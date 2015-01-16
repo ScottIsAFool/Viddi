@@ -1,0 +1,63 @@
+﻿<local:BasePage x:Class="Viddy.Views.AccountView"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:local="using:Viddy.Views"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:controls="using:Coding4Fun.Toolkit.Controls"
+                xmlns:converters="using:Cimbalino.Toolkit.Converters"
+                mc:Ignorable="d"
+                Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                DataContext="{Binding Account, Source={StaticResource Locator}}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Margin="19,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Horizontal">
+                <Grid>
+                    <Ellipse Width="44"
+                             Height="44" Fill="#FFACACAC"/>
+                    <Ellipse Width="45"
+                             Height="45">
+                        <Ellipse.Fill>
+                            <ImageBrush ImageSource="{Binding AvatarUrl}"
+                                        Stretch="UniformToFill"/>
+                        </Ellipse.Fill>
+                    </Ellipse>
+                </Grid>
+
+
+                <Grid>
+                    <TextBlock Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"
+                               VerticalAlignment="Center"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Text="{Binding Auth.AuthenticationInfo.User.Username, Source={StaticResource Locator}}"
+                               TextWrapping="Wrap"
+                               Margin="12,0,0,0" />
+                    <TextBlock Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource InverseVisibilityConverter}}"
+                               VerticalAlignment="Center"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Text="anonymous account"
+                               TextWrapping="Wrap"
+                               Margin="12,0,0,0" />
+                </Grid>
+            </StackPanel>
+
+            <Button Grid.Column="1"
+                    Command="{Binding LogInLogOutCommand}" />
+        </Grid>
+
+        <Grid Grid.Row="1">
+
+        </Grid>
+    </Grid>
+</local:BasePage>
