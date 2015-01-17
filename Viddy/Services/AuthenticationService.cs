@@ -39,6 +39,7 @@ namespace Viddy.Services
 
         public AuthResponse AuthenticationInfo { get; private set; }
         public bool IsLoggedIn { get { return AuthenticationInfo != null && AuthenticationInfo.Auth != null && AuthenticationInfo.User != null; } }
+        public string LoggedInUserId { get { return IsLoggedIn ? AuthenticationInfo.User.UserId : "0"; } }
 
         private void CheckForUser()
         {

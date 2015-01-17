@@ -9,6 +9,7 @@ using Windows.UI.Xaml.Navigation;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Extensions;
 using Viddy.Services;
+using Viddy.ViewModel;
 using Viddy.Views;
 
 namespace Viddy
@@ -19,6 +20,11 @@ namespace Viddy
     public sealed partial class App : Application
     {
         private TransitionCollection transitions;
+
+        public static ViewModelLocator Locator
+        {
+            get { return Current.Resources["Locator"] as ViewModelLocator; }
+        }
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -47,7 +53,7 @@ namespace Viddy
 
             Frame rootFrame = Window.Current.Content as Frame;
 
-            AuthenticationService.Current.StartService();
+            Locator.Auth.StartService();
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using Windows.Foundation.Collections;
 using Windows.Security.Authentication.Web;
@@ -9,6 +10,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Viddy.Services;
 using VidMePortable;
 using VidMePortable.Model;
+using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel
 {
@@ -19,6 +21,8 @@ namespace Viddy.ViewModel
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
 
+        private bool _videosLoaded;
+
         public AccountViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
         {
             _navigationService = navigationService;
@@ -27,21 +31,58 @@ namespace Viddy.ViewModel
             SetAvatar();
         }
 
+        public ObservableCollection<Video> Videos { get; set; }
+
         public RelayCommand LogInLogOutCommand
         {
             get
             {
-                return new RelayCommand(() =>
+                return new RelayCommand(async () =>
                 {
                     if (AuthenticationService.Current.IsLoggedIn)
                     {
                         AuthenticationService.Current.SignOut();
+                        _videosLoaded = false;
                         SetAvatar();
+                        await LoadData(true);
                     }
                     else
                     {
                         LaunchAuthentication();
                     }
+                });
+            }
+        }
+
+        public RelayCommand PageLoadedCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    await LoadData(false);
+                });
+            }
+        }
+
+        public RelayCommand RefreshCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    await LoadData(true);
+                });
+            }
+        }
+
+        public RelayCommand ChangeAvatarCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    
                 });
             }
         }
@@ -62,13 +103,49 @@ namespace Viddy.ViewModel
 
         private async Task CompleteAuthentication(string code)
         {
-            var auth = await _vidMeClient.ExchangeCodeForTokenAsync(code, Constants.ClientId, Constants.ClientSecret);
-            if (auth != null)
+            try
             {
-                AuthenticationService.Current.SetAuthenticationInfo(auth);
+                var auth = await _vidMeClient.ExchangeCodeForTokenAsync(code, Constants.ClientId, Constants.ClientSecret);
+                if (auth != null)
+                {
+                    AuthenticationService.Current.SetAuthenticationInfo(auth);
+                }
+
+                SetAvatar();
+                await LoadData(true);
             }
-            
-            SetAvatar();
+            catch (Exception ex)
+            {
+                
+            }
+        }
+
+        private async Task LoadData(bool isRefresh)
+        {
+            if (_videosLoaded && !isRefresh)
+            {
+                return;
+            }
+
+            try
+            {
+                VideosResponse response;
+                if (AuthenticationService.Current.IsLoggedIn)
+                {
+                    response = await _vidMeClient.GetUserVideosAsync(AuthenticationService.Current.LoggedInUserId);
+                }
+                else
+                {
+                    response = await _vidMeClient.GetAnonymousVideosAsync();
+                }
+
+                Videos = new ObservableCollection<Video>(response.Videos);
+                _videosLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                
+            }
         }
 
         protected override void WireMessages()
