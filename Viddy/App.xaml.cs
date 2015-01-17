@@ -7,6 +7,8 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using Cimbalino.Toolkit.Services;
+using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Extensions;
 using Viddy.ViewModel;
@@ -134,7 +136,18 @@ namespace Viddy
                         if (pickerArgs.Files.Any())
                         {
                             var file = pickerArgs.Files[0];
-                            Messenger.Default.Send(new NotificationMessage(file, Constants.Messages.ProfileFileMsg));
+                            if (file.ContentType.ToLower().Contains("image"))
+                            {
+                                Messenger.Default.Send(new NotificationMessage(file, Constants.Messages.ProfileFileMsg));
+                            }
+                            else
+                            {
+                                if (Locator.Upload != null)
+                                {
+                                    Messenger.Default.Send(new NotificationMessage(file, Constants.Messages.VideoFileMsg));
+                                    SimpleIoc.Default.GetInstance<INavigationService>().Navigate<EditVideoView>();
+                                }
+                            }
                         }
                     }
                 }

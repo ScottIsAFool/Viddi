@@ -1,3 +1,4 @@
+using Windows.Storage.Pickers;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Views;
@@ -41,6 +42,22 @@ namespace Viddy.ViewModel
             get
             {
                 return new RelayCommand(() => _navigationService.Navigate<AccountView>());
+            }
+        }
+
+        public RelayCommand SelectVideoCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    var filePicker = new FileOpenPicker { ViewMode = PickerViewMode.Thumbnail, SuggestedStartLocation = PickerLocationId.VideosLibrary };
+                    filePicker.FileTypeFilter.Add(".avi");
+                    filePicker.FileTypeFilter.Add(".mov");
+                    filePicker.FileTypeFilter.Add(".mp4");
+
+                    filePicker.PickSingleFileAndContinue();
+                });
             }
         }
     }

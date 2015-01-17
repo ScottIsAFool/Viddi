@@ -1,4 +1,4 @@
-﻿<local:BasePage x:Class="Viddy.Views.EditVideoView"
+﻿<local:BasePage x:Class="Viddy.Views.UploadVideoView"
                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:local="using:Viddy.Views"
@@ -6,13 +6,9 @@
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-                DataContext="{Binding EditVideo, Source={StaticResource Locator}}">
+                DataContext="{Binding Upload, Source={StaticResource Locator}}">
 
     <Grid>
-        <Grid.Background>
-            <ImageBrush ImageSource="{Binding Thumbnail, Converter={StaticResource ThumbnailConverter}}"
-                        Stretch="UniformToFill"/>
-        </Grid.Background>
 
     </Grid>
 </local:BasePage>
