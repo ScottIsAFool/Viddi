@@ -27,6 +27,7 @@ namespace Viddy.ViewModel
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AccountViewModel>();
+            SimpleIoc.Default.Register<EditVideoViewModel>();
         }
 
         public MainViewModel Main
@@ -37,6 +38,11 @@ namespace Viddy.ViewModel
         public AccountViewModel Account
         {
             get { return ServiceLocator.Current.GetInstance<AccountViewModel>(); }
+        }
+
+        public EditVideoViewModel EditVideo
+        {
+            get { return ServiceLocator.Current.GetInstance<EditVideoViewModel>(); }
         }
 
         public AuthenticationService Auth

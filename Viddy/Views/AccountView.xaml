@@ -69,22 +69,8 @@
             </Grid.ColumnDefinitions>
 
             <StackPanel Orientation="Horizontal">
-                <localControls:CustomButton Style="{StaticResource EmptyButtonStyle}"
-                                            IsHitTestVisible="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}"
-                                            TapCommand="{Binding ChangeAvatarCommand}">
-                    <Grid>
-                        <Ellipse Width="44"
-                                 Height="44"
-                                 Fill="#FFACACAC" />
-                        <Ellipse Width="45"
-                                 Height="45">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="{Binding AvatarUrl}"
-                                            Stretch="UniformToFill" />
-                            </Ellipse.Fill>
-                        </Ellipse>
-                    </Grid>
-                </localControls:CustomButton>
+                <localControls:ProfilePictureControl TappedCommand="{Binding ChangeAvatarCommand}"
+                                                     IsHitTestVisible="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}"/>
 
                 <Grid>
                     <TextBlock Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"
