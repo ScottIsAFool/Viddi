@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Threading.Tasks;
 using Windows.Foundation.Collections;
 using Windows.Security.Authentication.Web;
+using Windows.Storage;
+using Windows.Storage.FileProperties;
+using Windows.Storage.Pickers;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -82,7 +86,12 @@ namespace Viddy.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    
+                    var filePicker = new FileOpenPicker {ViewMode = PickerViewMode.Thumbnail, SuggestedStartLocation = PickerLocationId.PicturesLibrary};
+                    filePicker.FileTypeFilter.Add(".jpg");
+                    filePicker.FileTypeFilter.Add(".jpeg");
+                    filePicker.FileTypeFilter.Add(".png");
+
+                    filePicker.PickSingleFileAndContinue();
                 });
             }
         }
@@ -139,6 +148,11 @@ namespace Viddy.ViewModel
                     response = await _vidMeClient.GetAnonymousVideosAsync();
                 }
 
+                if (Videos != null)
+                {
+                    Videos.Clear();
+                }
+
                 Videos = new ObservableCollection<Video>(response.Videos);
                 _videosLoaded = true;
             }
@@ -157,7 +171,37 @@ namespace Viddy.ViewModel
                     var code = (string) m.Sender;
                     await CompleteAuthentication(code);
                 }
+                else if (m.Notification.Equals(Constants.Messages.ProfileFileMsg))
+                {
+                    var file = m.Sender as IStorageFile;
+                    await UpdateAvatar(file);
+                }
             });
+        }
+
+        private async Task UpdateAvatar(IStorageFile file)
+        {
+            try
+            {
+                using (var stream = await file.OpenAsync(FileAccessMode.Read))
+                {
+                    using (var actualStream = stream.AsStream())
+                    {
+                        var user = await _vidMeClient.UpdateAvatarAsync(AuthenticationService.Current.LoggedInUserId, actualStream, file.ContentType, file.Name);
+                        if (user != null)
+                        {
+                            var auth = AuthenticationService.Current.AuthenticationInfo;
+                            auth.User = user;
+                            AuthenticationService.Current.SetAuthenticationInfo(auth);
+                            SetAvatar();
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
         }
     }
 }

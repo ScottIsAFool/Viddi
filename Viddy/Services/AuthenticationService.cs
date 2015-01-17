@@ -1,6 +1,7 @@
 ﻿using Cimbalino.Toolkit.Services;
 using PropertyChanged;
 using Viddy.Extensions;
+using VidMePortable;
 using VidMePortable.Model.Responses;
 
 namespace Viddy.Services
@@ -9,11 +10,13 @@ namespace Viddy.Services
     public class AuthenticationService
     {
         private readonly IApplicationSettingsService _settingsService;
+        private readonly IVidMeClient _vidMeClient;
         public static AuthenticationService Current { get; private set; }
 
-        public AuthenticationService(IApplicationSettingsService settingsService)
+        public AuthenticationService(IApplicationSettingsService settingsService, IVidMeClient vidMeClient)
         {
             _settingsService = settingsService;
+            _vidMeClient = vidMeClient;
             Current = this;
         }
 
@@ -25,6 +28,7 @@ namespace Viddy.Services
         public void SetAuthenticationInfo(AuthResponse authInfo, bool save = true)
         {
             AuthenticationInfo = authInfo;
+            _vidMeClient.SetAuthentication(AuthenticationInfo.Auth);
             if (save)
             {
                 _settingsService.Roaming.SetS(Constants.StorageSettings.AuthenticationSettings, AuthenticationInfo);

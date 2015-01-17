@@ -14,6 +14,7 @@
         public static class Messages
         {
             public const string AuthCodeMsg = "AuthCodeMsg";
+            public const string ProfileFileMsg = "ProfileFileMsg";
         }
     }
 }

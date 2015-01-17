@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="using:Viddy"
              xmlns:converters="using:Cimbalino.Toolkit.Converters"
+             xmlns:themeManagerRt="using:ThemeManagerRt"
              RequestedTheme="Light">
     <Application.Resources>
         <vm:ViewModelLocator x:Key="Locator"
@@ -11,6 +12,8 @@
         <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
         <converters:BooleanToVisibilityConverter x:Key="InverseVisibilityConverter"
                                                  InvertValue="True"/>
+
+        <themeManagerRt:ThemeManager x:Key="ThemeManager" />
 
         <Style x:Key="EmptyButtonStyle"
                TargetType="ButtonBase">

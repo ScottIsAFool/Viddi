@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Security.Authentication.Web;
@@ -8,7 +9,6 @@ using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Extensions;
-using Viddy.Services;
 using Viddy.ViewModel;
 using Viddy.Views;
 
@@ -123,6 +123,18 @@ namespace Viddy
                                 var code = queryString["code"];
                                 Messenger.Default.Send(new NotificationMessage(code, Constants.Messages.AuthCodeMsg));
                             }
+                        }
+                    }
+                }
+                else if (args.Kind == ActivationKind.PickFileContinuation)
+                {
+                    var pickerArgs = args as IFileOpenPickerContinuationEventArgs;
+                    if (pickerArgs != null)
+                    {
+                        if (pickerArgs.Files.Any())
+                        {
+                            var file = pickerArgs.Files[0];
+                            Messenger.Default.Send(new NotificationMessage(file, Constants.Messages.ProfileFileMsg));
                         }
                     }
                 }

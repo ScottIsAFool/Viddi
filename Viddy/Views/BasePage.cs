@@ -2,12 +2,13 @@
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using ThemeManagerRt;
 using Viddy.Common;
 using Viddy.Helpers;
 
 namespace Viddy.Views
 {
-    public class BasePage : Page
+    public class BasePage : ThemeEnabledPage
     {
         private readonly NavigationHelper _navigationHelper;
 
