@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 using Windows.Foundation.Collections;
 using Windows.Security.Authentication.Web;
 using Windows.Storage;
-using Windows.Storage.FileProperties;
 using Windows.Storage.Pickers;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Services;
+using Viddy.Views;
 using VidMePortable;
 using VidMePortable.Model;
 using VidMePortable.Model.Responses;
@@ -96,6 +96,19 @@ namespace Viddy.ViewModel
             }
         }
 
+        public RelayCommand NavigateToSettingsCommand
+        {
+            get
+            {
+                return new RelayCommand(() => _navigationService.Navigate<SettingsView>());
+            }
+        }
+
+        public RelayCommand NavigateToEditProfileCommand
+        {
+            get { return new RelayCommand(() => _navigationService.Navigate<EditProfileView>()); }
+        }
+
         private void SetAvatar()
         {
             AvatarUrl = AuthenticationService.Current.IsLoggedIn ? AuthenticationService.Current.AuthenticationInfo.User.AvatarUrl : DefaultAvatar;
@@ -138,6 +151,7 @@ namespace Viddy.ViewModel
 
             try
             {
+                SetProgressBar("Getting videos...");
                 VideosResponse response;
                 if (AuthenticationService.Current.IsLoggedIn)
                 {
@@ -160,6 +174,8 @@ namespace Viddy.ViewModel
             {
                 
             }
+
+            SetProgressBar();
         }
 
         protected override void WireMessages()

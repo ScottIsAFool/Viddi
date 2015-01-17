@@ -12,6 +12,7 @@
         <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
         <converters:BooleanToVisibilityConverter x:Key="InverseVisibilityConverter"
                                                  InvertValue="True"/>
+        <converters:NegativeBooleanConverter x:Key="NegativeBooleanConverter"/>
 
         <themeManagerRt:ThemeManager x:Key="ThemeManager" />
 

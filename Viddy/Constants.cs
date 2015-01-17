@@ -9,6 +9,7 @@
         public static class StorageSettings
         {
             public const string AuthenticationSettings = "AuthenticationSettings";
+            public const string WindowsPhoneDeviceIdSetting = "WindowsPhoneDeviceIdSetting";
         }
 
         public static class Messages

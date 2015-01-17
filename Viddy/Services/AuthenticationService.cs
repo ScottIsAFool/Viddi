@@ -23,6 +23,9 @@ namespace Viddy.Services
         public void StartService()
         {
             CheckForUser();
+
+            //var deviceId = Utils.GetDeviceId(_settingsService);
+            //_vidMeClient.SetDeviceNameAndPlatform(deviceId, "WindowsPhone");
         }
 
         public void SetAuthenticationInfo(AuthResponse authInfo, bool save = true)
