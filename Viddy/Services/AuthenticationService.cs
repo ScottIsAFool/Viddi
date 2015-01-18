@@ -1,4 +1,5 @@
-﻿using Cimbalino.Toolkit.Services;
+﻿using System;
+using Cimbalino.Toolkit.Services;
 using PropertyChanged;
 using Viddy.Extensions;
 using VidMePortable;
@@ -31,6 +32,15 @@ namespace Viddy.Services
         public void SetAuthenticationInfo(AuthResponse authInfo, bool save = true)
         {
             AuthenticationInfo = authInfo;
+            if (AuthenticationInfo == null
+                || (AuthenticationInfo != null
+                && AuthenticationInfo.Auth != null
+                && AuthenticationInfo.Auth.Expires.HasValue
+                && AuthenticationInfo.Auth.Expires.Value < DateTime.Now))
+            {
+                return;
+            }
+
             _vidMeClient.SetAuthentication(AuthenticationInfo.Auth);
             if (save)
             {
