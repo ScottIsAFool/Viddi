@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Viddy.Common;
 using Viddy.Views;
 using VidMePortable;
+using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel
 {
@@ -24,10 +25,30 @@ namespace Viddy.ViewModel
             _vidMeClient = vidMeClient;
         }
 
-        public StorageItemThumbnail Thumbnail { get; set; }
-        public Stream VideoStream { get; set; }
-        public string VideoToPlay { get; set; }
         public StorageFile File { get; set; }
+
+        public bool Pause { get; set; }
+        public bool Play { get; set; }
+
+        public bool IsPlaying { get; set; }
+
+        public RelayCommand PlayPauseCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    if (IsPlaying)
+                    {
+                        Pause = !Pause;
+                    }
+                    else
+                    {
+                        Play = !Play;
+                    }
+                });
+            }
+        }
 
         public RelayCommand CancelCommand
         {
@@ -45,7 +66,33 @@ namespace Viddy.ViewModel
                     {
                         _navigationService.Navigate<MainPage>(new NavigationParameters {ClearBackstack = true});
                     }
+                });
+            }
+        }
 
+        public RelayCommand UploadVideoCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    try
+                    {
+                        var request = await _vidMeClient.RequestVideoAsync(new VideoRequest());
+                        if (request != null)
+                        {
+                            var stream = await File.OpenReadAsync();
+                            var video = await _vidMeClient.UploadVideoAsync(request.Code, File.ContentType, File.Name, stream.AsStream());
+                            if (video != null)
+                            {
+
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                    }
                 });
             }
         }
@@ -60,9 +107,6 @@ namespace Viddy.ViewModel
                     if (file == null) return;
 
                     File = file;
-                    VideoToPlay = "ms-appx:///" + file.FolderRelativeId;
-                    //var thumbnail = await file.GetThumbnailAsync(ThumbnailMode.VideosView);
-                    //Thumbnail = thumbnail;
                 }
             });
         }

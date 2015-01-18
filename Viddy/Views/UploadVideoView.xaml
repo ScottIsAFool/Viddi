@@ -11,29 +11,68 @@
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding Upload, Source={StaticResource Locator}}">
+    
+    <local:BasePage.Resources>
+        <x:Double x:Key="ButtonSize">45</x:Double>
+    </local:BasePage.Resources>
 
     <Grid>
         <playerFramework:MediaPlayer IsVolumeVisible="False"
-                                     Source="{Binding VideoToPlay}"
                                      IsDurationVisible="False"
                                      IsTimeElapsedVisible="False"
                                      IsTimeRemainingVisible="False"
                                      IsTimelineVisible="False"
-                                     MediaFailed="MediaPlayer_OnMediaFailed" />
+                                     IsPlayPauseVisible="False"
+                                     MediaFailed="MediaPlayer_OnMediaFailed">
+            <interactivity:Interaction.Behaviors>
+                <behaviours:VideoStreamBehaviour File="{Binding File}"
+                                                 IsAutoPlay="True"
+                                                 IsStart="{Binding Play}"
+                                                 IsPause="{Binding Pause}"
+                                                 IsPlaying="{Binding IsPlaying, Mode=TwoWay}"/>
+            </interactivity:Interaction.Behaviors>
+        </playerFramework:MediaPlayer>
         <Grid VerticalAlignment="Bottom" Background="#C4000000">
             <Grid Margin="19">
                 <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
                                        HorizontalAlignment="Left"
-                                       TapCommand="{Binding CancelCommand}">
+                                       TapCommand="{Binding CancelCommand}"
+                                       Width="{StaticResource ButtonSize}"
+                                       Height="{StaticResource ButtonSize}">
                     <Path Width="31.6666"
                           Height="31.6667"
                           Stretch="Fill"
                           Fill="White"
                           Data="F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z " />
                 </controls:CustomButton>
+                
+                <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                       HorizontalAlignment="Center"
+                                       Width="{StaticResource ButtonSize}"
+                                       Height="{StaticResource ButtonSize}"
+                                       TapCommand="{Binding PlayPauseCommand}">
+                    <Grid>
+                        <Path Width="20.5832"
+                              Height="31.6667"
+                              Stretch="Fill"
+                              Fill="White"
+                              Visibility="{Binding IsPlaying, Converter={StaticResource InverseVisibilityConverter}}"
+                              Data="F1 M 30.0833,22.1667L 50.6665,37.6043L 50.6665,38.7918L 30.0833,53.8333L 30.0833,22.1667 Z " />
+                        <Path Width="22.1667"
+                              Height="28.5"
+                              Stretch="Fill"
+                              Fill="White"
+                              Visibility="{Binding IsPlaying, Converter={StaticResource VisibilityConverter}}"
+                              Data="F1 M 26.9167,23.75L 33.25,23.75L 33.25,52.25L 26.9167,52.25L 26.9167,23.75 Z M 42.75,23.75L 49.0833,23.75L 49.0833,52.25L 42.75,52.25L 42.75,23.75 Z " />
+                    </Grid>
+                    
+                </controls:CustomButton>
 
                 <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
-                                       HorizontalAlignment="Right">
+                                       HorizontalAlignment="Right"
+                                       Width="{StaticResource ButtonSize}"
+                                       Height="{StaticResource ButtonSize}"
+                                       TapCommand="{Binding UploadVideoCommand}">
                     <Path Width="25.3333"
                           Height="41.1667"
                           Stretch="Fill"

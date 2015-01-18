@@ -89,6 +89,7 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="Behaviours\VideoStreamBehaviour.cs" />
+    <Compile Include="Common\NavigationParameters.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Constants.cs" />

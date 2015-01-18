@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
@@ -36,6 +37,17 @@ namespace Viddy
         {
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
+            UnhandledException += OnUnhandledException;
+        }
+
+        private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
+        {
+            if (Debugger.IsAttached)
+            {
+                //Debugger.Break();
+            }
+
+            e.Handled = true;
         }
 
         /// <summary>
@@ -47,7 +59,7 @@ namespace Viddy
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
+            if (Debugger.IsAttached)
             {
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
