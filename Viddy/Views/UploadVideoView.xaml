@@ -4,11 +4,43 @@
                 xmlns:local="using:Viddy.Views"
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+                xmlns:behaviours="using:Viddy.Behaviours"
+                xmlns:playerFramework="using:Microsoft.PlayerFramework"
+                xmlns:controls="using:Viddy.Controls"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding Upload, Source={StaticResource Locator}}">
 
     <Grid>
+        <playerFramework:MediaPlayer IsVolumeVisible="False"
+                                     Source="{Binding VideoToPlay}"
+                                     IsDurationVisible="False"
+                                     IsTimeElapsedVisible="False"
+                                     IsTimeRemainingVisible="False"
+                                     IsTimelineVisible="False"
+                                     MediaFailed="MediaPlayer_OnMediaFailed" />
+        <Grid VerticalAlignment="Bottom" Background="#C4000000">
+            <Grid Margin="19">
+                <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                       HorizontalAlignment="Left"
+                                       TapCommand="{Binding CancelCommand}">
+                    <Path Width="31.6666"
+                          Height="31.6667"
+                          Stretch="Fill"
+                          Fill="White"
+                          Data="F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z " />
+                </controls:CustomButton>
 
+                <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                       HorizontalAlignment="Right">
+                    <Path Width="25.3333"
+                          Height="41.1667"
+                          Stretch="Fill"
+                          Fill="White"
+                          Data="F1 M 25.3333,23.75L 50.6667,23.75L 50.6667,19L 25.3333,19L 25.3333,23.75 Z M 34.8333,60.1667L 41.1667,60.1667L 41.1667,39.5833L 49.0833,49.0833L 49.0833,39.5833L 38,26.9167L 26.9167,39.5833L 26.9167,49.0833L 34.8333,39.5833L 34.8333,60.1667 Z " />
+                </controls:CustomButton>
+            </Grid>
+        </Grid>
     </Grid>
 </local:BasePage>

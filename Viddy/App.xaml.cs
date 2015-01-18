@@ -145,7 +145,7 @@ namespace Viddy
                                 if (Locator.Upload != null)
                                 {
                                     Messenger.Default.Send(new NotificationMessage(file, Constants.Messages.VideoFileMsg));
-                                    SimpleIoc.Default.GetInstance<INavigationService>().Navigate<EditVideoView>();
+                                    SimpleIoc.Default.GetInstance<INavigationService>().Navigate<UploadVideoView>();
                                 }
                             }
                         }

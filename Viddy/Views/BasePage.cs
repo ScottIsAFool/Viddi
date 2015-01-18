@@ -2,6 +2,7 @@
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
+using ScottIsAFool.WindowsPhone.Logging;
 using ThemeManagerRt;
 using Viddy.Common;
 using Viddy.Helpers;
@@ -11,6 +12,7 @@ namespace Viddy.Views
     public class BasePage : ThemeEnabledPage
     {
         private readonly NavigationHelper _navigationHelper;
+        protected readonly ILog Logger;
 
         public BasePage()
         {
@@ -18,6 +20,7 @@ namespace Viddy.Views
             _navigationHelper = new NavigationHelper(this);
             _navigationHelper.LoadState += NavigationHelperLoadState;
             _navigationHelper.SaveState += NavigationHelperSaveState;
+            Logger = new WinLogger(GetType().FullName);
             ApplicationView.GetForCurrentView().SetDesiredBoundsMode(ApplicationViewBoundsMode.UseVisible);
         }
 
@@ -62,21 +65,21 @@ namespace Viddy.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            //Logger.Info("Navigated to {0}", GetType().FullName);
+            Logger.Info("Navigated to {0}", GetType().FullName);
 
-            //if (e.NavigationMode == NavigationMode.Back)
-            //{
-            //    InitialiseOnBack();
-            //}
-            //else
-            //{
-            //    var parameters = e.Parameter as NavigationParameters;
-            //    if (parameters != null && parameters.ClearBackstack)
-            //    {
-            //        Logger.Info("Clearing backstack");
-            //        Frame.SetNavigationState("1,0");
-            //    }
-            //}
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                InitialiseOnBack();
+            }
+            else
+            {
+                var parameters = e.Parameter as NavigationParameters;
+                if (parameters != null && parameters.ClearBackstack)
+                {
+                    Logger.Info("Clearing backstack");
+                    Frame.SetNavigationState("1,0");
+                }
+            }
 
             _navigationHelper.OnNavigatedTo(e);
         }

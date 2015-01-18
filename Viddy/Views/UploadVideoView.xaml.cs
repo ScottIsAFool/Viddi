@@ -1,4 +1,5 @@
 ﻿using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
 
 namespace Viddy.Views
 {
@@ -12,6 +13,11 @@ namespace Viddy.Views
             InitializeComponent();
 
             ApplicationView.GetForCurrentView().SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
+        }
+
+        private void MediaPlayer_OnMediaFailed(object sender, ExceptionRoutedEventArgs e)
+        {
+            var s = "";
         }
     }
 }
