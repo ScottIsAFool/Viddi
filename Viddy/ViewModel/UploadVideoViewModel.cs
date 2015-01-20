@@ -1,7 +1,6 @@
 ﻿using System;
 using System.IO;
 using Windows.Storage;
-using Windows.Storage.FileProperties;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -16,8 +15,6 @@ namespace Viddy.ViewModel
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
-
-        private StorageFile _selectedVideoFile;
 
         public UploadVideoViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
         {
@@ -56,8 +53,7 @@ namespace Viddy.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    // TODO: Clear the property
-                    _selectedVideoFile = null;
+                    File = null;
                     if (_navigationService.CanGoBack)
                     {
                         _navigationService.GoBack();
@@ -78,6 +74,7 @@ namespace Viddy.ViewModel
                 {
                     try
                     {
+                        Pause = !Pause;
                         var request = await _vidMeClient.RequestVideoAsync(new VideoRequest());
                         if (request != null)
                         {
@@ -99,7 +96,7 @@ namespace Viddy.ViewModel
 
         protected override void WireMessages()
         {
-            Messenger.Default.Register<NotificationMessage>(this, async m =>
+            Messenger.Default.Register<NotificationMessage>(this, m =>
             {
                 if (m.Notification.Equals(Constants.Messages.VideoFileMsg))
                 {

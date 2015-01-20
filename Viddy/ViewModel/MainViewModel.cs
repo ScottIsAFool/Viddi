@@ -1,3 +1,5 @@
+using System;
+using Windows.Media.Capture;
 using Windows.Storage.Pickers;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
@@ -21,6 +23,7 @@ namespace Viddy.ViewModel
     {
         private readonly INavigationService _navigationService;
 
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -35,6 +38,25 @@ namespace Viddy.ViewModel
             ////{
             ////    // Code runs "for real"
             ////}
+            
+            MediaCapture = new MediaCapture();
+        }
+
+        public MediaCapture MediaCapture { get; set; }
+
+        public bool CanTurnOnFlash { get; set; }
+        public bool HasFrontFacingCamera { get; set; }
+
+        public RelayCommand MainPageLoadedCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    await MediaCapture.InitializeAsync();
+                    await MediaCapture.StartPreviewAsync();
+                });
+            }
         }
 
         public RelayCommand NavigateToAccountCommand
@@ -55,6 +77,7 @@ namespace Viddy.ViewModel
                     filePicker.FileTypeFilter.Add(".avi");
                     filePicker.FileTypeFilter.Add(".mov");
                     filePicker.FileTypeFilter.Add(".mp4");
+                    filePicker.FileTypeFilter.Add(".wmv");
 
                     filePicker.PickSingleFileAndContinue();
                 });
