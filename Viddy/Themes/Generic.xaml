@@ -4,9 +4,9 @@
 
     <Style TargetType="controls:ProfilePictureControl">
         <Setter Property="Height"
-                Value="45"/>
+                Value="45" />
         <Setter Property="Width"
-                Value="45"/>
+                Value="45" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ProfilePictureControl">
@@ -20,7 +20,7 @@
                             <Ellipse Width="{TemplateBinding Width}"
                                      Height="{TemplateBinding Height}">
                                 <Ellipse.Fill>
-                                    <ImageBrush ImageSource="/Assets/Defaults/UserLoginDefault.png"/>
+                                    <ImageBrush ImageSource="/Assets/Defaults/UserLoginDefault.png" />
                                 </Ellipse.Fill>
                             </Ellipse>
                             <Ellipse Width="{TemplateBinding Width}"
@@ -30,6 +30,22 @@
                                                 Stretch="UniformToFill" />
                                 </Ellipse.Fill>
                             </Ellipse>
+
+                            <Grid Tag="{TemplateBinding IsChanging}"
+                                  Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource VisibilityConverter}}"
+                                  Width="{TemplateBinding Width}"
+                                  Height="{TemplateBinding Height}">
+                                <Ellipse Width="{TemplateBinding Width}"
+                                         Height="{TemplateBinding Height}"
+                                         Fill="#C4000000"/>
+                                <Viewbox Stretch="UniformToFill"
+                                         StretchDirection="DownOnly">
+                                    <ProgressRing Height="{TemplateBinding Height}"
+                                                  Width="{TemplateBinding Width}"
+                                                  IsActive="{TemplateBinding IsChanging}" 
+                                                  Margin="6"/>
+                                </Viewbox>
+                            </Grid>
                         </Grid>
                     </controls:CustomButton>
                 </ControlTemplate>

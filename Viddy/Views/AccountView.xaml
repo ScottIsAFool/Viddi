@@ -70,6 +70,7 @@
 
             <StackPanel Orientation="Horizontal">
                 <localControls:ProfilePictureControl TappedCommand="{Binding ChangeAvatarCommand}"
+                                                     IsChanging="{Binding ChangingAvatar}"
                                                      IsHitTestVisible="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}"/>
 
                 <Grid>

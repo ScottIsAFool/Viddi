@@ -25,6 +25,15 @@ namespace Viddy.Controls
             set { SetValue(TappedCommandProperty, value); }
         }
 
+        public static readonly DependencyProperty IsChangingProperty = DependencyProperty.Register(
+            "IsChanging", typeof (bool), typeof (ProfilePictureControl), new PropertyMetadata(default(bool)));
+
+        public bool IsChanging
+        {
+            get { return (bool) GetValue(IsChangingProperty); }
+            set { SetValue(IsChangingProperty, value); }
+        }
+
         public ProfilePictureControl()
         {
             DefaultStyleKey = typeof (ProfilePictureControl);

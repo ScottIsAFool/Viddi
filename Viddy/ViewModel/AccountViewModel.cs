@@ -36,6 +36,7 @@ namespace Viddy.ViewModel
         }
 
         public ObservableCollection<Video> Videos { get; set; }
+        public bool ChangingAvatar { get; set; }
 
         public RelayCommand LogInLogOutCommand
         {
@@ -199,6 +200,8 @@ namespace Viddy.ViewModel
         {
             try
             {
+                ChangingAvatar = true;
+
                 using (var stream = await file.OpenAsync(FileAccessMode.Read))
                 {
                     using (var actualStream = stream.AsStream())
@@ -218,6 +221,8 @@ namespace Viddy.ViewModel
             {
                 
             }
+
+            ChangingAvatar = false;
         }
     }
 }
