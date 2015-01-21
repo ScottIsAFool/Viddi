@@ -1,4 +1,7 @@
-﻿using Windows.UI.Xaml.Navigation;
+﻿using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Controls.Primitives;
+using Windows.UI.Xaml.Input;
+using Windows.UI.Xaml.Navigation;
 
 namespace Viddy.Views
 {
@@ -19,6 +22,12 @@ namespace Viddy.Views
         /// This parameter is typically used to configure the page.</param>
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+        }
+
+        private void ContainerGrid_OnHolding(object sender, HoldingRoutedEventArgs e)
+        {
+            var grid = sender as Grid;
+            FlyoutBase.ShowAttachedFlyout(grid);
         }
     }
 }

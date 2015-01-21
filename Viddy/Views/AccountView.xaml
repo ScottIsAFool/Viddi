@@ -153,14 +153,17 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <localControls:CustomButton Style="{StaticResource EmptyButtonStyle}">
-                            <FlyoutBase.AttachedFlyout>
-                                <MenuFlyout>
-                                    <MenuFlyoutItem Margin="12,0,0,0"
-                                                    Command="{Binding Account.DeleteCommand, Source={StaticResource Locator}}"
-                                                    CommandParameter="{Binding}"/>
-                                </MenuFlyout>
-                            </FlyoutBase.AttachedFlyout>
-                            <Grid Height="200">
+                            <Grid Height="200"
+                                  x:Name="ContainerGrid"
+                                  Holding="ContainerGrid_OnHolding">
+                                <FlyoutBase.AttachedFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Margin="12,0,0,0"
+                                                        Command="{Binding Account.DeleteCommand, Source={StaticResource Locator}}"
+                                                        CommandParameter="{Binding}"
+                                                        Text="delete"/>
+                                    </MenuFlyout>
+                                </FlyoutBase.AttachedFlyout>
                                 <Image Source="{Binding ThumbnailUrl}"
                                        Stretch="UniformToFill"
                                        VerticalAlignment="Center"/>
