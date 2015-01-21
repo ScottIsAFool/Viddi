@@ -21,7 +21,12 @@ namespace Viddy.Views
             _navigationHelper.LoadState += NavigationHelperLoadState;
             _navigationHelper.SaveState += NavigationHelperSaveState;
             Logger = new WinLogger(GetType().FullName);
-            ApplicationView.GetForCurrentView().SetDesiredBoundsMode(ApplicationViewBoundsMode.UseVisible);
+            SetFullScreen(ApplicationViewBoundsMode.UseVisible);
+        }
+
+        protected void SetFullScreen(ApplicationViewBoundsMode mode)
+        {
+            ApplicationView.GetForCurrentView().SetDesiredBoundsMode(mode);
         }
 
         /// <summary>
