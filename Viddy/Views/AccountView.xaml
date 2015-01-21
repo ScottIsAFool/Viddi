@@ -153,6 +153,13 @@
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <localControls:CustomButton Style="{StaticResource EmptyButtonStyle}">
+                            <FlyoutBase.AttachedFlyout>
+                                <MenuFlyout>
+                                    <MenuFlyoutItem Margin="12,0,0,0"
+                                                    Command="{Binding Account.DeleteCommand, Source={StaticResource Locator}}"
+                                                    CommandParameter="{Binding}"/>
+                                </MenuFlyout>
+                            </FlyoutBase.AttachedFlyout>
                             <Grid Height="200">
                                 <Image Source="{Binding ThumbnailUrl}"
                                        Stretch="UniformToFill"

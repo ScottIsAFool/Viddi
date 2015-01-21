@@ -97,6 +97,42 @@ namespace Viddy.ViewModel
             }
         }
 
+        public RelayCommand<Video> DeleteCommand
+        {
+            get
+            {
+                return new RelayCommand<Video>(async video =>
+                {
+                    if (video == null)
+                    {
+                        return;
+                    }
+
+                    try
+                    {
+                        if (AuthenticationService.Current.IsLoggedIn)
+                        {
+                            if (await _vidMeClient.DeleteVideoAsync(video.VideoId))
+                            {
+                                Videos.Remove(video);
+                            }
+                        }
+                        else
+                        {
+                            if (await _vidMeClient.DeleteAnonymousVideoAsync(video.VideoId, ""))
+                            {
+                                Videos.Remove(video);
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                    }
+                });
+            }
+        }
+
         public RelayCommand NavigateToSettingsCommand
         {
             get
