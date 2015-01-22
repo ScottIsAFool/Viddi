@@ -3,7 +3,9 @@ using System.Threading.Tasks;
 using Windows.Graphics.Display;
 using Windows.Media.Capture;
 using Windows.System.Display;
+using Windows.UI.Core;
 using Windows.UI.ViewManagement;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using GalaSoft.MvvmLight.Messaging;
@@ -19,6 +21,7 @@ namespace Viddy.Views
         private DisplayRequest _displayRequest;
         private bool _isRecording;
         private readonly DisplayInformation _display;
+        private bool _isInitialised;
 
         public MainPage()
         {
@@ -43,11 +46,23 @@ namespace Viddy.Views
             SetRotation(_display.CurrentOrientation);
         }
 
-        protected override async void OnNavigatedTo(NavigationEventArgs e)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
-            //await StartPreview();
+            Window.Current.VisibilityChanged += CurrentOnVisibilityChanged;
+        }
+
+        private async void CurrentOnVisibilityChanged(object sender, VisibilityChangedEventArgs e)
+        {
+            if (e.Visible)
+            {
+                await StartPreview();
+            }
+            else
+            {
+                StopVideo();
+            }
         }
 
         private async Task StartPreview()
@@ -58,6 +73,8 @@ namespace Viddy.Views
             }
 
             await _mediaCapture.InitializeAsync();
+
+            _isInitialised = true;
 
             SetRotation(_display.CurrentOrientation);
 
@@ -76,7 +93,7 @@ namespace Viddy.Views
                         rotation = VideoRotation.Clockwise270Degrees;
                         break;
                     case DisplayOrientations.LandscapeFlipped:
-                        rotation = VideoRotation.Clockwise90Degrees;
+                        rotation = VideoRotation.Clockwise180Degrees;
                         break;
                     default:
                         rotation = VideoRotation.Clockwise180Degrees;
@@ -133,6 +150,7 @@ namespace Viddy.Views
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
+            Window.Current.VisibilityChanged -= CurrentOnVisibilityChanged;
             StopVideo();
         }
 
@@ -151,6 +169,7 @@ namespace Viddy.Views
             }
 
             _mediaCapture.StopPreviewAsync();
+            _isInitialised = false;
 
             if (_isRecording)
             {
