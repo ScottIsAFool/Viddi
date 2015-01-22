@@ -41,12 +41,12 @@
                      StretchDirection="DownOnly"
                      Height="45"
                      Width="45">
-                <Border BorderBrush="#FFACACAC"
+                <Border BorderBrush="{ThemeResource ButtonBackgroundBrush}"
                         BorderThickness="1"
                         Padding="2"
                         CornerRadius="45">
                     <Grid>
-                        <Ellipse Fill="#FFACACAC"
+                        <Ellipse Fill="{ThemeResource ButtonBackgroundBrush}"
                                  Stretch="Fill"
                                  Height="45"
                                  Width="45" />

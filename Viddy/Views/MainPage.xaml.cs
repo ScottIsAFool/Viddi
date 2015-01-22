@@ -21,8 +21,7 @@ namespace Viddy.Views
         private DisplayRequest _displayRequest;
         private bool _isRecording;
         private readonly DisplayInformation _display;
-        private bool _isInitialised;
-
+        
         public MainPage()
         {
             InitializeComponent();
@@ -73,8 +72,6 @@ namespace Viddy.Views
             }
 
             await _mediaCapture.InitializeAsync();
-
-            _isInitialised = true;
 
             SetRotation(_display.CurrentOrientation);
 
@@ -169,8 +166,7 @@ namespace Viddy.Views
             }
 
             _mediaCapture.StopPreviewAsync();
-            _isInitialised = false;
-
+            
             if (_isRecording)
             {
                 _mediaCapture.StopRecordAsync();

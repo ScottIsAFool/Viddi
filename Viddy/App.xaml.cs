@@ -11,6 +11,7 @@ using Windows.UI.Xaml.Navigation;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
+using ThemeManagerRt;
 using Viddy.Extensions;
 using Viddy.ViewModel;
 using Viddy.Views;
@@ -38,6 +39,8 @@ namespace Viddy
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
             UnhandledException += OnUnhandledException;
+
+            ThemeManager.DefaultTheme = ElementTheme.Light;
         }
 
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)

@@ -8,7 +8,7 @@
         <Setter Property="Width"
                 Value="45" />
         <Setter Property="Background"
-                Value="#FFACACAC"></Setter>
+                Value="{ThemeResource ButtonBackgroundBrush}"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ProfilePictureControl">

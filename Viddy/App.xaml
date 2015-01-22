@@ -7,84 +7,94 @@
              xmlns:localConverters="using:Viddy.Converters"
              RequestedTheme="Light">
     <Application.Resources>
-        <vm:ViewModelLocator x:Key="Locator"
-                             xmlns:vm="using:Viddy.ViewModel" />
-        
-        <localConverters:ThumbnailConverter x:Key="ThumbnailConverter"/>
-        
-        <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter"/>
-        <converters:BooleanToVisibilityConverter x:Key="InverseVisibilityConverter"
-                                                 InvertValue="True"/>
-        <converters:NegativeBooleanConverter x:Key="NegativeBooleanConverter"/>
+        <ResourceDictionary>
+            <ResourceDictionary.ThemeDictionaries>
+                <ResourceDictionary x:Key="Light">
+                    <ResourceDictionary.MergedDictionaries>
+                        <ResourceDictionary Source="/Themes/LightGrey.xaml"/>
+                    </ResourceDictionary.MergedDictionaries>
+                </ResourceDictionary>
+            </ResourceDictionary.ThemeDictionaries>
+            <vm:ViewModelLocator x:Key="Locator"
+                                 xmlns:vm="using:Viddy.ViewModel" />
 
-        <themeManagerRt:ThemeManager x:Key="ThemeManager" />
+            <localConverters:ThumbnailConverter x:Key="ThumbnailConverter" />
 
-        <Style x:Key="EmptyButtonStyle"
-               TargetType="ButtonBase">
-            <Setter Property="Background"
-                    Value="Transparent" />
-            <Setter Property="BorderThickness"
-                    Value="0"/>
-            <Setter Property="Padding"
-                    Value="0" />
-            <Setter Property="HorizontalContentAlignment"
-                    Value="Stretch" />
-            <Setter Property="HorizontalAlignment"
-                    Value="Stretch" />
-            <Setter Property="MinWidth"
-                    Value="0"/>
-            <Setter Property="MinHeight"
-                    Value="0" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ButtonBase">
-                        <Border Background="{TemplateBinding Background}"
-                                Padding="{TemplateBinding Padding}">
-                            <VisualStateManager.VisualStateGroups>
-                                <VisualStateGroup x:Name="CommonStates">
-                                    <VisualStateGroup.Transitions>
-                                        <VisualTransition From="Pressed"
-                                                          To="PointerOver">
+            <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
+            <converters:BooleanToVisibilityConverter x:Key="InverseVisibilityConverter"
+                                                     InvertValue="True" />
+            <converters:NegativeBooleanConverter x:Key="NegativeBooleanConverter" />
+
+            <themeManagerRt:ThemeManager x:Key="ThemeManager" />
+
+            <Style x:Key="EmptyButtonStyle"
+                   TargetType="ButtonBase">
+                <Setter Property="Background"
+                        Value="Transparent" />
+                <Setter Property="BorderThickness"
+                        Value="0" />
+                <Setter Property="Padding"
+                        Value="0" />
+                <Setter Property="HorizontalContentAlignment"
+                        Value="Stretch" />
+                <Setter Property="HorizontalAlignment"
+                        Value="Stretch" />
+                <Setter Property="MinWidth"
+                        Value="0" />
+                <Setter Property="MinHeight"
+                        Value="0" />
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ButtonBase">
+                            <Border Background="{TemplateBinding Background}"
+                                    Padding="{TemplateBinding Padding}">
+                                <VisualStateManager.VisualStateGroups>
+                                    <VisualStateGroup x:Name="CommonStates">
+                                        <VisualStateGroup.Transitions>
+                                            <VisualTransition From="Pressed"
+                                                              To="PointerOver">
+                                                <Storyboard>
+                                                    <PointerUpThemeAnimation Storyboard.TargetName="Container" />
+                                                </Storyboard>
+                                            </VisualTransition>
+                                            <VisualTransition From="PointerOver"
+                                                              To="Normal">
+                                                <Storyboard>
+                                                    <PointerUpThemeAnimation Storyboard.TargetName="Container" />
+                                                </Storyboard>
+                                            </VisualTransition>
+                                            <VisualTransition From="Pressed"
+                                                              To="Normal">
+                                                <Storyboard>
+                                                    <PointerUpThemeAnimation Storyboard.TargetName="Container" />
+                                                </Storyboard>
+                                            </VisualTransition>
+                                        </VisualStateGroup.Transitions>
+                                        <VisualState x:Name="Normal" />
+                                        <VisualState x:Name="PointerOver" />
+                                        <VisualState x:Name="Pressed">
+                                            <Storyboard>
+                                                <PointerDownThemeAnimation Storyboard.TargetName="Container" />
+                                            </Storyboard>
+                                        </VisualState>
+                                        <VisualState x:Name="Disabled">
                                             <Storyboard>
                                                 <PointerUpThemeAnimation Storyboard.TargetName="Container" />
                                             </Storyboard>
-                                        </VisualTransition>
-                                        <VisualTransition From="PointerOver"
-                                                          To="Normal">
-                                            <Storyboard>
-                                                <PointerUpThemeAnimation Storyboard.TargetName="Container" />
-                                            </Storyboard>
-                                        </VisualTransition>
-                                        <VisualTransition From="Pressed"
-                                                          To="Normal">
-                                            <Storyboard>
-                                                <PointerUpThemeAnimation Storyboard.TargetName="Container" />
-                                            </Storyboard>
-                                        </VisualTransition>
-                                    </VisualStateGroup.Transitions>
-                                    <VisualState x:Name="Normal" />
-                                    <VisualState x:Name="PointerOver" />
-                                    <VisualState x:Name="Pressed">
-                                        <Storyboard>
-                                            <PointerDownThemeAnimation Storyboard.TargetName="Container" />
-                                        </Storyboard>
-                                    </VisualState>
-                                    <VisualState x:Name="Disabled">
-                                        <Storyboard>
-                                            <PointerUpThemeAnimation Storyboard.TargetName="Container" />
-                                        </Storyboard>
-                                    </VisualState>
-                                </VisualStateGroup>
-                            </VisualStateManager.VisualStateGroups>
-                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                              Content="{TemplateBinding Content}"
-                                              x:Name="Container"
-                                              ContentTemplate="{TemplateBinding ContentTemplate}" />
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                                        </VisualState>
+                                    </VisualStateGroup>
+                                </VisualStateManager.VisualStateGroups>
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Content="{TemplateBinding Content}"
+                                                  x:Name="Container"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}" />
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+        </ResourceDictionary>
+        
     </Application.Resources>
 </Application>

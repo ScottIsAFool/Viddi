@@ -231,8 +231,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\wpa81\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="ThemeManagerRt">
-      <HintPath>..\packages\ThemeManagerRt.1.0.0.1\lib\portable-win81+WindowsPhoneApp81\ThemeManagerRt.dll</HintPath>
+    <Reference Include="ThemeManagerRt, Version=1.0.1.1, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\ThemeManagerRt.1.0.1.1\lib\portable-win81+WindowsPhoneApp81\ThemeManagerRt.dll</HintPath>
     </Reference>
     <Reference Include="VidMePortable, Version=0.0.0.8, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
