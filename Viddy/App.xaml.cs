@@ -69,6 +69,15 @@ namespace Viddy
 
             Locator.Auth.StartService();
 
+            if (e.PreviousExecutionState == ApplicationExecutionState.Running
+                && rootFrame != null && rootFrame.Content != null)
+            {
+                if (rootFrame.Content is MainPage)
+                {
+                    Messenger.Default.Send(new NotificationMessage(Constants.Messages.AppLaunchedMsg));
+                }
+            }
+
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
             if (rootFrame == null)

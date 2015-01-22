@@ -21,6 +21,8 @@
 
         <CaptureElement Grid.RowSpan="3"
                         Stretch="UniformToFill"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Stretch"
                         x:Name="CaptureElement" />
 
         <controls:CustomButton Grid.Row="2"

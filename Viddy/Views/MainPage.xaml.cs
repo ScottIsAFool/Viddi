@@ -1,10 +1,12 @@
 ﻿using System;
-using Windows.Devices.Sensors;
+using System.Threading.Tasks;
+using Windows.Graphics.Display;
 using Windows.Media.Capture;
 using Windows.System.Display;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Viddy.Views
 {
@@ -16,6 +18,7 @@ namespace Viddy.Views
         private MediaCapture _mediaCapture;
         private DisplayRequest _displayRequest;
         private bool _isRecording;
+        private readonly DisplayInformation _display;
 
         public MainPage()
         {
@@ -24,34 +27,69 @@ namespace Viddy.Views
             _displayRequest = new DisplayRequest();
 
             SetFullScreen(ApplicationViewBoundsMode.UseCoreWindow);
-            var sensor = new SimpleOrientationSensor();
-            sensor.OrientationChanged += SensorOnOrientationChanged;
+            _display = DisplayInformation.GetForCurrentView();
+            _display.OrientationChanged += DisplayOnOrientationChanged;
+
+            Messenger.Default.Register<NotificationMessage>(this, m =>
+            {
+                if (m.Notification.Equals(Constants.Messages.AppLaunchedMsg))
+                {
+                    //StartPreview();
+                }
+            });
         }
 
-        private void SensorOnOrientationChanged(SimpleOrientationSensor sender, SimpleOrientationSensorOrientationChangedEventArgs args)
+        private void DisplayOnOrientationChanged(DisplayInformation sender, object args)
         {
-        
+            SetRotation(_display.CurrentOrientation);
         }
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
 
+            //await StartPreview();
+        }
+
+        private async Task StartPreview()
+        {
+            if (_mediaCapture == null)
+            {
+                _mediaCapture = new MediaCapture();
+            }
+
             await _mediaCapture.InitializeAsync();
-            
-            SetRotation();
+
+            SetRotation(_display.CurrentOrientation);
 
             CaptureElement.Source = _mediaCapture;
             await _mediaCapture.StartPreviewAsync();
         }
 
-        private void SetRotation()
+        private void SetRotation(DisplayOrientations orientation)
         {
+            var rotation = VideoRotation.Clockwise90Degrees;
+            if (orientation != _display.NativeOrientation)
+            {
+                switch (orientation)
+                {
+                    case DisplayOrientations.Landscape:
+                        rotation = VideoRotation.Clockwise270Degrees;
+                        break;
+                    case DisplayOrientations.LandscapeFlipped:
+                        rotation = VideoRotation.Clockwise90Degrees;
+                        break;
+                    default:
+                        rotation = VideoRotation.Clockwise180Degrees;
+                        break;
+                }
+            }
+
             if (!string.IsNullOrEmpty(_mediaCapture.MediaCaptureSettings.VideoDeviceId) && !string.IsNullOrEmpty(_mediaCapture.MediaCaptureSettings.AudioDeviceId))
             {
                 //rotate the video feed according to the sensor
-                _mediaCapture.SetPreviewRotation(VideoRotation.Clockwise270Degrees);
-                _mediaCapture.SetRecordRotation(VideoRotation.Clockwise270Degrees);
+                _mediaCapture.SetPreviewRotation(rotation);
+                _mediaCapture.SetRecordRotation(rotation);
 
                 //hook into MediaCapture events
                 _mediaCapture.RecordLimitationExceeded += MediaCaptureOnRecordLimitationExceeded;
@@ -96,11 +134,26 @@ namespace Viddy.Views
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
+            StopVideo();
+        }
+
+        private void StopVideo()
+        {
             if (_displayRequest != null)
             {
                 _displayRequest.RequestRelease();
                 _displayRequest = null;
             }
+
+            _mediaCapture.StopPreviewAsync();
+
+            if (_isRecording)
+            {
+                _mediaCapture.StopRecordAsync();
+            }
+
+            _mediaCapture.Dispose();
+            _mediaCapture = null;
         }
     }
 }
