@@ -1,5 +1,4 @@
-using System;
-using Windows.Media.Capture;
+using System.Threading.Tasks;
 using Windows.Storage.Pickers;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
@@ -22,27 +21,34 @@ namespace Viddy.ViewModel
     public class MainViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
+        private readonly ICameraInfoService _cameraInfo;
 
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel(INavigationService navigationService)
+        public MainViewModel(INavigationService navigationService, ICameraInfoService cameraInfo)
         {
             _navigationService = navigationService;
-            ////if (IsInDesignMode)
-            ////{
-            ////    // Code runs in Blend --> create design time data.
-            ////}
-            ////else
-            ////{
-            ////    // Code runs "for real"
-            ////}
-            
-            MediaCapture = new MediaCapture();
+            _cameraInfo = cameraInfo;
+            if (IsInDesignMode)
+            {
+                // Code runs in Blend --> create design time data.
+                CanTurnOnFlash = true;
+                HasFrontFacingCamera = true;
+            }
+            else
+            {
+                // Code runs "for real"
+                SetDeviceOptions();
+            }
         }
 
-        public MediaCapture MediaCapture { get; set; }
+        private async Task SetDeviceOptions()
+        {
+            CanTurnOnFlash = await _cameraInfo.HasFlash();
+            HasFrontFacingCamera = await _cameraInfo.HasFrontFacingCamera();
+        }
 
         public bool CanTurnOnFlash { get; set; }
         public bool HasFrontFacingCamera { get; set; }
@@ -51,10 +57,8 @@ namespace Viddy.ViewModel
         {
             get
             {
-                return new RelayCommand(async () =>
+                return new RelayCommand(() =>
                 {
-                    await MediaCapture.InitializeAsync();
-                    await MediaCapture.StartPreviewAsync();
                 });
             }
         }

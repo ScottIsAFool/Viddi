@@ -24,6 +24,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.RegisterIf<IApplicationSettingsService, ApplicationSettingsService>();
             SimpleIoc.Default.RegisterIf<AuthenticationService>(true);
             SimpleIoc.Default.RegisterIf<INavigationService, NavigationService>();
+            SimpleIoc.Default.RegisterIf<ICameraInfoService, CameraInfoService>();
 
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<AccountViewModel>();

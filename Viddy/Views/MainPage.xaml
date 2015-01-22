@@ -24,6 +24,12 @@
                         HorizontalAlignment="Stretch"
                         VerticalAlignment="Stretch"
                         x:Name="CaptureElement" />
+        
+        <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                               Grid.Row="0"
+                               HorizontalAlignment="Left">
+            
+        </controls:CustomButton>
 
         <controls:CustomButton Grid.Row="2"
                                Style="{StaticResource EmptyButtonStyle}"
