@@ -23,7 +23,6 @@ namespace Viddy.Views
         public MainPage()
         {
             InitializeComponent();
-            _mediaCapture = new MediaCapture();
             _displayRequest = new DisplayRequest();
 
             SetFullScreen(ApplicationViewBoundsMode.UseCoreWindow);
@@ -139,10 +138,16 @@ namespace Viddy.Views
 
         private void StopVideo()
         {
-            if (_displayRequest != null)
+
+            if (_displayRequest != null && _isRecording)
             {
                 _displayRequest.RequestRelease();
                 _displayRequest = null;
+            }
+
+            if (_mediaCapture == null)
+            {
+                return;
             }
 
             _mediaCapture.StopPreviewAsync();

@@ -4,6 +4,7 @@ namespace Cimbalino.Toolkit.Services
 {
     public interface ICameraInfoService
     {
+        Task StartService();
         Task<bool> HasPrimaryCamera();
         Task<bool> HasFrontFacingCamera();
         Task<bool> HasFlash();

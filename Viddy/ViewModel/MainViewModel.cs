@@ -40,12 +40,12 @@ namespace Viddy.ViewModel
             else
             {
                 // Code runs "for real"
-                SetDeviceOptions();
             }
         }
 
         private async Task SetDeviceOptions()
         {
+            await _cameraInfo.StartService();
             CanTurnOnFlash = await _cameraInfo.HasFlash();
             HasFrontFacingCamera = await _cameraInfo.HasFrontFacingCamera();
         }
@@ -59,6 +59,7 @@ namespace Viddy.ViewModel
             {
                 return new RelayCommand(() =>
                 {
+                    SetDeviceOptions();
                 });
             }
         }

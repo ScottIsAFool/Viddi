@@ -7,46 +7,57 @@
                 Value="45" />
         <Setter Property="Width"
                 Value="45" />
+        <Setter Property="Background"
+                Value="#FFACACAC"></Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ProfilePictureControl">
                     <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
                                            IsHitTestVisible="{TemplateBinding IsHitTestVisible}"
                                            TapCommand="{TemplateBinding TappedCommand}">
-                        <Grid>
-                            <Ellipse Width="{TemplateBinding Width}"
-                                     Height="{TemplateBinding Height}"
-                                     Fill="#FFACACAC" />
-                            <Ellipse Width="{TemplateBinding Width}"
-                                     Height="{TemplateBinding Height}">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="/Assets/Defaults/UserLoginDefault.png" />
-                                </Ellipse.Fill>
-                            </Ellipse>
-                            <Ellipse Width="{TemplateBinding Width}"
-                                     Height="{TemplateBinding Height}">
-                                <Ellipse.Fill>
-                                    <ImageBrush ImageSource="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}}"
-                                                Stretch="UniformToFill" />
-                                </Ellipse.Fill>
-                            </Ellipse>
+                        <Viewbox Stretch="UniformToFill"
+                                 StretchDirection="DownOnly"
+                                 Width="{TemplateBinding Width}"
+                                 Height="{TemplateBinding Height}">
+                            <Border BorderThickness="1"
+                                    BorderBrush="{TemplateBinding Background}"
+                                    CornerRadius="45"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Padding="2">
+                                <Grid>
+                                    <Ellipse Stretch="Fill" Fill="{TemplateBinding Background}" />
+                                    <Ellipse Stretch="Fill">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="/Assets/Defaults/UserLoginDefault.png" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+                                    <Ellipse Stretch="Fill"
+                                             Width="{TemplateBinding Width}"
+                                             Height="{TemplateBinding Height}">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}}"
+                                                        Stretch="UniformToFill" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
 
-                            <Grid Tag="{TemplateBinding IsChanging}"
-                                  Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource VisibilityConverter}}"
-                                  Width="{TemplateBinding Width}"
-                                  Height="{TemplateBinding Height}">
-                                <Ellipse Width="{TemplateBinding Width}"
-                                         Height="{TemplateBinding Height}"
-                                         Fill="#C4000000"/>
-                                <Viewbox Stretch="UniformToFill"
-                                         StretchDirection="DownOnly">
-                                    <ProgressRing Height="{TemplateBinding Height}"
-                                                  Width="{TemplateBinding Width}"
-                                                  IsActive="{TemplateBinding IsChanging}" 
-                                                  Margin="6"/>
-                                </Viewbox>
-                            </Grid>
-                        </Grid>
+                                    <Grid Tag="{TemplateBinding IsChanging}"
+                                          Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource VisibilityConverter}}"
+                                          HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Stretch">
+                                        <Ellipse Stretch="Fill"
+                                                 Fill="#C4000000" />
+                                        <Viewbox Stretch="UniformToFill"
+                                                 StretchDirection="DownOnly">
+                                            <ProgressRing Height="{TemplateBinding Height}"
+                                                          Width="{TemplateBinding Width}"
+                                                          IsActive="{TemplateBinding IsChanging}"
+                                                          Margin="6" />
+                                        </Viewbox>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </Viewbox>
                     </controls:CustomButton>
                 </ControlTemplate>
             </Setter.Value>

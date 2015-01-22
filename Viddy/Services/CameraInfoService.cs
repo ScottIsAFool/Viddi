@@ -27,6 +27,7 @@ namespace Cimbalino.Toolkit.Services
         public CameraInfoService()
         {
             _captureManager = new MediaCapture();
+            _captureManager.InitializeAsync();
         }
         internal enum CameraType
         {
@@ -51,6 +52,12 @@ namespace Cimbalino.Toolkit.Services
 #endif
 
 
+        public async Task StartService()
+        {
+#if !WINDOWS_PHONE
+            await _captureManager.InitializeAsync();
+#endif
+        }
 
         public async Task<bool> HasPrimaryCamera()
         {

@@ -95,39 +95,52 @@
                                         Margin="0,15,0,0"
                                         VerticalAlignment="Center">
                 <StackPanel Orientation="Vertical">
-                    <Grid>
-                        <Ellipse Width="44"
-                                 Height="44"
-                                 Fill="#FFACACAC" />
-                        <Ellipse Width="45"
-                                 Height="45">
-                            <Ellipse.Fill>
-                                <ImageBrush ImageSource="/Assets/Defaults/UserLoginDefault.png"
-                                            Stretch="UniformToFill" />
-                            </Ellipse.Fill>
-                        </Ellipse>
+                    <Viewbox Height="44"
+                             Width="44"
+                             Stretch="UniformToFill"
+                             StretchDirection="DownOnly">
+                        <Border HorizontalAlignment="Stretch"
+                                VerticalAlignment="Stretch"
+                                BorderBrush="#FFACACAC"
+                                BorderThickness="1"
+                                Padding="2"
+                                CornerRadius="45">
+                            <Grid>
+                                <Ellipse Width="44"
+                                         Height="44"
+                                         Fill="#FFACACAC" />
+                                <Ellipse Width="45"
+                                         Height="45">
+                                    <Ellipse.Fill>
+                                        <ImageBrush ImageSource="/Assets/Defaults/UserLoginDefault.png"
+                                                    Stretch="UniformToFill" />
+                                    </Ellipse.Fill>
+                                </Ellipse>
 
-                        <Path Width="16.334"
-                              Height="13.755"
-                              Stretch="Fill"
-                              VerticalAlignment="Bottom"
-                              HorizontalAlignment="Right"
-                              Fill="DeepSkyBlue"
-                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource InverseVisibilityConverter}}"
-                              Margin="0,0,6,6"
-                              Data="F1 M 23.7501,33.25L 34.8334,44.3333L 52.2499,22.1668L 56.9999,26.9168L 34.8334,53.8333L 19.0001,38L 23.7501,33.25 Z "
-                              UseLayoutRounding="False" />
-                        <Path Width="16"
-                              Height="16"
-                              Stretch="Fill"
-                              VerticalAlignment="Bottom"
-                              HorizontalAlignment="Right"
-                              Fill="Red"
-                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"
-                              Margin="0,0,6,6"
-                              Data="F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z "
-                              UseLayoutRounding="False" />
-                    </Grid>
+                                <Path Width="16.334"
+                                      Height="13.755"
+                                      Stretch="Fill"
+                                      VerticalAlignment="Bottom"
+                                      HorizontalAlignment="Right"
+                                      Fill="DeepSkyBlue"
+                                      Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource InverseVisibilityConverter}}"
+                                      Margin="0,0,6,6"
+                                      Data="F1 M 23.7501,33.25L 34.8334,44.3333L 52.2499,22.1668L 56.9999,26.9168L 34.8334,53.8333L 19.0001,38L 23.7501,33.25 Z "
+                                      UseLayoutRounding="False" />
+                                <Path Width="16"
+                                      Height="16"
+                                      Stretch="Fill"
+                                      VerticalAlignment="Bottom"
+                                      HorizontalAlignment="Right"
+                                      Fill="Red"
+                                      Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"
+                                      Margin="0,0,6,6"
+                                      Data="F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z "
+                                      UseLayoutRounding="False" />
+                            </Grid>
+
+                        </Border>
+                    </Viewbox>
 
                     <TextBlock Text="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource LoginLogoutConverter}}"
                                FontSize="{StaticResource TextStyleSmallFontSize}"
