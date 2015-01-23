@@ -14,6 +14,9 @@ namespace Viddy.Services
         private readonly IVidMeClient _vidMeClient;
         public static AuthenticationService Current { get; private set; }
 
+        public event EventHandler UserSignedIn;
+        public event EventHandler UserSignedOut;
+
         public AuthenticationService(IApplicationSettingsService settingsService, IVidMeClient vidMeClient)
         {
             _settingsService = settingsService;
@@ -46,12 +49,24 @@ namespace Viddy.Services
             {
                 _settingsService.Roaming.SetS(Constants.StorageSettings.AuthenticationSettings, AuthenticationInfo);
             }
+
+            var signedIn = UserSignedIn;
+            if (signedIn != null)
+            {
+                signedIn(this, EventArgs.Empty);
+            }
         }
 
         public void SignOut()
         {
             _settingsService.Roaming.Remove(Constants.StorageSettings.AuthenticationSettings);
             AuthenticationInfo = null;
+
+            var signedOut = UserSignedOut;
+            if (signedOut != null)
+            {
+                signedOut(this, EventArgs.Empty);
+            }
         }
 
         public AuthResponse AuthenticationInfo { get; private set; }

@@ -108,7 +108,9 @@
     <Compile Include="Services\ICameraInfoService.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModel\AccountViewModel.cs" />
+    <Compile Include="ViewModel\AvatarViewModel.cs" />
     <Compile Include="ViewModel\EditVideoViewModel.cs" />
+    <Compile Include="ViewModel\ManageAccountViewModel.cs" />
     <Compile Include="ViewModel\UploadVideoViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="Views\AccountView.xaml.cs">
@@ -121,11 +123,11 @@
     <Compile Include="Views\EditVideoView.xaml.cs">
       <DependentUpon>EditVideoView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
+    <Compile Include="Views\VideoRecordView.xaml.cs">
+      <DependentUpon>VideoRecordView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\VideoRecordViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
     <Compile Include="Views\ManageAccountView.xaml.cs">
       <DependentUpon>ManageAccountView.xaml</DependentUpon>
@@ -181,7 +183,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\MainPage.xaml">
+    <Page Include="Views\VideoRecordView.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

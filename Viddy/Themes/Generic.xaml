@@ -53,6 +53,7 @@
                                             <ProgressRing Height="{TemplateBinding Height}"
                                                           Width="{TemplateBinding Width}"
                                                           IsActive="{TemplateBinding IsChanging}"
+                                                          Background="Transparent"
                                                           Margin="6" />
                                         </Viewbox>
                                     </Grid>

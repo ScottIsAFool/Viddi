@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Pickers;
-using Windows.UI.Xaml;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
@@ -31,8 +30,9 @@ namespace Viddy.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public VideoRecordViewModel(INavigationService navigationService, ICameraInfoService cameraInfo)
+        public VideoRecordViewModel(INavigationService navigationService, ICameraInfoService cameraInfo, AvatarViewModel avatar)
         {
+            Avatar = avatar;
             _navigationService = navigationService;
             _cameraInfo = cameraInfo;
             if (IsInDesignMode)
@@ -54,6 +54,7 @@ namespace Viddy.ViewModel
             HasFrontFacingCamera = await _cameraInfo.HasFrontFacingCamera();
         }
 
+        public AvatarViewModel Avatar { get; set; }
         public bool CanTurnOnFlash { get; set; }
         public bool HasFrontFacingCamera { get; set; }
 

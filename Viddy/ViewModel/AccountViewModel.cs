@@ -20,23 +20,21 @@ namespace Viddy.ViewModel
 {
     public class AccountViewModel : ViewModelBase
     {
-        private const string DefaultAvatar = "/Assets/Defaults/UserLoginDefault.png";
-
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
 
         private bool _videosLoaded;
 
-        public AccountViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
+        public AccountViewModel(INavigationService navigationService, IVidMeClient vidMeClient, AvatarViewModel avatar)
         {
+            Avatar = avatar;
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
-
-            SetAvatar();
         }
 
         public ObservableCollection<Video> Videos { get; set; }
-        public bool ChangingAvatar { get; set; }
+        public AvatarViewModel Avatar { get; set; }
+
 
         public RelayCommand LogInLogOutCommand
         {
@@ -48,7 +46,6 @@ namespace Viddy.ViewModel
                     {
                         AuthenticationService.Current.SignOut();
                         _videosLoaded = false;
-                        SetAvatar();
                         await LoadData(true);
                     }
                     else
@@ -85,15 +82,7 @@ namespace Viddy.ViewModel
         {
             get
             {
-                return new RelayCommand(() =>
-                {
-                    var filePicker = new FileOpenPicker {ViewMode = PickerViewMode.Thumbnail, SuggestedStartLocation = PickerLocationId.PicturesLibrary};
-                    filePicker.FileTypeFilter.Add(".jpg");
-                    filePicker.FileTypeFilter.Add(".jpeg");
-                    filePicker.FileTypeFilter.Add(".png");
-
-                    filePicker.PickSingleFileAndContinue();
-                });
+                return new RelayCommand(() => Avatar.ChangeAvatar());
             }
         }
 
@@ -154,13 +143,6 @@ namespace Viddy.ViewModel
             }
         }
 
-        private void SetAvatar()
-        {
-            AvatarUrl = AuthenticationService.Current.IsLoggedIn ? AuthenticationService.Current.AuthenticationInfo.User.AvatarUrl : DefaultAvatar;
-        }
-
-        public string AvatarUrl { get; set; }
-
         private void LaunchAuthentication()
         {
             var url = _vidMeClient.GetAuthUrl(Constants.ClientId, Constants.CallBackUrl, new List<Scope> {Scope.Videos, Scope.VideoUpload, Scope.Channels, Scope.Comments, Scope.Votes, Scope.Account, Scope.AuthManagement, Scope.ClientManagement});
@@ -178,7 +160,6 @@ namespace Viddy.ViewModel
                     AuthenticationService.Current.SetAuthenticationInfo(auth);
                 }
 
-                SetAvatar();
                 await LoadData(true);
             }
             catch (Exception ex)
@@ -232,41 +213,7 @@ namespace Viddy.ViewModel
                     var code = (string) m.Sender;
                     await CompleteAuthentication(code);
                 }
-                else if (m.Notification.Equals(Constants.Messages.ProfileFileMsg))
-                {
-                    var file = m.Sender as IStorageFile;
-                    await UpdateAvatar(file);
-                }
             });
-        }
-
-        private async Task UpdateAvatar(IStorageFile file)
-        {
-            try
-            {
-                ChangingAvatar = true;
-
-                using (var stream = await file.OpenAsync(FileAccessMode.Read))
-                {
-                    using (var actualStream = stream.AsStream())
-                    {
-                        var user = await _vidMeClient.UpdateAvatarAsync(AuthenticationService.Current.LoggedInUserId, actualStream, file.ContentType, file.Name);
-                        if (user != null)
-                        {
-                            var auth = AuthenticationService.Current.AuthenticationInfo;
-                            auth.User = user;
-                            AuthenticationService.Current.SetAuthenticationInfo(auth);
-                            SetAvatar();
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                
-            }
-
-            ChangingAvatar = false;
         }
     }
 }
