@@ -91,7 +91,11 @@ namespace Viddy.Views
                 _mediaCapture = new MediaCapture();
             }
 
-            await _mediaCapture.InitializeAsync();
+            try
+            {
+                await _mediaCapture.InitializeAsync();
+            }
+            catch { }
 
             SetRotation(_display.CurrentOrientation);
 
@@ -200,6 +204,12 @@ namespace Viddy.Views
                     
                 }
             }
+        }
+
+        protected override void InitialiseOnBack()
+        {
+            base.InitialiseOnBack();
+            StartPreview();
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
