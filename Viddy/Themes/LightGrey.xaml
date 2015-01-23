@@ -4,5 +4,9 @@
     <Color x:Key="ButtonBackgroundColor">#FFACACAC</Color>
     <SolidColorBrush x:Key="ButtonBackgroundBrush"
                      Color="{StaticResource ButtonBackgroundColor}"/>
+    
+    <Color x:Key="RecordButtonColor">Red</Color>
+    <SolidColorBrush x:Key="RecordButtonBrush"
+                     Color="{StaticResource RecordButtonColor}"/>
 
 </ResourceDictionary>

@@ -25,11 +25,91 @@
                         VerticalAlignment="Stretch"
                         x:Name="CaptureElement" />
 
-        <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
-                               Grid.Row="0"
-                               HorizontalAlignment="Left">
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="0"
+                    Margin="19,51"
+                    HorizontalAlignment="Left">
+            <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                   x:Name="FlashButton"
+                                   Tapped="FlashButton_OnTapped"
+                                   Visibility="{Binding CanTurnOnFlash, Converter={StaticResource VisibilityConverter}}">
+                <Viewbox Stretch="UniformToFill"
+                         StretchDirection="DownOnly"
+                         Height="45"
+                         Width="45"
+                         x:Name="FlashViewbox">
+                    <Border BorderBrush="{ThemeResource ButtonBackgroundBrush}"
+                            BorderThickness="1"
+                            Padding="2"
+                            CornerRadius="45">
+                        <Grid>
+                            <Ellipse Fill="{ThemeResource ButtonBackgroundBrush}"
+                                     Stretch="Fill"
+                                     Height="45"
+                                     Width="45" />
+                            <Grid Visibility="{Binding FlashOn, Converter={StaticResource InverseVisibilityConverter}}">
+                                <Ellipse Fill="White"
+                                         Height="45"
+                                         Width="45" />
+                                <Path Width="45"
+                                      Height="45"
+                                      Stretch="Fill"
+                                      Fill="{ThemeResource ButtonBackgroundBrush}"
+                                      Data="F1 M 38,3.16666C 57.2379,3.16666 72.8333,18.7621 72.8333,38C 72.8333,57.2379 57.2379,72.8333 38,72.8333C 18.7621,72.8333 3.16667,57.2379 3.16667,38C 3.16667,18.7621 18.7621,3.16666 38,3.16666 Z M 52.252,18.9974L 36.4164,18.9974L 23.75,39.5833L 34.8333,39.5833L 25.3316,60.1667L 50.6667,34.8333L 38,34.8333L 52.252,18.9974 Z " />
+                            </Grid>
+                            <Path Width="45"
+                                  Height="45"
+                                  Stretch="Fill"
+                                  Fill="White"
+                                  Data="F1 M 38,3.16666C 57.2379,3.16666 72.8333,18.7621 72.8333,38C 72.8333,57.2379 57.2379,72.8333 38,72.8333C 18.7621,72.8333 3.16667,57.2379 3.16667,38C 3.16667,18.7621 18.7621,3.16666 38,3.16666 Z M 52.252,18.9974L 36.4164,18.9974L 23.75,39.5833L 34.8333,39.5833L 25.3316,60.1667L 50.6667,34.8333L 38,34.8333L 52.252,18.9974 Z "
+                                  Visibility="{Binding FlashOn, Converter={StaticResource VisibilityConverter}}" />
+                        </Grid>
+                    </Border>
+                </Viewbox>
+            </controls:CustomButton>
 
-        </controls:CustomButton>
+            <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                   Margin="0,12"
+                                   x:Name="FrontFacingButton"
+                                   Tapped="FrontFacingButton_OnTapped"
+                                   Visibility="{Binding HasFrontFacingCamera, Converter={StaticResource VisibilityConverter}}">
+                <Viewbox Stretch="UniformToFill"
+                         StretchDirection="DownOnly"
+                         Height="45"
+                         Width="45"
+                         x:Name="FrontFacingViewbox">
+                    <Border BorderBrush="{ThemeResource ButtonBackgroundBrush}"
+                            BorderThickness="1"
+                            Padding="2"
+                            CornerRadius="45">
+                        <Grid>
+                            <Ellipse Fill="{ThemeResource ButtonBackgroundBrush}"
+                                     Stretch="Fill"
+                                     Height="45"
+                                     Width="45" />
+                            <Grid Visibility="{Binding IsFrontFacing, Converter={StaticResource InverseVisibilityConverter}}">
+                                <Ellipse Fill="White"
+                                         Height="45"
+                                         Width="45" />
+                                <Path Width="45"
+                                      Height="45"
+                                      Stretch="Fill"
+                                      Fill="{ThemeResource ButtonBackgroundBrush}"
+                                      HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Data="F1 M 24,31C 24,32.1046 23.3284,33 22.5,33C 21.6716,33 21,32.1046 21,31C 21,29.8955 21.6716,29 22.5,29C 23.3284,29 24,29.8955 24,31 Z M 73,38C 73,57.33 57.33,73 38,73C 18.67,73 3,57.33 3,38C 3,18.67 18.67,3.00002 38,3.00002C 57.3299,3.00002 73,18.6701 73,38 Z M 22,26.0001C 19.2386,26.0001 17,28.2387 17,31.0001L 17,45.0001C 17,47.7615 19.2386,50.0001 22,50.0001L 33.2316,50.0001C 33.3923,48.5774 33.6626,46.7702 34.1154,44.8522C 31.1907,44.2177 29,41.6147 29,38.5C 29,34.9102 31.9101,32 35.5,32C 37.2666,32 38.8686,32.7048 40.0402,33.8485C 41.1646,32.9855 42.468,32.3696 43.9792,32.1075C 42.4693,30.9173 41.5,29.0718 41.5,27C 41.5,25.8018 41.8242,24.6792 42.3897,23.7154C 41.5176,22.1415 39.8181,21 38,21L 32,21C 29.3767,21 27,23.3766 27,26L 22,26.0001 Z M 44.7499,34C 44.75,34 34.75,33 35,53.5L 38.25,54.25C 38.25,54.25 38.75,46.75 40.75,42.75L 40.75,55.25C 40.75,55.25 44.5,57 48.5,56.9686C 52.5,56.9371 56,55.25 56,55.25L 55.9999,42.75C 57.9999,46.75 58.5,54.25 58.5,54.25L 61.75,53.5C 62,33 52,34 52,34L 44.7499,34 Z M 43,27C 43,29.7614 45.2386,32 48,32C 50.7614,32 53,29.7614 53,27C 53,24.2386 50.7614,22 48,22C 45.2386,22 43,24.2386 43,27 Z " />
+                            </Grid>
+                            <Path Width="45"
+                                  Height="45"
+                                  Stretch="Fill"
+                                  Fill="White"
+                                  Data="F1 M 24,31C 24,32.1046 23.3284,33 22.5,33C 21.6716,33 21,32.1046 21,31C 21,29.8955 21.6716,29 22.5,29C 23.3284,29 24,29.8955 24,31 Z M 73,38C 73,57.33 57.33,73 38,73C 18.67,73 3,57.33 3,38C 3,18.67 18.67,3.00002 38,3.00002C 57.3299,3.00002 73,18.6701 73,38 Z M 22,26.0001C 19.2386,26.0001 17,28.2387 17,31.0001L 17,45.0001C 17,47.7615 19.2386,50.0001 22,50.0001L 33.2316,50.0001C 33.3923,48.5774 33.6626,46.7702 34.1154,44.8522C 31.1907,44.2177 29,41.6147 29,38.5C 29,34.9102 31.9101,32 35.5,32C 37.2666,32 38.8686,32.7048 40.0402,33.8485C 41.1646,32.9855 42.468,32.3696 43.9792,32.1075C 42.4693,30.9173 41.5,29.0718 41.5,27C 41.5,25.8018 41.8242,24.6792 42.3897,23.7154C 41.5176,22.1415 39.8181,21 38,21L 32,21C 29.3767,21 27,23.3766 27,26L 22,26.0001 Z M 44.7499,34C 44.75,34 34.75,33 35,53.5L 38.25,54.25C 38.25,54.25 38.75,46.75 40.75,42.75L 40.75,55.25C 40.75,55.25 44.5,57 48.5,56.9686C 52.5,56.9371 56,55.25 56,55.25L 55.9999,42.75C 57.9999,46.75 58.5,54.25 58.5,54.25L 61.75,53.5C 62,33 52,34 52,34L 44.7499,34 Z M 43,27C 43,29.7614 45.2386,32 48,32C 50.7614,32 53,29.7614 53,27C 53,24.2386 50.7614,22 48,22C 45.2386,22 43,24.2386 43,27 Z "
+                                  Visibility="{Binding IsFrontFacing, Converter={StaticResource VisibilityConverter}}" />
+                        </Grid>
+                    </Border>
+                </Viewbox>
+            </controls:CustomButton>
+        </StackPanel>
 
         <controls:CustomButton Grid.Row="2"
                                Style="{StaticResource EmptyButtonStyle}"
@@ -67,11 +147,11 @@
                                Padding="0,0,0,18"
                                x:Name="RecordButton"
                                Tapped="RecordButton_OnTapped">
-            <Border BorderBrush="Red"
+            <Border BorderBrush="{ThemeResource RecordButtonBrush}"
                     BorderThickness="1"
                     Padding="2"
                     CornerRadius="55">
-                <Ellipse Fill="Red"
+                <Ellipse Fill="{ThemeResource RecordButtonBrush}"
                          Height="80"
                          Width="80" />
             </Border>

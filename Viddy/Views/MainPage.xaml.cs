@@ -11,7 +11,6 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
-using GalaSoft.MvvmLight.Messaging;
 
 namespace Viddy.Views
 {
@@ -24,6 +23,24 @@ namespace Viddy.Views
         private DisplayRequest _displayRequest;
         private bool _isRecording;
         private readonly DisplayInformation _display;
+
+        public static readonly DependencyProperty FlashOnProperty = DependencyProperty.Register(
+            "FlashOn", typeof (bool), typeof (MainPage), new PropertyMetadata(default(bool)));
+
+        public bool FlashOn
+        {
+            get { return (bool) GetValue(FlashOnProperty); }
+            set { SetValue(FlashOnProperty, value); }
+        }
+
+        public static readonly DependencyProperty IsFrontFacingProperty = DependencyProperty.Register(
+            "IsFrontFacing", typeof (bool), typeof (MainPage), new PropertyMetadata(default(bool)));
+
+        public bool IsFrontFacing
+        {
+            get { return (bool) GetValue(IsFrontFacingProperty); }
+            set { SetValue(IsFrontFacingProperty, value); }
+        }
         
         public MainPage()
         {
@@ -33,6 +50,9 @@ namespace Viddy.Views
             SetFullScreen(ApplicationViewBoundsMode.UseCoreWindow);
             _display = DisplayInformation.GetForCurrentView();
             _display.OrientationChanged += DisplayOnOrientationChanged;
+
+            FlashViewbox.DataContext = this;
+            FrontFacingViewbox.DataContext = this;
         }
 
         private void DisplayOnOrientationChanged(DisplayInformation sender, object args)
@@ -123,7 +143,8 @@ namespace Viddy.Views
 
         private async void RecordButton_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            string fileName = string.Empty;
+            return;
+            var fileName = string.Empty;
             if (!_isRecording)
             {
                 _isRecording = true;
@@ -134,7 +155,7 @@ namespace Viddy.Views
 
                 _displayRequest.RequestActive();
 
-                fileName = DateTime.Now.ToString("yyyy-dd-M-HH-mm-ss") + ".mp4";
+                fileName = "Viddy-" + DateTime.Now.ToString("yyyy-M-dd-HH-mm-ss") + ".mp4";
                 var folder = ApplicationData.Current.LocalCacheFolder;
                 var file = await folder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
 
@@ -202,6 +223,16 @@ namespace Viddy.Views
 
             _mediaCapture.Dispose();
             _mediaCapture = null;
+        }
+
+        private void FlashButton_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            FlashOn = !FlashOn;
+        }
+
+        private void FrontFacingButton_OnTapped(object sender, TappedRoutedEventArgs e)
+        {
+            IsFrontFacing = !IsFrontFacing;
         }
     }
 }
