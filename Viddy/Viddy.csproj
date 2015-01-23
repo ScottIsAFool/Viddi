@@ -111,6 +111,7 @@
     <Compile Include="ViewModel\AvatarViewModel.cs" />
     <Compile Include="ViewModel\EditVideoViewModel.cs" />
     <Compile Include="ViewModel\ManageAccountViewModel.cs" />
+    <Compile Include="ViewModel\ManageAppsAccessViewModel.cs" />
     <Compile Include="ViewModel\UploadVideoViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="Views\Account\AccountView.xaml.cs">
@@ -252,9 +253,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ThemeManagerRt.1.0.1.1\lib\portable-win81+WindowsPhoneApp81\ThemeManagerRt.dll</HintPath>
     </Reference>
-    <Reference Include="VidMePortable, Version=0.0.0.8, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="VidMePortable, Version=0.0.0.10, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\VidMePortable.0.0.0.8-beta\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10\VidMePortable.dll</HintPath>
+      <HintPath>..\packages\VidMePortable.0.0.0.10-beta\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10\VidMePortable.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

@@ -24,6 +24,7 @@
             <converters:BooleanToVisibilityConverter x:Key="InverseVisibilityConverter"
                                                      InvertValue="True" />
             <converters:NegativeBooleanConverter x:Key="NegativeBooleanConverter" />
+            <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
 
             <themeManagerRt:ThemeManager x:Key="ThemeManager" />
 
@@ -93,6 +94,11 @@
                         </ControlTemplate>
                     </Setter.Value>
                 </Setter>
+            </Style>
+
+            <Style TargetType="ListViewItem">
+                <Setter Property="HorizontalContentAlignment"
+                        Value="Stretch" />
             </Style>
         </ResourceDictionary>
         

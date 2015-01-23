@@ -40,7 +40,8 @@
                         VerticalAlignment="Top"
                         Margin="19,0">
                 <controls:CustomHyperlinkButton Content="Manage apps' access"
-                                                Style="{StaticResource EmptyButtonStyle}" />
+                                                Style="{StaticResource EmptyButtonStyle}" 
+                                                TapCommand="{Binding NavigateToAppsAccessCommand}"/>
             </StackPanel>
         </Grid>
 

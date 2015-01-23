@@ -25,6 +25,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.RegisterIf<AuthenticationService>(true);
             SimpleIoc.Default.RegisterIf<INavigationService, NavigationService>();
             SimpleIoc.Default.RegisterIf<ICameraInfoService, CameraInfoService>();
+            SimpleIoc.Default.RegisterIf<IMessageBoxService, MessageBoxService>();
 
             SimpleIoc.Default.Register<AvatarViewModel>();
             SimpleIoc.Default.Register<VideoRecordViewModel>();
@@ -32,6 +33,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.Register<EditVideoViewModel>();
             SimpleIoc.Default.Register<UploadVideoViewModel>();
             SimpleIoc.Default.Register<ManageAccountViewModel>();
+            SimpleIoc.Default.Register<ManageAppsAccessViewModel>();
         }
 
         public VideoRecordViewModel VideoRecord
@@ -57,6 +59,11 @@ namespace Viddy.ViewModel
         public ManageAccountViewModel ManageAccount
         {
             get { return ServiceLocator.Current.GetInstance<ManageAccountViewModel>(); }
+        }
+
+        public ManageAppsAccessViewModel ManageApps
+        {
+            get { return ServiceLocator.Current.GetInstance<ManageAppsAccessViewModel>(); }
         }
 
         public AuthenticationService Auth

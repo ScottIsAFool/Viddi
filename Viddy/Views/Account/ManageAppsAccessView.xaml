@@ -5,9 +5,19 @@
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 xmlns:views="using:Viddy.Views"
                 xmlns:controls="using:Viddy.Controls"
+                xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+                xmlns:behaviours="using:Viddy.Behaviours"
+                xmlns:core="using:Microsoft.Xaml.Interactions.Core"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-                DataContext="{Binding ManageAccount, Source={StaticResource Locator}}">
+                DataContext="{Binding ManageApps, Source={StaticResource Locator}}">
+    <interactivity:Interaction.Behaviors>
+        <behaviours:StatusBarBehavior BackgroundColor="{ThemeResource HeaderColor}"
+                                      IsVisible="True" />
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -19,9 +29,7 @@
               Height="80">
             <Grid Margin="19,0">
                 <StackPanel Orientation="Horizontal">
-                    <controls:ProfilePictureControl TappedCommand="{Binding ChangeAvatarCommand}"
-                                                    IsChanging="{Binding Avatar.ChangingAvatar}"
-                                                    IsHitTestVisible="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}" />
+                    <controls:ProfilePictureControl IsHitTestVisible="False" />
 
                     <Grid>
                         <TextBlock VerticalAlignment="Center"
@@ -32,6 +40,75 @@
                     </Grid>
                 </StackPanel>
             </Grid>
+        </Grid>
+        
+        <Grid x:Name="Content"
+              Grid.Row="1"
+              Margin="0,12,0,0">
+            <ListView ItemsSource="{Binding Apps}">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="19,0,19,12">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            
+                            <StackPanel Orientation="Vertical">
+                                <TextBlock Text="{Binding Name}"
+                                           Style="{StaticResource TitleTextBlockStyle}"/>
+                                <TextBlock Text="{Binding Organization}"
+                                           Style="{StaticResource BodyTextBlockStyle}"
+                                           FontSize="{StaticResource TextStyleSmallFontSize}"
+                                           Foreground="{ThemeResource SubtleBrush}"
+                                           Visibility="{Binding Organization, Converter={StaticResource NullToVisibilityConverter}}"/>
+                                <TextBlock Text="{Binding Description}"
+                                           TextTrimming="CharacterEllipsis"
+                                           Style="{StaticResource BodyTextBlockStyle}"
+                                           FontSize="{StaticResource TextStyleSmallFontSize}"
+                                           Foreground="{ThemeResource SubtleBrush}"
+                                           Visibility="{Binding Description, Converter={StaticResource NullToVisibilityConverter}}"/>
+                            </StackPanel>
+                            
+                            <Button Grid.Column="1"
+                                    x:Name="RevokeButton"
+                                    Style="{StaticResource EmptyButtonStyle}"
+                                    Tapped="RevokeButton_OnTapped"
+                                    VerticalContentAlignment="Stretch"
+                                    Padding="12"
+                                    VerticalAlignment="Stretch">
+                                <Button.Resources>
+                                    <x:Double x:Key="EllipseSize">5</x:Double>
+                                </Button.Resources>
+                                <FlyoutBase.AttachedFlyout>
+                                    <MenuFlyout>
+                                        <MenuFlyoutItem Margin="12,0,0,0"
+                                                        Command="{Binding ManageApps.RevokeTokenCommand, Source={StaticResource Locator}}"
+                                                        CommandParameter="{Binding}"
+                                                        Text="revoke" />
+                                    </MenuFlyout>
+                                </FlyoutBase.AttachedFlyout>
+
+                                <StackPanel Orientation="Horizontal">
+                                    <Ellipse Fill="{ThemeResource ButtonBackgroundBrush}"
+                                             Stretch="Fill"
+                                             Height="{StaticResource EllipseSize}"
+                                             Width="{StaticResource EllipseSize}"/>
+                                    <Ellipse Fill="{ThemeResource ButtonBackgroundBrush}"
+                                             Stretch="Fill"
+                                             Height="{StaticResource EllipseSize}"
+                                             Width="{StaticResource EllipseSize}" 
+                                             Margin="3,0"/>
+                                    <Ellipse Fill="{ThemeResource ButtonBackgroundBrush}"
+                                             Stretch="Fill"
+                                             Height="{StaticResource EllipseSize}"
+                                             Width="{StaticResource EllipseSize}" />
+                                </StackPanel>
+                            </Button>
+                        </Grid>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </Grid>
     </Grid>
 </views:BasePage>

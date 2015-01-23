@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Viddy.Common;
 using Viddy.Views;
 using VidMePortable;
+using VidMePortable.Model.Requests;
 using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel
