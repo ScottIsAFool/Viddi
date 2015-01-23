@@ -10,7 +10,11 @@
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding Main, Source={StaticResource Locator}}">
-
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding MainPageLoadedCommand}"/>
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -27,7 +31,7 @@
 
         <StackPanel Orientation="Vertical"
                     Grid.Row="0"
-                    Margin="19,51"
+                    Margin="19,41"
                     HorizontalAlignment="Left">
             <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
                                    x:Name="FlashButton"

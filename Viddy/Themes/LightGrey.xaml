@@ -8,5 +8,13 @@
     <Color x:Key="RecordButtonColor">Red</Color>
     <SolidColorBrush x:Key="RecordButtonBrush"
                      Color="{StaticResource RecordButtonColor}"/>
+    
+    <Color x:Key="TickColor">DeepSkyBlue</Color>
+    <SolidColorBrush x:Key="TickBrush"
+                     Color="{StaticResource TickColor}"/>
+    
+    <Color x:Key="CrossColor">Red</Color>
+    <SolidColorBrush x:Key="CrossBrush"
+                     Color="{StaticResource CrossColor}"/>
 
 </ResourceDictionary>

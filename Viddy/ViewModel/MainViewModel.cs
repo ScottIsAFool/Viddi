@@ -1,7 +1,11 @@
 using System.Threading.Tasks;
+using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.UI.Xaml;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
 using Viddy.Views;
 
 namespace Viddy.ViewModel
@@ -69,6 +73,15 @@ namespace Viddy.ViewModel
             get
             {
                 return new RelayCommand(() => _navigationService.Navigate<AccountView>());
+            }
+        }
+
+        public void FinishedRecording(IStorageFile file)
+        {
+            if (App.Locator.Upload != null)
+            {
+                Messenger.Default.Send(new NotificationMessage(file, Constants.Messages.VideoFileMsg));
+                SimpleIoc.Default.GetInstance<INavigationService>().Navigate<UploadVideoView>();
             }
         }
 

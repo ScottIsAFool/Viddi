@@ -11,6 +11,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
+using Viddy.ViewModel;
 
 namespace Viddy.Views
 {
@@ -23,6 +24,11 @@ namespace Viddy.Views
         private DisplayRequest _displayRequest;
         private bool _isRecording;
         private readonly DisplayInformation _display;
+
+        protected override ApplicationViewBoundsMode Mode
+        {
+            get { return ApplicationViewBoundsMode.UseCoreWindow; }
+        }
 
         public static readonly DependencyProperty FlashOnProperty = DependencyProperty.Register(
             "FlashOn", typeof (bool), typeof (MainPage), new PropertyMetadata(default(bool)));
@@ -46,8 +52,7 @@ namespace Viddy.Views
         {
             InitializeComponent();
             _displayRequest = new DisplayRequest();
-
-            SetFullScreen(ApplicationViewBoundsMode.UseCoreWindow);
+            
             _display = DisplayInformation.GetForCurrentView();
             _display.OrientationChanged += DisplayOnOrientationChanged;
 
@@ -182,6 +187,12 @@ namespace Viddy.Views
                     {
                         var cameraRoll = await KnownFolders.PicturesLibrary.GetFolderAsync("Camera Roll");
                         var copiedFile = await file.CopyAsync(cameraRoll);
+
+                        var vm = DataContext as MainViewModel;
+                        if (vm != null)
+                        {
+                            vm.FinishedRecording(file);
+                        }
                     }
                 }
                 catch (FileNotFoundException)

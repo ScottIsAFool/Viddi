@@ -55,7 +55,11 @@ namespace Cimbalino.Toolkit.Services
         public async Task StartService()
         {
 #if !WINDOWS_PHONE
-            await _captureManager.InitializeAsync();
+            try
+            {
+                await _captureManager.InitializeAsync();
+            }
+            catch { }
 #endif
         }
 

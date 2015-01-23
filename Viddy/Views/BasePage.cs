@@ -14,6 +14,11 @@ namespace Viddy.Views
         private readonly NavigationHelper _navigationHelper;
         protected readonly ILog Logger;
 
+        protected virtual ApplicationViewBoundsMode Mode
+        {
+            get { return ApplicationViewBoundsMode.UseVisible; }
+        }
+
         public BasePage()
         {
             NavigationCacheMode = NavigationCacheMode.Required;
@@ -21,7 +26,6 @@ namespace Viddy.Views
             _navigationHelper.LoadState += NavigationHelperLoadState;
             _navigationHelper.SaveState += NavigationHelperSaveState;
             Logger = new WinLogger(GetType().FullName);
-            SetFullScreen(ApplicationViewBoundsMode.UseVisible);
         }
 
         protected void SetFullScreen(ApplicationViewBoundsMode mode)
@@ -71,6 +75,8 @@ namespace Viddy.Views
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             Logger.Info("Navigated to {0}", GetType().FullName);
+
+            SetFullScreen(Mode);
 
             if (e.NavigationMode == NavigationMode.Back)
             {
