@@ -1,6 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
@@ -28,20 +28,20 @@ namespace Viddy.ViewModel
 
             if (IsInDesignMode)
             {
-                Apps = new ObservableCollection<Application>
+                Apps = new ObservableCollection<RevokeAppViewModel>
                 {
-                    new Application
+                    new RevokeAppViewModel(new Application
                     {
                         Name = "Viddy for Windows Phone",
                         Organization = "Ferret Labs",
                         Website = "http://ferretlabs.com",
                         Description = "VidMe app for Windows Phone 8.1"
-                    }
+                    }, _vidMeClient, this, _messageBoxService)
                 };
             }
         }
 
-        public ObservableCollection<Application> Apps { get; set; }
+        public ObservableCollection<RevokeAppViewModel> Apps { get; set; }
 
         public RelayCommand PageLoadedCommand
         {
@@ -65,46 +65,12 @@ namespace Viddy.ViewModel
             }
         }
 
-        public RelayCommand<Application> RevokeTokenCommand
+        internal void ResetApp()
         {
-            get
-            {
-                return new RelayCommand<Application>(async app =>
-                {
-                    try
-                    {
-                        if (app.ClientId == Constants.ClientId)
-                        {
-                            var result = await _messageBoxService.ShowAsync("This is the token for this app, are you sure you wish to revoke this token? If you do, you will have to sign in again.", "Are you sure?", new List<string> {"yes", "no"});
-                            if (result == 1)
-                            {
-                                return;
-                            }
-                        }
-
-                        SetProgressBar("Revoking token...");
-                        if (await _vidMeClient.RevokeAppTokenAsync(app.ClientId))
-                        {
-                            if (app.ClientId == Constants.ClientId)
-                            {
-                                _appsLoaded = false;
-                                Apps = null;
-                                AuthenticationService.Current.SignOut();
-                                _navigationService.Navigate<VideoRecordView>(new NavigationParameters {ClearBackstack = true});
-                            }
-                            else
-                            {
-                                Apps.Remove(app);
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                    }
-
-                    SetProgressBar();
-                });
-            }
+            _appsLoaded = false;
+            Apps = null;
+            AuthenticationService.Current.SignOut();
+            _navigationService.Navigate<VideoRecordView>(new NavigationParameters { ClearBackstack = true });
         }
 
         private async Task LoadData(bool isRefresh)
@@ -120,7 +86,7 @@ namespace Viddy.ViewModel
             {
                 var response = await _vidMeClient.GetAuthorisedAppsAsync();
 
-                Apps = new ObservableCollection<Application>(response);
+                Apps = new ObservableCollection<RevokeAppViewModel>(response.Select(x => new RevokeAppViewModel(x, _vidMeClient, this, _messageBoxService)));
                 _appsLoaded = true;
             }
             catch (Exception ex)

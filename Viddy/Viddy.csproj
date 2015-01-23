@@ -112,6 +112,7 @@
     <Compile Include="ViewModel\EditVideoViewModel.cs" />
     <Compile Include="ViewModel\ManageAccountViewModel.cs" />
     <Compile Include="ViewModel\ManageAppsAccessViewModel.cs" />
+    <Compile Include="ViewModel\RevokeAppViewModel.cs" />
     <Compile Include="ViewModel\UploadVideoViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="Views\Account\AccountView.xaml.cs">

@@ -19,6 +19,10 @@
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
 
+    <views:BasePage.Resources>
+
+    </views:BasePage.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -41,70 +45,88 @@
                 </StackPanel>
             </Grid>
         </Grid>
-        
+
         <Grid x:Name="Content"
               Grid.Row="1"
               Margin="0,12,0,0">
             <ListView ItemsSource="{Binding Apps}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Grid Margin="19,0,19,12">
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <ColumnDefinition Width="Auto" />
-                            </Grid.ColumnDefinitions>
-                            
-                            <StackPanel Orientation="Vertical">
-                                <TextBlock Text="{Binding Name}"
-                                           Style="{StaticResource TitleTextBlockStyle}"/>
-                                <TextBlock Text="{Binding Organization}"
-                                           Style="{StaticResource BodyTextBlockStyle}"
-                                           FontSize="{StaticResource TextStyleSmallFontSize}"
-                                           Foreground="{ThemeResource SubtleBrush}"
-                                           Visibility="{Binding Organization, Converter={StaticResource NullToVisibilityConverter}}"/>
-                                <TextBlock Text="{Binding Description}"
-                                           TextTrimming="CharacterEllipsis"
-                                           Style="{StaticResource BodyTextBlockStyle}"
-                                           FontSize="{StaticResource TextStyleSmallFontSize}"
-                                           Foreground="{ThemeResource SubtleBrush}"
-                                           Visibility="{Binding Description, Converter={StaticResource NullToVisibilityConverter}}"/>
-                            </StackPanel>
-                            
-                            <Button Grid.Column="1"
-                                    x:Name="RevokeButton"
-                                    Style="{StaticResource EmptyButtonStyle}"
-                                    Tapped="RevokeButton_OnTapped"
-                                    VerticalContentAlignment="Stretch"
-                                    Padding="12"
-                                    VerticalAlignment="Stretch">
-                                <Button.Resources>
-                                    <x:Double x:Key="EllipseSize">5</x:Double>
-                                </Button.Resources>
-                                <FlyoutBase.AttachedFlyout>
-                                    <MenuFlyout>
-                                        <MenuFlyoutItem Margin="12,0,0,0"
-                                                        Command="{Binding ManageApps.RevokeTokenCommand, Source={StaticResource Locator}}"
-                                                        CommandParameter="{Binding}"
-                                                        Text="revoke" />
-                                    </MenuFlyout>
-                                </FlyoutBase.AttachedFlyout>
+                        <Grid Margin="0,0,0,12"
+                              MinHeight="50">
+                            <Grid Margin="19,0,19,0"
+                                  IsHitTestVisible="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
 
-                                <StackPanel Orientation="Horizontal">
-                                    <Ellipse Fill="{ThemeResource ButtonBackgroundBrush}"
-                                             Stretch="Fill"
-                                             Height="{StaticResource EllipseSize}"
-                                             Width="{StaticResource EllipseSize}"/>
-                                    <Ellipse Fill="{ThemeResource ButtonBackgroundBrush}"
-                                             Stretch="Fill"
-                                             Height="{StaticResource EllipseSize}"
-                                             Width="{StaticResource EllipseSize}" 
-                                             Margin="3,0"/>
-                                    <Ellipse Fill="{ThemeResource ButtonBackgroundBrush}"
-                                             Stretch="Fill"
-                                             Height="{StaticResource EllipseSize}"
-                                             Width="{StaticResource EllipseSize}" />
+                                <StackPanel Orientation="Vertical">
+                                    <Grid>
+                                        <TextBlock Text="{Binding Application.Name}"
+                                                   Style="{StaticResource TitleTextBlockStyle}" 
+                                                   Visibility="{Binding ProgressIsVisible, Converter={StaticResource InverseVisibilityConverter}}"/>
+                                        <StackPanel Orientation="Horizontal"
+                                                    HorizontalAlignment="Stretch"
+                                                    Visibility="{Binding ProgressIsVisible, Converter={StaticResource VisibilityConverter}}">
+                                            <TextBlock Text="Revoking..."
+                                                       VerticalAlignment="Center"
+                                                       Style="{StaticResource TitleTextBlockStyle}" />
+                                            <ProgressBar IsIndeterminate="{Binding ProgressIsVisible}"
+                                                         HorizontalAlignment="Stretch"
+                                                         Width="200" />
+                                        </StackPanel>
+                                    </Grid>
+                                    <TextBlock Text="{Binding Application.Organization}"
+                                               Style="{StaticResource BodyTextBlockStyle}"
+                                               FontSize="{StaticResource TextStyleSmallFontSize}"
+                                               Foreground="{ThemeResource SubtleBrush}"
+                                               Visibility="{Binding Application.Organization, Converter={StaticResource NullToVisibilityConverter}}" />
+                                    <TextBlock Text="{Binding Application.Description}"
+                                               TextTrimming="CharacterEllipsis"
+                                               Style="{StaticResource BodyTextBlockStyle}"
+                                               FontSize="{StaticResource TextStyleSmallFontSize}"
+                                               Foreground="{ThemeResource SubtleBrush}"
+                                               Visibility="{Binding Application.Description, Converter={StaticResource NullToVisibilityConverter}}" />
                                 </StackPanel>
-                            </Button>
+
+                                <Button Grid.Column="1"
+                                        x:Name="RevokeButton"
+                                        Style="{StaticResource EmptyButtonStyle}"
+                                        Tapped="RevokeButton_OnTapped"
+                                        VerticalContentAlignment="Stretch"
+                                        Padding="12"
+                                        VerticalAlignment="Stretch"
+                                        IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}">
+                                    <Button.Resources>
+                                        <x:Double x:Key="EllipseSize">5</x:Double>
+                                    </Button.Resources>
+                                    <FlyoutBase.AttachedFlyout>
+                                        <MenuFlyout>
+                                            <MenuFlyoutItem Margin="12,0,0,0"
+                                                            Command="{Binding RevokeTokenCommand}"
+                                                            CommandParameter="{Binding}"
+                                                            Text="revoke" />
+                                        </MenuFlyout>
+                                    </FlyoutBase.AttachedFlyout>
+
+                                    <StackPanel Orientation="Horizontal">
+                                        <Ellipse Fill="{ThemeResource ButtonBackgroundBrush}"
+                                                 Stretch="Fill"
+                                                 Height="{StaticResource EllipseSize}"
+                                                 Width="{StaticResource EllipseSize}" />
+                                        <Ellipse Fill="{ThemeResource ButtonBackgroundBrush}"
+                                                 Stretch="Fill"
+                                                 Height="{StaticResource EllipseSize}"
+                                                 Width="{StaticResource EllipseSize}"
+                                                 Margin="3,0" />
+                                        <Ellipse Fill="{ThemeResource ButtonBackgroundBrush}"
+                                                 Stretch="Fill"
+                                                 Height="{StaticResource EllipseSize}"
+                                                 Width="{StaticResource EllipseSize}" />
+                                    </StackPanel>
+                                </Button>
+                            </Grid>
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
