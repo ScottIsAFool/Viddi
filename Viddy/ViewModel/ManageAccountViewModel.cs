@@ -1,4 +1,6 @@
 ﻿using Cimbalino.Toolkit.Services;
+using GalaSoft.MvvmLight.Command;
+using Viddy.Views.Account;
 using VidMePortable;
 
 namespace Viddy.ViewModel
@@ -17,5 +19,20 @@ namespace Viddy.ViewModel
 
         public AvatarViewModel Avatar { get; set; }
 
+        public RelayCommand ChangeAvatarCommand
+        {
+            get
+            {
+                return new RelayCommand(() => Avatar.ChangeAvatar());
+            }
+        }
+
+        public RelayCommand NavigateToAppsAccessCommand
+        {
+            get
+            {
+                return new RelayCommand(() => _navigationService.Navigate<ManageAppsAccessView>());
+            }
+        }
     }
 }

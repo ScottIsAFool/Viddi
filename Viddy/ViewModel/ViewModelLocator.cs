@@ -54,6 +54,11 @@ namespace Viddy.ViewModel
             get { return ServiceLocator.Current.GetInstance<UploadVideoViewModel>(); }
         }
 
+        public ManageAccountViewModel ManageAccount
+        {
+            get { return ServiceLocator.Current.GetInstance<ManageAccountViewModel>(); }
+        }
+
         public AuthenticationService Auth
         {
             get { return ServiceLocator.Current.GetInstance<AuthenticationService>(); }

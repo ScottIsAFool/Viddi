@@ -113,11 +113,14 @@
     <Compile Include="ViewModel\ManageAccountViewModel.cs" />
     <Compile Include="ViewModel\UploadVideoViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
-    <Compile Include="Views\AccountView.xaml.cs">
+    <Compile Include="Views\Account\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Account\ManageAppsAccessView.xaml.cs">
+      <DependentUpon>ManageAppsAccessView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\BasePage.cs" />
-    <Compile Include="Views\EditProfileView.xaml.cs">
+    <Compile Include="Views\Account\EditProfileView.xaml.cs">
       <DependentUpon>EditProfileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\EditVideoView.xaml.cs">
@@ -129,7 +132,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\VideoRecordViewModel.cs" />
     <Compile Include="ViewModel\ViewModelLocator.cs" />
-    <Compile Include="Views\ManageAccountView.xaml.cs">
+    <Compile Include="Views\Account\ManageAccountView.xaml.cs">
       <DependentUpon>ManageAccountView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\SettingsView.xaml.cs">
@@ -171,11 +174,15 @@
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
-    <Page Include="Views\AccountView.xaml">
+    <Page Include="Views\Account\AccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EditProfileView.xaml">
+    <Page Include="Views\Account\EditProfileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Account\ManageAppsAccessView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -187,7 +194,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Views\ManageAccountView.xaml">
+    <Page Include="Views\Account\ManageAccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
