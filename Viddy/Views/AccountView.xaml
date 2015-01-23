@@ -56,6 +56,11 @@
                     </AppBarButton.Icon>
                 </AppBarButton>
             </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="manage account"
+                              Command="{Binding NaviageToManageAccountCommand}"
+                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"/>
+            </CommandBar.SecondaryCommands>
         </CommandBar>
     </local:BasePage.BottomAppBar>
 

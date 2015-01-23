@@ -26,15 +26,15 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.RegisterIf<INavigationService, NavigationService>();
             SimpleIoc.Default.RegisterIf<ICameraInfoService, CameraInfoService>();
 
-            SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<VideoRecordViewModel>();
             SimpleIoc.Default.Register<AccountViewModel>();
             SimpleIoc.Default.Register<EditVideoViewModel>();
             SimpleIoc.Default.Register<UploadVideoViewModel>();
         }
 
-        public MainViewModel Main
+        public VideoRecordViewModel VideoRecord
         {
-            get { return ServiceLocator.Current.GetInstance<MainViewModel>(); }
+            get { return ServiceLocator.Current.GetInstance<VideoRecordViewModel>(); }
         }
 
         public AccountViewModel Account

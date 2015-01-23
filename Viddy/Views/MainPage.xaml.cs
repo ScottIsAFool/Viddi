@@ -18,7 +18,7 @@ namespace Viddy.Views
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage
+    public sealed partial class VideoRecordView
     {
         private MediaCapture _mediaCapture;
         private DisplayRequest _displayRequest;
@@ -31,7 +31,7 @@ namespace Viddy.Views
         }
 
         public static readonly DependencyProperty FlashOnProperty = DependencyProperty.Register(
-            "FlashOn", typeof (bool), typeof (MainPage), new PropertyMetadata(default(bool)));
+            "FlashOn", typeof (bool), typeof (VideoRecordView), new PropertyMetadata(default(bool)));
 
         public bool FlashOn
         {
@@ -40,7 +40,7 @@ namespace Viddy.Views
         }
 
         public static readonly DependencyProperty IsFrontFacingProperty = DependencyProperty.Register(
-            "IsFrontFacing", typeof (bool), typeof (MainPage), new PropertyMetadata(default(bool)));
+            "IsFrontFacing", typeof (bool), typeof (VideoRecordView), new PropertyMetadata(default(bool)));
 
         public bool IsFrontFacing
         {
@@ -48,7 +48,7 @@ namespace Viddy.Views
             set { SetValue(IsFrontFacingProperty, value); }
         }
         
-        public MainPage()
+        public VideoRecordView()
         {
             InitializeComponent();
             _displayRequest = new DisplayRequest();
@@ -192,7 +192,7 @@ namespace Viddy.Views
                         var cameraRoll = await KnownFolders.PicturesLibrary.GetFolderAsync("Camera Roll");
                         var copiedFile = await file.CopyAsync(cameraRoll);
 
-                        var vm = DataContext as MainViewModel;
+                        var vm = DataContext as VideoRecordViewModel;
                         if (vm != null)
                         {
                             vm.FinishedRecording(file);

@@ -146,6 +146,14 @@ namespace Viddy.ViewModel
             get { return new RelayCommand(() => _navigationService.Navigate<EditProfileView>()); }
         }
 
+        public RelayCommand NaviageToManageAccountCommand
+        {
+            get
+            {
+                return new RelayCommand(() => _navigationService.Navigate<ManageAccountView>());
+            }
+        }
+
         private void SetAvatar()
         {
             AvatarUrl = AuthenticationService.Current.IsLoggedIn ? AuthenticationService.Current.AuthenticationInfo.User.AvatarUrl : DefaultAvatar;

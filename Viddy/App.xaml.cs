@@ -75,7 +75,7 @@ namespace Viddy
             if (e.PreviousExecutionState == ApplicationExecutionState.Running
                 && rootFrame != null && rootFrame.Content != null)
             {
-                if (rootFrame.Content is MainPage)
+                if (rootFrame.Content is VideoRecordView)
                 {
                     Messenger.Default.Send(new NotificationMessage(Constants.Messages.AppLaunchedMsg));
                 }
@@ -118,7 +118,7 @@ namespace Viddy
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                if (!rootFrame.Navigate(typeof(MainPage), e.Arguments))
+                if (!rootFrame.Navigate(typeof(VideoRecordView), e.Arguments))
                 {
                     throw new Exception("Failed to create initial page");
                 }

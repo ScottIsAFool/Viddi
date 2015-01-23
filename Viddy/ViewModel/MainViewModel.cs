@@ -22,7 +22,7 @@ namespace Viddy.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class MainViewModel : ViewModelBase
+    public class VideoRecordViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
         private readonly ICameraInfoService _cameraInfo;
@@ -31,7 +31,7 @@ namespace Viddy.ViewModel
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public MainViewModel(INavigationService navigationService, ICameraInfoService cameraInfo)
+        public VideoRecordViewModel(INavigationService navigationService, ICameraInfoService cameraInfo)
         {
             _navigationService = navigationService;
             _cameraInfo = cameraInfo;

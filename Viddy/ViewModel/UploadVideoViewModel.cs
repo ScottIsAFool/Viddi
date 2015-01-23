@@ -60,7 +60,7 @@ namespace Viddy.ViewModel
                     }
                     else
                     {
-                        _navigationService.Navigate<MainPage>(new NavigationParameters {ClearBackstack = true});
+                        _navigationService.Navigate<VideoRecordView>(new NavigationParameters {ClearBackstack = true});
                     }
                 });
             }
