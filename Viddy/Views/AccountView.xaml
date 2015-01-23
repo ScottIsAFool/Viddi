@@ -8,24 +8,27 @@
                 xmlns:converters="using:Cimbalino.Toolkit.Converters"
                 xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                 xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+                xmlns:behaviours="using:Viddy.Behaviours"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding Account, Source={StaticResource Locator}}">
     <interactivity:Interaction.Behaviors>
+        <behaviours:StatusBarBehavior BackgroundColor="{ThemeResource HeaderColor}"
+                                      IsVisible="True"/>
         <core:EventTriggerBehavior EventName="Loaded">
-            <core:InvokeCommandAction Command="{Binding PageLoadedCommand}"/>
+            <core:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
-    
+
     <local:BasePage.Resources>
         <converters:BooleanToStringConverter x:Key="LoginLogoutConverter"
                                              TrueValue="sign out"
                                              FalseValue="sign in" />
         <converters:BooleanToStringConverter x:Key="HeaderConverter"
                                              TrueValue="my videos"
-                                             FalseValue="my anonymous videos"/>
+                                             FalseValue="my anonymous videos" />
     </local:BasePage.Resources>
-    
+
     <local:BasePage.BottomAppBar>
         <CommandBar ClosedDisplayMode="Compact">
             <CommandBar.PrimaryCommands>
@@ -33,7 +36,7 @@
                               Label="settings"
                               Command="{Binding NavigateToSettingsCommand}">
                     <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Setting"/>
+                        <SymbolIcon Symbol="Setting" />
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton IsCompact="True"
@@ -41,7 +44,7 @@
                               Command="{Binding RefreshCommand}"
                               IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}">
                     <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Refresh"/>
+                        <SymbolIcon Symbol="Refresh" />
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton IsCompact="True"
@@ -49,7 +52,7 @@
                               Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"
                               Command="{Binding NavigateToEditProfileCommand}">
                     <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Edit"/>
+                        <SymbolIcon Symbol="Edit" />
                     </AppBarButton.Icon>
                 </AppBarButton>
             </CommandBar.PrimaryCommands>
@@ -62,92 +65,105 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Margin="19,0">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="Auto" />
-            </Grid.ColumnDefinitions>
+        <Grid Background="{ThemeResource HeaderBrush}">
+            <Grid Margin="19,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
 
-            <StackPanel Orientation="Horizontal">
-                <localControls:ProfilePictureControl TappedCommand="{Binding ChangeAvatarCommand}"
-                                                     IsChanging="{Binding ChangingAvatar}"
-                                                     IsHitTestVisible="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}"/>
+                <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Vertical"
+                                VerticalAlignment="Center"
+                                Margin="0,15,0,6">
+                        <localControls:ProfilePictureControl TappedCommand="{Binding ChangeAvatarCommand}"
+                                                             IsChanging="{Binding ChangingAvatar}"
+                                                             IsHitTestVisible="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}" />
+                        <TextBlock Text=""/>
+                    </StackPanel>
 
-                <Grid>
-                    <TextBlock Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource BodyTextBlockStyle}"
-                               Text="{Binding Auth.AuthenticationInfo.User.Username, Source={StaticResource Locator}}"
-                               TextWrapping="Wrap"
-                               Margin="12,0,0,0" />
-                    <TextBlock Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource InverseVisibilityConverter}}"
-                               VerticalAlignment="Center"
-                               Style="{StaticResource BodyTextBlockStyle}"
-                               Text="anonymous account"
-                               TextWrapping="Wrap"
-                               Margin="12,0,0,0" />
-                </Grid>
-            </StackPanel>
-
-            <localControls:CustomButton Grid.Column="1"
-                                        Command="{Binding LogInLogOutCommand}"
-                                        Style="{StaticResource EmptyButtonStyle}"
-                                        Margin="0,15,0,0"
-                                        VerticalAlignment="Center">
-                <StackPanel Orientation="Vertical">
-                    <Viewbox Height="44"
-                             Width="44"
-                             Stretch="UniformToFill"
-                             StretchDirection="DownOnly">
-                        <Border HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch"
-                                BorderBrush="{ThemeResource ButtonBackgroundBrush}"
-                                BorderThickness="1"
-                                Padding="2"
-                                CornerRadius="45">
-                            <Grid>
-                                <Ellipse Width="44"
-                                         Height="44"
-                                         Fill="{ThemeResource ButtonBackgroundBrush}" />
-                                <Ellipse Width="45"
-                                         Height="45">
-                                    <Ellipse.Fill>
-                                        <ImageBrush ImageSource="/Assets/Defaults/UserLoginDefault.png"
-                                                    Stretch="UniformToFill" />
-                                    </Ellipse.Fill>
-                                </Ellipse>
-
-                                <Path Width="16.334"
-                                      Height="13.755"
-                                      Stretch="Fill"
-                                      VerticalAlignment="Bottom"
-                                      HorizontalAlignment="Right"
-                                      Fill="{ThemeResource TickBrush}"
-                                      Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource InverseVisibilityConverter}}"
-                                      Margin="0,0,6,6"
-                                      Data="F1 M 23.7501,33.25L 34.8334,44.3333L 52.2499,22.1668L 56.9999,26.9168L 34.8334,53.8333L 19.0001,38L 23.7501,33.25 Z "
-                                      UseLayoutRounding="False" />
-                                <Path Width="16"
-                                      Height="16"
-                                      Stretch="Fill"
-                                      VerticalAlignment="Bottom"
-                                      HorizontalAlignment="Right"
-                                      Fill="{ThemeResource CrossBrush}"
-                                      Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"
-                                      Margin="0,0,6,6"
-                                      Data="F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z "
-                                      UseLayoutRounding="False" />
-                            </Grid>
-
-                        </Border>
-                    </Viewbox>
-
-                    <TextBlock Text="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource LoginLogoutConverter}}"
-                               FontSize="{StaticResource TextStyleSmallFontSize}"
-                               HorizontalAlignment="Center"
-                               Foreground="{ThemeResource ButtonBackgroundBrush}" />
+                    <Grid>
+                        <TextBlock Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   Text="{Binding Auth.AuthenticationInfo.User.Username, Source={StaticResource Locator}}"
+                                   TextWrapping="Wrap"
+                                   Margin="12,0,0,0" />
+                        <TextBlock Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource InverseVisibilityConverter}}"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   Text="anonymous account"
+                                   TextWrapping="Wrap"
+                                   Margin="12,0,0,0" />
+                    </Grid>
                 </StackPanel>
-            </localControls:CustomButton>
+
+                <localControls:CustomButton Grid.Column="1"
+                                            Command="{Binding LogInLogOutCommand}"
+                                            Style="{StaticResource EmptyButtonStyle}"
+                                            Margin="0,15,0,6"
+                                            VerticalAlignment="Center">
+                    <StackPanel Orientation="Vertical">
+                        <Viewbox Height="44"
+                                 Width="44"
+                                 Stretch="UniformToFill"
+                                 StretchDirection="DownOnly">
+                            <Border HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    BorderBrush="{ThemeResource ButtonBackgroundBrush}"
+                                    BorderThickness="1"
+                                    Padding="2"
+                                    CornerRadius="90">
+                                <Grid HorizontalAlignment="Center"
+                                      VerticalAlignment="Center"
+                                      Margin="-2,-2,0,0">
+                                    <Ellipse Width="44"
+                                             Height="44"
+                                             Fill="{ThemeResource ButtonBackgroundBrush}"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center" />
+                                    <Ellipse Width="45"
+                                             Height="45"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center">
+                                        <Ellipse.Fill>
+                                            <ImageBrush ImageSource="/Assets/Defaults/UserLoginDefault.png"
+                                                        Stretch="UniformToFill" />
+                                        </Ellipse.Fill>
+                                    </Ellipse>
+
+                                    <Path Width="16.334"
+                                          Height="13.755"
+                                          Stretch="Fill"
+                                          VerticalAlignment="Bottom"
+                                          HorizontalAlignment="Right"
+                                          Fill="{ThemeResource TickBrush}"
+                                          Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource InverseVisibilityConverter}}"
+                                          Margin="0,0,6,6"
+                                          Data="F1 M 23.7501,33.25L 34.8334,44.3333L 52.2499,22.1668L 56.9999,26.9168L 34.8334,53.8333L 19.0001,38L 23.7501,33.25 Z "
+                                          UseLayoutRounding="False" />
+                                    <Path Width="16"
+                                          Height="16"
+                                          Stretch="Fill"
+                                          VerticalAlignment="Bottom"
+                                          HorizontalAlignment="Right"
+                                          Fill="{ThemeResource CrossBrush}"
+                                          Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"
+                                          Margin="0,0,6,6"
+                                          Data="F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z "
+                                          UseLayoutRounding="False" />
+                                </Grid>
+
+                            </Border>
+                        </Viewbox>
+
+                        <TextBlock Text="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource LoginLogoutConverter}}"
+                                   FontSize="{StaticResource TextStyleSmallFontSize}"
+                                   HorizontalAlignment="Center"
+                                   Foreground="{ThemeResource ButtonBackgroundBrush}" />
+                    </StackPanel>
+                </localControls:CustomButton>
+            </Grid>
         </Grid>
 
         <Grid Grid.Row="1">
@@ -155,12 +171,12 @@
                 <ListView.Header>
                     <TextBlock Text="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource HeaderConverter}}"
                                Style="{StaticResource GroupHeaderTextBlockStyle}"
-                               Margin="19,0,19,6"/>
+                               Margin="19,0,19,6" />
                 </ListView.Header>
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment"
-                                Value="Stretch"/>
+                                Value="Stretch" />
                     </Style>
                 </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
@@ -174,24 +190,24 @@
                                         <MenuFlyoutItem Margin="12,0,0,0"
                                                         Command="{Binding Account.DeleteCommand, Source={StaticResource Locator}}"
                                                         CommandParameter="{Binding}"
-                                                        Text="delete"/>
+                                                        Text="delete" />
                                     </MenuFlyout>
                                 </FlyoutBase.AttachedFlyout>
                                 <Image Source="{Binding ThumbnailUrl}"
                                        Stretch="UniformToFill"
-                                       VerticalAlignment="Center"/>
+                                       VerticalAlignment="Center" />
                                 <Border Height="200"
-                                        Background="#34000000"/>
-                                
+                                        Background="#34000000" />
+
                                 <TextBlock Foreground="White"
                                            Style="{StaticResource BodyTextBlockStyle}"
                                            VerticalAlignment="Bottom"
                                            HorizontalAlignment="Left"
                                            Margin="19,0,0,19">
-                                    <Run Text="{Binding ViewCount}"/>
-                                    <Run Text="plays"/>
+                                    <Run Text="{Binding ViewCount}" />
+                                    <Run Text="plays" />
                                 </TextBlock>
-                                
+
                                 <StackPanel Orientation="Horizontal"
                                             VerticalAlignment="Bottom"
                                             HorizontalAlignment="Right"
@@ -204,7 +220,7 @@
                                           Data="F1 M 36.8125,14.4232C 36.8125,20.7565 34.0416,26.694 34.0416,25.1107C 34.0416,23.5274 30.875,29.8607 29.2916,33.0274C 27.7083,36.194 26.125,40.5482 26.125,40.5482L 19.7917,40.1524C 19.7917,40.1524 18.2083,54.0065 21.375,55.5899C 24.5417,57.1732 27.8391,54.9558 30.875,56.7774C 38.7916,61.5274 51.4583,58.3607 49.875,55.194C 49.875,55.194 56.2083,52.0274 54.625,50.444C 54.625,50.444 56.2083,48.069 54.2292,45.694C 56.2083,43.319 55.4167,40.944 54.2292,39.3607C 55.4167,36.9857 56.2083,34.6107 51.4583,33.0274C 48.4542,32.026 40.375,35.7982 40.375,31.444C 40.375,29.8607 43.5416,25.1107 43.5416,21.944C 43.5416,15.6107 36.8125,14.4232 36.8125,14.4232 Z " />
                                     <TextBlock Text="{Binding LikesCount}"
                                                Style="{StaticResource BodyTextBlockStyle}"
-                                               Foreground="White"/>
+                                               Foreground="White" />
                                 </StackPanel>
                             </Grid>
                         </localControls:CustomButton>

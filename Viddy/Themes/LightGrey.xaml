@@ -17,4 +17,16 @@
     <SolidColorBrush x:Key="CrossBrush"
                      Color="{StaticResource CrossColor}"/>
 
+    <Color x:Key="HeaderColor">#F0F0F0</Color>
+    <SolidColorBrush x:Key="HeaderBrush"
+                     Color="{StaticResource HeaderColor}"/>
+
+    <Color x:Key="ApplicationPageBackgroundThemeColor">White</Color>
+    <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush"
+                     Color="{StaticResource ApplicationPageBackgroundThemeColor}"/>
+
+    <Color x:Key="ApplicationForegroundThemeColor">Black</Color>
+    <SolidColorBrush x:Key="ApplicationForegroundThemeBrush"
+                     Color="{StaticResource ApplicationForegroundThemeColor}"/>
+
 </ResourceDictionary>

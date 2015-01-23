@@ -233,17 +233,21 @@ namespace Viddy.Views
                 return;
             }
 
-            _mediaCapture.StopPreviewAsync();
-            
-            if (_isRecording)
+            try
             {
-                _mediaCapture.StopRecordAsync();
+                _mediaCapture.StopPreviewAsync();
+
+                if (_isRecording)
+                {
+                    _mediaCapture.StopRecordAsync();
+                }
+
+                CaptureElement.Source = null;
+
+                _mediaCapture.Dispose();
+                _mediaCapture = null;
             }
-
-            CaptureElement.Source = null;
-
-            _mediaCapture.Dispose();
-            _mediaCapture = null;
+            catch { }
         }
 
         private void FlashButton_OnTapped(object sender, TappedRoutedEventArgs e)

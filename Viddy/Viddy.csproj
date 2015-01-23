@@ -88,6 +88,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Behaviours\StatusBarBehavior.cs" />
     <Compile Include="Behaviours\VideoStreamBehaviour.cs" />
     <Compile Include="Common\NavigationParameters.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />

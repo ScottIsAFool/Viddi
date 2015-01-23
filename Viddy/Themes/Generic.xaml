@@ -25,7 +25,7 @@
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
                                     Padding="2">
-                                <Grid>
+                                <Grid Margin="-1,-1,0,0">
                                     <Ellipse Stretch="Fill" Fill="{TemplateBinding Background}" />
                                     <Ellipse Stretch="Fill">
                                         <Ellipse.Fill>
@@ -44,7 +44,8 @@
                                     <Grid Tag="{TemplateBinding IsChanging}"
                                           Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource VisibilityConverter}}"
                                           HorizontalAlignment="Stretch"
-                                          VerticalAlignment="Stretch">
+                                          VerticalAlignment="Stretch"
+                                          Margin="-2,-2,0,0">
                                         <Ellipse Stretch="Fill"
                                                  Fill="#C4000000" />
                                         <Viewbox Stretch="UniformToFill"
