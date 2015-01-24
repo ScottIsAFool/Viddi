@@ -10,7 +10,7 @@ using Viddy.Views;
 using VidMePortable;
 using VidMePortable.Model;
 
-namespace Viddy.ViewModel
+namespace Viddy.ViewModel.Account.Manage
 {
     public class ManageAppsAccessViewModel : ViewModelBase
     {

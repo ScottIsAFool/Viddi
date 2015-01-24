@@ -1,12 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using VidMePortable;
 using VidMePortable.Model;
 
-namespace Viddy.ViewModel
+namespace Viddy.ViewModel.Account.Manage
 {
     public class RevokeAppViewModel : ViewModelBase
     {

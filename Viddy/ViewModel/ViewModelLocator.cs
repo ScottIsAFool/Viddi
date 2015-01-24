@@ -3,6 +3,8 @@ using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using Viddy.Extensions;
 using Viddy.Services;
+using Viddy.ViewModel.Account;
+using Viddy.ViewModel.Account.Manage;
 using VidMePortable;
 
 namespace Viddy.ViewModel

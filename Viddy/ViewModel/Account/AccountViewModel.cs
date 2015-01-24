@@ -1,22 +1,21 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Threading.Tasks;
 using Windows.Foundation.Collections;
 using Windows.Security.Authentication.Web;
-using Windows.Storage;
-using Windows.Storage.Pickers;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Services;
 using Viddy.Views;
+using Viddy.Views.Account;
+using Viddy.Views.Account.Manage;
 using VidMePortable;
 using VidMePortable.Model;
 using VidMePortable.Model.Responses;
 
-namespace Viddy.ViewModel
+namespace Viddy.ViewModel.Account
 {
     public class AccountViewModel : ViewModelBase
     {

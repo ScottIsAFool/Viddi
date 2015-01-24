@@ -7,7 +7,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Viddy.Services;
 using VidMePortable;
 
-namespace Viddy.ViewModel
+namespace Viddy.ViewModel.Account
 {
     public class AvatarViewModel : ViewModelBase
     {

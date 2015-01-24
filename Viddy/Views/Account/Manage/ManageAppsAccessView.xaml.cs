@@ -2,7 +2,7 @@
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 
-namespace Viddy.Views.Account
+namespace Viddy.Views.Account.Manage
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

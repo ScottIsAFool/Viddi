@@ -5,7 +5,9 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
+using Viddy.ViewModel.Account;
 using Viddy.Views;
+using Viddy.Views.Account;
 
 namespace Viddy.ViewModel
 {

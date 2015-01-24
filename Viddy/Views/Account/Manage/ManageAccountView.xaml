@@ -1,4 +1,4 @@
-﻿<local:BasePage x:Class="Viddy.Views.ManageAccountView"
+﻿<local:BasePage x:Class="Viddy.Views.Account.Manage.ManageAccountView"
                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:local="using:Viddy.Views"
@@ -41,7 +41,11 @@
                         Margin="19,0">
                 <controls:CustomHyperlinkButton Content="Manage apps' access"
                                                 Style="{StaticResource EmptyButtonStyle}" 
-                                                TapCommand="{Binding NavigateToAppsAccessCommand}"/>
+                                                TapCommand="{Binding NavigateToAppsAccessCommand}"
+                                                Margin="0,0,0,12"/>
+                <controls:CustomHyperlinkButton Content="Manage my apps"
+                                                Style="{StaticResource EmptyButtonStyle}"
+                                                TapCommand="{Binding NavigateToMyAppsCommand}" />
             </StackPanel>
         </Grid>
 
