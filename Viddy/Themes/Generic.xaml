@@ -124,7 +124,7 @@
                         <StackPanel Orientation="Vertical">
                             <ProgressRing Height="60"
                                           Width="60"
-                                          IsActive="{Binding ProgressIsVisible}"/>
+                                          IsActive="{Binding}"/>
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
@@ -186,7 +186,8 @@
                                                     VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                                     HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                                     VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                                    Style="{TemplateBinding InitialisingContentStyle}"/>
+                                                    Style="{TemplateBinding InitialisingContentStyle}"
+                                                    DataContext="{TemplateBinding IsInitialising}"/>
                                 </Grid>
                             </Grid>
                         </ScrollViewer>

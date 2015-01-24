@@ -29,6 +29,11 @@
                         <SymbolIcon Symbol="Refresh" />
                     </AppBarButton.Icon>
                 </AppBarButton>
+                <AppBarButton Label="add">
+                    <AppBarButton.Icon>
+                        <SymbolIcon Symbol="Add"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </views:BasePage.BottomAppBar>
@@ -58,7 +63,29 @@
 
         <Grid Grid.Row="1"
               Margin="0,12,0,0">
-            <ListView ItemsSource="{Binding Apps}">
+            <controls:InitialisingListView ItemsSource="{Binding Apps}"
+                                           IsInitialising="{Binding ProgressIsVisible}"
+                                           IsEmpty="{Binding IsEmpty}"
+                                           VerticalContentAlignment="Stretch">
+                <controls:InitialisingListView.EmptyContent>
+                    <DataTemplate>
+                        <Grid VerticalAlignment="Stretch"
+                              Margin="19,0">
+                            <TextBlock Text="It appears you don't have any apps created. If you're a developer wanting to create an app that uses the VidMe API, you can add one using the + below."
+                                       TextWrapping="WrapWholeWords"
+                                       TextAlignment="Center"
+                                       Style="{StaticResource BodyTextBlockStyle}"/>
+
+                            <Path Width="28"
+                                  Height="60"
+                                  Stretch="Fill"
+                                  Fill="{ThemeResource ApplicationForegroundThemeBrush}"
+                                  VerticalAlignment="Bottom"
+                                  Margin="70,0,0,10"
+                                  Data="F1 M 42,19.0002L 34,19.0002L 34,43.7502L 24,33.7502L 24,44.2502L 38,58.2502L 52,44.2502L 52,33.7502L 42,43.7502L 42,19.0002 Z " />
+                        </Grid>
+                    </DataTemplate>
+                </controls:InitialisingListView.EmptyContent>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,0,0,12"
@@ -135,7 +162,7 @@
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </controls:InitialisingListView>
         </Grid>
 
     </Grid>

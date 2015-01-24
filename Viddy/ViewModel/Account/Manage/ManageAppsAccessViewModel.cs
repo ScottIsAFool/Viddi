@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Common;
+using Viddy.Extensions;
 using Viddy.Services;
 using Viddy.Views;
 using VidMePortable;
@@ -42,6 +43,7 @@ namespace Viddy.ViewModel.Account.Manage
         }
 
         public ObservableCollection<RevokeAppViewModel> Apps { get; set; }
+        public bool IsEmpty { get; set; }
 
         public RelayCommand PageLoadedCommand
         {
@@ -87,6 +89,8 @@ namespace Viddy.ViewModel.Account.Manage
                 var response = await _vidMeClient.GetAuthorisedAppsAsync();
 
                 Apps = new ObservableCollection<RevokeAppViewModel>(response.Select(x => new RevokeAppViewModel(x, _vidMeClient, this, _messageBoxService)));
+                IsEmpty = Apps.IsNullOrEmpty();
+
                 _appsLoaded = true;
             }
             catch (Exception ex)
