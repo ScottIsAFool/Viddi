@@ -19,10 +19,6 @@
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
 
-    <views:BasePage.Resources>
-
-    </views:BasePage.Resources>
-
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -69,12 +65,14 @@
                                         <StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Stretch"
                                                     Visibility="{Binding ProgressIsVisible, Converter={StaticResource VisibilityConverter}}">
-                                            <TextBlock Text="Revoking..."
+                                            <TextBlock Text="Revoking"
                                                        VerticalAlignment="Center"
                                                        Style="{StaticResource TitleTextBlockStyle}" />
                                             <ProgressBar IsIndeterminate="{Binding ProgressIsVisible}"
                                                          HorizontalAlignment="Stretch"
-                                                         Width="200" />
+                                                         Width="100" 
+                                                         VerticalAlignment="Bottom"
+                                                         Margin="3,0,0,4"/>
                                         </StackPanel>
                                     </Grid>
                                     <TextBlock Text="{Binding Application.Organization}"

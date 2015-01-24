@@ -43,18 +43,17 @@ namespace Viddy.ViewModel
 
                         SetProgressBar("Revoking token...");
 
-                        await Task.Delay(TimeSpan.FromSeconds(4));
-                        //if (await _vidMeClient.RevokeAppTokenAsync(app.ClientId))
-                        //{
-                        //    if (app.ClientId == Constants.ClientId)
-                        //    {
-                        //        _manageAppsAccessViewModel.ResetApp();
-                        //    }
-                        //    else
-                        //    {
-                        //        _manageAppsAccessViewModel.Apps.Remove(appVm);
-                        //    }
-                        //}
+                        if (await _vidMeClient.RevokeAppTokenAsync(app.ClientId))
+                        {
+                            if (app.ClientId == Constants.ClientId)
+                            {
+                                _manageAppsAccessViewModel.ResetApp();
+                            }
+                            else
+                            {
+                                _manageAppsAccessViewModel.Apps.Remove(appVm);
+                            }
+                        }
                     }
                     catch (Exception ex)
                     {
