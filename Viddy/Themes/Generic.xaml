@@ -8,7 +8,7 @@
         <Setter Property="Width"
                 Value="45" />
         <Setter Property="Background"
-                Value="{ThemeResource ButtonBackgroundBrush}"/>
+                Value="{ThemeResource ButtonBackgroundBrush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ProfilePictureControl">
@@ -26,7 +26,8 @@
                                     VerticalAlignment="Stretch"
                                     Padding="2">
                                 <Grid Margin="-1,-1,0,0">
-                                    <Ellipse Stretch="Fill" Fill="{TemplateBinding Background}" />
+                                    <Ellipse Stretch="Fill"
+                                             Fill="{TemplateBinding Background}" />
                                     <Ellipse Stretch="Fill">
                                         <Ellipse.Fill>
                                             <ImageBrush ImageSource="/Assets/Defaults/UserLoginDefault.png" />
@@ -61,6 +62,135 @@
                             </Border>
                         </Viewbox>
                     </controls:CustomButton>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style TargetType="controls:InitialisingListView">
+        <Setter Property="IsTabStop"
+                Value="False" />
+        <Setter Property="TabNavigation"
+                Value="Once" />
+        <Setter Property="IsSwipeEnabled"
+                Value="True" />
+        <Setter Property="ScrollViewer.HorizontalScrollBarVisibility"
+                Value="Disabled" />
+        <Setter Property="ScrollViewer.VerticalScrollBarVisibility"
+                Value="Auto" />
+        <Setter Property="ScrollViewer.HorizontalScrollMode"
+                Value="Disabled" />
+        <Setter Property="ScrollViewer.IsHorizontalRailEnabled"
+                Value="False" />
+        <Setter Property="ScrollViewer.VerticalScrollMode"
+                Value="Enabled" />
+        <Setter Property="ScrollViewer.IsVerticalRailEnabled"
+                Value="False" />
+        <Setter Property="ScrollViewer.ZoomMode"
+                Value="Disabled" />
+        <Setter Property="ScrollViewer.IsDeferredScrollingEnabled"
+                Value="False" />
+        <Setter Property="ScrollViewer.BringIntoViewOnFocusChange"
+                Value="True" />
+        <Setter Property="ItemContainerStyle">
+            <Setter.Value>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment"
+                            Value="Stretch" />
+                </Style>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemContainerTransitions">
+            <Setter.Value>
+                <TransitionCollection>
+                    <AddDeleteThemeTransition />
+                    <ContentThemeTransition />
+                    <ReorderThemeTransition />
+                    <EntranceThemeTransition IsStaggeringEnabled="False" />
+                </TransitionCollection>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="ItemsPanel">
+            <Setter.Value>
+                <ItemsPanelTemplate>
+                    <ItemsStackPanel Orientation="Vertical" />
+                </ItemsPanelTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="InitialisingContent">
+            <Setter.Value>
+                <DataTemplate>
+                    <Grid VerticalAlignment="Center">
+                        <StackPanel Orientation="Vertical">
+                            <ProgressRing Height="60"
+                                          Width="60"
+                                          IsActive="{Binding ProgressIsVisible}"/>
+                        </StackPanel>
+                    </Grid>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="EmptyContent">
+            <Setter.Value>
+                <DataTemplate>
+                    <TextBlock Text="Nothing to see here"
+                               Style="{StaticResource BodyTextBlockStyle}"/>
+                </DataTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:InitialisingListView">
+                    <Border BorderBrush="{TemplateBinding BorderBrush}"
+                            Background="{TemplateBinding Background}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                        <ScrollViewer x:Name="ScrollViewer"
+                                      TabNavigation="{TemplateBinding TabNavigation}"
+                                      HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                                      HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                      IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}"
+                                      VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                                      VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                      IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}"
+                                      IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+                                      IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+                                      ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}"
+                                      IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                      BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
+                                      AutomationProperties.AccessibilityView="Raw">
+                            <Grid Tag="{TemplateBinding IsInitialising}"
+                                  x:Name="ContainerGrid">
+                                <Grid x:Name="InitialisedContent"
+                                      Tag="{TemplateBinding IsEmpty}"
+                                      Visibility="{Binding Tag, ElementName=ContainerGrid, Converter={StaticResource InverseVisibilityConverter}}">
+                                    <ItemsPresenter Header="{TemplateBinding Header}"
+                                                    HeaderTemplate="{TemplateBinding HeaderTemplate}"
+                                                    HeaderTransitions="{TemplateBinding HeaderTransitions}"
+                                                    Footer="{TemplateBinding Footer}"
+                                                    FooterTemplate="{TemplateBinding FooterTemplate}"
+                                                    FooterTransitions="{TemplateBinding FooterTransitions}"
+                                                    Padding="{TemplateBinding Padding}"
+                                                    Visibility="{Binding Tag, ElementName=InitialisedContent, Converter={StaticResource InverseVisibilityConverter}}" />
+                                    <ContentControl ContentTemplate="{TemplateBinding EmptyContent}"
+                                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                                    Style="{TemplateBinding EmptyContentStyle}"
+                                                    Visibility="{Binding Tag, ElementName=InitialisedContent, Converter={StaticResource VisibilityConverter}}" />
+                                </Grid>
+                                <Grid x:Name="InitialisingContent"
+                                      Visibility="{Binding Tag, ElementName=ContainerGrid, Converter={StaticResource VisibilityConverter}}">
+                                    <ContentControl ContentTemplate="{TemplateBinding InitialisingContent}"
+                                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                                    Style="{TemplateBinding InitialisingContentStyle}"/>
+                                </Grid>
+                            </Grid>
+                        </ScrollViewer>
+                    </Border>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

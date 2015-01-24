@@ -7,6 +7,7 @@ using Windows.Security.Authentication.Web;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Viddy.Extensions;
 using Viddy.Services;
 using Viddy.Views;
 using Viddy.Views.Account;
@@ -33,6 +34,7 @@ namespace Viddy.ViewModel.Account
 
         public ObservableCollection<Video> Videos { get; set; }
         public AvatarViewModel Avatar { get; set; }
+        public bool IsEmpty { get; set; }
 
 
         public RelayCommand LogInLogOutCommand
@@ -193,6 +195,7 @@ namespace Viddy.ViewModel.Account
                 }
 
                 Videos = new ObservableCollection<Video>(response.Videos);
+                IsEmpty = Videos.IsNullOrEmpty();
                 _videosLoaded = true;
             }
             catch (Exception ex)

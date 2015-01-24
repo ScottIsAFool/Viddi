@@ -173,7 +173,9 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <ListView ItemsSource="{Binding Videos}">
+            <localControls:InitialisingListView ItemsSource="{Binding Videos}"
+                                                IsInitialising="{Binding ProgressIsVisible}"
+                                                IsEmpty="{Binding IsEmpty}">
                 <ListView.Header>
                     <TextBlock Text="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource HeaderConverter}}"
                                Style="{StaticResource GroupHeaderTextBlockStyle}"
@@ -229,7 +231,7 @@
                         </localControls:CustomButton>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </ListView>
+            </localControls:InitialisingListView>
         </Grid>
     </Grid>
 </local:BasePage>
