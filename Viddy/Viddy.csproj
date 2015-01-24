@@ -109,6 +109,9 @@
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModel\Account\AccountViewModel.cs" />
     <Compile Include="ViewModel\Account\AvatarViewModel.cs" />
+    <Compile Include="ViewModel\Account\Manage\AddAppViewModel.cs" />
+    <Compile Include="ViewModel\Account\Manage\ManageMyAppsViewModel.cs" />
+    <Compile Include="ViewModel\Account\Manage\OwnedAppViewModel.cs" />
     <Compile Include="ViewModel\EditVideoViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\ManageAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\ManageAppsAccessViewModel.cs" />
@@ -117,6 +120,9 @@
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="Views\Account\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\Manage\AddAppView.xaml.cs">
+      <DependentUpon>AddAppView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Account\Manage\ManageAppsAccessView.xaml.cs">
       <DependentUpon>ManageAppsAccessView.xaml</DependentUpon>
@@ -184,6 +190,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Account\EditProfileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Account\Manage\AddAppView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
