@@ -133,6 +133,7 @@
     <Compile Include="ViewModel\Account\Manage\ManageAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\ManageAppsAccessViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\RevokeAppViewModel.cs" />
+    <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\UploadVideoViewModel.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="ViewModel\VideoItemViewModel.cs" />
@@ -165,6 +166,9 @@
     </Compile>
     <Compile Include="Views\EditVideoView.xaml.cs">
       <DependentUpon>EditVideoView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\VideoRecordView.xaml.cs">
       <DependentUpon>VideoRecordView.xaml</DependentUpon>
@@ -259,6 +263,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\EditVideoView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,4 +1,5 @@
-﻿using Cimbalino.Toolkit.Services;
+﻿using System;
+using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using Viddy.Services;
 using VidMePortable.Model;
@@ -25,6 +26,30 @@ namespace Viddy.ViewModel
                        && AuthenticationService.Current.IsLoggedIn
                        && AuthenticationService.Current.LoggedInUserId == Video.UserId
                        && VideoIsAnonymousButOwned();
+            }
+        }
+
+        public string VideoLength
+        {
+            get
+            {
+                if (IsInDesignMode)
+                {
+                    return "0:07";
+                }
+
+                if (Video == null || !Video.Duration.HasValue)
+                {
+                    return string.Empty;
+                }
+
+                var ts = TimeSpan.FromSeconds(Video.Duration.Value);
+                if (ts.TotalHours > 1)
+                {
+                    return string.Format("{0:c}", ts);
+                }
+
+                return string.Format("{0:0}:{1:00}", ts.Minutes, ts.Seconds);
             }
         }
 

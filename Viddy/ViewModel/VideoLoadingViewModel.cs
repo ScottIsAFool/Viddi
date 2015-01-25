@@ -22,7 +22,7 @@ namespace Viddy.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
-                    await LoadData(false);
+                    await PageLoaded();
                 });
             }
         }
@@ -47,6 +47,11 @@ namespace Viddy.ViewModel
                     await LoadData(false, true, Videos.Count);
                 });
             }
+        }
+
+        public virtual async Task PageLoaded()
+        {
+            await LoadData(false);
         }
 
         public virtual async Task<VideosResponse> GetVideos(int offset)

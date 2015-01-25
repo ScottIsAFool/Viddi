@@ -14,7 +14,7 @@
                 DataContext="{Binding Account, Source={StaticResource Locator}}">
     <interactivity:Interaction.Behaviors>
         <behaviours:StatusBarBehavior BackgroundColor="{ThemeResource HeaderColor}"
-                                      IsVisible="True" />
+                                      IsVisible="False" />
         <core:EventTriggerBehavior EventName="Loaded">
             <core:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
         </core:EventTriggerBehavior>

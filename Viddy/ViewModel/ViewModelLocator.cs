@@ -40,6 +40,12 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.Register<ManualLoginViewModel>();
             SimpleIoc.Default.Register<CreateAccountViewModel>();
             SimpleIoc.Default.Register<ProfileViewModel>(true);
+            SimpleIoc.Default.Register<MainViewModel>();
+        }
+
+        public MainViewModel Main
+        {
+            get { return ServiceLocator.Current.GetInstance<MainViewModel>(); }
         }
 
         public VideoRecordViewModel VideoRecord

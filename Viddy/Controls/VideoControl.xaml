@@ -13,8 +13,7 @@
         <local:CustomButton Style="{StaticResource EmptyButtonStyle}">
             <Grid Height="200"
                   x:Name="ContainerGrid"
-                  Holding="ContainerGrid_OnHolding"
-                  DataContext="{Binding Video}">
+                  Holding="ContainerGrid_OnHolding">
                 <FlyoutBase.AttachedFlyout>
                     <MenuFlyout>
                         <MenuFlyoutItem Margin="12,0,0,0"
@@ -23,7 +22,7 @@
                                         Text="delete" />
                     </MenuFlyout>
                 </FlyoutBase.AttachedFlyout>
-                <Image Source="{Binding ThumbnailUrl}"
+                <Image Source="{Binding Video.ThumbnailUrl}"
                        Stretch="UniformToFill"
                        VerticalAlignment="Center" />
                 <Border Height="200"
@@ -33,9 +32,16 @@
                         VerticalAlignment="Top"
                         HorizontalAlignment="Left"
                         Padding="5,3"
-                        Visibility="{Binding Nsfw, Converter={StaticResource VisibilityConverter}}">
+                        Visibility="{Binding Video.Nsfw, Converter={StaticResource VisibilityConverter}}">
                     <TextBlock Text="NSFW"
                                Foreground="White"/>
+                </Border>
+                
+                <Border Padding="5,3"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Right" Background="#66000000">
+                    <TextBlock Text="{Binding VideoLength}"
+                               Foreground="White" />
                 </Border>
 
                 <TextBlock Foreground="White"
@@ -43,7 +49,7 @@
                            VerticalAlignment="Bottom"
                            HorizontalAlignment="Left"
                            Margin="19,0,0,19">
-                                    <Run Text="{Binding ViewCount}" />
+                                    <Run Text="{Binding Video.ViewCount}" />
                                     <Run Text="plays" />
                 </TextBlock>
 
@@ -54,7 +60,7 @@
                     <SymbolIcon Symbol="Like"
                                 Foreground="White"
                                 Height="20" />
-                    <TextBlock Text="{Binding LikesCount}"
+                    <TextBlock Text="{Binding Video.LikesCount}"
                                Style="{StaticResource BodyTextBlockStyle}"
                                Foreground="White" />
                 </StackPanel>
