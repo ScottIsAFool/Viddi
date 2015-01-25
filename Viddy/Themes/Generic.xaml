@@ -10,9 +10,9 @@
         <Setter Property="Background"
                 Value="{ThemeResource ButtonBackgroundBrush}" />
         <Setter Property="BorderBrush"
-                Value="{ThemeResource ButtonBackgroundBrush}"/>
+                Value="{ThemeResource ButtonBackgroundBrush}" />
         <Setter Property="BorderThickness"
-                Value="1"/>
+                Value="1" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ProfilePictureControl">
@@ -30,13 +30,15 @@
                                     VerticalAlignment="Stretch"
                                     Padding="2">
                                 <Grid Margin="-1,-1,0,0">
-                                    <Ellipse Stretch="Fill"
-                                             Fill="{TemplateBinding Background}" />
-                                    <Ellipse Stretch="Fill">
-                                        <Ellipse.Fill>
-                                            <ImageBrush ImageSource="/Assets/Defaults/UserLoginDefault.png" />
-                                        </Ellipse.Fill>
-                                    </Ellipse>
+                                    <Grid x:Name="PlaceHolderGrid">
+                                        <Ellipse Stretch="Fill"
+                                                 Fill="{TemplateBinding Background}" />
+                                        <Ellipse Stretch="Fill">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="/Assets/Defaults/UserLoginDefault.png" />
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+                                    </Grid>
                                     <Ellipse Stretch="Fill"
                                              Width="{TemplateBinding Width}"
                                              Height="{TemplateBinding Height}"
@@ -99,9 +101,9 @@
         <Setter Property="ScrollViewer.BringIntoViewOnFocusChange"
                 Value="True" />
         <Setter Property="HorizontalContentAlignment"
-                Value="Stretch"/>
+                Value="Stretch" />
         <Setter Property="VerticalContentAlignment"
-                Value="Stretch"/>
+                Value="Stretch" />
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
                 <Style TargetType="ListViewItem">
@@ -134,7 +136,7 @@
                         <StackPanel Orientation="Vertical">
                             <ProgressRing Height="60"
                                           Width="60"
-                                          IsActive="{Binding}"/>
+                                          IsActive="{Binding}" />
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
@@ -144,7 +146,7 @@
             <Setter.Value>
                 <DataTemplate>
                     <TextBlock Text="Nothing to see here"
-                               Style="{StaticResource BodyTextBlockStyle}"/>
+                               Style="{StaticResource BodyTextBlockStyle}" />
                 </DataTemplate>
             </Setter.Value>
         </Setter>
@@ -197,7 +199,7 @@
                                                     HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
                                                     VerticalAlignment="{TemplateBinding VerticalAlignment}"
                                                     Style="{TemplateBinding InitialisingContentStyle}"
-                                                    DataContext="{TemplateBinding IsInitialising}"/>
+                                                    DataContext="{TemplateBinding IsInitialising}" />
                                 </Grid>
                             </Grid>
                         </ScrollViewer>

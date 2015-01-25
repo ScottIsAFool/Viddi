@@ -1,11 +1,17 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Media;
+using Windows.UI.Xaml.Shapes;
 
 namespace Viddy.Controls
 {
     public class ProfilePictureControl : Control
     {
+        private Grid _placeholderGrid;
+        private Ellipse _imageEllipse;
+
         public static readonly DependencyProperty TappedCommandProperty = DependencyProperty.Register(
             "TappedCommand", typeof (ICommand), typeof (ProfilePictureControl), new PropertyMetadata(default(ICommand)));
 
@@ -25,7 +31,7 @@ namespace Viddy.Controls
         }
 
         public static readonly DependencyProperty AvatarUrlProperty = DependencyProperty.Register(
-            "AvatarUrl", typeof (string), typeof (ProfilePictureControl), new PropertyMetadata(default(string)));
+            "AvatarUrl", typeof (string), typeof (ProfilePictureControl), new PropertyMetadata(default(string), OnAvatarUrlChanged));
 
         public string AvatarUrl
         {
@@ -33,9 +39,46 @@ namespace Viddy.Controls
             set { SetValue(AvatarUrlProperty, value); }
         }
 
+        private static void OnAvatarUrlChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
+        {
+            var profile = sender as ProfilePictureControl;
+            if (profile != null)
+            {
+                if (profile._placeholderGrid != null)
+                {
+                    profile._placeholderGrid.Visibility = Visibility.Visible;
+                }
+            }
+        }
+
         public ProfilePictureControl()
         {
             DefaultStyleKey = typeof (ProfilePictureControl);
+        }
+
+        protected override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+
+            _imageEllipse = GetTemplateChild("ImageEllipse") as Ellipse;
+            _placeholderGrid = GetTemplateChild("PlaceHolderGrid") as Grid;
+
+            if (_imageEllipse != null)
+            {
+                var fill = _imageEllipse.Fill as ImageBrush;
+                if (fill != null)
+                {
+                    fill.ImageOpened += FillOnImageOpened;
+                }
+            }
+        }
+
+        private void FillOnImageOpened(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (_placeholderGrid != null)
+            {
+                _placeholderGrid.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }
