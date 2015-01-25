@@ -107,6 +107,7 @@
     <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="Helpers\NavigationHelper.cs" />
     <Compile Include="Logging\WinLogger.cs" />
+    <Compile Include="Messaging\UserMessage.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\CameraInfoService.cs" />
     <Compile Include="Services\ICameraInfoService.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="ViewModel\Account\Manage\ManageMyAppsViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\OwnedAppViewModel.cs" />
     <Compile Include="ViewModel\Account\ManualLoginViewModel.cs" />
+    <Compile Include="ViewModel\Account\ProfileViewModel.cs" />
     <Compile Include="ViewModel\EditVideoViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\ManageAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\ManageAppsAccessViewModel.cs" />
@@ -141,6 +143,9 @@
     </Compile>
     <Compile Include="Views\Account\ManualLoginView.xaml.cs">
       <DependentUpon>ManualLoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\ProfileView.xaml.cs">
+      <DependentUpon>ProfileView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BasePage.cs" />
     <Compile Include="Views\Account\EditProfileView.xaml.cs">
@@ -179,6 +184,7 @@
     <Content Include="Assets\StoreLogo.scale-240.png" />
     <Content Include="Assets\WideLogo.scale-240.png" />
     <Content Include="FodyWeavers.xml" />
+    <Content Include="ReadMe.Coding4Fun.Toolkit.txt" />
     <Content Include="StoreManifest.xml" />
   </ItemGroup>
   <ItemGroup>
@@ -224,6 +230,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Account\ProfileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\EditVideoView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -251,6 +261,12 @@
     </Reference>
     <Reference Include="Cimbalino.Toolkit.Core">
       <HintPath>..\packages\Cimbalino.Toolkit.Core.1.2.3\lib\wpa81\Cimbalino.Toolkit.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="Coding4Fun.Toolkit">
+      <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.1.0\lib\wpa81\Coding4Fun.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="Coding4Fun.Toolkit.Controls">
+      <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.1.0\lib\wpa81\Coding4Fun.Toolkit.Controls.dll</HintPath>
     </Reference>
     <Reference Include="GalaSoft.MvvmLight">
       <HintPath>..\packages\MvvmLightLibs.5.0.2.0\lib\wpa81\GalaSoft.MvvmLight.dll</HintPath>

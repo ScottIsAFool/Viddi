@@ -9,6 +9,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using ThemeManagerRt;
 using Viddy.Extensions;
+using Viddy.Messaging;
 using Viddy.Services;
 using Viddy.Views;
 using Viddy.Views.Account;
@@ -163,6 +164,30 @@ namespace Viddy.ViewModel.Account
             get
             {
                 return new RelayCommand(() => _navigationService.Navigate<ManualLoginView>());
+            }
+        }
+
+        public RelayCommand TempCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    Messenger.Default.Send(new UserMessage(new User
+                    {
+                        Username = "MarinaSweet",
+                        AvatarUrl = "https://d1wst0behutosd.cloudfront.net/avatars/10042.gif?gv2r1421446675",
+                        CoverUrl = "https://d1wst0behutosd.cloudfront.net/channel_covers/10042.jpg?v1r1420500373",
+                        FollowerCount = 120,
+                        LikesCount = "92",
+                        VideoCount = 532,
+                        VideoViews = "71556",
+                        VideosScores = 220,
+                        Bio = "Some bio information"
+                    }));
+
+                    _navigationService.Navigate<ProfileView>();
+                });
             }
         }
 
