@@ -88,6 +88,8 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Behaviours\EnterKeyBehaviour.cs" />
+    <Compile Include="Behaviours\UpdateTextBindingOnPropertyChanged.cs" />
     <Compile Include="Behaviours\StatusBarBehavior.cs" />
     <Compile Include="Behaviours\VideoStreamBehaviour.cs" />
     <Compile Include="Common\NavigationParameters.cs" />
@@ -114,6 +116,7 @@
     <Compile Include="ViewModel\Account\Manage\AddAppViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\ManageMyAppsViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\OwnedAppViewModel.cs" />
+    <Compile Include="ViewModel\Account\ManualLoginViewModel.cs" />
     <Compile Include="ViewModel\EditVideoViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\ManageAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\ManageAppsAccessViewModel.cs" />
@@ -131,6 +134,9 @@
     </Compile>
     <Compile Include="Views\Account\Manage\ManageMyAppsView.xaml.cs">
       <DependentUpon>ManageMyAppsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\ManualLoginView.xaml.cs">
+      <DependentUpon>ManualLoginView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\BasePage.cs" />
     <Compile Include="Views\Account\EditProfileView.xaml.cs">
@@ -203,6 +209,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Account\Manage\ManageMyAppsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Account\ManualLoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

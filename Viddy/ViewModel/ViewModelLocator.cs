@@ -37,6 +37,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.Register<ManageAccountViewModel>();
             SimpleIoc.Default.Register<ManageAppsAccessViewModel>();
             SimpleIoc.Default.Register<ManageMyAppsViewModel>();
+            SimpleIoc.Default.Register<ManualLoginViewModel>();
         }
 
         public VideoRecordViewModel VideoRecord
@@ -72,6 +73,11 @@ namespace Viddy.ViewModel
         public ManageMyAppsViewModel MyApps
         {
             get { return ServiceLocator.Current.GetInstance<ManageMyAppsViewModel>(); }
+        }
+
+        public ManualLoginViewModel ManualLogin
+        {
+            get { return ServiceLocator.Current.GetInstance<ManualLoginViewModel>(); }
         }
 
         public AuthenticationService Auth

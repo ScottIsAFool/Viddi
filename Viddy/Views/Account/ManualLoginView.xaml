@@ -1,0 +1,85 @@
+﻿<views:BasePage x:Class="Viddy.Views.Account.ManualLoginView"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:views="using:Viddy.Views"
+                xmlns:controls="using:Viddy.Controls"
+                xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+                xmlns:behaviours="using:Viddy.Behaviours"
+                xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
+                mc:Ignorable="d"
+                Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                DataContext="{Binding ManualLogin, Source={StaticResource Locator}}">
+    <interactivity:Interaction.Behaviors>
+        <behaviors:AutoFocusBehavior/>
+    </interactivity:Interaction.Behaviors>
+
+    <views:BasePage.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="sign in"
+                              IsEnabled="{Binding CanSignIn}"
+                              Command="{Binding SignInCommand}">
+                    <AppBarButton.Icon>
+                        <SymbolIcon Symbol="Accept"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </views:BasePage.BottomAppBar>
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Background="{ThemeResource HeaderBrush}"
+              Height="80">
+            <Grid Margin="19,0">
+                <StackPanel Orientation="Horizontal">
+                    <controls:ProfilePictureControl IsHitTestVisible="False" />
+
+                    <Grid>
+                        <TextBlock VerticalAlignment="Center"
+                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   Text="sign in"
+                                   TextWrapping="Wrap"
+                                   Margin="12,0,0,0" />
+                    </Grid>
+                </StackPanel>
+            </Grid>
+        </Grid>
+        
+        <Grid Grid.Row="1"
+              Margin="19,12,19,0">
+            <StackPanel Orientation="Vertical">
+                <TextBox Text="{Binding Username, Mode=TwoWay}"
+                         Header="Username:">
+                    <interactivity:Interaction.Behaviors>
+                        <behaviours:UpdateTextBindingOnPropertyChanged/>
+                    </interactivity:Interaction.Behaviors>
+                </TextBox>
+                
+                <PasswordBox Password="{Binding Password, Mode=TwoWay}"
+                             IsPasswordRevealButtonEnabled="True"
+                             Header="Password:">
+                    <interactivity:Interaction.Behaviors>
+                        <behaviours:EnterKeyHandler Command="{Binding SignInCommand}"/>
+                    </interactivity:Interaction.Behaviors>
+                </PasswordBox>
+                
+                <ProgressBar IsIndeterminate="{Binding ProgressIsVisible}"
+                             Visibility="{Binding ProgressIsVisible, Converter={StaticResource VisibilityConverter}}"/>
+                <controls:CustomHyperlinkButton TapCommand="{Binding NavigateToCreateAccountCommand}">
+                    <TextBlock FontSize="{StaticResource TextStyleMediumFontSize}">
+                        <Underline>
+                            <Run Text="Create account"/>
+                        </Underline>
+                    </TextBlock>
+                </controls:CustomHyperlinkButton>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</views:BasePage>

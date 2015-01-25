@@ -158,6 +158,14 @@ namespace Viddy.ViewModel.Account
             }
         }
 
+        public RelayCommand NavigateToManualLoginCommand
+        {
+            get
+            {
+                return new RelayCommand(() => _navigationService.Navigate<ManualLoginView>());
+            }
+        }
+
         private void LaunchAuthentication()
         {
             var url = _vidMeClient.GetAuthUrl(Constants.ClientId, Constants.CallBackUrl, new List<Scope> {Scope.Videos, Scope.VideoUpload, Scope.Channels, Scope.Comments, Scope.Votes, Scope.Account, Scope.AuthManagement, Scope.ClientManagement});

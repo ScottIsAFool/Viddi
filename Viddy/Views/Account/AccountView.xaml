@@ -66,6 +66,9 @@
                 <AppBarButton Label="manage account"
                               Command="{Binding NavigateToManageAccountCommand}"
                               Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}" />
+                <AppBarButton Label="problems signing in?"
+                              Command="{Binding NavigateToManualLoginCommand}"
+                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource InverseVisibilityConverter}}"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </local:BasePage.BottomAppBar>

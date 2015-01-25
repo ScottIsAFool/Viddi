@@ -29,7 +29,7 @@
     <SolidColorBrush x:Key="ApplicationForegroundThemeBrush"
                      Color="{StaticResource ApplicationForegroundThemeColor}"/>
     
-    <Color x:Key="SubtleColor">#FF606060</Color>
+    <Color x:Key="SubtleColor">#FF8D8D8D</Color>
     <SolidColorBrush x:Key="SubtleBrush"
                      Color="{StaticResource SubtleColor}"/>
 
