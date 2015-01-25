@@ -38,13 +38,15 @@ namespace Viddy.ViewModel.Account
             }
             else
             {
-                AuthenticationService.Current.UserSignedIn += CurrentOnUserSignedIn;
+                AuthenticationService.Current.UserSignedIn += UserStateChanged;
+                AuthenticationService.Current.UserSignedOut += UserStateChanged;
             }
         }
 
-        private void CurrentOnUserSignedIn(object sender, EventArgs eventArgs)
+        private async void UserStateChanged(object sender, EventArgs eventArgs)
         {
             Reset();
+            await LoadData(true);
         }
 
         public AvatarViewModel Avatar { get; set; }
@@ -59,7 +61,6 @@ namespace Viddy.ViewModel.Account
                     if (AuthenticationService.Current.IsLoggedIn)
                     {
                         AuthenticationService.Current.SignOut();
-                        await LoadData(true);
                     }
                     else
                     {

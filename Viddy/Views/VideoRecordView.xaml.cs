@@ -65,9 +65,11 @@ namespace Viddy.Views
             SetRotation(_display.CurrentOrientation);
         }
 
-        protected override void OnNavigatedTo(NavigationEventArgs e)
+        protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
             base.OnNavigatedTo(e);
+
+            await StartPreview();
 
             Window.Current.VisibilityChanged += CurrentOnVisibilityChanged;
         }
@@ -152,7 +154,6 @@ namespace Viddy.Views
 
         private async void RecordButton_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            return;
             var fileName = string.Empty;
             if (!_isRecording)
             {
@@ -164,8 +165,8 @@ namespace Viddy.Views
 
                 _displayRequest.RequestActive();
 
-                fileName = "Viddy-" + DateTime.Now.ToString("yyyy-M-dd-HH-mm-ss") + ".mp4";
-                var folder = ApplicationData.Current.LocalCacheFolder;
+                fileName = string.Format("Viddy-{0}.mp4", DateTime.Now.ToString("yyyy-M-dd-HH-mm-ss"));
+                var folder = ApplicationData.Current.LocalFolder;
                 var file = await folder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
 
                 _mediaCapture.StartRecordToStorageFileAsync(new MediaEncodingProfile(), file);

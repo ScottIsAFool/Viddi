@@ -18,8 +18,25 @@
             <core:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
-    
-    
+
+    <local:BasePage.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="record"
+                              Command="{Binding NavigateToVideoRecordCommand}">
+                    <AppBarButton.Icon>
+                        <SymbolIcon Symbol="Video" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+                <AppBarButton Label="search">
+                    <AppBarButton.Icon>
+                        <SymbolIcon Symbol="Find" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </local:BasePage.BottomAppBar>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -30,8 +47,8 @@
               Height="80">
             <Grid Margin="19,0">
                 <StackPanel Orientation="Horizontal">
-                    <controls:ProfilePictureControl AvatarUrl="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}}" 
-                                                    TappedCommand="{Binding NavigateToAccountCommand}"/>
+                    <controls:ProfilePictureControl AvatarUrl="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}}"
+                                                    TappedCommand="{Binding NavigateToAccountCommand}" />
 
                     <Grid>
                         <TextBlock VerticalAlignment="Center"
@@ -43,14 +60,49 @@
                 </StackPanel>
             </Grid>
         </Grid>
-        
-        <Grid Grid.Row="1"
-              Margin="0,12,0,0">
+
+        <Grid Grid.Row="1">
             <controls:InitialisingListView ItemsSource="{Binding Videos}"
                                            IsEmpty="{Binding IsEmpty}"
                                            IsInitialising="{Binding ProgressIsVisible}"
                                            ItemTemplate="{StaticResource VideoTemplate}">
-                
+                <controls:InitialisingListView.EmptyContent>
+                    <DataTemplate>
+                        <Grid Margin="19,12,19,0">
+                            <Grid Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"
+                                  x:Name="LoggedInContent">
+                                <TextBlock Text="It doesn't look like you have anything to show in your feed."
+                                           TextWrapping="WrapWholeWords"
+                                           Style="{StaticResource BodyTextBlockStyle}"
+                                           TextAlignment="Center" />
+                            </Grid>
+
+                            <Grid Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource InverseVisibilityConverter}}"
+                                  x:Name="LoggedOutContent">
+                                <TextBlock TextWrapping="WrapWholeWords"
+                                           Style="{StaticResource BodyTextBlockStyle}"
+                                           TextAlignment="Center">
+                                    <Run Text="If you want to see content here, consider" />
+                                    <Hyperlink Click="SignInHyperlink_OnClick"
+                                               x:Name="SignInHyperlink">
+                                        <Run Text="signing in" />
+                                    </Hyperlink>
+                                    <Run Text="or" />
+                                    <Hyperlink x:Name="CreateAccountHyperlink"
+                                               Click="CreateAccountHyperlink_OnClick">
+                                        <Run Text="creating an account." />
+                                    </Hyperlink>
+                                    <LineBreak />
+                                    <LineBreak />
+                                    <Run Text="Having an account means you can follow users or channels and catch up with them in your feed." />
+                                    <LineBreak />
+                                    <LineBreak />
+                                    <Run Text="If you simply wish to upload a video anonymously, then just tap the video button below." />
+                                </TextBlock>
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </controls:InitialisingListView.EmptyContent>
             </controls:InitialisingListView>
         </Grid>
     </Grid>
