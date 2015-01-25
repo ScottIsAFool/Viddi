@@ -7,6 +7,7 @@ using Windows.Security.Authentication.Web;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using ThemeManagerRt;
 using Viddy.Extensions;
 using Viddy.Services;
 using Viddy.Views;
@@ -30,6 +31,11 @@ namespace Viddy.ViewModel.Account
             Avatar = avatar;
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
+
+            if (IsInDesignMode)
+            {
+                IsEmpty = true;
+            }
         }
 
         public ObservableCollection<Video> Videos { get; set; }
@@ -136,11 +142,19 @@ namespace Viddy.ViewModel.Account
             get { return new RelayCommand(() => _navigationService.Navigate<EditProfileView>()); }
         }
 
-        public RelayCommand NaviageToManageAccountCommand
+        public RelayCommand NavigateToManageAccountCommand
         {
             get
             {
                 return new RelayCommand(() => _navigationService.Navigate<ManageAccountView>());
+            }
+        }
+
+        public RelayCommand NavigateToRecordCommand
+        {
+            get
+            {
+                return new RelayCommand(() => _navigationService.Navigate<VideoRecordView>());
             }
         }
 

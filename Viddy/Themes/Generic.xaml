@@ -92,6 +92,10 @@
                 Value="False" />
         <Setter Property="ScrollViewer.BringIntoViewOnFocusChange"
                 Value="True" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Stretch"/>
+        <Setter Property="VerticalContentAlignment"
+                Value="Stretch"/>
         <Setter Property="ItemContainerStyle">
             <Setter.Value>
                 <Style TargetType="ListViewItem">

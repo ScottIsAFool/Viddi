@@ -95,10 +95,11 @@
                     </Setter.Value>
                 </Setter>
             </Style>
-
-            <Style TargetType="ListViewItem">
-                <Setter Property="HorizontalContentAlignment"
-                        Value="Stretch" />
+            <Style TargetType="CommandBar">
+                <Setter Property="Background"
+                        Value="{ThemeResource AppBarBackgroundThemeBrush}"/>
+                <Setter Property="Foreground"
+                        Value="{ThemeResource AppBarItemForegroundThemeBrush}"/>
             </Style>
         </ResourceDictionary>
         

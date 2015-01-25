@@ -40,8 +40,6 @@ namespace Viddy
             this.InitializeComponent();
             this.Suspending += this.OnSuspending;
             UnhandledException += OnUnhandledException;
-
-            ThemeManager.DefaultTheme = ElementTheme.Light;
         }
 
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -69,6 +67,7 @@ namespace Viddy
             }
 #endif
 
+            ThemeManager.DefaultTheme = ElementTheme.Light;
             Frame rootFrame = Window.Current.Content as Frame;
 
             Locator.Auth.StartService();
@@ -133,6 +132,7 @@ namespace Viddy
         {
             base.OnActivated(args);
 
+            ThemeManager.DefaultTheme = ElementTheme.Light;
             if (args != null)
             {
                 if (args.Kind == ActivationKind.WebAuthenticationBrokerContinuation)

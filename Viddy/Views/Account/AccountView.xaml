@@ -14,7 +14,7 @@
                 DataContext="{Binding Account, Source={StaticResource Locator}}">
     <interactivity:Interaction.Behaviors>
         <behaviours:StatusBarBehavior BackgroundColor="{ThemeResource HeaderColor}"
-                                      IsVisible="True"/>
+                                      IsVisible="True" />
         <core:EventTriggerBehavior EventName="Loaded">
             <core:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
         </core:EventTriggerBehavior>
@@ -32,6 +32,12 @@
     <local:BasePage.BottomAppBar>
         <CommandBar ClosedDisplayMode="Compact">
             <CommandBar.PrimaryCommands>
+                <AppBarButton Label="record"
+                              Command="{Binding NavigateToRecordCommand}">
+                    <AppBarButton.Icon>
+                        <SymbolIcon Symbol="Video" />
+                    </AppBarButton.Icon>
+                </AppBarButton>
                 <AppBarButton IsCompact="True"
                               Label="settings"
                               Command="{Binding NavigateToSettingsCommand}">
@@ -49,8 +55,8 @@
                 </AppBarButton>
                 <AppBarButton IsCompact="True"
                               Label="edit profile"
-                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"
-                              Command="{Binding NavigateToEditProfileCommand}">
+                              Command="{Binding NavigateToEditProfileCommand}"
+                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}">
                     <AppBarButton.Icon>
                         <SymbolIcon Symbol="Edit" />
                     </AppBarButton.Icon>
@@ -58,8 +64,8 @@
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="manage account"
-                              Command="{Binding NaviageToManageAccountCommand}"
-                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"/>
+                              Command="{Binding NavigateToManageAccountCommand}"
+                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </local:BasePage.BottomAppBar>
@@ -84,8 +90,8 @@
                                 Margin="0,15,0,6">
                         <localControls:ProfilePictureControl TappedCommand="{Binding ChangeAvatarCommand}"
                                                              IsChanging="{Binding Avatar.ChangingAvatar}"
-                                                             IsHitTestVisible="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}"/>
-                        <TextBlock Text=""/>
+                                                             IsHitTestVisible="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}" />
+                        <TextBlock Text="" />
                     </StackPanel>
 
                     <Grid>
@@ -176,17 +182,67 @@
             <localControls:InitialisingListView ItemsSource="{Binding Videos}"
                                                 IsInitialising="{Binding ProgressIsVisible}"
                                                 IsEmpty="{Binding IsEmpty}">
+                <localControls:InitialisingListView.EmptyContent>
+                    <DataTemplate>
+                        <Grid Margin="19,12,19,0">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0">
+                                <Grid x:Name="AnonymousGrid"
+                                      Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource InverseVisibilityConverter}}">
+                                    <TextBlock Text="It doesn't look like you've uploaded any videos, you may need to sign in in order to see them"
+                                               Style="{StaticResource BodyTextBlockStyle}"
+                                               TextWrapping="WrapWholeWords"
+                                               TextAlignment="Center" 
+                                               Margin="0,0,0,12"/>
+                                </Grid>
+
+                                <Grid x:Name="SignedInGrid"
+                                      Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}">
+
+                                    <TextBlock Text="It doesn't look like you've uploaded any videos."
+                                               Style="{StaticResource BodyTextBlockStyle}"
+                                               TextWrapping="WrapWholeWords"
+                                               TextAlignment="Center" />
+                                </Grid>
+                            </Grid>
+                            
+                            <Grid Grid.Row="1">
+                                <TextBlock Text="You can record new videos by tapping the video button below"
+                                           TextWrapping="WrapWholeWords"
+                                           TextAlignment="Center"
+                                           Style="{StaticResource BodyTextBlockStyle}"/>
+
+                                <Path Width="28"
+                                      Height="60"
+                                      Stretch="Fill"
+                                      Fill="{ThemeResource ApplicationForegroundThemeBrush}"
+                                      VerticalAlignment="Bottom"
+                                      HorizontalAlignment="Left"
+                                      Margin="95,0,0,10"
+                                      Data="F1 M 42,19.0002L 34,19.0002L 34,43.7502L 24,33.7502L 24,44.2502L 38,58.2502L 52,44.2502L 52,33.7502L 42,43.7502L 42,19.0002 Z "
+                                      Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource InverseVisibilityConverter}}" />
+                                <Path Width="28"
+                                      Height="60"
+                                      Stretch="Fill"
+                                      Fill="{ThemeResource ApplicationForegroundThemeBrush}"
+                                      VerticalAlignment="Bottom"
+                                      HorizontalAlignment="Left"
+                                      Margin="60,0,0,10"
+                                      Data="F1 M 42,19.0002L 34,19.0002L 34,43.7502L 24,33.7502L 24,44.2502L 38,58.2502L 52,44.2502L 52,33.7502L 42,43.7502L 42,19.0002 Z "
+                                      Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}" />
+                            </Grid>
+                        </Grid>
+                    </DataTemplate>
+                </localControls:InitialisingListView.EmptyContent>
                 <ListView.Header>
                     <TextBlock Text="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource HeaderConverter}}"
                                Style="{StaticResource GroupHeaderTextBlockStyle}"
                                Margin="19,0,19,6" />
                 </ListView.Header>
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="ListViewItem">
-                        <Setter Property="HorizontalContentAlignment"
-                                Value="Stretch" />
-                    </Style>
-                </ListView.ItemContainerStyle>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <localControls:CustomButton Style="{StaticResource EmptyButtonStyle}">
@@ -222,7 +278,7 @@
                                             Margin="0,0,19,19">
                                     <SymbolIcon Symbol="Like"
                                                 Foreground="White"
-                                                Height="20"/>
+                                                Height="20" />
                                     <TextBlock Text="{Binding LikesCount}"
                                                Style="{StaticResource BodyTextBlockStyle}"
                                                Foreground="White" />

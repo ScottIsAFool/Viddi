@@ -33,4 +33,11 @@
     <SolidColorBrush x:Key="SubtleBrush"
                      Color="{StaticResource SubtleColor}"/>
 
+    <Color x:Key="AppBarBackgroundColor">#DDDDDD</Color>
+    <Color x:Key="AppBarForegroundColor">Black</Color>
+    <SolidColorBrush x:Key="AppBarBackgroundThemeBrush"
+                     Color="{StaticResource AppBarBackgroundColor}" />
+    <SolidColorBrush x:Key="AppBarItemForegroundThemeBrush"
+                     Color="{StaticResource AppBarForegroundColor}" />
+
 </ResourceDictionary>
