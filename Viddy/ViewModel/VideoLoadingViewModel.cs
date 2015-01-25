@@ -91,7 +91,7 @@ namespace Viddy.ViewModel
                 }
 
                 IsEmpty = Videos.IsNullOrEmpty();
-                CanLoadMore = Videos.Count <= response.Page.Total;
+                CanLoadMore = Videos.Count + 1 < response.Page.Total;
                 _videosLoaded = true;
             }
             catch (Exception ex)

@@ -20,7 +20,7 @@ namespace Viddy.ViewModel.Account
 
             if (IsInDesignMode)
             {
-                User = new User
+                User = new UserViewModel(new User
                 {
                     UserId = "59739",
                     Username = "PunkHack",
@@ -32,48 +32,32 @@ namespace Viddy.ViewModel.Account
                     VideoViews = "71556",
                     VideosScores = 220,
                     Bio = "Some bio information"
-                };
-
+                });
                 IsEmpty = true;
             }
         }
 
-        public User User { get; set; }
+        public UserViewModel User { get; set; }
 
-        public string UserFollowers
-        {
-            get { return User != null && User.FollowerCount > 0 ? string.Format("{0:N0} followers", User.FollowerCount) : null; }
-        }
-
-        public string UserPlays
+        public UserViewModel EmptyUser
         {
             get
             {
-                double views;
-                return User != null
-                       && !string.IsNullOrEmpty(User.VideoViews)
-                       && double.TryParse(User.VideoViews, out views)
-                       && views > 0
-                    ? string.Format("{0:N0} plays", views)
-                    : null;
+                return new UserViewModel(new User());
             }
         }
 
-        public string UserVideoCount
-        {
-            get { return User != null && User.VideoCount > 0 ? string.Format("{0:N0} videos", User.VideoCount) : null; }
-        }
 
         public override Task<VideosResponse> GetVideos(int offset)
         {
-            return _vidMeClient.GetUserVideosAsync(User.UserId, offset);
+            return _vidMeClient.GetUserVideosAsync(User.User.UserId, offset);
         }
 
         protected override void WireMessages()
         {
             Messenger.Default.Register<UserMessage>(this, m =>
             {
-                User = m.User;
+                User = new UserViewModel(m.User);
             });
         }
     }

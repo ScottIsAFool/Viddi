@@ -134,6 +134,7 @@
     <Compile Include="ViewModel\Account\Manage\ManageAppsAccessViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\RevokeAppViewModel.cs" />
     <Compile Include="ViewModel\UploadVideoViewModel.cs" />
+    <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="ViewModel\VideoItemViewModel.cs" />
     <Compile Include="ViewModel\VideoLoadingViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />

@@ -250,11 +250,14 @@
                         <localControls:LoadMoreControl/>
                     </DataTemplate>
                 </localControls:InitialisingListView.FooterTemplate>
-                <ListView.Header>
-                    <TextBlock Text="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource HeaderConverter}}"
-                               Style="{StaticResource GroupHeaderTextBlockStyle}"
-                               Margin="19,0,19,6" />
-                </ListView.Header>
+                <ListView.HeaderTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource HeaderConverter}}"
+                                   Style="{StaticResource GroupHeaderTextBlockStyle}"
+                                   Margin="19,0,19,6"
+                                   Visibility="{Binding IsEmpty, Converter={StaticResource InverseVisibilityConverter}}"/>
+                    </DataTemplate>
+                </ListView.HeaderTemplate>
             </localControls:InitialisingListView>
         </Grid>
     </Grid>

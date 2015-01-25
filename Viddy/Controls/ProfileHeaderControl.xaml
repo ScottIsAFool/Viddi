@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="400"
-             d:DataContext="{Binding Profile, Source={StaticResource Locator}}">
+             d:DataContext="{Binding Profile.User, Source={StaticResource Locator}}">
 
     <UserControl.Resources>
         <Style x:Key="ByLineStyle"
@@ -53,9 +53,11 @@
                            Style="{StaticResource BodyTextBlockStyle}"
                            FontSize="{StaticResource TextStyleMediumFontSize}"
                            TextWrapping="WrapWholeWords"
-                           Margin="0,0,0,6" />
+                           Margin="0,0,0,6" 
+                           Visibility="{Binding DisplayBio, Converter={StaticResource VisibilityConverter}}"/>
 
-                <StackPanel Orientation="Horizontal">
+                <StackPanel Orientation="Horizontal"
+                            Visibility="{Binding DisplayByLine, Converter={StaticResource VisibilityConverter}}">
                     <TextBlock Text="{Binding UserFollowers}"
                                Style="{StaticResource ByLineStyle}" />
 
