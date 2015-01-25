@@ -46,21 +46,16 @@
             </controls:InitialisingListView.HeaderTemplate>
             <controls:InitialisingListView.FooterTemplate>
                 <DataTemplate>
-                    <Grid Height="47"
-                          Visibility="{Binding CanLoadMore, Converter={StaticResource VisibilityConverter}}">
-                        <controls:CustomHyperlinkButton Command="{Binding LoadMoreCommand}"
-                                                        Content="load more"
-                                                        HorizontalContentAlignment="Center"
-                                                        HorizontalAlignment="Center"
-                                                        VerticalAlignment="Top"
-                                                        Visibility="{Binding IsLoadingMore, Converter={StaticResource InverseVisibilityConverter}}"/>
-                        <ProgressBar HorizontalAlignment="Center"
-                                     Width="130"
-                                     IsIndeterminate="{Binding IsLoadingMore}"
-                                     Visibility="{Binding IsLoadingMore, Converter={StaticResource VisibilityConverter}}"/>
-                    </Grid>
+                    <controls:LoadMoreControl/>
                 </DataTemplate>
             </controls:InitialisingListView.FooterTemplate>
+            <controls:InitialisingListView.EmptyContent>
+                <DataTemplate>
+                    <Grid>
+                        
+                    </Grid>
+                </DataTemplate>
+            </controls:InitialisingListView.EmptyContent>
         </controls:InitialisingListView>
 
     </Grid>

@@ -1,23 +1,17 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
-using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Viddy.Extensions;
 using Viddy.Messaging;
 using VidMePortable;
 using VidMePortable.Model;
+using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel.Account
 {
-    public class ProfileViewModel : ViewModelBase
+    public class ProfileViewModel : VideoLoadingViewModel
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
-
-        private bool _videosLoaded;
 
         public ProfileViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
         {
@@ -39,14 +33,12 @@ namespace Viddy.ViewModel.Account
                     VideosScores = 220,
                     Bio = "Some bio information"
                 };
+
+                IsEmpty = true;
             }
         }
 
         public User User { get; set; }
-        public ObservableCollection<VideoItemViewModel> Videos { get; set; }
-        public bool IsEmpty { get; set; }
-        public bool IsLoadingMore { get; set; }
-        public bool CanLoadMore { get; set; }
 
         public string UserFollowers
         {
@@ -72,77 +64,9 @@ namespace Viddy.ViewModel.Account
             get { return User != null && User.VideoCount > 0 ? string.Format("{0:N0} videos", User.VideoCount) : null; }
         }
 
-        public RelayCommand PageLoadedCommand
+        public override Task<VideosResponse> GetVideos(int offset)
         {
-            get
-            {
-                return new RelayCommand(async () =>
-                {
-                    await LoadData(false, false, 0);
-                });
-            }
-        }
-
-        public RelayCommand RefreshCommand
-        {
-            get
-            {
-                return new RelayCommand(async () =>
-                {
-                    await LoadData(true, false, 0);
-                });
-            }
-        }
-
-        public RelayCommand LoadMoreCommand
-        {
-            get
-            {
-                return new RelayCommand(async () =>
-                {
-                    await LoadData(false, true, Videos.Count);
-                });
-            }
-        }
-
-        private async Task LoadData(bool isRefresh, bool add, int offset)
-        {
-            if (_videosLoaded && !isRefresh && !add)
-            {
-                return;
-            }
-
-            try
-            {
-                if (!add)
-                {
-                    SetProgressBar("Getting videos...");
-                }
-
-                IsLoadingMore = add;
-                var response = await _vidMeClient.GetUserVideosAsync(User.UserId, offset);
-
-                if (Videos == null || !add)
-                {
-                    Videos = new ObservableCollection<VideoItemViewModel>();
-                }
-
-                foreach (var video in response.Videos.Select(x => new VideoItemViewModel(x)))
-                {
-                    Videos.Add(video);
-                }
-
-                IsEmpty = Videos.IsNullOrEmpty();
-                CanLoadMore = Videos.Count <= response.Page.Total;
-                _videosLoaded = true;
-            }
-            catch (Exception ex)
-            {
-                
-            }
-
-            IsLoadingMore = false;
-            SetProgressBar();
+            return _vidMeClient.GetUserVideosAsync(User.UserId, offset);
         }
 
         protected override void WireMessages()

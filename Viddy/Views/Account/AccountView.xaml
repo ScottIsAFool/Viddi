@@ -245,6 +245,11 @@
                         </Grid>
                     </DataTemplate>
                 </localControls:InitialisingListView.EmptyContent>
+                <localControls:InitialisingListView.FooterTemplate>
+                    <DataTemplate>
+                        <localControls:LoadMoreControl/>
+                    </DataTemplate>
+                </localControls:InitialisingListView.FooterTemplate>
                 <ListView.Header>
                     <TextBlock Text="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource HeaderConverter}}"
                                Style="{StaticResource GroupHeaderTextBlockStyle}"

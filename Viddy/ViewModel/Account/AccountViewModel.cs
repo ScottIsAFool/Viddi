@@ -21,12 +21,10 @@ using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel.Account
 {
-    public class AccountViewModel : ViewModelBase
+    public class AccountViewModel : VideoLoadingViewModel
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
-
-        private bool _videosLoaded;
 
         public AccountViewModel(INavigationService navigationService, IVidMeClient vidMeClient, AvatarViewModel avatar)
         {
@@ -38,11 +36,18 @@ namespace Viddy.ViewModel.Account
             {
                 IsEmpty = true;
             }
+            else
+            {
+                AuthenticationService.Current.UserSignedIn += CurrentOnUserSignedIn;
+            }
         }
 
-        public ObservableCollection<VideoItemViewModel> Videos { get; set; }
+        private void CurrentOnUserSignedIn(object sender, EventArgs eventArgs)
+        {
+            Reset();
+        }
+
         public AvatarViewModel Avatar { get; set; }
-        public bool IsEmpty { get; set; }
 
 
         public RelayCommand LogInLogOutCommand
@@ -54,35 +59,12 @@ namespace Viddy.ViewModel.Account
                     if (AuthenticationService.Current.IsLoggedIn)
                     {
                         AuthenticationService.Current.SignOut();
-                        _videosLoaded = false;
                         await LoadData(true);
                     }
                     else
                     {
                         LaunchAuthentication();
                     }
-                });
-            }
-        }
-
-        public RelayCommand PageLoadedCommand
-        {
-            get
-            {
-                return new RelayCommand(async () =>
-                {
-                    await LoadData(false);
-                });
-            }
-        }
-
-        public RelayCommand RefreshCommand
-        {
-            get
-            {
-                return new RelayCommand(async () =>
-                {
-                    await LoadData(true);
                 });
             }
         }
@@ -218,41 +200,11 @@ namespace Viddy.ViewModel.Account
             }
         }
 
-        private async Task LoadData(bool isRefresh)
+        public override Task<VideosResponse> GetVideos(int offset)
         {
-            if (_videosLoaded && !isRefresh)
-            {
-                return;
-            }
-
-            try
-            {
-                SetProgressBar("Getting videos...");
-                VideosResponse response;
-                if (AuthenticationService.Current.IsLoggedIn)
-                {
-                    response = await _vidMeClient.GetUserVideosAsync(AuthenticationService.Current.LoggedInUserId);
-                }
-                else
-                {
-                    response = await _vidMeClient.GetAnonymousVideosAsync();
-                }
-
-                if (Videos != null)
-                {
-                    Videos.Clear();
-                }
-
-                Videos = new ObservableCollection<VideoItemViewModel>(response.Videos.Select(x => new VideoItemViewModel(x)));
-                IsEmpty = Videos.IsNullOrEmpty();
-                _videosLoaded = true;
-            }
-            catch (Exception ex)
-            {
-                
-            }
-
-            SetProgressBar();
+            return AuthenticationService.Current.IsLoggedIn 
+                ? _vidMeClient.GetUserVideosAsync(AuthenticationService.Current.LoggedInUserId) 
+                : _vidMeClient.GetAnonymousVideosAsync();
         }
 
         protected override void WireMessages()

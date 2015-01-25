@@ -99,6 +99,9 @@
     <Compile Include="Controls\CustomButton.cs" />
     <Compile Include="Controls\CustomHyperlinkButton.cs" />
     <Compile Include="Controls\InitialisingListView.cs" />
+    <Compile Include="Controls\LoadMoreControl.xaml.cs">
+      <DependentUpon>LoadMoreControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ProfileHeaderControl.xaml.cs">
       <DependentUpon>ProfileHeaderControl.xaml</DependentUpon>
     </Compile>
@@ -132,6 +135,7 @@
     <Compile Include="ViewModel\Account\Manage\RevokeAppViewModel.cs" />
     <Compile Include="ViewModel\UploadVideoViewModel.cs" />
     <Compile Include="ViewModel\VideoItemViewModel.cs" />
+    <Compile Include="ViewModel\VideoLoadingViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="Views\Account\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
@@ -199,6 +203,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\LoadMoreControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\ProfileHeaderControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
