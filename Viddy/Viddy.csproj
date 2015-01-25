@@ -99,7 +99,13 @@
     <Compile Include="Controls\CustomButton.cs" />
     <Compile Include="Controls\CustomHyperlinkButton.cs" />
     <Compile Include="Controls\InitialisingListView.cs" />
+    <Compile Include="Controls\ProfileHeaderControl.xaml.cs">
+      <DependentUpon>ProfileHeaderControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\ProfilePictureControl.cs" />
+    <Compile Include="Controls\VideoControl.xaml.cs">
+      <DependentUpon>VideoControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Converters\ThumbnailConverter.cs" />
     <Compile Include="Extensions\ApplicationSettingsExtensions.cs" />
     <Compile Include="Extensions\ContainerExtensions.cs" />
@@ -125,6 +131,7 @@
     <Compile Include="ViewModel\Account\Manage\ManageAppsAccessViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\RevokeAppViewModel.cs" />
     <Compile Include="ViewModel\UploadVideoViewModel.cs" />
+    <Compile Include="ViewModel\VideoItemViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="Views\Account\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
@@ -192,6 +199,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Page Include="Controls\ProfileHeaderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\VideoControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Themes\Generic.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

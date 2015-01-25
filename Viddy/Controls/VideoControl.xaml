@@ -1,0 +1,64 @@
+﻿<UserControl x:Class="Viddy.Controls.VideoControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="using:Viddy.Controls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="300"
+             d:DesignWidth="400"
+             d:DataContext="{Binding Account.Videos[0], Source={StaticResource Locator}}">
+
+    <Grid>
+        <local:CustomButton Style="{StaticResource EmptyButtonStyle}">
+            <Grid Height="200"
+                  x:Name="ContainerGrid"
+                  Holding="ContainerGrid_OnHolding"
+                  DataContext="{Binding Video}">
+                <FlyoutBase.AttachedFlyout>
+                    <MenuFlyout>
+                        <MenuFlyoutItem Margin="12,0,0,0"
+                                        Command="{Binding Account.DeleteCommand, Source={StaticResource Locator}}"
+                                        CommandParameter="{Binding}"
+                                        Text="delete" />
+                    </MenuFlyout>
+                </FlyoutBase.AttachedFlyout>
+                <Image Source="{Binding ThumbnailUrl}"
+                       Stretch="UniformToFill"
+                       VerticalAlignment="Center" />
+                <Border Height="200"
+                        Background="#34000000" />
+                
+                <Border Background="{ThemeResource NsfwBackgroundBrush}"
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Left"
+                        Padding="5,3"
+                        Visibility="{Binding Nsfw, Converter={StaticResource VisibilityConverter}}">
+                    <TextBlock Text="NSFW"
+                               Foreground="White"/>
+                </Border>
+
+                <TextBlock Foreground="White"
+                           Style="{StaticResource BodyTextBlockStyle}"
+                           VerticalAlignment="Bottom"
+                           HorizontalAlignment="Left"
+                           Margin="19,0,0,19">
+                                    <Run Text="{Binding ViewCount}" />
+                                    <Run Text="plays" />
+                </TextBlock>
+
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Bottom"
+                            HorizontalAlignment="Right"
+                            Margin="0,0,19,19">
+                    <SymbolIcon Symbol="Like"
+                                Foreground="White"
+                                Height="20" />
+                    <TextBlock Text="{Binding LikesCount}"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Foreground="White" />
+                </StackPanel>
+            </Grid>
+        </local:CustomButton>
+    </Grid>
+</UserControl>

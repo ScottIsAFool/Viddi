@@ -5,6 +5,7 @@
              xmlns:converters="using:Cimbalino.Toolkit.Converters"
              xmlns:themeManagerRt="using:ThemeManagerRt"
              xmlns:localConverters="using:Viddy.Converters"
+             xmlns:controls="using:Viddy.Controls"
              RequestedTheme="Light">
     <Application.Resources>
         <ResourceDictionary>
@@ -101,6 +102,10 @@
                 <Setter Property="Foreground"
                         Value="{ThemeResource AppBarItemForegroundThemeBrush}"/>
             </Style>
+
+            <DataTemplate x:Key="VideoTemplate">
+                <controls:VideoControl />
+            </DataTemplate>
         </ResourceDictionary>
         
     </Application.Resources>

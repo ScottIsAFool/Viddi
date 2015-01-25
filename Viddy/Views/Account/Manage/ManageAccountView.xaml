@@ -21,7 +21,8 @@
                 <StackPanel Orientation="Horizontal">
                     <controls:ProfilePictureControl TappedCommand="{Binding ChangeAvatarCommand}"
                                                     IsChanging="{Binding Avatar.ChangingAvatar}"
-                                                    IsHitTestVisible="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}" />
+                                                    IsHitTestVisible="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}"
+                                                    AvatarUrl="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}}"/>
 
                     <Grid>
                         <TextBlock VerticalAlignment="Center"

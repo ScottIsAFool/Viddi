@@ -9,6 +9,10 @@
                 Value="45" />
         <Setter Property="Background"
                 Value="{ThemeResource ButtonBackgroundBrush}" />
+        <Setter Property="BorderBrush"
+                Value="{ThemeResource ButtonBackgroundBrush}"/>
+        <Setter Property="BorderThickness"
+                Value="1"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ProfilePictureControl">
@@ -19,8 +23,8 @@
                                  StretchDirection="DownOnly"
                                  Width="{TemplateBinding Width}"
                                  Height="{TemplateBinding Height}">
-                            <Border BorderThickness="1"
-                                    BorderBrush="{TemplateBinding Background}"
+                            <Border BorderThickness="{TemplateBinding BorderThickness}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
                                     CornerRadius="45"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch"
@@ -35,9 +39,11 @@
                                     </Ellipse>
                                     <Ellipse Stretch="Fill"
                                              Width="{TemplateBinding Width}"
-                                             Height="{TemplateBinding Height}">
+                                             Height="{TemplateBinding Height}"
+                                             x:Name="ImageEllipse"
+                                             Tag="{TemplateBinding AvatarUrl}">
                                         <Ellipse.Fill>
-                                            <ImageBrush ImageSource="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}}"
+                                            <ImageBrush ImageSource="{Binding Tag, ElementName=ImageEllipse}"
                                                         Stretch="UniformToFill" />
                                         </Ellipse.Fill>
                                     </Ellipse>

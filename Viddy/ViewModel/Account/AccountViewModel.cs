@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.Foundation.Collections;
 using Windows.Security.Authentication.Web;
@@ -39,7 +40,7 @@ namespace Viddy.ViewModel.Account
             }
         }
 
-        public ObservableCollection<Video> Videos { get; set; }
+        public ObservableCollection<VideoItemViewModel> Videos { get; set; }
         public AvatarViewModel Avatar { get; set; }
         public bool IsEmpty { get; set; }
 
@@ -94,13 +95,13 @@ namespace Viddy.ViewModel.Account
             }
         }
 
-        public RelayCommand<Video> DeleteCommand
+        public RelayCommand<VideoItemViewModel> DeleteCommand
         {
             get
             {
-                return new RelayCommand<Video>(async video =>
+                return new RelayCommand<VideoItemViewModel>(async video =>
                 {
-                    if (video == null)
+                    if (video == null || video.Video == null || !video.CanDelete)
                     {
                         return;
                     }
@@ -109,14 +110,14 @@ namespace Viddy.ViewModel.Account
                     {
                         if (AuthenticationService.Current.IsLoggedIn)
                         {
-                            if (await _vidMeClient.DeleteVideoAsync(video.VideoId))
+                            if (await _vidMeClient.DeleteVideoAsync(video.Video.VideoId))
                             {
                                 Videos.Remove(video);
                             }
                         }
                         else
                         {
-                            if (await _vidMeClient.DeleteAnonymousVideoAsync(video.VideoId, ""))
+                            if (await _vidMeClient.DeleteAnonymousVideoAsync(video.Video.VideoId, ""))
                             {
                                 Videos.Remove(video);
                             }
@@ -175,10 +176,11 @@ namespace Viddy.ViewModel.Account
                 {
                     Messenger.Default.Send(new UserMessage(new User
                     {
-                        Username = "MarinaSweet",
-                        AvatarUrl = "https://d1wst0behutosd.cloudfront.net/avatars/10042.gif?gv2r1421446675",
-                        CoverUrl = "https://d1wst0behutosd.cloudfront.net/channel_covers/10042.jpg?v1r1420500373",
-                        FollowerCount = 120,
+                        UserId = "59739",
+                        Username = "PunkHack",
+                        AvatarUrl = "https://d1wst0behutosd.cloudfront.net/avatars/59739.gif?gv2r1420954820",
+                        CoverUrl = "https://d1wst0behutosd.cloudfront.net/channel_covers/59739.jpg?v1r1420500373",
+                        FollowerCount = 1200,
                         LikesCount = "92",
                         VideoCount = 532,
                         VideoViews = "71556",
@@ -241,7 +243,7 @@ namespace Viddy.ViewModel.Account
                     Videos.Clear();
                 }
 
-                Videos = new ObservableCollection<Video>(response.Videos);
+                Videos = new ObservableCollection<VideoItemViewModel>(response.Videos.Select(x => new VideoItemViewModel(x)));
                 IsEmpty = Videos.IsNullOrEmpty();
                 _videosLoaded = true;
             }

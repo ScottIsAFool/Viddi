@@ -93,7 +93,8 @@
                                 Margin="0,15,0,6">
                         <localControls:ProfilePictureControl TappedCommand="{Binding ChangeAvatarCommand}"
                                                              IsChanging="{Binding Avatar.ChangingAvatar}"
-                                                             IsHitTestVisible="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}" />
+                                                             IsHitTestVisible="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}"
+                                                             AvatarUrl="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}}"/>
                         <TextBlock Text="" />
                     </StackPanel>
 
@@ -184,7 +185,8 @@
         <Grid Grid.Row="1">
             <localControls:InitialisingListView ItemsSource="{Binding Videos}"
                                                 IsInitialising="{Binding ProgressIsVisible}"
-                                                IsEmpty="{Binding IsEmpty}">
+                                                IsEmpty="{Binding IsEmpty}"
+                                                ItemTemplate="{StaticResource VideoTemplate}">
                 <localControls:InitialisingListView.EmptyContent>
                     <DataTemplate>
                         <Grid Margin="19,12,19,0">
@@ -248,50 +250,6 @@
                                Style="{StaticResource GroupHeaderTextBlockStyle}"
                                Margin="19,0,19,6" />
                 </ListView.Header>
-                <ListView.ItemTemplate>
-                    <DataTemplate>
-                        <localControls:CustomButton Style="{StaticResource EmptyButtonStyle}">
-                            <Grid Height="200"
-                                  x:Name="ContainerGrid"
-                                  Holding="ContainerGrid_OnHolding">
-                                <FlyoutBase.AttachedFlyout>
-                                    <MenuFlyout>
-                                        <MenuFlyoutItem Margin="12,0,0,0"
-                                                        Command="{Binding Account.DeleteCommand, Source={StaticResource Locator}}"
-                                                        CommandParameter="{Binding}"
-                                                        Text="delete" />
-                                    </MenuFlyout>
-                                </FlyoutBase.AttachedFlyout>
-                                <Image Source="{Binding ThumbnailUrl}"
-                                       Stretch="UniformToFill"
-                                       VerticalAlignment="Center" />
-                                <Border Height="200"
-                                        Background="#34000000" />
-
-                                <TextBlock Foreground="White"
-                                           Style="{StaticResource BodyTextBlockStyle}"
-                                           VerticalAlignment="Bottom"
-                                           HorizontalAlignment="Left"
-                                           Margin="19,0,0,19">
-                                    <Run Text="{Binding ViewCount}" />
-                                    <Run Text="plays" />
-                                </TextBlock>
-
-                                <StackPanel Orientation="Horizontal"
-                                            VerticalAlignment="Bottom"
-                                            HorizontalAlignment="Right"
-                                            Margin="0,0,19,19">
-                                    <SymbolIcon Symbol="Like"
-                                                Foreground="White"
-                                                Height="20" />
-                                    <TextBlock Text="{Binding LikesCount}"
-                                               Style="{StaticResource BodyTextBlockStyle}"
-                                               Foreground="White" />
-                                </StackPanel>
-                            </Grid>
-                        </localControls:CustomButton>
-                    </DataTemplate>
-                </ListView.ItemTemplate>
             </localControls:InitialisingListView>
         </Grid>
     </Grid>
