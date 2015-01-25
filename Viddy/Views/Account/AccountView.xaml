@@ -220,8 +220,6 @@
                                            TextWrapping="WrapWholeWords"
                                            TextAlignment="Center"
                                            Style="{StaticResource BodyTextBlockStyle}"/>
-                                <Button Content="temp"
-                                        Command="{Binding TempCommand}"/>
 
                                 <Path Width="28"
                                       Height="60"
