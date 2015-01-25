@@ -113,6 +113,7 @@
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModel\Account\AccountViewModel.cs" />
     <Compile Include="ViewModel\Account\AvatarViewModel.cs" />
+    <Compile Include="ViewModel\Account\CreateAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\AddAppViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\ManageMyAppsViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\OwnedAppViewModel.cs" />
@@ -125,6 +126,9 @@
     <Compile Include="ViewModel\ViewModelBase.cs" />
     <Compile Include="Views\Account\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\CreateAccountView.xaml.cs">
+      <DependentUpon>CreateAccountView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Account\Manage\AddAppView.xaml.cs">
       <DependentUpon>AddAppView.xaml</DependentUpon>
@@ -193,6 +197,10 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
     <Page Include="Views\Account\AccountView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Account\CreateAccountView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

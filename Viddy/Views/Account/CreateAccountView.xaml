@@ -1,34 +1,34 @@
-﻿<views:BasePage x:Class="Viddy.Views.Account.ManualLoginView"
+﻿<views:BasePage x:Class="Viddy.Views.Account.CreateAccountView"
                 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+                xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
                 xmlns:views="using:Viddy.Views"
                 xmlns:controls="using:Viddy.Controls"
-                xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                 xmlns:behaviours="using:Viddy.Behaviours"
-                xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-                DataContext="{Binding ManualLogin, Source={StaticResource Locator}}">
+                DataContext="{Binding CreateAccount, Source={StaticResource Locator}}">
     <interactivity:Interaction.Behaviors>
-        <behaviors:AutoFocusBehavior/>
+        <behaviors:AutoFocusBehavior />
     </interactivity:Interaction.Behaviors>
 
     <views:BasePage.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
-                <AppBarButton Label="sign in"
-                              IsEnabled="{Binding CanSignIn}"
-                              Command="{Binding SignInCommand}">
+                <AppBarButton Label="create"
+                              IsEnabled="{Binding CanCreateAccount}"
+                              Command="{Binding CreateAccountCommand}">
                     <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Accept"/>
+                        <SymbolIcon Symbol="Accept" />
                     </AppBarButton.Icon>
                 </AppBarButton>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </views:BasePage.BottomAppBar>
-    
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -44,14 +44,14 @@
                     <Grid>
                         <TextBlock VerticalAlignment="Center"
                                    Style="{StaticResource BodyTextBlockStyle}"
-                                   Text="sign in"
+                                   Text="create account"
                                    TextWrapping="Wrap"
                                    Margin="12,0,0,0" />
                     </Grid>
                 </StackPanel>
             </Grid>
         </Grid>
-        
+
         <Grid Grid.Row="1"
               Margin="19,12,19,0">
             <StackPanel Orientation="Vertical">
@@ -60,25 +60,21 @@
                 <TextBox Text="{Binding Username, Mode=TwoWay}"
                          Header="Username:">
                     <interactivity:Interaction.Behaviors>
-                        <behaviours:UpdateTextBindingOnPropertyChanged/>
+                        <behaviours:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
-                
+
                 <PasswordBox Password="{Binding Password, Mode=TwoWay}"
                              IsPasswordRevealButtonEnabled="True"
-                             Header="Password:">
+                             Header="Password:"/>
+
+                <TextBox Text="{Binding EmailAddress, Mode=TwoWay}"
+                         Header="Email address (optional):">
                     <interactivity:Interaction.Behaviors>
-                        <behaviours:EnterKeyHandler Command="{Binding SignInCommand}"/>
+                        <behaviours:UpdateTextBindingOnPropertyChanged />
+                        <behaviours:EnterKeyHandler Command="{Binding CreateAccountCommand}"/>
                     </interactivity:Interaction.Behaviors>
-                </PasswordBox>
-                
-                <controls:CustomHyperlinkButton TapCommand="{Binding NavigateToCreateAccountCommand}">
-                    <TextBlock FontSize="{StaticResource TextStyleMediumFontSize}">
-                        <Underline>
-                            <Run Text="Create account"/>
-                        </Underline>
-                    </TextBlock>
-                </controls:CustomHyperlinkButton>
+                </TextBox>
             </StackPanel>
         </Grid>
     </Grid>

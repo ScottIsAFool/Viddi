@@ -1,5 +1,4 @@
-﻿using System;
-using Cimbalino.Toolkit.Services;
+﻿using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Common;
 using Viddy.Services;
@@ -9,12 +8,12 @@ using VidMePortable.Model;
 
 namespace Viddy.ViewModel.Account
 {
-    public class ManualLoginViewModel : ViewModelBase
+    public class CreateAccountViewModel : ViewModelBase
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
 
-        public ManualLoginViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
+        public CreateAccountViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
         {
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
@@ -22,69 +21,58 @@ namespace Viddy.ViewModel.Account
 
         public string Username { get; set; }
         public string Password { get; set; }
+        public string EmailAddress { get; set; }
 
-        public bool CanSignIn
+        public bool CanCreateAccount
         {
             get
             {
-                return !string.IsNullOrEmpty(Username)
-                       && !string.IsNullOrEmpty(Password)
-                       && !ProgressIsVisible;
+                return !ProgressIsVisible
+                       && !string.IsNullOrEmpty(Username)
+                       && !string.IsNullOrEmpty(Password);
             }
         }
 
-        public RelayCommand SignInCommand
+        public RelayCommand CreateAccountCommand
         {
             get
             {
                 return new RelayCommand(async () =>
                 {
-                    if (!CanSignIn)
+                    if (!CanCreateAccount)
                     {
                         return;
                     }
 
                     try
                     {
-                        SetProgressBar("Signing in...");
-                        var response = await _vidMeClient.AuthenticateAsync(Username, Password);
+                        SetProgressBar("Creating user...");
+
+                        var response = await _vidMeClient.CreateUserAsync(Username, Password, EmailAddress);
 
                         AuthenticationService.Current.SetAuthenticationInfo(response);
 
                         _navigationService.Navigate<AccountView>(new NavigationParameters {ClearBackstack = true});
 
-                        Username = Password = string.Empty;
+                        Username = Password = EmailAddress = string.Empty;
                     }
-                    catch (VidMeException vex)
+                    catch (VidMeException ex)
                     {
-                        if (vex.Error.Code == "invalid_password")
+                        if (ex.Error.Code == "used_username")
                         {
-                            // TODO: Display error message
+                            // TODO: Display an error 
                         }
                     }
-                    catch (Exception ex)
-                    {
-
-                    }
-
 
                     SetProgressBar();
                 });
             }
         }
 
-        public RelayCommand NavigateToCreateAccountCommand
-        {
-            get
-            {
-                return new RelayCommand(() => _navigationService.Navigate<CreateAccountView>());
-            }
-        }
-
         public override void UpdateProperties()
         {
             base.UpdateProperties();
-            RaisePropertyChanged(() => CanSignIn);
+            RaisePropertyChanged(() => CanCreateAccount);
         }
     }
 }
