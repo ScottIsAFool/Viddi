@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Pickers;
@@ -43,17 +44,18 @@ namespace Viddy.ViewModel
                 CanTurnOnFlash = true;
                 HasFrontFacingCamera = true;
             }
-            else
-            {
-                // Code runs "for real"
-            }
+
+            _cameraInfo.IsInitialisedChanged += CameraInfoOnIsInitialisedChanged;            
         }
 
-        private async Task SetDeviceOptions()
+        private async void CameraInfoOnIsInitialisedChanged(object sender, EventArgs eventArgs)
         {
-            await _cameraInfo.StartService();
-            CanTurnOnFlash = await _cameraInfo.HasFlash();
-            HasFrontFacingCamera = await _cameraInfo.HasFrontFacingCamera();
+            if (_cameraInfo.IsInitialised)
+            {
+                _cameraInfo.IsInitialisedChanged -= CameraInfoOnIsInitialisedChanged;
+                CanTurnOnFlash = await _cameraInfo.HasFlash();
+                HasFrontFacingCamera = await _cameraInfo.HasFrontFacingCamera();
+            }
         }
 
         public AvatarViewModel Avatar { get; set; }
@@ -66,7 +68,6 @@ namespace Viddy.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    SetDeviceOptions();
                 });
             }
         }

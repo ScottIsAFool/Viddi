@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using System.IO;
 using System.Threading.Tasks;
 using Windows.Graphics.Display;
@@ -11,6 +12,8 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
+using Cimbalino.Toolkit.Services;
+using GalaSoft.MvvmLight.Ioc;
 using Viddy.ViewModel;
 
 namespace Viddy.Views
@@ -20,10 +23,12 @@ namespace Viddy.Views
     /// </summary>
     public sealed partial class VideoRecordView
     {
-        private MediaCapture _mediaCapture;
         private DisplayRequest _displayRequest;
         private bool _isRecording;
         private readonly DisplayInformation _display;
+        private readonly DispatcherTimer _recordingTimer;
+        private readonly ICameraInfoService _cameraInfoService;
+        private TimeSpan _recordedDuration;
 
         protected override ApplicationViewBoundsMode Mode
         {
@@ -58,6 +63,23 @@ namespace Viddy.Views
 
             FlashViewbox.DataContext = this;
             FrontFacingViewbox.DataContext = this;
+
+            _recordingTimer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(1)};
+            _recordingTimer.Tick += RecordingTimerOnTick;
+
+            _cameraInfoService = SimpleIoc.Default.GetInstance<ICameraInfoService>();
+        }
+
+        private void RecordingTimerOnTick(object sender, object o)
+        {
+            if (_recordedDuration == TimeSpan.MinValue)
+            {
+                _recordedDuration = TimeSpan.FromSeconds(0);
+            }
+
+            _recordedDuration = _recordedDuration.Add(TimeSpan.FromSeconds(1));
+            var timeString = string.Format("{0:00}:{1:00}", _recordedDuration.Minutes, _recordedDuration.Seconds);
+            Debug.WriteLine(timeString);
         }
 
         private void DisplayOnOrientationChanged(DisplayInformation sender, object args)
@@ -88,25 +110,31 @@ namespace Viddy.Views
 
         private async Task StartPreview()
         {
-            if (_mediaCapture == null)
-            {
-                _mediaCapture = new MediaCapture();
-            }
-
             try
             {
-                await _mediaCapture.InitializeAsync();
+                if (!_cameraInfoService.IsInitialised)
+                {
+                    await _cameraInfoService.StartService();
+                }
             }
             catch { }
 
-            SetRotation(_display.CurrentOrientation);
+            if (!_cameraInfoService.IsInitialised)
+            {
+                // TODO: Display error
+                return;
+            }
 
-            CaptureElement.Source = _mediaCapture;
-            await _mediaCapture.StartPreviewAsync();
+            await _cameraInfoService.StartPreview(() =>
+            {
+                CaptureElement.Source = _cameraInfoService.MediaCapture;
+                SetRotation(_display.CurrentOrientation);
+            });
         }
 
         private void SetRotation(DisplayOrientations orientation)
         {
+            var mediaCapture = _cameraInfoService.MediaCapture;
             var rotation = VideoRotation.Clockwise90Degrees;
             if (orientation != _display.NativeOrientation)
             {
@@ -124,15 +152,15 @@ namespace Viddy.Views
                 }
             }
 
-            if (!string.IsNullOrEmpty(_mediaCapture.MediaCaptureSettings.VideoDeviceId) && !string.IsNullOrEmpty(_mediaCapture.MediaCaptureSettings.AudioDeviceId))
+            if (_cameraInfoService.IsInitialised && !string.IsNullOrEmpty(mediaCapture.MediaCaptureSettings.VideoDeviceId) && !string.IsNullOrEmpty(mediaCapture.MediaCaptureSettings.AudioDeviceId))
             {
                 //rotate the video feed according to the sensor
-                _mediaCapture.SetPreviewRotation(rotation);
-                _mediaCapture.SetRecordRotation(rotation);
+                mediaCapture.SetPreviewRotation(rotation);
+                mediaCapture.SetRecordRotation(rotation);
 
                 //hook into MediaCapture events
-                _mediaCapture.RecordLimitationExceeded += MediaCaptureOnRecordLimitationExceeded;
-                _mediaCapture.Failed += MediaCaptureOnFailed;
+                mediaCapture.RecordLimitationExceeded += MediaCaptureOnRecordLimitationExceeded;
+                mediaCapture.Failed += MediaCaptureOnFailed;
 
                 //device initialized successfully
             }
@@ -152,9 +180,10 @@ namespace Viddy.Views
             var i = 1;
         }
 
+        private string _fileName;
         private async void RecordButton_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            var fileName = string.Empty;
+            var mediaCapture = _cameraInfoService.MediaCapture;
             if (!_isRecording)
             {
                 _isRecording = true;
@@ -165,21 +194,24 @@ namespace Viddy.Views
 
                 _displayRequest.RequestActive();
 
-                fileName = string.Format("Viddy-{0}.mp4", DateTime.Now.ToString("yyyy-M-dd-HH-mm-ss"));
-                var folder = ApplicationData.Current.LocalFolder;
-                var file = await folder.CreateFileAsync(fileName, CreationCollisionOption.ReplaceExisting);
+                _fileName = string.Format("Viddy-{0}.mp4", DateTime.Now.ToString("yyyy-M-dd-HH-mm-ss"));
+                var folder = ApplicationData.Current.LocalCacheFolder;
+                var file = await folder.CreateFileAsync(_fileName, CreationCollisionOption.ReplaceExisting);
 
-                _mediaCapture.StartRecordToStorageFileAsync(new MediaEncodingProfile(), file);
+                mediaCapture.StartRecordToStorageFileAsync(MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto), file);
+                _recordingTimer.Start();
             }
             else
             {
+                _recordingTimer.Stop();
                 _isRecording = false;
                 _displayRequest.RequestRelease();
                 _displayRequest = null;
+                _recordedDuration = TimeSpan.MinValue;
 
-                await _mediaCapture.StopRecordAsync();
+                await mediaCapture.StopRecordAsync();
 
-                if (string.IsNullOrEmpty(fileName))
+                if (string.IsNullOrEmpty(_fileName))
                 {
                     return;
                 }
@@ -187,16 +219,18 @@ namespace Viddy.Views
                 var folder = ApplicationData.Current.LocalCacheFolder;
                 try
                 {
-                    var file = await folder.GetFileAsync(fileName);
+                    var file = await folder.GetFileAsync(_fileName);
                     if (file != null)
                     {
-                        var cameraRoll = await KnownFolders.PicturesLibrary.GetFolderAsync("Camera Roll");
-                        var copiedFile = await file.CopyAsync(cameraRoll);
+                        var cameraRoll = KnownFolders.CameraRoll;
+                        await file.MoveAsync(cameraRoll);
+
+                        var movedFile = await cameraRoll.GetFileAsync(_fileName);
 
                         var vm = DataContext as VideoRecordViewModel;
                         if (vm != null)
                         {
-                            vm.FinishedRecording(file);
+                            vm.FinishedRecording(movedFile);
                         }
                     }
                 }
@@ -205,12 +239,6 @@ namespace Viddy.Views
                     
                 }
             }
-        }
-
-        protected override void InitialiseOnBack()
-        {
-            base.InitialiseOnBack();
-            StartPreview();
         }
 
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
@@ -222,31 +250,28 @@ namespace Viddy.Views
 
         private void StopVideo()
         {
-
+            
             if (_displayRequest != null && _isRecording)
             {
                 _displayRequest.RequestRelease();
                 _displayRequest = null;
             }
 
-            if (_mediaCapture == null)
+            if (!_cameraInfoService.IsInitialised)
             {
                 return;
             }
 
             try
             {
-                _mediaCapture.StopPreviewAsync();
-
                 if (_isRecording)
                 {
-                    _mediaCapture.StopRecordAsync();
+                    _cameraInfoService.MediaCapture.StopRecordAsync();
                 }
 
                 CaptureElement.Source = null;
 
-                _mediaCapture.Dispose();
-                _mediaCapture = null;
+                _cameraInfoService.DisposeMediaCapture();
             }
             catch { }
         }

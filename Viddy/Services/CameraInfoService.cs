@@ -27,7 +27,6 @@ namespace Cimbalino.Toolkit.Services
         public CameraInfoService()
         {
             _captureManager = new MediaCapture();
-            _captureManager.InitializeAsync();
         }
         internal enum CameraType
         {
@@ -49,7 +48,75 @@ namespace Cimbalino.Toolkit.Services
             var device = _deviceCollection.FirstOrDefault(x => x.EnclosureLocation != null && x.EnclosureLocation.Panel == panel);
             return device != null;
         }
+
+        public MediaCapture MediaCapture
+        {
+            get { return _captureManager; }
+        }
+
+        public bool IsInitialised { get; private set; }
+
+        private bool _previewStarted;
+        public async Task StartPreview(Action preStart = null)
+        {
+            if (_captureManager == null)
+            {
+                _captureManager = new MediaCapture();
+            }
+
+            if (IsInitialised)
+            {
+                if (preStart != null)
+                {
+                    preStart();
+                }
+
+                await _captureManager.StartPreviewAsync();
+                _previewStarted = true;
+            }
+        }
+
+        public async Task StopPreview()
+        {
+            if (_captureManager == null)
+            {
+                return;
+            }
+
+            if (_previewStarted)
+            {
+                await _captureManager.StopPreviewAsync();
+                _previewStarted = false;
+            }
+        }
+
+        public event EventHandler IsInitialisedChanged;
+
+        public async Task DisposeMediaCapture()
+        {
+            if (_captureManager == null)
+            {
+                return;
+            }
+
+            await StopPreview();
+
+            _captureManager.Dispose();
+            _captureManager = null;
+            IsInitialised = false;
+            InitialisedChanged();
+        }
+
+        private void InitialisedChanged()
+        {
+            var changed = IsInitialisedChanged;
+            if (changed != null)
+            {
+                changed(this, EventArgs.Empty);
+            }
+        }
 #endif
+
 
 
         public async Task StartService()
@@ -57,7 +124,17 @@ namespace Cimbalino.Toolkit.Services
 #if !WINDOWS_PHONE
             try
             {
-                await _captureManager.InitializeAsync();
+                if (_captureManager == null)
+                {
+                    _captureManager = new MediaCapture();
+                }
+
+                if (!IsInitialised)
+                {
+                    IsInitialised = true;
+                    await _captureManager.InitializeAsync();
+                    InitialisedChanged();
+                }
             }
             catch { }
 #endif
