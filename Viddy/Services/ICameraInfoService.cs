@@ -19,7 +19,7 @@ namespace Cimbalino.Toolkit.Services
         MediaCapture MediaCapture { get; }
         bool IsInitialised { get; }
         Task DisposeMediaCapture();
-        Task StartPreview(Action preStart = null);
+        Task StartPreview(Task preStart = null);
         Task StopPreview();
         event EventHandler IsInitialisedChanged;
 #endif

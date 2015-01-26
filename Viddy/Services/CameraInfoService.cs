@@ -64,7 +64,7 @@ namespace Cimbalino.Toolkit.Services
         public bool IsInitialised { get; private set; }
 
         private bool _previewStarted;
-        public async Task StartPreview(Action preStart = null)
+        public async Task StartPreview(Task preStart = null)
         {
             if (_captureManager == null)
             {
@@ -75,7 +75,7 @@ namespace Cimbalino.Toolkit.Services
             {
                 if (preStart != null)
                 {
-                    preStart();
+                    await preStart;
                 }
 
                 await _captureManager.StartPreviewAsync();

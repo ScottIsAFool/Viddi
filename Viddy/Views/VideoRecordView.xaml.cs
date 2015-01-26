@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using Windows.Graphics.Display;
 using Windows.Media.Capture;
@@ -126,14 +127,23 @@ namespace Viddy.Views
                 return;
             }
 
-            await _cameraInfoService.StartPreview(() =>
-            {
-                CaptureElement.Source = _cameraInfoService.MediaCapture;
-                SetRotation(_display.CurrentOrientation);
-            });
+            await _cameraInfoService.StartPreview(PrePreviewTask());
         }
 
-        private void SetRotation(DisplayOrientations orientation)
+        private async Task PrePreviewTask()
+        {
+            var mediaCapture = _cameraInfoService.MediaCapture;
+
+            var previewResolutions = mediaCapture.VideoDeviceController.GetAvailableMediaStreamProperties(MediaStreamType.VideoPreview).ToList();
+            var recordingResolutions = mediaCapture.VideoDeviceController.GetAvailableMediaStreamProperties(MediaStreamType.VideoRecord).ToList();
+            await mediaCapture.VideoDeviceController.SetMediaStreamPropertiesAsync(MediaStreamType.VideoPreview, previewResolutions.FirstOrDefault());
+            await mediaCapture.VideoDeviceController.SetMediaStreamPropertiesAsync(MediaStreamType.VideoRecord, recordingResolutions.FirstOrDefault());
+
+            CaptureElement.Source = _cameraInfoService.MediaCapture;
+            SetRotation(_display.CurrentOrientation);
+        }
+
+        private async void SetRotation(DisplayOrientations orientation)
         {
             var mediaCapture = _cameraInfoService.MediaCapture;
             var rotation = VideoRotation.Clockwise90Degrees;
