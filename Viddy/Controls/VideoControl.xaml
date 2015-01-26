@@ -27,19 +27,21 @@
                        VerticalAlignment="Center" />
                 <Border Height="200"
                         Background="#34000000" />
-                
+
                 <Border Background="{ThemeResource NsfwBackgroundBrush}"
                         VerticalAlignment="Top"
                         HorizontalAlignment="Left"
                         Padding="5,3"
                         Visibility="{Binding Video.Nsfw, Converter={StaticResource VisibilityConverter}}">
                     <TextBlock Text="NSFW"
-                               Foreground="White"/>
+                               Foreground="White" />
                 </Border>
-                
+
                 <Border Padding="5,3"
                         VerticalAlignment="Top"
-                        HorizontalAlignment="Right" Background="#66000000">
+                        HorizontalAlignment="Right"
+                        Background="#66000000"
+                        Visibility="{Binding DisplayDuration, Converter={StaticResource VisibilityConverter}}">
                     <TextBlock Text="{Binding VideoLength}"
                                Foreground="White" />
                 </Border>

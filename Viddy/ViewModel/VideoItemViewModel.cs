@@ -36,6 +36,11 @@ namespace Viddy.ViewModel
             }
         }
 
+        public bool DisplayDuration
+        {
+            get { return Video != null && !Video.Duration.HasValue; }
+        }
+
         public string VideoLength
         {
             get
