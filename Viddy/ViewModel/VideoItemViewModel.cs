@@ -23,9 +23,9 @@ namespace Viddy.ViewModel
             get
             {
                 return Video != null
-                       && AuthenticationService.Current.IsLoggedIn
-                       && AuthenticationService.Current.LoggedInUserId == Video.UserId
-                       && VideoIsAnonymousButOwned();
+                       && (AuthenticationService.Current.IsLoggedIn
+                       && AuthenticationService.Current.LoggedInUserId == Video.UserId)
+                       || VideoIsAnonymousButOwned();
             }
         }
 
@@ -56,7 +56,7 @@ namespace Viddy.ViewModel
         private bool VideoIsAnonymousButOwned()
         {
             // This means it's an anonymous video
-            return string.IsNullOrEmpty(Video.UserId) && _settingsService.Local.Contains(Video.VideoId);
+            return string.IsNullOrEmpty(Video.UserId) && _settingsService.Roaming.Contains(Utils.GetAnonVideoKeyName(Video.VideoId));
         }
     }
 }

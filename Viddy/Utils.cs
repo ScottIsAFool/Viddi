@@ -68,5 +68,9 @@ namespace Viddy
             get { return _info ?? (_info = new EasClientDeviceInformation()); }
         }
 
+        public static string GetAnonVideoKeyName(string videoId)
+        {
+            return string.Format("{0}-{1}", UniqueDeviceIdentifier, videoId);
+        }
     }
 }

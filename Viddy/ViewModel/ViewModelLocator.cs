@@ -98,6 +98,11 @@ namespace Viddy.ViewModel
             get { return ServiceLocator.Current.GetInstance<ProfileViewModel>(); }
         }
 
+        public AddAppViewModel AddApp
+        {
+            get { return ServiceLocator.Current.GetInstance<AddAppViewModel>(); }
+        }
+
         public AuthenticationService Auth
         {
             get { return ServiceLocator.Current.GetInstance<AuthenticationService>(); }

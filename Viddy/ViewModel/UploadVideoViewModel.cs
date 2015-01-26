@@ -5,10 +5,11 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Common;
+using Viddy.Extensions;
+using Viddy.Services;
 using Viddy.Views;
 using VidMePortable;
 using VidMePortable.Model.Requests;
-using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel
 {
@@ -16,11 +17,13 @@ namespace Viddy.ViewModel
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
+        private readonly IApplicationSettingsService _applicationSettings;
 
-        public UploadVideoViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
+        public UploadVideoViewModel(INavigationService navigationService, IVidMeClient vidMeClient, IApplicationSettingsService applicationSettings)
         {
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
+            _applicationSettings = applicationSettings;
         }
 
         public StorageFile File { get; set; }
@@ -83,7 +86,12 @@ namespace Viddy.ViewModel
                             var video = await _vidMeClient.UploadVideoAsync(request.Code, File.ContentType, File.Name, stream.AsStream());
                             if (video != null)
                             {
-
+                                if (!AuthenticationService.Current.IsLoggedIn)
+                                {
+                                    // We need to save the token that comes back so we can use it to delete anonymous videos
+                                    var key = Utils.GetAnonVideoKeyName(video.Id);
+                                    _applicationSettings.Roaming.SetS(key, request.AccessToken);
+                                }
                             }
                         }
                     }
