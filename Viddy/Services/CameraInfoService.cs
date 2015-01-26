@@ -198,7 +198,8 @@ namespace Cimbalino.Toolkit.Services
 #else
             return _captureManager.VideoDeviceController != null
                    && _captureManager.VideoDeviceController.FlashControl != null
-                   && _captureManager.VideoDeviceController.FlashControl.Supported;
+                   && _captureManager.VideoDeviceController.FlashControl.Supported
+                   && _captureManager.VideoDeviceController.FlashControl.PowerSupported;
 #endif
         }
 

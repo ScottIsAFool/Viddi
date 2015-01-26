@@ -134,10 +134,14 @@ namespace Viddy.Views
         {
             var mediaCapture = _cameraInfoService.MediaCapture;
 
-            var previewResolutions = mediaCapture.VideoDeviceController.GetAvailableMediaStreamProperties(MediaStreamType.VideoPreview).ToList();
-            var recordingResolutions = mediaCapture.VideoDeviceController.GetAvailableMediaStreamProperties(MediaStreamType.VideoRecord).ToList();
-            await mediaCapture.VideoDeviceController.SetMediaStreamPropertiesAsync(MediaStreamType.VideoPreview, previewResolutions.FirstOrDefault());
-            await mediaCapture.VideoDeviceController.SetMediaStreamPropertiesAsync(MediaStreamType.VideoRecord, recordingResolutions.FirstOrDefault());
+            var previewResolutions = mediaCapture.VideoDeviceController.GetAvailableMediaStreamProperties(MediaStreamType.VideoPreview).Cast<VideoEncodingProperties>().ToList();
+            var recordingResolutions = mediaCapture.VideoDeviceController.GetAvailableMediaStreamProperties(MediaStreamType.VideoRecord).Cast<VideoEncodingProperties>().ToList();
+
+            var highestPreviewRes = previewResolutions.FirstOrDefault(y => y.Height <= 720);
+            var highestRecordingRes = recordingResolutions.FirstOrDefault(y => y.Height <= 720);
+
+            await mediaCapture.VideoDeviceController.SetMediaStreamPropertiesAsync(MediaStreamType.VideoPreview, highestPreviewRes);
+            await mediaCapture.VideoDeviceController.SetMediaStreamPropertiesAsync(MediaStreamType.VideoRecord, highestRecordingRes);
 
             CaptureElement.Source = _cameraInfoService.MediaCapture;
             SetRotation(_display.CurrentOrientation);
@@ -147,18 +151,18 @@ namespace Viddy.Views
         {
             var mediaCapture = _cameraInfoService.MediaCapture;
             var rotation = VideoRotation.Clockwise90Degrees;
-            if (orientation != _display.NativeOrientation)
+            if (orientation != _display.NativeOrientation || IsFrontFacing)
             {
                 switch (orientation)
                 {
                     case DisplayOrientations.Landscape:
-                        rotation = VideoRotation.Clockwise270Degrees;
+                        rotation = IsFrontFacing ? VideoRotation.None : VideoRotation.Clockwise270Degrees;
                         break;
                     case DisplayOrientations.LandscapeFlipped:
                         rotation = VideoRotation.Clockwise180Degrees;
                         break;
                     default:
-                        rotation = VideoRotation.Clockwise180Degrees;
+                        rotation = IsFrontFacing ? VideoRotation.Clockwise270Degrees : VideoRotation.Clockwise180Degrees;
                         break;
                 }
             }
@@ -290,11 +294,31 @@ namespace Viddy.Views
         private void FlashButton_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             FlashOn = !FlashOn;
+            TurnFlashOnOrOff(FlashOn);
         }
 
-        private void FrontFacingButton_OnTapped(object sender, TappedRoutedEventArgs e)
+        private async void FrontFacingButton_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             IsFrontFacing = !IsFrontFacing;
+            await _cameraInfoService.DisposeMediaCapture();
+            await StartPreview();
+        }
+
+        private void TurnFlashOnOrOff(bool turnFlashOn)
+        {
+            if (!_cameraInfoService.IsInitialised)
+            {
+                return;
+            }
+
+            var torch = _cameraInfoService.MediaCapture.VideoDeviceController.TorchControl;
+            if (!torch.PowerSupported)
+            {
+                return;
+            }
+
+            torch.PowerPercent = turnFlashOn ? 100 : 0;
+            torch.Enabled = turnFlashOn;
         }
     }
 }
