@@ -14,7 +14,11 @@ namespace Cimbalino.Toolkit.Services
 {
     public class CameraInfoService : ICameraInfoService
     {
-
+        public enum CameraType
+        {
+            FrontFacing,
+            Primary
+        };
 #if WINDOWS_PHONE
         public IReadOnlyList<FlashState> GetAvailableFlashStates()
         {
@@ -28,15 +32,17 @@ namespace Cimbalino.Toolkit.Services
         {
             _captureManager = new MediaCapture();
         }
-        internal enum CameraType
-        {
-            FrontFacing,
-            Primary
-        };
+        
         private static DeviceInformationCollection _deviceCollection;
         private static MediaCapture _captureManager;
 
-        private static async Task<bool> HasCameraType(CameraType cameraType)
+        private async Task<bool> HasCameraType(CameraType cameraType)
+        {
+            var device = await GetDevice(cameraType);
+            return device != null;
+        }
+
+        public async Task<DeviceInformation> GetDevice(CameraType cameraType)
         {
             if (_deviceCollection == null)
             {
@@ -46,7 +52,8 @@ namespace Cimbalino.Toolkit.Services
             var panel = cameraType == CameraType.FrontFacing ? Panel.Front : Panel.Back;
 
             var device = _deviceCollection.FirstOrDefault(x => x.EnclosureLocation != null && x.EnclosureLocation.Panel == panel);
-            return device != null;
+
+            return device;
         }
 
         public MediaCapture MediaCapture
@@ -115,11 +122,22 @@ namespace Cimbalino.Toolkit.Services
                 changed(this, EventArgs.Empty);
             }
         }
+
+        public async Task StartService(CameraType cameraType = CameraType.Primary)
+        {
+            var device = await GetDevice(cameraType);
+            if (device == null)
+            {
+                await StartService(null);
+            }
+            else
+            {
+                await StartService(new MediaCaptureInitializationSettings {VideoDeviceId = device.Id});
+            }
+        }
 #endif
-
-
-
-        public async Task StartService()
+       
+        public async Task StartService(MediaCaptureInitializationSettings settings)
         {
 #if !WINDOWS_PHONE
             try
@@ -132,7 +150,22 @@ namespace Cimbalino.Toolkit.Services
                 if (!IsInitialised)
                 {
                     IsInitialised = true;
-                    await _captureManager.InitializeAsync();
+                    if (settings == null)
+                    {
+                        var device = await GetDevice(CameraType.Primary);
+                        if (device != null)
+                        {
+                            await _captureManager.InitializeAsync(new MediaCaptureInitializationSettings {VideoDeviceId = device.Id});
+                        }
+                        else
+                        {
+                            await _captureManager.InitializeAsync();
+                        }
+                    }
+                    else
+                    {
+                        await _captureManager.InitializeAsync(settings);
+                    }
                     InitialisedChanged();
                 }
             }

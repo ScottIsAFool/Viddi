@@ -114,7 +114,8 @@ namespace Viddy.Views
             {
                 if (!_cameraInfoService.IsInitialised)
                 {
-                    await _cameraInfoService.StartService();
+                    var cameraType = IsFrontFacing ? CameraInfoService.CameraType.FrontFacing : CameraInfoService.CameraType.Primary;
+                    await _cameraInfoService.StartService(cameraType);
                 }
             }
             catch { }
