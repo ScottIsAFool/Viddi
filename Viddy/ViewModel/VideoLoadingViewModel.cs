@@ -90,7 +90,7 @@ namespace Viddy.ViewModel
                     Videos = new ObservableCollection<VideoItemViewModel>();
                 }
 
-                foreach (var video in response.Videos.Select(x => new VideoItemViewModel(x)))
+                foreach (var video in response.Videos.Select(x => new VideoItemViewModel(x, this)))
                 {
                     Videos.Add(video);
                 }

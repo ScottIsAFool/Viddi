@@ -78,42 +78,6 @@ namespace Viddy.ViewModel.Account
             }
         }
 
-        public RelayCommand<VideoItemViewModel> DeleteCommand
-        {
-            get
-            {
-                return new RelayCommand<VideoItemViewModel>(async video =>
-                {
-                    if (video == null || video.Video == null || !video.CanDelete)
-                    {
-                        return;
-                    }
-
-                    try
-                    {
-                        if (AuthenticationService.Current.IsLoggedIn)
-                        {
-                            if (await _vidMeClient.DeleteVideoAsync(video.Video.VideoId))
-                            {
-                                Videos.Remove(video);
-                            }
-                        }
-                        else
-                        {
-                            if (await _vidMeClient.DeleteAnonymousVideoAsync(video.Video.VideoId, ""))
-                            {
-                                Videos.Remove(video);
-                            }
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        
-                    }
-                });
-            }
-        }
-
         public RelayCommand NavigateToSettingsCommand
         {
             get

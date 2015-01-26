@@ -1,17 +1,24 @@
 ﻿using System;
 using Cimbalino.Toolkit.Services;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
+using Viddy.Extensions;
 using Viddy.Services;
+using VidMePortable;
 using VidMePortable.Model;
 
 namespace Viddy.ViewModel
 {
     public class VideoItemViewModel : ViewModelBase
     {
+        private readonly IVidMeClient _vidMeClient;
+        private readonly VideoLoadingViewModel _videoLoadingViewModel;
         private readonly IApplicationSettingsService _settingsService;
 
-        public VideoItemViewModel(Video video)
+        public VideoItemViewModel(Video video, VideoLoadingViewModel videoLoadingViewModel)
         {
+            _vidMeClient = SimpleIoc.Default.GetInstance<IVidMeClient>();
+            _videoLoadingViewModel = videoLoadingViewModel;
             Video = video;
             _settingsService = SimpleIoc.Default.GetInstance<IApplicationSettingsService>();
         }
@@ -50,6 +57,48 @@ namespace Viddy.ViewModel
                 }
 
                 return string.Format("{0:0}:{1:00}", ts.Minutes, ts.Seconds);
+            }
+        }
+
+        public RelayCommand DeleteCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    if (Video == null || !CanDelete)
+                    {
+                        return;
+                    }
+
+                    try
+                    {
+                        if (AuthenticationService.Current.IsLoggedIn)
+                        {
+                            if (await _vidMeClient.DeleteVideoAsync(Video.VideoId))
+                            {
+                                _videoLoadingViewModel.Videos.Remove(this);
+                            }
+                        }
+                        else
+                        {
+                            var key = Utils.GetAnonVideoKeyName(Video.VideoId);
+                            var auth = _settingsService.Roaming.GetS<Auth>(key);
+
+                            if (auth != null)
+                            {
+                                if (await _vidMeClient.DeleteAnonymousVideoAsync(Video.VideoId, auth.Token))
+                                {
+                                    _videoLoadingViewModel.Videos.Remove(this);
+                                }
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+                });
             }
         }
 
