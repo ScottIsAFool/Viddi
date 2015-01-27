@@ -112,10 +112,17 @@
                            Fill="Red"
                            Height="200"/>
             </DataTemplate>
-            
+
+            <DataTemplate x:Key="AdTemplate">
+                <Rectangle Stretch="UniformToFill"
+                           Fill="SkyBlue"
+                           Height="200" />
+            </DataTemplate>
+
             <controls:VideoItemTypeDataTemplateSelector x:Key="VideoTemplateSelector"
                                                         NormalTemplate="{StaticResource VideoTemplate}"
-                                                        ReviewTemplate="{StaticResource ReviewTemplate}"/>
+                                                        ReviewTemplate="{StaticResource ReviewTemplate}"
+                                                        AdTemplate="{StaticResource AdTemplate}"/>
         </ResourceDictionary>
         
     </Application.Resources>

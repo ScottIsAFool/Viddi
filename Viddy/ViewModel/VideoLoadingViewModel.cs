@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -93,14 +91,16 @@ namespace Viddy.ViewModel
                     Videos = new ObservableCollection<IListType>();
                 }
 
-                var allVideos = response.Videos.Select(x => new VideoItemViewModel(x, this)).Cast<IListType>().ToList().AddEveryOften(10, 2, new ReviewViewModel());
+                var allVideos = response.Videos.Select(x => new VideoItemViewModel(x, this)).ToList();
 
-                //Videos.AddRange();
-
-                foreach (var video in allVideos)
+                if (IncludeReviewsInFeed() && !allVideos.IsNullOrEmpty())
                 {
-                    Videos.Add(video);
+                    allVideos.AddEveryOften(10, 2, new ReviewViewModel());
                 }
+
+                //allVideos.AddEveryOften(10, 2, new AdViewModel(), 5, true);
+
+                Videos.AddRange(allVideos);
 
                 IsEmpty = Videos.IsNullOrEmpty();
                 CanLoadMore = Videos.Count + 1 < response.Page.Total;
@@ -113,6 +113,11 @@ namespace Viddy.ViewModel
 
             IsLoadingMore = false;
             SetProgressBar();
+        }
+
+        protected virtual bool IncludeReviewsInFeed()
+        {
+            return false;
         }
     }
 }

@@ -7,8 +7,9 @@ namespace Viddy.Extensions
 {
     public static class ListTypeExtensions
     {
-        public static List<IListType> AddEveryOften(this List<IListType> list, int everyOften, int maxNumberToShow, IListType itemToAdd) 
+        public static List<IListType> AddEveryOften(this IEnumerable<IListType> collectionList, int everyOften, int maxNumberToShow, IListType itemToAdd, int startAt = 0, bool addAsFirstItem = false)
         {
+            var list = collectionList.ToList();
             if (list.IsNullOrEmpty())
             {
                 return new List<IListType>();
@@ -19,13 +20,15 @@ namespace Viddy.Extensions
 
             for (var i = 0; i < numberOfItemsToAdd; i++)
             {
-                var addAt = (i + 1) * everyOften;
+                var multiplyValue = addAsFirstItem && startAt > 0 ? i : i + 1;
+                var addAt = addAsFirstItem && i == 0 ? startAt : (multiplyValue * everyOften) + startAt;
                 if (addAt > list.Count)
                 {
                     break;
                 }
 
                 list.Insert(addAt, itemToAdd);
+
                 itemsAdded++;
                 if (itemsAdded == maxNumberToShow)
                 {
