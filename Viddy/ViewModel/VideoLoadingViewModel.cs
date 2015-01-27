@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Cimbalino.Toolkit.Extensions;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Extensions;
 using VidMePortable.Model.Responses;
@@ -13,7 +16,7 @@ namespace Viddy.ViewModel
         private bool _videosLoaded;
         public bool CanLoadMore { get; set; }
         public bool IsLoadingMore { get; set; }
-        public ObservableCollection<VideoItemViewModel> Videos { get; set; }
+        public ObservableCollection<IListType> Videos { get; set; }
         public bool IsEmpty { get; set; }
 
         public RelayCommand PageLoadedCommand
@@ -87,10 +90,14 @@ namespace Viddy.ViewModel
 
                 if (Videos == null || !add)
                 {
-                    Videos = new ObservableCollection<VideoItemViewModel>();
+                    Videos = new ObservableCollection<IListType>();
                 }
 
-                foreach (var video in response.Videos.Select(x => new VideoItemViewModel(x, this)))
+                var allVideos = response.Videos.Select(x => new VideoItemViewModel(x, this)).Cast<IListType>().ToList().AddEveryOften(10, 2, new ReviewViewModel());
+
+                //Videos.AddRange();
+
+                foreach (var video in allVideos)
                 {
                     Videos.Add(video);
                 }

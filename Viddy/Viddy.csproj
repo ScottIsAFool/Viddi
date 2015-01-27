@@ -109,10 +109,12 @@
     <Compile Include="Controls\VideoControl.xaml.cs">
       <DependentUpon>VideoControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\VideoItemTypeDataTemplateSelector.cs" />
     <Compile Include="Converters\ThumbnailConverter.cs" />
     <Compile Include="Extensions\ApplicationSettingsExtensions.cs" />
     <Compile Include="Extensions\ContainerExtensions.cs" />
     <Compile Include="Extensions\ListExtensions.cs" />
+    <Compile Include="Extensions\ListTypeExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="Helpers\NavigationHelper.cs" />
     <Compile Include="Logging\WinLogger.cs" />
@@ -134,6 +136,7 @@
     <Compile Include="ViewModel\Account\Manage\ManageAppsAccessViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\RevokeAppViewModel.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
+    <Compile Include="ViewModel\ReviewViewModel.cs" />
     <Compile Include="ViewModel\UploadVideoViewModel.cs" />
     <Compile Include="ViewModel\UserViewModel.cs" />
     <Compile Include="ViewModel\VideoItemViewModel.cs" />

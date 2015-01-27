@@ -9,7 +9,7 @@ using VidMePortable.Model;
 
 namespace Viddy.ViewModel
 {
-    public class VideoItemViewModel : ViewModelBase
+    public class VideoItemViewModel : ViewModelBase, IListType
     {
         private readonly IVidMeClient _vidMeClient;
         private readonly VideoLoadingViewModel _videoLoadingViewModel;
@@ -38,7 +38,7 @@ namespace Viddy.ViewModel
 
         public bool DisplayDuration
         {
-            get { return Video != null && !Video.Duration.HasValue; }
+            get { return Video != null && Video.Duration.HasValue; }
         }
 
         public string VideoLength
@@ -112,5 +112,19 @@ namespace Viddy.ViewModel
             // This means it's an anonymous video
             return string.IsNullOrEmpty(Video.UserId) && _settingsService.Roaming.Contains(Utils.GetAnonVideoKeyName(Video.VideoId));
         }
+
+        public ListType ListType { get { return ListType.Normal; } }
+    }
+
+    public interface IListType
+    {
+        ListType ListType { get; }
+    }
+
+    public enum ListType
+    {
+        Normal,
+        Review,
+        Ad
     }
 }

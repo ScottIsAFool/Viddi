@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using System.Diagnostics;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Viddy.Controls
@@ -57,6 +58,33 @@ namespace Viddy.Controls
         {
             get { return (Style) GetValue(InitialisingContentStyleProperty); }
             set { SetValue(InitialisingContentStyleProperty, value); }
+        }
+
+        public static readonly DependencyProperty ExtraContentProperty = DependencyProperty.Register(
+            "ExtraContent", typeof(DataTemplate), typeof(InitialisingListView), new PropertyMetadata(default(DataTemplate)));
+
+        public DataTemplate ExtraContent
+        {
+            get { return (DataTemplate)GetValue(ExtraContentProperty); }
+            set { SetValue(ExtraContentProperty, value); }
+        }
+
+        public static readonly DependencyProperty DisplayExtraContentProperty = DependencyProperty.Register(
+            "DisplayExtraContent", typeof (bool), typeof (InitialisingListView), new PropertyMetadata(default(bool)));
+
+        public bool DisplayExtraContent
+        {
+            get { return (bool) GetValue(DisplayExtraContentProperty); }
+            set { SetValue(DisplayExtraContentProperty, value); }
+        }
+
+        public static readonly DependencyProperty DisplayExtraContentFrequencyProperty = DependencyProperty.Register(
+            "DisplayExtraContentFrequency", typeof (int), typeof (InitialisingListView), new PropertyMetadata(default(int)));
+
+        public int DisplayExtraContentFrequency
+        {
+            get { return (int) GetValue(DisplayExtraContentFrequencyProperty); }
+            set { SetValue(DisplayExtraContentFrequencyProperty, value); }
         }
 
         public InitialisingListView()

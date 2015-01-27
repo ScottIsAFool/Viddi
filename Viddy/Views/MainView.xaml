@@ -65,7 +65,7 @@
             <controls:InitialisingListView ItemsSource="{Binding Videos}"
                                            IsEmpty="{Binding IsEmpty}"
                                            IsInitialising="{Binding ProgressIsVisible}"
-                                           ItemTemplate="{StaticResource VideoTemplate}">
+                                           ItemTemplateSelector="{StaticResource VideoTemplateSelector}">
                 <controls:InitialisingListView.EmptyContent>
                     <DataTemplate>
                         <Grid Margin="19,12,19,0">

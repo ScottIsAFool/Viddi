@@ -106,6 +106,16 @@
             <DataTemplate x:Key="VideoTemplate">
                 <controls:VideoControl />
             </DataTemplate>
+            
+            <DataTemplate x:Key="ReviewTemplate">
+                <Rectangle Stretch="UniformToFill"
+                           Fill="Red"
+                           Height="200"/>
+            </DataTemplate>
+            
+            <controls:VideoItemTypeDataTemplateSelector x:Key="VideoTemplateSelector"
+                                                        NormalTemplate="{StaticResource VideoTemplate}"
+                                                        ReviewTemplate="{StaticResource ReviewTemplate}"/>
         </ResourceDictionary>
         
     </Application.Resources>
