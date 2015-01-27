@@ -10,6 +10,8 @@
         {
             public const string AuthenticationSettings = "AuthenticationSettings";
             public const string WindowsPhoneDeviceIdSetting = "WindowsPhoneDeviceIdSetting";
+            public const string LaunchedCountSetting = "LaunchedCountSetting";
+            public const string PhoneAlreadyRespondedSetting = "PhoneAlreadyRespondedSetting";
         }
 
         public static class Messages

@@ -122,6 +122,7 @@
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\CameraInfoService.cs" />
     <Compile Include="Services\ICameraInfoService.cs" />
+    <Compile Include="Services\ReviewService.cs" />
     <Compile Include="Utils.cs" />
     <Compile Include="ViewModel\Account\AccountViewModel.cs" />
     <Compile Include="ViewModel\Account\AvatarViewModel.cs" />
@@ -131,6 +132,7 @@
     <Compile Include="ViewModel\Account\Manage\OwnedAppViewModel.cs" />
     <Compile Include="ViewModel\Account\ManualLoginViewModel.cs" />
     <Compile Include="ViewModel\Account\ProfileViewModel.cs" />
+    <Compile Include="ViewModel\AdViewModel.cs" />
     <Compile Include="ViewModel\EditVideoViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\ManageAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\ManageAppsAccessViewModel.cs" />

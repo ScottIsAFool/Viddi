@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Cimbalino.Toolkit.Extensions;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Extensions;
+using Viddy.Services;
 using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel
@@ -117,7 +118,7 @@ namespace Viddy.ViewModel
 
         protected virtual bool IncludeReviewsInFeed()
         {
-            return false;
+            return ReviewService.Current.CanShowReviews;
         }
     }
 }
