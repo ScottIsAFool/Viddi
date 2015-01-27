@@ -311,13 +311,9 @@ namespace Viddy.Views
                 return;
             }
 
-            var torch = _cameraInfoService.MediaCapture.VideoDeviceController.TorchControl;
-            if (!torch.PowerSupported)
-            {
-                return;
-            }
+            var mediaCapture = _cameraInfoService.MediaCapture;
 
-            torch.PowerPercent = turnFlashOn ? 100 : 0;
+            var torch = mediaCapture.VideoDeviceController.TorchControl;
             torch.Enabled = turnFlashOn;
         }
     }
