@@ -1,4 +1,5 @@
 ﻿using Cimbalino.Toolkit.Services;
+using Viddy.ViewModel;
 
 namespace Viddy.Services
 {
@@ -9,15 +10,19 @@ namespace Viddy.Services
 
         private int _runCount;
         private bool _alreadyResponded;
+        private readonly ReviewViewModel _reviewViewModel;
 
         public ReviewService(IApplicationSettingsService settingsService)
         {
+            _reviewViewModel = new ReviewViewModel();
             _settingsService = settingsService;
             Current = this;
 
             GetRunCount();
             GetAlreadyResponded();
         }
+
+        public ReviewViewModel ReviewViewModel { get { return _reviewViewModel; } }
 
         public void Responded()
         {

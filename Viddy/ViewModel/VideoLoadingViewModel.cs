@@ -96,7 +96,7 @@ namespace Viddy.ViewModel
 
                 if (IncludeReviewsInFeed() && !allVideos.IsNullOrEmpty())
                 {
-                    allVideos.AddEveryOften(10, 2, new ReviewViewModel());
+                    allVideos.AddEveryOften(10, 2, ReviewService.Current.ReviewViewModel);
                 }
 
                 //allVideos.AddEveryOften(10, 2, new AdViewModel(), 5, true);

@@ -15,14 +15,13 @@ using ThemeManagerRt;
 using Viddy.Extensions;
 using Viddy.ViewModel;
 using Viddy.Views;
-using Viddy.Views.Account;
 
 namespace Viddy
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public sealed partial class App : Application
+    public sealed partial class App
     {
         private TransitionCollection transitions;
 
@@ -37,8 +36,8 @@ namespace Viddy
         /// </summary>
         public App()
         {
-            this.InitializeComponent();
-            this.Suspending += this.OnSuspending;
+            InitializeComponent();
+            Suspending += OnSuspending;
             UnhandledException += OnUnhandledException;
         }
 
@@ -63,7 +62,7 @@ namespace Viddy
 #if DEBUG
             if (Debugger.IsAttached)
             {
-                this.DebugSettings.EnableFrameRateCounter = true;
+                DebugSettings.EnableFrameRateCounter = true;
             }
 #endif
 
@@ -71,6 +70,7 @@ namespace Viddy
             Frame rootFrame = Window.Current.Content as Frame;
 
             Locator.Auth.StartService();
+            Locator.Review.IncreaseCount();
 
             if (e.PreviousExecutionState == ApplicationExecutionState.Running
                 && rootFrame != null && rootFrame.Content != null)
@@ -105,15 +105,15 @@ namespace Viddy
                 // Removes the turnstile navigation for startup.
                 if (rootFrame.ContentTransitions != null)
                 {
-                    this.transitions = new TransitionCollection();
+                    transitions = new TransitionCollection();
                     foreach (var c in rootFrame.ContentTransitions)
                     {
-                        this.transitions.Add(c);
+                        transitions.Add(c);
                     }
                 }
 
                 rootFrame.ContentTransitions = null;
-                rootFrame.Navigated += this.RootFrame_FirstNavigated;
+                rootFrame.Navigated += RootFrame_FirstNavigated;
 
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
@@ -187,8 +187,8 @@ namespace Viddy
         private void RootFrame_FirstNavigated(object sender, NavigationEventArgs e)
         {
             var rootFrame = sender as Frame;
-            rootFrame.ContentTransitions = this.transitions ?? new TransitionCollection() { new NavigationThemeTransition() };
-            rootFrame.Navigated -= this.RootFrame_FirstNavigated;
+            rootFrame.ContentTransitions = transitions ?? new TransitionCollection() { new NavigationThemeTransition() };
+            rootFrame.Navigated -= RootFrame_FirstNavigated;
         }
 
         /// <summary>

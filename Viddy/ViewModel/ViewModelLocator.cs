@@ -114,6 +114,11 @@ namespace Viddy.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<AuthenticationService>(); }
         }
+
+        public ReviewService Review
+        {
+            get { return ServiceLocator.Current.GetInstance<ReviewService>(); }
+        }
         
         public static void Cleanup()
         {
