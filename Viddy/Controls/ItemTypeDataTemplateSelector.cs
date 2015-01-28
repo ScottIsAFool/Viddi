@@ -1,10 +1,11 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Viddy.Model;
 using Viddy.ViewModel;
 
 namespace Viddy.Controls
 {
-    public class VideoItemTypeDataTemplateSelector : DataTemplateSelector
+    public class ItemTypeDataTemplateSelector : DataTemplateSelector
     {
         public DataTemplate NormalTemplate { get; set; }
         public DataTemplate AdTemplate { get; set; }

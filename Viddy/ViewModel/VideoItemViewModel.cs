@@ -1,10 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Linq;
+using System.Threading.Tasks;
+using Cimbalino.Toolkit.Extensions;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Extensions;
 using Viddy.Messaging;
+using Viddy.Model;
 using Viddy.Services;
 using Viddy.Views;
 using VidMePortable;
@@ -19,6 +25,8 @@ namespace Viddy.ViewModel
         private readonly IApplicationSettingsService _settingsService;
         private readonly INavigationService _navigationService;
 
+        private bool _commentsLoaded;
+
         public VideoItemViewModel(Video video, VideoLoadingViewModel videoLoadingViewModel)
         {
             _vidMeClient = SimpleIoc.Default.GetInstance<IVidMeClient>();
@@ -29,6 +37,11 @@ namespace Viddy.ViewModel
         }
 
         public Video Video { get; set; }
+
+        public ObservableCollection<CommentViewModel> Comments { get; set; }
+        public bool IsEmpty { get; set; }
+        public bool CanLoadMore { get; set; }
+        public bool IsLoadingMore { get; set; }
 
         public bool CanDelete
         {
@@ -68,6 +81,11 @@ namespace Viddy.ViewModel
 
                 return string.Format("{0:0}:{1:00}", ts.Minutes, ts.Seconds);
             }
+        }
+
+        public int CommentCount
+        {
+            get { return Video != null ? Video.CommentCount : 0; }
         }
 
         public RelayCommand DeleteCommand
@@ -124,6 +142,34 @@ namespace Viddy.ViewModel
             }
         }
 
+        public RelayCommand RefreshCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    if (CommentCount > 0)
+                    {
+                        await LoadData(true);
+                    }
+                });
+            }
+        }
+
+        public RelayCommand LoadMoreCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    if (CommentCount > 0 && CanLoadMore)
+                    {
+                        await LoadData(false, true, Comments.Count);
+                    }
+                });
+            }
+        }
+
         private bool VideoIsAnonymousButOwned()
         {
             // This means it's an anonymous video
@@ -131,5 +177,42 @@ namespace Viddy.ViewModel
         }
 
         public ListType ListType { get { return ListType.Normal; } }
+
+        public async Task LoadData(bool isRefresh, bool add = false, int offset = 0)
+        {
+            if (_commentsLoaded && !isRefresh && !add)
+            {
+                return;
+            }
+
+            try
+            {
+                if (!add)
+                {
+                    SetProgressBar("Getting comments...");
+                }
+
+                IsLoadingMore = add;
+
+                var response = await _vidMeClient.GetCommentsAsync(Video.VideoId, SortDirection.Ascending);
+
+                if (Comments == null || !add)
+                {
+                    Comments = new ObservableCollection<CommentViewModel>();
+                }
+
+                Comments.AddRange(response.Select(x => new CommentViewModel(x, this)));
+
+                IsEmpty = Comments.IsNullOrEmpty();
+                _commentsLoaded = true;
+            }
+            catch (Exception ex)
+            {
+                
+            }
+
+            IsLoadingMore = false;
+            SetProgressBar();
+        }
     }
 }

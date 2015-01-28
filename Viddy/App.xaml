@@ -11,7 +11,7 @@
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Light">
                     <ResourceDictionary.MergedDictionaries>
-                        <ResourceDictionary Source="/Themes/LightGrey.xaml"/>
+                        <ResourceDictionary Source="/Themes/LightGrey.xaml" />
                     </ResourceDictionary.MergedDictionaries>
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
@@ -24,7 +24,7 @@
             <converters:BooleanToVisibilityConverter x:Key="InverseVisibilityConverter"
                                                      InvertValue="True" />
             <converters:NegativeBooleanConverter x:Key="NegativeBooleanConverter" />
-            <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter"/>
+            <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
 
             <themeManagerRt:ThemeManager x:Key="ThemeManager" />
 
@@ -97,19 +97,19 @@
             </Style>
             <Style TargetType="CommandBar">
                 <Setter Property="Background"
-                        Value="{ThemeResource AppBarBackgroundThemeBrush}"/>
+                        Value="{ThemeResource AppBarBackgroundThemeBrush}" />
                 <Setter Property="Foreground"
-                        Value="{ThemeResource AppBarItemForegroundThemeBrush}"/>
+                        Value="{ThemeResource AppBarItemForegroundThemeBrush}" />
             </Style>
 
             <DataTemplate x:Key="VideoTemplate">
                 <controls:VideoControl />
             </DataTemplate>
-            
+
             <DataTemplate x:Key="ReviewTemplate">
                 <Rectangle Stretch="UniformToFill"
                            Fill="Red"
-                           Height="200"/>
+                           Height="200" />
             </DataTemplate>
 
             <DataTemplate x:Key="AdTemplate">
@@ -117,12 +117,16 @@
                            Fill="SkyBlue"
                            Height="200" />
             </DataTemplate>
+            
+            <DataTemplate x:Key="CommentTemplate">
+                <controls:CommentControl/>
+            </DataTemplate>
 
-            <controls:VideoItemTypeDataTemplateSelector x:Key="VideoTemplateSelector"
-                                                        NormalTemplate="{StaticResource VideoTemplate}"
-                                                        ReviewTemplate="{StaticResource ReviewTemplate}"
-                                                        AdTemplate="{StaticResource AdTemplate}"/>
+            <controls:ItemTypeDataTemplateSelector x:Key="VideoTemplateSelector"
+                                                   NormalTemplate="{StaticResource VideoTemplate}"
+                                                   ReviewTemplate="{StaticResource ReviewTemplate}"
+                                                   AdTemplate="{StaticResource AdTemplate}" />
         </ResourceDictionary>
-        
+
     </Application.Resources>
 </Application>

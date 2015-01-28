@@ -112,7 +112,7 @@
     <Compile Include="Controls\VideoControl.xaml.cs">
       <DependentUpon>VideoControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\VideoItemTypeDataTemplateSelector.cs" />
+    <Compile Include="Controls\ItemTypeDataTemplateSelector.cs" />
     <Compile Include="Converters\ThumbnailConverter.cs" />
     <Compile Include="Extensions\ApplicationSettingsExtensions.cs" />
     <Compile Include="Extensions\ContainerExtensions.cs" />
@@ -142,8 +142,8 @@
     <Compile Include="ViewModel\Account\Manage\ManageAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\ManageAppsAccessViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\RevokeAppViewModel.cs" />
-    <Compile Include="ViewModel\IListType.cs" />
-    <Compile Include="ViewModel\ListType.cs" />
+    <Compile Include="Model\IListType.cs" />
+    <Compile Include="Model\ListType.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\ReviewViewModel.cs" />
     <Compile Include="ViewModel\UploadVideoViewModel.cs" />
@@ -356,9 +356,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ThemeManagerRt.1.0.1.2\lib\portable-win81+WindowsPhoneApp81\ThemeManagerRt.dll</HintPath>
     </Reference>
-    <Reference Include="VidMePortable, Version=0.0.0.11, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="VidMePortable, Version=0.0.0.12, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\VidMePortable.0.0.0.11-beta\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10\VidMePortable.dll</HintPath>
+      <HintPath>..\packages\VidMePortable.0.0.0.12-beta\lib\portable-net45+win+wpa81+wp80\VidMePortable.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

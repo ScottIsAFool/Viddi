@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Cimbalino.Toolkit.Extensions;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Extensions;
+using Viddy.Model;
 using Viddy.Services;
 using VidMePortable.Model.Responses;
 

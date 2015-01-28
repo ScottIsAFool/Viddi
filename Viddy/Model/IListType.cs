@@ -1,4 +1,4 @@
-﻿namespace Viddy.ViewModel
+﻿namespace Viddy.Model
 {
     public interface IListType
     {

@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using Viddy.Model;
 using Viddy.Services;
 
 namespace Viddy.ViewModel
