@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.Graphics.Display;
 using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
@@ -37,35 +38,35 @@ namespace Viddy.Views
         }
 
         public static readonly DependencyProperty FlashOnProperty = DependencyProperty.Register(
-            "FlashOn", typeof (bool), typeof (VideoRecordView), new PropertyMetadata(default(bool)));
+            "FlashOn", typeof(bool), typeof(VideoRecordView), new PropertyMetadata(default(bool)));
 
         public bool FlashOn
         {
-            get { return (bool) GetValue(FlashOnProperty); }
+            get { return (bool)GetValue(FlashOnProperty); }
             set { SetValue(FlashOnProperty, value); }
         }
 
         public static readonly DependencyProperty IsFrontFacingProperty = DependencyProperty.Register(
-            "IsFrontFacing", typeof (bool), typeof (VideoRecordView), new PropertyMetadata(default(bool)));
+            "IsFrontFacing", typeof(bool), typeof(VideoRecordView), new PropertyMetadata(default(bool)));
 
         public bool IsFrontFacing
         {
-            get { return (bool) GetValue(IsFrontFacingProperty); }
+            get { return (bool)GetValue(IsFrontFacingProperty); }
             set { SetValue(IsFrontFacingProperty, value); }
         }
-        
+
         public VideoRecordView()
         {
             InitializeComponent();
             _displayRequest = new DisplayRequest();
-            
+
             _display = DisplayInformation.GetForCurrentView();
             _display.OrientationChanged += DisplayOnOrientationChanged;
 
             FlashViewbox.DataContext = this;
             FrontFacingViewbox.DataContext = this;
 
-            _recordingTimer = new DispatcherTimer {Interval = TimeSpan.FromSeconds(1)};
+            _recordingTimer = new DispatcherTimer { Interval = TimeSpan.FromSeconds(1) };
             _recordingTimer.Tick += RecordingTimerOnTick;
 
             _cameraInfoService = SimpleIoc.Default.GetInstance<ICameraInfoService>();
@@ -119,7 +120,9 @@ namespace Viddy.Views
                     await _cameraInfoService.StartService(cameraType);
                 }
             }
-            catch { }
+            catch
+            {
+            }
 
             if (!_cameraInfoService.IsInitialised)
             {
@@ -171,7 +174,7 @@ namespace Viddy.Views
             {
                 //rotate the video feed according to the sensor
                 mediaCapture.SetPreviewRotation(rotation);
-                mediaCapture.SetRecordRotation(rotation);
+                //mediaCapture.SetRecordRotation(rotation);
 
                 //hook into MediaCapture events
                 mediaCapture.RecordLimitationExceeded += MediaCaptureOnRecordLimitationExceeded;
@@ -196,6 +199,7 @@ namespace Viddy.Views
         }
 
         private string _fileName;
+
         private async void RecordButton_OnTapped(object sender, TappedRoutedEventArgs e)
         {
             var mediaCapture = _cameraInfoService.MediaCapture;
@@ -213,7 +217,15 @@ namespace Viddy.Views
                 var folder = ApplicationData.Current.LocalCacheFolder;
                 var file = await folder.CreateFileAsync(_fileName, CreationCollisionOption.ReplaceExisting);
 
-                mediaCapture.StartRecordToStorageFileAsync(MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto), file);
+                var profile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);
+
+                var mfVideoRotationGuid = new Guid("C380465D-2271-428C-9B83-ECEA3B4A85C1"); // MF_MT_VIDEO_ROTATION in Mfapi.h
+                var rotation = _cameraInfoService.MediaCapture.GetPreviewRotation();
+                int mfVideoRotation = ConvertVideoRotationToMFRotation(rotation);
+
+                profile.Video.Properties.Add(mfVideoRotationGuid, PropertyValue.CreateInt32(mfVideoRotation));
+
+                mediaCapture.StartRecordToStorageFileAsync(profile, file);
                 _recordingTimer.Start();
             }
             else
@@ -251,7 +263,7 @@ namespace Viddy.Views
                 }
                 catch (FileNotFoundException)
                 {
-                    
+
                 }
             }
         }
@@ -265,7 +277,7 @@ namespace Viddy.Views
 
         private void StopVideo()
         {
-            
+
             if (_displayRequest != null && _isRecording)
             {
                 _displayRequest.RequestRelease();
@@ -288,7 +300,9 @@ namespace Viddy.Views
 
                 _cameraInfoService.DisposeMediaCapture();
             }
-            catch { }
+            catch
+            {
+            }
         }
 
         private void FlashButton_OnTapped(object sender, TappedRoutedEventArgs e)
@@ -315,6 +329,25 @@ namespace Viddy.Views
 
             var torch = mediaCapture.VideoDeviceController.TorchControl;
             torch.Enabled = turnFlashOn;
+        }
+
+        private int ConvertVideoRotationToMFRotation(VideoRotation rotation)
+        {
+            int MFVideoRotation = 0; // MFVideoRotationFormat::MFVideoRotationFormat_0 in Mfapi.h
+            switch (rotation)
+            {
+                case VideoRotation.Clockwise90Degrees:
+                    MFVideoRotation = 90; // MFVideoRotationFormat::MFVideoRotationFormat_90;
+                    break;
+                case VideoRotation.Clockwise180Degrees:
+                    MFVideoRotation = 180; // MFVideoRotationFormat::MFVideoRotationFormat_180;
+                    break;
+                case VideoRotation.Clockwise270Degrees:
+                    MFVideoRotation = 270; // MFVideoRotationFormat::MFVideoRotationFormat_270;
+                    break;
+            }
+
+            return MFVideoRotation;
         }
     }
 }

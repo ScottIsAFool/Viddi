@@ -1,7 +1,6 @@
 <Application x:Class="Viddy.App"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:local="using:Viddy"
              xmlns:converters="using:Cimbalino.Toolkit.Converters"
              xmlns:themeManagerRt="using:ThemeManagerRt"
              xmlns:localConverters="using:Viddy.Converters"
