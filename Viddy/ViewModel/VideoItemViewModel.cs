@@ -43,6 +43,11 @@ namespace Viddy.ViewModel
         public bool CanLoadMore { get; set; }
         public bool IsLoadingMore { get; set; }
 
+        public string Title
+        {
+            get { return Video != null && !string.IsNullOrEmpty(Video.Title) ? Video.Title : "Untitled"; }
+        }
+
         public bool CanDelete
         {
             get
@@ -194,16 +199,17 @@ namespace Viddy.ViewModel
 
                 IsLoadingMore = add;
 
-                var response = await _vidMeClient.GetCommentsAsync(Video.VideoId, SortDirection.Ascending);
+                var response = await _vidMeClient.GetCommentsAsync(Video.VideoId, SortDirection.Ascending, offset);
 
                 if (Comments == null || !add)
                 {
                     Comments = new ObservableCollection<CommentViewModel>();
                 }
 
-                Comments.AddRange(response.Select(x => new CommentViewModel(x, this)));
+                Comments.AddRange(response.Comments.Select(x => new CommentViewModel(x, this)));
 
                 IsEmpty = Comments.IsNullOrEmpty();
+                CanLoadMore = response.Page.Total > Comments.Count;
                 _commentsLoaded = true;
             }
             catch (Exception ex)

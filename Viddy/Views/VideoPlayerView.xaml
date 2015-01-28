@@ -4,11 +4,66 @@
                 xmlns:local="using:Viddy.Views"
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+                xmlns:behaviours="using:Viddy.Behaviours"
+                xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+                xmlns:controls="using:Viddy.Controls"
+                xmlns:playerFramework="using:Microsoft.PlayerFramework"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding VideoPlayer, Source={StaticResource Locator}}">
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
 
+        <Grid Background="{ThemeResource HeaderBrush}"
+              Height="80">
+            <Grid Margin="19,0">
+                <TextBlock VerticalAlignment="Center"
+                           Style="{StaticResource BodyTextBlockStyle}"
+                           Text="{Binding Video.Title}"
+                           TextTrimming="Clip" />
+            </Grid>
+        </Grid>
+
+        <controls:InitialisingListView Grid.Row="1">
+            <controls:InitialisingListView.HeaderTemplate>
+                <DataTemplate>
+                    <Grid>
+                        <Image Source="{Binding Video.Video.ThumbnailUrl}"
+                               Stretch="UniformToFill"
+                               VerticalAlignment="Center" />
+                        <playerFramework:MediaPlayer IsVolumeVisible="False"
+                                                     IsDurationVisible="False"
+                                                     IsTimeElapsedVisible="False"
+                                                     IsTimeRemainingVisible="False"
+                                                     IsTimelineVisible="False"
+                                                     IsPlayPauseVisible="True"
+                                                     MediaFailed="MediaPlayer_OnMediaFailed"
+                                                     IsFullScreenVisible="True"
+                                                     Source="{Binding Video.Video.CompleteUrl}">
+                            <!--<interactivity:Interaction.Behaviors>
+                            <behaviours:VideoStreamBehaviour File="{Binding File}"
+                                                             IsAutoPlay="True"
+                                                             IsStart="{Binding Play}"
+                                                             IsPause="{Binding Pause}"
+                                                             IsPlaying="{Binding IsPlaying, Mode=TwoWay}" />
+                        </interactivity:Interaction.Behaviors>-->
+                        </playerFramework:MediaPlayer>
+                    </Grid>
+                </DataTemplate>
+            </controls:InitialisingListView.HeaderTemplate>
+        </controls:InitialisingListView>
     </Grid>
 </local:BasePage>

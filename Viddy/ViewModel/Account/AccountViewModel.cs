@@ -168,7 +168,7 @@ namespace Viddy.ViewModel.Account
         public override Task<VideosResponse> GetVideos(int offset)
         {
             return AuthenticationService.Current.IsLoggedIn 
-                ? _vidMeClient.GetUserVideosAsync(AuthenticationService.Current.LoggedInUserId) 
+                ? _vidMeClient.GetUserVideosAsync(AuthenticationService.Current.LoggedInUserId, offset) 
                 : _vidMeClient.GetAnonymousVideosAsync();
         }
 

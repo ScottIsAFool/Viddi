@@ -9,5 +9,10 @@
         {
             InitializeComponent();
         }
+
+        private void MediaPlayer_OnMediaFailed(object sender, Windows.UI.Xaml.ExceptionRoutedEventArgs e)
+        {
+
+        }
     }
 }
