@@ -22,7 +22,7 @@ namespace Viddy.ViewModel
         {
             ServiceLocator.SetLocatorProvider(() => SimpleIoc.Default);
 
-            SimpleIoc.Default.RegisterIf<IVidMeClient>(() => new VidMeClient());
+            SimpleIoc.Default.RegisterIf<IVidMeClient, VidMeClient>();
             SimpleIoc.Default.RegisterIf<IApplicationSettingsService, ApplicationSettingsService>();
             SimpleIoc.Default.RegisterIf<AuthenticationService>(true);
             SimpleIoc.Default.RegisterIf<ReviewService>(true);
@@ -42,6 +42,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.Register<CreateAccountViewModel>();
             SimpleIoc.Default.Register<ProfileViewModel>(true);
             SimpleIoc.Default.Register<MainViewModel>();
+            SimpleIoc.Default.Register<VideoPlayerViewModel>(true);
         }
 
         public MainViewModel Main
@@ -102,6 +103,11 @@ namespace Viddy.ViewModel
         public AddAppViewModel AddApp
         {
             get { return ServiceLocator.Current.GetInstance<AddAppViewModel>(); }
+        }
+
+        public VideoPlayerViewModel VideoPlayer
+        {
+            get { return ServiceLocator.Current.GetInstance<VideoPlayerViewModel>(); }
         }
 
         public AuthenticationService Auth
