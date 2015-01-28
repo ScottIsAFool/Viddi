@@ -7,12 +7,12 @@
              mc:Ignorable="d"
              d:DesignHeight="300"
              d:DesignWidth="400"
-             d:DataContext="{Binding Account.Videos[0], Source={StaticResource Locator}}">
+             d:DataContext="{Binding VideoPlayer.Video, Source={StaticResource Locator}}">
 
     <Grid>
-        <local:CustomButton Style="{StaticResource EmptyButtonStyle}">
+        <local:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                            TapCommand="{Binding OpenVideoCommand}">
             <Grid Height="200"
-                  x:Name="ContainerGrid"
                   Holding="ContainerGrid_OnHolding">
                 <FlyoutBase.AttachedFlyout>
                     <MenuFlyout>

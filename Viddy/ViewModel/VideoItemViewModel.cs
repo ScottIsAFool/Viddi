@@ -2,8 +2,11 @@
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
 using Viddy.Extensions;
+using Viddy.Messaging;
 using Viddy.Services;
+using Viddy.Views;
 using VidMePortable;
 using VidMePortable.Model;
 
@@ -14,13 +17,15 @@ namespace Viddy.ViewModel
         private readonly IVidMeClient _vidMeClient;
         private readonly VideoLoadingViewModel _videoLoadingViewModel;
         private readonly IApplicationSettingsService _settingsService;
+        private readonly INavigationService _navigationService;
 
         public VideoItemViewModel(Video video, VideoLoadingViewModel videoLoadingViewModel)
         {
             _vidMeClient = SimpleIoc.Default.GetInstance<IVidMeClient>();
+            _settingsService = SimpleIoc.Default.GetInstance<IApplicationSettingsService>();
+            _navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
             _videoLoadingViewModel = videoLoadingViewModel;
             Video = video;
-            _settingsService = SimpleIoc.Default.GetInstance<IApplicationSettingsService>();
         }
 
         public Video Video { get; set; }
@@ -107,6 +112,18 @@ namespace Viddy.ViewModel
             }
         }
 
+        public RelayCommand OpenVideoCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    Messenger.Default.Send(new VideoMessage(this));
+                    _navigationService.Navigate<VideoPlayerView>();
+                });
+            }
+        }
+
         private bool VideoIsAnonymousButOwned()
         {
             // This means it's an anonymous video
@@ -114,17 +131,5 @@ namespace Viddy.ViewModel
         }
 
         public ListType ListType { get { return ListType.Normal; } }
-    }
-
-    public interface IListType
-    {
-        ListType ListType { get; }
-    }
-
-    public enum ListType
-    {
-        Normal,
-        Review,
-        Ad
     }
 }

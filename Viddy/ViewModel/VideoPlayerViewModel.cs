@@ -1,6 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using Cimbalino.Toolkit.Services;
+using GalaSoft.MvvmLight.Messaging;
+using Viddy.Messaging;
 using VidMePortable;
 
 namespace Viddy.ViewModel
@@ -21,5 +23,22 @@ namespace Viddy.ViewModel
         public bool IsEmpty { get; set; }
         public bool CanLoadMore { get; set; }
         public bool IsLoadingMore { get; set; }
+
+        protected override void WireMessages()
+        {
+            Messenger.Default.Register<VideoMessage>(this, m =>
+            {
+                Video = m.Video;
+                Reset();
+            });
+        }
+
+        private void Reset()
+        {
+            Comments = null;
+            IsEmpty = true;
+            CanLoadMore = false;
+            IsLoadingMore = false;
+        }
     }
 }
