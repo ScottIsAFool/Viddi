@@ -36,32 +36,37 @@
                            TextTrimming="Clip" />
             </Grid>
         </Grid>
-
-        <controls:InitialisingListView Grid.Row="1">
-            <controls:InitialisingListView.HeaderTemplate>
-                <DataTemplate>
-                    <Grid>
-                        <Image Source="{Binding Video.Video.ThumbnailUrl}"
-                               Stretch="UniformToFill"
-                               VerticalAlignment="Center" />
-                        <playerFramework:MediaPlayer IsVolumeVisible="False"
-                                                     IsDurationVisible="False"
-                                                     IsTimeElapsedVisible="False"
-                                                     IsTimeRemainingVisible="False"
-                                                     IsTimelineVisible="False"
-                                                     IsPlayPauseVisible="True"
-                                                     MediaFailed="MediaPlayer_OnMediaFailed"
-                                                     IsFullScreenVisible="True"
-                                                     Source="{Binding Video.Video.CompleteUrl}">
-                            <!--<interactivity:Interaction.Behaviors>
-                            <behaviours:VideoStreamBehaviour File="{Binding File}"
+        <Grid MaxHeight="200"
+              Grid.Row="1"
+              VerticalAlignment="Top">
+            <Image Source="{Binding Video.Video.ThumbnailUrl}"
+                   Stretch="UniformToFill"
+                   VerticalAlignment="Center" />
+            <playerFramework:MediaPlayer IsVolumeVisible="False"
+                                         IsDurationVisible="False"
+                                         IsTimeElapsedVisible="False"
+                                         IsTimeRemainingVisible="False"
+                                         IsTimelineVisible="False"
+                                         IsPlayPauseVisible="True"
+                                         MediaFailed="MediaPlayer_OnMediaFailed"
+                                         IsFullScreenVisible="True"
+                                         Source="{Binding Video.Video.CompleteUrl}"
+                                         IsFullScreenChanged="MediaPlayer_OnIsFullScreenChanged"
+                                         x:Name="MediaPlayer"
+                                         >
+                <interactivity:Interaction.Behaviors>
+                            <!--<behaviours:VideoStreamBehaviour File="{Binding File}"
                                                              IsAutoPlay="True"
                                                              IsStart="{Binding Play}"
                                                              IsPause="{Binding Pause}"
-                                                             IsPlaying="{Binding IsPlaying, Mode=TwoWay}" />
-                        </interactivity:Interaction.Behaviors>-->
-                        </playerFramework:MediaPlayer>
-                    </Grid>
+                                                             IsPlaying="{Binding IsPlaying, Mode=TwoWay}" />-->
+                        </interactivity:Interaction.Behaviors>
+            </playerFramework:MediaPlayer>
+        </Grid>
+        <controls:InitialisingListView Grid.Row="1" Visibility="Collapsed">
+            <controls:InitialisingListView.HeaderTemplate>
+                <DataTemplate>
+                    
                 </DataTemplate>
             </controls:InitialisingListView.HeaderTemplate>
         </controls:InitialisingListView>

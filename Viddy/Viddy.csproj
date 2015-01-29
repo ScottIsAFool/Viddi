@@ -119,7 +119,6 @@
     <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\ListTypeExtensions.cs" />
     <Compile Include="Extensions\UriExtensions.cs" />
-    <Compile Include="Helpers\NavigationHelper.cs" />
     <Compile Include="Logging\WinLogger.cs" />
     <Compile Include="Messaging\UserMessage.cs" />
     <Compile Include="Messaging\VideoMessage.cs" />

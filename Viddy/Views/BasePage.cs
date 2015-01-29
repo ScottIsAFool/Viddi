@@ -1,18 +1,17 @@
-﻿using System;
-using Windows.UI.ViewManagement;
-using Windows.UI.Xaml.Controls;
+﻿using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Navigation;
+using Cimbalino.Toolkit.Services;
+using GalaSoft.MvvmLight.Ioc;
 using ScottIsAFool.WindowsPhone.Logging;
 using ThemeManagerRt;
 using Viddy.Common;
-using Viddy.Helpers;
 
 namespace Viddy.Views
 {
     public class BasePage : ThemeEnabledPage
     {
-        private readonly NavigationHelper _navigationHelper;
         protected readonly ILog Logger;
+        private readonly INavigationService _navigationService;
 
         protected virtual ApplicationViewBoundsMode Mode
         {
@@ -22,52 +21,24 @@ namespace Viddy.Views
         public BasePage()
         {
             NavigationCacheMode = NavigationCacheMode.Required;
-            _navigationHelper = new NavigationHelper(this);
-            _navigationHelper.LoadState += NavigationHelperLoadState;
-            _navigationHelper.SaveState += NavigationHelperSaveState;
             Logger = new WinLogger(GetType().FullName);
+            _navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+            _navigationService.BackKeyPressed += OnBackKeyPressed;
+        }
+
+        protected virtual void OnBackKeyPressed(object sender, NavigationServiceBackKeyPressedEventArgs e)
+        {
+            if (e.Behavior == NavigationServiceBackKeyPressedBehavior.GoBack)
+            {
+                _navigationService.BackKeyPressed -= OnBackKeyPressed;
+            }
         }
 
         protected void SetFullScreen(ApplicationViewBoundsMode mode)
         {
             ApplicationView.GetForCurrentView().SetDesiredBoundsMode(mode);
         }
-
-        /// <summary>
-        /// Gets the <see cref="NavigationHelper"/> associated with this <see cref="Page"/>.
-        /// </summary>
-        public NavigationHelper NavigationHelper
-        {
-            get { return _navigationHelper; }
-        }
-
-        /// <summary>
-        /// Populates the page with content passed during navigation.  Any saved state is also
-        /// provided when recreating a page from a prior session.
-        /// </summary>
-        /// <param name="sender">
-        /// The source of the event; typically <see cref="NavigationHelper"/>
-        /// </param>
-        /// <param name="e">Event data that provides both the navigation parameter passed to
-        /// <see cref="Frame.Navigate(Type, Object)"/> when this page was initially requested and
-        /// a dictionary of state preserved by this page during an earlier
-        /// session.  The state will be null the first time a page is visited.</param>
-        protected virtual void NavigationHelperLoadState(object sender, LoadStateEventArgs e)
-        {
-        }
-
-        /// <summary>
-        /// Preserves state associated with this page in case the application is suspended or the
-        /// page is discarded from the navigation cache.  Values must conform to the serialization
-        /// requirements of <see cref="SuspensionManager.SessionState"/>.
-        /// </summary>
-        /// <param name="sender">The source of the event; typically <see cref="NavigationHelper"/></param>
-        /// <param name="e">Event data that provides an empty dictionary to be populated with
-        /// serializable state.</param>
-        protected virtual void NavigationHelperSaveState(object sender, SaveStateEventArgs e)
-        {
-        }
-
+        
         protected virtual void InitialiseOnBack()
         {
         }
@@ -92,13 +63,13 @@ namespace Viddy.Views
                 }
             }
 
-            _navigationHelper.OnNavigatedTo(e);
+            base.OnNavigatedTo(e);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
             //Logger.Info("Navigated from {0}", GetType().FullName);
-            _navigationHelper.OnNavigatedFrom(e);
+            base.OnNavigatedFrom(e);
         }
     }
 }
