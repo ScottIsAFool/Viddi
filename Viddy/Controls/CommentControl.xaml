@@ -4,51 +4,52 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls="using:Coding4Fun.Toolkit.Controls"
-             xmlns:controls1="using:Viddy.Controls"
+             xmlns:localControls="using:Viddy.Controls"
              mc:Ignorable="d"
              d:DesignHeight="160"
              d:DesignWidth="400"
              d:DataContext="{Binding VideoPlayer.Video.Comments[0], Source={StaticResource Locator}}">
 
     <Grid MinHeight="60"
-          DataContext="{Binding Comment}">
+          Margin="0,0,0,12">
         <Grid Margin="19,0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
 
-            <controls1:CustomButton
-                Style="{StaticResource EmptyButtonStyle}">
+            <localControls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                        TapCommand="{Binding NavigateTouserCommand}">
                 <StackPanel Orientation="Horizontal">
-                    <controls1:ProfilePictureControl Height="60"
-                                                     Width="60" />
+                    <localControls:ProfilePictureControl Height="60"
+                                                         Width="60"
+                                                         DataContext="{Binding Comment}" />
 
                     <StackPanel Orientation="Vertical"
                                 Margin="12,0,0,0">
 
-                        <TextBlock Text="{Binding User.Username}"
+                        <TextBlock Text="{Binding Username, FallbackValue=scottisafool}"
                                    Style="{StaticResource BodyTextBlockStyle}"
                                    TextTrimming="CharacterEllipsis"
-                                   FontWeight="SemiBold" />
-                        <TextBlock Text="{Binding DateCreated}"
+                                   FontWeight="SemiBold"
+                                   FontSize="{StaticResource TextStyleExtraLargeFontSize}" />
+                        <TextBlock Text="{Binding Date, FallbackValue='an hour ago'}"
                                    Style="{StaticResource BodyTextBlockStyle}"
                                    FontSize="{StaticResource TextStyleSmallFontSize}"
                                    Foreground="{ThemeResource SubtleBrush}" />
                     </StackPanel>
                 </StackPanel>
-            </controls1:CustomButton>
+            </localControls:CustomButton>
 
             <StackPanel Orientation="Vertical"
-                        Grid.Row="1">
-                <TextBlock Text="{Binding Body}"
-                           Style="{StaticResource BodyTextBlockStyle}" />
+                        Grid.Row="1"
+                        Margin="0,6,0,0">
+                <TextBlock Text="{Binding Comment.Body, FallbackValue='This is the comment text and should appear as such'}"
+                           Style="{StaticResource BodyTextBlockStyle}"
+                           Margin="72,0,0,0" />
             </StackPanel>
         </Grid>
 
-        <Border BorderThickness="0,0,0,1"
-                BorderBrush="Black"
-                VerticalAlignment="Bottom"
-                Margin="30,0" />
+
     </Grid>
 </UserControl>

@@ -9,6 +9,7 @@
                 xmlns:core="using:Microsoft.Xaml.Interactions.Core"
                 xmlns:controls="using:Viddy.Controls"
                 xmlns:playerFramework="using:Microsoft.PlayerFramework"
+                xmlns:converters="using:Cimbalino.Toolkit.Converters"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding VideoPlayer, Source={StaticResource Locator}}">
@@ -33,7 +34,8 @@
                 <TextBlock VerticalAlignment="Center"
                            Style="{StaticResource BodyTextBlockStyle}"
                            Text="{Binding Video.Title}"
-                           TextTrimming="Clip" />
+                           TextTrimming="CharacterEllipsis"
+                           TextWrapping="NoWrap"/>
             </Grid>
         </Grid>
         <Grid Grid.Row="1">
@@ -71,7 +73,26 @@
 
             <controls:InitialisingListView Grid.Row="1"
                                            ItemsSource="{Binding Video.Comments}"
-                                           ItemTemplate="{StaticResource CommentTemplate}">
+                                           ItemTemplate="{StaticResource CommentTemplate}"
+                                           Margin="0,12,0,0"
+                                           IsEmpty="{Binding Video.IsEmpty}"
+                                           IsInitialising="{Binding Video.ProgressIsVisible}">
+                <controls:InitialisingListView.EmptyContent>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.Resources>
+                                <converters:BooleanToStringConverter x:Key="LeaveCommentConverter"
+                                                                     TrueValue="No comments have been left for this video, why not leave one?"
+                                                                     FalseValue="No comments have been left for this video, why not sign in and leave one?"/>
+                            </Grid.Resources>
+                            <TextBlock Text="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource LeaveCommentConverter}}"
+                                       TextWrapping="WrapWholeWords"
+                                       TextAlignment="Center"
+                                       Style="{StaticResource BodyTextBlockStyle}" 
+                                       Margin="19,0"/>
+                        </Grid>
+                    </DataTemplate>
+                </controls:InitialisingListView.EmptyContent>
             </controls:InitialisingListView>
         </Grid>
     </Grid>

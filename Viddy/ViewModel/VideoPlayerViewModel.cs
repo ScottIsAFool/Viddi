@@ -22,7 +22,7 @@ namespace Viddy.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
-                    if (Video != null && Video.CommentCount > 0)
+                    if (Video != null)
                     {
                         await Video.LoadData(false);
                     }
