@@ -58,7 +58,8 @@
                 <ProgressBar IsIndeterminate="{Binding ProgressIsVisible}"
                              Visibility="{Binding ProgressIsVisible, Converter={StaticResource VisibilityConverter}}" />
                 <TextBox Text="{Binding Username, Mode=TwoWay}"
-                         Header="Username:">
+                         Header="Username:"
+                         IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}">
                     <interactivity:Interaction.Behaviors>
                         <behaviours:UpdateTextBindingOnPropertyChanged/>
                     </interactivity:Interaction.Behaviors>
@@ -66,7 +67,8 @@
                 
                 <PasswordBox Password="{Binding Password, Mode=TwoWay}"
                              IsPasswordRevealButtonEnabled="True"
-                             Header="Password:">
+                             Header="Password:"
+                             IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}">
                     <interactivity:Interaction.Behaviors>
                         <behaviours:EnterKeyHandler Command="{Binding SignInCommand}"/>
                     </interactivity:Interaction.Behaviors>

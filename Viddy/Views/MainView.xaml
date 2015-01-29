@@ -28,6 +28,13 @@
                         <SymbolIcon Symbol="Video" />
                     </AppBarButton.Icon>
                 </AppBarButton>
+                <AppBarButton Label="refresh"
+                              Command="{Binding RefreshCommand}"
+                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator},Converter={StaticResource VisibilityConverter}}">
+                    <AppBarButton.Icon>
+                        <SymbolIcon Symbol="Refresh"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
                 <AppBarButton Label="search">
                     <AppBarButton.Icon>
                         <SymbolIcon Symbol="Find" />
@@ -62,7 +69,7 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <controls:InitialisingListView ItemsSource="{Binding Videos}"
+            <controls:InitialisingListView ItemsSource="{Binding Items}"
                                            IsEmpty="{Binding IsEmpty}"
                                            IsInitialising="{Binding ProgressIsVisible}"
                                            ItemTemplateSelector="{StaticResource VideoTemplateSelector}">

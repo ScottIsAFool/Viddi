@@ -51,7 +51,14 @@ namespace Viddy.ViewModel.Account
 
                         AuthenticationService.Current.SetAuthenticationInfo(response);
 
-                        _navigationService.Navigate<AccountView>(new NavigationParameters {ClearBackstack = true});
+                        if (_navigationService.CanGoBack)
+                        {
+                            _navigationService.GoBack();
+                        }
+                        else
+                        {
+                            _navigationService.Navigate<AccountView>(new NavigationParameters { ClearBackstack = true });                            
+                        }
 
                         Username = Password = string.Empty;
                     }

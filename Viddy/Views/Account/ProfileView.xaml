@@ -34,7 +34,7 @@
     <Grid>
         <controls:ProfileHeaderControl DataContext="{Binding EmptyUser}"
                                        Visibility="{Binding Profile.ProgressIsVisible, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"/>
-        <controls:InitialisingListView ItemsSource="{Binding Videos}"
+        <controls:InitialisingListView ItemsSource="{Binding Items}"
                                        ItemTemplate="{StaticResource VideoTemplate}"
                                        IsEmpty="{Binding IsEmpty}"
                                        IsInitialising="{Binding ProgressIsVisible}"

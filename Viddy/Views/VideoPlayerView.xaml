@@ -36,39 +36,43 @@
                            TextTrimming="Clip" />
             </Grid>
         </Grid>
-        <Grid MaxHeight="200"
-              Grid.Row="1"
-              VerticalAlignment="Top">
-            <Image Source="{Binding Video.Video.ThumbnailUrl}"
-                   Stretch="UniformToFill"
-                   VerticalAlignment="Center" />
-            <playerFramework:MediaPlayer IsVolumeVisible="False"
-                                         IsDurationVisible="False"
-                                         IsTimeElapsedVisible="False"
-                                         IsTimeRemainingVisible="False"
-                                         IsTimelineVisible="False"
-                                         IsPlayPauseVisible="True"
-                                         MediaFailed="MediaPlayer_OnMediaFailed"
-                                         IsFullScreenVisible="True"
-                                         Source="{Binding Video.Video.CompleteUrl}"
-                                         IsFullScreenChanged="MediaPlayer_OnIsFullScreenChanged"
-                                         x:Name="MediaPlayer"
-                                         >
-                <interactivity:Interaction.Behaviors>
-                            <!--<behaviours:VideoStreamBehaviour File="{Binding File}"
+        <Grid Grid.Row="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+
+            <Grid MaxHeight="200"
+                  Grid.Row="0"
+                  VerticalAlignment="Top">
+                <Image Source="{Binding Video.Video.ThumbnailUrl}"
+                       Stretch="UniformToFill"
+                       VerticalAlignment="Center" />
+                <playerFramework:MediaPlayer IsVolumeVisible="False"
+                                             IsDurationVisible="False"
+                                             IsTimeElapsedVisible="False"
+                                             IsTimeRemainingVisible="False"
+                                             IsTimelineVisible="False"
+                                             IsPlayPauseVisible="True"
+                                             MediaFailed="MediaPlayer_OnMediaFailed"
+                                             IsFullScreenVisible="True"
+                                             Source="{Binding Video.Video.CompleteUrl}"
+                                             IsFullScreenChanged="MediaPlayer_OnIsFullScreenChanged"
+                                             x:Name="MediaPlayer">
+                    <interactivity:Interaction.Behaviors>
+                        <!--<behaviours:VideoStreamBehaviour File="{Binding File}"
                                                              IsAutoPlay="True"
                                                              IsStart="{Binding Play}"
                                                              IsPause="{Binding Pause}"
                                                              IsPlaying="{Binding IsPlaying, Mode=TwoWay}" />-->
-                        </interactivity:Interaction.Behaviors>
-            </playerFramework:MediaPlayer>
+                    </interactivity:Interaction.Behaviors>
+                </playerFramework:MediaPlayer>
+            </Grid>
+
+            <controls:InitialisingListView Grid.Row="1"
+                                           ItemsSource="{Binding Video.Comments}"
+                                           ItemTemplate="{StaticResource CommentTemplate}">
+            </controls:InitialisingListView>
         </Grid>
-        <controls:InitialisingListView Grid.Row="1" Visibility="Collapsed">
-            <controls:InitialisingListView.HeaderTemplate>
-                <DataTemplate>
-                    
-                </DataTemplate>
-            </controls:InitialisingListView.HeaderTemplate>
-        </controls:InitialisingListView>
     </Grid>
 </local:BasePage>

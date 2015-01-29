@@ -16,7 +16,7 @@ namespace Viddy.ViewModel
         private bool _videosLoaded;
         public bool CanLoadMore { get; set; }
         public bool IsLoadingMore { get; set; }
-        public ObservableCollection<IListType> Videos { get; set; }
+        public ObservableCollection<IListType> Items { get; set; }
         public bool IsEmpty { get; set; }
 
         public RelayCommand PageLoadedCommand
@@ -47,7 +47,7 @@ namespace Viddy.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
-                    await LoadData(false, true, Videos.Count);
+                    await LoadData(false, true, Items.Count);
                 });
             }
         }
@@ -64,7 +64,7 @@ namespace Viddy.ViewModel
 
         protected void Reset()
         {
-            Videos = null;
+            Items = null;
             _videosLoaded = false;
             CanLoadMore = false;
             IsLoadingMore = false;
@@ -88,9 +88,9 @@ namespace Viddy.ViewModel
                 IsLoadingMore = add;
                 var response = await GetVideos(offset);
 
-                if (Videos == null || !add)
+                if (Items == null || !add)
                 {
-                    Videos = new ObservableCollection<IListType>();
+                    Items = new ObservableCollection<IListType>();
                 }
 
                 var allVideos = response.Videos.Select(x => new VideoItemViewModel(x, this)).ToList();
@@ -102,10 +102,10 @@ namespace Viddy.ViewModel
 
                 //allVideos.AddEveryOften(10, 2, new AdViewModel(), 5, true);
 
-                Videos.AddRange(allVideos);
+                Items.AddRange(allVideos);
 
-                IsEmpty = Videos.IsNullOrEmpty();
-                CanLoadMore = Videos.Count + 1 < response.Page.Total;
+                IsEmpty = Items.IsNullOrEmpty();
+                CanLoadMore = Items.Count + 1 < response.Page.Total;
                 _videosLoaded = true;
             }
             catch (Exception ex)

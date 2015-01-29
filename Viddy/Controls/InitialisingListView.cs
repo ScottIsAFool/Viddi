@@ -60,31 +60,22 @@ namespace Viddy.Controls
             set { SetValue(InitialisingContentStyleProperty, value); }
         }
 
-        public static readonly DependencyProperty ExtraContentProperty = DependencyProperty.Register(
-            "ExtraContent", typeof(DataTemplate), typeof(InitialisingListView), new PropertyMetadata(default(DataTemplate)));
+        public static readonly DependencyProperty LoadFailedContentProperty = DependencyProperty.Register(
+            "LoadFailedContent", typeof (DataTemplate), typeof (InitialisingListView), new PropertyMetadata(default(DataTemplate)));
 
-        public DataTemplate ExtraContent
+        public DataTemplate LoadFailedContent
         {
-            get { return (DataTemplate)GetValue(ExtraContentProperty); }
-            set { SetValue(ExtraContentProperty, value); }
+            get { return (DataTemplate) GetValue(LoadFailedContentProperty); }
+            set { SetValue(LoadFailedContentProperty, value); }
         }
 
-        public static readonly DependencyProperty DisplayExtraContentProperty = DependencyProperty.Register(
-            "DisplayExtraContent", typeof (bool), typeof (InitialisingListView), new PropertyMetadata(default(bool)));
+        public static readonly DependencyProperty LoadFailedProperty = DependencyProperty.Register(
+            "LoadFailed", typeof (bool), typeof (InitialisingListView), new PropertyMetadata(default(bool)));
 
-        public bool DisplayExtraContent
+        public bool LoadFailed
         {
-            get { return (bool) GetValue(DisplayExtraContentProperty); }
-            set { SetValue(DisplayExtraContentProperty, value); }
-        }
-
-        public static readonly DependencyProperty DisplayExtraContentFrequencyProperty = DependencyProperty.Register(
-            "DisplayExtraContentFrequency", typeof (int), typeof (InitialisingListView), new PropertyMetadata(default(int)));
-
-        public int DisplayExtraContentFrequency
-        {
-            get { return (int) GetValue(DisplayExtraContentFrequencyProperty); }
-            set { SetValue(DisplayExtraContentFrequencyProperty, value); }
+            get { return (bool) GetValue(LoadFailedProperty); }
+            set { SetValue(LoadFailedProperty, value); }
         }
 
         public InitialisingListView()

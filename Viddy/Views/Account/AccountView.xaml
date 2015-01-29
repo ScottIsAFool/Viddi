@@ -183,7 +183,7 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <localControls:InitialisingListView ItemsSource="{Binding Videos}"
+            <localControls:InitialisingListView ItemsSource="{Binding Items}"
                                                 IsInitialising="{Binding ProgressIsVisible}"
                                                 IsEmpty="{Binding IsEmpty}"
                                                 ItemTemplate="{StaticResource VideoTemplate}">
