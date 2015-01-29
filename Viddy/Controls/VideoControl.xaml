@@ -64,7 +64,9 @@
                                 Height="20" />
                     <TextBlock Text="{Binding Video.LikesCount}"
                                Style="{StaticResource BodyTextBlockStyle}"
-                               Foreground="White" />
+                               Foreground="White"
+                               Margin="6,0"/>
+                    <SymbolIcon Symbol="Comment"></SymbolIcon>
                 </StackPanel>
             </Grid>
         </local:CustomButton>
