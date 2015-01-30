@@ -12,40 +12,39 @@
     <Grid MinHeight="60"
           Margin="0,0,0,12">
         <Grid Margin="19,0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
 
             <localControls:CustomButton Style="{StaticResource EmptyButtonStyle}"
-                                        TapCommand="{Binding NavigateTouserCommand}">
-                <StackPanel Orientation="Horizontal">
-                    <localControls:ProfilePictureControl Height="60"
-                                                         Width="60"
-                                                         DataContext="{Binding Comment}" />
-
-                    <StackPanel Orientation="Vertical"
-                                Margin="12,0,0,0">
-
-                        <TextBlock Text="{Binding Username, FallbackValue=scottisafool}"
-                                   Style="{StaticResource BodyTextBlockStyle}"
-                                   TextTrimming="CharacterEllipsis"
-                                   FontWeight="SemiBold"
-                                   FontSize="{StaticResource TextStyleExtraLargeFontSize}" />
-                        <TextBlock Text="{Binding Date, FallbackValue='an hour ago'}"
-                                   Style="{StaticResource BodyTextBlockStyle}"
-                                   FontSize="{StaticResource TextStyleSmallFontSize}"
-                                   Foreground="{ThemeResource SubtleBrush}" />
-                    </StackPanel>
-                </StackPanel>
+                                        TapCommand="{Binding NavigateTouserCommand}"
+                                        Grid.Column="0"
+                                        VerticalAlignment="Top">
+                <localControls:ProfilePictureControl Height="60"
+                                                     Width="60"
+                                                     DataContext="{Binding Comment}"
+                                                     AvatarUrl="{Binding User.AvatarUrl}" />
             </localControls:CustomButton>
 
+
             <StackPanel Orientation="Vertical"
-                        Grid.Row="1"
-                        Margin="0,6,0,0">
+                        Margin="12,0,0,0"
+                        Grid.Column="1"
+                        VerticalAlignment="Top">
+                <TextBlock Text="{Binding Username, FallbackValue=scottisafool}"
+                           Style="{StaticResource BodyTextBlockStyle}"
+                           TextTrimming="CharacterEllipsis"
+                           FontWeight="Bold" />
+                
                 <TextBlock Text="{Binding Comment.Body, FallbackValue='This is the comment text and should appear as such'}"
                            Style="{StaticResource BodyTextBlockStyle}"
-                           Margin="72,0,0,0" />
+                           />
+                
+                <TextBlock Text="{Binding Date, FallbackValue='an hour ago'}"
+                           Style="{StaticResource BodyTextBlockStyle}"
+                           FontSize="{StaticResource TextStyleSmallFontSize}"
+                           Foreground="{ThemeResource SubtleBrush}" />
             </StackPanel>
         </Grid>
 

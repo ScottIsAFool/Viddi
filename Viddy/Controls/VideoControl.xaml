@@ -66,7 +66,13 @@
                                Style="{StaticResource BodyTextBlockStyle}"
                                Foreground="White"
                                Margin="6,0"/>
-                    <SymbolIcon Symbol="Comment"></SymbolIcon>
+                    <SymbolIcon Symbol="Comment"
+                                Foreground="White"
+                                Height="20"/>
+                    <TextBlock Text="{Binding CommentCount}"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Foreground="White"
+                               Margin="6,0" />
                 </StackPanel>
             </Grid>
         </local:CustomButton>
