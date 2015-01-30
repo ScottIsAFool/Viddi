@@ -57,6 +57,23 @@ namespace Viddy.ViewModel
                         }
                     }, this)
                 };
+
+                Video = new Video
+                {
+                    User = new User
+                    {
+                        UserId = "59739",
+                        Username = "PunkHack",
+                        AvatarUrl = "https://d1wst0behutosd.cloudfront.net/avatars/59739.gif?gv2r1420954820",
+                        CoverUrl = "https://d1wst0behutosd.cloudfront.net/channel_covers/59739.jpg?v1r1420500373",
+                        FollowerCount = 1200,
+                        LikesCount = "92",
+                        VideoCount = 532,
+                        VideoViews = "71556",
+                        VideosScores = 220,
+                        Bio = "Some bio information"
+                    }
+                };
             }
         }
 
@@ -81,6 +98,24 @@ namespace Viddy.ViewModel
                        && AuthenticationService.Current.LoggedInUserId == Video.UserId)
                        || VideoIsAnonymousButOwned();
             }
+        }
+
+        public string SubmittedBy
+        {
+            get
+            {
+                if (Video == null)
+                {
+                    return string.Empty;
+                }
+
+                return IsAnonymous ? "Anonymous" : Video.User.Username;
+            }
+        }
+
+        public bool IsAnonymous
+        {
+            get { return Video == null || string.IsNullOrEmpty(Video.UserId) || Video.User == null; }
         }
 
         public bool DisplayDuration

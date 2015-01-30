@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Messaging;
+using Viddy.Views.Account;
 
 namespace Viddy.ViewModel
 {
@@ -26,6 +27,23 @@ namespace Viddy.ViewModel
                     {
                         await Video.LoadData(false);
                     }
+                });
+            }
+        }
+
+        public RelayCommand NavigateToUserCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    if (Video == null || Video.IsAnonymous)
+                    {
+                        return;
+                    }
+
+                    Messenger.Default.Send(new UserMessage(Video.Video.User));
+                    _navigationService.Navigate<ProfileView>();
                 });
             }
         }

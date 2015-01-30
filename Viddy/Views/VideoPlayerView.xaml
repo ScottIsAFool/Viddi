@@ -41,11 +41,29 @@
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
             </Grid.RowDefinitions>
+            
+            <Grid Grid.Row="0">
+                <StackPanel Orientation="Horizontal"
+                            Margin="19,6,19,12">
+                    <TextBlock Text="Submitted by:"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Foreground="{ThemeResource SubtleBrush}"/>
+                    <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                           TapCommand="{Binding NavigateToUserCommand}"
+                                           IsHitTestVisible="{Binding Video.IsAnonymous, Converter={StaticResource NegativeBooleanConverter}}">
+                        <TextBlock Text="{Binding Video.SubmittedBy}"
+                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   FontWeight="Bold"
+                                   Margin="6,0"/>
+                    </controls:CustomButton>
+                </StackPanel>
+            </Grid>
 
             <Grid MaxHeight="200"
-                  Grid.Row="0"
+                  Grid.Row="1"
                   VerticalAlignment="Top">
                 <Image Source="{Binding Video.Video.ThumbnailUrl}"
                        Stretch="UniformToFill"
@@ -71,7 +89,7 @@
                 </playerFramework:MediaPlayer>
             </Grid>
 
-            <controls:InitialisingListView Grid.Row="1"
+            <controls:InitialisingListView Grid.Row="2"
                                            ItemsSource="{Binding Video.Comments}"
                                            ItemTemplate="{StaticResource CommentTemplate}"
                                            Margin="0,12,0,0"
