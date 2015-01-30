@@ -23,15 +23,11 @@ namespace Viddy.Views
             NavigationCacheMode = NavigationCacheMode.Required;
             Logger = new WinLogger(GetType().FullName);
             _navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
-            _navigationService.BackKeyPressed += OnBackKeyPressed;
         }
 
         protected virtual void OnBackKeyPressed(object sender, NavigationServiceBackKeyPressedEventArgs e)
         {
-            if (e.Behavior == NavigationServiceBackKeyPressedBehavior.GoBack)
-            {
-                _navigationService.BackKeyPressed -= OnBackKeyPressed;
-            }
+            
         }
 
         protected void SetFullScreen(ApplicationViewBoundsMode mode)
@@ -45,6 +41,11 @@ namespace Viddy.Views
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
+            if (_navigationService != null)
+            {
+                _navigationService.BackKeyPressed += OnBackKeyPressed;
+            }
+
             Logger.Info("Navigated to {0}", GetType().FullName);
 
             SetFullScreen(Mode);
@@ -68,6 +69,11 @@ namespace Viddy.Views
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            if (_navigationService != null)
+            {
+                _navigationService.BackKeyPressed -= OnBackKeyPressed;                
+            }
+
             //Logger.Info("Navigated from {0}", GetType().FullName);
             base.OnNavigatedFrom(e);
         }
