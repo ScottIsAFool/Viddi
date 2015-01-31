@@ -314,6 +314,22 @@ namespace Viddy.ViewModel
 
         public ListType ListType { get { return ListType.Normal; } }
 
+        public async Task RefreshVideoDetails()
+        {
+            try
+            {
+                //var response = await _vidMeClient.GetVideoAsync(Video.VideoId);
+                //if (response != null)
+                //{
+                    
+                //}
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
+
         public async Task LoadData(bool isRefresh, bool add = false, int offset = 0)
         {
             if (_commentsLoaded && !isRefresh && !add)

@@ -25,6 +25,7 @@ namespace Viddy.ViewModel
                 {
                     if (Video != null)
                     {
+                        Video.RefreshVideoDetails().ConfigureAwait(false);
                         await Video.LoadData(false);
                     }
                 });
