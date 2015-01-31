@@ -2,49 +2,51 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Color x:Key="ButtonBackgroundColor">#FFACACAC</Color>
+    <Color x:Key="RecordButtonColor">Red</Color>
+    <Color x:Key="TickColor">DeepSkyBlue</Color>
+    <Color x:Key="CrossColor">Red</Color>
+    <Color x:Key="HeaderColor">#F0F0F0</Color>
+    <Color x:Key="ApplicationPageBackgroundThemeColor">White</Color>
+    <Color x:Key="ApplicationForegroundThemeColor">Black</Color>
+    <Color x:Key="SubtleColor">#FF8D8D8D</Color>
+    <Color x:Key="AppBarBackgroundColor">#DDDDDD</Color>
+    <Color x:Key="AppBarForegroundColor">Black</Color>
+    <Color x:Key="NsfwBackgroundColor">DarkRed</Color>
+    <Color x:Key="PhoneAccentColor">#5900FF</Color>
+
     <SolidColorBrush x:Key="ButtonBackgroundBrush"
                      Color="{StaticResource ButtonBackgroundColor}"/>
     
-    <Color x:Key="RecordButtonColor">Red</Color>
     <SolidColorBrush x:Key="RecordButtonBrush"
                      Color="{StaticResource RecordButtonColor}"/>
     
-    <Color x:Key="TickColor">DeepSkyBlue</Color>
     <SolidColorBrush x:Key="TickBrush"
                      Color="{StaticResource TickColor}"/>
     
-    <Color x:Key="CrossColor">Red</Color>
     <SolidColorBrush x:Key="CrossBrush"
                      Color="{StaticResource CrossColor}"/>
 
-    <Color x:Key="HeaderColor">#F0F0F0</Color>
     <SolidColorBrush x:Key="HeaderBrush"
                      Color="{StaticResource HeaderColor}"/>
 
-    <Color x:Key="ApplicationPageBackgroundThemeColor">White</Color>
     <SolidColorBrush x:Key="ApplicationPageBackgroundThemeBrush"
                      Color="{StaticResource ApplicationPageBackgroundThemeColor}"/>
 
-    <Color x:Key="ApplicationForegroundThemeColor">Black</Color>
     <SolidColorBrush x:Key="ApplicationForegroundThemeBrush"
                      Color="{StaticResource ApplicationForegroundThemeColor}"/>
     
-    <Color x:Key="SubtleColor">#FF8D8D8D</Color>
     <SolidColorBrush x:Key="SubtleBrush"
                      Color="{StaticResource SubtleColor}"/>
-
-    <Color x:Key="AppBarBackgroundColor">#DDDDDD</Color>
-    <Color x:Key="AppBarForegroundColor">Black</Color>
+    
     <SolidColorBrush x:Key="AppBarBackgroundThemeBrush"
                      Color="{StaticResource AppBarBackgroundColor}" />
+
     <SolidColorBrush x:Key="AppBarItemForegroundThemeBrush"
                      Color="{StaticResource AppBarForegroundColor}" />
     
-    <Color x:Key="NsfwBackgroundColor">DarkRed</Color>
     <SolidColorBrush x:Key="NsfwBackgroundBrush"
                      Color="{StaticResource NsfwBackgroundColor}"/>
 
-    <Color x:Key="PhoneAccentColor">#5900FF</Color>
     <SolidColorBrush x:Key="PhoneAccentBrush"
                      Color="{StaticResource PhoneAccentColor}"/>
 
