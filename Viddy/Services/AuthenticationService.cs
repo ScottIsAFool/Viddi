@@ -3,6 +3,7 @@ using Cimbalino.Toolkit.Services;
 using PropertyChanged;
 using Viddy.Extensions;
 using VidMePortable;
+using VidMePortable.Model;
 using VidMePortable.Model.Responses;
 
 namespace Viddy.Services
@@ -75,6 +76,7 @@ namespace Viddy.Services
         public AuthResponse AuthenticationInfo { get; private set; }
         public bool IsLoggedIn { get { return AuthenticationInfo != null && AuthenticationInfo.Auth != null && AuthenticationInfo.User != null; } }
         public string LoggedInUserId { get { return IsLoggedIn ? AuthenticationInfo.User.UserId : "0"; } }
+        public User LoggedInUser { get { return IsLoggedIn ? AuthenticationInfo.User : null; } }
 
         private void CheckForUser()
         {

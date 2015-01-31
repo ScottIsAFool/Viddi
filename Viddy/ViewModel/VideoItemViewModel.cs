@@ -239,6 +239,61 @@ namespace Viddy.ViewModel
             }
         }
 
+        public RelayCommand AddCommentCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    if (!CanAddComment)
+                    {
+                        return;
+                    }
+
+                    try
+                    {
+                        AddingComment = true;
+                        var now = DateTime.Now;
+                        var response = await _vidMeClient.CreateCommentAsync(Video.VideoId, CommentText, now.TimeOfDay);
+                        if (response != null)
+                        {
+                            response.User = AuthenticationService.Current.LoggedInUser;
+
+                            var commentVm = new CommentViewModel(response, this);
+                            if (Comments == null)
+                            {
+                                Comments = new ObservableCollection<CommentViewModel>();
+                            }
+
+                            Comments.Insert(0, commentVm);
+
+                            CommentText = string.Empty;
+                            Video.CommentCount++;
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+
+                    AddingComment = false;
+                });
+            }
+        }
+
+        public string CommentText { get; set; }
+        public bool AddingComment { get; set; }
+
+        public bool CanAddComment
+        {
+            get
+            {
+                return !AddingComment
+                       && !string.IsNullOrEmpty(CommentText)
+                       && AuthenticationService.Current.IsLoggedIn;
+            }
+        }
+
         private bool VideoIsAnonymousButOwned()
         {
             // This means it's an anonymous video
@@ -278,7 +333,7 @@ namespace Viddy.ViewModel
             }
             catch (Exception ex)
             {
-                
+
             }
 
             IsLoadingMore = false;

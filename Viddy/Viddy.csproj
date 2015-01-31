@@ -113,6 +113,7 @@
       <DependentUpon>VideoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ItemTypeDataTemplateSelector.cs" />
+    <Compile Include="Converters\CommentEnabledConverter.cs" />
     <Compile Include="Converters\ThumbnailConverter.cs" />
     <Compile Include="Extensions\ApplicationSettingsExtensions.cs" />
     <Compile Include="Extensions\ContainerExtensions.cs" />

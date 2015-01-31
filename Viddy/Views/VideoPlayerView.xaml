@@ -10,6 +10,8 @@
                 xmlns:playerFramework="using:Microsoft.PlayerFramework"
                 xmlns:converters="using:Cimbalino.Toolkit.Converters"
                 xmlns:behaviours="using:Viddy.Behaviours"
+                xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
+                xmlns:localConverters="using:Viddy.Converters"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding VideoPlayer, Source={StaticResource Locator}}">
@@ -26,6 +28,7 @@
         <converters:BooleanToStringConverter x:Key="LikeIconConverter"
                                              TrueValue="/Assets/Icons/appbar.thumbs.up.inverted.png"
                                              FalseValue="/Assets/Icons/appbar.thumbs.up.png" />
+        <localConverters:CommentEnabledConverter x:Key="CommentEnabledConverter"/>
     </local:BasePage.Resources>
 
     <!--<local:BasePage.BottomAppBar>
@@ -145,22 +148,32 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
                 
-                <TextBox InputScope="Chat">
+                <TextBox InputScope="Chat"
+                         AcceptsReturn="True"
+                         Text="{Binding Video.CommentText, Mode=TwoWay}">
                     <interactivity:Interaction.Behaviors>
                         <behaviours:UpdateTextBindingOnPropertyChanged />
+                        <behaviors:MultiBindingBehavior PropertyName="IsEnabled"
+                                                        Converter="{StaticResource CommentEnabledConverter}">
+                            <behaviors:MultiBindingItem Value="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}"/>
+                            <behaviors:MultiBindingItem Value="{Binding Video.AddingComment, Converter={StaticResource NegativeBooleanConverter}}"/>
+                        </behaviors:MultiBindingBehavior>
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
 
                 <controls:CustomButton Grid.Column="1"
                                        Style="{StaticResource EmptyButtonStyle}"
                                        Margin="6,0,0,0"
-                                       IsTabStop="False">
+                                       IsTabStop="False"
+                                       VerticalAlignment="Center"
+                                       TapCommand="{Binding Video.AddCommentCommand}"
+                                       IsEnabled="{Binding Video.CanAddComment}">
                     <Grid>
                         <Border BorderBrush="{ThemeResource ButtonBackgroundBrush}"
                                 BorderThickness="1"
                                 CornerRadius="45"
                                 Height="45"
-                                Width="45"></Border>
+                                Width="45"/>
                         <Viewbox Width="38"
                                  Margin="0,5,0,0"
                                  Height="27"
