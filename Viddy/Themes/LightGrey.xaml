@@ -48,4 +48,7 @@
     <SolidColorBrush x:Key="PhoneAccentBrush"
                      Color="{StaticResource PhoneAccentColor}"/>
 
+    <SolidColorBrush x:Key="ProgressBarIndeterminateForegroundThemeBrush"
+                     Color="{StaticResource PhoneAccentColor}"/>
+
 </ResourceDictionary>
