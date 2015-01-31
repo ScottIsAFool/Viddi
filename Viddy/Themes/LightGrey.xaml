@@ -44,4 +44,8 @@
     <SolidColorBrush x:Key="NsfwBackgroundBrush"
                      Color="{StaticResource NsfwBackgroundColor}"/>
 
+    <Color x:Key="PhoneAccentColor">#5900FF</Color>
+    <SolidColorBrush x:Key="PhoneAccentBrush"
+                     Color="{StaticResource PhoneAccentColor}"/>
+
 </ResourceDictionary>

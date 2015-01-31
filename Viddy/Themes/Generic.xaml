@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="using:Viddy.Controls">
+                    xmlns:controls="using:Viddy.Controls"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008">
 
     <Style TargetType="controls:ProfilePictureControl">
         <Setter Property="Height"
@@ -203,6 +204,160 @@
                             </Grid>
                         </ScrollViewer>
                     </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <SolidColorBrush x:Key="CheckBoxBackgroundThemeBrush"
+                     Color="Transparent" />
+    <Thickness x:Key="PhoneBorderThickness">2.5</Thickness>
+    <x:Double x:Key="TextStyleLargeFontSize">18.14</x:Double>
+    <FontFamily x:Key="PhoneFontFamilyNormal">Segoe WP</FontFamily>
+    <Thickness x:Key="PhoneTouchTargetLargeOverhang">0,16</Thickness>
+    <Style TargetType="controls:FollowingControl">
+        <Setter Property="Background"
+                Value="{ThemeResource CheckBoxBackgroundThemeBrush}" />
+        <Setter Property="BorderBrush"
+                Value="{ThemeResource CheckBoxBorderThemeBrush}" />
+        <Setter Property="BorderThickness"
+                Value="{ThemeResource PhoneBorderThickness}" />
+        <Setter Property="FontSize"
+                Value="{ThemeResource TextStyleLargeFontSize}" />
+        <Setter Property="FontFamily"
+                Value="{ThemeResource PhoneFontFamilyNormal}" />
+        <Setter Property="HorizontalContentAlignment"
+                Value="Left" />
+        <Setter Property="VerticalContentAlignment"
+                Value="Top" />
+        <Setter Property="HorizontalAlignment"
+                Value="Left" />
+        <Setter Property="VerticalAlignment"
+                Value="Top" />
+        <Setter Property="FollowingText"
+                Value="follow"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:FollowingControl">
+                    <Grid Background="Transparent">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="CommonStates">
+                                <VisualStateGroup.Transitions>
+                                    <VisualTransition From="Pressed"
+                                                      To="PointerOver">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="Grid" />
+                                        </Storyboard>
+                                    </VisualTransition>
+                                    <VisualTransition From="PointerOver"
+                                                      To="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="Grid" />
+                                        </Storyboard>
+                                    </VisualTransition>
+                                    <VisualTransition From="Pressed"
+                                                      To="Normal">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="Grid" />
+                                        </Storyboard>
+                                    </VisualTransition>
+                                </VisualStateGroup.Transitions>
+                                <VisualState x:Name="Normal" />
+                                <VisualState x:Name="MouseOver" />
+                                <VisualState x:Name="PointerOver" />
+                                <VisualState x:Name="Pressed">
+                                    <Storyboard>
+                                        <PointerDownThemeAnimation Storyboard.TargetName="Grid" />
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Background"
+                                                                       Storyboard.TargetName="CheckBackground">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource CheckBoxPressedBackgroundThemeBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Disabled">
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0"
+                                                         To="0.5"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         Storyboard.TargetName="CheckBackground" />
+                                        <DoubleAnimation Duration="0"
+                                                         To="0.5"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         Storyboard.TargetName="FollowingText"/>
+
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="CheckedPointerOver" />
+                                <VisualState x:Name="CheckedPressed" />
+                                <VisualState x:Name="CheckedDisabled">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush)"
+                                                                       Storyboard.TargetName="CheckBackground">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource PhoneAccentBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground)"
+                                                                       Storyboard.TargetName="FollowingText">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource PhoneAccentBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimation Duration="0"
+                                                         To="0.5"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         Storyboard.TargetName="FollowingText"
+                                                          />
+                                        <DoubleAnimation Duration="0"
+                                                         To="0.5"
+                                                         Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                         Storyboard.TargetName="CheckBackground"
+                                                          />
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="IndeterminatePointerOver" />
+                                <VisualState x:Name="IndeterminatePressed" />
+                                <VisualState x:Name="IndeterminateDisabled" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="CheckStates">
+                                <VisualState x:Name="Checked">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(TextBlock.Foreground)"
+                                                                       Storyboard.TargetName="FollowingText">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource PhoneAccentBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(Border.BorderBrush)"
+                                                                       Storyboard.TargetName="CheckBackground">
+                                            <DiscreteObjectKeyFrame KeyTime="0"
+                                                                    Value="{ThemeResource PhoneAccentBrush}" />
+                                        </ObjectAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="Unchecked" />
+                                <VisualState x:Name="Indeterminate">
+                                    <Storyboard>
+                                    </Storyboard>
+                                </VisualState>
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid x:Name="Grid">
+                            <Border x:Name="CheckBackground"
+                            	BorderThickness="{TemplateBinding BorderThickness}"
+                            	Background="{TemplateBinding Background}"
+                            	HorizontalAlignment="Left"
+                            	IsHitTestVisible="False"
+                            	VerticalAlignment="Center"
+                            	BorderBrush="{ThemeResource SubtleBrush}"
+                            	CornerRadius="10">
+                            	<TextBlock Text="{TemplateBinding FollowingText}"
+                            		Padding="4,0,4,2"
+                            		VerticalAlignment="Top"
+                            		Margin="4,0"
+                            		Foreground="{ThemeResource SubtleBrush}"
+                            		x:Name="FollowingText" />
+                            </Border>
+                        </Grid>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

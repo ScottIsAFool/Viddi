@@ -11,6 +11,9 @@
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding Profile, Source={StaticResource Locator}}">
+    <views:BasePage.Resources>
+        
+    </views:BasePage.Resources>
     <interactivity:Interaction.Behaviors>
         <behaviours:StatusBarBehavior IsVisible="False" />
         <core:EventTriggerBehavior EventName="Loaded">
@@ -33,7 +36,7 @@
 
     <Grid>
         <controls:ProfileHeaderControl DataContext="{Binding EmptyUser}"
-                                       Visibility="{Binding Profile.ProgressIsVisible, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"/>
+                                       Visibility="{Binding Profile.ProgressIsVisible, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}" />
         <controls:InitialisingListView ItemsSource="{Binding Items}"
                                        ItemTemplate="{StaticResource VideoTemplate}"
                                        IsEmpty="{Binding IsEmpty}"
@@ -43,28 +46,31 @@
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
                         <controls:ProfileHeaderControl DataContext="{Binding User}" />
+                        <controls:FollowingControl IsEnabled="{Binding User.CanFollow}"
+                                                   FollowingText="{Binding User.FollowingText}"
+                                                   IsChecked="{Binding User.IsFollowedByMe, Mode=TwoWay}" 
+                                                   Margin="19,-5,19,0"/>
                         <TextBlock Text="This user hasn't submitted any content yet."
                                    Style="{StaticResource BodyTextBlockStyle}"
                                    Margin="19"
                                    TextWrapping="WrapWholeWords"
                                    TextAlignment="Center"
-                                   Visibility="{Binding IsEmpty, Converter={StaticResource VisibilityConverter}}"/>
+                                   Visibility="{Binding IsEmpty, Converter={StaticResource VisibilityConverter}}" />
                     </StackPanel>
                 </DataTemplate>
             </controls:InitialisingListView.HeaderTemplate>
             <controls:InitialisingListView.FooterTemplate>
                 <DataTemplate>
-                    <controls:LoadMoreControl/>
+                    <controls:LoadMoreControl />
                 </DataTemplate>
             </controls:InitialisingListView.FooterTemplate>
             <controls:InitialisingListView.EmptyContent>
                 <DataTemplate>
                     <Grid>
-                        
+
                     </Grid>
                 </DataTemplate>
             </controls:InitialisingListView.EmptyContent>
         </controls:InitialisingListView>
-
     </Grid>
 </views:BasePage>

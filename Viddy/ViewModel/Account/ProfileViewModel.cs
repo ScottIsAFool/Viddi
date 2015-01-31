@@ -47,6 +47,15 @@ namespace Viddy.ViewModel.Account
             }
         }
 
+        public override Task PageLoaded()
+        {
+            if (User != null)
+            {
+                User.RefreshFollowerDetails().ConfigureAwait(false);
+            }
+
+            return base.PageLoaded();
+        }
 
         public override Task<VideosResponse> GetVideos(int offset)
         {
