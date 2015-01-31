@@ -21,7 +21,13 @@ namespace Viddy.Services
         {
             _settingsService = settingsService;
             _vidMeClient = vidMeClient;
+            _vidMeClient.AuthDetailsUpdated += VidMeClientOnAuthDetailsUpdated;
             Current = this;
+        }
+
+        private void VidMeClientOnAuthDetailsUpdated(object sender, AuthResponse authResponse)
+        {
+            SetAuthenticationInfo(authResponse);
         }
 
         public void StartService()
@@ -36,10 +42,7 @@ namespace Viddy.Services
         {
             AuthenticationInfo = authInfo;
             if (AuthenticationInfo == null
-                || (AuthenticationInfo != null
-                && AuthenticationInfo.Auth != null
-                && AuthenticationInfo.Auth.Expires.HasValue
-                && AuthenticationInfo.Auth.Expires.Value < DateTime.Now))
+                || AuthenticationInfo.Auth == null)
             {
                 return;
             }

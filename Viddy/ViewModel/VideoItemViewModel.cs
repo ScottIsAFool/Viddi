@@ -113,6 +113,11 @@ namespace Viddy.ViewModel
             }
         }
 
+        public string Date
+        {
+            get { return Video != null && Video.DateCreated.HasValue ? Utils.DaysAgo(Video.DateCreated.Value) : string.Empty; }
+        }
+
         public bool IsAnonymous
         {
             get { return Video == null || string.IsNullOrEmpty(Video.UserId) || Video.User == null; }
