@@ -73,6 +73,11 @@
                                            IsEmpty="{Binding IsEmpty}"
                                            IsInitialising="{Binding ProgressIsVisible}"
                                            ItemTemplateSelector="{StaticResource VideoTemplateSelector}">
+                <controls:InitialisingListView.FooterTemplate>
+                    <DataTemplate>
+                        <controls:LoadMoreControl />
+                    </DataTemplate>
+                </controls:InitialisingListView.FooterTemplate>
                 <controls:InitialisingListView.EmptyContent>
                     <DataTemplate>
                         <Grid Margin="19,12,19,0">

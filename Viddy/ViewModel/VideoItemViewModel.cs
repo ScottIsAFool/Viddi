@@ -157,6 +157,18 @@ namespace Viddy.ViewModel
             get { return Video != null ? Video.CommentCount : 0; }
         }
 
+        public void RemoveComment(CommentViewModel comment)
+        {
+            if (Comments == null)
+            {
+                return;
+            }
+
+            Comments.Remove(comment);
+            Video.CommentCount--;
+            RaisePropertyChanged(()=> CommentCount);
+        }
+
         public RelayCommand DeleteCommand
         {
             get

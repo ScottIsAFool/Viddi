@@ -98,7 +98,7 @@ namespace Viddy.ViewModel
 
                         if (await _vidMeClient.DeleteCommentAsync(Comment.CommentId))
                         {
-                            _videoItemViewModel.Comments.Remove(this);
+                            _videoItemViewModel.RemoveComment(this);
                         }
                     }
                     catch (Exception ex)

@@ -11,11 +11,20 @@
 
     <Grid MinHeight="60"
           Margin="0,0,0,12">
-        <Grid Margin="19,0">
+        <Grid Margin="19,0"
+              Holding="ContainerGrid_OnHolding">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
+
+            <FlyoutBase.AttachedFlyout>
+                <MenuFlyout>
+                    <MenuFlyoutItem Margin="12,0,0,0"
+                                    Command="{Binding DeleteCommand}"
+                                    Text="delete" />
+                </MenuFlyout>
+            </FlyoutBase.AttachedFlyout>
 
             <localControls:CustomButton Style="{StaticResource EmptyButtonStyle}"
                                         TapCommand="{Binding NavigateTouserCommand}"

@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -95,14 +97,20 @@ namespace Viddy.ViewModel
 
                 var allVideos = response.Videos.Select(x => new VideoItemViewModel(x, this)).ToList();
 
+                IEnumerable<IListType> videoList;
+
                 if (IncludeReviewsInFeed() && !allVideos.IsNullOrEmpty())
                 {
-                    allVideos.AddEveryOften(10, 2, ReviewService.Current.ReviewViewModel);
+                    videoList = allVideos.AddEveryOften(10, 2, ReviewService.Current.ReviewViewModel);
+                }
+                else
+                {
+                    videoList = allVideos;
                 }
 
                 //allVideos.AddEveryOften(10, 2, new AdViewModel(), 5, true);
 
-                Items.AddRange(allVideos);
+                Items.AddRange(videoList);
 
                 IsEmpty = Items.IsNullOrEmpty();
                 CanLoadMore = Items.Count + 1 < response.Page.Total;
