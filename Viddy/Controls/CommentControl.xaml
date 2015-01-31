@@ -32,15 +32,18 @@
                         Margin="12,0,0,0"
                         Grid.Column="1"
                         VerticalAlignment="Top">
-                <TextBlock Text="{Binding Username, FallbackValue=scottisafool}"
-                           Style="{StaticResource BodyTextBlockStyle}"
-                           TextTrimming="CharacterEllipsis"
-                           FontWeight="Bold" />
-                
+                <localControls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                            TapCommand="{Binding NavigateTouserCommand}"
+                                            VerticalAlignment="Top">
+                    <TextBlock Text="{Binding Username, FallbackValue=scottisafool}"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               TextTrimming="CharacterEllipsis"
+                               FontWeight="Bold" />
+                </localControls:CustomButton>
+
                 <TextBlock Text="{Binding Comment.Body, FallbackValue='This is the comment text and should appear as such'}"
-                           Style="{StaticResource BodyTextBlockStyle}"
-                           />
-                
+                           Style="{StaticResource BodyTextBlockStyle}" />
+
                 <TextBlock Text="{Binding Date, FallbackValue='an hour ago'}"
                            Style="{StaticResource BodyTextBlockStyle}"
                            FontSize="{StaticResource TextStyleSmallFontSize}"
