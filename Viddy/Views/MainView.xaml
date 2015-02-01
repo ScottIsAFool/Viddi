@@ -35,7 +35,8 @@
                         <SymbolIcon Symbol="Refresh"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
-                <AppBarButton Label="search">
+                <AppBarButton Label="search"
+                              Command="{Binding NavigateToSearchCommand}">
                     <AppBarButton.Icon>
                         <SymbolIcon Symbol="Find" />
                     </AppBarButton.Icon>

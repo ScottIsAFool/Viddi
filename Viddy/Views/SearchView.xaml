@@ -1,0 +1,69 @@
+﻿<local:BasePage x:Class="Viddy.Views.SearchView"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:local="using:Viddy.Views"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:controls="using:Viddy.Controls"
+                xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+                xmlns:behaviours="using:Viddy.Behaviours"
+                mc:Ignorable="d"
+                Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                DataContext="{Binding Search, Source={StaticResource Locator}}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <Grid Background="{ThemeResource HeaderBrush}"
+              Height="80">
+            <Grid Margin="19,0"
+                  HorizontalAlignment="Stretch">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <controls:ProfilePictureControl AvatarUrl="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}}" />
+
+                    <TextBox PlaceholderText="enter something to search for"
+                             Text="{Binding SearchText, Mode=TwoWay}"
+                             VerticalAlignment="Center"
+                             Margin="12,0,0,0"
+                             Background="Transparent"
+                             x:Name="SearchBox"
+                             HorizontalAlignment="Stretch"
+                             IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
+                             Grid.Column="1">
+                        <interactivity:Interaction.Behaviors>
+                            <behaviours:UpdateTextBindingOnPropertyChanged EnterHitCommand="{Binding SearchCommand}"/>
+                        </interactivity:Interaction.Behaviors>
+                    </TextBox>
+                </Grid>
+            </Grid>
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <controls:InitialisingListView ItemsSource="{Binding Items}"
+                                           IsInitialising="{Binding ProgressIsVisible}"
+                                           IsEmpty="{Binding IsEmpty}"
+                                           ItemTemplateSelector="{StaticResource VideoTemplateSelector}">
+                <controls:InitialisingListView.FooterTemplate>
+                    <DataTemplate>
+                        <controls:LoadMoreControl />
+                    </DataTemplate>
+                </controls:InitialisingListView.FooterTemplate>
+                <controls:InitialisingListView.HeaderTemplate>
+                    <DataTemplate>
+                        <CheckBox IsChecked="{Binding IncludeNsfw, Mode=TwoWay}"
+                                  Content="Include NSFW videos" 
+                                  Margin="19,0"/>
+                    </DataTemplate>
+                </controls:InitialisingListView.HeaderTemplate>
+            </controls:InitialisingListView>
+        </Grid>
+    </Grid>
+</local:BasePage>
