@@ -296,6 +296,23 @@ namespace Viddy.ViewModel
         public string CommentText { get; set; }
         public bool AddingComment { get; set; }
 
+        public string Background
+        {
+            get
+            {
+                if (Video != null && !string.IsNullOrEmpty(Video.Colors))
+                {
+                    var colours = Video.Colors.Split(',');
+                    if (!colours.IsNullOrEmpty())
+                    {
+                        return colours.First();
+                    }
+                }
+
+                return "#FFFFFFF";
+            }
+        }
+
         public bool CanAddComment
         {
             get

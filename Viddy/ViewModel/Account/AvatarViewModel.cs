@@ -20,13 +20,6 @@ namespace Viddy.ViewModel.Account
         public AvatarViewModel(IVidMeClient vidMeClient)
         {
             _vidMeClient = vidMeClient;
-
-            AuthenticationService.Current.UserSignedIn += UserStateChanged;
-            AuthenticationService.Current.UserSignedOut += UserStateChanged;
-        }
-
-        private void UserStateChanged(object sender, EventArgs eventArgs)
-        {
         }
 
         public void ChangeAvatar()

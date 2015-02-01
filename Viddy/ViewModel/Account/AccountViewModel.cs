@@ -1,15 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
-using System.Linq;
 using System.Threading.Tasks;
 using Windows.Foundation.Collections;
 using Windows.Security.Authentication.Web;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using ThemeManagerRt;
-using Viddy.Extensions;
 using Viddy.Messaging;
 using Viddy.Services;
 using Viddy.Views;
