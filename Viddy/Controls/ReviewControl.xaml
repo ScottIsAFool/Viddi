@@ -1,0 +1,91 @@
+﻿<UserControl x:Class="Viddy.Controls.ReviewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:viewModel="using:Viddy.ViewModel"
+             xmlns:controls="using:Viddy.Controls"
+             mc:Ignorable="d"
+             d:DesignHeight="200"
+             d:DesignWidth="480"
+             d:DataContext="{d:DesignInstance d:Type=viewModel:ReviewViewModel}">
+
+
+    <Grid Background="SkyBlue">
+        <Grid Margin="19">
+            <Grid x:Name="ReviewGrid"
+                  Visibility="{Binding ShowFeedback, Converter={StaticResource InverseVisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Vertical"
+                            Grid.ColumnSpan="2">
+                    <TextBlock Text="Fancy a review?"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               FontWeight="Bold" />
+                    <TextBlock Text="Thanks for using Viddy, we hope you're enjoying it. Would you fancy giving the app a quick review?"
+                               Style="{StaticResource BodyTextBlockStyle}" />
+                </StackPanel>
+
+                <controls:CustomButton Grid.Row="1"
+                                       Grid.Column="0"
+                                       VerticalAlignment="Bottom"
+                                       HorizontalAlignment="Stretch"
+                                       Content="no"
+                                       Margin="0,0,6,0" 
+                                       TapCommand="{Binding NoReviewCommand}"/>
+
+                <controls:CustomButton Grid.Row="1"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Bottom"
+                                       HorizontalAlignment="Stretch"
+                                       Content="yes"
+                                       Margin="6,0,0,0" 
+                                       TapCommand="{Binding YesReviewCommand}"/>
+            </Grid>
+
+            <Grid x:Name="FeedbackGrid"
+                  Visibility="{Binding ShowFeedback, Converter={StaticResource VisibilityConverter}}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Vertical"
+                            Grid.ColumnSpan="2">
+                    <TextBlock Text="Fancy a review?"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               FontWeight="Bold" />
+                    <TextBlock Text="Thanks for using Viddy, we hope you're enjoying it. Would you fancy giving the app a quick review?"
+                               Style="{StaticResource BodyTextBlockStyle}" />
+                </StackPanel>
+
+                <controls:CustomButton Grid.Row="1"
+                                       Grid.Column="0"
+                                       VerticalAlignment="Bottom"
+                                       HorizontalAlignment="Stretch"
+                                       Content="no"
+                                       Margin="0,0,6,0"
+                                       TapCommand="{Binding NoFeedbackCommand}" />
+
+                <controls:CustomButton Grid.Row="1"
+                                       Grid.Column="1"
+                                       VerticalAlignment="Bottom"
+                                       HorizontalAlignment="Stretch"
+                                       Content="yes"
+                                       Margin="6,0,0,0"
+                                       TapCommand="{Binding YesFeedbackCommand}" />
+            </Grid>
+        </Grid>
+    </Grid>
+</UserControl>

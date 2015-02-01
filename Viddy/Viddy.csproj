@@ -110,6 +110,9 @@
       <DependentUpon>ProfileHeaderControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ProfilePictureControl.cs" />
+    <Compile Include="Controls\ReviewControl.xaml.cs">
+      <DependentUpon>ReviewControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\VideoControl.xaml.cs">
       <DependentUpon>VideoControl.xaml</DependentUpon>
     </Compile>
@@ -240,6 +243,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\ProfileHeaderControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ReviewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

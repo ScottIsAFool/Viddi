@@ -107,9 +107,7 @@
             </DataTemplate>
 
             <DataTemplate x:Key="ReviewTemplate">
-                <Rectangle Stretch="UniformToFill"
-                           Fill="Red"
-                           Height="200" />
+                <controls:ReviewControl/>
             </DataTemplate>
 
             <DataTemplate x:Key="AdTemplate">
