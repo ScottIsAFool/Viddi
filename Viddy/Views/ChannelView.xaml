@@ -33,8 +33,8 @@
     </local:BasePage.BottomAppBar>
 
     <Grid>
-        <controls:ProfileHeaderControl DataContext="{Binding EmptyUser}"
-                                       Visibility="{Binding Profile.ProgressIsVisible, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}" />
+        <controls:ProfileHeaderControl DataContext="{Binding EmptyChannel}"
+                                       Visibility="{Binding Channel.ProgressIsVisible, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}" />
         <controls:InitialisingListView ItemsSource="{Binding Items}"
                                        ItemTemplate="{StaticResource VideoTemplate}"
                                        IsEmpty="{Binding IsEmpty}"
@@ -43,11 +43,11 @@
             <controls:InitialisingListView.HeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
-                        <controls:ProfileHeaderControl DataContext="{Binding User}" />
-                        <controls:FollowingControl IsEnabled="{Binding User.CanFollow}"
-                                                   FollowingText="{Binding User.FollowingText}"
-                                                   IsChecked="{Binding User.IsFollowedByMe, Mode=TwoWay}"
-                                                   Margin="19,-5,19,0" />
+                        <controls:ProfileHeaderControl DataContext="{Binding Channel}" />
+                        <controls:FollowingControl IsEnabled="{Binding Channel.CanFollow}"
+                                                   FollowingText="{Binding Channel.FollowingText}"
+                                                   IsChecked="{Binding Channel.IsFollowedByMe, Mode=TwoWay}"
+                                                   Margin="19,-5,19,12" />
                         <TextBlock Text="This user hasn't submitted any content yet."
                                    Style="{StaticResource BodyTextBlockStyle}"
                                    Margin="19"

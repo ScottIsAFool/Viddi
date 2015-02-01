@@ -9,5 +9,7 @@ namespace Viddy.ViewModel.Item
         string AvatarUrl { get; }
         string Name { get; }
         string UserVideoCount { get; }
+        bool DisplayBio { get; }
+        bool DisplayByLine { get; }
     }
 }

@@ -8,7 +8,7 @@ using VidMePortable.Model;
 
 namespace Viddy.ViewModel.Item
 {
-    public class UserViewModel : ViewModelBase, IProfileViewModel
+    public class UserViewModel : ViewModelBase, IProfileViewModel, IFollowViewModel
     {
         private readonly IVidMeClient _vidMeClient;
         public User User { get; set; }
@@ -156,7 +156,7 @@ namespace Viddy.ViewModel.Item
 
         public bool DisplayByLine
         {
-            get { return User != null && !string.IsNullOrEmpty(UserFollowers) && !string.IsNullOrEmpty(UserPlays) && !string.IsNullOrEmpty(UserVideoCount); }
+            get { return User != null && (!string.IsNullOrEmpty(UserFollowers) || !string.IsNullOrEmpty(UserPlays) || !string.IsNullOrEmpty(UserVideoCount)); }
         }
     }
 }
