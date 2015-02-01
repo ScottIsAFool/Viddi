@@ -49,6 +49,17 @@ namespace Viddy.ViewModel
             }
         }
 
+        public RelayCommand NavigateToChannelCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    
+                });
+            }
+        }
+
         protected override void WireMessages()
         {
             Messenger.Default.Register<VideoMessage>(this, m =>

@@ -50,10 +50,8 @@
                            Style="{StaticResource BodyTextBlockStyle}"
                            VerticalAlignment="Bottom"
                            HorizontalAlignment="Left"
-                           Margin="19,0,0,19">
-                                    <Run Text="{Binding Video.ViewCount}" />
-                                    <Run Text="plays" />
-                </TextBlock>
+                           Margin="19,0,0,19"
+                           Text="{Binding Plays}"/>
 
                 <StackPanel Orientation="Horizontal"
                             VerticalAlignment="Bottom"

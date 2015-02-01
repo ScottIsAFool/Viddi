@@ -112,6 +112,16 @@ namespace Viddy.ViewModel
             }
         }
 
+        public string ChannelInfo
+        {
+            get { return Video != null && !string.IsNullOrEmpty(Video.ChannelId) ? Video.ChannelId : null; }
+        }
+
+        public string Plays
+        {
+            get { return Video != null ? string.Format("{0} plays", Video.ViewCount) : "0 plays"; }
+        }
+
         public string Date
         {
             get { return Video != null && Video.DateCreated.HasValue ? Utils.DaysAgo(Video.DateCreated.Value) : string.Empty; }
