@@ -1,5 +1,6 @@
 ﻿using Cimbalino.Toolkit.Services;
 using Viddy.ViewModel;
+using Viddy.ViewModel.Item;
 
 namespace Viddy.Services
 {

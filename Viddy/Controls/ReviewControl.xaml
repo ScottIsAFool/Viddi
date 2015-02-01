@@ -5,10 +5,11 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:viewModel="using:Viddy.ViewModel"
              xmlns:controls="using:Viddy.Controls"
+             xmlns:item="using:Viddy.ViewModel.Item"
              mc:Ignorable="d"
              Height="200"
              d:DesignWidth="480"
-             d:DataContext="{d:DesignInstance d:Type=viewModel:ReviewViewModel}">
+             d:DataContext="{d:DesignInstance d:Type=item:ReviewViewModel}">
 
 
     <Grid Background="SkyBlue">

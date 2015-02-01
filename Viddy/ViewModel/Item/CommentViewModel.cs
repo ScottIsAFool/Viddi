@@ -10,7 +10,7 @@ using Viddy.Views.Account;
 using VidMePortable;
 using VidMePortable.Model;
 
-namespace Viddy.ViewModel
+namespace Viddy.ViewModel.Item
 {
     public class CommentViewModel : ViewModelBase, IListType
     {

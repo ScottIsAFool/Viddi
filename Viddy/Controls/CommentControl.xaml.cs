@@ -2,6 +2,7 @@
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
 using Viddy.ViewModel;
+using Viddy.ViewModel.Item;
 
 namespace Viddy.Controls
 {

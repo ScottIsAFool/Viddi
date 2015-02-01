@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Messaging;
+using Viddy.ViewModel.Item;
 using Viddy.Views.Account;
 
 namespace Viddy.ViewModel

@@ -3,7 +3,7 @@ using GalaSoft.MvvmLight.Messaging;
 using Viddy.Model;
 using Viddy.Services;
 
-namespace Viddy.ViewModel
+namespace Viddy.ViewModel.Item
 {
     public class ReviewViewModel : ViewModelBase, IListType
     {

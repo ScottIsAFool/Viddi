@@ -6,7 +6,7 @@ using Viddy.Services;
 using VidMePortable;
 using VidMePortable.Model;
 
-namespace Viddy.ViewModel
+namespace Viddy.ViewModel.Item
 {
     public class UserViewModel : ViewModelBase
     {

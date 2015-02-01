@@ -2,6 +2,7 @@
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Messaging;
+using Viddy.ViewModel.Item;
 using VidMePortable;
 using VidMePortable.Model;
 using VidMePortable.Model.Responses;
