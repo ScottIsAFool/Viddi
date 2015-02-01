@@ -3,7 +3,9 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Messaging;
 using Viddy.ViewModel.Item;
+using Viddy.Views;
 using Viddy.Views.Account;
+using VidMePortable.Model;
 
 namespace Viddy.ViewModel
 {
@@ -56,7 +58,8 @@ namespace Viddy.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    
+                    Messenger.Default.Send(new ChannelMessage(Video.Channel));
+                    _navigationService.Navigate<ChannelView>();
                 });
             }
         }

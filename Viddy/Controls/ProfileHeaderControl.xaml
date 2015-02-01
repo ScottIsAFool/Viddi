@@ -27,7 +27,7 @@
         </Grid.RowDefinitions>
         <Grid Height="200"
               Background="{ThemeResource HeaderBrush}">
-            <Image Source="{Binding User.CoverUrl}"
+            <Image Source="{Binding CoverUrl}"
                    Stretch="UniformToFill"
                    Height="160"
                    VerticalAlignment="Top" />
@@ -37,9 +37,9 @@
                         Margin="19,0">
                 <local:ProfilePictureControl Height="80"
                                              Width="80"
-                                             AvatarUrl="{Binding User.AvatarUrl}"
+                                             AvatarUrl="{Binding AvatarUrl}"
                                              BorderBrush="{ThemeResource ApplicationPageBackgroundThemeBrush}" />
-                <TextBlock Text="{Binding User.Username}"
+                <TextBlock Text="{Binding Name}"
                            Style="{StaticResource SubheaderTextBlockStyle}"
                            VerticalAlignment="Bottom"
                            Margin="6,0" />
@@ -49,7 +49,7 @@
         <Grid Grid.Row="1"
               Margin="19,12">
             <StackPanel Orientation="Vertical">
-                <TextBlock Text="{Binding User.Bio}"
+                <TextBlock Text="{Binding Description}"
                            Style="{StaticResource BodyTextBlockStyle}"
                            FontSize="{StaticResource TextStyleMediumFontSize}"
                            TextWrapping="WrapWholeWords"

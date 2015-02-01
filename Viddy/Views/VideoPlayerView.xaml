@@ -104,8 +104,8 @@
                         
                         <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
                                                TapCommand="{Binding NavigateToChannelCommand}"
-                                               Visibility="{Binding Video.ChannelInfo, Converter={StaticResource NullToVisibilityConverter}}">
-                            <TextBlock Text="{Binding Video.ChannelInfo}"
+                                               Visibility="{Binding Video.Channel, Converter={StaticResource NullToVisibilityConverter}}">
+                            <TextBlock Text="{Binding Video.Channel.Name}"
                                        Style="{StaticResource BodyTextBlockStyle}"
                                        FontWeight="Bold"
                                        Margin="6,0" />

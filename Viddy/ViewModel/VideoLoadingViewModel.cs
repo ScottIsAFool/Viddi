@@ -97,25 +97,28 @@ namespace Viddy.ViewModel
                     Items = new ObservableCollection<IListType>();
                 }
 
-                var allVideos = response.Videos.Select(x => new VideoItemViewModel(x, this)).ToList();
-
-                IEnumerable<IListType> videoList;
-
-                if (IncludeReviewsInFeed() && !allVideos.IsNullOrEmpty())
+                if (response != null && response.Videos != null)
                 {
-                    videoList = allVideos.AddEveryOften(10, 2, ReviewService.Current.ReviewViewModel);
-                }
-                else
-                {
-                    videoList = allVideos;
-                }
+                    var allVideos = response.Videos.Select(x => new VideoItemViewModel(x, this)).ToList();
 
-                //allVideos.AddEveryOften(10, 2, new AdViewModel(), 5, true);
+                    IEnumerable<IListType> videoList;
 
-                Items.AddRange(videoList);
+                    if (IncludeReviewsInFeed() && !allVideos.IsNullOrEmpty())
+                    {
+                        videoList = allVideos.AddEveryOften(10, 2, ReviewService.Current.ReviewViewModel);
+                    }
+                    else
+                    {
+                        videoList = allVideos;
+                    }
+
+                    //allVideos.AddEveryOften(10, 2, new AdViewModel(), 5, true);
+
+                    Items.AddRange(videoList);
+                }
 
                 IsEmpty = Items.IsNullOrEmpty();
-                CanLoadMore = Items.Count + 1 < response.Page.Total;
+                CanLoadMore = response != null && response.Page != null && Items.Count + 1 < response.Page.Total;
                 _videosLoaded = true;
             }
             catch (Exception ex)

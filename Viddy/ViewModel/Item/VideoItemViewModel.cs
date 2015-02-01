@@ -34,49 +34,45 @@ namespace Viddy.ViewModel.Item
             _videoLoadingViewModel = videoLoadingViewModel;
             Video = video;
 
+            if (Video != null && Video.Channel != null)
+            {
+                Channel = new ChannelItemViewModel(Video.Channel);
+            }
+
             if (IsInDesignMode)
             {
+                var user = new User
+                {
+                    UserId = "59739",
+                    Username = "PunkHack",
+                    AvatarUrl = "https://d1wst0behutosd.cloudfront.net/avatars/59739.gif?gv2r1420954820",
+                    CoverUrl = "https://d1wst0behutosd.cloudfront.net/channel_covers/59739.jpg?v1r1420500373",
+                    FollowerCount = 1200,
+                    LikesCount = "92",
+                    VideoCount = 532,
+                    VideoViews = "71556",
+                    VideosScores = 220,
+                    Bio = "Some bio information"
+                };
                 Comments = new ObservableCollection<CommentViewModel>
                 {
                     new CommentViewModel(new Comment
                     {
                         Body = "This is a comment",
-                        User = new User
-                        {
-                            UserId = "59739",
-                            Username = "PunkHack",
-                            AvatarUrl = "https://d1wst0behutosd.cloudfront.net/avatars/59739.gif?gv2r1420954820",
-                            CoverUrl = "https://d1wst0behutosd.cloudfront.net/channel_covers/59739.jpg?v1r1420500373",
-                            FollowerCount = 1200,
-                            LikesCount = "92",
-                            VideoCount = 532,
-                            VideoViews = "71556",
-                            VideosScores = 220,
-                            Bio = "Some bio information"
-                        }
+                        User = user
                     }, this)
                 };
 
                 Video = new Video
                 {
-                    User = new User
-                    {
-                        UserId = "59739",
-                        Username = "PunkHack",
-                        AvatarUrl = "https://d1wst0behutosd.cloudfront.net/avatars/59739.gif?gv2r1420954820",
-                        CoverUrl = "https://d1wst0behutosd.cloudfront.net/channel_covers/59739.jpg?v1r1420500373",
-                        FollowerCount = 1200,
-                        LikesCount = "92",
-                        VideoCount = 532,
-                        VideoViews = "71556",
-                        VideosScores = 220,
-                        Bio = "Some bio information"
-                    }
+                    User = user
                 };
             }
         }
 
         public Video Video { get; set; }
+
+        public ChannelItemViewModel Channel { get; set; }
 
         public ObservableCollection<CommentViewModel> Comments { get; set; }
         public bool IsEmpty { get; set; }

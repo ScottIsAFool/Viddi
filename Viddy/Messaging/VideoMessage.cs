@@ -1,5 +1,4 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
-using Viddy.ViewModel;
 using Viddy.ViewModel.Item;
 
 namespace Viddy.Messaging
