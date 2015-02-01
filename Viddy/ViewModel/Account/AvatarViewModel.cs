@@ -6,6 +6,7 @@ using Windows.Storage.Pickers;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Services;
 using VidMePortable;
+using VidMePortable.Model;
 
 namespace Viddy.ViewModel.Account
 {
@@ -13,6 +14,8 @@ namespace Viddy.ViewModel.Account
     {
         private const string DefaultAvatar = "/Assets/Defaults/UserLoginDefault.png";
         private readonly IVidMeClient _vidMeClient;
+
+        private PictureType _pictureType;
 
         public AvatarViewModel(IVidMeClient vidMeClient)
         {
@@ -28,7 +31,21 @@ namespace Viddy.ViewModel.Account
 
         public void ChangeAvatar()
         {
-            var filePicker = new FileOpenPicker { ViewMode = PickerViewMode.Thumbnail, SuggestedStartLocation = PickerLocationId.PicturesLibrary };
+            _pictureType = PictureType.Avatar;
+
+            LaunchFilePicker();
+        }
+
+        public void ChangeCover()
+        {
+            _pictureType = PictureType.Cover;
+
+            LaunchFilePicker();
+        }
+
+        private static void LaunchFilePicker()
+        {
+            var filePicker = new FileOpenPicker {ViewMode = PickerViewMode.Thumbnail, SuggestedStartLocation = PickerLocationId.PicturesLibrary};
             filePicker.FileTypeFilter.Add(".jpg");
             filePicker.FileTypeFilter.Add(".jpeg");
             filePicker.FileTypeFilter.Add(".png");
@@ -37,18 +54,19 @@ namespace Viddy.ViewModel.Account
         }
 
         public bool ChangingAvatar { get; set; }
+        public bool ChangingCover { get; set; }
 
-        private async Task UpdateAvatar(IStorageFile file)
+        private async Task UpdatePicture(IStorageFile file)
         {
             try
             {
-                ChangingAvatar = true;
+                SetChanging(true);
 
                 using (var stream = await file.OpenAsync(FileAccessMode.Read))
                 {
                     using (var actualStream = stream.AsStream())
                     {
-                        var user = await _vidMeClient.UpdateAvatarAsync(AuthenticationService.Current.LoggedInUserId, actualStream, file.ContentType, file.Name);
+                        var user = await SendPictureData(AuthenticationService.Current.LoggedInUserId, actualStream, file.ContentType, file.Name);
                         if (user != null)
                         {
                             var auth = AuthenticationService.Current.AuthenticationInfo;
@@ -63,7 +81,26 @@ namespace Viddy.ViewModel.Account
 
             }
 
-            ChangingAvatar = false;
+            SetChanging(false);
+        }
+
+        private void SetChanging(bool value)
+        {
+            if (_pictureType == PictureType.Avatar)
+            {
+                ChangingAvatar = value;
+            }
+            else
+            {
+                ChangingCover = value;
+            }
+        }
+
+        private Task<User> SendPictureData(string loggedInUserId, Stream actualStream, string contentType, string name)
+        {
+            return _pictureType == PictureType.Avatar 
+                ? _vidMeClient.UpdateAvatarAsync(loggedInUserId, actualStream, contentType, name) 
+                : _vidMeClient.UpdateCoverAsync(loggedInUserId, actualStream, contentType, name);
         }
 
         protected override void WireMessages()
@@ -73,9 +110,16 @@ namespace Viddy.ViewModel.Account
                 if (m.Notification.Equals(Constants.Messages.ProfileFileMsg))
                 {
                     var file = m.Sender as IStorageFile;
-                    await UpdateAvatar(file);
+                    
+                    await UpdatePicture(file);
                 }
             });
+        }
+
+        private enum PictureType
+        {
+            Avatar,
+            Cover
         }
     }
 }
