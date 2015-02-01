@@ -11,8 +11,7 @@
              d:DataContext="{d:DesignInstance d:Type=viewModel:ReviewViewModel}">
 
 
-    <Grid Background="SkyBlue"
-          Visibility="{Binding HideControl, Converter={StaticResource InverseVisibilityConverter}}">
+    <Grid Background="SkyBlue">
         <Grid Margin="19">
             <Grid x:Name="ReviewGrid"
                   Visibility="{Binding ShowFeedback, Converter={StaticResource InverseVisibilityConverter}}">

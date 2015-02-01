@@ -10,7 +10,6 @@ namespace Viddy.ViewModel
         public ListType ListType { get { return ListType.Review; } }
 
         public bool ShowFeedback { get; set; }
-        public bool HideControl { get; set; }
 
         public RelayCommand YesReviewCommand
         {
@@ -51,16 +50,12 @@ namespace Viddy.ViewModel
         {
             get
             {
-                return new RelayCommand(() =>
-                {
-                    CloseControl();
-                });
+                return new RelayCommand(CloseControl);
             }
         }
 
-        private void CloseControl()
+        private static void CloseControl()
         {
-            HideControl = true;
             Messenger.Default.Send(new NotificationMessage(Constants.Messages.HideReviewsMsg));
         }
     }

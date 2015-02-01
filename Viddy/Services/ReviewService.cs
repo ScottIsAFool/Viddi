@@ -38,7 +38,7 @@ namespace Viddy.Services
 
         public bool CanShowReviews
         {
-            get { return _runCount > 5 && !_alreadyResponded; }
+            get { return _runCount > 5 && _runCount % 5 == 0 && !_alreadyResponded; }
         }
 
         private void GetAlreadyResponded()
