@@ -1,4 +1,5 @@
 ﻿using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using Viddy.Model;
 using Viddy.Services;
 
@@ -9,6 +10,7 @@ namespace Viddy.ViewModel
         public ListType ListType { get { return ListType.Review; } }
 
         public bool ShowFeedback { get; set; }
+        public bool HideControl { get; set; }
 
         public RelayCommand YesReviewCommand
         {
@@ -17,6 +19,7 @@ namespace Viddy.ViewModel
                 return new RelayCommand(() =>
                 {
                     ReviewService.Current.Responded();
+                    CloseControl();
                 });
             }
         }
@@ -50,9 +53,15 @@ namespace Viddy.ViewModel
             {
                 return new RelayCommand(() =>
                 {
-                    
+                    CloseControl();
                 });
             }
+        }
+
+        private void CloseControl()
+        {
+            HideControl = true;
+            Messenger.Default.Send(new NotificationMessage(Constants.Messages.HideReviewsMsg));
         }
     }
 }

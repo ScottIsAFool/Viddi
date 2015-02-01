@@ -6,12 +6,13 @@
              xmlns:viewModel="using:Viddy.ViewModel"
              xmlns:controls="using:Viddy.Controls"
              mc:Ignorable="d"
-             d:DesignHeight="200"
+             Height="200"
              d:DesignWidth="480"
              d:DataContext="{d:DesignInstance d:Type=viewModel:ReviewViewModel}">
 
 
-    <Grid Background="SkyBlue">
+    <Grid Background="SkyBlue"
+          Visibility="{Binding HideControl, Converter={StaticResource InverseVisibilityConverter}}">
         <Grid Margin="19">
             <Grid x:Name="ReviewGrid"
                   Visibility="{Binding ShowFeedback, Converter={StaticResource InverseVisibilityConverter}}">
@@ -63,10 +64,10 @@
 
                 <StackPanel Orientation="Vertical"
                             Grid.ColumnSpan="2">
-                    <TextBlock Text="Fancy a review?"
+                    <TextBlock Text="What about feedback?"
                                Style="{StaticResource BodyTextBlockStyle}"
                                FontWeight="Bold" />
-                    <TextBlock Text="Thanks for using Viddy, we hope you're enjoying it. Would you fancy giving the app a quick review?"
+                    <TextBlock Text="Not to worry, would you prefer to provide any feedback about the app instead?"
                                Style="{StaticResource BodyTextBlockStyle}" />
                 </StackPanel>
 

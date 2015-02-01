@@ -110,6 +110,8 @@
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment"
                             Value="Stretch" />
+                    <Setter Property="MinHeight"
+                            Value="0"/>
                 </Style>
             </Setter.Value>
         </Setter>

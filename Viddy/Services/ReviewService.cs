@@ -43,6 +43,10 @@ namespace Viddy.Services
 
         private void GetAlreadyResponded()
         {
+#if DEBUG
+            _alreadyResponded = false;
+            return;
+#endif
             var responded = _settingsService.Roaming.Get<bool>(Constants.StorageSettings.PhoneAlreadyRespondedSetting);
             _alreadyResponded = responded;
         }

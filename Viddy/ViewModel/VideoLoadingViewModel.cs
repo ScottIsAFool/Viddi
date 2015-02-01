@@ -6,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Extensions;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using Viddy.Extensions;
 using Viddy.Model;
 using Viddy.Services;
@@ -128,6 +129,27 @@ namespace Viddy.ViewModel
         protected virtual bool IncludeReviewsInFeed()
         {
             return ReviewService.Current.CanShowReviews;
+        }
+
+        protected override void WireMessages()
+        {
+            Messenger.Default.Register<NotificationMessage>(this, m =>
+            {
+                if (m.Notification.Equals(Constants.Messages.HideReviewsMsg))
+                {
+                    if (Items == null)
+                    {
+                        return;
+                    }
+
+                    var reviews = Items.Where(x => x is ReviewViewModel).ToList();
+                    if (reviews == null) return;
+                    foreach (var item in reviews)
+                    {
+                        Items.Remove(item);
+                    }
+                }
+            });
         }
     }
 }

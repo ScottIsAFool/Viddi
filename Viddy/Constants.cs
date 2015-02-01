@@ -20,6 +20,7 @@
             public const string ProfileFileMsg = "ProfileFileMsg";
             public const string VideoFileMsg = "VideoFileMsg";
             public const string AppLaunchedMsg = "AppLaunchedMsg";
+            public const string HideReviewsMsg = "HideReviewsMsg";
         }
     }
 }
