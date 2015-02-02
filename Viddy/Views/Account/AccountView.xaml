@@ -131,8 +131,7 @@
                                     Padding="2"
                                     CornerRadius="90">
                                 <Grid HorizontalAlignment="Center"
-                                      VerticalAlignment="Center"
-                                      Margin="-2,-2,0,0">
+                                      VerticalAlignment="Center">
                                     <Ellipse Width="44"
                                              Height="44"
                                              Fill="{ThemeResource ButtonBackgroundBrush}"
