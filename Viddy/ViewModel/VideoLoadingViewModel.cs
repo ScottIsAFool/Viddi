@@ -132,7 +132,11 @@ namespace Viddy.ViewModel
 
         protected virtual bool IncludeReviewsInFeed()
         {
+#if DEBUG
+            return true;
+#else
             return ReviewService.Current.CanShowReviews;
+#endif
         }
 
         protected override void WireMessages()
