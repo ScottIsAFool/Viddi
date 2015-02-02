@@ -66,9 +66,9 @@
                 <AppBarButton Label="manage account"
                               Command="{Binding NavigateToManageAccountCommand}"
                               Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}" />
-                <AppBarButton Label="problems signing in?"
+                <!--<AppBarButton Label="problems signing in?"
                               Command="{Binding NavigateToManualLoginCommand}"
-                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource InverseVisibilityConverter}}"/>
+                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource InverseVisibilityConverter}}"/>-->
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </local:BasePage.BottomAppBar>
@@ -115,7 +115,7 @@
                 </StackPanel>
 
                 <localControls:CustomButton Grid.Column="1"
-                                            Command="{Binding LogInLogOutCommand}"
+                                            TapCommand="{Binding LogInLogOutCommand}"
                                             Style="{StaticResource EmptyButtonStyle}"
                                             Margin="0,15,0,6"
                                             VerticalAlignment="Center">

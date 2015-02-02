@@ -17,7 +17,7 @@ namespace Viddy.Views
 
         private void SignInHyperlink_OnClick(Hyperlink sender, HyperlinkClickEventArgs args)
         {
-            Navigate<AccountView>();
+            Navigate<ManualLoginView>();
         }
 
         private static void Navigate<T>()

@@ -57,7 +57,7 @@ namespace Viddy.ViewModel.Account
                         }
                         else
                         {
-                            _navigationService.Navigate<AccountView>(new NavigationParameters { ClearBackstack = true });                            
+                            _navigationService.Navigate<AccountView>(new NavigationParameters { RemoveCurrentPageFromBackstack = true });                            
                         }
 
                         Username = Password = string.Empty;

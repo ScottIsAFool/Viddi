@@ -1,4 +1,5 @@
-﻿using Windows.UI.ViewManagement;
+﻿using System.Linq;
+using Windows.UI.ViewManagement;
 using Windows.UI.Xaml.Navigation;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
@@ -60,7 +61,7 @@ namespace Viddy.Views
                 if (parameters != null && parameters.ClearBackstack)
                 {
                     Logger.Info("Clearing backstack");
-                    Frame.SetNavigationState("1,0");
+                    Frame.BackStack.Clear();
                 }
             }
 
@@ -72,6 +73,19 @@ namespace Viddy.Views
             if (_navigationService != null)
             {
                 _navigationService.BackKeyPressed -= OnBackKeyPressed;                
+            }
+
+            if (e.NavigationMode != NavigationMode.Back)
+            {
+                var parameters = e.Parameter as NavigationParameters;
+                if (parameters != null && parameters.RemoveCurrentPageFromBackstack)
+                {
+                    var page = Frame.BackStack.FirstOrDefault(x => x.SourcePageType == GetType());
+                    if (page != null)
+                    {
+                        Frame.BackStack.Remove(page);
+                    }
+                }
             }
 
             //Logger.Info("Navigated from {0}", GetType().FullName);

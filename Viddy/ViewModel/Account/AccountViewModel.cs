@@ -52,7 +52,7 @@ namespace Viddy.ViewModel.Account
         {
             get
             {
-                return new RelayCommand(async () =>
+                return new RelayCommand(() =>
                 {
                     if (AuthenticationService.Current.IsLoggedIn)
                     {
@@ -60,7 +60,8 @@ namespace Viddy.ViewModel.Account
                     }
                     else
                     {
-                        LaunchAuthentication();
+                        //LaunchAuthentication();
+                        _navigationService.Navigate<ManualLoginView>();
                     }
                 });
             }
