@@ -113,6 +113,7 @@
     <Compile Include="Controls\ReviewControl.xaml.cs">
       <DependentUpon>ReviewControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\RotateControl.cs" />
     <Compile Include="Controls\VideoControl.xaml.cs">
       <DependentUpon>VideoControl.xaml</DependentUpon>
     </Compile>

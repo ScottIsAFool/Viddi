@@ -365,4 +365,15 @@
         </Setter>
     </Style>
 
+    <Style TargetType="controls:RotateContentControl">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:RotateContentControl">
+                    <ContentControl x:Name="Content"
+                                    Content="{TemplateBinding Content}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
 </ResourceDictionary>

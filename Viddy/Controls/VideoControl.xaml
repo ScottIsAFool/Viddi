@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
-             d:DesignHeight="300"
+             d:DesignHeight="202"
              d:DesignWidth="400"
              d:DataContext="{Binding VideoPlayer.Video, Source={StaticResource Locator}}">
 
@@ -28,30 +28,46 @@
                 <Border Height="200"
                         Background="#34000000" />
 
-                <Border Background="{ThemeResource NsfwBackgroundBrush}"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Left"
-                        Padding="5,3"
-                        Visibility="{Binding Video.Nsfw, Converter={StaticResource VisibilityConverter}}">
-                    <TextBlock Text="NSFW"
-                               Foreground="White" />
-                </Border>
-
-                <Border Padding="5,3"
-                        VerticalAlignment="Top"
-                        HorizontalAlignment="Right"
-                        Background="#66000000"
-                        Visibility="{Binding DisplayDuration, Converter={StaticResource VisibilityConverter}}">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <TextBlock Text="{Binding Video.Title, FallbackValue='Video title goes here'}"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Foreground="White"
+                               Margin="19,0,12,0"
+                               TextWrapping="NoWrap"
+                               TextTrimming="CharacterEllipsis"
+                               VerticalAlignment="Top"
+                               Padding="0,3" />
                     <TextBlock Text="{Binding VideoLength}"
-                               Foreground="White" />
-                </Border>
+                               Foreground="White"
+                               Padding="5,3"
+                               Grid.Column="1"
+                               VerticalAlignment="Top"
+                               HorizontalAlignment="Right"
+                               Visibility="{Binding DisplayDuration, Converter={StaticResource VisibilityConverter}}" />
+                </Grid>
+                <local:RotateContentControl Direction="Up"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Left"
+                                            Visibility="{Binding Video.Nsfw, Converter={StaticResource VisibilityConverter}}">
+                    <Border Background="{ThemeResource NsfwBackgroundBrush}"
+                            Padding="5,3">
+                        <TextBlock Text="NSFW"
+                                   Foreground="White" />
+                    </Border>
+                </local:RotateContentControl>
+
+
 
                 <TextBlock Foreground="White"
                            Style="{StaticResource BodyTextBlockStyle}"
                            VerticalAlignment="Bottom"
                            HorizontalAlignment="Left"
                            Margin="19,0,0,19"
-                           Text="{Binding Plays}"/>
+                           Text="{Binding Plays, FallbackValue=0 plays}" />
 
                 <StackPanel Orientation="Horizontal"
                             VerticalAlignment="Bottom"
@@ -63,10 +79,10 @@
                     <TextBlock Text="{Binding Video.LikesCount}"
                                Style="{StaticResource BodyTextBlockStyle}"
                                Foreground="White"
-                               Margin="6,0"/>
+                               Margin="6,0" />
                     <SymbolIcon Symbol="Comment"
                                 Foreground="White"
-                                Height="20"/>
+                                Height="20" />
                     <TextBlock Text="{Binding CommentCount}"
                                Style="{StaticResource BodyTextBlockStyle}"
                                Foreground="White"
