@@ -9,7 +9,7 @@
              d:DesignWidth="400"
              d:DataContext="{Binding VideoPlayer.Video, Source={StaticResource Locator}}">
 
-    <Grid>
+    <Grid Margin="0,0,0,2">
         <local:CustomButton Style="{StaticResource EmptyButtonStyle}"
                             TapCommand="{Binding OpenVideoCommand}">
             <Grid Height="200"
