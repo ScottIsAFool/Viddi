@@ -60,7 +60,7 @@
         <Grid x:Name="Content"
               Grid.Row="1"
               Margin="0,12,0,0">
-            <controls:InitialisingListView ItemsSource="{Binding Apps}"
+            <controls:LoadingListView ItemsSource="{Binding Apps}"
                                            IsInitialising="{Binding ProgressIsVisible}"
                                            IsEmpty="{Binding IsEmpty}">
                 <ListView.ItemTemplate>
@@ -145,7 +145,7 @@
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </controls:InitialisingListView>
+            </controls:LoadingListView>
         </Grid>
     </Grid>
 </views:BasePage>

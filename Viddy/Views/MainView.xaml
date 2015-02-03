@@ -70,16 +70,16 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <controls:InitialisingListView ItemsSource="{Binding Items}"
+            <controls:LoadingListView ItemsSource="{Binding Items}"
                                            IsEmpty="{Binding IsEmpty}"
                                            IsInitialising="{Binding ProgressIsVisible}"
                                            ItemTemplateSelector="{StaticResource VideoTemplateSelector}">
-                <controls:InitialisingListView.FooterTemplate>
+                <controls:LoadingListView.FooterTemplate>
                     <DataTemplate>
                         <controls:LoadMoreControl />
                     </DataTemplate>
-                </controls:InitialisingListView.FooterTemplate>
-                <controls:InitialisingListView.EmptyContent>
+                </controls:LoadingListView.FooterTemplate>
+                <controls:LoadingListView.EmptyContent>
                     <DataTemplate>
                         <Grid Margin="19,12,19,0">
                             <Grid Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"
@@ -115,8 +115,8 @@
                             </Grid>
                         </Grid>
                     </DataTemplate>
-                </controls:InitialisingListView.EmptyContent>
-            </controls:InitialisingListView>
+                </controls:LoadingListView.EmptyContent>
+            </controls:LoadingListView>
         </Grid>
     </Grid>
 </local:BasePage>

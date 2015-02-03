@@ -175,18 +175,18 @@
                         <TextBlock Text="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource LoginLogoutConverter}}"
                                    FontSize="{StaticResource TextStyleSmallFontSize}"
                                    HorizontalAlignment="Center"
-                                   Foreground="{ThemeResource ButtonBackgroundBrush}" />
+                                   Foreground="{ThemeResource SubtleBrush}" />
                     </StackPanel>
                 </localControls:CustomButton>
             </Grid>
         </Grid>
 
         <Grid Grid.Row="1">
-            <localControls:InitialisingListView ItemsSource="{Binding Items}"
+            <localControls:LoadingListView ItemsSource="{Binding Items}"
                                                 IsInitialising="{Binding ProgressIsVisible}"
                                                 IsEmpty="{Binding IsEmpty}"
                                                 ItemTemplate="{StaticResource VideoTemplate}">
-                <localControls:InitialisingListView.EmptyContent>
+                <localControls:LoadingListView.EmptyContent>
                     <DataTemplate>
                         <Grid Margin="19,12,19,0">
                             <Grid.RowDefinitions>
@@ -241,12 +241,12 @@
                             </Grid>
                         </Grid>
                     </DataTemplate>
-                </localControls:InitialisingListView.EmptyContent>
-                <localControls:InitialisingListView.FooterTemplate>
+                </localControls:LoadingListView.EmptyContent>
+                <localControls:LoadingListView.FooterTemplate>
                     <DataTemplate>
                         <localControls:LoadMoreControl/>
                     </DataTemplate>
-                </localControls:InitialisingListView.FooterTemplate>
+                </localControls:LoadingListView.FooterTemplate>
                 <ListView.HeaderTemplate>
                     <DataTemplate>
                         <TextBlock Text="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource HeaderConverter}}"
@@ -255,7 +255,7 @@
                                    Visibility="{Binding IsEmpty, Converter={StaticResource InverseVisibilityConverter}}"/>
                     </DataTemplate>
                 </ListView.HeaderTemplate>
-            </localControls:InitialisingListView>
+            </localControls:LoadingListView>
         </Grid>
     </Grid>
 </local:BasePage>

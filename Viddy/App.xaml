@@ -8,7 +8,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              mc:Ignorable="d"
              x:Class="Viddy.App"
-             RequestedTheme="Light">
+             RequestedTheme="Dark">
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
@@ -151,7 +151,8 @@
                         <ControlTemplate TargetType="TextBox">
                             <Grid Background="Transparent">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="75" />
+                                    <ColumnDefinition Width="Auto"
+                                                      MaxWidth="75"/>
                                     <ColumnDefinition />
                                 </Grid.ColumnDefinitions>
                                 <Grid.RowDefinitions>
@@ -170,7 +171,7 @@
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush"
                                                                                Storyboard.TargetName="BorderElement">
                                                     <DiscreteObjectKeyFrame KeyTime="0"
-                                                                            Value="{ThemeResource TextBoxDisabledBorderThemeBrush}" />
+                                                                            Value="{ThemeResource TextBoxBorderBrush}" />
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground"
                                                                                Storyboard.TargetName="ContentElement">
@@ -230,6 +231,10 @@
                                                   ContentTemplate="{TemplateBinding HeaderTemplate}"
                                                   Content="{TemplateBinding Header}"
                                                   Grid.Row="1"
+                                                  Width="42"
+                                                  Margin="27,0,0,0"
+                                                  Tag="{TemplateBinding Header}"
+                                                  Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource NullToVisibilityConverter}}"
                                                   Style="{StaticResource HeaderContentPresenterStyle}"
                                                   VerticalAlignment="Center"
                                                   HorizontalAlignment="Center"
@@ -244,7 +249,7 @@
                                               IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
                                               Margin="0"
                                               MinHeight="{ThemeResource TextControlThemeMinHeight}"
-                                              Padding="5,14,8,0"
+                                              Padding="7,14,8,0"
                                               Grid.Row="1"
                                               VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                                               VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
@@ -427,7 +432,8 @@
                         <ControlTemplate TargetType="PasswordBox">
                             <Grid Background="Transparent">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="75" />
+                                    <ColumnDefinition MaxWidth="75"
+                                                      Width="Auto"/>
                                     <ColumnDefinition />
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
@@ -448,7 +454,7 @@
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush"
                                                                                Storyboard.TargetName="BorderElement">
                                                     <DiscreteObjectKeyFrame KeyTime="0"
-                                                                            Value="{ThemeResource TextBoxDisabledBorderThemeBrush}" />
+                                                                            Value="{ThemeResource TextBoxBorderBrush}" />
                                                 </ObjectAnimationUsingKeyFrames>
                                                 <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground"
                                                                                Storyboard.TargetName="ContentElement">
@@ -538,6 +544,8 @@
                                                   ContentTemplate="{TemplateBinding HeaderTemplate}"
                                                   Content="{TemplateBinding Header}"
                                                   Grid.Row="1"
+                                                  Width="42"
+                                                  Margin="27,0,0,0"
                                                   Style="{StaticResource HeaderContentPresenterStyle}"
                                                   VerticalAlignment="Center"
                                                   HorizontalAlignment="Center"

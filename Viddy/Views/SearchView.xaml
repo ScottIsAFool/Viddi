@@ -47,23 +47,23 @@
         </Grid>
 
         <Grid Grid.Row="1">
-            <controls:InitialisingListView ItemsSource="{Binding Items}"
+            <controls:LoadingListView ItemsSource="{Binding Items}"
                                            IsInitialising="{Binding ProgressIsVisible}"
                                            IsEmpty="{Binding IsEmpty}"
                                            ItemTemplateSelector="{StaticResource VideoTemplateSelector}">
-                <controls:InitialisingListView.FooterTemplate>
+                <controls:LoadingListView.FooterTemplate>
                     <DataTemplate>
                         <controls:LoadMoreControl />
                     </DataTemplate>
-                </controls:InitialisingListView.FooterTemplate>
-                <controls:InitialisingListView.HeaderTemplate>
+                </controls:LoadingListView.FooterTemplate>
+                <controls:LoadingListView.HeaderTemplate>
                     <DataTemplate>
                         <CheckBox IsChecked="{Binding IncludeNsfw, Mode=TwoWay}"
                                   Content="Include NSFW videos" 
                                   Margin="19,0"/>
                     </DataTemplate>
-                </controls:InitialisingListView.HeaderTemplate>
-            </controls:InitialisingListView>
+                </controls:LoadingListView.HeaderTemplate>
+            </controls:LoadingListView>
         </Grid>
     </Grid>
 </local:BasePage>

@@ -1,13 +1,12 @@
-﻿using System.Diagnostics;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 
 namespace Viddy.Controls
 {
-    public class InitialisingListView : ListView
+    public class LoadingListView : ListView
     {
         public static readonly DependencyProperty IsEmptyProperty = DependencyProperty.Register(
-            "IsEmpty", typeof (bool), typeof (InitialisingListView), new PropertyMetadata(default(bool)));
+            "IsEmpty", typeof (bool), typeof (LoadingListView), new PropertyMetadata(default(bool)));
 
         public bool IsEmpty
         {
@@ -16,7 +15,7 @@ namespace Viddy.Controls
         }
 
         public static readonly DependencyProperty EmptyContentProperty = DependencyProperty.Register(
-            "EmptyContent", typeof (DataTemplate), typeof (InitialisingListView), new PropertyMetadata(default(DataTemplate)));
+            "EmptyContent", typeof (DataTemplate), typeof (LoadingListView), new PropertyMetadata(default(DataTemplate)));
 
         public DataTemplate EmptyContent
         {
@@ -25,7 +24,7 @@ namespace Viddy.Controls
         }
 
         public static readonly DependencyProperty InitialisingContentProperty = DependencyProperty.Register(
-            "InitialisingContent", typeof (DataTemplate), typeof (InitialisingListView), new PropertyMetadata(default(DataTemplate)));
+            "InitialisingContent", typeof (DataTemplate), typeof (LoadingListView), new PropertyMetadata(default(DataTemplate)));
 
         public DataTemplate InitialisingContent
         {
@@ -34,7 +33,7 @@ namespace Viddy.Controls
         }
 
         public static readonly DependencyProperty IsInitialisingProperty = DependencyProperty.Register(
-            "IsInitialising", typeof (bool), typeof (InitialisingListView), new PropertyMetadata(default(bool)));
+            "IsInitialising", typeof (bool), typeof (LoadingListView), new PropertyMetadata(default(bool)));
 
         public bool IsInitialising
         {
@@ -43,7 +42,7 @@ namespace Viddy.Controls
         }
 
         public static readonly DependencyProperty EmptyContentStyleProperty = DependencyProperty.Register(
-            "EmptyContentStyle", typeof (Style), typeof (InitialisingListView), new PropertyMetadata(default(Style)));
+            "EmptyContentStyle", typeof (Style), typeof (LoadingListView), new PropertyMetadata(default(Style)));
 
         public Style EmptyContentStyle
         {
@@ -52,7 +51,7 @@ namespace Viddy.Controls
         }
 
         public static readonly DependencyProperty InitialisingContentStyleProperty = DependencyProperty.Register(
-            "InitialisingContentStyle", typeof (Style), typeof (InitialisingListView), new PropertyMetadata(default(Style)));
+            "InitialisingContentStyle", typeof (Style), typeof (LoadingListView), new PropertyMetadata(default(Style)));
 
         public Style InitialisingContentStyle
         {
@@ -61,7 +60,7 @@ namespace Viddy.Controls
         }
 
         public static readonly DependencyProperty LoadFailedContentProperty = DependencyProperty.Register(
-            "LoadFailedContent", typeof (DataTemplate), typeof (InitialisingListView), new PropertyMetadata(default(DataTemplate)));
+            "LoadFailedContent", typeof (DataTemplate), typeof (LoadingListView), new PropertyMetadata(default(DataTemplate)));
 
         public DataTemplate LoadFailedContent
         {
@@ -70,7 +69,7 @@ namespace Viddy.Controls
         }
 
         public static readonly DependencyProperty LoadFailedProperty = DependencyProperty.Register(
-            "LoadFailed", typeof (bool), typeof (InitialisingListView), new PropertyMetadata(default(bool)));
+            "LoadFailed", typeof (bool), typeof (LoadingListView), new PropertyMetadata(default(bool)));
 
         public bool LoadFailed
         {
@@ -78,9 +77,9 @@ namespace Viddy.Controls
             set { SetValue(LoadFailedProperty, value); }
         }
 
-        public InitialisingListView()
+        public LoadingListView()
         {
-            DefaultStyleKey = typeof (InitialisingListView);
+            DefaultStyleKey = typeof (LoadingListView);
         }
     }
 }

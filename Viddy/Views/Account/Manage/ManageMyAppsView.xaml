@@ -65,11 +65,11 @@
 
         <Grid Grid.Row="1"
               Margin="0,12,0,0">
-            <controls:InitialisingListView ItemsSource="{Binding Apps}"
+            <controls:LoadingListView ItemsSource="{Binding Apps}"
                                            IsInitialising="{Binding ProgressIsVisible}"
                                            IsEmpty="{Binding IsEmpty}"
                                            VerticalContentAlignment="Stretch">
-                <controls:InitialisingListView.EmptyContent>
+                <controls:LoadingListView.EmptyContent>
                     <DataTemplate>
                         <Grid VerticalAlignment="Stretch"
                               Margin="19,0">
@@ -87,7 +87,7 @@
                                   Data="F1 M 42,19.0002L 34,19.0002L 34,43.7502L 24,33.7502L 24,44.2502L 38,58.2502L 52,44.2502L 52,33.7502L 42,43.7502L 42,19.0002 Z " />
                         </Grid>
                     </DataTemplate>
-                </controls:InitialisingListView.EmptyContent>
+                </controls:LoadingListView.EmptyContent>
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,0,0,12"
@@ -164,7 +164,7 @@
                         </Grid>
                     </DataTemplate>
                 </ListView.ItemTemplate>
-            </controls:InitialisingListView>
+            </controls:LoadingListView>
         </Grid>
 
     </Grid>

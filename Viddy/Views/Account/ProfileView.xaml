@@ -34,12 +34,12 @@
     <Grid>
         <controls:ProfileHeaderControl DataContext="{Binding EmptyUser}"
                                        Visibility="{Binding Profile.ProgressIsVisible, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}" />
-        <controls:InitialisingListView ItemsSource="{Binding Items}"
+        <controls:LoadingListView ItemsSource="{Binding Items}"
                                        ItemTemplate="{StaticResource VideoTemplate}"
                                        IsEmpty="{Binding IsEmpty}"
                                        IsInitialising="{Binding ProgressIsVisible}"
                                        Header="{Binding}">
-            <controls:InitialisingListView.HeaderTemplate>
+            <controls:LoadingListView.HeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
                         <controls:ProfileHeaderControl DataContext="{Binding User}" />
@@ -55,19 +55,19 @@
                                    Visibility="{Binding IsEmpty, Converter={StaticResource VisibilityConverter}}" />
                     </StackPanel>
                 </DataTemplate>
-            </controls:InitialisingListView.HeaderTemplate>
-            <controls:InitialisingListView.FooterTemplate>
+            </controls:LoadingListView.HeaderTemplate>
+            <controls:LoadingListView.FooterTemplate>
                 <DataTemplate>
                     <controls:LoadMoreControl />
                 </DataTemplate>
-            </controls:InitialisingListView.FooterTemplate>
-            <controls:InitialisingListView.EmptyContent>
+            </controls:LoadingListView.FooterTemplate>
+            <controls:LoadingListView.EmptyContent>
                 <DataTemplate>
                     <Grid>
 
                     </Grid>
                 </DataTemplate>
-            </controls:InitialisingListView.EmptyContent>
-        </controls:InitialisingListView>
+            </controls:LoadingListView.EmptyContent>
+        </controls:LoadingListView>
     </Grid>
 </views:BasePage>

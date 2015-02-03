@@ -1,25 +1,29 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <Color x:Key="ButtonBackgroundColor">White</Color>
+    <Color x:Key="ButtonBackgroundColor">#FF0C1C3E</Color>
     <Color x:Key="RecordButtonColor">Red</Color>
     <Color x:Key="TickColor">DeepSkyBlue</Color>
     <Color x:Key="CrossColor">Red</Color>
     <Color x:Key="HeaderColor">#030710</Color>
     <!--<Color x:Key="ApplicationPageBackgroundThemeColor">#FF8D8D8D</Color>-->
-	<Color x:Key="ApplicationPageBackgroundThemeColor">#060E1B</Color>
+    <Color x:Key="ApplicationPageBackgroundThemeColor">#060E1B</Color>
     <Color x:Key="ApplicationForegroundThemeColor">White</Color>
     <Color x:Key="SubtleColor">#99CFCFCF</Color>
     <Color x:Key="AppBarBackgroundColor">#DDDDDD</Color>
     <Color x:Key="AppBarForegroundColor">Black</Color>
     <Color x:Key="NsfwBackgroundColor">DarkRed</Color>
     <Color x:Key="PhoneAccentColor">#5900FF</Color>
-	<Color x:Key="DefaultUserColor">#FFACACAC</Color>
-	<Color x:Key="EyeOffColor">#99CFCFCF</Color>
+    <Color x:Key="DefaultUserColor">White</Color>
+    <Color x:Key="EyeOffColor">#99CFCFCF</Color>
     <Color x:Key="EyeOnColor">White</Color>
-	<Color x:Key="TextBoxBackgroundColor">#FF464646</Color>
-	<Color x:Key="TextBoxFocusBackgroundColor">#030710</Color>
+    <Color x:Key="TextBoxBackgroundColor">#FF464646</Color>
+    <Color x:Key="TextBoxFocusBackgroundColor">#030710</Color>
     <Color x:Key="TextBoxBorderColor">#0E162B</Color>
+	    <Color x:Key="CommentButtonColor">#FF13347A</Color>
+
+    <SolidColorBrush x:Key="CommentButtonBrush"
+                     Color="{StaticResource CommentButtonColor}"/>
 
     <SolidColorBrush x:Key="ButtonBackgroundBrush"
                      Color="{StaticResource ButtonBackgroundColor}" />
@@ -59,20 +63,20 @@
 
     <SolidColorBrush x:Key="ProgressBarIndeterminateForegroundThemeBrush"
                      Color="{StaticResource PhoneAccentColor}" />
-					 
-    <SolidColorBrush x:Key="DefaultUserBrush"
-                     Color="{StaticResource DefaultUserColor}"/>
-					 <SolidColorBrush x:Key="EyeOffBrush"
-                     Color="{StaticResource EyeOffColor}"/>
-    
-    <SolidColorBrush x:Key="EyeOnBrush"
-                     Color="{StaticResource EyeOnColor}"/>
 
-   
+    <SolidColorBrush x:Key="DefaultUserBrush"
+                     Color="{StaticResource DefaultUserColor}" />
+    <SolidColorBrush x:Key="EyeOffBrush"
+                     Color="{StaticResource EyeOffColor}" />
+
+    <SolidColorBrush x:Key="EyeOnBrush"
+                     Color="{StaticResource EyeOnColor}" />
+
+
     <SolidColorBrush x:Key="TextBoxBackgroundBrush"
-                     Color="{StaticResource HeaderColor}"/>
-					 <SolidColorBrush x:Key="TextBoxFocusBackgroundBrush"
+                     Color="{StaticResource HeaderColor}" />
+    <SolidColorBrush x:Key="TextBoxFocusBackgroundBrush"
                      Color="{StaticResource HeaderColor}" />
     <SolidColorBrush x:Key="TextBoxBorderBrush"
-                     Color="{StaticResource TextBoxBorderColor}"/>
+                     Color="{StaticResource TextBoxBorderColor}" />
 </ResourceDictionary>
