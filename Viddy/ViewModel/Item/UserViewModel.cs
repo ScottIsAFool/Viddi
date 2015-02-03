@@ -127,7 +127,7 @@ namespace Viddy.ViewModel.Item
 
             try
             {
-                var response = await _vidMeClient.IsUserFollowingUserAsync(User.UserId);
+                var response = await _vidMeClient.IsUserFollowingUserAsync(User.UserId, AuthenticationService.Current.LoggedInUserId);
 
                 SetIsFollowedByMe(response);
             }

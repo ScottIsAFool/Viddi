@@ -59,14 +59,19 @@
                 <StackPanel Orientation="Horizontal"
                             Visibility="{Binding DisplayByLine, Converter={StaticResource VisibilityConverter}}">
                     <TextBlock Text="{Binding UserFollowers}"
-                               Style="{StaticResource ByLineStyle}" />
+                               Visibility="{Binding UserFollowers, Converter={StaticResource NullToVisibilityConverter}}"
+                               Style="{StaticResource ByLineStyle}"
+                               Margin="0,0,12,0"/>
 
                     <TextBlock Text="{Binding UserVideoCount}"
+                               Visibility="{Binding UserVideoCount, Converter={StaticResource NullToVisibilityConverter}}"
                                Style="{StaticResource ByLineStyle}"
-                               Margin="12,0" />
+                               Margin="0,0,12,0" />
 
                     <TextBlock Text="{Binding UserPlays}"
-                               Style="{StaticResource ByLineStyle}" />
+                               Visibility="{Binding UserFollowers, Converter={StaticResource NullToVisibilityConverter}}"
+                               Style="{StaticResource ByLineStyle}"
+                               Margin="0,0,12,0" />
                 </StackPanel>
             </StackPanel>
         </Grid>
