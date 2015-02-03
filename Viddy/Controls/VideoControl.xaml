@@ -67,7 +67,8 @@
                            Style="{StaticResource BodyTextBlockStyle}"
                            VerticalAlignment="Bottom"
                            HorizontalAlignment="Left"
-                           Margin="19,0,0,19"
+                           Margin="19,0,0,12"
+                           Padding="0,3"
                            Text="{Binding Plays, FallbackValue=0 plays}" />
 
                 <StackPanel Orientation="Horizontal"
@@ -77,14 +78,14 @@
                     <SymbolIcon Symbol="Like"
                                 Foreground="White"
                                 Height="20" />
-                    <TextBlock Text="{Binding Video.LikesCount}"
+                    <TextBlock Text="{Binding Video.LikesCount, FallbackValue=0}"
                                Style="{StaticResource BodyTextBlockStyle}"
                                Foreground="White"
                                Margin="6,0" />
                     <SymbolIcon Symbol="Comment"
                                 Foreground="White"
                                 Height="20" />
-                    <TextBlock Text="{Binding CommentCount}"
+                    <TextBlock Text="{Binding CommentCount, FallbackValue=0}"
                                Style="{StaticResource BodyTextBlockStyle}"
                                Foreground="White"
                                Margin="6,0" />
