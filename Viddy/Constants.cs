@@ -21,6 +21,7 @@
             public const string VideoFileMsg = "VideoFileMsg";
             public const string AppLaunchedMsg = "AppLaunchedMsg";
             public const string HideReviewsMsg = "HideReviewsMsg";
+            public const string ClearSearchMsg = "ClearSearchMsg";
         }
     }
 }

@@ -35,7 +35,9 @@
                              Margin="12,0,0,0"
                              Background="Transparent"
                              x:Name="SearchBox"
+                             InputScope="Search"
                              HorizontalAlignment="Stretch"
+                             Style="{StaticResource FullLengthTextBoxStyle}"
                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
                              Grid.Column="1">
                         <interactivity:Interaction.Behaviors>
@@ -60,7 +62,7 @@
                     <DataTemplate>
                         <CheckBox IsChecked="{Binding IncludeNsfw, Mode=TwoWay}"
                                   Content="Include NSFW videos" 
-                                  Margin="19,0"/>
+                                  Margin="12,0"/>
                     </DataTemplate>
                 </controls:LoadingListView.HeaderTemplate>
             </controls:LoadingListView>

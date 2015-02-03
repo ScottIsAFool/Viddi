@@ -1,5 +1,7 @@
 ﻿using System;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Navigation;
+using GalaSoft.MvvmLight.Messaging;
 
 namespace Viddy.Views
 {
@@ -17,6 +19,15 @@ namespace Viddy.Views
         private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
         {
             SearchBox.Focus(FocusState.Programmatic);
+        }
+
+        protected override void OnNavigatedFrom(NavigationEventArgs e)
+        {
+            base.OnNavigatedFrom(e);
+            if (e.NavigationMode == NavigationMode.Back)
+            {
+                Messenger.Default.Send(new NotificationMessage(Constants.Messages.ClearSearchMsg));
+            }
         }
     }
 }

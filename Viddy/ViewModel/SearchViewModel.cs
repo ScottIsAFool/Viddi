@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using VidMePortable;
 using VidMePortable.Model.Responses;
 
@@ -46,6 +47,24 @@ namespace Viddy.ViewModel
         public override void UpdateProperties()
         {
             RaisePropertyChanged(() => CanSearch);
+        }
+
+        protected override void WireMessages()
+        {
+            Messenger.Default.Register<NotificationMessage>(this, m =>
+            {
+                if (m.Notification.Equals(Constants.Messages.ClearSearchMsg))
+                {
+                    Reset();
+                }
+            });
+        }
+
+        protected override void Reset()
+        {
+            SearchText = string.Empty;
+            IncludeNsfw = false;
+            base.Reset();
         }
     }
 }

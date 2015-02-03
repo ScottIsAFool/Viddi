@@ -66,13 +66,13 @@ namespace Viddy.ViewModel
             return new VideosResponse();
         }
 
-        protected void Reset()
+        protected virtual void Reset()
         {
             Items = null;
             _videosLoaded = false;
             CanLoadMore = false;
             IsLoadingMore = false;
-            IsEmpty = false;
+            IsEmpty = true;
         }
 
         protected async Task LoadData(bool isRefresh, bool add = false, int offset = 0)
@@ -138,7 +138,7 @@ namespace Viddy.ViewModel
             return ReviewService.Current.CanShowReviews;
 #endif
         }
-
+        
         protected override void WireMessages()
         {
             Messenger.Default.Register<NotificationMessage>(this, m =>
