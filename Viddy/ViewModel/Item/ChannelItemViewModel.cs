@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Cimbalino.Toolkit.Services;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
 using JetBrains.Annotations;
+using Viddy.Messaging;
 using Viddy.Services;
+using Viddy.Views;
 using VidMePortable;
 using VidMePortable.Model;
 
@@ -11,11 +16,13 @@ namespace Viddy.ViewModel.Item
     public class ChannelItemViewModel : ViewModelBase, IProfileViewModel, IFollowViewModel
     {
         private readonly IVidMeClient _vidMeClient;
+        private readonly INavigationService _navigationService;
 
         public ChannelItemViewModel(Channel channel)
         {
             Channel = channel;
             _vidMeClient = SimpleIoc.Default.GetInstance<IVidMeClient>();
+            _navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
         }
 
         public Channel Channel { get; set; }
@@ -142,6 +149,18 @@ namespace Viddy.ViewModel.Item
             _ignoreFollowedChanged = true;
             IsFollowedByMe = value;
             _ignoreFollowedChanged = false;
+        }
+
+        public RelayCommand NavigateToChannel
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                    {
+                        Messenger.Default.Send(new ChannelMessage(this));
+                        _navigationService.Navigate<ChannelView>();
+                    });
+            }
         }
     }
 }

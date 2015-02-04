@@ -55,7 +55,14 @@
         
         <Grid Grid.Row="1">
             <controls:LoadingListView ItemsSource="{Binding Items}"
-                                      IsEmpty="{Binding IsEmpty}"></controls:LoadingListView>
+                                      IsEmpty="{Binding IsEmpty}"
+                                      IsInitialising="{Binding ProgressIsVisible}">
+                <controls:LoadingListView.ItemTemplate>
+                    <DataTemplate>
+                        <controls:ChannelControl/>
+                    </DataTemplate>
+                </controls:LoadingListView.ItemTemplate>
+            </controls:LoadingListView>
         </Grid>
     </Grid>
 </local:BasePage>

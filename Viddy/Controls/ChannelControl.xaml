@@ -1,0 +1,32 @@
+﻿<UserControl x:Class="Viddy.Controls.ChannelControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:item="using:Viddy.ViewModel.Item"
+             xmlns:controls="using:Viddy.Controls"
+             mc:Ignorable="d"
+             Height="200"
+             d:DesignWidth="400"
+             d:DataContext="{d:DesignInstance d:Type=item:ChannelItemViewModel}">
+
+    <Grid>
+        <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                               VerticalContentAlignment="Stretch"
+                               VerticalAlignment="Stretch"
+                               TapCommand="{Binding NavigateToChannel}"
+                               Margin="0,0,0,2">
+            <Grid>
+                <Rectangle Fill="{ThemeResource ButtonBackgroundBrush}" />
+                <Image Source="{Binding CoverUrl}"
+                       Stretch="UniformToFill" />
+                <Rectangle Height="200"
+                           Fill="#34000000" />
+                <TextBlock Text="{Binding Name, FallbackValue=Awww}"
+                           Style="{StaticResource BodyTextBlockStyle}"
+                           Margin="19,12"
+                           VerticalAlignment="Top" />
+            </Grid>
+        </controls:CustomButton>
+    </Grid>
+</UserControl>
