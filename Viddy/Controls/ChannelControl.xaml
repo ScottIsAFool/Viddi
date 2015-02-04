@@ -21,7 +21,7 @@
                 <Image Source="{Binding CoverUrl}"
                        Stretch="UniformToFill" />
                 <Rectangle Height="200"
-                           Fill="#34000000" />
+                           Fill="{StaticResource OverlayBrush}" />
                 <TextBlock Text="{Binding Name, FallbackValue=Awww}"
                            Style="{StaticResource BodyTextBlockStyle}"
                            Margin="19,12"

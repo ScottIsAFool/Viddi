@@ -90,7 +90,7 @@
                         <TextBlock Text="{Binding Video.Video.LikesCount}"
                                    Style="{StaticResource BodyTextBlockStyle}"
                                    Foreground="{ThemeResource SubtleBrush}"
-                                   Margin="0,0,6,0" />
+                                   Margin="6,0,6,0" />
                         <TextBlock Style="{StaticResource BodyTextBlockStyle}"
                                    VerticalAlignment="Bottom"
                                    HorizontalAlignment="Left"

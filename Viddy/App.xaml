@@ -40,6 +40,9 @@
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
 
             <themeManagerRt:ThemeManager x:Key="ThemeManager" />
+            <Color x:Key="OverlayColor">#4C000000</Color>
+            <SolidColorBrush x:Key="OverlayBrush"
+                             Color="{StaticResource OverlayColor}"/>
 
             <DataTemplate x:Key="VideoTemplate">
                 <controls:VideoControl />
