@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Extensions;
-using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Extensions;
 using Viddy.Model;
@@ -15,69 +13,16 @@ using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel
 {
-    public class VideoLoadingViewModel : ViewModelBase
+    public class VideoLoadingViewModel : LoadingItemsViewModel<IListType>
     {
-        private bool _videosLoaded;
-        public bool CanLoadMore { get; set; }
-        public bool IsLoadingMore { get; set; }
-        public ObservableCollection<IListType> Items { get; set; }
-        public bool IsEmpty { get; set; }
-
-        public RelayCommand PageLoadedCommand
-        {
-            get
-            {
-                return new RelayCommand(async () =>
-                {
-                    await PageLoaded();
-                });
-            }
-        }
-
-        public RelayCommand RefreshCommand
-        {
-            get
-            {
-                return new RelayCommand(async () =>
-                {
-                    await LoadData(true);
-                });
-            }
-        }
-
-        public RelayCommand LoadMoreCommand
-        {
-            get
-            {
-                return new RelayCommand(async () =>
-                {
-                    await LoadData(false, true, Items.Count);
-                });
-            }
-        }
-
-        public virtual async Task PageLoaded()
-        {
-            await LoadData(false);
-        }
-
         public virtual async Task<VideosResponse> GetVideos(int offset)
         {
             return new VideosResponse();
         }
 
-        protected virtual void Reset()
+        protected override async Task LoadData(bool isRefresh, bool add = false, int offset = 0)
         {
-            Items = null;
-            _videosLoaded = false;
-            CanLoadMore = false;
-            IsLoadingMore = false;
-            IsEmpty = true;
-        }
-
-        protected async Task LoadData(bool isRefresh, bool add = false, int offset = 0)
-        {
-            if (_videosLoaded && !isRefresh && !add)
+            if (ItemsLoaded && !isRefresh && !add)
             {
                 return;
             }
@@ -119,7 +64,7 @@ namespace Viddy.ViewModel
 
                 IsEmpty = Items.IsNullOrEmpty();
                 CanLoadMore = response != null && response.Page != null && Items.Count + 1 < response.Page.Total;
-                _videosLoaded = true;
+                ItemsLoaded = true;
             }
             catch (Exception ex)
             {

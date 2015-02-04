@@ -142,7 +142,7 @@
             </Grid>
 
             <controls:LoadingListView Grid.Row="2"
-                                           ItemsSource="{Binding Video.Comments}"
+                                           ItemsSource="{Binding Video.Items}"
                                            ItemTemplate="{StaticResource CommentTemplate}"
                                            Margin="0,12,0,0"
                                            IsEmpty="{Binding Video.IsEmpty}"

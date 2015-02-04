@@ -5,7 +5,6 @@ using Viddy.Messaging;
 using Viddy.ViewModel.Item;
 using Viddy.Views;
 using Viddy.Views.Account;
-using VidMePortable.Model;
 
 namespace Viddy.ViewModel
 {
@@ -29,7 +28,7 @@ namespace Viddy.ViewModel
                     if (Video != null)
                     {
                         Video.RefreshVideoDetails().ConfigureAwait(false);
-                        await Video.LoadData(false);
+                        await Video.LoadData();
                     }
                 });
             }

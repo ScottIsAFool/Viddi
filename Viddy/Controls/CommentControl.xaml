@@ -7,7 +7,7 @@
              mc:Ignorable="d"
              d:DesignHeight="160"
              d:DesignWidth="400"
-             d:DataContext="{Binding VideoPlayer.Video.Comments[0], Source={StaticResource Locator}}">
+             d:DataContext="{Binding VideoPlayer.Video.Items[0], Source={StaticResource Locator}}">
 
     <Grid MinHeight="60"
           Margin="0,0,0,12">

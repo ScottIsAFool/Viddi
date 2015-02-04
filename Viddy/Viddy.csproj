@@ -145,6 +145,7 @@
     <Compile Include="ViewModel\Account\ManualLoginViewModel.cs" />
     <Compile Include="ViewModel\Account\ProfileViewModel.cs" />
     <Compile Include="ViewModel\AdViewModel.cs" />
+    <Compile Include="ViewModel\BrowseChannelsViewModel.cs" />
     <Compile Include="ViewModel\ChannelViewModel.cs" />
     <Compile Include="ViewModel\Item\ChannelItemViewModel.cs" />
     <Compile Include="ViewModel\Item\CommentViewModel.cs" />
@@ -156,6 +157,7 @@
     <Compile Include="Model\ListType.cs" />
     <Compile Include="ViewModel\Item\IFollowViewModel.cs" />
     <Compile Include="ViewModel\Item\IProfileViewModel.cs" />
+    <Compile Include="ViewModel\LoadingItemsViewModel{T}.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />
     <Compile Include="ViewModel\Item\ReviewViewModel.cs" />
     <Compile Include="ViewModel\SearchViewModel.cs" />
@@ -190,6 +192,9 @@
     <Compile Include="Views\BasePage.cs" />
     <Compile Include="Views\Account\EditProfileView.xaml.cs">
       <DependentUpon>EditProfileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\BrowseChannelsView.xaml.cs">
+      <DependentUpon>BrowseChannelsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ChannelView.xaml.cs">
       <DependentUpon>ChannelView.xaml</DependentUpon>
@@ -320,6 +325,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Account\ProfileView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\BrowseChannelsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

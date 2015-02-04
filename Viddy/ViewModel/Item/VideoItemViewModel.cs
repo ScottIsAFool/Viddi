@@ -17,15 +17,13 @@ using VidMePortable.Model;
 
 namespace Viddy.ViewModel.Item
 {
-    public class VideoItemViewModel : ViewModelBase, IListType
+    public class VideoItemViewModel : LoadingItemsViewModel<CommentViewModel>, IListType
     {
         private readonly IVidMeClient _vidMeClient;
         private readonly VideoLoadingViewModel _videoLoadingViewModel;
         private readonly IApplicationSettingsService _settingsService;
         private readonly INavigationService _navigationService;
-
-        private bool _commentsLoaded;
-
+        
         public VideoItemViewModel(Video video, VideoLoadingViewModel videoLoadingViewModel)
         {
             _vidMeClient = SimpleIoc.Default.GetInstance<IVidMeClient>();
@@ -54,7 +52,7 @@ namespace Viddy.ViewModel.Item
                     VideosScores = 220,
                     Bio = "Some bio information"
                 };
-                Comments = new ObservableCollection<CommentViewModel>
+                Items = new ObservableCollection<CommentViewModel>
                 {
                     new CommentViewModel(new Comment
                     {
@@ -73,11 +71,6 @@ namespace Viddy.ViewModel.Item
         public Video Video { get; set; }
 
         public ChannelItemViewModel Channel { get; set; }
-
-        public ObservableCollection<CommentViewModel> Comments { get; set; }
-        public bool IsEmpty { get; set; }
-        public bool CanLoadMore { get; set; }
-        public bool IsLoadingMore { get; set; }
 
         public string Title
         {
@@ -164,12 +157,12 @@ namespace Viddy.ViewModel.Item
 
         public void RemoveComment(CommentViewModel comment)
         {
-            if (Comments == null)
+            if (Items == null)
             {
                 return;
             }
 
-            Comments.Remove(comment);
+            Items.Remove(comment);
             Video.CommentCount--;
             RaisePropertyChanged(()=> CommentCount);
         }
@@ -228,34 +221,6 @@ namespace Viddy.ViewModel.Item
             }
         }
 
-        public RelayCommand RefreshCommand
-        {
-            get
-            {
-                return new RelayCommand(async () =>
-                {
-                    if (CommentCount > 0)
-                    {
-                        await LoadData(true);
-                    }
-                });
-            }
-        }
-
-        public RelayCommand LoadMoreCommand
-        {
-            get
-            {
-                return new RelayCommand(async () =>
-                {
-                    if (CommentCount > 0 && CanLoadMore)
-                    {
-                        await LoadData(false, true, Comments.Count);
-                    }
-                });
-            }
-        }
-
         public RelayCommand AddCommentCommand
         {
             get
@@ -277,12 +242,12 @@ namespace Viddy.ViewModel.Item
                             response.User = AuthenticationService.Current.LoggedInUser;
 
                             var commentVm = new CommentViewModel(response, this);
-                            if (Comments == null)
+                            if (Items == null)
                             {
-                                Comments = new ObservableCollection<CommentViewModel>();
+                                Items = new ObservableCollection<CommentViewModel>();
                             }
 
-                            Comments.Insert(0, commentVm);
+                            Items.Insert(0, commentVm);
 
                             CommentText = string.Empty;
                             Video.CommentCount++;
@@ -352,9 +317,14 @@ namespace Viddy.ViewModel.Item
             }
         }
 
-        public async Task LoadData(bool isRefresh, bool add = false, int offset = 0)
+        public async Task LoadData()
         {
-            if (_commentsLoaded && !isRefresh && !add)
+            await LoadData(false);
+        }
+
+        protected override async Task LoadData(bool isRefresh, bool add = false, int offset = 0)
+        {
+            if (ItemsLoaded && !isRefresh && !add)
             {
                 return;
             }
@@ -370,16 +340,16 @@ namespace Viddy.ViewModel.Item
 
                 var response = await _vidMeClient.GetCommentsAsync(Video.VideoId, SortDirection.Ascending, offset);
 
-                if (Comments == null || !add)
+                if (Items == null || !add)
                 {
-                    Comments = new ObservableCollection<CommentViewModel>();
+                    Items = new ObservableCollection<CommentViewModel>();
                 }
 
-                Comments.AddRange(response.Comments.Select(x => new CommentViewModel(x, this)));
+                Items.AddRange(response.Comments.Select(x => new CommentViewModel(x, this)));
 
-                IsEmpty = Comments.IsNullOrEmpty();
-                CanLoadMore = response.Page.Total > Comments.Count;
-                _commentsLoaded = true;
+                IsEmpty = Items.IsNullOrEmpty();
+                CanLoadMore = response.Page.Total > Items.Count;
+                ItemsLoaded = true;
             }
             catch (Exception ex)
             {
