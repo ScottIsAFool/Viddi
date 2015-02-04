@@ -141,8 +141,8 @@
                         <StackPanel Orientation="Vertical">
                             <ProgressRing Height="60"
                                           Width="60"
-                                          IsActive="{Binding}" 
-                                          Background="Transparent"/>
+                                          IsActive="{Binding}"
+                                          Background="Transparent" />
                         </StackPanel>
                     </Grid>
                 </DataTemplate>
@@ -156,58 +156,127 @@
                 </DataTemplate>
             </Setter.Value>
         </Setter>
+        <Setter Property="GoToTopButton">
+            <Setter.Value>
+                <Button Style="{StaticResource EmptyButtonStyle}"
+                        Width="45"
+                        Height="45">
+                    <Grid>
+                        <Viewbox Stretch="UniformToFill"
+                                 StretchDirection="DownOnly"
+                                 Width="{Binding Width, RelativeSource={RelativeSource TemplatedParent}}"
+                                 Height="{Binding Height, RelativeSource={RelativeSource TemplatedParent}}">
+                            <Border BorderThickness="1"
+                                    BorderBrush="{ThemeResource ButtonBackgroundBrush}"
+                                    CornerRadius="45"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch"
+                                    Padding="2">
+                                <Grid>
+                                    <Grid x:Name="PlaceHolderGrid">
+                                        <Border CornerRadius="45"
+                                                Background="{ThemeResource ButtonBackgroundBrush}">
+                                            <TextBlock FontFamily="{StaticResource SegoeUISymbolsFont}"
+                                                       Text="&#xE1FE;"
+                                                       HorizontalAlignment="Center"
+                                                       VerticalAlignment="Center"
+                                                       Foreground="{ThemeResource DefaultUserBrush}"
+                                                       FontSize="26.667" />
+                                        </Border>
+                                    </Grid>
+                                </Grid>
+                            </Border>
+                        </Viewbox>
+                    </Grid>
+                </Button>
+            </Setter.Value>
+        </Setter>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:LoadingListView">
                     <Border BorderBrush="{TemplateBinding BorderBrush}"
                             Background="{TemplateBinding Background}"
                             BorderThickness="{TemplateBinding BorderThickness}">
-                        <ScrollViewer x:Name="ScrollViewer"
-                                      TabNavigation="{TemplateBinding TabNavigation}"
-                                      HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
-                                      HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
-                                      IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}"
-                                      VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
-                                      VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
-                                      IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}"
-                                      IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
-                                      IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
-                                      ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}"
-                                      IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
-                                      BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
-                                      AutomationProperties.AccessibilityView="Raw">
-                            <Grid Tag="{TemplateBinding IsInitialising}"
-                                  x:Name="ContainerGrid">
-                                <Grid x:Name="InitialisedContent"
-                                      Tag="{TemplateBinding IsEmpty}"
-                                      Visibility="{Binding Tag, ElementName=ContainerGrid, Converter={StaticResource InverseVisibilityConverter}}">
-                                    <ItemsPresenter Header="{TemplateBinding Header}"
-                                                    HeaderTemplate="{TemplateBinding HeaderTemplate}"
-                                                    HeaderTransitions="{TemplateBinding HeaderTransitions}"
-                                                    Footer="{TemplateBinding Footer}"
-                                                    FooterTemplate="{TemplateBinding FooterTemplate}"
-                                                    FooterTransitions="{TemplateBinding FooterTransitions}"
-                                                    Padding="{TemplateBinding Padding}" />
-                                    <ContentControl ContentTemplate="{TemplateBinding EmptyContent}"
-                                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                                    Style="{TemplateBinding EmptyContentStyle}"
-                                                    Visibility="{Binding Tag, ElementName=InitialisedContent, Converter={StaticResource VisibilityConverter}}" />
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="GoToTopButtonGroup">
+                                <VisualState x:Name="ShowGoToTopButton">
+                                    <Storyboard>
+                                        <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)"
+                                                                       Storyboard.TargetName="GoToTopButtonPresenter">
+                                            <DiscreteObjectKeyFrame KeyTime="0">
+                                                <DiscreteObjectKeyFrame.Value>
+                                                    <Visibility>Visible</Visibility>
+                                                </DiscreteObjectKeyFrame.Value>
+                                            </DiscreteObjectKeyFrame>
+                                        </ObjectAnimationUsingKeyFrames>
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)"
+                                                                       Storyboard.TargetName="GoToTopButtonPresenter">
+                                            <EasingDoubleKeyFrame KeyTime="0"
+                                                                  Value="0" />
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.7"
+                                                                  Value="1" />
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </VisualState>
+                                <VisualState x:Name="HideGoToTopButton" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+                        <Grid>
+                            <ScrollViewer x:Name="ScrollViewer"
+                                          TabNavigation="{TemplateBinding TabNavigation}"
+                                          HorizontalScrollMode="{TemplateBinding ScrollViewer.HorizontalScrollMode}"
+                                          HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
+                                          IsHorizontalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsHorizontalScrollChainingEnabled}"
+                                          VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
+                                          VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
+                                          IsVerticalScrollChainingEnabled="{TemplateBinding ScrollViewer.IsVerticalScrollChainingEnabled}"
+                                          IsHorizontalRailEnabled="{TemplateBinding ScrollViewer.IsHorizontalRailEnabled}"
+                                          IsVerticalRailEnabled="{TemplateBinding ScrollViewer.IsVerticalRailEnabled}"
+                                          ZoomMode="{TemplateBinding ScrollViewer.ZoomMode}"
+                                          IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
+                                          BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
+                                          AutomationProperties.AccessibilityView="Raw">
+                                <Grid Tag="{TemplateBinding IsInitialising}"
+                                      x:Name="ContainerGrid">
+                                    <Grid x:Name="InitialisedContent"
+                                          Tag="{TemplateBinding IsEmpty}"
+                                          Visibility="{Binding Tag, ElementName=ContainerGrid, Converter={StaticResource InverseVisibilityConverter}}">
+                                        <ItemsPresenter Header="{TemplateBinding Header}"
+                                                        HeaderTemplate="{TemplateBinding HeaderTemplate}"
+                                                        HeaderTransitions="{TemplateBinding HeaderTransitions}"
+                                                        Footer="{TemplateBinding Footer}"
+                                                        FooterTemplate="{TemplateBinding FooterTemplate}"
+                                                        FooterTransitions="{TemplateBinding FooterTransitions}"
+                                                        Padding="{TemplateBinding Padding}" />
+                                        <ContentControl ContentTemplate="{TemplateBinding EmptyContent}"
+                                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                                        Style="{TemplateBinding EmptyContentStyle}"
+                                                        Visibility="{Binding Tag, ElementName=InitialisedContent, Converter={StaticResource VisibilityConverter}}" />
+                                    </Grid>
+                                    <Grid x:Name="InitialisingContent"
+                                          Visibility="{Binding Tag, ElementName=ContainerGrid, Converter={StaticResource VisibilityConverter}}">
+                                        <ContentControl ContentTemplate="{TemplateBinding InitialisingContent}"
+                                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                                        Style="{TemplateBinding InitialisingContentStyle}"
+                                                        DataContext="{TemplateBinding IsInitialising}" />
+                                    </Grid>
                                 </Grid>
-                                <Grid x:Name="InitialisingContent"
-                                      Visibility="{Binding Tag, ElementName=ContainerGrid, Converter={StaticResource VisibilityConverter}}">
-                                    <ContentControl ContentTemplate="{TemplateBinding InitialisingContent}"
-                                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                    HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                                    VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                                    Style="{TemplateBinding InitialisingContentStyle}"
-                                                    DataContext="{TemplateBinding IsInitialising}" />
-                                </Grid>
-                            </Grid>
-                        </ScrollViewer>
+                            </ScrollViewer>
+                            <ContentPresenter x:Name="GoToTopButtonPresenter"
+                                              
+                                              VerticalAlignment="Top"
+                                              HorizontalAlignment="Right"
+                                              Opacity="0"
+                                              Visibility="Collapsed" />
+                            <!--Content="{TemplateBinding GoToTopButton}"
+                                              ContentTemplate="{TemplateBinding GoToTopButtonTemplate}"-->
+                        </Grid>
                     </Border>
                 </ControlTemplate>
             </Setter.Value>

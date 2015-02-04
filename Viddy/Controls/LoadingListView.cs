@@ -1,10 +1,14 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
 
 namespace Viddy.Controls
 {
     public class LoadingListView : ListView
     {
+        private ScrollViewer _scrollViewer;
+        private ContentPresenter _goToTopButton;
+
         public static readonly DependencyProperty IsEmptyProperty = DependencyProperty.Register(
             "IsEmpty", typeof (bool), typeof (LoadingListView), new PropertyMetadata(default(bool)));
 
@@ -77,9 +81,98 @@ namespace Viddy.Controls
             set { SetValue(LoadFailedProperty, value); }
         }
 
+        public static readonly DependencyProperty IsAtTopProperty = DependencyProperty.Register(
+            "IsAtTop", typeof (bool), typeof (LoadingListView), new PropertyMetadata(default(bool)));
+
+        public bool IsAtTop
+        {
+            get { return (bool) GetValue(IsAtTopProperty); }
+            set { SetValue(IsAtTopProperty, value); }
+        }
+
+        public static readonly DependencyProperty GoToTopButtonProperty = DependencyProperty.Register(
+            "GoToTopButton", typeof (object), typeof (LoadingListView), new PropertyMetadata(default(object)));
+
+        public object GoToTopButton
+        {
+            get { return (object) GetValue(GoToTopButtonProperty); }
+            set { SetValue(GoToTopButtonProperty, value); }
+        }
+
+        public static readonly DependencyProperty GoToTopButtonTemplateProperty = DependencyProperty.Register(
+            "GoToTopButtonTemplate", typeof (DataTemplate), typeof (LoadingListView), new PropertyMetadata(default(DataTemplate)));
+
+        public DataTemplate GoToTopButtonTemplate
+        {
+            get { return (DataTemplate) GetValue(GoToTopButtonTemplateProperty); }
+            set { SetValue(GoToTopButtonTemplateProperty, value); }
+        }
+
+        public static readonly DependencyProperty ShowGoToTopButtonProperty = DependencyProperty.Register(
+            "ShowGoToTopButton", typeof (bool), typeof (LoadingListView), new PropertyMetadata(true));
+
+        public bool ShowGoToTopButton
+        {
+            get { return (bool) GetValue(ShowGoToTopButtonProperty); }
+            set { SetValue(ShowGoToTopButtonProperty, value); }
+        }
+
         public LoadingListView()
         {
             DefaultStyleKey = typeof (LoadingListView);
+        }
+
+        public void GoToTop()
+        {
+            if (_scrollViewer != null)
+            {
+                _scrollViewer.ScrollToVerticalOffset(0);
+            }
+        }
+
+        protected override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            _scrollViewer = GetTemplateChild("ScrollViewer") as ScrollViewer;
+            if (_scrollViewer != null)
+            {
+                _scrollViewer.ViewChanged += ScrollViewerOnViewChanged;
+            }
+
+            _goToTopButton = GetTemplateChild("GoToTopButtonPresenter") as ContentPresenter;
+            if (_goToTopButton != null)
+            {
+                _goToTopButton.Tapped += GoToTopButtonOnTapped;
+            }
+        }
+
+        private void GoToTopButtonOnTapped(object sender, TappedRoutedEventArgs tappedRoutedEventArgs)
+        {
+            GoToTop();
+        }
+
+        private void ScrollViewerOnViewChanged(object sender, ScrollViewerViewChangedEventArgs scrollViewerViewChangedEventArgs)
+        {
+            if (_scrollViewer == null)
+            {
+                return;
+            }
+
+            IsAtTop = _scrollViewer.VerticalOffset == 0;
+
+            if (IsAtTop)
+            {
+                // Hide go to top button
+                VisualStateManager.GoToState(this, "HideGoToTopButton", true);
+            }
+            else
+            {
+                if (ShowGoToTopButton)
+                {
+                    // Show go to top button
+                    VisualStateManager.GoToState(this, "ShowGoToTopButton", true);
+                }
+            }
         }
     }
 }
