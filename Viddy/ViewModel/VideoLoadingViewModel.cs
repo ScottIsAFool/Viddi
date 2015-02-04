@@ -36,14 +36,13 @@ namespace Viddy.ViewModel
 
                 IsLoadingMore = add;
                 var response = await GetVideos(offset);
-
-                if (Items == null || !add)
-                {
-                    Items = new ObservableCollection<IListType>();
-                }
-
                 if (response != null && response.Videos != null)
                 {
+                    if (Items == null || !add)
+                    {
+                        Items = new ObservableCollection<IListType>();
+                    }
+
                     var allVideos = response.Videos.Select(x => new VideoItemViewModel(x, this)).ToList();
 
                     IEnumerable<IListType> videoList;
@@ -83,7 +82,7 @@ namespace Viddy.ViewModel
             return ReviewService.Current.CanShowReviews;
 #endif
         }
-        
+
         protected override void WireMessages()
         {
             Messenger.Default.Register<NotificationMessage>(this, m =>

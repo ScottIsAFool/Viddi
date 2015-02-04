@@ -47,6 +47,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.Register<SearchViewModel>();
             SimpleIoc.Default.Register<ChannelViewModel>(true);
             SimpleIoc.Default.Register<SettingsViewModel>();
+            SimpleIoc.Default.Register<BrowseChannelsViewModel>();
         }
 
         public MainViewModel Main
@@ -127,6 +128,11 @@ namespace Viddy.ViewModel
         public SettingsViewModel Settings
         {
             get { return ServiceLocator.Current.GetInstance<SettingsViewModel>(); }
+        }
+
+        public BrowseChannelsViewModel BrowseChannels
+        {
+            get { return ServiceLocator.Current.GetInstance<BrowseChannelsViewModel>(); }
         }
 
         public AuthenticationService Auth
