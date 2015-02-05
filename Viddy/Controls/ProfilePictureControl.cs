@@ -39,6 +39,15 @@ namespace Viddy.Controls
             set { SetValue(AvatarUrlProperty, value); }
         }
 
+        public static readonly DependencyProperty DisplayDefaultAvatarProperty = DependencyProperty.Register(
+            "DisplayDefaultAvatar", typeof (bool), typeof (ProfilePictureControl), new PropertyMetadata(default(bool)));
+
+        public bool DisplayDefaultAvatar
+        {
+            get { return (bool) GetValue(DisplayDefaultAvatarProperty); }
+            set { SetValue(DisplayDefaultAvatarProperty, value); }
+        }
+
         private static void OnAvatarUrlChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             var profile = sender as ProfilePictureControl;

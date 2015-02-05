@@ -124,6 +124,7 @@
     </Compile>
     <Compile Include="Controls\ItemTypeDataTemplateSelector.cs" />
     <Compile Include="Converters\CommentEnabledConverter.cs" />
+    <Compile Include="Converters\NullBooleanConverter.cs" />
     <Compile Include="Converters\ThumbnailConverter.cs" />
     <Compile Include="Extensions\ApplicationSettingsExtensions.cs" />
     <Compile Include="Extensions\ContainerExtensions.cs" />
@@ -142,6 +143,7 @@
     <Compile Include="ViewModel\Account\AccountViewModel.cs" />
     <Compile Include="ViewModel\Account\AvatarViewModel.cs" />
     <Compile Include="ViewModel\Account\CreateAccountViewModel.cs" />
+    <Compile Include="ViewModel\Account\EditProfileViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\AddAppViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\ManageMyAppsViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\OwnedAppViewModel.cs" />

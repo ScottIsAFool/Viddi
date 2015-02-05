@@ -32,12 +32,17 @@
             <FontFamily x:Key="SegoeUISymbolsFont">ms-appx:///Fonts/seguisym.ttf#Segoe UI Symbol</FontFamily>
 
             <localConverters:ThumbnailConverter x:Key="ThumbnailConverter" />
+            <localConverters:NullBooleanConverter x:Key="NullBooleanConverter"/>
+            <localConverters:NullBooleanConverter x:Key="InverseNullBooleanConverter" 
+                                                  Invert="True"/>
 
             <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
             <converters:BooleanToVisibilityConverter x:Key="InverseVisibilityConverter"
                                                      InvertValue="True" />
             <converters:NegativeBooleanConverter x:Key="NegativeBooleanConverter" />
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
+            <converters:NullToVisibilityConverter x:Key="InverseNullToVisibilityConverter" 
+                                                  InvertValue="True"/>
 
             <themeManagerRt:ThemeManager x:Key="ThemeManager" />
             <Color x:Key="OverlayColor">#4C000000</Color>

@@ -13,6 +13,8 @@
                 Value="{ThemeResource ButtonBackgroundBrush}" />
         <Setter Property="BorderThickness"
                 Value="1" />
+        <Setter Property="DisplayDefaultAvatar"
+                Value="True"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ProfilePictureControl">
@@ -38,7 +40,9 @@
                                                        HorizontalAlignment="Center"
                                                        VerticalAlignment="Center"
                                                        Foreground="{ThemeResource DefaultUserBrush}"
-                                                       FontSize="26.667" />
+                                                       FontSize="26.667" 
+                                                       Tag="{TemplateBinding DisplayDefaultAvatar}"
+                                                       Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource VisibilityConverter}}"/>
                                         </Border>
                                     </Grid>
                                     <Ellipse Stretch="Fill"

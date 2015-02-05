@@ -3,6 +3,7 @@ using System.IO;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Services;
 using VidMePortable;
@@ -36,9 +37,19 @@ namespace Viddy.ViewModel.Account
             LaunchFilePicker();
         }
 
+        public RelayCommand ChangeAvatarCommand
+        {
+            get { return new RelayCommand(ChangeAvatar); }
+        }
+
+        public RelayCommand ChangeCoverCommand
+        {
+            get { return new RelayCommand(ChangeCover); }
+        }
+
         private static void LaunchFilePicker()
         {
-            var filePicker = new FileOpenPicker {ViewMode = PickerViewMode.Thumbnail, SuggestedStartLocation = PickerLocationId.PicturesLibrary};
+            var filePicker = new FileOpenPicker { ViewMode = PickerViewMode.Thumbnail, SuggestedStartLocation = PickerLocationId.PicturesLibrary };
             filePicker.FileTypeFilter.Add(".jpg");
             filePicker.FileTypeFilter.Add(".jpeg");
             filePicker.FileTypeFilter.Add(".png");
@@ -91,8 +102,8 @@ namespace Viddy.ViewModel.Account
 
         private Task<User> SendPictureData(string loggedInUserId, Stream actualStream, string contentType, string name)
         {
-            return _pictureType == PictureType.Avatar 
-                ? _vidMeClient.UpdateAvatarAsync(loggedInUserId, actualStream, contentType, name) 
+            return _pictureType == PictureType.Avatar
+                ? _vidMeClient.UpdateAvatarAsync(loggedInUserId, actualStream, contentType, name)
                 : _vidMeClient.UpdateCoverAsync(loggedInUserId, actualStream, contentType, name);
         }
 
@@ -103,7 +114,7 @@ namespace Viddy.ViewModel.Account
                 if (m.Notification.Equals(Constants.Messages.ProfileFileMsg))
                 {
                     var file = m.Sender as IStorageFile;
-                    
+
                     await UpdatePicture(file);
                 }
             });
