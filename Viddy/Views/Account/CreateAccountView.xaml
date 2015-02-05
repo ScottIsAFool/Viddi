@@ -53,12 +53,14 @@
         </Grid>
 
         <Grid Grid.Row="1"
-              Margin="19,12,19,0">
+              Margin="0,12,0,0">
             <StackPanel Orientation="Vertical">
                 <ProgressBar IsIndeterminate="{Binding ProgressIsVisible}"
                              Visibility="{Binding ProgressIsVisible, Converter={StaticResource VisibilityConverter}}" />
                 <TextBox Text="{Binding Username, Mode=TwoWay}"
-                         Header="Username:">
+                         PlaceholderText="Username"
+                         Header="&#xE13D;"
+                         Style="{StaticResource FullLengthTextBoxStyle}">
                     <interactivity:Interaction.Behaviors>
                         <behaviours:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
@@ -66,10 +68,14 @@
 
                 <PasswordBox Password="{Binding Password, Mode=TwoWay}"
                              IsPasswordRevealButtonEnabled="True"
-                             Header="Password:"/>
+                             PlaceholderText="Password"
+                             Header="&#xE1F6;"
+                             Style="{StaticResource FullLengthPasswordBoxStyle}"/>
 
                 <TextBox Text="{Binding EmailAddress, Mode=TwoWay}"
-                         Header="Email address (optional):">
+                         PlaceholderText="Email address (optional)"
+                         Style="{StaticResource FullLengthTextBoxStyle}"
+                         Header="&#xE119;">
                     <interactivity:Interaction.Behaviors>
                         <behaviours:UpdateTextBindingOnPropertyChanged />
                         <behaviours:EnterKeyHandler Command="{Binding CreateAccountCommand}"/>

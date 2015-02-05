@@ -29,7 +29,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Background="{ThemeResource HeaderBrush}"
+        <Grid Background="{ThemeResource PlaceholderTextBrush}"
               Height="80">
             <Grid Margin="19,0">
                 <StackPanel Orientation="Horizontal">
@@ -49,34 +49,43 @@
         
         <Grid Grid.Row="1"
               Margin="0,12,0,0">
-            <StackPanel Orientation="Vertical"
-                        Margin="19,0">
-                <TextBox Header="Name:"
-                         Text="{Binding Name, Mode=TwoWay}">
+            <StackPanel Orientation="Vertical">
+                <TextBox PlaceholderText="Name"
+                         Text="{Binding Name, Mode=TwoWay}"
+                         Style="{StaticResource FullLengthTextBoxStyle}"
+                         Header="&#xE1F6;">
                     <interactivity:Interaction.Behaviors>
                         <behaviours:UpdateTextBindingOnPropertyChanged/>
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
-                <TextBox Header="Redirect Url:"
-                         Text="{Binding RedirectUrl, Mode=TwoWay}">
+                <TextBox PlaceholderText="Redirect Url:"
+                         Text="{Binding RedirectUrl, Mode=TwoWay}"
+                         Style="{StaticResource FullLengthTextBoxStyle}"
+                         Header="&#xE12B;">
                     <interactivity:Interaction.Behaviors>
                         <behaviours:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
-                <TextBox Header="Description (optional):"
-                         Text="{Binding Description, Mode=TwoWay}">
+                <TextBox PlaceholderText="Description (optional):"
+                         Text="{Binding Description, Mode=TwoWay}"
+                         Style="{StaticResource FullLengthTextBoxStyle}"
+                         Header="&#xE1F6;">
                     <interactivity:Interaction.Behaviors>
                         <behaviours:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
-                <TextBox Header="Website (optional):"
-                         Text="{Binding Website, Mode=TwoWay}">
+                <TextBox PlaceholderText="Website (optional):"
+                         Text="{Binding Website, Mode=TwoWay}"
+                         Style="{StaticResource FullLengthTextBoxStyle}"
+                         Header="&#xE12B;">
                     <interactivity:Interaction.Behaviors>
                         <behaviours:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
-                <TextBox Header="Company (optional):"
-                         Text="{Binding Organisation, Mode=TwoWay}">
+                <TextBox PlaceholderText="Company (optional):"
+                         Text="{Binding Organisation, Mode=TwoWay}"
+                         Style="{StaticResource FullLengthTextBoxStyle}"
+                         Header="&#xE1F6;">
                     <interactivity:Interaction.Behaviors>
                         <behaviours:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
