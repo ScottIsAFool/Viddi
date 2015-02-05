@@ -23,24 +23,15 @@
         <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="record"
-                              Command="{Binding NavigateToVideoRecordCommand}">
-                    <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Video" />
-                    </AppBarButton.Icon>
-                </AppBarButton>
+                              Command="{Binding NavigateToVideoRecordCommand}"
+                              Icon="Video"/>
                 <AppBarButton Label="refresh"
                               Command="{Binding RefreshCommand}"
-                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator},Converter={StaticResource VisibilityConverter}}">
-                    <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Refresh"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
+                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator},Converter={StaticResource VisibilityConverter}}"
+                              Icon="Refresh"/>
                 <AppBarButton Label="search"
-                              Command="{Binding NavigateToSearchCommand}">
-                    <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Find" />
-                    </AppBarButton.Icon>
-                </AppBarButton>
+                              Command="{Binding NavigateToSearchCommand}"
+                              Icon="Find"/>
                 <AppBarButton Label="channels"
                               Command="{Binding NavigateToBrowseChannelsCommand}">
                     <AppBarButton.Icon>

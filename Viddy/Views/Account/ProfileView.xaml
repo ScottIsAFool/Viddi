@@ -22,11 +22,8 @@
         <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="refresh"
-                              Command="{Binding RefreshCommand}">
-                    <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Refresh" />
-                    </AppBarButton.Icon>
-                </AppBarButton>
+                              Command="{Binding RefreshCommand}"
+                              Icon="Refresh" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </views:BasePage.BottomAppBar>
@@ -35,18 +32,18 @@
         <controls:ProfileHeaderControl DataContext="{Binding EmptyUser}"
                                        Visibility="{Binding Profile.ProgressIsVisible, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}" />
         <controls:LoadingListView ItemsSource="{Binding Items}"
-                                       ItemTemplate="{StaticResource VideoTemplate}"
-                                       IsEmpty="{Binding IsEmpty}"
-                                       IsInitialising="{Binding ProgressIsVisible}"
-                                       Header="{Binding}">
+                                  IsEmpty="{Binding IsEmpty}"
+                                  ItemTemplateSelector="{StaticResource VideoTemplateSelector}"
+                                  IsInitialising="{Binding ProgressIsVisible}"
+                                  Header="{Binding}">
             <controls:LoadingListView.HeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
                         <controls:ProfileHeaderControl DataContext="{Binding User}" />
                         <controls:FollowingControl IsEnabled="{Binding User.CanFollow}"
                                                    FollowingText="{Binding User.FollowingText}"
-                                                   IsChecked="{Binding User.IsFollowedByMe, Mode=TwoWay}" 
-                                                   Margin="19,-5,19,12"/>
+                                                   IsChecked="{Binding User.IsFollowedByMe, Mode=TwoWay}"
+                                                   Margin="19,-5,19,12" />
                         <TextBlock Text="This user hasn't submitted any content yet."
                                    Style="{StaticResource BodyTextBlockStyle}"
                                    Margin="19"

@@ -14,11 +14,10 @@
     <views:BasePage.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
-                <AppBarButton Label="save">
-                    <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Save"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
+                <AppBarButton Label="save"
+                              Icon="Save"
+                              Command="{Binding SaveAppCommand}"
+                              IsEnabled="{Binding CanAddApp}"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </views:BasePage.BottomAppBar>

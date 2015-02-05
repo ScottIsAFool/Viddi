@@ -16,6 +16,17 @@
             <core:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
+    
+    <local:BasePage.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="save"
+                              Icon="Save"
+                              IsEnabled="{Binding CanUpdate}"
+                              Command="{Binding UpdateProfileCommand}"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </local:BasePage.BottomAppBar>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -33,7 +44,8 @@
                 <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
                                        TapCommand="{Binding Avatar.ChangeCoverCommand}"
                                        IsEnabled="{Binding Avatar.ChangingCover, Converter={StaticResource NegativeBooleanConverter}}"
-                                       Visibility="{Binding Avatar.ChangingCover, Converter={StaticResource InverseVisibilityConverter}}">
+                                       Visibility="{Binding Avatar.ChangingCover, Converter={StaticResource InverseVisibilityConverter}}"
+                                       VerticalAlignment="Stretch">
                     <Border BorderBrush="White"
                             BorderThickness="2"
                             Height="50"
@@ -75,7 +87,7 @@
                     <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
                                            TapCommand="{Binding Avatar.ChangeAvatarCommand}"
                                            IsEnabled="{Binding Avatar.ChangingAvatar, Converter={StaticResource NegativeBooleanConverter}}"
-                                           Visibility="{Binding Avatar.ChangingAvatar, Converter={StaticResource InverseVisibilityConverter}}>
+                                           Visibility="{Binding Avatar.ChangingAvatar, Converter={StaticResource InverseVisibilityConverter}}">
                         <Border BorderBrush="White"
                                 BorderThickness="2"
                                 Height="50"
@@ -101,7 +113,7 @@
                          VerticalAlignment="Bottom"
                          HorizontalAlignment="Stretch"
                          Grid.Column="1"
-                         Margin="6,0" 
+                         Margin="6,0,6,-10" 
                          Height="40"
                          Style="{StaticResource FullLengthTextBoxStyle}"
                          BorderThickness="0">
@@ -111,6 +123,34 @@
                 </TextBox>
             </Grid>
         </Grid>
+        
+        <StackPanel Grid.Row="1"
+                    Margin="0,12,0,0">
+            <TextBox Text="{Binding Bio, Mode=TwoWay}"
+                     Style="{StaticResource FullLengthTextBoxStyle}"
+                     PlaceholderText="Bio">
+                <interactivity:Interaction.Behaviors>
+                    <behaviours:UpdateTextBindingOnPropertyChanged/>
+                </interactivity:Interaction.Behaviors>
+            </TextBox>
+            <TextBox Text="{Binding Email, Mode=TwoWay}"
+                     Style="{StaticResource FullLengthTextBoxStyle}"
+                     PlaceholderText="Email">
+                <interactivity:Interaction.Behaviors>
+                    <behaviours:UpdateTextBindingOnPropertyChanged />
+                </interactivity:Interaction.Behaviors>
+            </TextBox>
+            
+            <TextBlock Text="Change password:"
+                       Style="{StaticResource BodyTextBlockStyle}"
+                       Margin="19,24,19,12"/>
+            <PasswordBox Password="{Binding CurrentPassword, Mode=TwoWay}"
+                     Style="{StaticResource FullLengthPasswordBoxStyle}"
+                     PlaceholderText="Current password"/>
+            <PasswordBox Password="{Binding NewPassword, Mode=TwoWay}"
+                     Style="{StaticResource FullLengthPasswordBoxStyle}"
+                     PlaceholderText="New password"/>
+        </StackPanel>
 
     </Grid>
 </local:BasePage>

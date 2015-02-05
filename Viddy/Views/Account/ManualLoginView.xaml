@@ -20,11 +20,8 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="sign in"
                               IsEnabled="{Binding CanSignIn}"
-                              Command="{Binding SignInCommand}">
-                    <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Accept" />
-                    </AppBarButton.Icon>
-                </AppBarButton>
+                              Command="{Binding SignInCommand}"
+                              Icon="Accept"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </views:BasePage.BottomAppBar>

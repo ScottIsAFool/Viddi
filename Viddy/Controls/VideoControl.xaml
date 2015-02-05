@@ -33,7 +33,7 @@
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
-                    <TextBlock Text="{Binding Video.Title, FallbackValue='Video title goes here'}"
+                    <TextBlock Text="{Binding Video.Title}"
                                Style="{StaticResource BodyTextBlockStyle}"
                                Foreground="White"
                                Margin="19,0,12,0"

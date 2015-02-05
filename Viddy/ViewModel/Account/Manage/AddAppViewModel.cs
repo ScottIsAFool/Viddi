@@ -40,11 +40,6 @@ namespace Viddy.ViewModel.Account.Manage
             {
                 return new RelayCommand(async () =>
                 {
-                    if (!CanAddApp)
-                    {
-                        return;
-                    }
-
                     try
                     {
                         var app = new AppRequest
@@ -63,7 +58,7 @@ namespace Viddy.ViewModel.Account.Manage
                     {
                         
                     }
-                });
+                }, () => CanAddApp);
             }
         }
 

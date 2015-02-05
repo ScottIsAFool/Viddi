@@ -1,4 +1,5 @@
-﻿using Cimbalino.Toolkit.Services;
+﻿using System;
+using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Services;
 using Viddy.ViewModel.Item;
@@ -26,6 +27,41 @@ namespace Viddy.ViewModel.Account
 
         public string NewPassword { get; set; }
         public string CurrentPassword { get; set; }
+        public bool IsChanged { get; set; }
+
+        public bool CanUpdate
+        {
+            get
+            {
+                return !ProgressIsVisible
+                       && IsChanged
+                       && !string.IsNullOrEmpty(Name)
+                       && (string.IsNullOrEmpty(NewPassword) && string.IsNullOrEmpty(CurrentPassword)
+                           || (!string.IsNullOrEmpty(NewPassword) && !string.IsNullOrEmpty(CurrentPassword)));
+            }
+        }
+
+        public RelayCommand UpdateProfileCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    try
+                    {
+                        SetProgressBar("Updating profile...");
+
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                    }
+
+                    SetProgressBar();
+                }, () => CanUpdate);
+            }
+        }
 
         public RelayCommand PageLoadedCommand
         {
@@ -36,6 +72,8 @@ namespace Viddy.ViewModel.Account
                     var user = AuthenticationService.Current.AuthenticationInfo.User;
                     Name = user.Username;
                     Bio = user.Bio;
+
+                    IsChanged = false;
                 }, () => AuthenticationService.Current.IsLoggedIn);
             }
         }

@@ -24,11 +24,8 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="refresh"
                               Command="{Binding RefreshCommand}"
-                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}">
-                    <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Refresh"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
+                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
+                              Icon="Refresh"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </views:BasePage.BottomAppBar>

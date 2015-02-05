@@ -4,6 +4,10 @@
                     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                     mc:Ignorable="d">
 
+    <Style TargetType="ProgressBar">
+        <Setter Property="Background"
+                Value="Transparent"/>
+    </Style>
     <Style x:Key="EmptyButtonStyle"
            TargetType="ButtonBase">
         <Setter Property="Background"
@@ -115,7 +119,8 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="TextBox">
-                    <Grid Background="Transparent">
+                    <Grid Background="Transparent"
+                          Height="{TemplateBinding Height}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="Auto"
                                               MaxWidth="75" />
@@ -197,7 +202,7 @@
                                           ContentTemplate="{TemplateBinding HeaderTemplate}"
                                           Content="{TemplateBinding Header}"
                                           Grid.Row="1"
-                                          Width="42"
+                                          Width="28"
                                           Margin="27,0,0,0"
                                           Tag="{TemplateBinding Header}"
                                           Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource NullToVisibilityConverter}}"
@@ -215,7 +220,7 @@
                                       IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
                                       Margin="0"
                                       MinHeight="{ThemeResource TextControlThemeMinHeight}"
-                                      Padding="7,14,8,0"
+                                      Padding="19,14,8,0"
                                       Grid.Row="1"
                                       VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                                       VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
@@ -229,7 +234,7 @@
                                         FontSize="{ThemeResource ContentControlFontSize}"
                                         IsTabStop="False"
                                         Margin="0,6"
-                                        Padding="5,-6,8,0"
+                                        Padding="19,-6,8,0"
                                         Grid.Row="1"
                                         Grid.Column="1"
                                         BorderBrush="Transparent"
@@ -510,7 +515,7 @@
                                           ContentTemplate="{TemplateBinding HeaderTemplate}"
                                           Content="{TemplateBinding Header}"
                                           Grid.Row="1"
-                                          Width="42"
+                                          Width="28"
                                           Margin="27,0,0,0"
                                           Style="{StaticResource HeaderContentPresenterStyle}"
                                           VerticalAlignment="Center"
@@ -526,7 +531,7 @@
                                       IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
                                       Margin="0"
                                       MinHeight="{ThemeResource TextControlThemeMinHeight}"
-                                      Padding="7,14,8,0"
+                                      Padding="19,14,8,0"
                                       Grid.Row="1"
                                       VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"
                                       VerticalScrollMode="{TemplateBinding ScrollViewer.VerticalScrollMode}"
@@ -540,7 +545,7 @@
                                         FontSize="{ThemeResource ContentControlFontSize}"
                                         IsTabStop="False"
                                         Margin="{TemplateBinding BorderThickness}"
-                                        Padding="7,-6,8,0"
+                                        Padding="19,-6,8,0"
                                         Grid.Row="1"
                                         Grid.Column="1"
                                         BorderBrush="Transparent"

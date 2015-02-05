@@ -33,34 +33,22 @@
         <CommandBar ClosedDisplayMode="Compact">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="record"
-                              Command="{Binding NavigateToRecordCommand}">
-                    <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Video" />
-                    </AppBarButton.Icon>
-                </AppBarButton>
+                              Command="{Binding NavigateToRecordCommand}"
+                              Icon="Video"/>
                 <AppBarButton IsCompact="True"
                               Label="settings"
-                              Command="{Binding NavigateToSettingsCommand}">
-                    <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Setting" />
-                    </AppBarButton.Icon>
-                </AppBarButton>
+                              Command="{Binding NavigateToSettingsCommand}"
+                              Icon="Setting"/>
                 <AppBarButton IsCompact="True"
                               Label="refresh"
                               Command="{Binding RefreshCommand}"
-                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}">
-                    <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Refresh" />
-                    </AppBarButton.Icon>
-                </AppBarButton>
+                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
+                              Icon="Refresh"/>
                 <AppBarButton IsCompact="True"
                               Label="edit profile"
+                              Icon="Edit"
                               Command="{Binding NavigateToEditProfileCommand}"
-                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}">
-                    <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Edit" />
-                    </AppBarButton.Icon>
-                </AppBarButton>
+                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"/>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="manage account"

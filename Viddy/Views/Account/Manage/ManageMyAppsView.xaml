@@ -24,17 +24,11 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="refresh"
                               Command="{Binding RefreshCommand}"
-                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}">
-                    <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Refresh" />
-                    </AppBarButton.Icon>
-                </AppBarButton>
+                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
+                              Icon="Refresh"/>
                 <AppBarButton Label="add"
-                              Command="{Binding AddAppCommand}">
-                    <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Add"/>
-                    </AppBarButton.Icon>
-                </AppBarButton>
+                              Command="{Binding AddAppCommand}"
+                              Icon="Add"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </views:BasePage.BottomAppBar>

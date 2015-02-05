@@ -20,11 +20,8 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="create"
                               IsEnabled="{Binding CanCreateAccount}"
-                              Command="{Binding CreateAccountCommand}">
-                    <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Accept" />
-                    </AppBarButton.Icon>
-                </AppBarButton>
+                              Command="{Binding CreateAccountCommand}"
+                              Icon="Accept"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </views:BasePage.BottomAppBar>
