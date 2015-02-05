@@ -169,7 +169,7 @@
                                                                        Storyboard.TargetName="HeaderContentPresenter">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
-                                                    <SolidColorBrush Color="White" />
+                                                    <SolidColorBrush Color="{ThemeResource TextBoxHeaderFocusColor}" />
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
@@ -452,7 +452,7 @@
                                                                        Storyboard.TargetName="HeaderContentPresenter">
                                             <DiscreteObjectKeyFrame KeyTime="0">
                                                 <DiscreteObjectKeyFrame.Value>
-                                                    <SolidColorBrush Color="White" />
+                                                    <SolidColorBrush Color="{ThemeResource TextBoxHeaderFocusColor}" />
                                                 </DiscreteObjectKeyFrame.Value>
                                             </DiscreteObjectKeyFrame>
                                         </ObjectAnimationUsingKeyFrames>
