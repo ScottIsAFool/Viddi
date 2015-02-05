@@ -16,11 +16,12 @@
     <Color x:Key="DefaultUserColor">White</Color>
     <Color x:Key="EyeOffColor">Gray</Color>
     <Color x:Key="EyeOnColor">White</Color>
-    <Color x:Key="TextBoxBackgroundColor">#FFC9C6C6</Color>
+    <Color x:Key="TextBoxBackgroundColor">#F0F0F0</Color>
     <Color x:Key="TextBoxFocusBackgroundColor">#F0F0F0</Color>
-    <Color x:Key="TextBoxBorderColor">#FF4A4A4A</Color>
+    <Color x:Key="TextBoxBorderColor">#FF5C5C5C</Color>
     <Color x:Key="CommentButtonColor">#FFACACAC</Color>
     <Color x:Key="TextBoxHeaderFocusColor">#FFACACAC</Color>
+    <Color x:Key="PlaceholderTextColor">#FF7C7878</Color>
 
     <SolidColorBrush x:Key="CommentButtonBrush"
                      Color="{StaticResource CommentButtonColor}"/>
@@ -83,4 +84,7 @@
 
     <SolidColorBrush x:Key="TextBoxHeaderFocusBrush"
                      Color="{StaticResource TextBoxHeaderFocusColor}" />
+    
+    <SolidColorBrush x:Key="PlaceholderTextBrush"
+                     Color="{StaticResource PlaceholderTextColor}"/>
 </ResourceDictionary>

@@ -25,7 +25,8 @@
                 <TextBlock Text="{Binding Name, FallbackValue=Awww}"
                            Style="{StaticResource BodyTextBlockStyle}"
                            Margin="19,12"
-                           VerticalAlignment="Top" />
+                           VerticalAlignment="Top"
+                           Foreground="White"/>
             </Grid>
         </controls:CustomButton>
     </Grid>

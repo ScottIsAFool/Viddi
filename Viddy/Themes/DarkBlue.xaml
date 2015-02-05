@@ -6,7 +6,6 @@
     <Color x:Key="TickColor">DeepSkyBlue</Color>
     <Color x:Key="CrossColor">Red</Color>
     <Color x:Key="HeaderColor">#030710</Color>
-    <!--<Color x:Key="ApplicationPageBackgroundThemeColor">#FF8D8D8D</Color>-->
     <Color x:Key="ApplicationPageBackgroundThemeColor">#060E1B</Color>
     <Color x:Key="ApplicationForegroundThemeColor">White</Color>
     <Color x:Key="SubtleColor">#99CFCFCF</Color>
@@ -22,6 +21,7 @@
     <Color x:Key="TextBoxBorderColor">#0E162B</Color>
     <Color x:Key="CommentButtonColor">#FF13347A</Color>
     <Color x:Key="TextBoxHeaderFocusColor">White</Color>
+    <Color x:Key="PlaceholderTextColor">#99CFCFCF</Color>
 
     <SolidColorBrush x:Key="CommentButtonBrush"
                      Color="{StaticResource CommentButtonColor}" />
@@ -85,4 +85,7 @@
 
     <SolidColorBrush x:Key="TextBoxHeaderFocusBrush"
                      Color="{StaticResource TextBoxHeaderFocusColor}"/>
+    
+    <SolidColorBrush x:Key="PlaceholderTextBrush"
+                     Color="{StaticResource PlaceholderTextColor}" />
 </ResourceDictionary>

@@ -85,7 +85,7 @@
         <Setter Property="MinWidth"
                 Value="{ThemeResource TextControlThemeMinWidth}" />
         <Setter Property="Foreground"
-                Value="White" />
+                Value="{ThemeResource ApplicationForegroundThemeBrush}" />
         <Setter Property="SelectionHighlightColor"
                 Value="#FF68FF00" />
         <Setter Property="Background"
@@ -235,7 +235,7 @@
                                         BorderBrush="Transparent"
                                         Background="Transparent"
                                         VerticalContentAlignment="Center"
-                                        Foreground="{ThemeResource SubtleBrush}" />
+                                        Foreground="{ThemeResource PlaceholderTextBrush}" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>
@@ -368,7 +368,7 @@
         <Setter Property="MinWidth"
                 Value="{ThemeResource TextControlThemeMinWidth}" />
         <Setter Property="Foreground"
-                Value="White" />
+                Value="{ThemeResource ApplicationForegroundThemeBrush}" />
         <Setter Property="SelectionHighlightColor"
                 Value="#FF68FF00" />
         <Setter Property="Background"
@@ -546,7 +546,7 @@
                                         BorderBrush="Transparent"
                                         Background="Transparent"
                                         VerticalContentAlignment="Center"
-                                        Foreground="{ThemeResource SubtleBrush}" />
+                                        Foreground="{ThemeResource PlaceholderTextBrush}" />
                         <CheckBox x:Name="RevealButton"
                                   Foreground="{ThemeResource TextBoxForegroundHeaderThemeBrush}"
                                   HorizontalAlignment="Right"
