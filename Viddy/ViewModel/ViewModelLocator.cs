@@ -39,6 +39,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.Register<ManageAccountViewModel>();
             SimpleIoc.Default.Register<ManageAppsAccessViewModel>();
             SimpleIoc.Default.Register<ManageMyAppsViewModel>();
+            SimpleIoc.Default.Register<AddAppViewModel>();
             SimpleIoc.Default.Register<ManualLoginViewModel>();
             SimpleIoc.Default.Register<CreateAccountViewModel>();
             SimpleIoc.Default.Register<ProfileViewModel>(true);
