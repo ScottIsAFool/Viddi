@@ -72,6 +72,17 @@ namespace Viddy.ViewModel
             }
         }
 
+        public RelayCommand PinToStartCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    
+                });
+            }
+        }
+
         public RelayCommand NavigateToAccountCommand
         {
             get
