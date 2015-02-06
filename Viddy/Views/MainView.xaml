@@ -70,25 +70,54 @@
                         <Grid Margin="19,12,19,0">
                             <Grid Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"
                                   x:Name="LoggedInContent">
-                                <TextBlock Text="It doesn't look like you have anything to show in your feed."
-                                           TextWrapping="WrapWholeWords"
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+
+                                <BitmapIcon UriSource="/Assets/PureLogo.png"
+                                            Height="130"
+                                            Width="130"
+                                            Margin="0,0,0,12" />
+                                
+                                <TextBlock TextWrapping="WrapWholeWords"
                                            Style="{StaticResource BodyTextBlockStyle}"
-                                           TextAlignment="Center" />
+                                           TextAlignment="Center" 
+                                           Grid.Row="1">
+                                    <Run Text="It doesn't look like you have anything to show in your feed."/>
+                                          
+                                    <LineBreak />
+                                    <LineBreak />
+                                    <Run Text="Try searching for videos, or browse the list of available channels."/>
+                                </TextBlock>
                             </Grid>
 
                             <Grid Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource InverseVisibilityConverter}}"
                                   x:Name="LoggedOutContent">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="*"/>
+                                </Grid.RowDefinitions>
+                                
+                                <BitmapIcon UriSource="/Assets/PureLogo.png"
+                                            Height="130"
+                                            Width="130"
+                                            Margin="0,0,0,12"/>
+                                
                                 <TextBlock TextWrapping="WrapWholeWords"
                                            Style="{StaticResource BodyTextBlockStyle}"
-                                           TextAlignment="Center">
+                                           TextAlignment="Center"
+                                           Grid.Row="1">
                                     <Run Text="If you want to see content here, consider" />
                                     <Hyperlink Click="SignInHyperlink_OnClick"
-                                               x:Name="SignInHyperlink">
+                                               x:Name="SignInHyperlink"
+                                               Foreground="{ThemeResource PhoneAccentBrush}">
                                         <Run Text="signing in" />
                                     </Hyperlink>
                                     <Run Text="or" />
                                     <Hyperlink x:Name="CreateAccountHyperlink"
-                                               Click="CreateAccountHyperlink_OnClick">
+                                               Click="CreateAccountHyperlink_OnClick"
+                                               Foreground="{ThemeResource PhoneAccentBrush}">
                                         <Run Text="creating an account." />
                                     </Hyperlink>
                                     <LineBreak />
@@ -99,7 +128,7 @@
                                     <Run Text="If you simply wish to upload a video anonymously, then just tap the video button below." />
                                     <LineBreak />
                                     <LineBreak />
-                                    <Run Text="Or you can search for videos, or browse the list of channels available" />
+                                    <Run Text="Or you can search for videos, or browse the list of available channels." />
                                 </TextBlock>
                             </Grid>
                         </Grid>

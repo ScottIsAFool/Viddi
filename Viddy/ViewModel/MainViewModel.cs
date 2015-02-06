@@ -20,8 +20,15 @@ namespace Viddy.ViewModel
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
 
-            AuthenticationService.Current.UserSignedOut += UserStateChanged;
-            AuthenticationService.Current.UserSignedIn += UserStateChanged;
+            if (IsInDesignMode)
+            {
+                IsEmpty = true;
+            }
+            else
+            {
+                AuthenticationService.Current.UserSignedOut += UserStateChanged;
+                AuthenticationService.Current.UserSignedIn += UserStateChanged;
+            }
         }
 
         private void UserStateChanged(object sender, EventArgs eventArgs)
