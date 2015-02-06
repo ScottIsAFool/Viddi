@@ -25,6 +25,7 @@ namespace Viddy.ViewModel
             // This needs to be called this way because VidMeClient has multiple constructors
             SimpleIoc.Default.RegisterIf<IVidMeClient>(() => new VidMeClient());
             SimpleIoc.Default.RegisterIf<IApplicationSettingsService, ApplicationSettingsService>();
+            SimpleIoc.Default.RegisterIf<IStorageService, StorageService>();
             SimpleIoc.Default.RegisterIf<AuthenticationService>(true);
             SimpleIoc.Default.RegisterIf<ReviewService>(true);
             SimpleIoc.Default.RegisterIf<INavigationService, NavigationService>();
