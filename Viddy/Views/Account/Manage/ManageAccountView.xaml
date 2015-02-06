@@ -14,26 +14,9 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
-        <Grid Background="{ThemeResource HeaderBrush}"
-              Height="80">
-            <Grid Margin="19,0">
-                <StackPanel Orientation="Horizontal">
-                    <controls:ProfilePictureControl TappedCommand="{Binding ChangeAvatarCommand}"
-                                                    IsChanging="{Binding Avatar.ChangingAvatar}"
-                                                    IsHitTestVisible="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}"
-                                                    AvatarUrl="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}}"/>
-
-                    <Grid>
-                        <TextBlock VerticalAlignment="Center"
-                                   Style="{StaticResource BodyTextBlockStyle}"
-                                   Text="manage account"
-                                   TextWrapping="Wrap"
-                                   Margin="12,0,0,0" />
-                    </Grid>
-                </StackPanel>
-            </Grid>
-        </Grid>
+        
+        <controls:PageHeaderControl HeaderText="manage account"
+                                    ProfilePictureEnabled="False" />
         
         <Grid Grid.Row="1"
               Margin="0,12,0,0">

@@ -15,24 +15,9 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Background="{ThemeResource HeaderBrush}"
-              Height="80">
-            <Grid Margin="19,0">
-                <StackPanel Orientation="Horizontal">
-                    <controls:ProfilePictureControl AvatarUrl="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}}"
-                                                    TappedCommand="{Binding NavigateToAccountCommand}" />
+        <controls:PageHeaderControl ProfilePictureEnabled="False"
+                                    HeaderText="settings" />
 
-                    <Grid>
-                        <TextBlock VerticalAlignment="Center"
-                                   Style="{StaticResource BodyTextBlockStyle}"
-                                   Text="Settings"
-                                   TextWrapping="Wrap"
-                                   Margin="12,0,0,0" />
-                    </Grid>
-                </StackPanel>
-            </Grid>
-        </Grid>
-        
         <StackPanel Orientation="Horizontal"
                     Grid.Row="1">
             <Button Command="{Binding ToLightCommand}"

@@ -75,38 +75,19 @@
                     <ColumnDefinition Width="Auto" />
                 </Grid.ColumnDefinitions>
 
-                <StackPanel Orientation="Horizontal">
-                    <StackPanel Orientation="Vertical"
-                                VerticalAlignment="Center"
-                                Margin="0,15,0,6">
-                        <localControls:ProfilePictureControl TappedCommand="{Binding ChangeAvatarCommand}"
-                                                             IsChanging="{Binding Avatar.ChangingAvatar}"
-                                                             IsHitTestVisible="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}"
-                                                             AvatarUrl="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}}"/>
-                        <TextBlock Text="" />
-                    </StackPanel>
-
-                    <Grid>
-                        <TextBlock Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"
-                                   VerticalAlignment="Center"
-                                   Style="{StaticResource BodyTextBlockStyle}"
-                                   Text="{Binding Auth.AuthenticationInfo.User.Username, Source={StaticResource Locator}}"
-                                   TextWrapping="Wrap"
-                                   Margin="12,0,0,0" />
-                        <TextBlock Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource InverseVisibilityConverter}}"
-                                   VerticalAlignment="Center"
-                                   Style="{StaticResource BodyTextBlockStyle}"
-                                   Text="anonymous account"
-                                   TextWrapping="Wrap"
-                                   Margin="12,0,0,12" />
-                    </Grid>
-                </StackPanel>
+                <localControls:PageHeaderControl HeaderText="{Binding Name}"
+                                                 TapCommand="{Binding ChangeAvatarCommand}"
+                                                 AvatarChanging="{Binding Avatar.ChangingAvatar}"
+                                                 ProfilePictureEnabled="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}"
+                                                 Grid.ColumnSpan="2"
+                                                 Padding="0"/>
 
                 <localControls:CustomButton Grid.Column="1"
                                             TapCommand="{Binding LogInLogOutCommand}"
                                             Style="{StaticResource EmptyButtonStyle}"
                                             Margin="0,15,0,6"
-                                            VerticalAlignment="Center">
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Right">
                     <StackPanel Orientation="Vertical">
                         <Viewbox Height="44"
                                  Width="44"

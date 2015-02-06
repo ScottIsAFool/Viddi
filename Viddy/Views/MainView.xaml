@@ -24,18 +24,18 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="record"
                               Command="{Binding NavigateToVideoRecordCommand}"
-                              Icon="Video"/>
+                              Icon="Video" />
                 <AppBarButton Label="refresh"
                               Command="{Binding RefreshCommand}"
                               Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator},Converter={StaticResource VisibilityConverter}}"
-                              Icon="Refresh"/>
+                              Icon="Refresh" />
                 <AppBarButton Label="search"
                               Command="{Binding NavigateToSearchCommand}"
-                              Icon="Find"/>
+                              Icon="Find" />
                 <AppBarButton Label="channels"
                               Command="{Binding NavigateToBrowseChannelsCommand}">
                     <AppBarButton.Icon>
-                        <SymbolIcon Symbol="BrowsePhotos"/>
+                        <SymbolIcon Symbol="BrowsePhotos" />
                         <!--<PathIcon Data="F1 M 22,46.9996C 26.4235,48.3026 34.4825,48.8053 37.2083,52.2153L 37.2083,32.9996C 34.4826,29.5896 26.4235,29.0869 22,27.7839L 22,46.9996 Z M 22,24.3078L 22,24.028C 26.4235,25.331 34.4825,25.8337 37.2083,29.2437L 38,29.4716L 38.7917,29.2157C 41.5174,25.8057 49.5765,25.303 54,24L 54,24.2798C 55.2286,24.6498 56,24.9716 56,24.9716L 56,27.9716L 59,26.8258L 59,50.9716C 59,50.9716 41.1667,52.2216 38,57.7633L 37.9999,57.7913C 34.8333,52.2496 17,50.9996 17,50.9996L 17,26.8538L 20,27.9996L 20,24.9996C 20,24.9996 20.7714,24.6778 22,24.3078 Z M 23.5,44.506L 23.5,41.3844C 27.269,42.243 32.4604,42.8187 35.5,44.7496L 35.5,47.8712C 32.4604,45.9402 27.269,45.3646 23.5,44.506 Z M 23.5,39.1212L 23.5,35.9996C 27.269,36.8582 32.4604,37.4338 35.5,39.3648L 35.5,42.4864C 32.4604,40.5554 27.269,39.9798 23.5,39.1212 Z M 23.5,33.6344L 23.5,30.5128C 27.269,31.3714 32.4604,31.947 35.5,33.878L 35.5,36.9996C 32.4604,35.0686 27.269,34.493 23.5,33.6344 Z M 54,46.9716L 54,27.7559C 49.5765,29.0589 41.5174,29.5616 38.7917,32.9716L 38.7917,52.1873C 41.5175,48.7773 49.5765,48.2746 54,46.9716 Z M 52.5,44.478C 48.731,45.3366 43.5395,45.9122 40.5,47.8432L 40.5,44.7216C 43.5395,42.7906 48.731,42.215 52.5,41.3564L 52.5,44.478 Z M 52.5,39.0932C 48.731,39.9518 43.5395,40.5274 40.5,42.4584L 40.5,39.3368C 43.5396,37.4058 48.731,36.8302 52.5,35.9716L 52.5,39.0932 Z M 52.5,33.6064C 48.731,34.465 43.5395,35.0406 40.5,36.9716L 40.5,33.85C 43.5395,31.919 48.731,31.3434 52.5,30.4848L 52.5,33.6064 Z "
                                   Width="45"
                                   Height="45"
@@ -53,29 +53,13 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Background="{ThemeResource HeaderBrush}"
-              Height="80">
-            <Grid Margin="19,0">
-                <StackPanel Orientation="Horizontal">
-                    <controls:ProfilePictureControl AvatarUrl="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}}"
-                                                    TappedCommand="{Binding NavigateToAccountCommand}" />
-
-                    <Grid>
-                        <TextBlock VerticalAlignment="Center"
-                                   Style="{StaticResource BodyTextBlockStyle}"
-                                   Text="Viddy"
-                                   TextWrapping="Wrap"
-                                   Margin="12,0,0,0" />
-                    </Grid>
-                </StackPanel>
-            </Grid>
-        </Grid>
+        <controls:PageHeaderControl TapCommand="{Binding NavigateToAccountCommand}"/>
 
         <Grid Grid.Row="1">
             <controls:LoadingListView ItemsSource="{Binding Items}"
-                                           IsEmpty="{Binding IsEmpty}"
-                                           IsInitialising="{Binding ProgressIsVisible}"
-                                           ItemTemplateSelector="{StaticResource VideoTemplateSelector}">
+                                      IsEmpty="{Binding IsEmpty}"
+                                      IsInitialising="{Binding ProgressIsVisible}"
+                                      ItemTemplateSelector="{StaticResource VideoTemplateSelector}">
                 <controls:LoadingListView.FooterTemplate>
                     <DataTemplate>
                         <controls:LoadMoreControl />
@@ -115,7 +99,7 @@
                                     <Run Text="If you simply wish to upload a video anonymously, then just tap the video button below." />
                                     <LineBreak />
                                     <LineBreak />
-                                    <Run Text="Or you can search for videos, or browse the list of channels available"/>
+                                    <Run Text="Or you can search for videos, or browse the list of channels available" />
                                 </TextBlock>
                             </Grid>
                         </Grid>

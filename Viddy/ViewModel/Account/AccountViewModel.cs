@@ -36,6 +36,7 @@ namespace Viddy.ViewModel.Account
             {
                 AuthenticationService.Current.UserSignedIn += UserStateChanged;
                 AuthenticationService.Current.UserSignedOut += UserStateChanged;
+                Reset();
             }
         }
 
@@ -45,8 +46,14 @@ namespace Viddy.ViewModel.Account
             await LoadData(true);
         }
 
-        public AvatarViewModel Avatar { get; set; }
+        protected override void Reset()
+        {
+            Name = AuthenticationService.Current.IsLoggedIn ? AuthenticationService.Current.LoggedInUser.Username : "anonymous account";
+            base.Reset();
+        }
 
+        public AvatarViewModel Avatar { get; set; }
+        public string Name { get; set; }
 
         public RelayCommand LogInLogOutCommand
         {

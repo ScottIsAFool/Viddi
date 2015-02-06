@@ -52,16 +52,9 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Grid Background="{ThemeResource HeaderBrush}"
-              Height="80">
-            <Grid Margin="19,0">
-                <TextBlock VerticalAlignment="Center"
-                           Style="{StaticResource BodyTextBlockStyle}"
-                           Text="{Binding Video.Title}"
-                           TextTrimming="CharacterEllipsis"
-                           TextWrapping="NoWrap" />
-            </Grid>
-        </Grid>
+        <controls:PageHeaderControl ProfilePictureEnabled="False"
+                                    ProfilePictureVisibility="Collapsed"
+                                    HeaderText="{Binding Video.Title}" />
         <Grid Grid.Row="1">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />

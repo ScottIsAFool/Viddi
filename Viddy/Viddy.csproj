@@ -111,6 +111,7 @@
     <Compile Include="Controls\LoadMoreControl.xaml.cs">
       <DependentUpon>LoadMoreControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\PageHeaderControl.cs" />
     <Compile Include="Controls\ProfileHeaderControl.xaml.cs">
       <DependentUpon>ProfileHeaderControl.xaml</DependentUpon>
     </Compile>

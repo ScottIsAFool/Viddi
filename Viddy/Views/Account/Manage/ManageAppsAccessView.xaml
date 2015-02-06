@@ -36,23 +36,8 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Background="{ThemeResource HeaderBrush}"
-              Height="80">
-            <Grid Margin="19,0">
-                <StackPanel Orientation="Horizontal">
-                    <controls:ProfilePictureControl IsHitTestVisible="False"
-                                                    AvatarUrl="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}}"/>
-
-                    <Grid>
-                        <TextBlock VerticalAlignment="Center"
-                                   Style="{StaticResource BodyTextBlockStyle}"
-                                   Text="manage apps' access"
-                                   TextWrapping="Wrap"
-                                   Margin="12,0,0,0" />
-                    </Grid>
-                </StackPanel>
-            </Grid>
-        </Grid>
+        <controls:PageHeaderControl HeaderText="manage app's access"
+                                    ProfilePictureEnabled="False" />
 
         <Grid x:Name="Content"
               Grid.Row="1"

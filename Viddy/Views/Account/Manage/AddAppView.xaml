@@ -32,23 +32,8 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <Grid Background="{ThemeResource HeaderBrush}"
-              Height="80">
-            <Grid Margin="19,0">
-                <StackPanel Orientation="Horizontal">
-                    <controls:ProfilePictureControl IsHitTestVisible="False"
-                                                    AvatarUrl="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}}" />
-
-                    <Grid>
-                        <TextBlock VerticalAlignment="Center"
-                                   Style="{StaticResource BodyTextBlockStyle}"
-                                   Text="add app"
-                                   TextWrapping="Wrap"
-                                   Margin="12,0,0,0" />
-                    </Grid>
-                </StackPanel>
-            </Grid>
-        </Grid>
+        <controls:PageHeaderControl ProfilePictureEnabled="False"
+                                    HeaderText="add app"/>
         
         <Grid Grid.Row="1"
               Margin="0,12,0,0">

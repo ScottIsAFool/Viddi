@@ -14,7 +14,7 @@
         <Setter Property="BorderThickness"
                 Value="1" />
         <Setter Property="DisplayDefaultAvatar"
-                Value="True"/>
+                Value="True" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ProfilePictureControl">
@@ -40,9 +40,9 @@
                                                        HorizontalAlignment="Center"
                                                        VerticalAlignment="Center"
                                                        Foreground="{ThemeResource DefaultUserBrush}"
-                                                       FontSize="26.667" 
+                                                       FontSize="26.667"
                                                        Tag="{TemplateBinding DisplayDefaultAvatar}"
-                                                       Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource VisibilityConverter}}"/>
+                                                       Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource VisibilityConverter}}" />
                                         </Border>
                                     </Grid>
                                     <Ellipse Stretch="Fill"
@@ -173,22 +173,22 @@
                                 <Border BorderThickness="1"
                                         BorderBrush="{ThemeResource ButtonBackgroundBrush}"
                                         Width="50"
-                                     Height="50"
-									 CornerRadius="45"
+                                        Height="50"
+                                        CornerRadius="45"
                                         HorizontalAlignment="Stretch"
                                         VerticalAlignment="Stretch"
                                         Padding="2">
-                                            <Border CornerRadius="45"
-                                                    Background="{ThemeResource ButtonBackgroundBrush}">
-                                                <TextBlock FontFamily="{StaticResource SegoeUISymbolsFont}"
-                                                           Text="&#xE1FE;"
-                                                           HorizontalAlignment="Center"
-                                                           VerticalAlignment="Center"
+                                    <Border CornerRadius="45"
+                                            Background="{ThemeResource ButtonBackgroundBrush}">
+                                        <TextBlock FontFamily="{StaticResource SegoeUISymbolsFont}"
+                                                   Text="&#xE1FE;"
+                                                   HorizontalAlignment="Center"
+                                                   VerticalAlignment="Center"
+                                                   Foreground="{ThemeResource DefaultUserBrush}"
+                                                   FontSize="26.667"
+                                                   Margin="1,0,0,3" />
+                                    </Border>
 
-                                                           Foreground="{ThemeResource DefaultUserBrush}"
-                                                           FontSize="26.667" Margin="1,0,0,3" />
-                                            </Border>
-                                   
                                 </Border>
                             </Viewbox>
                         </Grid>
@@ -446,6 +446,44 @@
                 <ControlTemplate TargetType="controls:RotateContentControl">
                     <ContentControl x:Name="Content"
                                     Content="{TemplateBinding Content}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="controls:PageHeaderControl">
+        <Setter Property="HeaderText"
+                Value="Viddy"/>
+        <Setter Property="ProfilePictureEnabled"
+                Value="True"/>
+        <Setter Property="Padding"
+                Value="19,0"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:PageHeaderControl">
+                    <Grid Background="{ThemeResource HeaderBrush}"
+                          Height="80">
+                        <Border Padding="{TemplateBinding Padding}">
+                            <StackPanel Orientation="Horizontal">
+                                <controls:ProfilePictureControl IsHitTestVisible="{TemplateBinding ProfilePictureEnabled}"
+                                                                TappedCommand="{TemplateBinding TapCommand}"
+                                                                Visibility="{TemplateBinding ProfilePictureVisibility}"
+                                                                IsChanging="{TemplateBinding AvatarChanging}"
+                                                                AvatarUrl="{Binding Auth.LoggedInUser.AvatarUrl, Source={StaticResource Locator}}"/>
+
+                                <Grid>
+                                    <TextBlock VerticalAlignment="Center"
+                                               Style="{StaticResource BodyTextBlockStyle}"
+                                               FontSize="{StaticResource TextStyleExtraLargeFontSize}"
+                                               Text="{TemplateBinding HeaderText}"
+                                               TextTrimming="CharacterEllipsis"
+                                               TextWrapping="NoWrap" 
+                                               Margin="12,0,0,0"
+                                               Visibility="{Binding Text, RelativeSource={RelativeSource Self}, Converter={StaticResource NullToVisibilityConverter}}"/>
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
