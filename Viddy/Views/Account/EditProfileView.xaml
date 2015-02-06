@@ -8,6 +8,7 @@
                 xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                 xmlns:behaviours="using:Viddy.Behaviours"
                 xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+                xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding EditProfile, Source={StaticResource Locator}}">
@@ -15,15 +16,16 @@
         <core:EventTriggerBehavior EventName="Loaded">
             <core:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
         </core:EventTriggerBehavior>
+        <behaviors:AutoFocusBehavior/>
     </interactivity:Interaction.Behaviors>
-    
+
     <local:BasePage.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="save"
                               Icon="Save"
                               IsEnabled="{Binding CanUpdate}"
-                              Command="{Binding UpdateProfileCommand}"/>
+                              Command="{Binding UpdateProfileCommand}" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </local:BasePage.BottomAppBar>
@@ -41,53 +43,26 @@
                        Stretch="UniformToFill"
                        Height="160"
                        VerticalAlignment="Top" />
-                <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
-                                       TapCommand="{Binding Avatar.ChangeCoverCommand}"
-                                       IsEnabled="{Binding Avatar.ChangingCover, Converter={StaticResource NegativeBooleanConverter}}"
-                                       Visibility="{Binding Avatar.ChangingCover, Converter={StaticResource InverseVisibilityConverter}}"
-                                       VerticalAlignment="Stretch">
-                    <Border BorderBrush="White"
-                            BorderThickness="2"
-                            Height="50"
-                            Width="50"
-                            CornerRadius="45"
-                            Background="{ThemeResource OverlayBrush}">
-                        <Grid>
-                            <SymbolIcon Symbol="Add"
-                                        Foreground="White"
-                                        Width="30"
-                                        Height="30"
-                                        Visibility="{Binding Auth.AuthenticationInfo.User.CoverUrl, Source={StaticResource Locator}, Converter={StaticResource InverseNullToVisibilityConverter}}" />
-                            <SymbolIcon Symbol="Edit"
-                                        Foreground="White"
-                                        Width="30"
-                                        Height="30"
-                                        Visibility="{Binding Auth.AuthenticationInfo.User.CoverUrl, Source={StaticResource Locator}, Converter={StaticResource NullToVisibilityConverter}}" />
-                        </Grid>
-                    </Border>
-                </controls:CustomButton>
-            </Grid>
-
-
-            <Grid       VerticalAlignment="Bottom"
-                        Margin="19,0"
-                        HorizontalAlignment="Stretch">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto" />
-                    <ColumnDefinition Width="*" />
-                </Grid.ColumnDefinitions>
                 <Grid>
-                    <controls:ProfilePictureControl Height="80"
-                                                    Width="80"
-                                                    AvatarUrl="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}}"
-                                                    IsHitTestVisible="False"
-                                                    BorderBrush="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-                                                    DisplayDefaultAvatar="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}, Converter={StaticResource InverseNullBooleanConverter}}" 
-                                                    IsChanging="{Binding Avatar.ChangingAvatar}"/>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="*"/>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
+
                     <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
-                                           TapCommand="{Binding Avatar.ChangeAvatarCommand}"
-                                           IsEnabled="{Binding Avatar.ChangingAvatar, Converter={StaticResource NegativeBooleanConverter}}"
-                                           Visibility="{Binding Avatar.ChangingAvatar, Converter={StaticResource InverseVisibilityConverter}}">
+                                           TapCommand="{Binding Avatar.ChangeCoverCommand}"
+                                           IsEnabled="{Binding Avatar.ChangingCover, Converter={StaticResource NegativeBooleanConverter}}"
+                                           VerticalAlignment="Center"
+                                           HorizontalAlignment="Center"
+                                           Grid.Column="1"
+                                           Grid.Row="1">
                         <Border BorderBrush="White"
                                 BorderThickness="2"
                                 Height="50"
@@ -99,57 +74,160 @@
                                             Foreground="White"
                                             Width="30"
                                             Height="30"
-                                            Visibility="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}, Converter={StaticResource InverseNullToVisibilityConverter}}" />
+                                            Visibility="{Binding Auth.AuthenticationInfo.User.CoverUrl, Source={StaticResource Locator}, Converter={StaticResource InverseNullToVisibilityConverter}}" />
                                 <SymbolIcon Symbol="Edit"
                                             Foreground="White"
                                             Width="30"
                                             Height="30"
-                                            Visibility="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}, Converter={StaticResource NullToVisibilityConverter}}" />
+                                            Visibility="{Binding Auth.AuthenticationInfo.User.CoverUrl, Source={StaticResource Locator}, Converter={StaticResource NullToVisibilityConverter}}" />
                             </Grid>
                         </Border>
                     </controls:CustomButton>
+                    
+                    <controls:CustomButton Grid.Column="2"
+                                           Style="{StaticResource EmptyButtonStyle}"
+                                           HorizontalContentAlignment="Left"
+                                           HorizontalAlignment="Left"
+                                           Grid.Row="1"
+                                           VerticalAlignment="Bottom"
+                                           Margin="0,12,0,-12"
+                                           TapCommand="{Binding Avatar.RemoveCoverCommand}"
+                                           Visibility="{Binding Auth.AuthenticationInfo.User.CoverUrl, Source={StaticResource Locator}, Converter={StaticResource NullToVisibilityConverter}}">
+                        <Border BorderThickness="2"
+                                BorderBrush="White"
+                                Height="30"
+                                Width="30"
+                                CornerRadius="45"
+                                Background="{ThemeResource OverlayBrush}">
+                            <SymbolIcon Symbol="Delete"
+                                        
+                                        Foreground="White"
+                                        HorizontalAlignment="Right"
+                                        Margin="0,0.333,-0.5,-0.5"
+                                        Width="26" />
+                        </Border>
+                    </controls:CustomButton>
+                </Grid>
+                
+            </Grid>
+
+
+            <Grid       VerticalAlignment="Bottom"
+                        Margin="19,0"
+                        HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid>
+                    <Grid >
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+                        <controls:ProfilePictureControl Height="80"
+                                                        Width="80"
+                                                        AvatarUrl="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}}"
+                                                        IsHitTestVisible="False"
+                                                        BorderBrush="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                                                        DisplayDefaultAvatar="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}, Converter={StaticResource InverseNullBooleanConverter}}"
+                                                        IsChanging="{Binding Avatar.ChangingAvatar}" />
+                        <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                               TapCommand="{Binding Avatar.ChangeAvatarCommand}"
+                                               IsEnabled="{Binding Avatar.ChangingAvatar, Converter={StaticResource NegativeBooleanConverter}}"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center">
+                            <Border BorderBrush="White"
+                                    BorderThickness="2"
+                                    Height="50"
+                                    Width="50"
+                                    CornerRadius="45"
+                                    Background="{ThemeResource OverlayBrush}">
+                                <Grid>
+                                    <SymbolIcon Symbol="Add"
+                                                Foreground="White"
+                                                Width="30"
+                                                Height="30"
+                                                Visibility="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}, Converter={StaticResource InverseNullToVisibilityConverter}}" />
+                                    <SymbolIcon Symbol="Edit"
+                                                Foreground="White"
+                                                Width="30"
+                                                Height="30"
+                                                Visibility="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}, Converter={StaticResource NullToVisibilityConverter}}" />
+                                </Grid>
+                            </Border>
+                        </controls:CustomButton>
+
+                        <controls:CustomButton Grid.Column="1"
+                                               Style="{StaticResource EmptyButtonStyle}"
+                                               HorizontalContentAlignment="Left"
+                                               HorizontalAlignment="Left"
+                                               VerticalAlignment="Bottom"
+                                               Margin="-15,12,0,0"
+                                               TapCommand="{Binding Avatar.RemoveAvatarCommand}"
+                                               Visibility="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}, Converter={StaticResource NullToVisibilityConverter}}">
+                            <Border BorderThickness="2"
+                                    BorderBrush="White"
+                                    Height="30"
+                                    Width="30"
+                                    CornerRadius="45"
+                                    Background="{ThemeResource OverlayBrush}">
+                                <SymbolIcon Symbol="Delete"
+                                            Foreground="White"
+                                            HorizontalAlignment="Right"
+                                            Margin="0,0.333,-0.5,-0.5"
+                                            Width="26" />
+                            </Border>
+                        </controls:CustomButton>
+                    </Grid>
                 </Grid>
                 <TextBox Text="{Binding Name, Mode=TwoWay}"
                          VerticalAlignment="Bottom"
                          HorizontalAlignment="Stretch"
                          Grid.Column="1"
-                         Margin="6,0,6,-10" 
+                         Margin="6,0,6,-10"
                          Height="40"
                          Style="{StaticResource FullLengthTextBoxStyle}"
-                         BorderThickness="0">
+                         BorderThickness="0"
+                         IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}">
                     <interactivity:Interaction.Behaviors>
-                        <behaviours:UpdateTextBindingOnPropertyChanged/>
+                        <behaviours:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
             </Grid>
         </Grid>
-        
+
         <StackPanel Grid.Row="1"
                     Margin="0,12,0,0">
             <TextBox Text="{Binding Bio, Mode=TwoWay}"
                      Style="{StaticResource FullLengthTextBoxStyle}"
-                     PlaceholderText="Bio">
-                <interactivity:Interaction.Behaviors>
-                    <behaviours:UpdateTextBindingOnPropertyChanged/>
-                </interactivity:Interaction.Behaviors>
-            </TextBox>
-            <TextBox Text="{Binding Email, Mode=TwoWay}"
-                     Style="{StaticResource FullLengthTextBoxStyle}"
-                     PlaceholderText="Email">
+                     PlaceholderText="Bio"
+                     AcceptsReturn="True"
+                     IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}">
                 <interactivity:Interaction.Behaviors>
                     <behaviours:UpdateTextBindingOnPropertyChanged />
                 </interactivity:Interaction.Behaviors>
             </TextBox>
-            
+            <TextBox Text="{Binding Email, Mode=TwoWay}"
+                     Style="{StaticResource FullLengthTextBoxStyle}"
+                     PlaceholderText="Email"
+                     IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}">
+                <interactivity:Interaction.Behaviors>
+                    <behaviours:UpdateTextBindingOnPropertyChanged />
+                </interactivity:Interaction.Behaviors>
+            </TextBox>
+
             <TextBlock Text="Change password:"
                        Style="{StaticResource BodyTextBlockStyle}"
-                       Margin="19,24,19,12"/>
+                       Margin="19,24,19,12" />
             <PasswordBox Password="{Binding CurrentPassword, Mode=TwoWay}"
-                     Style="{StaticResource FullLengthPasswordBoxStyle}"
-                     PlaceholderText="Current password"/>
+                         Style="{StaticResource FullLengthPasswordBoxStyle}"
+                         PlaceholderText="Current password"
+                         IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}" />
             <PasswordBox Password="{Binding NewPassword, Mode=TwoWay}"
-                     Style="{StaticResource FullLengthPasswordBoxStyle}"
-                     PlaceholderText="New password"/>
+                         Style="{StaticResource FullLengthPasswordBoxStyle}"
+                         PlaceholderText="New password"
+                         IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}" />
         </StackPanel>
 
     </Grid>

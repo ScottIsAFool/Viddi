@@ -15,12 +15,14 @@ namespace Viddy.ViewModel.Account
     {
         private const string DefaultAvatar = "/Assets/Defaults/UserLoginDefault.png";
         private readonly IVidMeClient _vidMeClient;
+        private readonly IToastService _toastService;
 
         private PictureType _pictureType;
 
-        public AvatarViewModel(IVidMeClient vidMeClient)
+        public AvatarViewModel(IVidMeClient vidMeClient, IToastService toastService)
         {
             _vidMeClient = vidMeClient;
+            _toastService = toastService;
         }
 
         public void ChangeAvatar()
@@ -47,6 +49,50 @@ namespace Viddy.ViewModel.Account
             get { return new RelayCommand(ChangeCover); }
         }
 
+        public RelayCommand RemoveAvatarCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    try
+                    {
+                        ChangingAvatar = true;
+                        var user = await _vidMeClient.RemoveAvatarAsync(AuthenticationService.Current.LoggedInUserId);
+                        UpdateUserInfo(user);
+                    }
+                    catch (Exception ex)
+                    {
+                        
+                    }
+
+                    ChangingAvatar = false;
+                });
+            }
+        }
+
+        public RelayCommand RemoveCoverCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    try
+                    {
+                        ChangingCover = true;
+                        var user = await _vidMeClient.RemoveCoverAsync(AuthenticationService.Current.LoggedInUserId);
+                        UpdateUserInfo(user);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
+
+                    ChangingCover = false;
+                });
+            }
+        }
+
         private static void LaunchFilePicker()
         {
             var filePicker = new FileOpenPicker { ViewMode = PickerViewMode.Thumbnail, SuggestedStartLocation = PickerLocationId.PicturesLibrary };
@@ -66,17 +112,29 @@ namespace Viddy.ViewModel.Account
             {
                 SetChanging(true);
 
+                if (_pictureType == PictureType.Cover)
+                {
+                    var storageFile = file as StorageFile;
+                    if (storageFile != null)
+                    {
+                        var properties = await storageFile.Properties.GetImagePropertiesAsync();
+                        if (properties != null)
+                        {
+                            if (properties.Width < 800 || properties.Height < 600)
+                            {
+                                _toastService.Show("Image too small");
+                                return;
+                            }
+                        }
+                    }
+                }
+
                 using (var stream = await file.OpenAsync(FileAccessMode.Read))
                 {
                     using (var actualStream = stream.AsStream())
                     {
                         var user = await SendPictureData(AuthenticationService.Current.LoggedInUserId, actualStream, file.ContentType, file.Name);
-                        if (user != null)
-                        {
-                            var auth = AuthenticationService.Current.AuthenticationInfo;
-                            auth.User = user;
-                            AuthenticationService.Current.SetAuthenticationInfo(auth);
-                        }
+                        UpdateUserInfo(user);
                     }
                 }
             }
@@ -86,6 +144,16 @@ namespace Viddy.ViewModel.Account
             }
 
             SetChanging(false);
+        }
+
+        private static void UpdateUserInfo(User user)
+        {
+            if (user != null)
+            {
+                var auth = AuthenticationService.Current.AuthenticationInfo;
+                auth.User = user;
+                AuthenticationService.Current.SetAuthenticationInfo(auth);
+            }
         }
 
         private void SetChanging(bool value)

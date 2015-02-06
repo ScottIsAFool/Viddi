@@ -1,9 +1,11 @@
 ﻿using System;
 using Cimbalino.Toolkit.Services;
+using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Services;
 using Viddy.ViewModel.Item;
 using VidMePortable;
+using VidMePortable.Model;
 
 namespace Viddy.ViewModel.Account
 {
@@ -11,12 +13,14 @@ namespace Viddy.ViewModel.Account
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
+        private readonly IToastService _toastService;
 
-        public EditProfileViewModel(INavigationService navigationService, IVidMeClient vidMeClient, AvatarViewModel avatarViewModel)
+        public EditProfileViewModel(INavigationService navigationService, IVidMeClient vidMeClient, AvatarViewModel avatarViewModel, IToastService toastService)
         {
             Avatar = avatarViewModel;
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
+            _toastService = toastService;
         }
 
         public AvatarViewModel Avatar { get; set; }
@@ -45,17 +49,37 @@ namespace Viddy.ViewModel.Account
         {
             get
             {
-                return new RelayCommand(() =>
+                return new RelayCommand(async () =>
                 {
                     try
                     {
                         SetProgressBar("Updating profile...");
 
-                        
+                        string newPassword = null, currentPassword = null;
+                        if (!string.IsNullOrEmpty(NewPassword) && !string.IsNullOrEmpty(CurrentPassword))
+                        {
+                            newPassword = NewPassword;
+                            currentPassword = CurrentPassword;
+                        }
+
+                        var response = await _vidMeClient.EditUserAsync(AuthenticationService.Current.LoggedInUserId, Name, currentPassword, newPassword, Email, Bio);
+                        if (response != null)
+                        {
+                            var auth = AuthenticationService.Current.AuthenticationInfo;
+                            auth.User = response;
+                            AuthenticationService.Current.SetAuthenticationInfo(auth);
+                        }
+
+                        NewPassword = CurrentPassword = string.Empty;
+
+                        _toastService.Show("Changes saved");
                     }
-                    catch (Exception ex)
+                    catch (VidMeException ex)
                     {
-                        
+                        if (ex.Error != null && !string.IsNullOrEmpty(ex.Error.Error))
+                        {
+                            _toastService.Show(ex.Error.Error);
+                        }
                     }
 
                     SetProgressBar();
@@ -72,10 +96,16 @@ namespace Viddy.ViewModel.Account
                     var user = AuthenticationService.Current.AuthenticationInfo.User;
                     Name = user.Username;
                     Bio = user.Bio;
+                    Email = user.Email;
 
                     IsChanged = false;
                 }, () => AuthenticationService.Current.IsLoggedIn);
             }
+        }
+
+        public override void UpdateProperties()
+        {
+            RaisePropertyChanged(() => CanUpdate);
         }
     }
 }
