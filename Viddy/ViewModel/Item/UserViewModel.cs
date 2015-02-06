@@ -11,12 +11,14 @@ namespace Viddy.ViewModel.Item
     public class UserViewModel : ViewModelBase, IProfileViewModel, IFollowViewModel
     {
         private readonly IVidMeClient _vidMeClient;
+        private readonly ITileService _tileService;
         public User User { get; set; }
 
         public UserViewModel(User user)
         {
             User = user;
             _vidMeClient = SimpleIoc.Default.GetInstance<IVidMeClient>();
+            _tileService = SimpleIoc.Default.GetInstance<ITileService>();
         }
 
         public string UserFollowers
@@ -36,6 +38,11 @@ namespace Viddy.ViewModel.Item
                     ? string.Format("{0:N0} plays", views)
                     : null;
             }
+        }
+
+        public override bool IsPinned
+        {
+            get { return _tileService.IsUserPinned(User.UserId); }
         }
 
         public string Description { get { return User != null ? User.Bio : null; } }

@@ -186,6 +186,8 @@ namespace Viddy.ViewModel.Account
                     await UpdatePicture(file);
                 }
             });
+
+            base.WireMessages();
         }
 
         private enum PictureType

@@ -6,6 +6,7 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
+using Viddy.Services;
 using Viddy.ViewModel.Account;
 using Viddy.Views;
 using Viddy.Views.Account;
@@ -28,16 +29,18 @@ namespace Viddy.ViewModel
     {
         private readonly INavigationService _navigationService;
         private readonly ICameraInfoService _cameraInfo;
+        private readonly ITileService _tileService;
 
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public VideoRecordViewModel(INavigationService navigationService, ICameraInfoService cameraInfo, AvatarViewModel avatar)
+        public VideoRecordViewModel(INavigationService navigationService, ICameraInfoService cameraInfo, AvatarViewModel avatar, ITileService tileService)
         {
             Avatar = avatar;
             _navigationService = navigationService;
             _cameraInfo = cameraInfo;
+            _tileService = tileService;
             if (IsInDesignMode)
             {
                 // Code runs in Blend --> create design time data.
@@ -81,6 +84,11 @@ namespace Viddy.ViewModel
                     
                 });
             }
+        }
+
+        public override bool IsPinned
+        {
+            get { return _tileService.IsVideoRecordPinned; }
         }
 
         public RelayCommand NavigateToAccountCommand

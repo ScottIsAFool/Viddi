@@ -31,6 +31,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.RegisterIf<ICameraInfoService, CameraInfoService>();
             SimpleIoc.Default.RegisterIf<IMessageBoxService, MessageBoxService>();
             SimpleIoc.Default.RegisterIf<IToastService, ToastService>();
+            SimpleIoc.Default.RegisterIf<ITileService, TileService>();
 
             SimpleIoc.Default.Register<AvatarViewModel>();
             SimpleIoc.Default.Register<VideoRecordViewModel>();

@@ -1,4 +1,6 @@
-﻿using ScottIsAFool.WindowsPhone.Logging;
+﻿using GalaSoft.MvvmLight.Messaging;
+using ScottIsAFool.WindowsPhone.Logging;
+using Viddy.Messaging;
 
 namespace Viddy.ViewModel
 {
@@ -17,7 +19,12 @@ namespace Viddy.ViewModel
 
         protected virtual void WireMessages()
         {
+            Messenger.Default.Register<PinMessage>(this, m => RaisePropertyChanged(() => IsPinned));
+        }
 
+        public virtual bool IsPinned
+        {
+            get { return false; }
         }
 
         public void SetProgressBar(string text)

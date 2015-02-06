@@ -44,6 +44,8 @@ namespace Viddy.ViewModel
             {
                 Channel = m.Channel;
             });
+
+            base.WireMessages();
         }
     }
 }

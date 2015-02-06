@@ -150,11 +150,13 @@
     <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="Logging\WinLogger.cs" />
     <Compile Include="Messaging\ChannelMessage.cs" />
+    <Compile Include="Messaging\PinMessage.cs" />
     <Compile Include="Messaging\UserMessage.cs" />
     <Compile Include="Messaging\VideoMessage.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\CameraInfoService.cs" />
     <Compile Include="Services\ICameraInfoService.cs" />
+    <Compile Include="Services\ITileService.cs" />
     <Compile Include="Services\IToastService.cs" />
     <Compile Include="Services\ReviewService.cs" />
     <Compile Include="Services\ToastService.cs" />

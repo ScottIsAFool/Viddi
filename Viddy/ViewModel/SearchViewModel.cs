@@ -58,6 +58,8 @@ namespace Viddy.ViewModel
                     Reset();
                 }
             });
+
+            base.WireMessages();
         }
 
         protected override void Reset()

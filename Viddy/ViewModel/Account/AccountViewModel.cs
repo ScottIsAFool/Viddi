@@ -186,6 +186,7 @@ namespace Viddy.ViewModel.Account
                     await CompleteAuthentication(code);
                 }
             });
+            base.WireMessages();
         }
     }
 }

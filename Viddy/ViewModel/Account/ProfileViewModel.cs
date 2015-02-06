@@ -69,6 +69,8 @@ namespace Viddy.ViewModel.Account
             {
                 User = new UserViewModel(m.User);
             });
+
+            base.WireMessages();
         }
     }
 }

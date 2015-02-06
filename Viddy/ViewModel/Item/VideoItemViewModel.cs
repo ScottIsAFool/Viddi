@@ -23,12 +23,14 @@ namespace Viddy.ViewModel.Item
         private readonly VideoLoadingViewModel _videoLoadingViewModel;
         private readonly IApplicationSettingsService _settingsService;
         private readonly INavigationService _navigationService;
+        private readonly ITileService _tileService;
         
         public VideoItemViewModel(Video video, VideoLoadingViewModel videoLoadingViewModel)
         {
             _vidMeClient = SimpleIoc.Default.GetInstance<IVidMeClient>();
             _settingsService = SimpleIoc.Default.GetInstance<IApplicationSettingsService>();
             _navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+            _tileService = SimpleIoc.Default.GetInstance<ITileService>();
             _videoLoadingViewModel = videoLoadingViewModel;
             Video = video;
 
@@ -71,6 +73,11 @@ namespace Viddy.ViewModel.Item
         public Video Video { get; set; }
 
         public ChannelItemViewModel Channel { get; set; }
+
+        public override bool IsPinned
+        {
+            get { return _tileService.IsVideoPinned(Video.VideoId); }
+        }
 
         public string Title
         {

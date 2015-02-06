@@ -115,6 +115,8 @@ namespace Viddy.ViewModel
                     File = file;
                 }
             });
+
+            base.WireMessages();
         }
     }
 }

@@ -17,15 +17,22 @@ namespace Viddy.ViewModel.Item
     {
         private readonly IVidMeClient _vidMeClient;
         private readonly INavigationService _navigationService;
+        private readonly ITileService _tileService;
 
         public ChannelItemViewModel(Channel channel)
         {
             Channel = channel;
             _vidMeClient = SimpleIoc.Default.GetInstance<IVidMeClient>();
             _navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+            _tileService = SimpleIoc.Default.GetInstance<ITileService>();
         }
 
         public Channel Channel { get; set; }
+
+        public override bool IsPinned
+        {
+            get { return _tileService.IsChannelPinned(Channel.ChannelId); }
+        }
 
         public string UserFollowers
         {

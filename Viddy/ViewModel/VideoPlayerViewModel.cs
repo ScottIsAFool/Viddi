@@ -69,6 +69,8 @@ namespace Viddy.ViewModel
             {
                 Video = m.Video;
             });
+
+            base.WireMessages();
         }
     }
 }

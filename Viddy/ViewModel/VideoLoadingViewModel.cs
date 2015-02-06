@@ -102,6 +102,8 @@ namespace Viddy.ViewModel
                     }
                 }
             });
+
+            base.WireMessages();
         }
     }
 }
