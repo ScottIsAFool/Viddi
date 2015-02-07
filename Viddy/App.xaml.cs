@@ -12,7 +12,9 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using ThemeManagerRt;
+using Viddy.Common;
 using Viddy.Extensions;
+using Viddy.Messaging;
 using Viddy.ViewModel;
 using Viddy.Views;
 
@@ -68,6 +70,7 @@ namespace Viddy
 
             ThemeManager.DefaultTheme = ElementTheme.Light;
             Frame rootFrame = Window.Current.Content as Frame;
+            Messenger.Default.Send(new PinMessage());
 
             Locator.Auth.StartService();
             Locator.Review.IncreaseCount();
@@ -121,6 +124,18 @@ namespace Viddy
                 if (!rootFrame.Navigate(typeof(MainView), e.Arguments))
                 {
                     throw new Exception("Failed to create initial page");
+                }
+            }
+
+            if (!string.IsNullOrEmpty(e.Arguments))
+            {
+                var query = new Uri(e.Arguments).QueryString();
+                if (query.ContainsKey("tileType"))
+                {
+                    var source = query["tileType"];
+                    var id = query["id"];
+                    //var type = Type.GetType(string.Format("Viddy.Views.Sources.{0}View", source));
+                    //rootFrame.Navigate(type, new NavigationParameters { ShowHomeButton = true });
                 }
             }
 

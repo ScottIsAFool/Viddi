@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.UI;
 using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
@@ -17,9 +18,9 @@ namespace Viddy.Services
         bool IsChannelPinned(string channelId);
         Task<bool> PinVideoRecord();
         Task<bool> UnpinVideoRecord();
-        Task<bool> PinVideo(string videoId);
-        Task<bool> UnpinVideo(string videoId);
-        Task<bool> PinChannel(string channelId);
+        Task<bool> PinVideo(string videoId, string pinName);
+        Task<bool> UnpinVideo(string videoId, string pinName);
+        Task<bool> PinChannel(string channelId, string pinName);
         Task<bool> UnpinChannel(string channelId);
         Task<bool> PinUser(string userId);
         Task<bool> UnpinUser(string userId);
@@ -35,6 +36,7 @@ namespace Viddy.Services
         private const string WideTileLocation = "ms-appdata:///Assets/{0}WideTile.png";
         private const string SourceTileLocation = "ms-appdata:///Local/" + SourceTileFile;
         private const string SourceTileFile = "{0}{1}.png";
+        private const string Arguments = "http://ferretlabs.com/viddy?tileType={0}&id={1}";
 
         private readonly IStorageService _storageService;
         private readonly IApplicationSettingsService _appSettings;
@@ -54,22 +56,26 @@ namespace Viddy.Services
 
         public bool IsUserPinned(string userId)
         {
-            return IsPinned(GetTileId(userId, TileType.User));
+            return IsPinned(GetTileId(TileType.User, userId));
         }
 
         public bool IsVideoPinned(string videoId)
         {
-            return IsPinned(GetTileId(videoId, TileType.Video));
+            return IsPinned(GetTileId(TileType.Video, videoId));
         }
 
         public bool IsChannelPinned(string channelId)
         {
-            return IsPinned(GetTileId(channelId, TileType.Channel));
+            return IsPinned(GetTileId(TileType.Channel, channelId));
         }
 
-        public Task<bool> PinVideoRecord()
+        public async Task<bool> PinVideoRecord()
         {
-            throw new System.NotImplementedException();
+            var uri = GetTileImageUrl(TileType.VideoRecord);
+            var arguments = string.Format(Arguments, TileType.VideoRecord, string.Empty);
+            var tileId = GetTileId(TileType.VideoRecord);
+            var tileName = "Record video";
+            return await PinTile(tileId, tileName, arguments, uri);
         }
 
         public Task<bool> UnpinVideoRecord()
@@ -77,24 +83,24 @@ namespace Viddy.Services
             return Unpin(TileType.VideoRecord.ToString());
         }
 
-        public Task<bool> PinVideo(string videoId)
+        public Task<bool> PinVideo(string videoId, string pinName)
         {
             throw new System.NotImplementedException();
         }
 
-        public Task<bool> UnpinVideo(string videoId)
+        public Task<bool> UnpinVideo(string videoId, string pinName)
         {
-            return Unpin(GetTileId(videoId, TileType.Video));
+            return Unpin(GetTileId(TileType.Video, videoId));
         }
 
-        public Task<bool> PinChannel(string channelId)
+        public Task<bool> PinChannel(string channelId, string pinName)
         {
             throw new System.NotImplementedException();
         }
 
         public Task<bool> UnpinChannel(string channelId)
         {
-            return Unpin(GetTileId(channelId, TileType.Channel));
+            return Unpin(GetTileId(TileType.Channel, channelId));
         }
 
         public Task<bool> PinUser(string userId)
@@ -104,7 +110,7 @@ namespace Viddy.Services
 
         public Task<bool> UnpinUser(string userId)
         {
-            return Unpin(GetTileId(userId, TileType.User));
+            return Unpin(GetTileId(TileType.User, userId));
         }
 
         public async Task SaveVisualElementToFile(UIElement element, string filename, int height, int width)
@@ -132,9 +138,9 @@ namespace Viddy.Services
         }
         #endregion
 
-        
 
-        private static string GetTileId(string id, TileType tileType)
+
+        private static string GetTileId(TileType tileType, string id = "")
         {
             return string.Format("{0}{1}", tileType, id);
         }
@@ -143,6 +149,28 @@ namespace Viddy.Services
         {
             return SecondaryTile.Exists(tileId);
         }
+
+        private static async Task<bool> PinTile(string tileId, string tileName, string arguments, string uri)
+        {
+            try
+            {
+                var secondaryTile = new SecondaryTile(tileId, tileName, arguments, new Uri(uri, UriKind.Absolute), TileSize.Square150x150)
+                {
+                    BackgroundColor = Colors.Transparent
+                };
+                secondaryTile.VisualElements.ShowNameOnSquare150x150Logo = true;
+                secondaryTile.VisualElements.ForegroundText = ForegroundText.Dark;
+                secondaryTile.VisualElements.Square30x30Logo = new Uri(uri);
+
+                return await secondaryTile.RequestCreateAsync();
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return false;
+        }
+
 
         private static async Task<bool> Unpin(string tileId)
         {
