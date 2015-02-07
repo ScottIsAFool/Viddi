@@ -91,6 +91,8 @@ namespace Viddy.Views
 
         protected override async void OnNavigatedTo(NavigationEventArgs e)
         {
+            _fromPageNavigation = true;
+
             base.OnNavigatedTo(e);
 
             await StartPreview();
@@ -98,15 +100,22 @@ namespace Viddy.Views
             Window.Current.VisibilityChanged += CurrentOnVisibilityChanged;
         }
 
-        private async void CurrentOnVisibilityChanged(object sender, VisibilityChangedEventArgs e)
+        private bool _fromPageNavigation;
+
+        public async void CurrentOnVisibilityChanged(object sender, VisibilityChangedEventArgs e)
         {
             if (e.Visible)
             {
-                await StartPreview();
+                if (!_fromPageNavigation)
+                {
+                    await StartPreview();
+                }
             }
             else
             {
+                _fromPageNavigation = false;
                 StopVideo();
+                //Window.Current.VisibilityChanged -= CurrentOnVisibilityChanged;
             }
         }
 

@@ -85,10 +85,10 @@ namespace Viddy
                 }
             }
 
-            if (TileService.IsFromSecondaryTile(e.Arguments))
-            {
-                rootFrame = null;
-            }
+            //if (TileService.IsFromSecondaryTile(e.Arguments))
+            //{
+            //    rootFrame = null;
+            //}
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -133,6 +133,11 @@ namespace Viddy
                 {
                     throw new Exception("Failed to create initial page");
                 }
+            }
+
+            if (e.TileId != "App")
+            {
+                rootFrame.Navigate(pageToLoad);
             }
 
             // Ensure the current window is active
@@ -244,7 +249,7 @@ namespace Viddy
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
-
+            
             // TODO: Save application state and stop any background activity
             deferral.Complete();
         }
