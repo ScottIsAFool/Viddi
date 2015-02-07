@@ -102,6 +102,8 @@ namespace Viddy.ViewModel
             {
                 await _tileService.PinVideoRecord();
             }
+
+            RaisePropertyChanged(() => IsPinned);
         }
 
         public override string GetPinFileName()

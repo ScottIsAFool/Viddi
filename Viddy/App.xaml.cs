@@ -15,6 +15,7 @@ using ThemeManagerRt;
 using Viddy.Common;
 using Viddy.Extensions;
 using Viddy.Messaging;
+using Viddy.Services;
 using Viddy.ViewModel;
 using Viddy.Views;
 
@@ -76,12 +77,17 @@ namespace Viddy
             Locator.Review.IncreaseCount();
 
             if (e.PreviousExecutionState == ApplicationExecutionState.Running
-                && rootFrame != null && rootFrame.Content != null)
+                && rootFrame != null && rootFrame.Content != null && string.IsNullOrEmpty(e.Arguments))
             {
                 if (rootFrame.Content is VideoRecordView)
                 {
-                    Messenger.Default.Send(new NotificationMessage(Constants.Messages.AppLaunchedMsg));
+                    rootFrame = null;
                 }
+            }
+
+            if (TileService.IsFromSecondaryTile(e.Arguments))
+            {
+                rootFrame = null;
             }
 
             // Do not repeat app initialization when the Window already has content,
@@ -103,6 +109,8 @@ namespace Viddy
                 Window.Current.Content = rootFrame;
             }
 
+            var pageToLoad = PageToLoad(e.Arguments);
+
             if (rootFrame.Content == null)
             {
                 // Removes the turnstile navigation for startup.
@@ -121,26 +129,46 @@ namespace Viddy
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                if (!rootFrame.Navigate(typeof(MainView), e.Arguments))
+                if (!rootFrame.Navigate(pageToLoad, e.Arguments))
                 {
                     throw new Exception("Failed to create initial page");
                 }
             }
 
-            if (!string.IsNullOrEmpty(e.Arguments))
-            {
-                var query = new Uri(e.Arguments).QueryString();
-                if (query.ContainsKey("tileType"))
-                {
-                    var source = query["tileType"];
-                    var id = query["id"];
-                    //var type = Type.GetType(string.Format("Viddy.Views.Sources.{0}View", source));
-                    //rootFrame.Navigate(type, new NavigationParameters { ShowHomeButton = true });
-                }
-            }
-
             // Ensure the current window is active
             Window.Current.Activate();
+        }
+
+        public Type PageToLoad(string arguments)
+        {
+            var type = typeof(MainView);
+            if (string.IsNullOrEmpty(arguments))
+            {
+                return type;
+            }
+
+            var query = new Uri(arguments).QueryString();
+            if (!query.ContainsKey("tileType"))
+            {
+                return type;
+            }
+
+            var source = query["tileType"];
+            var tileType = (TileService.TileType)Enum.Parse(typeof(TileService.TileType), source);
+            var id = query["id"];
+            //var type = Type.GetType(string.Format("Viddy.Views.Sources.{0}View", source));
+            //rootFrame.Navigate(type, new NavigationParameters { ShowHomeButton = true });
+            switch (tileType)
+            {
+                case TileService.TileType.VideoRecord:
+                    type = typeof(VideoRecordView);
+                    break;
+                default:
+                    type = typeof(MainView);
+                    break;
+            }
+
+            return type;
         }
 
         protected override void OnActivated(IActivatedEventArgs args)

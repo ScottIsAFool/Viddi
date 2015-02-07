@@ -78,8 +78,11 @@ namespace Cimbalino.Toolkit.Services
                     await preStart;
                 }
 
-                await _captureManager.StartPreviewAsync();
-                _previewStarted = true;
+                if (!_previewStarted)
+                {
+                    await _captureManager.StartPreviewAsync();
+                    _previewStarted = true;
+                }
             }
         }
 

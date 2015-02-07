@@ -47,6 +47,11 @@ namespace Viddy.Services
             _appSettings = appSettings;
         }
 
+        public static bool IsFromSecondaryTile(string args)
+        {
+            return !string.IsNullOrEmpty(args) && args.Contains("tileType");
+        }
+
         #region ITileService Implementations
 
         public bool IsVideoRecordPinned

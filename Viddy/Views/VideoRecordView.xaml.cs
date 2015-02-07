@@ -277,7 +277,6 @@ namespace Viddy.Views
 
         private void StopVideo()
         {
-
             if (_displayRequest != null && _isRecording)
             {
                 _displayRequest.RequestRelease();
