@@ -231,6 +231,7 @@
     <Compile Include="Views\MainView.xaml.cs">
       <DependentUpon>MainView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\PinnableBasePage.cs" />
     <Compile Include="Views\SearchView.xaml.cs">
       <DependentUpon>SearchView.xaml</DependentUpon>
     </Compile>
@@ -436,6 +437,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="NotificationsExtensions">
+      <HintPath>..\packages\NotificationsExtensions.UniversalApps.1.0.3\lib\wpa81\NotificationsExtensions.winmd</HintPath>
+    </Reference>
     <Reference Include="PropertyChanged">
       <HintPath>..\packages\PropertyChanged.Fody.1.49.0\Lib\portable-net4+sl4+wp8+win8+wpa81+MonoAndroid16+MonoTouch40\PropertyChanged.dll</HintPath>
       <Private>False</Private>
@@ -452,9 +456,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ThemeManagerRt.1.0.1.4\lib\portable-win81+WindowsPhoneApp81\ThemeManagerRt.dll</HintPath>
     </Reference>
-    <Reference Include="VidMePortable, Version=0.0.0.25, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="VidMePortable, Version=0.0.0.27, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\VidMePortable.0.0.0.25-beta\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10\VidMePortable.dll</HintPath>
+      <HintPath>..\packages\VidMePortable.0.0.0.27-beta\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10\VidMePortable.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

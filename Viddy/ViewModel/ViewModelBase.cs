@@ -1,4 +1,6 @@
-﻿using GalaSoft.MvvmLight.Messaging;
+﻿using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using GalaSoft.MvvmLight.Messaging;
 using ScottIsAFool.WindowsPhone.Logging;
 using Viddy.Messaging;
 
@@ -47,5 +49,12 @@ namespace Viddy.ViewModel
         public string ProgressText { get; set; }
 
         public virtual void UpdateProperties() { }
+
+        public virtual async Task PinUnpin() { }
+
+        public virtual string GetPinFileName()
+        {
+            return string.Empty;
+        }
     }
 }

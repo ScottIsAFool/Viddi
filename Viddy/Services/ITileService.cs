@@ -1,5 +1,10 @@
-﻿using System.Threading.Tasks;
+﻿using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Windows.UI.StartScreen;
+using Windows.UI.Xaml;
+using Windows.UI.Xaml.Media.Imaging;
+using Cimbalino.Toolkit.Extensions;
 using Cimbalino.Toolkit.Services;
 
 namespace Viddy.Services
@@ -18,6 +23,9 @@ namespace Viddy.Services
         Task<bool> UnpinChannel(string channelId);
         Task<bool> PinUser(string userId);
         Task<bool> UnpinUser(string userId);
+        Task SaveVisualElementToFile(UIElement element, string filename, int height, int width);
+        string GetTileImageUrl(TileService.TileType tileType, string id = "");
+        string GetTileFileName(TileService.TileType tileType, string id = "");
     }
 
     public class TileService : ITileService
@@ -66,7 +74,7 @@ namespace Viddy.Services
 
         public Task<bool> UnpinVideoRecord()
         {
-            throw new System.NotImplementedException();
+            return Unpin(TileType.VideoRecord.ToString());
         }
 
         public Task<bool> PinVideo(string videoId)
@@ -76,7 +84,7 @@ namespace Viddy.Services
 
         public Task<bool> UnpinVideo(string videoId)
         {
-            throw new System.NotImplementedException();
+            return Unpin(GetTileId(videoId, TileType.Video));
         }
 
         public Task<bool> PinChannel(string channelId)
@@ -86,7 +94,7 @@ namespace Viddy.Services
 
         public Task<bool> UnpinChannel(string channelId)
         {
-            throw new System.NotImplementedException();
+            return Unpin(GetTileId(channelId, TileType.Channel));
         }
 
         public Task<bool> PinUser(string userId)
@@ -96,14 +104,35 @@ namespace Viddy.Services
 
         public Task<bool> UnpinUser(string userId)
         {
-            throw new System.NotImplementedException();
+            return Unpin(GetTileId(userId, TileType.User));
         }
-        #endregion
 
-        private string GetTileImageUrl(string id, TileType tileType)
+        public async Task SaveVisualElementToFile(UIElement element, string filename, int height, int width)
+        {
+            //element.Measure(new Size(width, height));
+            //element.Arrange(new Rect { Height = height, Width = width });
+            //element.UpdateLayout();
+            var renderTargetBitmap = new RenderTargetBitmap();
+            await renderTargetBitmap.RenderAsync(element, width, height);
+
+            using (var file = await _storageService.Local.CreateFileAsync(filename))
+            {
+                await renderTargetBitmap.SavePngAsync(file);
+            }
+        }
+
+        public string GetTileImageUrl(TileType tileType, string id = "")
         {
             return string.Format(SourceTileLocation, tileType, id);
         }
+
+        public string GetTileFileName(TileType tileType, string id = "")
+        {
+            return string.Format(SourceTileFile, tileType, id);
+        }
+        #endregion
+
+        
 
         private static string GetTileId(string id, TileType tileType)
         {
@@ -115,7 +144,18 @@ namespace Viddy.Services
             return SecondaryTile.Exists(tileId);
         }
 
-        private enum TileType
+        private static async Task<bool> Unpin(string tileId)
+        {
+            if (string.IsNullOrEmpty(tileId)) return false;
+
+            var tiles = await SecondaryTile.FindAllAsync();
+            var tile = tiles.FirstOrDefault(x => x.TileId == tileId);
+            if (tile == null) return false;
+
+            return await tile.RequestDeleteAsync();
+        }
+
+        public enum TileType
         {
             VideoRecord,
             Channel,

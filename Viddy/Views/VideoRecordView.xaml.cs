@@ -34,7 +34,7 @@ namespace Viddy.Views
 
         protected override ApplicationViewBoundsMode Mode
         {
-            get { return ApplicationViewBoundsMode.UseCoreWindow; }
+            get { return ApplicationViewBoundsMode.UseVisible; }
         }
 
         public static readonly DependencyProperty FlashOnProperty = DependencyProperty.Register(
@@ -348,6 +348,11 @@ namespace Viddy.Views
             }
 
             return MFVideoRotation;
+        }
+
+        private async void PinButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            await SaveTileImage(RecordTile);
         }
     }
 }

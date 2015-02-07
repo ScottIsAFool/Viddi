@@ -43,6 +43,12 @@
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
             <converters:NullToVisibilityConverter x:Key="InverseNullToVisibilityConverter" 
                                                   InvertValue="True"/>
+            <converters:BooleanToStringConverter x:Key="PinUnpinConverter"
+                                                 TrueValue="unpin"
+                                                 FalseValue="pin"/>
+            <converters:BooleanToStringConverter x:Key="PinUnpinLongConverter"
+                                                 TrueValue="unpin from start"
+                                                 FalseValue="pin to start" />
 
             <themeManagerRt:ThemeManager x:Key="ThemeManager" />
             <Color x:Key="OverlayColor">#4C000000</Color>

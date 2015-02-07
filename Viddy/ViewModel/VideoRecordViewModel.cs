@@ -2,6 +2,7 @@ using System;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Pickers;
+using Windows.UI.Xaml;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
@@ -89,6 +90,24 @@ namespace Viddy.ViewModel
         public override bool IsPinned
         {
             get { return _tileService.IsVideoRecordPinned; }
+        }
+
+        public override async Task PinUnpin()
+        {
+            if (IsPinned)
+            {
+                await _tileService.UnpinVideoRecord();
+            }
+            else
+            {
+                await _tileService.PinVideoRecord();
+            }
+        }
+
+        public override string GetPinFileName()
+        {
+            var filename = _tileService.GetTileFileName(TileService.TileType.VideoRecord);
+            return filename;
         }
 
         public RelayCommand NavigateToAccountCommand

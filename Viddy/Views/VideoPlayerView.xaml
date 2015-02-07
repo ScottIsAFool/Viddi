@@ -1,20 +1,20 @@
-﻿<local:BasePage x:Class="Viddy.Views.VideoPlayerView"
-                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                xmlns:local="using:Viddy.Views"
-                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-                xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
-                xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-                xmlns:controls="using:Viddy.Controls"
-                xmlns:playerFramework="using:Microsoft.PlayerFramework"
-                xmlns:converters="using:Cimbalino.Toolkit.Converters"
-                xmlns:behaviours="using:Viddy.Behaviours"
-                xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
-                xmlns:localConverters="using:Viddy.Converters"
-                mc:Ignorable="d"
-                Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
-                DataContext="{Binding VideoPlayer, Source={StaticResource Locator}}">
+﻿<local:PinnableBasePage x:Class="Viddy.Views.VideoPlayerView"
+                        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                        xmlns:local="using:Viddy.Views"
+                        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                        xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+                        xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+                        xmlns:controls="using:Viddy.Controls"
+                        xmlns:playerFramework="using:Microsoft.PlayerFramework"
+                        xmlns:converters="using:Cimbalino.Toolkit.Converters"
+                        xmlns:behaviours="using:Viddy.Behaviours"
+                        xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
+                        xmlns:localConverters="using:Viddy.Converters"
+                        mc:Ignorable="d"
+                        Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                        DataContext="{Binding VideoPlayer, Source={StaticResource Locator}}">
     <interactivity:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
             <core:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
@@ -89,12 +89,12 @@
                                    HorizontalAlignment="Left"
                                    Text="{Binding Video.Plays}"
                                    Foreground="{ThemeResource SubtleBrush}"
-                                   Margin="6,0"/>
+                                   Margin="6,0" />
                         <TextBlock Text="{Binding Video.Date}"
                                    Style="{StaticResource BodyTextBlockStyle}"
-                                   Foreground="{ThemeResource SubtleBrush}" 
-                                   Margin="6,0"/>
-                        
+                                   Foreground="{ThemeResource SubtleBrush}"
+                                   Margin="6,0" />
+
                         <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
                                                TapCommand="{Binding NavigateToChannelCommand}"
                                                Visibility="{Binding Video.Channel, Converter={StaticResource NullToVisibilityConverter}}">
@@ -135,11 +135,11 @@
             </Grid>
 
             <controls:LoadingListView Grid.Row="2"
-                                           ItemsSource="{Binding Video.Items}"
-                                           ItemTemplate="{StaticResource CommentTemplate}"
-                                           Margin="0,12,0,0"
-                                           IsEmpty="{Binding Video.IsEmpty}"
-                                           IsInitialising="{Binding Video.ProgressIsVisible}">
+                                      ItemsSource="{Binding Video.Items}"
+                                      ItemTemplate="{StaticResource CommentTemplate}"
+                                      Margin="0,12,0,0"
+                                      IsEmpty="{Binding Video.IsEmpty}"
+                                      IsInitialising="{Binding Video.ProgressIsVisible}">
                 <controls:LoadingListView.EmptyContent>
                     <DataTemplate>
                         <Grid>
@@ -210,4 +210,4 @@
             </Grid>
         </Grid>
     </Grid>
-</local:BasePage>
+</local:PinnableBasePage>
