@@ -28,7 +28,6 @@ namespace Viddy.Views
 
         protected virtual void OnBackKeyPressed(object sender, NavigationServiceBackKeyPressedEventArgs e)
         {
-            var i = 1;
         }
 
         protected void SetFullScreen(ApplicationViewBoundsMode mode)

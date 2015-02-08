@@ -12,6 +12,7 @@ using Windows.System.Display;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
+using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Cimbalino.Toolkit.Services;
@@ -102,7 +103,24 @@ namespace Viddy.Views
 
         private bool _fromPageNavigation;
 
-        public async void CurrentOnVisibilityChanged(object sender, VisibilityChangedEventArgs e)
+        public static async void CurrentOnVisibilityChanged(object sender, VisibilityChangedEventArgs e)
+        {
+            var window = sender as Window;
+            if (window != null)
+            {
+                var frame = window.Content as Frame;
+                if (frame != null)
+                {
+                    var page = frame.Content as VideoRecordView;
+                    if (page != null)
+                    {
+                        await page.VisibilityChanged(e);
+                    }
+                }
+            }
+        }
+
+        private async Task VisibilityChanged(VisibilityChangedEventArgs e)
         {
             if (e.Visible)
             {

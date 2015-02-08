@@ -235,7 +235,7 @@ namespace Viddy
         private void RootFrame_FirstNavigated(object sender, NavigationEventArgs e)
         {
             var rootFrame = sender as Frame;
-            rootFrame.ContentTransitions = transitions ?? new TransitionCollection() { new NavigationThemeTransition() };
+            rootFrame.ContentTransitions = transitions ?? new TransitionCollection { new NavigationThemeTransition() };
             rootFrame.Navigated -= RootFrame_FirstNavigated;
         }
 
@@ -249,6 +249,8 @@ namespace Viddy
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
+
+            Window.Current.VisibilityChanged -= VideoRecordView.CurrentOnVisibilityChanged;
             
             // TODO: Save application state and stop any background activity
             deferral.Complete();
