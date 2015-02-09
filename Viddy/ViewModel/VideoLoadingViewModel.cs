@@ -15,9 +15,9 @@ namespace Viddy.ViewModel
 {
     public class VideoLoadingViewModel : LoadingItemsViewModel<IListType>
     {
-        public virtual async Task<VideosResponse> GetVideos(int offset)
+        public virtual Task<VideosResponse> GetVideos(int offset)
         {
-            return new VideosResponse();
+            return Task.FromResult(new VideosResponse());
         }
 
         protected override async Task LoadData(bool isRefresh, bool add = false, int offset = 0)
