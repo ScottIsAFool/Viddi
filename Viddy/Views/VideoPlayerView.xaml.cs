@@ -33,5 +33,10 @@ namespace Viddy.Views
 
             base.OnBackKeyPressed(sender, e);
         }
+
+        private async void PinButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            await SaveTileImage(MediumTile);
+        }
     }
 }

@@ -39,7 +39,7 @@ namespace Viddy.Controls
 
         private void SetImage()
         {
-            if (_image != null)
+            if (_image != null && !string.IsNullOrEmpty(ImageUrl))
             {
                 var bitmap = new BitmapImage(new Uri(ImageUrl, UriKind.Absolute));
                 _image.Source = bitmap;
