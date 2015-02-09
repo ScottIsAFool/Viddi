@@ -61,7 +61,6 @@ namespace Viddy.ViewModel
                     Items.AddRange(videoList);
                 }
 
-                IsEmpty = Items.IsNullOrEmpty();
                 CanLoadMore = response != null && response.Page != null && Items.Count + 1 < response.Page.Total;
                 ItemsLoaded = true;
             }
@@ -70,6 +69,7 @@ namespace Viddy.ViewModel
 
             }
 
+            IsEmpty = Items.IsNullOrEmpty();
             IsLoadingMore = false;
             SetProgressBar();
         }
