@@ -172,6 +172,7 @@
     <Compile Include="ViewModel\Account\Manage\OwnedAppViewModel.cs" />
     <Compile Include="ViewModel\Account\ManualLoginViewModel.cs" />
     <Compile Include="ViewModel\Account\ProfileViewModel.cs" />
+    <Compile Include="ViewModel\Account\UserPlaylistsViewModel.cs" />
     <Compile Include="ViewModel\AdViewModel.cs" />
     <Compile Include="ViewModel\BrowseChannelsViewModel.cs" />
     <Compile Include="ViewModel\ChannelViewModel.cs" />
