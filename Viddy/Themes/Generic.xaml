@@ -499,8 +499,10 @@
                 <ControlTemplate TargetType="controls:TileControl">
                     <Grid Height="{TemplateBinding Height}"
                           Width="{TemplateBinding Width}">
-                        <Image Source="{TemplateBinding ImageUrl}"
-                               Stretch="UniformToFill"/>
+                        <Image Stretch="UniformToFill"
+                               Height="{TemplateBinding Height}"
+                               Width="{TemplateBinding Width}"
+                               x:Name="TileImage"/>
                         <Border Background="{ThemeResource OverlayBrush}"/>
                         <Image Source="/Assets/PureLogo.png"
                                Height="80"

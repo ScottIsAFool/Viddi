@@ -85,6 +85,11 @@ namespace Viddy.ViewModel.Account
             RaisePropertyChanged(() => IsPinned);
         }
 
+        public override bool IsPinned
+        {
+            get { return User.IsPinned; }
+        }
+
         protected override void WireMessages()
         {
             Messenger.Default.Register<UserMessage>(this, m =>

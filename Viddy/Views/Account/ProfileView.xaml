@@ -30,7 +30,8 @@
                 </AppBarButton>
                 <AppBarButton Label="refresh"
                               Command="{Binding RefreshCommand}"
-                              Icon="Refresh" />
+                              Icon="Refresh" 
+                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </views:BasePage.BottomAppBar>

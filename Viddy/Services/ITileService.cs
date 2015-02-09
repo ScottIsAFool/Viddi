@@ -79,7 +79,7 @@ namespace Viddy.Services
 
         public Task<bool> PinVideoRecord()
         {
-            return PinTile(string.Empty, TileType.VideoRecord, "Record video", null);
+            return PinTile(string.Empty, TileType.VideoRecord, "Record video", null, false);
         }
 
         public Task<bool> UnpinVideoRecord()
@@ -89,7 +89,7 @@ namespace Viddy.Services
 
         public Task<bool> PinVideo(Video video)
         {
-            return PinTile(video.VideoId, TileType.Video, video.Title, video);
+            return PinTile(video.VideoId, TileType.Video, video.Title, video, false);
         }
 
         public Task<bool> UnpinVideo(string videoId)
@@ -171,9 +171,15 @@ namespace Viddy.Services
             return SecondaryTile.Exists(tileId);
         }
 
-        private async Task<bool> PinTile(string itemId, TileType tileType, string tileName, object item)
+        private string GetWideTileImageUrl(TileType tileType, string id = "")
+        {
+            return string.Format(WideTileLocation, tileType, id);
+        }
+
+        private async Task<bool> PinTile(string itemId, TileType tileType, string tileName, object item, bool includeWideTile = true)
         {
             var uri = GetTileImageUrl(tileType, itemId);
+            var wideUri = GetWideTileImageUrl(tileType, itemId);
             var arguments = string.Format(Arguments, tileType, itemId);
             var tileId = GetTileId(tileType, itemId);
 
@@ -191,6 +197,11 @@ namespace Viddy.Services
                 secondaryTile.VisualElements.ShowNameOnSquare150x150Logo = true;
                 secondaryTile.VisualElements.ForegroundText = ForegroundText.Dark;
                 secondaryTile.VisualElements.Square30x30Logo = new Uri(uri);
+                if (includeWideTile)
+                {
+                    secondaryTile.VisualElements.Wide310x150Logo = new Uri(wideUri);
+                    secondaryTile.VisualElements.ShowNameOnWide310x150Logo = true;
+                }
 
                 return await secondaryTile.RequestCreateAsync();
             }
