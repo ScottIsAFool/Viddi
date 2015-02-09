@@ -67,7 +67,7 @@ namespace Viddy.ViewModel.Account
         {
             Messenger.Default.Register<UserMessage>(this, m =>
             {
-                User = new UserViewModel(m.User);
+                User = m.User;
             });
 
             base.WireMessages();

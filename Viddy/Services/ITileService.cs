@@ -30,6 +30,7 @@ namespace Viddy.Services
         string GetTileImageUrl(TileService.TileType tileType, string id = "");
         string GetTileFileName(TileService.TileType tileType, string id = "");
         string GetTileId(TileService.TileType tileType, string id = "");
+        object GetPinnedItemDetails(TileService.TileType tileType, string id);
     }
 
     public class TileService : ITileService
@@ -145,8 +146,27 @@ namespace Viddy.Services
         {
             return string.Format("{0}{1}", tileType, id);
         }
+
+        public object GetPinnedItemDetails(TileType tileType, string id)
+        {
+            var tileId = GetTileId(tileType, id);
+            switch (tileType)
+            {
+                case TileType.VideoRecord:
+                    return null;
+                case TileType.Channel:
+                    return GetItem<Channel>(tileId);
+                case TileType.User:
+                    return GetItem<User>(tileId);
+                case TileType.Video:
+                    return GetItem<Video>(tileId);
+                default:
+                    return null;
+            }
+        }
+
         #endregion
-        
+
         private static bool IsPinned(string tileId)
         {
             return SecondaryTile.Exists(tileId);
@@ -181,7 +201,7 @@ namespace Viddy.Services
 
             return false;
         }
-        
+
         private static async Task<bool> Unpin(string tileId)
         {
             if (string.IsNullOrEmpty(tileId)) return false;

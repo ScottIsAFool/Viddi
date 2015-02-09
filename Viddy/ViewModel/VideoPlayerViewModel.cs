@@ -45,7 +45,7 @@ namespace Viddy.ViewModel
                         return;
                     }
 
-                    Messenger.Default.Send(new UserMessage(Video.Video.User));
+                    Messenger.Default.Send(new UserMessage(new UserViewModel(Video.Video.User)));
                     _navigationService.Navigate<ProfileView>();
                 });
             }

@@ -8,6 +8,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Messaging;
 using Viddy.Services;
+using Viddy.ViewModel.Item;
 using Viddy.Views;
 using Viddy.Views.Account;
 using Viddy.Views.Account.Manage;
@@ -125,7 +126,7 @@ namespace Viddy.ViewModel.Account
             {
                 return new RelayCommand(() =>
                 {
-                    Messenger.Default.Send(new UserMessage(new User
+                    Messenger.Default.Send(new UserMessage(new UserViewModel(new User
                     {
                         UserId = "59739",
                         Username = "PunkHack",
@@ -137,7 +138,7 @@ namespace Viddy.ViewModel.Account
                         VideoViews = "71556",
                         VideosScores = 220,
                         Bio = "Some bio information"
-                    }));
+                    })));
 
                     _navigationService.Navigate<ProfileView>();
                 });

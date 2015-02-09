@@ -115,7 +115,7 @@ namespace Viddy.ViewModel.Item
             {
                 return new RelayCommand(() =>
                 {
-                    Messenger.Default.Send(new UserMessage(Comment.User));
+                    Messenger.Default.Send(new UserMessage(new UserViewModel(Comment.User)));
                     _navigationService.Navigate<ProfileView>();
                 });
             }

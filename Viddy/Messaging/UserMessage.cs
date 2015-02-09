@@ -1,13 +1,13 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
-using VidMePortable.Model;
+using Viddy.ViewModel.Item;
 
 namespace Viddy.Messaging
 {
     public class UserMessage : MessageBase
     {
-        public User User { get; set; }
+        public UserViewModel User { get; set; }
 
-        public UserMessage(User user)
+        public UserMessage(UserViewModel user)
         {
             User = user;
         }

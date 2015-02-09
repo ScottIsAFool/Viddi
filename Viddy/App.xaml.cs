@@ -12,12 +12,14 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using ThemeManagerRt;
-using Viddy.Common;
 using Viddy.Extensions;
 using Viddy.Messaging;
 using Viddy.Services;
 using Viddy.ViewModel;
+using Viddy.ViewModel.Item;
 using Viddy.Views;
+using Viddy.Views.Account;
+using VidMePortable.Model;
 
 namespace Viddy
 {
@@ -26,7 +28,7 @@ namespace Viddy
     /// </summary>
     public sealed partial class App
     {
-        private TransitionCollection transitions;
+        private TransitionCollection _transitions;
 
         public static ViewModelLocator Locator
         {
@@ -48,7 +50,7 @@ namespace Viddy
         {
             if (Debugger.IsAttached)
             {
-                //Debugger.Break();
+                Debugger.Break();
             }
 
             e.Handled = true;
@@ -70,24 +72,19 @@ namespace Viddy
 #endif
 
             ThemeManager.DefaultTheme = ElementTheme.Light;
-            Frame rootFrame = Window.Current.Content as Frame;
+            var rootFrame = Window.Current.Content as Frame;
             Messenger.Default.Send(new PinMessage());
 
             Locator.Auth.StartService();
             Locator.Review.IncreaseCount();
 
-            if (e.PreviousExecutionState == ApplicationExecutionState.Running
-                && rootFrame != null && rootFrame.Content != null && string.IsNullOrEmpty(e.Arguments))
-            {
-                if (rootFrame.Content is VideoRecordView)
-                {
-                    rootFrame = null;
-                }
-            }
-
-            //if (TileService.IsFromSecondaryTile(e.Arguments))
+            //if (e.PreviousExecutionState == ApplicationExecutionState.Running
+            //    && rootFrame != null && rootFrame.Content != null && string.IsNullOrEmpty(e.Arguments))
             //{
-            //    rootFrame = null;
+            //    if (rootFrame.Content is VideoRecordView)
+            //    {
+            //        rootFrame = null;
+            //    }
             //}
 
             // Do not repeat app initialization when the Window already has content,
@@ -116,10 +113,10 @@ namespace Viddy
                 // Removes the turnstile navigation for startup.
                 if (rootFrame.ContentTransitions != null)
                 {
-                    transitions = new TransitionCollection();
+                    _transitions = new TransitionCollection();
                     foreach (var c in rootFrame.ContentTransitions)
                     {
-                        transitions.Add(c);
+                        _transitions.Add(c);
                     }
                 }
 
@@ -129,7 +126,7 @@ namespace Viddy
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                if (!rootFrame.Navigate(pageToLoad, e.Arguments))
+                if (!rootFrame.Navigate(pageToLoad))
                 {
                     throw new Exception("Failed to create initial page");
                 }
@@ -161,12 +158,25 @@ namespace Viddy
             var source = query["tileType"];
             var tileType = (TileService.TileType)Enum.Parse(typeof(TileService.TileType), source);
             var id = query["id"];
-            //var type = Type.GetType(string.Format("Viddy.Views.Sources.{0}View", source));
-            //rootFrame.Navigate(type, new NavigationParameters { ShowHomeButton = true });
+
+            var item = Locator.TileService.GetPinnedItemDetails(tileType, id);
+
             switch (tileType)
             {
                 case TileService.TileType.VideoRecord:
                     type = typeof(VideoRecordView);
+                    break;
+                case TileService.TileType.Channel:
+                    Messenger.Default.Send(new ChannelMessage(new ChannelItemViewModel((Channel)item)));
+                    type = typeof(ChannelView);
+                    break;
+                case TileService.TileType.User:
+                    Messenger.Default.Send(new UserMessage(new UserViewModel((User)item)));
+                    type = typeof(ProfileView);
+                    break;
+                case TileService.TileType.Video:
+                    Messenger.Default.Send(new VideoMessage(new VideoItemViewModel((Video)item, null)));
+                    type = typeof(VideoPlayerView);
                     break;
                 default:
                     type = typeof(MainView);
@@ -235,7 +245,7 @@ namespace Viddy
         private void RootFrame_FirstNavigated(object sender, NavigationEventArgs e)
         {
             var rootFrame = sender as Frame;
-            rootFrame.ContentTransitions = transitions ?? new TransitionCollection { new NavigationThemeTransition() };
+            rootFrame.ContentTransitions = _transitions ?? new TransitionCollection { new NavigationThemeTransition() };
             rootFrame.Navigated -= RootFrame_FirstNavigated;
         }
 
@@ -251,7 +261,7 @@ namespace Viddy
             var deferral = e.SuspendingOperation.GetDeferral();
 
             Window.Current.VisibilityChanged -= VideoRecordView.CurrentOnVisibilityChanged;
-            
+
             // TODO: Save application state and stop any background activity
             deferral.Complete();
         }

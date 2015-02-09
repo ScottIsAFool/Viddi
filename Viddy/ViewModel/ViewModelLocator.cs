@@ -154,6 +154,11 @@ namespace Viddy.ViewModel
         {
             get { return ServiceLocator.Current.GetInstance<ReviewService>(); }
         }
+
+        public ITileService TileService
+        {
+            get { return ServiceLocator.Current.GetInstance<ITileService>(); }
+        }
         
         public static void Cleanup()
         {

@@ -180,18 +180,16 @@ namespace Viddy.ViewModel.Item
             {
                 return new RelayCommand(async () =>
                 {
-                    if (Video == null || !CanDelete)
-                    {
-                        return;
-                    }
-
                     try
                     {
                         if (AuthenticationService.Current.IsLoggedIn)
                         {
                             if (await _vidMeClient.DeleteVideoAsync(Video.VideoId))
                             {
-                                _videoLoadingViewModel.Items.Remove(this);
+                                if (_videoLoadingViewModel != null)
+                                {
+                                    _videoLoadingViewModel.Items.Remove(this);
+                                }
                             }
                         }
                         else
@@ -203,7 +201,10 @@ namespace Viddy.ViewModel.Item
                             {
                                 if (await _vidMeClient.DeleteAnonymousVideoAsync(Video.VideoId, auth.Token))
                                 {
-                                    _videoLoadingViewModel.Items.Remove(this);
+                                    if (_videoLoadingViewModel != null)
+                                    {
+                                        _videoLoadingViewModel.Items.Remove(this);
+                                    }
                                 }
                             }
                         }
@@ -212,7 +213,7 @@ namespace Viddy.ViewModel.Item
                     {
 
                     }
-                });
+                }, () => CanDelete);
             }
         }
 
