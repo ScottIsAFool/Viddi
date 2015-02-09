@@ -106,7 +106,7 @@ namespace Viddy.ViewModel
             RaisePropertyChanged(() => IsPinned);
         }
 
-        public override string GetPinFileName()
+        public override string GetPinFileName(bool isWideTile = false)
         {
             var filename = _tileService.GetTileFileName(TileService.TileType.VideoRecord);
             return filename;

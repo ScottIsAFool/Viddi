@@ -235,11 +235,6 @@ namespace Viddy.ViewModel.Item
             {
                 return new RelayCommand(async () =>
                 {
-                    if (!CanAddComment)
-                    {
-                        return;
-                    }
-
                     try
                     {
                         AddingComment = true;
@@ -267,7 +262,7 @@ namespace Viddy.ViewModel.Item
                     }
 
                     AddingComment = false;
-                });
+                }, () => CanAddComment);
             }
         }
 

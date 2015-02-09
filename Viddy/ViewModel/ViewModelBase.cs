@@ -52,7 +52,7 @@ namespace Viddy.ViewModel
 
         public virtual async Task PinUnpin() { }
 
-        public virtual string GetPinFileName()
+        public virtual string GetPinFileName(bool isWideTile = false)
         {
             return string.Empty;
         }

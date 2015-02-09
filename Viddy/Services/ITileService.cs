@@ -28,17 +28,16 @@ namespace Viddy.Services
         Task<bool> UnpinUser(string userId);
         Task SaveVisualElementToFile(UIElement element, string filename, int height, int width);
         string GetTileImageUrl(TileService.TileType tileType, string id = "");
-        string GetTileFileName(TileService.TileType tileType, string id = "");
+        string GetTileFileName(TileService.TileType tileType, string id = "", bool isWideTile = false);
         string GetTileId(TileService.TileType tileType, string id = "");
         object GetPinnedItemDetails(TileService.TileType tileType, string id);
     }
 
     public class TileService : ITileService
     {
-        private const string MediumTileLocation = "ms-appdata:///Assets/{0}Tile.png";
-        private const string SmallTileLocation = "ms-appdata:///Assets/{0}SmallTile.png";
-        private const string WideTileLocation = "ms-appdata:///Assets/{0}WideTile.png";
         private const string SourceTileLocation = "ms-appdata:///Local/" + SourceTileFile;
+        private const string WideTileLocation = "ms-appdata:///Local/" + WideTileFile;
+        private const string WideTileFile = "{0}{1}Wide.png";
         private const string SourceTileFile = "{0}{1}.png";
         private const string Arguments = "http://ferretlabs.com/viddy?tileType={0}&id={1}";
 
@@ -137,9 +136,9 @@ namespace Viddy.Services
             return string.Format(SourceTileLocation, tileType, id);
         }
 
-        public string GetTileFileName(TileType tileType, string id = "")
+        public string GetTileFileName(TileType tileType, string id = "", bool isWideTile = false)
         {
-            return string.Format(SourceTileFile, tileType, id);
+            return isWideTile ? string.Format(WideTileFile, tileType, id) : string.Format(SourceTileFile, tileType, id);
         }
 
         public string GetTileId(TileType tileType, string id = "")

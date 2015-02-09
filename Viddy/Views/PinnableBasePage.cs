@@ -1,7 +1,5 @@
-﻿using System;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Windows.UI.Xaml;
-using Windows.UI.Xaml.Media.Imaging;
 using GalaSoft.MvvmLight.Ioc;
 using Viddy.Services;
 using Viddy.ViewModel;
@@ -10,14 +8,19 @@ namespace Viddy.Views
 {
     public class PinnableBasePage : BasePage
     {
-        protected async Task SaveTileImage(UIElement tileElement)
+        protected async Task SaveTileImage(UIElement mediumTile, UIElement wideTile = null)
         {
             var vm = DataContext as ViewModelBase;
             if (vm != null)
             {
                 var tileService = SimpleIoc.Default.GetInstance<ITileService>();
                 var filename = vm.GetPinFileName();
-                await tileService.SaveVisualElementToFile(tileElement, filename, 360, 360);
+                await tileService.SaveVisualElementToFile(mediumTile, filename, 360, 360);
+                if (wideTile != null)
+                {
+                    filename = vm.GetPinFileName(true);
+                    await tileService.SaveVisualElementToFile(wideTile, filename, 360, 691);
+                }
                 vm.PinUnpin();
             }
         }

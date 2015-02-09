@@ -2,6 +2,7 @@
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Messaging;
+using Viddy.Services;
 using Viddy.ViewModel.Item;
 using VidMePortable;
 using VidMePortable.Model;
@@ -13,11 +14,13 @@ namespace Viddy.ViewModel.Account
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
+        private readonly ITileService _tileService;
 
-        public ProfileViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
+        public ProfileViewModel(INavigationService navigationService, IVidMeClient vidMeClient, ITileService tileService)
         {
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
+            _tileService = tileService;
 
             if (IsInDesignMode)
             {
@@ -61,6 +64,25 @@ namespace Viddy.ViewModel.Account
         public override Task<VideosResponse> GetVideos(int offset)
         {
             return _vidMeClient.GetUserVideosAsync(User.User.UserId, offset);
+        }
+
+        public override string GetPinFileName(bool isWideTile = false)
+        {
+            return _tileService.GetTileFileName(TileService.TileType.User, User.User.UserId, isWideTile);
+        }
+
+        public override async Task PinUnpin()
+        {
+            if (IsPinned)
+            {
+                await _tileService.UnpinUser(User.User.UserId);
+            }
+            else
+            {
+                await _tileService.PinUser(User.User);
+            }
+
+            RaisePropertyChanged(() => IsPinned);
         }
 
         protected override void WireMessages()

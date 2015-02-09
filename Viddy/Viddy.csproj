@@ -133,6 +133,7 @@
       <DependentUpon>ReviewControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\RotateControl.cs" />
+    <Compile Include="Controls\TileControl.cs" />
     <Compile Include="Controls\Tiles\RecordTile.xaml.cs">
       <DependentUpon>RecordTile.xaml</DependentUpon>
     </Compile>
