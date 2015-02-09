@@ -35,6 +35,9 @@
             <localConverters:NullBooleanConverter x:Key="NullBooleanConverter"/>
             <localConverters:NullBooleanConverter x:Key="InverseNullBooleanConverter" 
                                                   Invert="True"/>
+            <localConverters:BooleanToSymbolConverter x:Key="PinUnpinSymbolConverter"
+                                                      TrueValue="UnPin"
+                                                      FalseValue="Pin"/>
 
             <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
             <converters:BooleanToVisibilityConverter x:Key="InverseVisibilityConverter"

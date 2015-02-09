@@ -4,6 +4,7 @@ using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
 using Windows.Security.Authentication.Web;
+using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -75,6 +76,8 @@ namespace Viddy
             var rootFrame = Window.Current.Content as Frame;
             Messenger.Default.Send(new PinMessage());
 
+            Window.Current.VisibilityChanged += CurrentOnVisibilityChanged;
+
             Locator.Auth.StartService();
             Locator.Review.IncreaseCount();
 
@@ -139,6 +142,11 @@ namespace Viddy
 
             // Ensure the current window is active
             Window.Current.Activate();
+        }
+
+        private void CurrentOnVisibilityChanged(object sender, VisibilityChangedEventArgs visibilityChangedEventArgs)
+        {
+            Messenger.Default.Send(new PinMessage());
         }
 
         public Type PageToLoad(string arguments)
@@ -261,6 +269,7 @@ namespace Viddy
             var deferral = e.SuspendingOperation.GetDeferral();
 
             Window.Current.VisibilityChanged -= VideoRecordView.CurrentOnVisibilityChanged;
+            Window.Current.VisibilityChanged -= CurrentOnVisibilityChanged;
 
             // TODO: Save application state and stop any background activity
             deferral.Complete();

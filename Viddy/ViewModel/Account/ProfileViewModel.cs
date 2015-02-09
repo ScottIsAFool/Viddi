@@ -87,7 +87,7 @@ namespace Viddy.ViewModel.Account
 
         public override bool IsPinned
         {
-            get { return User.IsPinned; }
+            get { return User != null && User.IsPinned; }
         }
 
         protected override void WireMessages()

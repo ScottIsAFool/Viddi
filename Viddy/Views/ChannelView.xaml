@@ -22,6 +22,13 @@
     <local:BasePage.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
+                <AppBarButton Label="{Binding IsPinned, Converter={StaticResource PinUnpinConverter}}"
+                              x:Name="PinButton"
+                              Click="PinButton_OnClick">
+                    <AppBarButton.Icon>
+                        <SymbolIcon Symbol="{Binding IsPinned, Converter={StaticResource PinUnpinSymbolConverter}}"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
                 <AppBarButton Label="refresh"
                               Command="{Binding RefreshCommand}"
                               Icon="Refresh" />
@@ -30,6 +37,13 @@
     </local:BasePage.BottomAppBar>
 
     <Grid>
+        <Grid Margin="-1200,-1200,0,0">
+            <controls:TileControl x:Name="MediumTile"
+                                  ImageUrl="{Binding Channel.AvatarUrl}" />
+            <controls:TileControl x:Name="WideTile"
+                                  ImageUrl="{Binding Channel.CoverUrl}"
+                                  Width="691" />
+        </Grid>
         <controls:ProfileHeaderControl DataContext="{Binding EmptyChannel}"
                                        Visibility="{Binding Channel.ProgressIsVisible, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}" />
         <controls:LoadingListView ItemsSource="{Binding Items}"

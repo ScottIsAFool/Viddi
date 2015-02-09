@@ -1,4 +1,6 @@
-﻿namespace Viddy.Views
+﻿using Windows.UI.Xaml;
+
+namespace Viddy.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -8,6 +10,11 @@
         public ChannelView()
         {
             InitializeComponent();
+        }
+
+        private async void PinButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            await SaveTileImage(MediumTile, WideTile);
         }
     }
 }

@@ -25,7 +25,7 @@
                               x:Name="PinButton"
                               Click="PinButton_OnClick">
                     <AppBarButton.Icon>
-                        <SymbolIcon Symbol="Pin"/>
+                        <SymbolIcon Symbol="{Binding IsPinned, Converter={StaticResource PinUnpinSymbolConverter}}"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton Label="refresh"
