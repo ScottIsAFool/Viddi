@@ -22,6 +22,7 @@
             public const string AppLaunchedMsg = "AppLaunchedMsg";
             public const string HideReviewsMsg = "HideReviewsMsg";
             public const string ClearSearchMsg = "ClearSearchMsg";
+            public const string UserDetailMsg = "UserDetailMsg";
         }
     }
 }

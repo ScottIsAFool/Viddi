@@ -4,20 +4,22 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Extensions;
 using Cimbalino.Toolkit.Services;
+using GalaSoft.MvvmLight.Messaging;
 using Viddy.Extensions;
+using Viddy.Messaging;
 using Viddy.ViewModel.Item;
 using VidMePortable;
-using VidMePortable.Model;
-using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel.Account
 {
-    public class UserPlaylistsViewModel : LoadingItemsViewModel<UserViewModel>
+    public class UserFollowersViewModel : LoadingItemsViewModel<UserViewModel>
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
 
-        public UserPlaylistsViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
+        private UserViewModel _user;
+
+        public UserFollowersViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
         {
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
@@ -39,7 +41,7 @@ namespace Viddy.ViewModel.Account
 
                 IsLoadingMore = add;
 
-                var response = new UsersResponse();
+                var response = await _vidMeClient.GetUsersFollowersAsync(_user.User.UserId, offset);
                 if (response != null && !response.Users.IsNullOrEmpty())
                 {
                     if (Items == null || !add)
@@ -56,6 +58,22 @@ namespace Viddy.ViewModel.Account
             {
                 
             }
+        }
+
+        protected override void WireMessages()
+        {
+            Messenger.Default.Register<UserMessage>(this, m =>
+            {
+                if (m.Notification.Equals(Constants.Messages.UserDetailMsg))
+                {
+                    if (Items != null)
+                    {
+                        Items.Clear();
+                    }
+
+                    _user = m.User;
+                }
+            });
         }
     }
 }

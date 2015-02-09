@@ -1,8 +1,13 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Cimbalino.Toolkit.Services;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
+using GalaSoft.MvvmLight.Messaging;
 using JetBrains.Annotations;
+using Viddy.Messaging;
 using Viddy.Services;
+using Viddy.Views.Account;
 using VidMePortable;
 using VidMePortable.Model;
 
@@ -12,6 +17,7 @@ namespace Viddy.ViewModel.Item
     {
         private readonly IVidMeClient _vidMeClient;
         private readonly ITileService _tileService;
+        private readonly INavigationService _navigationService;
         public User User { get; set; }
 
         public UserViewModel(User user)
@@ -19,6 +25,7 @@ namespace Viddy.ViewModel.Item
             User = user;
             _vidMeClient = SimpleIoc.Default.GetInstance<IVidMeClient>();
             _tileService = SimpleIoc.Default.GetInstance<ITileService>();
+            _navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
         }
 
         public string UserFollowers
@@ -164,6 +171,18 @@ namespace Viddy.ViewModel.Item
         public bool DisplayByLine
         {
             get { return User != null && (!string.IsNullOrEmpty(UserFollowers) || !string.IsNullOrEmpty(UserPlays) || !string.IsNullOrEmpty(UserVideoCount)); }
+        }
+
+        public RelayCommand NavigateToProfileCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    Messenger.Default.Send(new UserMessage(this));
+                    _navigationService.Navigate<ProfileView>();
+                });
+            }
         }
     }
 }

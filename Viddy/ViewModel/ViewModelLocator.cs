@@ -6,6 +6,7 @@ using Viddy.Services;
 using Viddy.ViewModel.Account;
 using Viddy.ViewModel.Account.Manage;
 using VidMePortable;
+using VidMePortable.Model;
 
 namespace Viddy.ViewModel
 {
@@ -53,6 +54,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.Register<SettingsViewModel>();
             SimpleIoc.Default.Register<BrowseChannelsViewModel>();
             SimpleIoc.Default.Register<EditProfileViewModel>();
+            SimpleIoc.Default.Register<UserFollowersViewModel>(true);
         }
 
         public MainViewModel Main
@@ -143,6 +145,11 @@ namespace Viddy.ViewModel
         public EditProfileViewModel EditProfile
         {
             get { return ServiceLocator.Current.GetInstance<EditProfileViewModel>(); }
+        }
+
+        public UserFollowersViewModel UserFollowers
+        {
+            get { return ServiceLocator.Current.GetInstance<UserFollowersViewModel>(); }
         }
 
         public AuthenticationService Auth
