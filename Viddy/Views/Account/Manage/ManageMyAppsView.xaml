@@ -44,7 +44,7 @@
 
         <Grid Grid.Row="1"
               Margin="0,12,0,0">
-            <controls:LoadingListView ItemsSource="{Binding Apps}"
+            <controls:LoadingListView ItemsSource="{Binding Items}"
                                            IsInitialising="{Binding ProgressIsVisible}"
                                            IsEmpty="{Binding IsEmpty}"
                                            VerticalContentAlignment="Stretch">
@@ -89,14 +89,14 @@
                                         <Run Text="Client ID:"/>
                                         <Run Text="{Binding Application.ClientId}"/>
                                     </TextBlock>
-                                    <!--<TextBlock TextTrimming="CharacterEllipsis"
+                                    <TextBlock TextTrimming="CharacterEllipsis"
                                                Style="{StaticResource BodyTextBlockStyle}"
                                                FontSize="{StaticResource TextStyleSmallFontSize}"
                                                Foreground="{ThemeResource SubtleBrush}"
                                                Visibility="{Binding Application.ClientSecret, Converter={StaticResource NullToVisibilityConverter}}">
                                         <Run Text="Client Secret:"/>
                                         <Run Text="{Binding Application.ClientSecret}"/>
-                                    </TextBlock>-->
+                                    </TextBlock>
                                 </StackPanel>
 
                                 <Button Grid.Column="1"

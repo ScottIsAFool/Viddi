@@ -26,6 +26,10 @@ namespace Viddy.ViewModel.Account.Manage
             var request = args.Request;
             request.Data.Properties.Title = Application.Name + " Details";
             var message = string.Format("Name: {0}\nClient ID: {1}", Application.Name, Application.ClientId);
+            if (!string.IsNullOrEmpty(Application.ClientSecret))
+            {
+                message += string.Format("\nClient Secret: {0}", Application.ClientSecret);
+            }
             request.Data.Properties.Description = message;
             request.Data.SetText(message);
         }

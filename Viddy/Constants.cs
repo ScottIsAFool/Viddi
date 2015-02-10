@@ -23,6 +23,7 @@
             public const string HideReviewsMsg = "HideReviewsMsg";
             public const string ClearSearchMsg = "ClearSearchMsg";
             public const string UserDetailMsg = "UserDetailMsg";
+            public const string NewAppAddedMsg = "NewAppAddedMsg";
         }
     }
 }

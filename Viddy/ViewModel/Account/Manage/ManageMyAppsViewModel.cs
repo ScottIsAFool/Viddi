@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
 using Viddy.Extensions;
 using Viddy.Views.Account.Manage;
 using VidMePortable;
@@ -11,12 +12,10 @@ using VidMePortable.Model;
 
 namespace Viddy.ViewModel.Account.Manage
 {
-    public class ManageMyAppsViewModel : ViewModelBase
+    public class ManageMyAppsViewModel : LoadingItemsViewModel<OwnedAppViewModel>
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
-
-        private bool _appsLoaded;
 
         public ManageMyAppsViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
         {
@@ -25,7 +24,7 @@ namespace Viddy.ViewModel.Account.Manage
 
             if (IsInDesignMode)
             {
-                Apps = new ObservableCollection<OwnedAppViewModel>
+                Items = new ObservableCollection<OwnedAppViewModel>
                 {
                     new OwnedAppViewModel(new Application
                     {
@@ -38,31 +37,6 @@ namespace Viddy.ViewModel.Account.Manage
             }
         }
 
-        public ObservableCollection<OwnedAppViewModel> Apps { get; set; }
-        public bool IsEmpty { get; set; }
-
-        public RelayCommand PageLoadedCommand
-        {
-            get
-            {
-                return new RelayCommand(async () =>
-                {
-                    await LoadData(false);
-                });
-            }
-        }
-
-        public RelayCommand RefreshCommand
-        {
-            get
-            {
-                return new RelayCommand(async () =>
-                {
-                    await LoadData(true);
-                });
-            }
-        }
-
         public RelayCommand AddAppCommand
         {
             get
@@ -71,9 +45,9 @@ namespace Viddy.ViewModel.Account.Manage
             }
         }
 
-        private async Task LoadData(bool isRefresh)
+        protected override async Task LoadData(bool isRefresh, bool add = false, int offset = 0)
         {
-            if (_appsLoaded && !isRefresh)
+            if (ItemsLoaded && !isRefresh)
             {
                 return;
             }
@@ -84,10 +58,10 @@ namespace Viddy.ViewModel.Account.Manage
 
                 var response = await _vidMeClient.GetOwnedAppsAsync();
 
-                Apps = new ObservableCollection<OwnedAppViewModel>(response.Select(x => new OwnedAppViewModel(x, _vidMeClient)));
-                IsEmpty = Apps.IsNullOrEmpty();
+                Items = new ObservableCollection<OwnedAppViewModel>(response.Select(x => new OwnedAppViewModel(x, _vidMeClient)));
+                IsEmpty = Items.IsNullOrEmpty();
 
-                _appsLoaded = true;
+                ItemsLoaded = true;
             }
             catch (Exception ex)
             {
@@ -95,6 +69,17 @@ namespace Viddy.ViewModel.Account.Manage
             }
 
             SetProgressBar();
+        }
+
+        protected override void WireMessages()
+        {
+            Messenger.Default.Register<NotificationMessage>(this, m =>
+            {
+                if (m.Notification.Equals(Constants.Messages.NewAppAddedMsg))
+                {
+                    ItemsLoaded = false;
+                }
+            });
         }
     }
 }

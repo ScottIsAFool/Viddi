@@ -1,8 +1,10 @@
 ﻿using System;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
+using GalaSoft.MvvmLight.Messaging;
+using Viddy.Common;
+using Viddy.Views.Account.Manage;
 using VidMePortable;
-using VidMePortable.Model;
 using VidMePortable.Model.Requests;
 
 namespace Viddy.ViewModel.Account.Manage
@@ -42,6 +44,7 @@ namespace Viddy.ViewModel.Account.Manage
                 {
                     try
                     {
+                        SetProgressBar("Adding app...");
                         var app = new AppRequest
                         {
                             Name = Name,
@@ -52,12 +55,25 @@ namespace Viddy.ViewModel.Account.Manage
                         };
 
                         var response = await _vidMeClient.RegisterAppAsync(app);
-                        
+                        if (response != null)
+                        {
+                            Messenger.Default.Send(new NotificationMessage(Constants.Messages.NewAppAddedMsg));
+                            if (_navigationService.CanGoBack)
+                            {
+                                _navigationService.GoBack();
+                            }
+                            else
+                            {
+                                _navigationService.Navigate<ManageMyAppsView>(new NavigationParameters {ClearBackstack = true});
+                            }
+                        }
                     }
                     catch (Exception ex)
                     {
                         
                     }
+
+                    SetProgressBar();
                 }, () => CanAddApp);
             }
         }
