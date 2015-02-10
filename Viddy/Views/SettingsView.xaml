@@ -9,6 +9,105 @@
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding Settings, Source={StaticResource Locator}}">
 
+    <views:BasePage.Resources>
+        <Style x:Key="RadioSelectionTemplate"
+               TargetType="RadioButton">
+            <Setter Property="Margin"
+                    Value="0" />
+            <Setter Property="Padding"
+                    Value="0" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Stretch" />
+            <Setter Property="VerticalContentAlignment"
+                    Value="Stretch" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="RadioButton">
+                        <Grid Background="Transparent">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Opacity"
+                                                                           Storyboard.TargetName="ContainingGrid">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="0.7" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                                <VisualStateGroup x:Name="CheckStates">
+                                    <VisualState x:Name="Checked">
+                                        <Storyboard>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Visibility"
+                                                                           Storyboard.TargetName="IconBackground">
+                                                <DiscreteObjectKeyFrame KeyTime="0">
+                                                    <DiscreteObjectKeyFrame.Value>
+                                                        <Visibility>Visible</Visibility>
+                                                    </DiscreteObjectKeyFrame.Value>
+                                                </DiscreteObjectKeyFrame>
+                                            </ObjectAnimationUsingKeyFrames>
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="BorderBrush"
+                                                                           Storyboard.TargetName="TheBorder">
+                                                <DiscreteObjectKeyFrame KeyTime="0"
+                                                                        Value="{StaticResource PhoneAccentBrush}" />
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Unchecked" />
+                                    <VisualState x:Name="Indeterminate" />
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid x:Name="ContainingGrid">
+                                <Grid>
+                                    <ContentControl x:Name="ContentContainer"
+                                                    ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                    Content="{TemplateBinding Content}"
+                                                    Foreground="{TemplateBinding Foreground}"
+                                                    FontSize="{TemplateBinding FontSize}"
+                                                    FontFamily="{TemplateBinding FontFamily}"
+                                                    HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                    Padding="{TemplateBinding Padding}"
+                                                    VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}" />
+                                    <Grid HorizontalAlignment="Right"
+                                          VerticalAlignment="Top"
+                                          x:Name="IconBackground"
+                                          Visibility="Collapsed">
+                                        <Viewbox StretchDirection="DownOnly"
+                                                 VerticalAlignment="Stretch"
+                                                 Stretch="Uniform"
+                                                 MaxWidth="60"
+                                                 MaxHeight="60">
+                                            <Grid>
+                                                <Polygon Points="0,0 32,0, 32,40"
+                                                         Fill="{StaticResource PhoneAccentBrush}"
+                                                         Stretch="Fill"
+                                                         Width="60"
+                                                         Height="60" />
+                                                <Path Data="F1M574.042,314.611L533.8,344.398 522.251,328.798 515.235,333.988 526.786,349.593 526.782,349.596 531.978,356.603 579.235,321.622 574.042,314.611z"
+                                                      Stretch="Uniform"
+                                                      Fill="#FFFFFFFF"
+                                                      Width="26"
+                                                      VerticalAlignment="Top"
+                                                      HorizontalAlignment="Right"
+                                                      Margin="0,8,4,0"
+                                                      Height="26" />
+                                            </Grid>
+                                        </Viewbox>
+                                    </Grid>
+                                </Grid>
+                                <Border x:Name="TheBorder"
+                                        BorderThickness="3"
+                                        BorderBrush="Transparent" />
+                            </Grid>
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </views:BasePage.Resources>
+
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto" />
@@ -18,12 +117,66 @@
         <controls:PageHeaderControl ProfilePictureEnabled="False"
                                     HeaderText="settings" />
 
-        <StackPanel Orientation="Horizontal"
-                    Grid.Row="1">
-            <Button Command="{Binding ToLightCommand}"
-                    Content="To Light Theme"/>
-            <Button Command="{Binding ToDarkCommand}"
-                    Content="To Dark Theme" />
-        </StackPanel>
+        <Grid Grid.Row="1"
+              Margin="19,12,19,0">
+            <ScrollViewer>
+                <StackPanel Orientation="Vertical">
+                    <StackPanel Orientation="Vertical">
+                        <TextBlock Text="THEME"
+                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   FontWeight="Bold"
+                                   Margin="0,0,0,12" />
+                        <TextBlock Text="You have the choice of two themes in which to view Viddy, which would you like?"
+                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   FontSize="{StaticResource TextStyleMediumFontSize}"
+                                   Margin="0,0,0,12" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <RadioButton IsChecked="{Binding IsLightTheme, Mode=TwoWay}"
+                                         Style="{StaticResource RadioSelectionTemplate}"
+                                         HorizontalAlignment="Stretch"
+                                         Height="50">
+                                <Border Background="White"
+                                        HorizontalAlignment="Stretch">
+                                    <TextBlock Text="Light"
+                                               Foreground="Black"
+                                               VerticalAlignment="Center"
+                                               Margin="12,0" />
+                                </Border>
+                            </RadioButton>
+                            <RadioButton IsChecked="{Binding IsLightTheme, Converter={StaticResource NegativeBooleanConverter}}"
+                                         Grid.Column="1"
+                                         Height="50"
+                                         Style="{StaticResource RadioSelectionTemplate}"
+                                         HorizontalAlignment="Stretch">
+                                <Border Background="#060E1B"
+                                        HorizontalAlignment="Stretch">
+                                    <TextBlock Text="Dark"
+                                               Foreground="White"
+                                               VerticalAlignment="Center"
+                                               Margin="12,0" />
+                                </Border>
+                            </RadioButton>
+                        </Grid>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical"
+                                Margin="0,12">
+                        <TextBlock Text="LOCATION"
+                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   FontWeight="Bold"
+                                   Margin="0,0,0,12" />
+                        <TextBlock Text="This app can allow you to attach your location to the videos you upload or find videos in your area, if you don't want this, you can easily turn it off."
+                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   FontSize="{StaticResource TextStyleMediumFontSize}"
+                                   Margin="0,0,0,12" />
+                        <ToggleSwitch Header="Location service"
+                                      IsOn="{Binding IsLocationOn, Mode=TwoWay}" />
+                    </StackPanel>
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
     </Grid>
 </views:BasePage>

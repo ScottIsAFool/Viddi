@@ -44,6 +44,10 @@
                     </AppBarButton.Icon>
                 </AppBarButton>
             </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="settings"
+                              Command="{Binding NavigateToSettingsCommand}"/>
+            </CommandBar.SecondaryCommands>
         </CommandBar>
     </local:BasePage.BottomAppBar>
 

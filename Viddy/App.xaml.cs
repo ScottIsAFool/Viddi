@@ -72,14 +72,10 @@ namespace Viddy
             }
 #endif
 
-            ThemeManager.DefaultTheme = ElementTheme.Light;
             var rootFrame = Window.Current.Content as Frame;
             Messenger.Default.Send(new PinMessage());
 
-            Window.Current.VisibilityChanged += CurrentOnVisibilityChanged;
-
-            Locator.Auth.StartService();
-            Locator.Review.IncreaseCount();
+            AppStarted();
 
             //if (e.PreviousExecutionState == ApplicationExecutionState.Running
             //    && rootFrame != null && rootFrame.Content != null && string.IsNullOrEmpty(e.Arguments))
@@ -144,7 +140,21 @@ namespace Viddy
             Window.Current.Activate();
         }
 
-        private void CurrentOnVisibilityChanged(object sender, VisibilityChangedEventArgs visibilityChangedEventArgs)
+        private void AppStarted()
+        {
+            if (_appStarted) return;
+
+            Window.Current.VisibilityChanged += CurrentOnVisibilityChanged;
+
+            Locator.SettingsService.StartService();
+            Locator.Auth.StartService();
+            Locator.Review.IncreaseCount();
+            _appStarted = true;
+        }
+
+        private bool _appStarted;
+
+        private static void CurrentOnVisibilityChanged(object sender, VisibilityChangedEventArgs visibilityChangedEventArgs)
         {
             Messenger.Default.Send(new PinMessage());
         }
@@ -198,7 +208,8 @@ namespace Viddy
         {
             base.OnActivated(args);
 
-            ThemeManager.DefaultTheme = ElementTheme.Light;
+            AppStarted();
+
             if (args != null)
             {
                 if (args.Kind == ActivationKind.WebAuthenticationBrokerContinuation)

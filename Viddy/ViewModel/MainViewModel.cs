@@ -72,5 +72,10 @@ namespace Viddy.ViewModel
         {
             get { return new RelayCommand(() => _navigationService.Navigate<BrowseChannelsView>()); }
         }
+
+        public RelayCommand NavigateToSettingsCommand
+        {
+            get { return new RelayCommand(() => _navigationService.Navigate<SettingsView>()); }
+        }
     }
 }

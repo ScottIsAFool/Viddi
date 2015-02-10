@@ -2,6 +2,7 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using Viddy.Extensions;
+using Viddy.Model;
 using Viddy.Services;
 using Viddy.ViewModel.Account;
 using Viddy.ViewModel.Account.Manage;
@@ -34,6 +35,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.RegisterIf<IMessageBoxService, MessageBoxService>();
             SimpleIoc.Default.RegisterIf<IToastService, ToastService>();
             SimpleIoc.Default.RegisterIf<ITileService, TileService>();
+            SimpleIoc.Default.RegisterIf<ISettingsService, SettingsService>();
 
             SimpleIoc.Default.Register<AvatarViewModel>();
             SimpleIoc.Default.Register<VideoRecordViewModel>();
@@ -155,6 +157,11 @@ namespace Viddy.ViewModel
         public AuthenticationService Auth
         {
             get { return ServiceLocator.Current.GetInstance<AuthenticationService>(); }
+        }
+
+        public ISettingsService SettingsService
+        {
+            get { return ServiceLocator.Current.GetInstance<ISettingsService>(); }
         }
 
         public ReviewService Review

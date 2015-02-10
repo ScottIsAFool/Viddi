@@ -155,6 +155,7 @@
     <Compile Include="Messaging\PinMessage.cs" />
     <Compile Include="Messaging\UserMessage.cs" />
     <Compile Include="Messaging\VideoMessage.cs" />
+    <Compile Include="Model\AppSettings.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\CameraInfoService.cs" />
     <Compile Include="Services\ICameraInfoService.cs" />

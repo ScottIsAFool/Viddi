@@ -1,24 +1,43 @@
-﻿using Cimbalino.Toolkit.Services;
+﻿using Windows.UI.Xaml;
 using GalaSoft.MvvmLight.Command;
+using JetBrains.Annotations;
 using ThemeManagerRt;
-using VidMePortable;
+using Viddy.Model;
 
 namespace Viddy.ViewModel
 {
     public class SettingsViewModel : ViewModelBase
     {
-        private readonly INavigationService _navigationService;
-        private readonly IVidMeClient _vidMeClient;
-        private readonly IApplicationSettingsService _settingsService;
+        private readonly ISettingsService _settingsService;
 
-        public SettingsViewModel(INavigationService navigationService, IVidMeClient vidMeClient, IApplicationSettingsService settingsService)
+        public SettingsViewModel(ISettingsService settingsService)
         {
-            _navigationService = navigationService;
-            _vidMeClient = vidMeClient;
             _settingsService = settingsService;
         }
 
         public bool IsLightTheme { get; set; }
+        public bool IsLocationOn { get; set; }
+
+        [UsedImplicitly]
+        private void OnIsLightThemeChanged()
+        {
+            if (IsLightTheme)
+            {
+                ThemeManager.ToLightTheme();
+                _settingsService.Theme = ElementTheme.Light;
+            }
+            else
+            {
+                ThemeManager.ToDarkTheme();
+                _settingsService.Theme = ElementTheme.Dark;
+            }
+        }
+
+        [UsedImplicitly]
+        private void OnIsLocationOnChanged()
+        {
+            _settingsService.LocationIsOn = IsLocationOn;
+        }
 
         public RelayCommand ToLightCommand
         {
