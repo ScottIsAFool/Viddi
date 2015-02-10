@@ -36,6 +36,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.RegisterIf<IToastService, ToastService>();
             SimpleIoc.Default.RegisterIf<ITileService, TileService>();
             SimpleIoc.Default.RegisterIf<ISettingsService, SettingsService>();
+            SimpleIoc.Default.RegisterIf<INotificationService, NotificationService>();
 
             SimpleIoc.Default.Register<AvatarViewModel>();
             SimpleIoc.Default.Register<VideoRecordViewModel>();
@@ -57,6 +58,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.Register<BrowseChannelsViewModel>();
             SimpleIoc.Default.Register<EditProfileViewModel>();
             SimpleIoc.Default.Register<UserFollowersViewModel>(true);
+            SimpleIoc.Default.Register<NotificationsViewModel>(true);
         }
 
         public MainViewModel Main
@@ -154,6 +156,11 @@ namespace Viddy.ViewModel
             get { return ServiceLocator.Current.GetInstance<UserFollowersViewModel>(); }
         }
 
+        public NotificationsViewModel Notifications
+        {
+            get { return ServiceLocator.Current.GetInstance<NotificationsViewModel>(); }
+        }
+
         public AuthenticationService Auth
         {
             get { return ServiceLocator.Current.GetInstance<AuthenticationService>(); }
@@ -172,6 +179,11 @@ namespace Viddy.ViewModel
         public ITileService TileService
         {
             get { return ServiceLocator.Current.GetInstance<ITileService>(); }
+        }
+
+        public INotificationService NotificationService
+        {
+            get { return ServiceLocator.Current.GetInstance<INotificationService>(); }
         }
         
         public static void Cleanup()

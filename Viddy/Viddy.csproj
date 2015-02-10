@@ -161,6 +161,7 @@
     <Compile Include="Services\ICameraInfoService.cs" />
     <Compile Include="Services\ITileService.cs" />
     <Compile Include="Services\IToastService.cs" />
+    <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\ReviewService.cs" />
     <Compile Include="Services\ToastService.cs" />
     <Compile Include="Utils.cs" />
@@ -172,6 +173,8 @@
     <Compile Include="ViewModel\Account\Manage\ManageMyAppsViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\OwnedAppViewModel.cs" />
     <Compile Include="ViewModel\Account\ManualLoginViewModel.cs" />
+    <Compile Include="ViewModel\Item\NotificationItemViewModel.cs" />
+    <Compile Include="ViewModel\Account\NotificationsViewModel.cs" />
     <Compile Include="ViewModel\Account\ProfileViewModel.cs" />
     <Compile Include="ViewModel\Account\UserFollowersViewModel.cs" />
     <Compile Include="ViewModel\AdViewModel.cs" />
@@ -215,6 +218,9 @@
     </Compile>
     <Compile Include="Views\Account\ManualLoginView.xaml.cs">
       <DependentUpon>ManualLoginView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Account\NotificationsView.xaml.cs">
+      <DependentUpon>NotificationsView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Account\ProfileView.xaml.cs">
       <DependentUpon>ProfileView.xaml</DependentUpon>
@@ -363,6 +369,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Account\ManualLoginView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Account\NotificationsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
