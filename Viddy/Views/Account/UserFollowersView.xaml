@@ -15,15 +15,28 @@
             <core:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
+    
+    <views:BasePage.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="refresh"
+                              Icon="Refresh"
+                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
+                              Command="{Binding RefreshCommand}"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </views:BasePage.BottomAppBar>
 
     <Grid>
         <controls:LoadingListView ItemsSource="{Binding Items}"
                                   IsEmpty="{Binding IsEmpty}"
-                                  IsInitialising="{Binding ProgressIsVisible}">
+                                  IsInitialising="{Binding ProgressIsVisible}"
+                                  Margin="19,19,19,0">
             <controls:LoadingListView.ItemTemplate>
                 <DataTemplate>
                     <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
-                                           TapCommand="{Binding NavigateToProfileCommand}">
+                                           TapCommand="{Binding NavigateToProfileCommand}"
+                                           Margin="0,0,0,12">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="Auto" />
@@ -31,6 +44,12 @@
                             </Grid.ColumnDefinitions>
 
                             <controls:ProfilePictureControl AvatarUrl="{Binding AvatarUrl}" />
+                            
+                            <TextBlock Text="{Binding Name}"
+                                       Grid.Column="1"
+                                       Style="{StaticResource BodyTextBlockStyle}"
+                                       VerticalAlignment="Center"
+                                       Margin="12,0"/>
                         </Grid>
                     </controls:CustomButton>
                 </DataTemplate>

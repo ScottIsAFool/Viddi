@@ -469,9 +469,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\ThemeManagerRt.1.0.1.4\lib\portable-win81+WindowsPhoneApp81\ThemeManagerRt.dll</HintPath>
     </Reference>
-    <Reference Include="VidMePortable, Version=0.0.0.28, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="VidMePortable, Version=0.0.0.29, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\VidMePortable.0.0.0.28-beta\lib\portable-net45+win+wpa81+wp80\VidMePortable.dll</HintPath>
+      <HintPath>..\packages\VidMePortable.0.0.0.29-beta\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10\VidMePortable.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

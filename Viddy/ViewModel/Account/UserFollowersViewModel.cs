@@ -52,12 +52,18 @@ namespace Viddy.ViewModel.Account
                     var allUsers = response.Users.Select(x => new UserViewModel(x)).ToList();
 
                     Items.AddRange(allUsers);
+                    CanLoadMore = Items != null && Items.Count < response.Page.Total;
                 }
+
+                ItemsLoaded = true;
             }
             catch (Exception ex)
             {
                 
             }
+
+            IsEmpty = Items.IsNullOrEmpty();
+            SetProgressBar();
         }
 
         protected override void WireMessages()
@@ -66,12 +72,12 @@ namespace Viddy.ViewModel.Account
             {
                 if (m.Notification.Equals(Constants.Messages.UserDetailMsg))
                 {
-                    if (Items != null)
+                    if (_user == null || _user.User.UserId != m.User.User.UserId)
                     {
-                        Items.Clear();
-                    }
+                        Reset();
 
-                    _user = m.User;
+                        _user = m.User;
+                    }
                 }
             });
         }

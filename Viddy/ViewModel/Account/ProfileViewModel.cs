@@ -94,7 +94,11 @@ namespace Viddy.ViewModel.Account
         {
             Messenger.Default.Register<UserMessage>(this, m =>
             {
-                User = m.User;
+                if (string.IsNullOrEmpty(m.Notification))
+                {
+                    Reset();
+                    User = m.User;
+                }
             });
 
             base.WireMessages();

@@ -30,7 +30,16 @@ namespace Viddy.ViewModel.Item
 
         public string UserFollowers
         {
-            get { return User != null && User.FollowerCount > 0 ? string.Format("{0:N0} followers", User.FollowerCount) : null; }
+            get
+            {
+                if (User == null || User.FollowerCount == 0)
+                {
+                    return "0 followers";
+                }
+
+
+                return User.FollowerCount > 1 ? string.Format("{0:N0} followers", User.FollowerCount) : "1 follower";
+            }
         }
 
         public string UserPlays
@@ -181,6 +190,18 @@ namespace Viddy.ViewModel.Item
                 {
                     Messenger.Default.Send(new UserMessage(this));
                     _navigationService.Navigate<ProfileView>();
+                });
+            }
+        }
+
+        public RelayCommand NavigateToFollowersCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    Messenger.Default.Send(new UserMessage(this, Constants.Messages.UserDetailMsg));
+                    _navigationService.Navigate<UserFollowersView>();
                 });
             }
         }
