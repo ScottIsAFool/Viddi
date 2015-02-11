@@ -17,6 +17,8 @@
                 Value="True" />
         <Setter Property="IsHitTestVisible"
                 Value="False" />
+        <Setter Property="DisplayNotifications"
+                Value="False"/>
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ProfilePictureControl">
@@ -83,7 +85,8 @@
                             <Grid HorizontalAlignment="Right"
                                   VerticalAlignment="Top"
                                   Margin="0,-9,-3,0"
-                                  Visibility="{Binding NotificationService.DisplayNotificationCount, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}">
+                                  Tag="{TemplateBinding DisplayNotifications}"
+                                  Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource VisibilityConverter}}">
                                 <Ellipse Fill="Red"
                                          Width="20"
                                          Height="20" />
@@ -93,7 +96,9 @@
                                     <TextBlock Text="{Binding NotificationService.NotificationCount, Source={StaticResource Locator}}"
                                                Style="{StaticResource BodyTextBlockStyle}"
                                                HorizontalAlignment="Center"
-                                               VerticalAlignment="Center" />
+                                               VerticalAlignment="Center"
+                                               Margin="0,-1,0,0"
+                                               Foreground="White"/>
                                 </Viewbox>
                             </Grid>
                         </Grid>
@@ -486,11 +491,12 @@
                           Height="80">
                         <Border Padding="{TemplateBinding Padding}">
                             <StackPanel Orientation="Horizontal">
-                                <controls:ProfilePictureControl IsHitTestVisible="{Binding NotificationService.DisplayNotificationCount, Source={StaticResource Locator}}"
+                                <controls:ProfilePictureControl IsHitTestVisible="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}"
                                                                 x:Name="ProfilePictureControl"
                                                                 Visibility="{TemplateBinding ProfilePictureVisibility}"
                                                                 IsChanging="{TemplateBinding AvatarChanging}"
-                                                                AvatarUrl="{Binding Auth.LoggedInUser.AvatarUrl, Source={StaticResource Locator}}"/>
+                                                                AvatarUrl="{Binding Auth.LoggedInUser.AvatarUrl, Source={StaticResource Locator}}"
+                                                                DisplayNotifications="{Binding NotificationService.DisplayNotificationCount, Source={StaticResource Locator}}"/>
 
                                 <Grid>
                                     <TextBlock VerticalAlignment="Center"

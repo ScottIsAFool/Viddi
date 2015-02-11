@@ -22,7 +22,13 @@
             <controls:LoadingListView ItemsSource="{Binding Items}"
                                       IsEmpty="{Binding IsEmpty}"
                                       IsInitialising="{Binding ProgressIsVisible}">
-                
+                <controls:LoadingListView.EmptyContent>
+                    <DataTemplate>
+                        <TextBlock Text="You don't have any notifications."
+                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   Margin="19,0"/>
+                    </DataTemplate>
+                </controls:LoadingListView.EmptyContent>
             </controls:LoadingListView>
         </Grid>
     </Grid>

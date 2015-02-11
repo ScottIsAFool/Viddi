@@ -29,13 +29,19 @@ namespace Viddy.Services
         private readonly INavigationService _navigationService;
         private readonly DispatcherTimer _timer;
 
+#if DEBUG
+        private const double Interval = 0.5;
+#else
+        private const int Interval = 15;
+#endif
+
         public NotificationService(INavigationService navigationService, IVidMeClient vidMeClient, ITileService tileService)
         {
             _vidMeClient = vidMeClient;
             _tileService = tileService;
             _navigationService = navigationService;
-            NotificationCount = 0;
-            _timer = new DispatcherTimer {Interval = TimeSpan.FromMinutes(15)};
+
+            _timer = new DispatcherTimer {Interval = TimeSpan.FromMinutes(Interval)};
             _timer.Tick += TimerOnTick;
         }
 
@@ -73,6 +79,8 @@ namespace Viddy.Services
                 {
                     _timer.Stop();
                 }
+
+                UpdateTileCount(0);
             }
         }
 
@@ -83,9 +91,21 @@ namespace Viddy.Services
             get { return NotificationCount > 0; }
         }
 
-        public Task<bool> MarkAllAsRead()
+        public async Task<bool> MarkAllAsRead()
         {
-            return _vidMeClient.MarkAllNotificationsAsReadAsync();
+            try
+            {
+                if (await _vidMeClient.MarkAllNotificationsAsReadAsync())
+                {
+                    UpdateTileCount(0);
+                    return true;
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return false;
         }
 
         public RelayCommand NavigateToNotificationsCommand
