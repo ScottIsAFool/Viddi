@@ -1,8 +1,15 @@
-﻿using Cimbalino.Toolkit.Services;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Windows.UI.Xaml;
+using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using PropertyChanged;
+using Viddy.Extensions;
 using Viddy.Views.Account;
 using VidMePortable;
+using VidMePortable.Model;
 
 namespace Viddy.Services
 {
@@ -11,6 +18,7 @@ namespace Viddy.Services
         void StartService();
         int NotificationCount { get; set; }
         bool DisplayNotificationCount { get; }
+        Task<bool> MarkAllAsRead();
     }
 
     [ImplementPropertyChanged]
@@ -18,16 +26,51 @@ namespace Viddy.Services
     {
         private readonly IVidMeClient _vidMeClient;
         private readonly INavigationService _navigationService;
+        private readonly DispatcherTimer _timer;
 
         public NotificationService(IVidMeClient vidMeClient, INavigationService navigationService)
         {
             _vidMeClient = vidMeClient;
             _navigationService = navigationService;
             NotificationCount = 6;
+            _timer = new DispatcherTimer {Interval = TimeSpan.FromMinutes(15)};
+            _timer.Tick += TimerOnTick;
+        }
+
+        private void TimerOnTick(object sender, object o)
+        {
+            CheckForNotifications();
         }
 
         public void StartService()
         {
+            if (_timer != null && !_timer.IsEnabled)
+            {
+                _timer.Start();
+            }
+
+            AuthenticationService.Current.UserSignedIn += CurrentOnUserSignedIn;
+            AuthenticationService.Current.UserSignedOut += CurrentOnUserSignedIn;
+
+            CheckForNotifications();
+        }
+
+        private void CurrentOnUserSignedIn(object sender, EventArgs eventArgs)
+        {
+            if (AuthenticationService.Current.IsLoggedIn)
+            {
+                if (_timer != null && !_timer.IsEnabled)
+                {
+                    _timer.Start();
+                }
+            }
+            else
+            {
+                if (_timer != null && _timer.IsEnabled)
+                {
+                    _timer.Stop();
+                }
+            }
         }
 
         public int NotificationCount { get; set; }
@@ -37,9 +80,66 @@ namespace Viddy.Services
             get { return NotificationCount > 0; }
         }
 
+        public Task<bool> MarkAllAsRead()
+        {
+            return _vidMeClient.MarkAllNotificationsAsReadAsync();
+        }
+
         public RelayCommand NavigateToNotificationsCommand
         {
             get { return new RelayCommand(() => _navigationService.Navigate<NotificationsView>()); }
+        }
+
+        private List<Notification> _notifications;
+        private async Task CheckForNotifications(int limit = 1, int offset = 0)
+        {
+            if (!AuthenticationService.Current.IsLoggedIn)
+            {
+                return;
+            }
+
+            try
+            {
+                var response = await _vidMeClient.GetNotificationsAsync(limit, offset);
+                if (response != null && !response.Notifications.IsNullOrEmpty())
+                {
+                    if (limit == 1)
+                    {
+                        _notifications = null;
+                        var notification = response.Notifications[0];
+                        if (!notification.Read)
+                        {
+                            await CheckForNotifications(20);
+                        }
+                        else
+                        {
+                            NotificationCount = 0;
+                        }
+                    }
+                    else
+                    {
+                        if (_notifications == null)
+                        {
+                            _notifications = new List<Notification>();
+                        }
+
+                        _notifications.AddRange(response.Notifications);
+                        var hasReadItems = _notifications.Any(x => x.Read);
+                        if (hasReadItems)
+                        {
+                            NotificationCount = _notifications.Count(x => !x.Read);
+                        }
+                        else
+                        {
+                            await CheckForNotifications(20, _notifications.Count);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
         }
     }
 }

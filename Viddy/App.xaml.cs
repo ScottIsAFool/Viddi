@@ -148,6 +148,7 @@ namespace Viddy
 
             Locator.SettingsService.StartService();
             Locator.Auth.StartService();
+            Locator.NotificationService.StartService();
             Locator.Review.IncreaseCount();
             _appStarted = true;
         }
