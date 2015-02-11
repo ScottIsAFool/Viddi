@@ -25,14 +25,16 @@ namespace Viddy.Services
     public class NotificationService : INotificationService
     {
         private readonly IVidMeClient _vidMeClient;
+        private readonly ITileService _tileService;
         private readonly INavigationService _navigationService;
         private readonly DispatcherTimer _timer;
 
-        public NotificationService(IVidMeClient vidMeClient, INavigationService navigationService)
+        public NotificationService(INavigationService navigationService, IVidMeClient vidMeClient, ITileService tileService)
         {
             _vidMeClient = vidMeClient;
+            _tileService = tileService;
             _navigationService = navigationService;
-            NotificationCount = 6;
+            NotificationCount = 0;
             _timer = new DispatcherTimer {Interval = TimeSpan.FromMinutes(15)};
             _timer.Tick += TimerOnTick;
         }
@@ -62,6 +64,7 @@ namespace Viddy.Services
                 if (_timer != null && !_timer.IsEnabled)
                 {
                     _timer.Start();
+                    CheckForNotifications();
                 }
             }
             else
@@ -95,6 +98,7 @@ namespace Viddy.Services
         {
             if (!AuthenticationService.Current.IsLoggedIn)
             {
+                UpdateTileCount(0);
                 return;
             }
 
@@ -113,7 +117,7 @@ namespace Viddy.Services
                         }
                         else
                         {
-                            NotificationCount = 0;
+                            UpdateTileCount(0);
                         }
                     }
                     else
@@ -127,7 +131,7 @@ namespace Viddy.Services
                         var hasReadItems = _notifications.Any(x => x.Read);
                         if (hasReadItems)
                         {
-                            NotificationCount = _notifications.Count(x => !x.Read);
+                            UpdateTileCount(_notifications.Count(x => !x.Read));
                         }
                         else
                         {
@@ -140,6 +144,12 @@ namespace Viddy.Services
             {
                 
             }
+        }
+
+        private void UpdateTileCount(int count)
+        {
+            NotificationCount = count;
+            _tileService.UpdateTileCount(count);
         }
     }
 }

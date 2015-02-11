@@ -2,11 +2,14 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI;
+using Windows.UI.Notifications;
 using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
 using Cimbalino.Toolkit.Extensions;
 using Cimbalino.Toolkit.Services;
+using NotificationsExtensions.BadgeContent;
+using NotificationsExtensions.TileContent;
 using Viddy.Extensions;
 using VidMePortable.Model;
 
@@ -31,6 +34,7 @@ namespace Viddy.Services
         string GetTileFileName(TileService.TileType tileType, string id = "", bool isWideTile = false);
         string GetTileId(TileService.TileType tileType, string id = "");
         object GetPinnedItemDetails(TileService.TileType tileType, string id);
+        void UpdateTileCount(int count);
     }
 
     public class TileService : ITileService
@@ -162,6 +166,12 @@ namespace Viddy.Services
                 default:
                     return null;
             }
+        }
+
+        public void UpdateTileCount(int count)
+        {
+            var badgeContent = new BadgeNumericNotificationContent((uint) count);
+            BadgeUpdateManager.CreateBadgeUpdaterForApplication().Update(badgeContent.CreateNotification());
         }
 
         #endregion

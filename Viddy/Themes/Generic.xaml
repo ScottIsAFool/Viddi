@@ -16,68 +16,87 @@
         <Setter Property="DisplayDefaultAvatar"
                 Value="True" />
         <Setter Property="IsHitTestVisible"
-                Value="False"/>
+                Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ProfilePictureControl">
                     <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
                                            IsHitTestVisible="{TemplateBinding IsHitTestVisible}"
                                            TapCommand="{TemplateBinding TappedCommand}">
-                        <Viewbox Stretch="UniformToFill"
-                                 StretchDirection="DownOnly"
-                                 Width="{TemplateBinding Width}"
-                                 Height="{TemplateBinding Height}">
-                            <Border BorderThickness="{TemplateBinding BorderThickness}"
-                                    BorderBrush="{TemplateBinding BorderBrush}"
-                                    CornerRadius="45"
-                                    HorizontalAlignment="Stretch"
-                                    VerticalAlignment="Stretch"
-                                    Padding="2">
-                                <Grid>
-                                    <Grid x:Name="PlaceHolderGrid">
-                                        <Border CornerRadius="45"
-                                                Background="{TemplateBinding Background}">
-                                            <TextBlock FontFamily="{StaticResource SegoeUISymbolsFont}"
-                                                       Text="&#xE13D;"
-                                                       HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"
-                                                       Foreground="{ThemeResource DefaultUserBrush}"
-                                                       FontSize="26.667"
-                                                       Tag="{TemplateBinding DisplayDefaultAvatar}"
-                                                       Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource VisibilityConverter}}" />
-                                        </Border>
-                                    </Grid>
-                                    <Ellipse Stretch="Fill"
-                                             Width="{TemplateBinding Width}"
-                                             Height="{TemplateBinding Height}"
-                                             x:Name="ImageEllipse"
-                                             Tag="{TemplateBinding AvatarUrl}">
-                                        <Ellipse.Fill>
-                                            <ImageBrush ImageSource="{Binding Tag, ElementName=ImageEllipse}"
-                                                        Stretch="UniformToFill" />
-                                        </Ellipse.Fill>
-                                    </Ellipse>
-
-                                    <Grid Tag="{TemplateBinding IsChanging}"
-                                          Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource VisibilityConverter}}"
-                                          HorizontalAlignment="Stretch"
-                                          VerticalAlignment="Stretch"
-                                          Margin="-2,-2,0,0">
+                        <Grid>
+                            <Viewbox Stretch="UniformToFill"
+                                     StretchDirection="DownOnly"
+                                     Width="{TemplateBinding Width}"
+                                     Height="{TemplateBinding Height}">
+                                <Border BorderThickness="{TemplateBinding BorderThickness}"
+                                        BorderBrush="{TemplateBinding BorderBrush}"
+                                        CornerRadius="45"
+                                        HorizontalAlignment="Stretch"
+                                        VerticalAlignment="Stretch"
+                                        Padding="2">
+                                    <Grid>
+                                        <Grid x:Name="PlaceHolderGrid">
+                                            <Border CornerRadius="45"
+                                                    Background="{TemplateBinding Background}">
+                                                <TextBlock FontFamily="{StaticResource SegoeUISymbolsFont}"
+                                                           Text="&#xE13D;"
+                                                           HorizontalAlignment="Center"
+                                                           VerticalAlignment="Center"
+                                                           Foreground="{ThemeResource DefaultUserBrush}"
+                                                           FontSize="26.667"
+                                                           Tag="{TemplateBinding DisplayDefaultAvatar}"
+                                                           Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource VisibilityConverter}}" />
+                                            </Border>
+                                        </Grid>
                                         <Ellipse Stretch="Fill"
-                                                 Fill="#C4000000" />
-                                        <Viewbox Stretch="UniformToFill"
-                                                 StretchDirection="DownOnly">
-                                            <ProgressRing Height="{TemplateBinding Height}"
-                                                          Width="{TemplateBinding Width}"
-                                                          IsActive="{TemplateBinding IsChanging}"
-                                                          Background="Transparent"
-                                                          Margin="6"
-                                                          Foreground="{ThemeResource PhoneAccentBrush}" />
-                                        </Viewbox>
+                                                 Width="{TemplateBinding Width}"
+                                                 Height="{TemplateBinding Height}"
+                                                 x:Name="ImageEllipse"
+                                                 Tag="{TemplateBinding AvatarUrl}">
+                                            <Ellipse.Fill>
+                                                <ImageBrush ImageSource="{Binding Tag, ElementName=ImageEllipse}"
+                                                            Stretch="UniformToFill" />
+                                            </Ellipse.Fill>
+                                        </Ellipse>
+
+                                        <Grid Tag="{TemplateBinding IsChanging}"
+                                              Visibility="{Binding Tag, RelativeSource={RelativeSource Self}, Converter={StaticResource VisibilityConverter}}"
+                                              HorizontalAlignment="Stretch"
+                                              VerticalAlignment="Stretch"
+                                              Margin="-2,-2,0,0">
+                                            <Ellipse Stretch="Fill"
+                                                     Fill="#C4000000" />
+                                            <Viewbox Stretch="UniformToFill"
+                                                     StretchDirection="DownOnly">
+                                                <ProgressRing Height="{TemplateBinding Height}"
+                                                              Width="{TemplateBinding Width}"
+                                                              IsActive="{TemplateBinding IsChanging}"
+                                                              Background="Transparent"
+                                                              Margin="6"
+                                                              Foreground="{ThemeResource PhoneAccentBrush}" />
+                                            </Viewbox>
+                                        </Grid>
                                     </Grid>
-                                </Grid>
-                            </Border>
-                        </Viewbox>
+                                </Border>
+                            </Viewbox>
+
+                            <Grid HorizontalAlignment="Right"
+                                  VerticalAlignment="Top"
+                                  Margin="0,-9,-3,0"
+                                  Visibility="{Binding NotificationService.DisplayNotificationCount, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}">
+                                <Ellipse Fill="Red"
+                                         Width="20"
+                                         Height="20" />
+                                <Viewbox StretchDirection="DownOnly"
+                                         Width="20"
+                                         Height="20">
+                                    <TextBlock Text="{Binding NotificationService.NotificationCount, Source={StaticResource Locator}}"
+                                               Style="{StaticResource BodyTextBlockStyle}"
+                                               HorizontalAlignment="Center"
+                                               VerticalAlignment="Center" />
+                                </Viewbox>
+                            </Grid>
+                        </Grid>
                     </controls:CustomButton>
                 </ControlTemplate>
             </Setter.Value>
