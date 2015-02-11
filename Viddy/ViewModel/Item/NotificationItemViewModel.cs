@@ -26,6 +26,49 @@ namespace Viddy.ViewModel.Item
             get { return Notification != null ? Notification.Text : string.Empty; }
         }
 
+        public string AvatarUrl
+        {
+            get
+            {
+                if (Notification == null)
+                {
+                    return string.Empty;
+                }
+
+                var type = Notification.NotificationType;
+
+                switch (type)
+                {
+                    case NotificationType.ChannelSubscribed:
+                        var channel = Notification.Channel;
+                        if (channel != null)
+                        {
+                            return channel.AvatarUrl;
+                        }
+                        break;
+                    case NotificationType.CommentReply:
+                    case NotificationType.UserSubscribed:
+                    case NotificationType.VideoComment:
+                    case NotificationType.VideoUpVoted:
+                        var user = Notification.User;
+                        if (user != null)
+                        {
+                            return user.AvatarUrl;
+                        }
+                        break;
+                    default:
+                        return string.Empty;
+                }
+
+                return string.Empty;
+            }
+        }
+
+        public string NotificationDate
+        {
+            get { return Notification != null && Notification.DateCreated.HasValue ? Utils.DaysAgo(Notification.DateCreated.Value) : string.Empty; }
+        }
+
         public RelayCommand NavigationActionCommand
         {
             get
@@ -65,10 +108,13 @@ namespace Viddy.ViewModel.Item
                     }
                     break;
                 case NotificationType.VideoComment:
-
-                    break;
                 case NotificationType.VideoUpVoted:
-
+                    var video = Notification.Video;
+                    if (video != null)
+                    {
+                        Messenger.Default.Send(new VideoMessage(new VideoItemViewModel(video, null)));
+                        _navigationService.Navigate<VideoPlayerView>();
+                    }
                     break;
             }
         }
