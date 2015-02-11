@@ -58,6 +58,8 @@ namespace Viddy.ViewModel.Account
 
                     Items.AddRange(allNotifications);
                     //CanLoadMore = Items != null && Items.Count < response.page
+
+                    ItemsLoaded = true;
                 }
             }
             catch (Exception ex)

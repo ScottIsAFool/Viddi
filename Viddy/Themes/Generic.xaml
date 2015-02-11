@@ -496,7 +496,8 @@
                                                                 Visibility="{TemplateBinding ProfilePictureVisibility}"
                                                                 IsChanging="{TemplateBinding AvatarChanging}"
                                                                 AvatarUrl="{Binding Auth.LoggedInUser.AvatarUrl, Source={StaticResource Locator}}"
-                                                                DisplayNotifications="{Binding NotificationService.DisplayNotificationCount, Source={StaticResource Locator}}"/>
+                                                                DisplayNotifications="{Binding NotificationService.DisplayNotificationCount, Source={StaticResource Locator}}"
+                                                                Margin="0,0,12,0"/>
 
                                 <Grid>
                                     <TextBlock VerticalAlignment="Center"
@@ -505,7 +506,6 @@
                                                Text="{TemplateBinding HeaderText}"
                                                TextTrimming="CharacterEllipsis"
                                                TextWrapping="NoWrap" 
-                                               Margin="12,0,0,0"
                                                Visibility="{Binding Text, RelativeSource={RelativeSource Self}, Converter={StaticResource NullToVisibilityConverter}}"/>
                                 </Grid>
                             </StackPanel>

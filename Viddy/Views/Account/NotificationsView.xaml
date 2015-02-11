@@ -15,6 +15,17 @@
             <core:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
+    
+    <views:BasePage.BottomAppBar>
+        <CommandBar>
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="refresh"
+                              Icon="Refresh"
+                              Command="{Binding RefreshCommand}"
+                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </views:BasePage.BottomAppBar>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -41,6 +52,11 @@
                         <controls:NotificationControl Margin="0,0,0,12"/>
                     </DataTemplate>
                 </controls:LoadingListView.ItemTemplate>
+                <controls:LoadingListView.FooterTemplate>
+                    <DataTemplate>
+                        <controls:LoadMoreControl/>
+                    </DataTemplate>
+                </controls:LoadingListView.FooterTemplate>
             </controls:LoadingListView>
         </Grid>
     </Grid>
