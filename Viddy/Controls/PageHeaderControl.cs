@@ -1,11 +1,18 @@
-﻿using System.Windows.Input;
+﻿using System;
+using System.Windows.Input;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml.Input;
+using Cimbalino.Toolkit.Services;
+using GalaSoft.MvvmLight.Ioc;
+using Viddy.Views.Account;
 
 namespace Viddy.Controls
 {
     public class PageHeaderControl : Control
     {
+        private ProfilePictureControl _profilePicture;
+
         public static readonly DependencyProperty HeaderTextProperty = DependencyProperty.Register(
             "HeaderText", typeof (string), typeof (PageHeaderControl), new PropertyMetadata(default(string)));
 
@@ -54,6 +61,21 @@ namespace Viddy.Controls
         public PageHeaderControl()
         {
             DefaultStyleKey = typeof (PageHeaderControl);
+        }
+
+        protected override void OnApplyTemplate()
+        {
+            base.OnApplyTemplate();
+            _profilePicture = GetTemplateChild("ProfilePictureControl") as ProfilePictureControl;
+            if (_profilePicture != null)
+            {
+                _profilePicture.Tapped += ProfilePictureOnTapped;
+            }
+        }
+
+        private static void ProfilePictureOnTapped(object sender, TappedRoutedEventArgs tappedRoutedEventArgs)
+        {
+            SimpleIoc.Default.GetInstance<INavigationService>().Navigate<NotificationsView>();
         }
     }
 }

@@ -45,6 +45,9 @@
                 </AppBarButton>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
+                <AppBarButton Label="account"
+                              Command="{Binding NavigateToAccountCommand}"
+                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"></AppBarButton>
                 <AppBarButton Label="settings"
                               Command="{Binding NavigateToSettingsCommand}"/>
             </CommandBar.SecondaryCommands>
@@ -57,7 +60,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <controls:PageHeaderControl TapCommand="{Binding NavigateToAccountCommand}"/>
+        <controls:PageHeaderControl />
 
         <Grid Grid.Row="1">
             <controls:LoadingListView ItemsSource="{Binding Items}"

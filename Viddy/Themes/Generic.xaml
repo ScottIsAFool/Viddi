@@ -486,8 +486,8 @@
                           Height="80">
                         <Border Padding="{TemplateBinding Padding}">
                             <StackPanel Orientation="Horizontal">
-                                <controls:ProfilePictureControl IsHitTestVisible="{TemplateBinding ProfilePictureEnabled}"
-                                                                TappedCommand="{TemplateBinding TapCommand}"
+                                <controls:ProfilePictureControl IsHitTestVisible="{Binding NotificationService.DisplayNotificationCount, Source={StaticResource Locator}}"
+                                                                x:Name="ProfilePictureControl"
                                                                 Visibility="{TemplateBinding ProfilePictureVisibility}"
                                                                 IsChanging="{TemplateBinding AvatarChanging}"
                                                                 AvatarUrl="{Binding Auth.LoggedInUser.AvatarUrl, Source={StaticResource Locator}}"/>

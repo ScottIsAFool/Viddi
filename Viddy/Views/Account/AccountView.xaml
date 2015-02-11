@@ -76,9 +76,7 @@
                 </Grid.ColumnDefinitions>
 
                 <localControls:PageHeaderControl HeaderText="{Binding Name}"
-                                                 TapCommand="{Binding ChangeAvatarCommand}"
                                                  AvatarChanging="{Binding Avatar.ChangingAvatar}"
-                                                 ProfilePictureEnabled="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}"
                                                  Grid.ColumnSpan="2"
                                                  Padding="0"/>
 
