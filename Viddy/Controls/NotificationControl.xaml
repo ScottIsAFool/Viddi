@@ -5,10 +5,17 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:item="using:Viddy.ViewModel.Item"
              xmlns:controls="using:Viddy.Controls"
+             xmlns:converters="using:Cimbalino.Toolkit.Converters"
              mc:Ignorable="d"
              d:DesignHeight="100"
              d:DesignWidth="400"
              d:DataContext="{d:DesignInstance d:Type=item:NotificationItemViewModel}">
+    
+    <UserControl.Resources>
+        <converters:BooleanToBrushConverter x:Key="UnreadBrushConverter"
+                                            TrueValue="{ThemeResource SubtleBrush}"
+                                            FalseValue="{ThemeResource PhoneAccentBrush}"/>
+    </UserControl.Resources>
 
     <Grid VerticalAlignment="Top">
         <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
@@ -32,7 +39,7 @@
                     <TextBlock Text="{Binding NotificationDate}"
                                Style="{StaticResource BodyTextBlockStyle}"
                                FontSize="{StaticResource TextStyleSmallFontSize}"
-                               Foreground="{ThemeResource SubtleBrush}"/>
+                               Foreground="{Binding Notification.Read, Converter={StaticResource UnreadBrushConverter}}"/>
                 </StackPanel>
             </Grid>
         </controls:CustomButton>
