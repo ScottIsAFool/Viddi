@@ -41,6 +41,12 @@
                         <SymbolIcon Symbol="{Binding IsPinned, Converter={StaticResource PinUnpinSymbolConverter}}" />
                     </AppBarButton.Icon>
                 </AppBarButton>
+                <AppBarButton Label="share"
+                              Command="{Binding Video.ShareCommand}">
+                    <AppBarButton.Icon>
+                        <BitmapIcon UriSource="/Assets/Icons/appbar.share.png"/>
+                    </AppBarButton.Icon>
+                </AppBarButton>
                 <!--<AppBarButton Label="like">
                     <AppBarButton.Icon>
                         <BitmapIcon UriSource="" />

@@ -2,6 +2,7 @@
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.DataTransfer;
 using Cimbalino.Toolkit.Extensions;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
@@ -24,6 +25,8 @@ namespace Viddy.ViewModel.Item
         private readonly IApplicationSettingsService _settingsService;
         private readonly INavigationService _navigationService;
         private readonly ITileService _tileService;
+
+        private readonly DataTransferManager _manager;
         
         public VideoItemViewModel(Video video, VideoLoadingViewModel videoLoadingViewModel)
         {
@@ -31,6 +34,7 @@ namespace Viddy.ViewModel.Item
             _settingsService = SimpleIoc.Default.GetInstance<IApplicationSettingsService>();
             _navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
             _tileService = SimpleIoc.Default.GetInstance<ITileService>();
+            _manager = DataTransferManager.GetForCurrentView();
             _videoLoadingViewModel = videoLoadingViewModel;
             Video = video;
 
@@ -361,6 +365,28 @@ namespace Viddy.ViewModel.Item
 
             IsLoadingMore = false;
             SetProgressBar();
+        }
+
+        private void ManagerOnDataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        {
+            _manager.DataRequested -= ManagerOnDataRequested;
+            var request = args.Request;
+            request.Data.Properties.Title = string.IsNullOrEmpty(Title) ? Title : "Check out this video";
+            var message = IsAnonymous ? string.Format("Check out this video") : string.Format("Check out this video by {0}", Video.User.Username);
+            request.Data.Properties.Description = message;
+            request.Data.SetUri(new Uri(Video.FullUrl));
+        }
+
+        public RelayCommand ShareCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    _manager.DataRequested += ManagerOnDataRequested;
+                    DataTransferManager.ShowShareUI();
+                });
+            }
         }
     }
 }
