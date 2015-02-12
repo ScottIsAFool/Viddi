@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight.Ioc;
 using ScottIsAFool.WindowsPhone.Logging;
 using ThemeManagerRt;
 using Viddy.Common;
+using Viddy.ViewModel.Account;
 
 namespace Viddy.Views
 {
@@ -69,6 +70,15 @@ namespace Viddy.Views
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
+            var vm = DataContext as IBackSupportedViewModel;
+            if (vm != null)
+            {
+                if (e.NavigationMode == NavigationMode.Back)
+                {
+                    vm.ChangeContext();
+                }
+            }
+
             if (_navigationService != null)
             {
                 _navigationService.BackKeyPressed -= OnBackKeyPressed;                
@@ -89,6 +99,20 @@ namespace Viddy.Views
 
             //Logger.Info("Navigated from {0}", GetType().FullName);
             base.OnNavigatedFrom(e);
+        }
+
+        protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
+        {
+            var vm = DataContext as IBackSupportedViewModel;
+            if (vm != null)
+            {
+                if (e.NavigationMode != NavigationMode.Back)
+                {
+                    vm.SaveContext();
+                }
+            }
+
+            base.OnNavigatingFrom(e);
         }
     }
 }

@@ -59,7 +59,6 @@
                 <StackPanel Orientation="Horizontal"
                             Visibility="{Binding DisplayByLine, Converter={StaticResource VisibilityConverter}}">
                     <local:CustomButton Style="{StaticResource EmptyButtonStyle}"
-                                        IsHitTestVisible="False"
                                         Visibility="{Binding UserFollowers, Converter={StaticResource NullToVisibilityConverter}}"
                                         TapCommand="{Binding NavigateToFollowersCommand}">
                         <TextBlock Text="{Binding UserFollowers}"

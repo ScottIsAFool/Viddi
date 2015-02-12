@@ -61,6 +61,7 @@ namespace Viddy.ViewModel
             CanLoadMore = false;
             IsLoadingMore = false;
             IsEmpty = true;
+            RaisePropertyChanged(() => IsPinned);
         }
     }
 }

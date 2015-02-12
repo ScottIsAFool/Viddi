@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Messaging;
 using Viddy.Services;
@@ -10,11 +12,19 @@ using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel.Account
 {
-    public class ProfileViewModel : VideoLoadingViewModel
+    public interface IBackSupportedViewModel
+    {
+        void ChangeContext();
+        void SaveContext();
+    }
+
+    public class ProfileViewModel : ViewModelBase, IBackSupportedViewModel
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
         private readonly ITileService _tileService;
+
+        private Stack<UserViewModel> _users; 
 
         public ProfileViewModel(INavigationService navigationService, IVidMeClient vidMeClient, ITileService tileService)
         {
@@ -36,8 +46,7 @@ namespace Viddy.ViewModel.Account
                     VideoViews = "71556",
                     VideosScores = 220,
                     Bio = "Some bio information"
-                });
-                IsEmpty = true;
+                }) {IsEmpty = true};
             }
         }
 
@@ -51,19 +60,19 @@ namespace Viddy.ViewModel.Account
             }
         }
 
-        public override Task PageLoaded()
+        public RelayCommand PageLoadedCommand
         {
-            if (User != null)
+            get
             {
-                User.RefreshFollowerDetails().ConfigureAwait(false);
+                return new RelayCommand(async () =>
+                {
+                    if (User != null)
+                    {
+                        User.RefreshFollowerDetails().ConfigureAwait(false);
+                        await User.PageLoaded();
+                    }
+                });
             }
-
-            return base.PageLoaded();
-        }
-
-        public override Task<VideosResponse> GetVideos(int offset)
-        {
-            return _vidMeClient.GetUserVideosAsync(User.User.UserId, offset);
         }
 
         public override string GetPinFileName(bool isWideTile = false)
@@ -96,12 +105,36 @@ namespace Viddy.ViewModel.Account
             {
                 if (string.IsNullOrEmpty(m.Notification))
                 {
-                    Reset();
+                    
                     User = m.User;
                 }
             });
 
             base.WireMessages();
+        }
+
+        public void ChangeContext()
+        {
+            if (_users == null || _users.Count == 0)
+            {
+                return;
+            }
+
+            var user = _users.Pop();
+            if (user != null)
+            {
+                User = user;
+            }
+        }
+
+        public void SaveContext()
+        {
+            if (_users == null)
+            {
+                _users = new Stack<UserViewModel>();
+            }
+
+            _users.Push(User);
         }
     }
 }

@@ -10,10 +10,11 @@ using Viddy.Services;
 using Viddy.Views.Account;
 using VidMePortable;
 using VidMePortable.Model;
+using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel.Item
 {
-    public class UserViewModel : ViewModelBase, IProfileViewModel, IFollowViewModel
+    public class UserViewModel : VideoLoadingViewModel, IProfileViewModel, IFollowViewModel
     {
         private readonly IVidMeClient _vidMeClient;
         private readonly ITileService _tileService;
@@ -26,6 +27,11 @@ namespace Viddy.ViewModel.Item
             _vidMeClient = SimpleIoc.Default.GetInstance<IVidMeClient>();
             _tileService = SimpleIoc.Default.GetInstance<ITileService>();
             _navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+        }
+
+        public override Task<VideosResponse> GetVideos(int offset)
+        {
+            return _vidMeClient.GetUserVideosAsync(User.UserId, offset);
         }
 
         public string UserFollowers
