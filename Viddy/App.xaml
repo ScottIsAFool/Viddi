@@ -57,6 +57,18 @@
             <Color x:Key="OverlayColor">#4C000000</Color>
             <SolidColorBrush x:Key="OverlayBrush"
                              Color="{StaticResource OverlayColor}"/>
+            <!--<LinearGradientBrush SpreadMethod="Reflect"
+                                 ColorInterpolationMode="SRgbLinearInterpolation"
+                                 StartPoint="0,0"
+                                 EndPoint="0,1"
+                                 x:Key="OverlayBrush">
+                <GradientStop Color="{StaticResource OverlayColor}"
+                              Offset="0.126" />
+                <GradientStop Color="Transparent"
+                              Offset=".5" />
+                <GradientStop Color="{StaticResource OverlayColor}"
+                              Offset="0.874" />
+            </LinearGradientBrush>-->
 
             <DataTemplate x:Key="VideoTemplate">
                 <controls:VideoControl />

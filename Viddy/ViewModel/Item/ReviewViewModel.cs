@@ -1,4 +1,8 @@
-﻿using GalaSoft.MvvmLight.Command;
+﻿using System;
+using Windows.ApplicationModel.Store;
+using Windows.System;
+using Cimbalino.Toolkit.Services;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Model;
 using Viddy.Services;
@@ -19,6 +23,7 @@ namespace Viddy.ViewModel.Item
                 {
                     ReviewService.Current.Responded();
                     CloseControl();
+                    Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + CurrentApp.AppId));
                 });
             }
         }
@@ -41,7 +46,8 @@ namespace Viddy.ViewModel.Item
             {
                 return new RelayCommand(() =>
                 {
-                    
+                    CloseControl();
+                    new EmailComposeService().ShowAsync("scottisafool@live.co.uk", "Feedback for Viddy", "Here are some thoughts:\n\n");
                 });
             }
         }
