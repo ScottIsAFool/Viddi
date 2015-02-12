@@ -166,6 +166,8 @@ namespace Viddy.ViewModel.Item
             get { return Video != null ? Video.CommentCount : 0; }
         }
 
+        public int UsersVote { get; set; }
+
         public void RemoveComment(CommentViewModel comment)
         {
             if (Items == null)
@@ -270,6 +272,75 @@ namespace Viddy.ViewModel.Item
             }
         }
 
+        public RelayCommand ShareCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    _manager.DataRequested += ManagerOnDataRequested;
+                    DataTransferManager.ShowShareUI();
+                });
+            }
+        }
+
+        public RelayCommand RefreshVideoInfoCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    await RefreshVideoDetails();
+                });
+            }
+        }
+
+        public RelayCommand UpVoteCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    var vote = UsersVote == 0 ? Vote.Up : Vote.Neutral;
+
+                    await ChangeVote(vote);
+                });
+            }
+        }
+
+        public RelayCommand DownVoteCommand
+        {
+            get
+            {
+                return new RelayCommand(async () =>
+                {
+                    var vote = UsersVote == 0 ? Vote.Down : Vote.Neutral;
+
+                    await ChangeVote(vote);
+                });
+            }
+        }
+
+        private async Task ChangeVote(Vote vote)
+        {
+            GettingVideoInfo = true;
+            ViewerVote response = null;
+            try
+            {
+                response = await _vidMeClient.VoteForVideoAsync(Video.VideoId, vote);
+            }
+            catch (Exception ex)
+            {
+                GettingVideoInfo = false;
+                return;
+            }
+
+            if (response != null)
+            {
+                await RefreshVideoDetails();                
+            }
+        }
+
         public string CommentText { get; set; }
         public bool AddingComment { get; set; }
 
@@ -300,29 +371,29 @@ namespace Viddy.ViewModel.Item
             }
         }
 
-        private bool VideoIsAnonymousButOwned()
-        {
-            // This means it's an anonymous video
-            return string.IsNullOrEmpty(Video.UserId) && _settingsService.Roaming.Contains(Utils.GetAnonVideoKeyName(Video.VideoId));
-        }
-
         public ListType ListType { get { return ListType.Normal; } }
 
         public async Task RefreshVideoDetails()
         {
             try
             {
-                //var response = await _vidMeClient.GetVideoAsync(Video.VideoId);
-                //if (response != null)
-                //{
-                    
-                //}
+                GettingVideoInfo = true;
+                var response = await _vidMeClient.GetVideoAsync(Video.VideoId);
+                if (response != null)
+                {
+                    Video = response.Video;
+                    UsersVote = response.ViewerVote != null && response.ViewerVote.Value.HasValue ? response.ViewerVote.Value.Value : 0;
+                }
             }
             catch (Exception ex)
             {
                 
             }
+
+            GettingVideoInfo = false;
         }
+
+        public bool GettingVideoInfo { get; set; }
 
         public async Task LoadData()
         {
@@ -377,16 +448,10 @@ namespace Viddy.ViewModel.Item
             request.Data.SetUri(new Uri(Video.FullUrl));
         }
 
-        public RelayCommand ShareCommand
+        private bool VideoIsAnonymousButOwned()
         {
-            get
-            {
-                return new RelayCommand(() =>
-                {
-                    _manager.DataRequested += ManagerOnDataRequested;
-                    DataTransferManager.ShowShareUI();
-                });
-            }
+            // This means it's an anonymous video
+            return string.IsNullOrEmpty(Video.UserId) && _settingsService.Roaming.Contains(Utils.GetAnonVideoKeyName(Video.VideoId));
         }
     }
 }

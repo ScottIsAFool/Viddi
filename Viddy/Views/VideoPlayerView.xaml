@@ -47,6 +47,10 @@
                         <BitmapIcon UriSource="/Assets/Icons/appbar.share.png"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
+                <AppBarButton Label="refresh"
+                              Icon="Refresh"
+                              Command="{Binding Video.RefreshVideoInfoCommand}"
+                              IsEnabled="{Binding Video.GettingVideoInfo, Converter={StaticResource NegativeBooleanConverter}}"/>
                 <!--<AppBarButton Label="like">
                     <AppBarButton.Icon>
                         <BitmapIcon UriSource="" />
