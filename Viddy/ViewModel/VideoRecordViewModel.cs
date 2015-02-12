@@ -75,8 +75,9 @@ namespace Viddy.ViewModel
         {
             get
             {
-                return new RelayCommand(() =>
+                return new RelayCommand(async () =>
                 {
+                    //await _foursqureViewModel.GetLocations();
                 });
             }
         }

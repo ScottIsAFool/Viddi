@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Net.Http;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
 using FourSquare.SharpSquare.Core;
@@ -14,6 +15,7 @@ namespace Viddy.ViewModel
         private readonly ISettingsService _settingsService;
         private readonly INavigationService _navigationService;
         private readonly SharpSquare _sharpSquare;
+        
 
         public FoursqureViewModel(ISettingsService settingsService, INavigationService navigationService, SharpSquare sharpSquare)
         {
@@ -29,7 +31,9 @@ namespace Viddy.ViewModel
                 LocationText = "Turn location on";
             }
 
-            double longitude, latitude;
+            LocationText = "Finding you...";
+
+            double longitude = 40.7, latitude = -74;
 
             var options = new Dictionary<string, string> {{"ll", string.Format("{0},{1}", longitude, latitude)}, {"limit", "10"}};
 
