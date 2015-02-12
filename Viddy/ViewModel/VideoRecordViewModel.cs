@@ -2,7 +2,6 @@ using System;
 using System.Threading.Tasks;
 using Windows.Storage;
 using Windows.Storage.Pickers;
-using Windows.UI.Xaml;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
@@ -31,17 +30,23 @@ namespace Viddy.ViewModel
         private readonly INavigationService _navigationService;
         private readonly ICameraInfoService _cameraInfo;
         private readonly ITileService _tileService;
-
-
+        private readonly FoursqureViewModel _foursqureViewModel;
+        
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
-        public VideoRecordViewModel(INavigationService navigationService, ICameraInfoService cameraInfo, AvatarViewModel avatar, ITileService tileService)
+        public VideoRecordViewModel(
+            INavigationService navigationService, 
+            ICameraInfoService cameraInfo, 
+            AvatarViewModel avatar, 
+            ITileService tileService, 
+            FoursqureViewModel foursqureViewModel)
         {
             Avatar = avatar;
             _navigationService = navigationService;
             _cameraInfo = cameraInfo;
             _tileService = tileService;
+            _foursqureViewModel = foursqureViewModel;
             if (IsInDesignMode)
             {
                 // Code runs in Blend --> create design time data.

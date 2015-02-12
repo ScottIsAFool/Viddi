@@ -173,6 +173,7 @@
     <Compile Include="ViewModel\Account\AvatarViewModel.cs" />
     <Compile Include="ViewModel\Account\CreateAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\EditProfileViewModel.cs" />
+    <Compile Include="ViewModel\FoursqureViewModel.cs" />
     <Compile Include="ViewModel\IBackSupportedViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\AddAppViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\ManageMyAppsViewModel.cs" />
@@ -502,7 +503,12 @@
       <Name>Microsoft Player Framework</Name>
     </SDKReference>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <ProjectReference Include="..\SharpSquare\SharpSquare.csproj">
+      <Project>{28230cbe-b53e-4e7e-b237-1123e365076e}</Project>
+      <Name>SharpSquare</Name>
+    </ProjectReference>
+  </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

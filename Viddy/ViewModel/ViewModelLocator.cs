@@ -1,4 +1,5 @@
 using Cimbalino.Toolkit.Services;
+using FourSquare.SharpSquare.Core;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using Viddy.Extensions;
@@ -37,7 +38,9 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.RegisterIf<ITileService, TileService>();
             SimpleIoc.Default.RegisterIf<ISettingsService, SettingsService>();
             SimpleIoc.Default.RegisterIf<INotificationService, NotificationService>();
+            SimpleIoc.Default.RegisterIf(() => new SharpSquare(Constants.FourSquareClientId, Constants.FourSquareClientSecret));
 
+            SimpleIoc.Default.Register<FoursqureViewModel>();
             SimpleIoc.Default.Register<AvatarViewModel>();
             SimpleIoc.Default.Register<VideoRecordViewModel>();
             SimpleIoc.Default.Register<AccountViewModel>();

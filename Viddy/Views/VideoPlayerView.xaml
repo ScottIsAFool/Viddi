@@ -189,7 +189,7 @@
 
                     <TextBox InputScope="Chat"
                              AcceptsReturn="True"
-                             PlaceholderText="enter comment..."
+                             PlaceholderText="keep it civil..."
                              Text="{Binding Video.CommentText, Mode=TwoWay}"
                              Style="{StaticResource FullLengthTextBoxStyle}">
                         <interactivity:Interaction.Behaviors>
