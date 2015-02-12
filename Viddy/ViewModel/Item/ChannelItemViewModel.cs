@@ -10,10 +10,11 @@ using Viddy.Services;
 using Viddy.Views;
 using VidMePortable;
 using VidMePortable.Model;
+using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel.Item
 {
-    public class ChannelItemViewModel : ViewModelBase, IProfileViewModel, IFollowViewModel
+    public class ChannelItemViewModel : VideoLoadingViewModel, IProfileViewModel, IFollowViewModel
     {
         private readonly IVidMeClient _vidMeClient;
         private readonly INavigationService _navigationService;
@@ -156,6 +157,11 @@ namespace Viddy.ViewModel.Item
             _ignoreFollowedChanged = true;
             IsFollowedByMe = value;
             _ignoreFollowedChanged = false;
+        }
+
+        public override Task<VideosResponse> GetVideos(int offset)
+        {
+            return _vidMeClient.GetChannelsNewVideosAsync(Channel.ChannelId, offset);
         }
 
         public RelayCommand NavigateToChannel

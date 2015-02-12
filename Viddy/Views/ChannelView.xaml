@@ -13,7 +13,6 @@
                         DataContext="{Binding Channel, Source={StaticResource Locator}}">
 
     <interactivity:Interaction.Behaviors>
-        <behaviours:StatusBarBehavior IsVisible="False" />
         <core:EventTriggerBehavior EventName="Loaded">
             <core:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
         </core:EventTriggerBehavior>
@@ -22,15 +21,15 @@
     <local:BasePage.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
-                <AppBarButton Label="{Binding IsPinned, Converter={StaticResource PinUnpinConverter}}"
+                <AppBarButton Label="{Binding Channel.IsPinned, Converter={StaticResource PinUnpinConverter}}"
                               x:Name="PinButton"
                               Click="PinButton_OnClick">
                     <AppBarButton.Icon>
-                        <SymbolIcon Symbol="{Binding IsPinned, Converter={StaticResource PinUnpinSymbolConverter}}"/>
+                        <SymbolIcon Symbol="{Binding Channel.IsPinned, Converter={StaticResource PinUnpinSymbolConverter}}"/>
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton Label="refresh"
-                              Command="{Binding RefreshCommand}"
+                              Command="{Binding Channel.RefreshCommand}"
                               Icon="Refresh" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
@@ -46,10 +45,10 @@
         </Grid>
         <controls:ProfileHeaderControl DataContext="{Binding EmptyChannel}"
                                        Visibility="{Binding Channel.ProgressIsVisible, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}" />
-        <controls:LoadingListView ItemsSource="{Binding Items}"
-                                  ItemTemplate="{StaticResource VideoTemplate}"
-                                  IsEmpty="{Binding IsEmpty}"
-                                  IsInitialising="{Binding ProgressIsVisible}"
+        <controls:LoadingListView ItemsSource="{Binding Channel.Items}"
+                                  ItemTemplateSelector="{StaticResource VideoTemplateSelector}"
+                                  IsEmpty="{Binding Channel.IsEmpty}"
+                                  IsInitialising="{Binding Channel.ProgressIsVisible}"
                                   Header="{Binding}">
             <controls:LoadingListView.HeaderTemplate>
                 <DataTemplate>
@@ -64,20 +63,18 @@
                                    Margin="19"
                                    TextWrapping="WrapWholeWords"
                                    TextAlignment="Center"
-                                   Visibility="{Binding IsEmpty, Converter={StaticResource VisibilityConverter}}" />
+                                   Visibility="{Binding Channel.IsEmpty, Converter={StaticResource VisibilityConverter}}" />
                     </StackPanel>
                 </DataTemplate>
             </controls:LoadingListView.HeaderTemplate>
             <controls:LoadingListView.FooterTemplate>
                 <DataTemplate>
-                    <controls:LoadMoreControl />
+                    <controls:LoadMoreControl DataContext="{Binding Channel}"/>
                 </DataTemplate>
             </controls:LoadingListView.FooterTemplate>
             <controls:LoadingListView.EmptyContent>
                 <DataTemplate>
-                    <Grid>
-
-                    </Grid>
+                    <Grid/>
                 </DataTemplate>
             </controls:LoadingListView.EmptyContent>
         </controls:LoadingListView>

@@ -1,5 +1,7 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
+using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Messaging;
 using Viddy.Services;
@@ -10,11 +12,13 @@ using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel
 {
-    public class ChannelViewModel : VideoLoadingViewModel
+    public class ChannelViewModel : ViewModelBase, IBackSupportedViewModel
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
         private readonly ITileService _tileService;
+
+        private Stack<ChannelItemViewModel> _previousItems; 
 
         public ChannelViewModel(INavigationService navigationService, IVidMeClient vidMeClient, ITileService tileService)
         {
@@ -50,19 +54,19 @@ namespace Viddy.ViewModel
             RaisePropertyChanged(() => IsPinned);
         }
 
-        public override Task PageLoaded()
+        public RelayCommand PageLoadedCommand
         {
-            if (Channel != null)
+            get
             {
-                Channel.RefreshFollowerDetails().ConfigureAwait(false);
+                return new RelayCommand(async () =>
+                {
+                    if (Channel != null)
+                    {
+                        Channel.RefreshFollowerDetails().ConfigureAwait(false);
+                        await Channel.PageLoaded();
+                    }
+                });
             }
-
-            return base.PageLoaded();
-        }
-
-        public override Task<VideosResponse> GetVideos(int offset)
-        {
-            return _vidMeClient.GetChannelsNewVideosAsync(Channel.Channel.ChannelId, offset);
         }
 
         protected override void WireMessages()
@@ -73,6 +77,30 @@ namespace Viddy.ViewModel
             });
 
             base.WireMessages();
+        }
+
+        public void ChangeContext()
+        {
+            if (_previousItems == null || _previousItems.Count == 0)
+            {
+                return;
+            }
+
+            var item = _previousItems.Pop();
+            if (item != null)
+            {
+                Channel = item;
+            }
+        }
+
+        public void SaveContext()
+        {
+            if (_previousItems == null)
+            {
+                _previousItems = new Stack<ChannelItemViewModel>();
+            }
+
+            _previousItems.Push(Channel);
         }
     }
 }
