@@ -172,6 +172,7 @@
     <Compile Include="ViewModel\Account\AvatarViewModel.cs" />
     <Compile Include="ViewModel\Account\CreateAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\EditProfileViewModel.cs" />
+    <Compile Include="ViewModel\IBackSupportedViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\AddAppViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\ManageMyAppsViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\OwnedAppViewModel.cs" />

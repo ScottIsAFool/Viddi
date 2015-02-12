@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight.Ioc;
 using ScottIsAFool.WindowsPhone.Logging;
 using ThemeManagerRt;
 using Viddy.Common;
+using Viddy.ViewModel;
 using Viddy.ViewModel.Account;
 
 namespace Viddy.Views

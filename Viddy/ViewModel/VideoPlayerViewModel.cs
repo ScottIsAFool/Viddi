@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -10,10 +11,12 @@ using Viddy.Views.Account;
 
 namespace Viddy.ViewModel
 {
-    public class VideoPlayerViewModel : ViewModelBase
+    public class VideoPlayerViewModel : ViewModelBase, IBackSupportedViewModel
     {
         private readonly INavigationService _navigationService;
         private readonly ITileService _tileService;
+
+        private Stack<VideoItemViewModel> _previousItems; 
 
         public VideoPlayerViewModel(INavigationService navigationService, ITileService tileService)
         {
@@ -99,6 +102,30 @@ namespace Viddy.ViewModel
             });
 
             base.WireMessages();
+        }
+
+        public void ChangeContext()
+        {
+            if (_previousItems == null || _previousItems.Count == 0)
+            {
+                return;
+            }
+
+            var item = _previousItems.Pop();
+            if (item != null)
+            {
+                Video = item;
+            }
+        }
+
+        public void SaveContext()
+        {
+            if (_previousItems == null)
+            {
+                _previousItems = new Stack<VideoItemViewModel>();
+            }
+
+            _previousItems.Push(Video);
         }
     }
 }

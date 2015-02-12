@@ -8,23 +8,16 @@ using Viddy.Services;
 using Viddy.ViewModel.Item;
 using VidMePortable;
 using VidMePortable.Model;
-using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel.Account
 {
-    public interface IBackSupportedViewModel
-    {
-        void ChangeContext();
-        void SaveContext();
-    }
-
     public class ProfileViewModel : ViewModelBase, IBackSupportedViewModel
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
         private readonly ITileService _tileService;
 
-        private Stack<UserViewModel> _users; 
+        private Stack<UserViewModel> _previousItems; 
 
         public ProfileViewModel(INavigationService navigationService, IVidMeClient vidMeClient, ITileService tileService)
         {
@@ -115,26 +108,26 @@ namespace Viddy.ViewModel.Account
 
         public void ChangeContext()
         {
-            if (_users == null || _users.Count == 0)
+            if (_previousItems == null || _previousItems.Count == 0)
             {
                 return;
             }
 
-            var user = _users.Pop();
-            if (user != null)
+            var item = _previousItems.Pop();
+            if (item != null)
             {
-                User = user;
+                User = item;
             }
         }
 
         public void SaveContext()
         {
-            if (_users == null)
+            if (_previousItems == null)
             {
-                _users = new Stack<UserViewModel>();
+                _previousItems = new Stack<UserViewModel>();
             }
 
-            _users.Push(User);
+            _previousItems.Push(User);
         }
     }
 }
