@@ -22,6 +22,8 @@
     <Color x:Key="CommentButtonColor">#FF13347A</Color>
     <Color x:Key="TextBoxHeaderFocusColor">White</Color>
     <Color x:Key="PlaceholderTextColor">#99CFCFCF</Color>
+    <Color x:Key="ReviewBackgroundColor">#FF383E59</Color>
+    <Color x:Key="ReviewNoBackgroundColor">#FF666D8B</Color>
 
     <SolidColorBrush x:Key="CommentButtonBrush"
                      Color="{StaticResource CommentButtonColor}" />
@@ -73,7 +75,6 @@
     <SolidColorBrush x:Key="EyeOnBrush"
                      Color="{StaticResource EyeOnColor}" />
 
-
     <SolidColorBrush x:Key="TextBoxBackgroundBrush"
                      Color="{StaticResource HeaderColor}" />
     
@@ -88,4 +89,10 @@
     
     <SolidColorBrush x:Key="PlaceholderTextBrush"
                      Color="{StaticResource PlaceholderTextColor}" />
+    
+    <SolidColorBrush x:Key="ReviewBackgroundBrush"
+                     Color="{StaticResource ReviewBackgroundColor}"/>
+
+    <SolidColorBrush x:Key="ReviewNoBackgroundBrush"
+                     Color="{StaticResource ReviewNoBackgroundColor}" />
 </ResourceDictionary>
