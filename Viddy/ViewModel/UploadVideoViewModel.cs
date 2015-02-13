@@ -18,12 +18,18 @@ namespace Viddy.ViewModel
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
         private readonly IApplicationSettingsService _applicationSettings;
+        private readonly FoursqureViewModel _foursqureViewModel;
 
-        public UploadVideoViewModel(INavigationService navigationService, IVidMeClient vidMeClient, IApplicationSettingsService applicationSettings)
+        public UploadVideoViewModel(
+            INavigationService navigationService, 
+            IVidMeClient vidMeClient, 
+            IApplicationSettingsService applicationSettings, 
+            FoursqureViewModel foursqureViewModel)
         {
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
             _applicationSettings = applicationSettings;
+            _foursqureViewModel = foursqureViewModel;
         }
 
         public StorageFile File { get; set; }
@@ -79,7 +85,14 @@ namespace Viddy.ViewModel
                     try
                     {
                         Pause = !Pause;
-                        var request = await _vidMeClient.RequestVideoAsync(new VideoRequest());
+                        var request = await _vidMeClient.RequestVideoAsync(new VideoRequest
+                        {
+                            FourSquarePlaceId = _foursqureViewModel.VenueId,
+                            FourSquarePlaceName = _foursqureViewModel.VenueName,
+                            Latitude = _foursqureViewModel.Latitude,
+                            Longitude = _foursqureViewModel.Longitude
+                        });
+
                         if (request != null)
                         {
                             var stream = await File.OpenReadAsync();

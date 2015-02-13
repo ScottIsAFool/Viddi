@@ -31,7 +31,8 @@ namespace Viddy.ViewModel
         private readonly ICameraInfoService _cameraInfo;
         private readonly ITileService _tileService;
         private readonly FoursqureViewModel _foursqureViewModel;
-        
+        private readonly IMessageBoxService _messageBoxService;
+
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
         /// </summary>
@@ -40,13 +41,15 @@ namespace Viddy.ViewModel
             ICameraInfoService cameraInfo, 
             AvatarViewModel avatar, 
             ITileService tileService, 
-            FoursqureViewModel foursqureViewModel)
+            FoursqureViewModel foursqureViewModel,
+            IMessageBoxService messageBoxService)
         {
             Avatar = avatar;
             _navigationService = navigationService;
             _cameraInfo = cameraInfo;
             _tileService = tileService;
             _foursqureViewModel = foursqureViewModel;
+            _messageBoxService = messageBoxService;
             if (IsInDesignMode)
             {
                 // Code runs in Blend --> create design time data.
@@ -77,7 +80,7 @@ namespace Viddy.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
-                    //await _foursqureViewModel.GetLocations();
+                    await _foursqureViewModel.GetLocations();
                 });
             }
         }
