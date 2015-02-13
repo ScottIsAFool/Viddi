@@ -1,5 +1,4 @@
 using Cimbalino.Toolkit.Services;
-using FourSquare.SharpSquare.Core;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
 using Viddy.Extensions;
@@ -8,7 +7,6 @@ using Viddy.Services;
 using Viddy.ViewModel.Account;
 using Viddy.ViewModel.Account.Manage;
 using VidMePortable;
-using VidMePortable.Model;
 
 namespace Viddy.ViewModel
 {
@@ -38,7 +36,6 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.RegisterIf<ITileService, TileService>();
             SimpleIoc.Default.RegisterIf<ISettingsService, SettingsService>();
             SimpleIoc.Default.RegisterIf<INotificationService, NotificationService>();
-            SimpleIoc.Default.RegisterIf(() => new SharpSquare(Constants.FourSquareClientId, Constants.FourSquareClientSecret));
 
             SimpleIoc.Default.Register<FoursqureViewModel>();
             SimpleIoc.Default.Register<AvatarViewModel>();

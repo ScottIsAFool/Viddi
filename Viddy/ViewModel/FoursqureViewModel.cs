@@ -1,9 +1,6 @@
 ﻿using System.Collections.Generic;
-using System.Net.Http;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
-using FourSquare.SharpSquare.Core;
-using FourSquare.SharpSquare.Entities;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Model;
 using Viddy.Views;
@@ -14,14 +11,12 @@ namespace Viddy.ViewModel
     {
         private readonly ISettingsService _settingsService;
         private readonly INavigationService _navigationService;
-        private readonly SharpSquare _sharpSquare;
         
 
-        public FoursqureViewModel(ISettingsService settingsService, INavigationService navigationService, SharpSquare sharpSquare)
+        public FoursqureViewModel(ISettingsService settingsService, INavigationService navigationService)
         {
             _settingsService = settingsService;
             _navigationService = navigationService;
-            _sharpSquare = sharpSquare;
         }
 
         public async Task GetLocations()
@@ -37,11 +32,9 @@ namespace Viddy.ViewModel
 
             var options = new Dictionary<string, string> {{"ll", string.Format("{0},{1}", longitude, latitude)}, {"limit", "10"}};
 
-            var venues = await _sharpSquare.SearchVenues(options);
-            Locations = venues;
         }
 
-        public List<Venue> Locations { get; set; }
+        public List<string> Locations { get; set; }
 
         public string LocationText { get; set; }
 
