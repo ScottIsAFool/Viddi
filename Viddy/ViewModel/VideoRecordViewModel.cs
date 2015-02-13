@@ -30,7 +30,6 @@ namespace Viddy.ViewModel
         private readonly INavigationService _navigationService;
         private readonly ICameraInfoService _cameraInfo;
         private readonly ITileService _tileService;
-        private readonly FoursqureViewModel _foursqureViewModel;
         private readonly IMessageBoxService _messageBoxService;
 
         /// <summary>
@@ -41,14 +40,14 @@ namespace Viddy.ViewModel
             ICameraInfoService cameraInfo, 
             AvatarViewModel avatar, 
             ITileService tileService, 
-            FoursqureViewModel foursqureViewModel,
+            FoursqureViewModel foursquare,
             IMessageBoxService messageBoxService)
         {
             Avatar = avatar;
             _navigationService = navigationService;
             _cameraInfo = cameraInfo;
             _tileService = tileService;
-            _foursqureViewModel = foursqureViewModel;
+            Foursquare = foursquare;
             _messageBoxService = messageBoxService;
             if (IsInDesignMode)
             {
@@ -70,6 +69,7 @@ namespace Viddy.ViewModel
             }
         }
 
+        public FoursqureViewModel Foursquare { get; set; }
         public AvatarViewModel Avatar { get; set; }
         public bool CanTurnOnFlash { get; set; }
         public bool HasFrontFacingCamera { get; set; }
@@ -80,7 +80,7 @@ namespace Viddy.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
-                    await _foursqureViewModel.GetLocations();
+                    await Foursquare.GetLocations();
                 });
             }
         }

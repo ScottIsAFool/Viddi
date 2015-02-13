@@ -138,6 +138,7 @@ namespace Viddy.ViewModel
                 {
                     LocationText = venue.Name;
                     SelectedVenue = venue;
+                    ShowVenues = false;
                 });
             }
         }
@@ -150,18 +151,31 @@ namespace Viddy.ViewModel
                 {
                     SelectedVenue = null;
                     LocationText = "Add location?";
-                });
+                }, () => _settingsService.LocationIsOn);
             }
         }
 
         public RelayCommand VenueTextTappedCommand
         {
-            get { return new RelayCommand(() => ShowVenues = !ShowVenues); }
-        }
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    if (!_settingsService.LocationIsOn)
+                    {
+                        _navigationService.Navigate<SettingsView>();
+                        return;
+                    }
 
-        public RelayCommand TurnLocationOn
-        {
-            get { return new RelayCommand(() => _navigationService.Navigate<SettingsView>()); }
+                    if (Locations.IsNullOrEmpty())
+                    {
+                        GetLocations();
+                        return;
+                    }
+
+                    ShowVenues = !ShowVenues;
+                });
+            }
         }
     }
 }

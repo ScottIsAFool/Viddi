@@ -22,9 +22,9 @@
     <views:BasePage.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="{Binding IsPinned, Converter={StaticResource PinUnpinLongConverter}}" 
+                <AppBarButton Label="{Binding IsPinned, Converter={StaticResource PinUnpinLongConverter}}"
                               x:Name="PinButton"
-                              Click="PinButton_OnClick"/>
+                              Click="PinButton_OnClick" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </views:BasePage.BottomAppBar>
@@ -43,11 +43,23 @@
                 <RowDefinition Height="Auto" />
             </Grid.RowDefinitions>
 
-            <StackPanel Orientation="Vertical"
-                        Grid.Row="0"
-                        Margin="19,41"
-                        HorizontalAlignment="Left">
+            <Grid Margin="19,41">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                    <RowDefinition Height="*" />
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="6*" />
+                    <ColumnDefinition Width="1*" />
+
+                </Grid.ColumnDefinitions>
+
                 <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                       Grid.Row="1"
+                                       HorizontalAlignment="Left"
                                        x:Name="FlashButton"
                                        Tapped="FlashButton_OnTapped"
                                        Visibility="{Binding CanTurnOnFlash, Converter={StaticResource VisibilityConverter}}">
@@ -89,6 +101,9 @@
                 <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
                                        Margin="0,12"
                                        x:Name="FrontFacingButton"
+                                       Grid.Row="2"
+                                       Grid.Column="0"
+                                       HorizontalAlignment="Left"
                                        Tapped="FrontFacingButton_OnTapped"
                                        Visibility="{Binding HasFrontFacingCamera, Converter={StaticResource VisibilityConverter}}">
                     <Viewbox Stretch="UniformToFill"
@@ -127,7 +142,83 @@
                         </Border>
                     </Viewbox>
                 </controls:CustomButton>
-            </StackPanel>
+
+                <Border BorderBrush="{ThemeResource ButtonBackgroundBrush}"
+                        BorderThickness="2"
+                        CornerRadius="10"
+                        Padding="4,3"
+                        Grid.Row="1"
+                        Margin="6,0"
+                        DataContext="{Binding Foursquare}"
+                        Grid.Column="1"
+                        Background="{ThemeResource ButtonBackgroundBrush}">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                               TapCommand="{Binding VenueTextTappedCommand}">
+                            <TextBlock Text="{Binding LocationText}"
+                                       TextAlignment="Center" 
+                                       TextWrapping="NoWrap"
+                                       TextTrimming="CharacterEllipsis"
+                                       Style="{StaticResource BodyTextBlockStyle}"/>
+                        </controls:CustomButton>
+                        
+                        <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                               Grid.Column="1"
+                                               Width="25"
+                                               Visibility="{Binding HasVenue, Converter={StaticResource VisibilityConverter}}"
+                                               TapCommand="{Binding ClearLocationCommand}">
+                            <SymbolIcon Symbol="Clear"
+                                        Foreground="{ThemeResource ApplicationForegroundThemeBrush}"/>
+                        </controls:CustomButton>
+                    </Grid>
+                </Border>
+
+                <Border Grid.Column="0"
+                        Grid.Row="2"
+                        Grid.RowSpan="100"
+                        Grid.ColumnSpan="3"
+                        MaxHeight="250"
+                        BorderBrush="{ThemeResource ButtonBackgroundBrush}"
+                        BorderThickness="2"
+                        CornerRadius="10"
+                        Padding="4,3"
+                        Margin="6,6"
+                        Visibility="{Binding Foursquare.ShowVenues, Converter={StaticResource VisibilityConverter}}"
+                        HorizontalAlignment="Center"
+                        Background="{ThemeResource ButtonBackgroundBrush}">
+                    <ListView ItemsSource="{Binding Foursquare.Locations}"
+                              Margin="12,6,0,0"
+                              Padding="0,0,12,0">
+                        <ListView.HeaderTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="Choose your location"
+                                           Style="{StaticResource BodyTextBlockStyle}"
+                                           Padding="2"
+                                           Margin="0,0,0,6"
+                                           FontWeight="SemiBold"/>
+                            </DataTemplate>
+                        </ListView.HeaderTemplate>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                                       Margin="0,0,0,6"
+                                                       TapCommand="{Binding VideoRecord.Foursquare.VenueTappedCommand, Source={StaticResource Locator}}"
+                                                       CommandParameter="{Binding}">
+                                    <TextBlock Text="{Binding Name}"
+                                               Style="{StaticResource BodyTextBlockStyle}"
+                                               Padding="2"/>
+                                </controls:CustomButton>
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Border>
+                
+
+            </Grid>
 
             <controls:CustomButton Grid.Row="2"
                                    Style="{StaticResource EmptyButtonStyle}"
@@ -192,6 +283,6 @@
         <tiles:RecordTile Margin="-1000,-1000,0,0"
                           x:Name="RecordTile"
                           VerticalAlignment="Top"
-                          HorizontalAlignment="Left"/>
+                          HorizontalAlignment="Left" />
     </Grid>
 </views:PinnableBasePage>
