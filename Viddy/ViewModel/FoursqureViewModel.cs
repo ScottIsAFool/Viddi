@@ -151,6 +151,7 @@ namespace Viddy.ViewModel
                 {
                     SelectedVenue = null;
                     LocationText = "Add location?";
+                    ShowVenues = false;
                 }, () => _settingsService.LocationIsOn);
             }
         }
