@@ -18,7 +18,7 @@
         <Setter Property="IsHitTestVisible"
                 Value="False" />
         <Setter Property="DisplayNotifications"
-                Value="False"/>
+                Value="False" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ProfilePictureControl">
@@ -98,7 +98,7 @@
                                                HorizontalAlignment="Center"
                                                VerticalAlignment="Center"
                                                Margin="0,-1,0,0"
-                                               Foreground="White"/>
+                                               Foreground="White" />
                                 </Viewbox>
                             </Grid>
                         </Grid>
@@ -537,6 +537,19 @@
                                VerticalAlignment="Top"
                                HorizontalAlignment="Right"
                                Margin="19"/>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="controls:BlurredImageControl"> 
+        <Setter
+            Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:BlurredImageControl">
+                    <Grid>
+                        <ContentPresenter x:Name="imagePresenter" />
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

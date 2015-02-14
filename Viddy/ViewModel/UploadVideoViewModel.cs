@@ -24,20 +24,30 @@ namespace Viddy.ViewModel
             INavigationService navigationService, 
             IVidMeClient vidMeClient, 
             IApplicationSettingsService applicationSettings, 
-            FoursqureViewModel foursqureViewModel)
+            FoursqureViewModel foursqureViewModel,
+            EditVideoViewModel editVideoViewModel)
         {
+            EditVideo = editVideoViewModel;
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
             _applicationSettings = applicationSettings;
             _foursqureViewModel = foursqureViewModel;
+
+            if (IsInDesignMode)
+            {
+                IsUploading = true;
+            }
         }
 
+        public EditVideoViewModel EditVideo { get; set; }
         public StorageFile File { get; set; }
 
         public bool Pause { get; set; }
         public bool Play { get; set; }
 
         public bool IsPlaying { get; set; }
+
+        public bool IsUploading { get; set; }
 
         public RelayCommand PlayPauseCommand
         {
@@ -84,6 +94,7 @@ namespace Viddy.ViewModel
                 {
                     try
                     {
+                        IsUploading = true;
                         Pause = !Pause;
                         var request = await _vidMeClient.RequestVideoAsync(new VideoRequest
                         {
@@ -95,6 +106,7 @@ namespace Viddy.ViewModel
 
                         if (request != null)
                         {
+                            EditVideo.SetVideo(request.Video);
                             var stream = await File.OpenReadAsync();
                             var video = await _vidMeClient.UploadVideoAsync(request.Code, File.ContentType, File.Name, stream.AsStream());
                             if (video != null)
@@ -125,6 +137,8 @@ namespace Viddy.ViewModel
                     var file = m.Sender as StorageFile;
                     if (file == null) return;
 
+                    IsUploading = true;
+                    //EditVideo.CanEdit = IsUploading = false;
                     File = file;
                 }
             });
