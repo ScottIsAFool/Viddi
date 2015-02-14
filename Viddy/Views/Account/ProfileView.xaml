@@ -21,6 +21,10 @@
     <views:BasePage.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
+                <AppBarButton Label="home"
+                              Icon="Home"
+                              Visibility="{Binding ShowHomeButton, Converter={StaticResource VisibilityConverter}}"
+                              Command="{Binding NavigateHomeCommand}" />
                 <AppBarButton Label="{Binding User.IsPinned, Converter={StaticResource PinUnpinConverter}}"
                               x:Name="PinButton"
                               Click="PinButton_OnClick">
@@ -44,7 +48,8 @@
                                   ImageUrl="{Binding User.CoverUrl}"
                                   Width="691"/>
         </Grid>
-        <controls:ProfileHeaderControl DataContext="{Binding EmptyUser}"/>
+        <controls:ProfileHeaderControl DataContext="{Binding EmptyUser}"
+                                       Visibility="{Binding ProgressIsVisible, Converter={StaticResource VisibilityConverter}}"/>
         <controls:LoadingListView ItemsSource="{Binding User.Items}"
                                   IsEmpty="{Binding User.IsEmpty}"
                                   ItemTemplateSelector="{StaticResource VideoTemplateSelector}"

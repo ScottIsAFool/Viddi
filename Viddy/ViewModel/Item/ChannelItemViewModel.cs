@@ -140,6 +140,11 @@ namespace Viddy.ViewModel.Item
 
         public async Task RefreshFollowerDetails()
         {
+            if (!AuthenticationService.Current.IsLoggedIn)
+            {
+                return;
+            }
+
             try
             {
                 var response = await _vidMeClient.IsUserFollowingChannelAsync(Channel.ChannelId);

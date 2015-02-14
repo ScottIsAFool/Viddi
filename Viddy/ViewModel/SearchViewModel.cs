@@ -3,12 +3,13 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Messaging;
+using Viddy.Views;
 using VidMePortable;
 using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel
 {
-    public class SearchViewModel : VideoLoadingViewModel
+    public class SearchViewModel : VideoLoadingViewModel, ICanHasHomeButton
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
@@ -79,5 +80,17 @@ namespace Viddy.ViewModel
             IncludeNsfw = false;
             base.Reset();
         }
+
+        #region ICanHasHomeButton implementation
+        public bool ShowHomeButton { get; set; }
+
+        public RelayCommand NavigateHomeCommand
+        {
+            get
+            {
+                return new RelayCommand(() => _navigationService.Navigate<MainView>());
+            }
+        }
+        #endregion
     }
 }

@@ -13,6 +13,7 @@
                         DataContext="{Binding Channel, Source={StaticResource Locator}}">
 
     <interactivity:Interaction.Behaviors>
+        <behaviours:StatusBarBehavior IsVisible="False"/>
         <core:EventTriggerBehavior EventName="Loaded">
             <core:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
         </core:EventTriggerBehavior>
@@ -21,6 +22,10 @@
     <local:BasePage.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
+                <AppBarButton Label="home"
+                              Icon="Home"
+                              Visibility="{Binding ShowHomeButton, Converter={StaticResource VisibilityConverter}}"
+                              Command="{Binding NavigateHomeCommand}" />
                 <AppBarButton Label="{Binding Channel.IsPinned, Converter={StaticResource PinUnpinConverter}}"
                               x:Name="PinButton"
                               Click="PinButton_OnClick">
@@ -57,8 +62,9 @@
                         <controls:FollowingControl IsEnabled="{Binding Channel.CanFollow}"
                                                    FollowingText="{Binding Channel.FollowingText}"
                                                    IsChecked="{Binding Channel.IsFollowedByMe, Mode=TwoWay}"
+                                                   Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"
                                                    Margin="19,-5,19,12" />
-                        <TextBlock Text="This user hasn't submitted any content yet."
+                        <TextBlock Text="This channel hasn't got any content yet."
                                    Style="{StaticResource BodyTextBlockStyle}"
                                    Margin="19"
                                    TextWrapping="WrapWholeWords"

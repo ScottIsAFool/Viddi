@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
@@ -6,19 +7,20 @@ using GalaSoft.MvvmLight.Messaging;
 using Viddy.Messaging;
 using Viddy.Services;
 using Viddy.ViewModel.Item;
+using Viddy.Views;
 using VidMePortable;
 using VidMePortable.Model;
-using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel
 {
-    public class ChannelViewModel : ViewModelBase, IBackSupportedViewModel
+    public class ChannelViewModel : ViewModelBase, IBackSupportedViewModel, ICanHasHomeButton
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
         private readonly ITileService _tileService;
 
-        private Stack<ChannelItemViewModel> _previousItems; 
+        private Stack<ChannelItemViewModel> _previousItems;
+        private bool _fromProtocol;
 
         public ChannelViewModel(INavigationService navigationService, IVidMeClient vidMeClient, ITileService tileService)
         {
@@ -60,12 +62,45 @@ namespace Viddy.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
-                    if (Channel != null)
+                    if (!_fromProtocol)
                     {
-                        Channel.RefreshFollowerDetails().ConfigureAwait(false);
-                        await Channel.PageLoaded();
+                        await LoadChannelVideos();
                     }
                 });
+            }
+        }
+
+        private async Task LoadChannelVideos()
+        {
+            if (Channel != null)
+            {
+                Channel.RefreshFollowerDetails().ConfigureAwait(false);
+                await Channel.PageLoaded();
+            }
+        }
+
+        private async Task GetChannel(string channelId)
+        {
+            try
+            {
+                var response = await _vidMeClient.GetChannelAsync(channelId);
+                if (response != null)
+                {
+                    if (Channel == null)
+                    {
+                        Channel = new ChannelItemViewModel(response.Channel);
+                    }
+                    else
+                    {
+                        Channel.Channel = response.Channel;
+                    }
+
+                    await LoadChannelVideos();
+                }
+            }
+            catch (Exception ex)
+            {
+                
             }
         }
 
@@ -73,7 +108,20 @@ namespace Viddy.ViewModel
         {
             Messenger.Default.Register<ChannelMessage>(this, m =>
             {
+                _fromProtocol = false;
                 Channel = m.Channel;
+            });
+
+            Messenger.Default.Register<ProtocolMessage>(this, m =>
+            {
+                if (m.Type != ProtocolMessage.ProtocolType.Channel)
+                {
+                    return;
+                }
+
+                _fromProtocol = true;
+                Channel = new ChannelItemViewModel(new Channel()) {ProgressIsVisible = true};
+                GetChannel(m.Content);
             });
 
             base.WireMessages();
@@ -102,5 +150,17 @@ namespace Viddy.ViewModel
 
             _previousItems.Push(Channel);
         }
+
+        #region ICanHasHomeButton implementation
+        public bool ShowHomeButton { get; set; }
+
+        public RelayCommand NavigateHomeCommand
+        {
+            get
+            {
+                return new RelayCommand(() => _navigationService.Navigate<MainView>());
+            }
+        }
+        #endregion
     }
 }

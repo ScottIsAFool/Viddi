@@ -183,6 +183,7 @@
     <Compile Include="ViewModel\Account\Manage\ManageMyAppsViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\OwnedAppViewModel.cs" />
     <Compile Include="ViewModel\Account\ManualLoginViewModel.cs" />
+    <Compile Include="ViewModel\ICanHasHomeButton.cs" />
     <Compile Include="ViewModel\Item\NotificationItemViewModel.cs" />
     <Compile Include="ViewModel\Account\NotificationsViewModel.cs" />
     <Compile Include="ViewModel\Account\ProfileViewModel.cs" />

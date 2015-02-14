@@ -25,7 +25,7 @@ namespace Viddy.ViewModel
     /// See http://www.galasoft.ch/mvvm
     /// </para>
     /// </summary>
-    public class VideoRecordViewModel : ViewModelBase
+    public class VideoRecordViewModel : ViewModelBase, ICanHasHomeButton
     {
         private readonly INavigationService _navigationService;
         private readonly ICameraInfoService _cameraInfo;
@@ -154,5 +154,17 @@ namespace Viddy.ViewModel
                 });
             }
         }
+
+        #region ICanHasHomeButton implementation
+        public bool ShowHomeButton { get; set; }
+
+        public RelayCommand NavigateHomeCommand
+        {
+            get
+            {
+                return new RelayCommand(() => _navigationService.Navigate<MainView>());
+            }
+        }
+        #endregion
     }
 }

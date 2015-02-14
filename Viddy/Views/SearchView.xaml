@@ -10,6 +10,19 @@
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding Search, Source={StaticResource Locator}}">
+    <interactivity:Interaction.Behaviors>
+        <behaviours:StatusBarBehavior IsVisible="False" />
+    </interactivity:Interaction.Behaviors>
+    
+    <local:BasePage.BottomAppBar>
+        <CommandBar Visibility="{Binding ShowHomeButton, Converter={StaticResource VisibilityConverter}}">
+            <CommandBar.PrimaryCommands>
+                <AppBarButton Label="home"
+                              Icon="Home"
+                              Command="{Binding NavigateHomeCommand}"/>
+            </CommandBar.PrimaryCommands>
+        </CommandBar>
+    </local:BasePage.BottomAppBar>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -28,7 +41,8 @@
                     </Grid.ColumnDefinitions>
                     
                     <controls:PageHeaderControl HeaderText=""
-                                                ProfilePictureEnabled="False"></controls:PageHeaderControl>
+                                                ProfilePictureEnabled="False"
+                                                Padding="0"/>
 
                     <TextBox PlaceholderText="enter something to search for"
                              Text="{Binding SearchText, Mode=TwoWay}"

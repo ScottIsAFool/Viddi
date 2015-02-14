@@ -36,7 +36,7 @@ namespace Viddy.Views
         {
             ApplicationView.GetForCurrentView().SetDesiredBoundsMode(mode);
         }
-        
+
         protected virtual void InitialiseOnBack()
         {
         }
@@ -56,14 +56,21 @@ namespace Viddy.Views
             {
                 InitialiseOnBack();
             }
-            else
+
+            var parameters = e.Parameter as NavigationParameters;
+            if (parameters != null)
             {
-                var parameters = e.Parameter as NavigationParameters;
-                if (parameters != null && parameters.ClearBackstack)
+                if (parameters.ClearBackstack)
                 {
                     Logger.Info("Clearing backstack");
                     Frame.BackStack.Clear();
                 }
+            }
+
+            var vm = DataContext as ICanHasHomeButton;
+            if (vm != null)
+            {
+                vm.ShowHomeButton = parameters != null && parameters.ShowHomeButton;
             }
 
             base.OnNavigatedTo(e);
@@ -82,7 +89,7 @@ namespace Viddy.Views
 
             if (_navigationService != null)
             {
-                _navigationService.BackKeyPressed -= OnBackKeyPressed;                
+                _navigationService.BackKeyPressed -= OnBackKeyPressed;
             }
 
             if (e.NavigationMode != NavigationMode.Back)

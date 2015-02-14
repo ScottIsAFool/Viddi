@@ -7,12 +7,13 @@ using GalaSoft.MvvmLight.Messaging;
 using Viddy.Messaging;
 using Viddy.Services;
 using Viddy.ViewModel.Item;
+using Viddy.Views;
 using VidMePortable;
 using VidMePortable.Model;
 
 namespace Viddy.ViewModel.Account
 {
-    public class ProfileViewModel : ViewModelBase, IBackSupportedViewModel
+    public class ProfileViewModel : ViewModelBase, IBackSupportedViewModel, ICanHasHomeButton
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
@@ -172,6 +173,16 @@ namespace Viddy.ViewModel.Account
             }
 
             _previousItems.Push(User);
+        }
+
+        public bool ShowHomeButton { get; set; }
+
+        public RelayCommand NavigateHomeCommand
+        {
+            get
+            {
+                return new RelayCommand(() => _navigationService.Navigate<MainView>());
+            }
         }
     }
 }

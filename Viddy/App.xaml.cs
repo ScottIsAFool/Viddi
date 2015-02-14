@@ -294,7 +294,7 @@ namespace Viddy
                         }
 
                         var frame = new Frame();
-                        frame.Navigate(pageToGoTo);
+                        frame.Navigate(pageToGoTo, new NavigationParameters {ShowHomeButton = true});
 
                         Window.Current.Content = frame;
                         Window.Current.Activate();
