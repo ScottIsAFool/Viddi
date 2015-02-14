@@ -3,7 +3,9 @@ using System.Diagnostics;
 using System.Linq;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
+using Windows.ApplicationModel.DataTransfer;
 using Windows.Security.Authentication.Web;
+using Windows.Storage;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -12,7 +14,6 @@ using Windows.UI.Xaml.Navigation;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
-using ThemeManagerRt;
 using Viddy.Extensions;
 using Viddy.Messaging;
 using Viddy.Services;
@@ -76,15 +77,6 @@ namespace Viddy
             Messenger.Default.Send(new PinMessage());
 
             AppStarted();
-
-            //if (e.PreviousExecutionState == ApplicationExecutionState.Running
-            //    && rootFrame != null && rootFrame.Content != null && string.IsNullOrEmpty(e.Arguments))
-            //{
-            //    if (rootFrame.Content is VideoRecordView)
-            //    {
-            //        rootFrame = null;
-            //    }
-            //}
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -245,15 +237,43 @@ namespace Viddy
                             }
                             else
                             {
-                                if (Locator.Upload != null)
-                                {
-                                    Messenger.Default.Send(new NotificationMessage(file, Constants.Messages.VideoFileMsg));
-                                    SimpleIoc.Default.GetInstance<INavigationService>().Navigate<UploadVideoView>();
-                                }
+                                SendFile(file);
                             }
                         }
                     }
                 }
+            }
+        }
+
+        private static void SendFile(IStorageItem file)
+        {
+            if (Locator.Upload != null)
+            {
+                Messenger.Default.Send(new NotificationMessage(file, Constants.Messages.VideoFileMsg));
+                SimpleIoc.Default.GetInstance<INavigationService>().Navigate<UploadVideoView>();
+            }
+        }
+
+        protected override async void OnShareTargetActivated(ShareTargetActivatedEventArgs args)
+        {
+            base.OnShareTargetActivated(args);
+            var shareOperation = args.ShareOperation;
+            if (shareOperation.Data.Contains(StandardDataFormats.StorageItems))
+            {
+                var files = await shareOperation.Data.GetStorageItemsAsync();
+                if (files.Count > 1)
+                {
+                    // TODO: Display error message
+                    shareOperation.ReportError("Viddy can only accept one file at a time");
+                    return;
+                }
+
+                var file = files[0];
+
+                var frame = new Frame();
+                Window.Current.Content = frame;
+                Window.Current.Activate();
+                SendFile(file);
             }
         }
 

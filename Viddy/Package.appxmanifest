@@ -25,6 +25,17 @@
         </m3:DefaultTile>
         <m3:SplashScreen Image="Assets\SplashScreen.png" BackgroundColor="#5900FF" />
       </m3:VisualElements>
+      <Extensions>
+        <Extension Category="windows.shareTarget">
+          <ShareTarget>
+            <SupportedFileTypes>
+              <FileType>.mp4</FileType>
+              <FileType>.wmv</FileType>
+              <FileType>.mov</FileType>
+            </SupportedFileTypes>
+          </ShareTarget>
+        </Extension>
+      </Extensions>
     </Application>
   </Applications>
   <Capabilities>
