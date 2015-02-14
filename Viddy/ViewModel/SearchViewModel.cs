@@ -2,6 +2,7 @@
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Viddy.Messaging;
 using VidMePortable;
 using VidMePortable.Model.Responses;
 
@@ -32,10 +33,8 @@ namespace Viddy.ViewModel
             {
                 return new RelayCommand(async () =>
                 {
-                    if (!CanSearch) return;
-
                     await LoadData(true);
-                });
+                }, () => CanSearch);
             }
         }
 
@@ -57,6 +56,18 @@ namespace Viddy.ViewModel
                 {
                     Reset();
                 }
+            });
+
+            Messenger.Default.Register<ProtocolMessage>(this, m =>
+            {
+                if (m.Type != ProtocolMessage.ProtocolType.Search)
+                {
+                    return;
+                }
+
+                SearchText = m.Content;
+                IncludeNsfw = m.SecondaryContent;
+                SearchCommand.Execute(null);
             });
 
             base.WireMessages();

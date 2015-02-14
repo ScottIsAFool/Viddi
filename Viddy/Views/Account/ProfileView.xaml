@@ -44,8 +44,7 @@
                                   ImageUrl="{Binding User.CoverUrl}"
                                   Width="691"/>
         </Grid>
-        <controls:ProfileHeaderControl DataContext="{Binding EmptyUser}"
-                                       Visibility="{Binding Profile.ProgressIsVisible, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}" />
+        <controls:ProfileHeaderControl DataContext="{Binding EmptyUser}"/>
         <controls:LoadingListView ItemsSource="{Binding User.Items}"
                                   IsEmpty="{Binding User.IsEmpty}"
                                   ItemTemplateSelector="{StaticResource VideoTemplateSelector}"
@@ -56,6 +55,7 @@
                     <StackPanel Orientation="Vertical">
                         <controls:ProfileHeaderControl DataContext="{Binding User}" />
                         <controls:FollowingControl IsEnabled="{Binding User.CanFollow}"
+                                                   Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"
                                                    FollowingText="{Binding User.FollowingText}"
                                                    IsChecked="{Binding User.IsFollowedByMe, Mode=TwoWay}"
                                                    Margin="19,-5,19,12" />

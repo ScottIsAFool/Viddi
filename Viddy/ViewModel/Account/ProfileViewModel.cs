@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
@@ -17,7 +18,8 @@ namespace Viddy.ViewModel.Account
         private readonly IVidMeClient _vidMeClient;
         private readonly ITileService _tileService;
 
-        private Stack<UserViewModel> _previousItems; 
+        private Stack<UserViewModel> _previousItems;
+        private bool _fromProtocol;
 
         public ProfileViewModel(INavigationService navigationService, IVidMeClient vidMeClient, ITileService tileService)
         {
@@ -47,10 +49,7 @@ namespace Viddy.ViewModel.Account
 
         public UserViewModel EmptyUser
         {
-            get
-            {
-                return new UserViewModel(new User());
-            }
+            get { return new UserViewModel(new User()) {IsShadowHeader = true}; }
         }
 
         public RelayCommand PageLoadedCommand
@@ -59,12 +58,45 @@ namespace Viddy.ViewModel.Account
             {
                 return new RelayCommand(async () =>
                 {
-                    if (User != null)
+                    if (!_fromProtocol)
                     {
-                        User.RefreshFollowerDetails().ConfigureAwait(false);
-                        await User.PageLoaded();
+                        await LoadUserVideos();
                     }
                 });
+            }
+        }
+
+        private async Task GetUser(string userId)
+        {
+            try
+            {
+                var response = await _vidMeClient.GetUserAsync(userId);
+                if (response != null)
+                {
+                    if (User == null)
+                    {
+                        User = new UserViewModel(response.User);
+                    }
+                    else
+                    {
+                        User.User = response.User;
+                    }
+
+                    await LoadUserVideos();
+                }
+            }
+            catch (Exception ex)
+            {
+                
+            }
+        }
+
+        private async Task LoadUserVideos()
+        {
+            if (User != null)
+            {
+                User.RefreshFollowerDetails().ConfigureAwait(false);
+                await User.PageLoaded();
             }
         }
 
@@ -98,9 +130,21 @@ namespace Viddy.ViewModel.Account
             {
                 if (string.IsNullOrEmpty(m.Notification))
                 {
-                    
+                    _fromProtocol = false;
                     User = m.User;
                 }
+            });
+
+            Messenger.Default.Register<ProtocolMessage>(this, m =>
+            {
+                if (m.Type != ProtocolMessage.ProtocolType.User)
+                {
+                    return;
+                }
+
+                _fromProtocol = true;
+                User = new UserViewModel(new User()) {ProgressIsVisible = true};
+                GetUser(m.Content);
             });
 
             base.WireMessages();

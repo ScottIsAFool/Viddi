@@ -14,6 +14,7 @@ using Windows.UI.Xaml.Navigation;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
+using Viddy.Common;
 using Viddy.Extensions;
 using Viddy.Messaging;
 using Viddy.Services;
@@ -96,6 +97,13 @@ namespace Viddy
                 // Place the frame in the current Window
                 Window.Current.Content = rootFrame;
             }
+            else
+            {
+                if (!string.IsNullOrEmpty(e.Arguments))
+                {
+                    rootFrame.BackStack.Clear();
+                }
+            }
 
             var pageToLoad = PageToLoad(e.Arguments);
 
@@ -117,7 +125,7 @@ namespace Viddy
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
                 // parameter
-                if (!rootFrame.Navigate(pageToLoad))
+                if (!rootFrame.Navigate(pageToLoad, new NavigationParameters {ShowHomeButton = pageToLoad != typeof (MainView)}))
                 {
                     throw new Exception("Failed to create initial page");
                 }
@@ -240,6 +248,56 @@ namespace Viddy
                                 SendFile(file);
                             }
                         }
+                    }
+                }
+                else if (args.Kind == ActivationKind.Protocol)
+                {
+                    var eventArgs = args as ProtocolActivatedEventArgs;
+                    if (eventArgs != null)
+                    {
+                        var uri = eventArgs.Uri;
+                        // viddy://search?query={0}
+                        // viddy://record
+                        // viddy://
+                        // viddy://user?id={0}
+                        // viddy://channel?id={0}
+
+                        Type pageToGoTo;
+                        var query = uri.QueryString();
+
+                        switch (uri.Host)
+                        {
+                            case "search":
+                                pageToGoTo = typeof (SearchView);
+                                var includeNsfw = false;
+                                if (query.ContainsKey("nsfw"))
+                                {
+                                    includeNsfw = bool.Parse(query["nsfw"]);
+                                }
+
+                                Messenger.Default.Send(new ProtocolMessage(ProtocolMessage.ProtocolType.Search, query["query"], includeNsfw));
+                                break;
+                            case "record":
+                                pageToGoTo = typeof (VideoRecordView);
+                                break;
+                            case "user":
+                                pageToGoTo = typeof (ProfileView);
+                                Messenger.Default.Send(new ProtocolMessage(ProtocolMessage.ProtocolType.User, query["id"]));
+                                break;
+                            case "channel":
+                                pageToGoTo = typeof (ChannelView);
+                                Messenger.Default.Send(new ProtocolMessage(ProtocolMessage.ProtocolType.Channel, query["id"]));
+                                break;
+                            default:
+                                pageToGoTo = typeof (MainView);
+                                break;
+                        }
+
+                        var frame = new Frame();
+                        frame.Navigate(pageToGoTo);
+
+                        Window.Current.Content = frame;
+                        Window.Current.Activate();
                     }
                 }
             }

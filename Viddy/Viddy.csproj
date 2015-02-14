@@ -160,6 +160,7 @@
     <Compile Include="Logging\WinLogger.cs" />
     <Compile Include="Messaging\ChannelMessage.cs" />
     <Compile Include="Messaging\PinMessage.cs" />
+    <Compile Include="Messaging\ProtocolMessage.cs" />
     <Compile Include="Messaging\UserMessage.cs" />
     <Compile Include="Messaging\VideoMessage.cs" />
     <Compile Include="Model\AppSettings.cs" />

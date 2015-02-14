@@ -1,0 +1,39 @@
+﻿<Page x:Class="ViddyLauncher.MainPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      mc:Ignorable="d"
+      Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid HorizontalAlignment="Stretch"
+          Margin="19">
+        <StackPanel Orientation="Vertical"
+                    HorizontalAlignment="Stretch">
+            <Button Content="Launch Viddy"
+                    x:Name="LaunchViddyButton"
+                    HorizontalAlignment="Stretch"
+                    Tapped="LaunchViddyButton_OnTapped"/>
+            <Button Content="Search with Viddy"
+                    x:Name="SearchViddyButton"
+                    HorizontalAlignment="Stretch" 
+                    Tapped="SearchViddyButton_OnTapped"/>
+            <Button Content="Search with viddy (NSFW)"
+                    HorizontalAlignment="Stretch"
+                    x:Name="SearchViddyNsfwButton"
+                    Tapped="SearchViddyNsfwButton_OnTapped"/>
+            <Button Content="Show User"
+                    HorizontalAlignment="Stretch"
+                    x:Name="ShowUserButton"
+                    Tapped="ShowUserButton_OnTapped"/>
+            <Button Content="Show Channel"
+                    x:Name="ShowChannelButton"
+                    HorizontalAlignment="Stretch"
+                    Tapped="ShowChannelButton_OnTapped"/>
+            <Button Content="Launch Video Record"
+                    x:Name="VideoRecordButton"
+                    HorizontalAlignment="Stretch" 
+                    Tapped="VideoRecordButton_OnTapped"/>
+        </StackPanel>
+    </Grid>
+</Page>

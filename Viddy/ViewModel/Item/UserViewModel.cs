@@ -34,11 +34,18 @@ namespace Viddy.ViewModel.Item
             return _vidMeClient.GetUserVideosAsync(User.UserId, offset);
         }
 
+        public bool IsShadowHeader { get; set; }
+
         public string UserFollowers
         {
             get
             {
-                if (User == null || User.FollowerCount == 0)
+                if (User == null || IsShadowHeader)
+                {
+                    return string.Empty;
+                }
+
+                if (User.FollowerCount == 0)
                 {
                     return "0 followers";
                 }
@@ -101,7 +108,7 @@ namespace Viddy.ViewModel.Item
         }
 
         private bool _ignoreFollowedChanged;
-        
+
         [UsedImplicitly]
         private async void OnIsFollowedByMeChanged()
         {
@@ -118,8 +125,8 @@ namespace Viddy.ViewModel.Item
             try
             {
                 ChangingFollowState = true;
-                var task = isFollowing 
-                    ? _vidMeClient.FollowUserAsync(User.UserId) 
+                var task = isFollowing
+                    ? _vidMeClient.FollowUserAsync(User.UserId)
                     : _vidMeClient.UnfollowUserAsync(User.UserId);
                 if (!await task)
                 {
@@ -141,7 +148,7 @@ namespace Viddy.ViewModel.Item
             }
             catch (Exception ex)
             {
-                
+
             }
 
             ChangingFollowState = false;
@@ -149,7 +156,7 @@ namespace Viddy.ViewModel.Item
 
         public async Task RefreshFollowerDetails()
         {
-            if (User.UserId == AuthenticationService.Current.LoggedInUserId)
+            if (!AuthenticationService.Current.IsLoggedIn || User.UserId == AuthenticationService.Current.LoggedInUserId)
             {
                 return;
             }

@@ -35,6 +35,12 @@
             </SupportedFileTypes>
           </ShareTarget>
         </Extension>
+        <Extension Category="windows.protocol">
+          <Protocol Name="viddy">
+            <Logo>Assets\TileIcons\Logo.png</Logo>
+            <DisplayName>Launch Viddy, a VidMe Windows Phone client</DisplayName>
+          </Protocol>
+        </Extension>
       </Extensions>
     </Application>
   </Applications>

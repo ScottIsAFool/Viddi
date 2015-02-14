@@ -52,7 +52,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.Register<ProfileViewModel>(true);
             SimpleIoc.Default.Register<MainViewModel>();
             SimpleIoc.Default.Register<VideoPlayerViewModel>(true);
-            SimpleIoc.Default.Register<SearchViewModel>();
+            SimpleIoc.Default.Register<SearchViewModel>(true);
             SimpleIoc.Default.Register<ChannelViewModel>(true);
             SimpleIoc.Default.Register<SettingsViewModel>();
             SimpleIoc.Default.Register<BrowseChannelsViewModel>();
