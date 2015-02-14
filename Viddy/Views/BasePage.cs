@@ -39,6 +39,11 @@ namespace Viddy.Views
 
         protected virtual void InitialiseOnBack()
         {
+            var backVm = DataContext as IBackSupportedViewModel;
+            if (backVm != null)
+            {
+                backVm.ChangeContext(GetType());
+            }
         }
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
@@ -78,14 +83,14 @@ namespace Viddy.Views
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
         {
-            var vm = DataContext as IBackSupportedViewModel;
-            if (vm != null)
-            {
-                if (e.NavigationMode == NavigationMode.Back)
-                {
-                    vm.ChangeContext();
-                }
-            }
+            //var vm = DataContext as IBackSupportedViewModel;
+            //if (vm != null)
+            //{
+            //    if (e.NavigationMode == NavigationMode.Back)
+            //    {
+            //        vm.ChangeContext(GetType());
+            //    }
+            //}
 
             if (_navigationService != null)
             {

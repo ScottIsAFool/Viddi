@@ -4,10 +4,12 @@ using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Viddy.Extensions;
 using Viddy.Messaging;
 using Viddy.Services;
 using Viddy.ViewModel.Item;
 using Viddy.Views;
+using Viddy.Views.Account;
 using VidMePortable;
 using VidMePortable.Model;
 
@@ -151,9 +153,9 @@ namespace Viddy.ViewModel.Account
             base.WireMessages();
         }
 
-        public void ChangeContext()
+        public void ChangeContext(Type callingType)
         {
-            if (_previousItems == null || _previousItems.Count == 0)
+            if (_previousItems.IsNullOrEmpty() || callingType != typeof(ProfileView))
             {
                 return;
             }

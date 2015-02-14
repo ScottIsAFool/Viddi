@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Viddy.Extensions;
 using Viddy.Messaging;
 using Viddy.Services;
 using Viddy.ViewModel.Item;
@@ -127,9 +128,9 @@ namespace Viddy.ViewModel
             base.WireMessages();
         }
 
-        public void ChangeContext()
+        public void ChangeContext(Type callingType)
         {
-            if (_previousItems == null || _previousItems.Count == 0)
+            if (_previousItems.IsNullOrEmpty() || callingType != typeof(ChannelView))
             {
                 return;
             }

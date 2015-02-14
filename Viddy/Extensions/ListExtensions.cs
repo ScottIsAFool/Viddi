@@ -9,5 +9,10 @@ namespace Viddy.Extensions
         {
             return list == null || !list.Any();
         }
+
+        public static bool IsNullOrEmpty<T>(this Stack<T> stack)
+        {
+            return stack == null || !stack.Any();
+        }
     }
 }

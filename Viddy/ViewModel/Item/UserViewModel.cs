@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Messaging;
 using JetBrains.Annotations;
 using Viddy.Messaging;
 using Viddy.Services;
+using Viddy.ViewModel.Account;
 using Viddy.Views.Account;
 using VidMePortable;
 using VidMePortable.Model;
@@ -14,7 +15,7 @@ using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel.Item
 {
-    public class UserViewModel : VideoLoadingViewModel, IProfileViewModel, IFollowViewModel
+    public class UserViewModel : VideoLoadingViewModel, IProfileViewModel, IFollowViewModel, ICanShowFollowers
     {
         private readonly IVidMeClient _vidMeClient;
         private readonly ITileService _tileService;
@@ -29,13 +30,24 @@ namespace Viddy.ViewModel.Item
             _navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
         }
 
+        private FollowersViewModel _followers;
+        public FollowersViewModel Followers
+        {
+            get { return _followers ?? (_followers = new FollowersViewModel(_vidMeClient, true)); }
+        }
+
         public override Task<VideosResponse> GetVideos(int offset)
         {
             return _vidMeClient.GetUserVideosAsync(User.UserId, offset);
         }
 
         public bool IsShadowHeader { get; set; }
+        public override bool IsPinned
+        {
+            get { return _tileService.IsUserPinned(User.UserId); }
+        }
 
+        #region IProfileViewModel implementations
         public string UserFollowers
         {
             get
@@ -68,17 +80,28 @@ namespace Viddy.ViewModel.Item
                     : null;
             }
         }
-
-        public override bool IsPinned
-        {
-            get { return _tileService.IsUserPinned(User.UserId); }
-        }
-
+        
         public string Description { get { return User != null ? User.Bio : null; } }
         public string CoverUrl { get { return User != null ? User.CoverUrl : null; } }
         public string AvatarUrl { get { return User != null ? User.AvatarUrl : null; } }
         public string Name { get { return User != null ? User.Username : null; } }
+        public string UserVideoCount
+        {
+            get { return User != null && User.VideoCount > 0 ? string.Format("{0:N0} videos", User.VideoCount) : null; }
+        }
 
+        public bool DisplayBio
+        {
+            get { return User != null && !string.IsNullOrEmpty(User.Bio); }
+        }
+
+        public bool DisplayByLine
+        {
+            get { return User != null && (!string.IsNullOrEmpty(UserFollowers) || !string.IsNullOrEmpty(UserPlays) || !string.IsNullOrEmpty(UserVideoCount)); }
+        }
+        #endregion
+
+        #region IFollowViewModel implementations
         public bool IsFollowedByMe { get; set; }
         public bool ChangingFollowState { get; set; }
 
@@ -105,19 +128,6 @@ namespace Viddy.ViewModel.Item
                        && User != null
                        && User.UserId != AuthenticationService.Current.LoggedInUserId;
             }
-        }
-
-        private bool _ignoreFollowedChanged;
-
-        [UsedImplicitly]
-        private async void OnIsFollowedByMeChanged()
-        {
-            if (_ignoreFollowedChanged)
-            {
-                return;
-            }
-
-            await ChangeFollowingState(IsFollowedByMe);
         }
 
         public async Task ChangeFollowingState(bool isFollowing)
@@ -172,27 +182,26 @@ namespace Viddy.ViewModel.Item
 
             }
         }
+        #endregion
+
+        private bool _ignoreFollowedChanged;
+
+        [UsedImplicitly]
+        private async void OnIsFollowedByMeChanged()
+        {
+            if (_ignoreFollowedChanged)
+            {
+                return;
+            }
+
+            await ChangeFollowingState(IsFollowedByMe);
+        }
 
         private void SetIsFollowedByMe(bool value)
         {
             _ignoreFollowedChanged = true;
             IsFollowedByMe = value;
             _ignoreFollowedChanged = false;
-        }
-
-        public string UserVideoCount
-        {
-            get { return User != null && User.VideoCount > 0 ? string.Format("{0:N0} videos", User.VideoCount) : null; }
-        }
-
-        public bool DisplayBio
-        {
-            get { return User != null && !string.IsNullOrEmpty(User.Bio); }
-        }
-
-        public bool DisplayByLine
-        {
-            get { return User != null && (!string.IsNullOrEmpty(UserFollowers) || !string.IsNullOrEmpty(UserPlays) || !string.IsNullOrEmpty(UserVideoCount)); }
         }
 
         public RelayCommand NavigateToProfileCommand
@@ -218,5 +227,9 @@ namespace Viddy.ViewModel.Item
                 });
             }
         }
+
+        #region ICanShowFollowers implementations
+        public string Id { get { return User != null ? User.UserId : string.Empty; } }
+        #endregion
     }
 }

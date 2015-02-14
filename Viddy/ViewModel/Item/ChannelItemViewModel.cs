@@ -7,14 +7,16 @@ using GalaSoft.MvvmLight.Messaging;
 using JetBrains.Annotations;
 using Viddy.Messaging;
 using Viddy.Services;
+using Viddy.ViewModel.Account;
 using Viddy.Views;
+using Viddy.Views.Account;
 using VidMePortable;
 using VidMePortable.Model;
 using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel.Item
 {
-    public class ChannelItemViewModel : VideoLoadingViewModel, IProfileViewModel, IFollowViewModel
+    public class ChannelItemViewModel : VideoLoadingViewModel, IProfileViewModel, IFollowViewModel, ICanShowFollowers
     {
         private readonly IVidMeClient _vidMeClient;
         private readonly INavigationService _navigationService;
@@ -35,6 +37,7 @@ namespace Viddy.ViewModel.Item
             get { return _tileService.IsChannelPinned(Channel.ChannelId); }
         }
 
+        #region IProfileViewModel implementations
         public string UserFollowers
         {
             get { return Channel != null && Channel.FollowerCount > 0 ? string.Format("{0:N0} followers", Channel.FollowerCount) : null; }
@@ -70,7 +73,9 @@ namespace Viddy.ViewModel.Item
         {
             get { return Channel != null && (!string.IsNullOrEmpty(UserFollowers) || !string.IsNullOrEmpty(UserPlays) || !string.IsNullOrEmpty(UserVideoCount)); }
         }
+        #endregion
 
+        #region IFollowViewModel implementation
         public bool IsFollowedByMe { get; set; }
         public bool ChangingFollowState { get; set; }
 
@@ -89,19 +94,6 @@ namespace Viddy.ViewModel.Item
                 return !ChangingFollowState
                        && AuthenticationService.Current.IsLoggedIn;
             }
-        }
-
-        private bool _ignoreFollowedChanged;
-
-        [UsedImplicitly]
-        private async void OnIsFollowedByMeChanged()
-        {
-            if (_ignoreFollowedChanged)
-            {
-                return;
-            }
-
-            await ChangeFollowingState(IsFollowedByMe);
         }
 
         public async Task ChangeFollowingState(bool isFollowing)
@@ -156,6 +148,20 @@ namespace Viddy.ViewModel.Item
 
             }
         }
+        #endregion
+
+        private bool _ignoreFollowedChanged;
+
+        [UsedImplicitly]
+        private async void OnIsFollowedByMeChanged()
+        {
+            if (_ignoreFollowedChanged)
+            {
+                return;
+            }
+
+            await ChangeFollowingState(IsFollowedByMe);
+        }
 
         private void SetIsFollowedByMe(bool value)
         {
@@ -180,5 +186,27 @@ namespace Viddy.ViewModel.Item
                     });
             }
         }
+
+        public RelayCommand NavigateToFollowersCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    Messenger.Default.Send(new ChannelMessage(this, Constants.Messages.UserDetailMsg));
+                    _navigationService.Navigate<UserFollowersView>();
+                });
+            }
+        }
+
+        #region ICanShowFollowers implementations
+        public string Id { get { return Channel != null ? Channel.ChannelId : string.Empty; } }
+        private FollowersViewModel _followers;
+
+        public FollowersViewModel Followers
+        {
+            get { return _followers ?? (_followers = new FollowersViewModel(_vidMeClient, false)); }
+        }
+        #endregion
     }
 }

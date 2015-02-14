@@ -12,7 +12,7 @@
                 DataContext="{Binding UserFollowers, Source={StaticResource Locator}}">
     <interactivity:Interaction.Behaviors>
         <core:EventTriggerBehavior EventName="Loaded">
-            <core:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
+            <core:InvokeCommandAction Command="{Binding Item.Followers.PageLoadedCommand}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
     
@@ -21,17 +21,22 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="refresh"
                               Icon="Refresh"
-                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
-                              Command="{Binding RefreshCommand}"/>
+                              IsEnabled="{Binding Item.Followers.ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
+                              Command="{Binding Item.Followers.RefreshCommand}"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </views:BasePage.BottomAppBar>
 
-    <Grid>
+    <Grid DataContext="{Binding Item.Followers}">
         <controls:LoadingListView ItemsSource="{Binding Items}"
                                   IsEmpty="{Binding IsEmpty}"
                                   IsInitialising="{Binding ProgressIsVisible}"
                                   Margin="19,19,19,0">
+            <controls:LoadingListView.FooterTemplate>
+                <DataTemplate>
+                    <controls:LoadMoreControl/>
+                </DataTemplate>
+            </controls:LoadingListView.FooterTemplate>
             <controls:LoadingListView.ItemTemplate>
                 <DataTemplate>
                     <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"

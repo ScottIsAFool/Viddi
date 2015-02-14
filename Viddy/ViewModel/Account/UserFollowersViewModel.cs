@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
@@ -8,22 +9,24 @@ using GalaSoft.MvvmLight.Messaging;
 using Viddy.Extensions;
 using Viddy.Messaging;
 using Viddy.ViewModel.Item;
+using Viddy.Views.Account;
 using VidMePortable;
+using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel.Account
 {
-    public class UserFollowersViewModel : LoadingItemsViewModel<UserViewModel>
+    public class FollowersViewModel : LoadingItemsViewModel<UserViewModel>
     {
-        private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
+        private readonly bool _isUser;
 
-        private UserViewModel _user;
-
-        public UserFollowersViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
+        public FollowersViewModel(IVidMeClient vidMeClient, bool isUser)
         {
-            _navigationService = navigationService;
             _vidMeClient = vidMeClient;
+            _isUser = isUser;
         }
+
+        public string Id { get; set; }
 
         protected override async Task LoadData(bool isRefresh, bool add = false, int offset = 0)
         {
@@ -41,7 +44,7 @@ namespace Viddy.ViewModel.Account
 
                 IsLoadingMore = add;
 
-                var response = await _vidMeClient.GetUsersFollowersAsync(_user.User.UserId, offset);
+                var response = await GetTask(Id, offset);
                 if (response != null && !response.Users.IsNullOrEmpty())
                 {
                     if (Items == null || !add)
@@ -59,12 +62,34 @@ namespace Viddy.ViewModel.Account
             }
             catch (Exception ex)
             {
-                
+
             }
 
+            IsLoadingMore = false;
             IsEmpty = Items.IsNullOrEmpty();
             SetProgressBar();
         }
+
+        private Task<UsersResponse> GetTask(string id, int offset)
+        {
+            return _isUser
+                ? _vidMeClient.GetUsersFollowersAsync(id, offset)
+                : _vidMeClient.GetChannelFollowersAsync(id, offset);
+        }
+    }
+
+    public class UserFollowersViewModel : ViewModelBase, IBackSupportedViewModel
+    {
+        private readonly INavigationService _navigationService;
+
+        public UserFollowersViewModel(INavigationService navigationService)
+        {
+            _navigationService = navigationService;
+        }
+
+        private Stack<ICanShowFollowers> _previousItems;
+
+        public ICanShowFollowers Item { get; set; }
 
         protected override void WireMessages()
         {
@@ -72,14 +97,53 @@ namespace Viddy.ViewModel.Account
             {
                 if (m.Notification.Equals(Constants.Messages.UserDetailMsg))
                 {
-                    if (_user == null || _user.User.UserId != m.User.User.UserId)
+                    var user = Item as UserViewModel;
+                    if (user == null || user.Id != m.User.Id)
                     {
-                        Reset();
+                        Item = m.User;
+                        Item.Followers.Id = Item.Id;
+                    }
+                }
+            });
 
-                        _user = m.User;
+            Messenger.Default.Register<ChannelMessage>(this, m =>
+            {
+                if (m.Notification.Equals(Constants.Messages.UserDetailMsg))
+                {
+                    var channel = Item as ChannelItemViewModel;
+                    if (channel == null || channel.Id != m.Channel.Id)
+                    {
+                        Item = m.Channel;
+                        Item.Followers.Id = Item.Id;
                     }
                 }
             });
         }
+
+        #region IBackSupportedViewModel implementations
+        public void ChangeContext(Type callingType)
+        {
+            if (_previousItems.IsNullOrEmpty() || callingType != typeof(UserFollowersView))
+            {
+                return;
+            }
+
+            var item = _previousItems.Pop();
+            if (item != null)
+            {
+                Item = item;
+            }
+        }
+
+        public void SaveContext()
+        {
+            if (_previousItems == null)
+            {
+                _previousItems = new Stack<ICanShowFollowers>();
+            }
+
+            _previousItems.Push(Item);
+        }
+        #endregion
     }
 }
