@@ -18,10 +18,21 @@
     <local:BasePage.Resources>
         <x:Double x:Key="ButtonSize">45</x:Double>
     </local:BasePage.Resources>
+    
+    <local:BasePage.BottomAppBar>
+        <CommandBar Visibility="{Binding EditVideo.CanEdit, Converter={StaticResource VisibilityConverter}}">
+            <AppBarButton Label="share"
+                          Command="{Binding EditVideo.ShareCommand}">
+                <AppBarButton.Icon>
+                    <BitmapIcon UriSource="/Assets/Icons/appbar.share.png"/>
+                </AppBarButton.Icon>
+            </AppBarButton>
+        </CommandBar>
+    </local:BasePage.BottomAppBar>
 
     <Grid x:Name="LayoutGrid">
         <Grid x:Name="VideoPreviewGrid"
-              Visibility="{Binding IsUploading, Converter={StaticResource InverseVisibilityConverter}}">
+              Visibility="{Binding EditVideo.CanEdit, Converter={StaticResource InverseVisibilityConverter}}">
             <playerFramework:MediaPlayer IsVolumeVisible="False"
                                          IsDurationVisible="False"
                                          IsTimeElapsedVisible="False"
@@ -90,10 +101,23 @@
         </Grid>
 
         <Grid x:Name="VideoEditGrid"
-              Visibility="{Binding IsUploading, Converter={StaticResource VisibilityConverter}}">
+              Visibility="{Binding EditVideo.CanEdit, Converter={StaticResource VisibilityConverter}}"
+              >
             <controls:BlurredImageControl StorageFile="{Binding File}"
                                           HorizontalAlignment="Stretch"
                                           VerticalAlignment="Stretch" />
+            
+            <StackPanel Orientation="Vertical"
+                        VerticalAlignment="Top"
+                        Visibility="{Binding IsUploading, Converter={StaticResource VisibilityConverter}}">
+                <ProgressBar IsIndeterminate="{Binding IsUploading}"
+                             Background="Transparent"/>
+                <TextBlock Text="Your video is currently uploading, please don't leave this page"
+                           Style="{StaticResource BodyTextBlockStyle}"
+                           FontSize="{StaticResource TextStyleMediumFontSize}"
+                           Margin="19,0"/>
+            </StackPanel>
+            
             <StackPanel Orientation="Vertical"
                         VerticalAlignment="Center">
                 <TextBox Style="{StaticResource FullLengthTextBoxStyleNoFocusChange}"
@@ -120,10 +144,18 @@
                     <CheckBox Content="And is totally NSFW!"
                               Foreground="{ThemeResource PlaceholderTextBrush}"
                               BorderBrush="{ThemeResource PlaceholderTextBrush}"
-                              
                               HorizontalAlignment="Stretch"
                               IsChecked="{Binding EditVideo.IsNsfw, Mode=TwoWay}" />
                 </Border>
+                <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                       Content="Save"
+                                       Background="{ThemeResource TextBoxBackgroundBrush}"
+                                       Opacity="0.8"
+                                       Height="60"
+                                       VerticalContentAlignment="Center"
+                                       HorizontalContentAlignment="Center"
+                                       TapCommand="{Binding EditVideo.SaveChangesCommand}"
+                                       IsEnabled="{Binding EditVideo.CanSave}"/>
             </StackPanel>
         </Grid>
     </Grid>

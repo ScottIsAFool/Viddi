@@ -314,6 +314,7 @@ namespace Viddy
 
         protected override async void OnShareTargetActivated(ShareTargetActivatedEventArgs args)
         {
+            AppStarted();
             base.OnShareTargetActivated(args);
             var shareOperation = args.ShareOperation;
             if (shareOperation.Data.Contains(StandardDataFormats.StorageItems))

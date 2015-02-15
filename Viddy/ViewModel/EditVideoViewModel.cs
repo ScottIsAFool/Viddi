@@ -1,4 +1,5 @@
 ﻿using System;
+using Windows.ApplicationModel.DataTransfer;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using VidMePortable;
@@ -11,13 +12,17 @@ namespace Viddy.ViewModel
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
+        private readonly IMessageBoxService _messageBoxService;
+        private DataTransferManager _manager;
 
         private Video _video;
+        private bool _isUploading;
 
-        public EditVideoViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
+        public EditVideoViewModel(INavigationService navigationService, IVidMeClient vidMeClient, IMessageBoxService messageBoxService)
         {
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
+            _messageBoxService = messageBoxService;
         }
 
         public void SetVideo(Video video)
@@ -26,12 +31,22 @@ namespace Viddy.ViewModel
             CanEdit = true;
         }
 
+        public void SetIsUploading(bool isUploading)
+        {
+            _isUploading = isUploading;
+        }
+
         public bool CanEdit { get; set; }
         public bool IsNsfw { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
 
         public bool IsChanged { get; set; }
+
+        public bool CanSave
+        {
+            get { return !ProgressIsVisible && IsChanged; }
+        }
 
         public RelayCommand SaveChangesCommand
         {
@@ -43,44 +58,73 @@ namespace Viddy.ViewModel
                     {
                         var request = new VideoRequest();
 
-                        if (!Title.Equals(_video.Title))
+                        if (!string.IsNullOrEmpty(Title) && !Title.Equals(_video.Title))
                         {
                             request.Title = Title;
                         }
 
-                        if (!Description.Equals(_video.Description))
+                        if (!string.IsNullOrEmpty(Description) && !Description.Equals(_video.Description))
                         {
                             request.Description = Description;
                         }
 
-                        if (IsNsfw)
+                        if (IsNsfw && !_video.Nsfw)
                         {
-                            request.Title += " NSFW";
+                            request.Title += "NSFW";
                         }
 
                         var response = await _vidMeClient.EditVideoAsync(_video.VideoId, request);
                         
-                        if (response != null && IsNsfw && response.Nsfw && response.Title.EndsWith(" NSFW"))
-                        {
-                            request = new VideoRequest
-                            {
-                                Title = response.Title.Substring(0, response.Title.Length - 4).Trim()
-                            };
-
-                            response = await _vidMeClient.EditVideoAsync(_video.VideoId, request);
-                        }
-
                         if (response != null)
                         {
-                            
+                            IsChanged = false;
                         }
                     }
                     catch (Exception ex)
                     {
 
                     }
-                }, () => IsChanged);
+                }, () => CanSave);
             }
+        }
+
+        public RelayCommand ShareCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    if (_video == null)
+                    {
+                        // TODO: display error
+                        return;
+                    }
+                    if (_isUploading)
+                    {
+                        // TODO: show "do not exit message"
+                        return;
+                    }
+
+                    _manager = DataTransferManager.GetForCurrentView(); 
+                    _manager.DataRequested += ManagerOnDataRequested;
+                    DataTransferManager.ShowShareUI();
+                });
+            }
+        }
+
+        private void ManagerOnDataRequested(DataTransferManager sender, DataRequestedEventArgs args)
+        {
+            _manager.DataRequested -= ManagerOnDataRequested;
+            var request = args.Request;
+            request.Data.Properties.Title = !string.IsNullOrEmpty(_video.Title) ? _video.Title : "Check out my video";
+            var message = "Check out my video"; 
+            request.Data.Properties.Description = message;
+            request.Data.SetUri(new Uri(_video.FullUrl));
+        }
+
+        public override void UpdateProperties()
+        {
+            RaisePropertyChanged(() => CanSave);
         }
     }
 }

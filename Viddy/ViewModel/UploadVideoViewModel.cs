@@ -94,7 +94,9 @@ namespace Viddy.ViewModel
                 {
                     try
                     {
+                        SetProgressBar("Uploading video...");
                         IsUploading = true;
+                        EditVideo.SetIsUploading(true);
                         Pause = !Pause;
                         var request = await _vidMeClient.RequestVideoAsync(new VideoRequest
                         {
@@ -124,6 +126,10 @@ namespace Viddy.ViewModel
                     {
                         
                     }
+
+                    SetProgressBar();
+                    EditVideo.SetIsUploading(false);
+                    IsUploading = false;
                 });
             }
         }
@@ -137,8 +143,8 @@ namespace Viddy.ViewModel
                     var file = m.Sender as StorageFile;
                     if (file == null) return;
 
-                    IsUploading = true;
-                    //EditVideo.CanEdit = IsUploading = false;
+                    //IsUploading = true;
+                    EditVideo.CanEdit = IsUploading = false;
                     File = file;
                 }
             });
