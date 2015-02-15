@@ -42,7 +42,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.Register<VideoRecordViewModel>();
             SimpleIoc.Default.Register<AccountViewModel>();
             SimpleIoc.Default.Register<EditVideoViewModel>();
-            SimpleIoc.Default.Register<UploadVideoViewModel>();
+            SimpleIoc.Default.Register<UploadVideoViewModel>(true);
             SimpleIoc.Default.Register<ManageAccountViewModel>();
             SimpleIoc.Default.Register<ManageAppsAccessViewModel>();
             SimpleIoc.Default.Register<ManageMyAppsViewModel>();

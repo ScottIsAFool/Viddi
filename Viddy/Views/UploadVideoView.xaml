@@ -103,9 +103,9 @@
         <Grid x:Name="VideoEditGrid"
               Visibility="{Binding EditVideo.CanEdit, Converter={StaticResource VisibilityConverter}}"
               >
-            <controls:BlurredImageControl StorageFile="{Binding File}"
-                                          HorizontalAlignment="Stretch"
-                                          VerticalAlignment="Stretch" />
+            <controls:BlurredImageControl HorizontalAlignment="Stretch"
+                                          VerticalAlignment="Stretch"
+                                          Image="{Binding Image}"/>
             
             <StackPanel Orientation="Vertical"
                         VerticalAlignment="Top"

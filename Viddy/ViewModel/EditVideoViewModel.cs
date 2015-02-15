@@ -31,6 +31,8 @@ namespace Viddy.ViewModel
             CanEdit = true;
         }
 
+        public string ThumbnailImage { get; set; }
+
         public void SetIsUploading(bool isUploading)
         {
             _isUploading = isUploading;

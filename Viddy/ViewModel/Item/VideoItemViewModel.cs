@@ -88,7 +88,7 @@ namespace Viddy.ViewModel.Item
             get { return Video != null && !string.IsNullOrEmpty(Video.Title) ? Video.Title : "Untitled"; }
         }
 
-        public bool CanDelete
+        public bool IsOwner
         {
             get
             {
@@ -219,7 +219,7 @@ namespace Viddy.ViewModel.Item
                     {
 
                     }
-                }, () => CanDelete);
+                }, () => IsOwner);
             }
         }
 
@@ -318,6 +318,18 @@ namespace Viddy.ViewModel.Item
 
                     await ChangeVote(vote);
                 });
+            }
+        }
+
+        public RelayCommand EditVideoCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    Messenger.Default.Send(new VideoMessage(this, Constants.Messages.EditVideoMsg));
+                    _navigationService.Navigate<UploadVideoView>();
+                }, () => IsOwner);
             }
         }
 

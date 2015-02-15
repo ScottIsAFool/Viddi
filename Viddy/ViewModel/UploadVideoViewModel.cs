@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Common;
 using Viddy.Extensions;
+using Viddy.Messaging;
 using Viddy.Services;
 using Viddy.Views;
 using VidMePortable;
@@ -40,8 +41,9 @@ namespace Viddy.ViewModel
         }
 
         public EditVideoViewModel EditVideo { get; set; }
-        public StorageFile File { get; set; }
 
+        public StorageFile File { get; set; }
+        public object Image { get; set; }
         public bool Pause { get; set; }
         public bool Play { get; set; }
 
@@ -146,6 +148,17 @@ namespace Viddy.ViewModel
                     //IsUploading = true;
                     EditVideo.CanEdit = IsUploading = false;
                     File = file;
+                    Image = File;
+                }
+            });
+
+            Messenger.Default.Register<VideoMessage>(this, m =>
+            {
+                if (m.Notification.Equals(Constants.Messages.EditVideoMsg))
+                {
+                    EditVideo.SetVideo(m.Video.Video);
+                    Image = m.Video.Video.ThumbnailUrl;
+
                 }
             });
 

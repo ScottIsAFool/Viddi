@@ -30,6 +30,7 @@
             public const string ClearSearchMsg = "ClearSearchMsg";
             public const string UserDetailMsg = "UserDetailMsg";
             public const string NewAppAddedMsg = "NewAppAddedMsg";
+            public const string EditVideoMsg = "EditVideoMsg";
         }
     }
 }

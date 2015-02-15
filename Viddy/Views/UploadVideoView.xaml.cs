@@ -11,8 +11,11 @@ namespace Viddy.Views
         public UploadVideoView()
         {
             InitializeComponent();
+        }
 
-            ApplicationView.GetForCurrentView().SetDesiredBoundsMode(ApplicationViewBoundsMode.UseCoreWindow);
+        protected override ApplicationViewBoundsMode Mode
+        {
+            get { return ApplicationViewBoundsMode.UseCoreWindow; }
         }
 
         private void MediaPlayer_OnMediaFailed(object sender, ExceptionRoutedEventArgs e)

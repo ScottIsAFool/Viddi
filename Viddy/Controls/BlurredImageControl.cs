@@ -12,16 +12,15 @@ namespace Viddy.Controls
 {
     public sealed class BlurredImageControl : Control
     {
-        public static readonly DependencyProperty ImageUrlProperty = DependencyProperty.Register("ImageUrl", typeof(string), typeof(string), new PropertyMetadata(string.Empty, SourceSet));
         public static readonly DependencyProperty BlurProperty = DependencyProperty.Register("Blur", typeof(float), typeof(BlurredImageControl), new PropertyMetadata(15.0f));
+        
+        public static readonly DependencyProperty ImageProperty = DependencyProperty.Register(
+            "Image", typeof (object), typeof (BlurredImageControl), new PropertyMetadata(default(object), SourceSet));
 
-        public static readonly DependencyProperty StorageFileProperty = DependencyProperty.Register(
-            "StorageFile", typeof (StorageFile), typeof (BlurredImageControl), new PropertyMetadata(default(StorageFile), SourceSet));
-
-        public StorageFile StorageFile
+        public object Image
         {
-            get { return (StorageFile) GetValue(StorageFileProperty); }
-            set { SetValue(StorageFileProperty, value); }
+            get { return (object) GetValue(ImageProperty); }
+            set { SetValue(ImageProperty, value); }
         }
 
         private CanvasControl _control;
@@ -40,12 +39,6 @@ namespace Viddy.Controls
         {
             get { return (float)GetValue(BlurProperty); }
             set { SetValue(BlurProperty, value); }
-        }
-
-        public string ImageUrl
-        {
-            get { return (string)GetValue(ImageUrlProperty); }
-            set { SetValue(ImageUrlProperty, value); }
         }
 
         protected override void OnApplyTemplate()
@@ -79,29 +72,35 @@ namespace Viddy.Controls
 
         private async void OnCreateResources(CanvasControl sender, object args)
         {
-            if (StorageFile == null && string.IsNullOrEmpty(ImageUrl))
+            if (Image == null)
             {
                 return;
             }
 
+            _imageLoaded = false;
             _scaleEffect = new ScaleEffect();
             _blurEffect = new GaussianBlurEffect();
 
-            if (StorageFile != null)
+            var file = Image as StorageFile;
+            if(file != null)
             {
-                using (var thumbnail = await StorageFile.GetThumbnailAsync(ThumbnailMode.VideosView))
+                using (var thumbnail = await file.GetThumbnailAsync(ThumbnailMode.VideosView))
                 {
                     _image = await CanvasBitmap.LoadAsync(sender.Device, thumbnail);
                 }
+
+                _imageLoaded = true;
+                sender.Invalidate();
             }
-            else if (!string.IsNullOrWhiteSpace(ImageUrl))
+
+            var url = Image as string;
+            if (!string.IsNullOrEmpty(url))
             {
-                _image = await CanvasBitmap.LoadAsync(sender.Device, new Uri(ImageUrl));
+                _image = await CanvasBitmap.LoadAsync(sender.Device, new Uri(url));
+
+                _imageLoaded = true;
+                sender.Invalidate();
             }
-
-            _imageLoaded = true;
-
-            sender.Invalidate();
         }
 
         private void OnDraw(CanvasControl sender, CanvasDrawEventArgs args)

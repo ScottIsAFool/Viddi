@@ -51,11 +51,10 @@
                               Icon="Refresh"
                               Command="{Binding Video.RefreshVideoInfoCommand}"
                               IsEnabled="{Binding Video.GettingVideoInfo, Converter={StaticResource NegativeBooleanConverter}}"/>
-                <!--<AppBarButton Label="like">
-                    <AppBarButton.Icon>
-                        <BitmapIcon UriSource="" />
-                    </AppBarButton.Icon>
-                </AppBarButton>-->
+                <AppBarButton Label="edit"
+                              Icon="Edit"
+                              Visibility="{Binding Video.IsOwner, Converter={StaticResource VisibilityConverter}}"
+                              Command="{Binding Video.EditVideoCommand}"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </local:BasePage.BottomAppBar>

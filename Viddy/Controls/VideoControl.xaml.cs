@@ -16,7 +16,7 @@ namespace Viddy.Controls
         private void ContainerGrid_OnHolding(object sender, HoldingRoutedEventArgs e)
         {
             var vm = DataContext as VideoItemViewModel;
-            if (vm == null || !vm.CanDelete)
+            if (vm == null || !vm.IsOwner)
             {
                 return;
             }
