@@ -15,6 +15,7 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Common;
+using Viddy.Core.Extensions;
 using Viddy.Extensions;
 using Viddy.Messaging;
 using Viddy.Services;
@@ -150,6 +151,7 @@ namespace Viddy
             Locator.Auth.StartService();
             Locator.NotificationService.StartService();
             Locator.Review.IncreaseCount();
+            Locator.TaskService.CreateService();
             _appStarted = true;
         }
 

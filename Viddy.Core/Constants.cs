@@ -10,6 +10,8 @@
         public const string FourSquareClientSecret = "J1IUOTC0M0DCNVBRU4JNPI12DKD5UDYWXNREYLTN3YZTIYXT";
         public const string FourSquareSearchUrl = "https://api.foursquare.com/v2/venues/search?client_id={0}&client_secret={1}&v=20150212&ll={2},{3}&limit=10";
         public const string FourSquareGeneralAreaUrl = FourSquareSearchUrl + "&intent=checkin&radius=1000&categoryId=4f2a25ac4b909258e854f55f";
+        public const string ViddyNotificationAgent = "Viddy.NotificationBackgroundTask";
+        public const string ViddyNotificationAgentStartPoint = "Viddy.BackgroundTask.NotificationTask";
 
         public static class StorageSettings
         {

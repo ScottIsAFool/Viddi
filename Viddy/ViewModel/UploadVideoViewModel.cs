@@ -5,6 +5,8 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Common;
+using Viddy.Core.Extensions;
+using Viddy.Core.Services;
 using Viddy.Extensions;
 using Viddy.Messaging;
 using Viddy.Services;

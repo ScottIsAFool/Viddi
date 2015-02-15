@@ -2,6 +2,7 @@
 using Cimbalino.Toolkit.Services;
 using Coding4Fun.Toolkit.Controls;
 using GalaSoft.MvvmLight.Command;
+using Viddy.Core.Services;
 using Viddy.Services;
 using Viddy.ViewModel.Item;
 using VidMePortable;

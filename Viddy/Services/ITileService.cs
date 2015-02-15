@@ -10,6 +10,7 @@ using Cimbalino.Toolkit.Extensions;
 using Cimbalino.Toolkit.Services;
 using NotificationsExtensions.BadgeContent;
 using NotificationsExtensions.TileContent;
+using Viddy.Core.Extensions;
 using Viddy.Extensions;
 using VidMePortable.Model;
 

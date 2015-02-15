@@ -1,15 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using PropertyChanged;
-using Viddy.Extensions;
+using Viddy.BackgroundTask;
+using Viddy.Core.Services;
 using Viddy.Views.Account;
 using VidMePortable;
-using VidMePortable.Model;
 
 namespace Viddy.Services
 {
@@ -28,18 +26,20 @@ namespace Viddy.Services
         private readonly ITileService _tileService;
         private readonly INavigationService _navigationService;
         private readonly DispatcherTimer _timer;
+        private readonly NotificationTask _notificationTask;
 
 #if DEBUG
         private const double Interval = 0.5;
 #else
         private const int Interval = 15;
 #endif
-
+        
         public NotificationService(INavigationService navigationService, IVidMeClient vidMeClient, ITileService tileService)
         {
             _vidMeClient = vidMeClient;
             _tileService = tileService;
             _navigationService = navigationService;
+            _notificationTask = new NotificationTask();
 
             _timer = new DispatcherTimer {Interval = TimeSpan.FromMinutes(Interval)};
             _timer.Tick += TimerOnTick;
@@ -48,6 +48,11 @@ namespace Viddy.Services
         private void TimerOnTick(object sender, object o)
         {
             CheckForNotifications();
+        }
+
+        private async Task CheckForNotifications()
+        {
+            NotificationCount = await _notificationTask.CheckForNotifications(false);
         }
 
         public void StartService()
@@ -80,7 +85,7 @@ namespace Viddy.Services
                     _timer.Stop();
                 }
 
-                UpdateTileCount(0);
+                _notificationTask.UpdateTileCount(0, false);
             }
         }
 
@@ -97,7 +102,8 @@ namespace Viddy.Services
             {
                 if (await _vidMeClient.MarkAllNotificationsAsReadAsync())
                 {
-                    UpdateTileCount(0);
+                    NotificationCount = 0;
+                    _notificationTask.UpdateTileCount(0, false);
                     return true;
                 }
             }
@@ -111,65 +117,6 @@ namespace Viddy.Services
         public RelayCommand NavigateToNotificationsCommand
         {
             get { return new RelayCommand(() => _navigationService.Navigate<NotificationsView>()); }
-        }
-
-        private List<Notification> _notifications;
-        private async Task CheckForNotifications(int limit = 1, int offset = 0)
-        {
-            if (!AuthenticationService.Current.IsLoggedIn)
-            {
-                UpdateTileCount(0);
-                return;
-            }
-
-            try
-            {
-                var response = await _vidMeClient.GetNotificationsAsync(limit, offset);
-                if (response != null && !response.Notifications.IsNullOrEmpty())
-                {
-                    if (limit == 1)
-                    {
-                        _notifications = null;
-                        var notification = response.Notifications[0];
-                        if (!notification.Read)
-                        {
-                            await CheckForNotifications(20);
-                        }
-                        else
-                        {
-                            UpdateTileCount(0);
-                        }
-                    }
-                    else
-                    {
-                        if (_notifications == null)
-                        {
-                            _notifications = new List<Notification>();
-                        }
-
-                        _notifications.AddRange(response.Notifications);
-                        var hasReadItems = _notifications.Any(x => x.Read);
-                        if (hasReadItems)
-                        {
-                            UpdateTileCount(_notifications.Count(x => !x.Read));
-                        }
-                        else
-                        {
-                            await CheckForNotifications(20, _notifications.Count);
-                        }
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                
-            }
-        }
-
-        private void UpdateTileCount(int count)
-        {
-            NotificationCount = count;
-            _tileService.UpdateTileCount(count);
         }
     }
 }

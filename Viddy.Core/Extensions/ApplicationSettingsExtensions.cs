@@ -1,7 +1,7 @@
 ﻿using Cimbalino.Toolkit.Services;
 using Newtonsoft.Json;
 
-namespace Viddy.Extensions
+namespace Viddy.Core.Extensions
 {
     public static class ApplicationSettingsExtensions
     {

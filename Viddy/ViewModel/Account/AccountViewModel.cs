@@ -6,6 +6,7 @@ using Windows.Security.Authentication.Web;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Viddy.Core.Services;
 using Viddy.Messaging;
 using Viddy.Services;
 using Viddy.ViewModel.Item;

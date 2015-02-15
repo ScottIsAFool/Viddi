@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Net;
 
-namespace Viddy.Extensions
+namespace Viddy.Core.Extensions
 {
     /// <summary>
     /// Provides a set of static (Shared in Visual Basic) methods for <see cref="Uri"/> instances.

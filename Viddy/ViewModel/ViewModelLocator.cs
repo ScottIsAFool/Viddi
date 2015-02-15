@@ -1,6 +1,7 @@
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using Viddy.Core.Services;
 using Viddy.Extensions;
 using Viddy.Model;
 using Viddy.Services;
@@ -36,6 +37,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.RegisterIf<ITileService, TileService>();
             SimpleIoc.Default.RegisterIf<ISettingsService, SettingsService>();
             SimpleIoc.Default.RegisterIf<INotificationService, NotificationService>();
+            SimpleIoc.Default.RegisterIf<ITaskService, TaskService>();
 
             SimpleIoc.Default.Register<FoursqureViewModel>();
             SimpleIoc.Default.Register<AvatarViewModel>();
@@ -184,6 +186,11 @@ namespace Viddy.ViewModel
         public INotificationService NotificationService
         {
             get { return ServiceLocator.Current.GetInstance<INotificationService>(); }
+        }
+
+        public ITaskService TaskService
+        {
+            get { return ServiceLocator.Current.GetInstance<ITaskService>(); }
         }
         
         public static void Cleanup()

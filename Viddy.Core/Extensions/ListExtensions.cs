@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 
-namespace Viddy.Extensions
+namespace Viddy.Core.Extensions
 {
     public static class ListExtensions
     {

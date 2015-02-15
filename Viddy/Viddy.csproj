@@ -113,7 +113,6 @@
     <Compile Include="Common\NavigationParameters.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
-    <Compile Include="Constants.cs" />
     <Compile Include="Controls\BlurredImageControl.cs" />
     <Compile Include="Controls\ChannelControl.xaml.cs">
       <DependentUpon>ChannelControl.xaml</DependentUpon>
@@ -152,11 +151,8 @@
     <Compile Include="Converters\CommentEnabledConverter.cs" />
     <Compile Include="Converters\NullBooleanConverter.cs" />
     <Compile Include="Converters\ThumbnailConverter.cs" />
-    <Compile Include="Extensions\ApplicationSettingsExtensions.cs" />
     <Compile Include="Extensions\ContainerExtensions.cs" />
-    <Compile Include="Extensions\ListExtensions.cs" />
     <Compile Include="Extensions\ListTypeExtensions.cs" />
-    <Compile Include="Extensions\UriExtensions.cs" />
     <Compile Include="Foursquare\FoursquareClient.cs" />
     <Compile Include="Foursquare\SearchResponse.cs" />
     <Compile Include="Logging\WinLogger.cs" />
@@ -166,15 +162,14 @@
     <Compile Include="Messaging\UserMessage.cs" />
     <Compile Include="Messaging\VideoMessage.cs" />
     <Compile Include="Model\AppSettings.cs" />
-    <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Services\CameraInfoService.cs" />
     <Compile Include="Services\ICameraInfoService.cs" />
     <Compile Include="Services\ITileService.cs" />
     <Compile Include="Services\IToastService.cs" />
     <Compile Include="Services\NotificationService.cs" />
     <Compile Include="Services\ReviewService.cs" />
+    <Compile Include="Services\TaskService.cs" />
     <Compile Include="Services\ToastService.cs" />
-    <Compile Include="Utils.cs" />
     <Compile Include="ViewModel\Account\AccountViewModel.cs" />
     <Compile Include="ViewModel\Account\AvatarViewModel.cs" />
     <Compile Include="ViewModel\Account\CreateAccountViewModel.cs" />
@@ -514,6 +509,16 @@
     <SDKReference Include="Microsoft.PlayerFramework.Xaml, Version=2.0.0.0">
       <Name>Microsoft Player Framework</Name>
     </SDKReference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Viddy.BackgroundTask\Viddy.BackgroundTask.csproj">
+      <Project>{5f3fcb6f-4203-4555-bd9c-a28b95f9f91e}</Project>
+      <Name>Viddy.BackgroundTask</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Viddy.Core\Viddy.Core.csproj">
+      <Project>{d0dc6c8b-6813-40bd-80f1-2b70503bf43a}</Project>
+      <Name>Viddy.Core</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

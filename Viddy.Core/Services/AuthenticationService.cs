@@ -1,12 +1,12 @@
 ﻿using System;
 using Cimbalino.Toolkit.Services;
 using PropertyChanged;
-using Viddy.Extensions;
+using Viddy.Core.Extensions;
 using VidMePortable;
 using VidMePortable.Model;
 using VidMePortable.Model.Responses;
 
-namespace Viddy.Services
+namespace Viddy.Core.Services
 {
     [ImplementPropertyChanged]
     public class AuthenticationService
@@ -71,6 +71,11 @@ namespace Viddy.Services
             {
                 signedOut(this, EventArgs.Empty);
             }
+        }
+
+        public IVidMeClient GetAuthenticatedVidMeClient()
+        {
+            return _vidMeClient;
         }
 
         public AuthResponse AuthenticationInfo { get; private set; }

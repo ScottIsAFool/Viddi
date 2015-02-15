@@ -3,6 +3,7 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
+using Viddy.Core.Services;
 using Viddy.Messaging;
 using Viddy.Model;
 using Viddy.Services;

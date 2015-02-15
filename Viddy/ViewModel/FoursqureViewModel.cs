@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
+using Viddy.Core.Extensions;
 using Viddy.Extensions;
 using Viddy.Foursquare;
 using Viddy.Model;

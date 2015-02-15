@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using JetBrains.Annotations;
+using Viddy.Core.Services;
 using Viddy.Messaging;
 using Viddy.Services;
 using Viddy.ViewModel.Account;
