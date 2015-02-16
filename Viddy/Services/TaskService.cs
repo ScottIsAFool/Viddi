@@ -27,7 +27,7 @@ namespace Viddy.Services
                     TaskEntryPoint = Constants.ViddyNotificationAgentStartPoint
                 };
 
-                var trigger = new TimeTrigger(30, false);
+                var trigger = new TimeTrigger((uint)frequencyInMinutes, false);
                 taskBuilder.SetTrigger(trigger);
                 taskBuilder.Register();
             }

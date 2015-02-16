@@ -14,7 +14,7 @@ namespace Viddy.Model
         ElementTheme Theme { get; set; }
         bool LocationIsOn { get; set; }
         bool CheckForNotificationsInBackground { get; set; }
-        int NotificationCheckFrequencyInMinutes { get; set; }
+        int NotificationFrequency { get; set; }
         void Save();
     }
 
@@ -29,6 +29,7 @@ namespace Viddy.Model
         {
             _applicationSettings = applicationSettings;
             Theme = ElementTheme.Light;
+            NotificationFrequency = 30;
         }
 
         public void StartService()
@@ -51,7 +52,7 @@ namespace Viddy.Model
         public ElementTheme Theme { get; set; }
         public bool LocationIsOn { get; set; }
         public bool CheckForNotificationsInBackground { get; set; }
-        public int NotificationCheckFrequencyInMinutes { get; set; }
+        public int NotificationFrequency { get; set; }
 
         [UsedImplicitly]
         private void OnCheckForNotificationsInBackgroundChanged()

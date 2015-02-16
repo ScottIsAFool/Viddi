@@ -5,12 +5,13 @@
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 xmlns:views="using:Viddy.Views"
                 xmlns:controls="using:Viddy.Controls"
-                xmlns:controls1="using:WinRTXamlToolkit.Controls"
+                xmlns:converters="using:Viddy.Converters"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding Settings, Source={StaticResource Locator}}">
 
     <views:BasePage.Resources>
+        <converters:FrequencyConverter x:Key="FrequencyConverter"/>
         <Style x:Key="RadioSelectionTemplate"
                TargetType="RadioButton">
             <Setter Property="Margin"
@@ -189,9 +190,15 @@
                                    Margin="0,0,0,12" />
                         <ToggleSwitch Header="Background check for notifications"
                                       IsOn="{Binding CheckForNotificationsInBackground, Mode=TwoWay}" />
-                        <controls1:NumericUpDown Minimum="30"
-                                                 SmallChange="30"
-                                                 Maximum="1440"/>
+                        <ComboBox ItemsSource="{Binding UpdateFrequencies}"
+                                  SelectedItem="{Binding NotificationFrequency, Mode=TwoWay}"
+                                  Header="Check for notifications every...">
+                            <ComboBox.ItemTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Converter={StaticResource FrequencyConverter}}"/>
+                                </DataTemplate>
+                            </ComboBox.ItemTemplate>
+                        </ComboBox>
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>
