@@ -61,6 +61,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.Register<EditProfileViewModel>();
             SimpleIoc.Default.Register<UserFollowersViewModel>(true);
             SimpleIoc.Default.Register<NotificationsViewModel>(true);
+            SimpleIoc.Default.Register<AboutViewModel>();
         }
 
         public MainViewModel Main
@@ -156,6 +157,11 @@ namespace Viddy.ViewModel
         public UserFollowersViewModel UserFollowers
         {
             get { return ServiceLocator.Current.GetInstance<UserFollowersViewModel>(); }
+        }
+
+        public AboutViewModel About
+        {
+            get { return ServiceLocator.Current.GetInstance<AboutViewModel>(); }
         }
 
         public NotificationsViewModel Notifications

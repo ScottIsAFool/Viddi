@@ -172,6 +172,7 @@
     <Compile Include="Services\ReviewService.cs" />
     <Compile Include="Services\TaskService.cs" />
     <Compile Include="Services\ToastService.cs" />
+    <Compile Include="ViewModel\AboutViewModel.cs" />
     <Compile Include="ViewModel\Account\AccountViewModel.cs" />
     <Compile Include="ViewModel\Account\AvatarViewModel.cs" />
     <Compile Include="ViewModel\Account\CreateAccountViewModel.cs" />
@@ -213,6 +214,9 @@
     <Compile Include="ViewModel\VideoLoadingViewModel.cs" />
     <Compile Include="ViewModel\VideoPlayerViewModel.cs" />
     <Compile Include="ViewModel\ViewModelBase.cs" />
+    <Compile Include="Views\AboutView.xaml.cs">
+      <DependentUpon>AboutView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Account\AccountView.xaml.cs">
       <DependentUpon>AccountView.xaml</DependentUpon>
     </Compile>
@@ -359,6 +363,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Page>
+    <Page Include="Views\AboutView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Account\AccountView.xaml">
       <SubType>Designer</SubType>
