@@ -162,6 +162,7 @@
     <Compile Include="Messaging\UserMessage.cs" />
     <Compile Include="Messaging\VideoMessage.cs" />
     <Compile Include="Model\AppSettings.cs" />
+    <Compile Include="Model\UpdateFrequency.cs" />
     <Compile Include="Services\CameraInfoService.cs" />
     <Compile Include="Services\ICameraInfoService.cs" />
     <Compile Include="Services\ITileService.cs" />
@@ -500,6 +501,9 @@
     <Reference Include="VidMePortable, Version=0.0.0.33, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\VidMePortable.0.0.0.33-beta\lib\portable-net45+win+wpa81+wp80+MonoAndroid10+MonoTouch10\VidMePortable.dll</HintPath>
+    </Reference>
+    <Reference Include="WinRTXamlToolkit">
+      <HintPath>..\packages\WinRTXamlToolkit.WindowsPhone.1.8.1.0\lib\wpa\WinRTXamlToolkit.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>

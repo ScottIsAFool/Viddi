@@ -5,6 +5,7 @@
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 xmlns:views="using:Viddy.Views"
                 xmlns:controls="using:Viddy.Controls"
+                xmlns:controls1="using:WinRTXamlToolkit.Controls"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding Settings, Source={StaticResource Locator}}">
@@ -163,7 +164,8 @@
                         </Grid>
                     </StackPanel>
                     <StackPanel Orientation="Vertical"
-                                Margin="0,12">
+                                Margin="0,12"
+                                Visibility="Collapsed">
                         <TextBlock Text="LOCATION"
                                    Style="{StaticResource BodyTextBlockStyle}"
                                    FontWeight="Bold"
@@ -174,6 +176,22 @@
                                    Margin="0,0,0,12" />
                         <ToggleSwitch Header="Location service"
                                       IsOn="{Binding IsLocationOn, Mode=TwoWay}" />
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical"
+                                Margin="0,12">
+                        <TextBlock Text="NOTIFICATIONS"
+                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   FontWeight="Bold"
+                                   Margin="0,0,0,12" />
+                        <TextBlock Text="Would you like this app to check for new notifications in the background? If so, you can set how often you'd like the app to check."
+                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   FontSize="{StaticResource TextStyleMediumFontSize}"
+                                   Margin="0,0,0,12" />
+                        <ToggleSwitch Header="Background check for notifications"
+                                      IsOn="{Binding CheckForNotificationsInBackground, Mode=TwoWay}" />
+                        <controls1:NumericUpDown Minimum="30"
+                                                 SmallChange="30"
+                                                 Maximum="1440"/>
                     </StackPanel>
                 </StackPanel>
             </ScrollViewer>

@@ -8,13 +8,13 @@ namespace Viddy.Services
 {
     public interface ITaskService
     {
-        Task CreateService();
+        Task CreateService(int frequencyInMinutes = 30);
         void RemoveService();
     }
 
     public class TaskService : ITaskService
     {
-        public async Task CreateService()
+        public async Task CreateService(int frequencyInMinutes = 30)
         {
             var backgroundStatus = await BackgroundExecutionManager.RequestAccessAsync();
 

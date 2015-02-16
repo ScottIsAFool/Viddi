@@ -3,20 +3,49 @@ using GalaSoft.MvvmLight.Command;
 using JetBrains.Annotations;
 using ThemeManagerRt;
 using Viddy.Model;
+using Viddy.Services;
 
 namespace Viddy.ViewModel
 {
     public class SettingsViewModel : ViewModelBase
     {
         private readonly ISettingsService _settingsService;
+        private readonly ITaskService _taskService;
 
-        public SettingsViewModel(ISettingsService settingsService)
+        public SettingsViewModel(ISettingsService settingsService, ITaskService taskService)
         {
             _settingsService = settingsService;
+            _taskService = taskService;
         }
 
         public bool IsLightTheme { get; set; }
         public bool IsLocationOn { get; set; }
+        public bool CheckForNotificationsInBackground { get; set; }
+        public int NotificationCheckFrequencyInMinutes { get; set; }
+
+        [UsedImplicitly]
+        private void OnCheckForNotificationsInBackgroundChanged()
+        {
+            if (CheckForNotificationsInBackground)
+            {
+                _taskService.CreateService();
+            }
+            else
+            {
+                _taskService.RemoveService();
+            }
+
+            _settingsService.CheckForNotificationsInBackground = CheckForNotificationsInBackground;
+        }
+
+        [UsedImplicitly]
+        private void OnNotificationCheckFrequencyInMinutesChanged()
+        {
+            _taskService.RemoveService();
+            _taskService.CreateService(NotificationCheckFrequencyInMinutes);
+
+            _settingsService.NotificationCheckFrequencyInMinutes = NotificationCheckFrequencyInMinutes;
+        }
 
         [UsedImplicitly]
         private void OnIsLightThemeChanged()
@@ -37,22 +66,6 @@ namespace Viddy.ViewModel
         private void OnIsLocationOnChanged()
         {
             _settingsService.LocationIsOn = IsLocationOn;
-        }
-
-        public RelayCommand ToLightCommand
-        {
-            get
-            {
-                return new RelayCommand(ThemeManager.ToLightTheme);
-            }
-        }
-
-        public RelayCommand ToDarkCommand
-        {
-            get
-            {
-                return new RelayCommand(ThemeManager.ToDarkTheme);
-            }
         }
     }
 }

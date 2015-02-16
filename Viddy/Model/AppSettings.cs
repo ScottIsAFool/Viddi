@@ -5,7 +5,6 @@ using PropertyChanged;
 using ThemeManagerRt;
 using Viddy.Core;
 using Viddy.Core.Extensions;
-using Viddy.Extensions;
 
 namespace Viddy.Model
 {
@@ -14,6 +13,8 @@ namespace Viddy.Model
         void StartService();
         ElementTheme Theme { get; set; }
         bool LocationIsOn { get; set; }
+        bool CheckForNotificationsInBackground { get; set; }
+        int NotificationCheckFrequencyInMinutes { get; set; }
         void Save();
     }
 
@@ -49,6 +50,20 @@ namespace Viddy.Model
 
         public ElementTheme Theme { get; set; }
         public bool LocationIsOn { get; set; }
+        public bool CheckForNotificationsInBackground { get; set; }
+        public int NotificationCheckFrequencyInMinutes { get; set; }
+
+        [UsedImplicitly]
+        private void OnCheckForNotificationsInBackgroundChanged()
+        {
+            Save();
+        }
+
+        [UsedImplicitly]
+        private void OnNotificationCheckFrequencyInMinutesChanged()
+        {
+            Save();
+        }
 
         [UsedImplicitly]
         private void OnThemeChanged()

@@ -1,14 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-#if WINDOWS_PHONE
-using System.Collections.Generic;
-using Windows.Phone.Media.Capture;
-using Microsoft.Devices;
-#else
 using System;
 using Windows.Media.Capture;
 using Windows.Devices.Enumeration;
-#endif
 
 namespace Cimbalino.Toolkit.Services
 {
@@ -19,15 +13,6 @@ namespace Cimbalino.Toolkit.Services
             FrontFacing,
             Primary
         };
-#if WINDOWS_PHONE
-        public IReadOnlyList<FlashState> GetAvailableFlashStates()
-        {
-            IReadOnlyList<object> rawValueList = PhotoCaptureDevice.GetSupportedPropertyValues(CameraSensorLocation.Back, KnownCameraPhotoProperties.FlashMode);
-            List<FlashState> flashStates = new List<FlashState>(rawValueList.Count);
-            foreach (object rawValue in rawValueList) flashStates.Add((FlashState) (uint) rawValue);
-            return flashStates.AsReadOnly();
-        }
-#else
         public CameraInfoService()
         {
             _captureManager = new MediaCapture();
@@ -138,11 +123,9 @@ namespace Cimbalino.Toolkit.Services
                 await StartService(new MediaCaptureInitializationSettings {VideoDeviceId = device.Id});
             }
         }
-#endif
        
         public async Task StartService(MediaCaptureInitializationSettings settings)
         {
-#if !WINDOWS_PHONE
             try
             {
                 if (_captureManager == null)
@@ -173,47 +156,30 @@ namespace Cimbalino.Toolkit.Services
                 }
             }
             catch { }
-#endif
         }
 
         public async Task<bool> HasPrimaryCamera()
         {
-#if WINDOWS_PHONE
-                return PhotoCamera.IsCameraTypeSupported(CameraType.Primary);
-#else
             return await HasCameraType(CameraType.Primary);
-#endif
         }
 
         public async Task<bool> HasFrontFacingCamera()
         {
-#if WINDOWS_PHONE
-                return PhotoCamera.IsCameraTypeSupported(CameraType.FrontFacing);
-#else
             return await HasCameraType(CameraType.FrontFacing);
-#endif
         }
 
         public async Task<bool> HasFlash()
         {
-#if WINDOWS_PHONE
-                return GetAvailableFlashStates().Any(r => r != FlashState.Off);
-#else
             return _captureManager.VideoDeviceController != null
                    && _captureManager.VideoDeviceController.FlashControl != null
                    && _captureManager.VideoDeviceController.FlashControl.Supported;
-#endif
         }
 
         public async Task<bool> SupportsFocus()
         {
-#if WINDOWS_PHONE
-            return PhotoCaptureDevice.IsFocusSupported(CameraSensorLocation.Back);
-#else
             return _captureManager.VideoDeviceController != null
                    && _captureManager.VideoDeviceController.FocusControl != null
                    && _captureManager.VideoDeviceController.FocusControl.Supported;
-#endif
         }
     }
 }
