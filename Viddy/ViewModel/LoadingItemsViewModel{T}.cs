@@ -11,6 +11,7 @@ namespace Viddy.ViewModel
         public bool IsLoadingMore { get; set; }
         public ObservableCollection<TItemType> Items { get; set; }
         public bool IsEmpty { get; set; }
+        public bool HasErrors { get; set; }
 
         public RelayCommand PageLoadedCommand
         {
@@ -61,6 +62,7 @@ namespace Viddy.ViewModel
             CanLoadMore = false;
             IsLoadingMore = false;
             IsEmpty = true;
+            HasErrors = false;
             RaisePropertyChanged(() => IsPinned);
         }
     }

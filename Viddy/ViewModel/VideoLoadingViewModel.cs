@@ -29,6 +29,8 @@ namespace Viddy.ViewModel
                 return;
             }
 
+            HasErrors = false;
+
             try
             {
                 if (!add)
@@ -68,7 +70,8 @@ namespace Viddy.ViewModel
             }
             catch (Exception ex)
             {
-
+                Log.DebugException(string.Format("{0}.LoadData()", GetType()), ex);
+                HasErrors = true;
             }
 
             IsEmpty = Items.IsNullOrEmpty();

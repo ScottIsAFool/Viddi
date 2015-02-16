@@ -9,7 +9,6 @@ using GalaSoft.MvvmLight.Messaging;
 using Viddy.Core;
 using Viddy.Core.Services;
 using Viddy.Messaging;
-using Viddy.Services;
 using Viddy.ViewModel.Item;
 using Viddy.Views;
 using Viddy.Views.Account;

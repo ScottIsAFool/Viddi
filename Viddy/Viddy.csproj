@@ -84,6 +84,7 @@
   <ItemGroup>
     <!-- A reference to the entire .Net Framework and Windows SDK are automatically included -->
     <None Include="app.config" />
+    <Content Include="Assets\Icons\appbar.film.list.png" />
     <Content Include="Assets\Icons\appbar.share.png" />
     <Content Include="Assets\TileIcons\Logo.scale-100.png" />
     <Content Include="Assets\TileIcons\Logo.scale-140.png" />
