@@ -3,6 +3,7 @@ using Cimbalino.Toolkit.Services;
 using JetBrains.Annotations;
 using PropertyChanged;
 using ThemeManagerRt;
+using Viddy.Core;
 using Viddy.Core.Extensions;
 using Viddy.Extensions;
 

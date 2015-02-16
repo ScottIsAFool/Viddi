@@ -2,6 +2,7 @@
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using GalaSoft.MvvmLight.Messaging;
+using Viddy.Core;
 
 namespace Viddy.Views
 {

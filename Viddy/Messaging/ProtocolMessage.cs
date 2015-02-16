@@ -8,7 +8,8 @@ namespace Viddy.Messaging
         {
             Channel,
             User, 
-            Search
+            Search,
+            Video
         }
 
         public ProtocolMessage(ProtocolType protocolType, string content, bool secondaryContent = false)

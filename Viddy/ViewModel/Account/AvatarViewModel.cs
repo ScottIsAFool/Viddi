@@ -5,6 +5,7 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Viddy.Core;
 using Viddy.Core.Services;
 using Viddy.Services;
 using VidMePortable;

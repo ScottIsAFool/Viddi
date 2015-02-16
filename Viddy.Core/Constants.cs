@@ -1,4 +1,4 @@
-﻿namespace Viddy
+﻿namespace Viddy.Core
 {
     public static class Constants
     {
@@ -20,6 +20,7 @@
             public const string LaunchedCountSetting = "LaunchedCountSetting";
             public const string PhoneAlreadyRespondedSetting = "PhoneAlreadyRespondedSetting";
             public const string ApplicationSettings = "ApplicationSettings";
+            public const string PreviousToasts = "PreviousToasts";
         }
 
         public static class Messages

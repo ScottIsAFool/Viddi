@@ -8,6 +8,7 @@ using Windows.UI.Notifications;
 using Cimbalino.Toolkit.Services;
 using NotificationsExtensions.BadgeContent;
 using NotificationsExtensions.ToastContent;
+using Viddy.Core;
 using Viddy.Core.Extensions;
 using Viddy.Core.Services;
 using VidMePortable;
@@ -19,8 +20,6 @@ namespace Viddy.BackgroundTask
     {
         private IVidMeClient _vidMeClient;
         private readonly IApplicationSettingsService _settingsService = new ApplicationSettingsService();
-
-        private AuthenticationService _authenticationService;
 
         private List<Notification> _notifications;
         public async void Run(IBackgroundTaskInstance taskInstance)
@@ -37,7 +36,7 @@ namespace Viddy.BackgroundTask
             if (AuthenticationService.Current == null)
             {
                 _vidMeClient = new VidMeClient(Utils.DeviceId, "WindowsPhone");
-                _authenticationService = new AuthenticationService(_settingsService, _vidMeClient);
+                new AuthenticationService(_settingsService, _vidMeClient);
             }
 
             if (AuthenticationService.Current != null)
@@ -121,20 +120,104 @@ namespace Viddy.BackgroundTask
             return unreadCount;
         }
 
+        private List<string> _previousToastIds;
         public void UpdateTileCount(int count, bool showToast)
         {
             if (showToast)
             {
-                // Show toast
-                var toastNotification = ToastContentFactory.CreateToastText02();
-                toastNotification.TextHeading.Text = "Viddy";
-                toastNotification.TextBodyWrap.Text = count > 1 ? string.Format("You have {0} unread notifications", count) : "You have 1 unread notification";
-                ToastNotificationManager.CreateToastNotifier().Show(toastNotification.CreateNotification());
+                LoadPreviousToasts();
+                ShowToasts();
+                SavePreviousToasts();
+            }
+
+            if (count == 0)
+            {
+                ClearPreviousToasts();
             }
 
             // Update tile
             var badgeContent = new BadgeNumericNotificationContent((uint)count);
             BadgeUpdateManager.CreateBadgeUpdaterForApplication().Update(badgeContent.CreateNotification());
+        }
+
+        private void ShowToasts()
+        {
+            var toastManager = ToastNotificationManager.CreateToastNotifier();
+            // Show toast
+            foreach (var notification in _notifications.Where(x => !x.Read))
+            {
+                if (_previousToastIds.Contains(notification.NotificationId))
+                {
+                    continue;
+                }
+
+                var toastNotification = ToastContentFactory.CreateToastText02();
+                toastNotification.Launch = HandleNotificationType(notification);
+                toastNotification.TextHeading.Text = "Viddy";
+                toastNotification.TextBodyWrap.Text = notification.Text;
+                toastManager.Show(toastNotification.CreateNotification());
+
+                _previousToastIds.Add(notification.NotificationId);
+            }
+        }
+
+        private static string HandleNotificationType(Notification notification)
+        {
+            if (notification == null)
+            {
+                return "viddy://";
+            }
+
+            var type = notification.NotificationType;
+
+            switch (type)
+            {
+                case NotificationType.ChannelSubscribed:
+                    var channel = notification.Channel;
+                    if (channel != null)
+                    {
+                        return string.Format("viddy://channel?id={0}", channel.ChannelId);
+                    }
+                    break;
+                case NotificationType.CommentReply:
+                    break;
+                case NotificationType.UserSubscribed:
+                    var user = notification.User;
+                    if (user != null)
+                    {
+                        return string.Format("viddy://user?id={0}", user.UserId);
+                    }
+                    break;
+                case NotificationType.VideoComment:
+                case NotificationType.VideoUpVoted:
+                    var video = notification.Video;
+                    if (video != null)
+                    {
+                        return string.Format("viddy://video?id={0}", video.VideoId);
+                    }
+                    break;
+            }
+
+            return "viddy://";
+        }
+
+        private void LoadPreviousToasts()
+        {
+            var list = _settingsService.Local.GetS<List<string>>(Constants.StorageSettings.PreviousToasts);
+            _previousToastIds = list ?? new List<string>();
+        }
+
+        private void SavePreviousToasts()
+        {
+            if (!_previousToastIds.IsNullOrEmpty())
+            {
+                _settingsService.Local.SetS(Constants.StorageSettings.PreviousToasts, _previousToastIds);
+            }
+        }
+
+        private void ClearPreviousToasts()
+        {
+            _settingsService.Local.Remove(Constants.StorageSettings.PreviousToasts);
         }
     }
 }

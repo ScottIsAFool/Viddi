@@ -15,6 +15,7 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Common;
+using Viddy.Core;
 using Viddy.Core.Extensions;
 using Viddy.Extensions;
 using Viddy.Messaging;
@@ -79,6 +80,16 @@ namespace Viddy
             Messenger.Default.Send(new PinMessage());
 
             AppStarted();
+
+            if (!string.IsNullOrEmpty(e.Arguments) && Uri.IsWellFormedUriString(e.Arguments, UriKind.Absolute) && e.Arguments.StartsWith("viddy://"))
+            {
+                var uri = new Uri(e.Arguments);
+                if (!string.IsNullOrEmpty(uri.Host))
+                {
+                    HandleUriLaunch(uri);
+                    return;
+                }
+            }
 
             // Do not repeat app initialization when the Window already has content,
             // just ensure that the window is active
@@ -258,51 +269,60 @@ namespace Viddy
                     if (eventArgs != null)
                     {
                         var uri = eventArgs.Uri;
-                        // viddy://search?query={0}
-                        // viddy://record
-                        // viddy://
-                        // viddy://user?id={0}
-                        // viddy://channel?id={0}
-
-                        Type pageToGoTo;
-                        var query = uri.QueryString();
-
-                        switch (uri.Host)
-                        {
-                            case "search":
-                                pageToGoTo = typeof (SearchView);
-                                var includeNsfw = false;
-                                if (query.ContainsKey("nsfw"))
-                                {
-                                    includeNsfw = bool.Parse(query["nsfw"]);
-                                }
-
-                                Messenger.Default.Send(new ProtocolMessage(ProtocolMessage.ProtocolType.Search, query["query"], includeNsfw));
-                                break;
-                            case "record":
-                                pageToGoTo = typeof (VideoRecordView);
-                                break;
-                            case "user":
-                                pageToGoTo = typeof (ProfileView);
-                                Messenger.Default.Send(new ProtocolMessage(ProtocolMessage.ProtocolType.User, query["id"]));
-                                break;
-                            case "channel":
-                                pageToGoTo = typeof (ChannelView);
-                                Messenger.Default.Send(new ProtocolMessage(ProtocolMessage.ProtocolType.Channel, query["id"]));
-                                break;
-                            default:
-                                pageToGoTo = typeof (MainView);
-                                break;
-                        }
-
-                        var frame = new Frame();
-                        frame.Navigate(pageToGoTo, new NavigationParameters {ShowHomeButton = true});
-
-                        Window.Current.Content = frame;
-                        Window.Current.Activate();
+                        HandleUriLaunch(uri);
                     }
                 }
             }
+        }
+
+        private static void HandleUriLaunch(Uri uri)
+        {
+// viddy://search?query={0}
+            // viddy://record
+            // viddy://
+            // viddy://user?id={0}
+            // viddy://channel?id={0}
+
+            Type pageToGoTo;
+            var query = uri.QueryString();
+
+            switch (uri.Host)
+            {
+                case "search":
+                    pageToGoTo = typeof (SearchView);
+                    var includeNsfw = false;
+                    if (query.ContainsKey("nsfw"))
+                    {
+                        includeNsfw = bool.Parse(query["nsfw"]);
+                    }
+
+                    Messenger.Default.Send(new ProtocolMessage(ProtocolMessage.ProtocolType.Search, query["query"], includeNsfw));
+                    break;
+                case "record":
+                    pageToGoTo = typeof (VideoRecordView);
+                    break;
+                case "user":
+                    pageToGoTo = typeof (ProfileView);
+                    Messenger.Default.Send(new ProtocolMessage(ProtocolMessage.ProtocolType.User, query["id"]));
+                    break;
+                case "channel":
+                    pageToGoTo = typeof (ChannelView);
+                    Messenger.Default.Send(new ProtocolMessage(ProtocolMessage.ProtocolType.Channel, query["id"]));
+                    break;
+                case "video":
+                    pageToGoTo = typeof (VideoPlayerView);
+                    Messenger.Default.Send(new ProtocolMessage(ProtocolMessage.ProtocolType.Video, query["id"]));
+                    break;
+                default:
+                    pageToGoTo = typeof (MainView);
+                    break;
+            }
+
+            var frame = new Frame();
+            frame.Navigate(pageToGoTo, new NavigationParameters {ShowHomeButton = true});
+
+            Window.Current.Content = frame;
+            Window.Current.Activate();
         }
 
         private static void SendFile(IStorageItem file)

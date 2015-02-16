@@ -2,6 +2,7 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
+using Viddy.Core;
 
 namespace Viddy.Services
 {

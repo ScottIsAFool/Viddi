@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
+using Viddy.Core;
 using VidMePortable;
 using VidMePortable.Model;
 

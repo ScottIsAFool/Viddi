@@ -2,6 +2,7 @@
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Viddy.Core;
 using Viddy.Messaging;
 using Viddy.Views;
 using VidMePortable;
