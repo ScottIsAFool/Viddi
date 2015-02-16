@@ -83,6 +83,7 @@ namespace Viddy.Views
             _recordedDuration = _recordedDuration.Add(TimeSpan.FromSeconds(1));
             var timeString = string.Format("{0:00}:{1:00}", _recordedDuration.Minutes, _recordedDuration.Seconds);
             Debug.WriteLine(timeString);
+            RecordedLengthText.Text = timeString;
         }
 
         private void DisplayOnOrientationChanged(DisplayInformation sender, object args)
@@ -232,6 +233,9 @@ namespace Viddy.Views
             var mediaCapture = _cameraInfoService.MediaCapture;
             if (!_isRecording)
             {
+                RecordedLengthText.Text = "00:00";
+                RecordedLengthText.Visibility = Visibility.Visible;
+
                 _isRecording = true;
                 if (_displayRequest == null)
                 {
@@ -285,6 +289,7 @@ namespace Viddy.Views
                         if (vm != null)
                         {
                             vm.FinishedRecording(movedFile);
+                            RecordedLengthText.Visibility = Visibility.Collapsed;
                         }
                     }
                 }

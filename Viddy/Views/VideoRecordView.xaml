@@ -68,6 +68,7 @@
                                        HorizontalAlignment="Left"
                                        x:Name="FlashButton"
                                        Tapped="FlashButton_OnTapped"
+                                       VerticalAlignment="Top"
                                        Visibility="{Binding CanTurnOnFlash, Converter={StaticResource VisibilityConverter}}">
                     <Viewbox Stretch="UniformToFill"
                              StretchDirection="DownOnly"
@@ -105,10 +106,10 @@
                 </controls:CustomButton>
 
                 <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
-                                       Margin="0,12"
                                        x:Name="FrontFacingButton"
-                                       Grid.Row="2"
-                                       Grid.Column="0"
+                                       Grid.Row="1"
+                                       Grid.Column="2"
+                                       VerticalAlignment="Top"
                                        HorizontalAlignment="Left"
                                        Tapped="FrontFacingButton_OnTapped"
                                        Visibility="{Binding HasFrontFacingCamera, Converter={StaticResource VisibilityConverter}}">
@@ -154,7 +155,7 @@
                         CornerRadius="10"
                         Padding="4,3"
                         Grid.Row="1"
-                        Margin="6,0"
+                        Margin="6,2"
                         DataContext="{Binding Foursquare}"
                         Grid.Column="1"
                         Background="{ThemeResource ButtonBackgroundBrush}">
@@ -182,6 +183,14 @@
                         </controls:CustomButton>
                     </Grid>
                 </Border>
+                
+                <TextBlock Text="00:01"
+                           Grid.Row="2"
+                           Grid.Column="0"
+                           Grid.ColumnSpan="2"
+                           FontSize="{StaticResource TextStyleExtraExtraLargeFontSize}"
+                           x:Name="RecordedLengthText"
+                           Visibility="Collapsed"/>
 
                 <Border Grid.Column="0"
                         Grid.Row="2"
