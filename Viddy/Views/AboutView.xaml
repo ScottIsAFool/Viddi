@@ -4,11 +4,18 @@
                 xmlns:local="using:Viddy.Views"
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:controls="using:Viddy.Controls"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding About, Source={StaticResource Locator}}">
 
     <Grid>
-
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        
+        <controls:PageHeaderControl HeaderText="about"
+                                    ProfilePictureVisibility="Collapsed"/>
     </Grid>
 </local:BasePage>
