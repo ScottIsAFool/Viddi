@@ -75,6 +75,9 @@ namespace Viddy.ViewModel.Item
         {
             get { return Channel != null && (!string.IsNullOrEmpty(UserFollowers) || !string.IsNullOrEmpty(UserPlays) || !string.IsNullOrEmpty(UserVideoCount)); }
         }
+
+        public bool IsNsfw { get { return Channel != null && Channel.Nsfw; } }
+
         #endregion
 
         #region IFollowViewModel implementation

@@ -27,10 +27,23 @@
         </Grid.RowDefinitions>
         <Grid Height="200"
               Background="{ThemeResource HeaderBrush}">
-            <Image Source="{Binding CoverUrl}"
-                   Stretch="UniformToFill"
-                   Height="160"
-                   VerticalAlignment="Top" />
+            <Grid>
+                <Image Source="{Binding CoverUrl}"
+                       Stretch="UniformToFill"
+                       Height="160"
+                       VerticalAlignment="Top" />
+                <local:RotateContentControl Direction="Down"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Right"
+                                            Visibility="{Binding IsNsfw, Converter={StaticResource VisibilityConverter}}">
+                    <Border Background="{ThemeResource NsfwBackgroundBrush}"
+                            Padding="5,3">
+                        <TextBlock Text="NSFW"
+                                   Foreground="White" 
+                                   FontSize="{StaticResource TextStyleMediumFontSize}"/>
+                    </Border>
+                </local:RotateContentControl>
+            </Grid>
 
             <StackPanel Orientation="Horizontal"
                         VerticalAlignment="Bottom"

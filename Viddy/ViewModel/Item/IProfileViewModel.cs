@@ -11,5 +11,6 @@ namespace Viddy.ViewModel.Item
         string UserVideoCount { get; }
         bool DisplayBio { get; }
         bool DisplayByLine { get; }
+        bool IsNsfw { get; }
     }
 }

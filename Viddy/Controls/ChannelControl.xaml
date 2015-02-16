@@ -27,6 +27,17 @@
                            Margin="19,12"
                            VerticalAlignment="Top"
                            Foreground="White"/>
+                
+                <controls:RotateContentControl Direction="Down"
+                                            VerticalAlignment="Center"
+                                            HorizontalAlignment="Right"
+                                            Visibility="{Binding Channel.Nsfw, Converter={StaticResource VisibilityConverter}}">
+                    <Border Background="{ThemeResource NsfwBackgroundBrush}"
+                            Padding="5,3">
+                        <TextBlock Text="NSFW"
+                                   Foreground="White" />
+                    </Border>
+                </controls:RotateContentControl>
             </Grid>
         </controls:CustomButton>
     </Grid>

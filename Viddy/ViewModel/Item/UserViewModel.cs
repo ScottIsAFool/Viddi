@@ -101,6 +101,9 @@ namespace Viddy.ViewModel.Item
         {
             get { return User != null && (!string.IsNullOrEmpty(UserFollowers) || !string.IsNullOrEmpty(UserPlays) || !string.IsNullOrEmpty(UserVideoCount)); }
         }
+
+        public bool IsNsfw { get { return false; } }
+
         #endregion
 
         #region IFollowViewModel implementations
