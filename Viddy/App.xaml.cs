@@ -7,6 +7,7 @@ using Windows.ApplicationModel.DataTransfer;
 using Windows.Security.Authentication.Web;
 using Windows.Storage;
 using Windows.UI.Core;
+using Windows.UI.Notifications;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Animation;
@@ -277,14 +278,21 @@ namespace Viddy
 
         private static void HandleUriLaunch(Uri uri)
         {
-// viddy://search?query={0}
+            // viddy://search?query={0}
             // viddy://record
             // viddy://
             // viddy://user?id={0}
             // viddy://channel?id={0}
+            // viddy://video?id={0}
 
             Type pageToGoTo;
             var query = uri.QueryString();
+
+            if (query.ContainsKey("notificationId"))
+            {
+                var notificationId = query["notificationId"];
+                ToastNotificationManager.History.Remove(notificationId);
+            }
 
             switch (uri.Host)
             {

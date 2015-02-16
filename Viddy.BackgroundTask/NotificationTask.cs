@@ -133,6 +133,7 @@ namespace Viddy.BackgroundTask
             if (count == 0)
             {
                 ClearPreviousToasts();
+                ToastNotificationManager.History.Clear();
             }
 
             // Update tile
@@ -155,7 +156,10 @@ namespace Viddy.BackgroundTask
                 toastNotification.Launch = HandleNotificationType(notification);
                 toastNotification.TextHeading.Text = "Viddy";
                 toastNotification.TextBodyWrap.Text = notification.Text;
-                toastManager.Show(toastNotification.CreateNotification());
+                
+                var toast = toastNotification.CreateNotification();
+                toast.Tag = notification.NotificationId;
+                toastManager.Show(toast);
 
                 _previousToastIds.Add(notification.NotificationId);
             }
@@ -169,6 +173,7 @@ namespace Viddy.BackgroundTask
             }
 
             var type = notification.NotificationType;
+            var urlTemplate = "viddy://{0}?id={1}&notificationId=" + notification.NotificationId;
 
             switch (type)
             {
@@ -176,7 +181,7 @@ namespace Viddy.BackgroundTask
                     var channel = notification.Channel;
                     if (channel != null)
                     {
-                        return string.Format("viddy://channel?id={0}", channel.ChannelId);
+                        return string.Format(urlTemplate, "channel", channel.ChannelId);
                     }
                     break;
                 case NotificationType.CommentReply:
@@ -185,7 +190,7 @@ namespace Viddy.BackgroundTask
                     var user = notification.User;
                     if (user != null)
                     {
-                        return string.Format("viddy://user?id={0}", user.UserId);
+                        return string.Format(urlTemplate, "user", user.UserId);
                     }
                     break;
                 case NotificationType.VideoComment:
@@ -193,7 +198,7 @@ namespace Viddy.BackgroundTask
                     var video = notification.Video;
                     if (video != null)
                     {
-                        return string.Format("viddy://video?id={0}", video.VideoId);
+                        return string.Format(urlTemplate, "video", video.VideoId);
                     }
                     break;
             }
