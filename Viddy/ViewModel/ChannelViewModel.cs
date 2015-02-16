@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using Viddy.Core;
 using Viddy.Core.Extensions;
 using Viddy.Extensions;
 using Viddy.Messaging;
@@ -67,6 +68,21 @@ namespace Viddy.ViewModel
                     if (!_fromProtocol)
                     {
                         await LoadChannelVideos();
+                    }
+                });
+            }
+        }
+
+        public RelayCommand AddVideoCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    if (App.Locator.VideoRecord != null)
+                    {
+                        Messenger.Default.Send(new ChannelMessage(Channel, Constants.Messages.AddVideoToChannelMsg));
+                        _navigationService.Navigate<VideoRecordView>();
                     }
                 });
             }

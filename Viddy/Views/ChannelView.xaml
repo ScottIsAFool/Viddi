@@ -36,6 +36,9 @@
                 <AppBarButton Label="refresh"
                               Command="{Binding Channel.RefreshCommand}"
                               Icon="Refresh" />
+                <AppBarButton Label="add video"
+                              Icon="Video"
+                              Command="{Binding AddVideoCommand}"/>
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </local:BasePage.BottomAppBar>

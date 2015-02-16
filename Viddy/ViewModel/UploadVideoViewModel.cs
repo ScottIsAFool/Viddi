@@ -11,8 +11,10 @@ using Viddy.Core.Services;
 using Viddy.Extensions;
 using Viddy.Messaging;
 using Viddy.Services;
+using Viddy.ViewModel.Item;
 using Viddy.Views;
 using VidMePortable;
+using VidMePortable.Model;
 using VidMePortable.Model.Requests;
 
 namespace Viddy.ViewModel
@@ -108,7 +110,8 @@ namespace Viddy.ViewModel
                             FourSquarePlaceId = _foursqureViewModel.VenueId,
                             FourSquarePlaceName = _foursqureViewModel.VenueName,
                             Latitude = _foursqureViewModel.Latitude,
-                            Longitude = _foursqureViewModel.Longitude
+                            Longitude = _foursqureViewModel.Longitude,
+                            ChannelId = _channel != null ? _channel.Id : null
                         });
 
                         if (request != null)
@@ -139,6 +142,8 @@ namespace Viddy.ViewModel
             }
         }
 
+        private ChannelItemViewModel _channel;
+
         protected override void WireMessages()
         {
             Messenger.Default.Register<NotificationMessage>(this, m =>
@@ -147,6 +152,8 @@ namespace Viddy.ViewModel
                 {
                     var file = m.Sender as StorageFile;
                     if (file == null) return;
+
+                    _channel = m.Target != null ? m.Target as ChannelItemViewModel : null;
 
                     //IsUploading = true;
                     EditVideo.CanEdit = IsUploading = false;

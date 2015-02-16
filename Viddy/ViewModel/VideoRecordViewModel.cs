@@ -7,10 +7,13 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Core;
+using Viddy.Messaging;
 using Viddy.Services;
 using Viddy.ViewModel.Account;
+using Viddy.ViewModel.Item;
 using Viddy.Views;
 using Viddy.Views.Account;
+using VidMePortable.Model;
 
 namespace Viddy.ViewModel
 {
@@ -130,11 +133,13 @@ namespace Viddy.ViewModel
             }
         }
 
+        private ChannelItemViewModel _channel;
+
         public void FinishedRecording(IStorageFile file)
         {
             if (App.Locator.Upload != null)
             {
-                Messenger.Default.Send(new NotificationMessage(file, Constants.Messages.VideoFileMsg));
+                Messenger.Default.Send(new NotificationMessage(file, _channel, Constants.Messages.VideoFileMsg));
                 SimpleIoc.Default.GetInstance<INavigationService>().Navigate<UploadVideoView>();
             }
         }
@@ -167,5 +172,17 @@ namespace Viddy.ViewModel
             }
         }
         #endregion
+
+        protected override void WireMessages()
+        {
+            base.WireMessages();
+            Messenger.Default.Register<ChannelMessage>(this, m =>
+            {
+                if (m.Notification.Equals(Constants.Messages.AddVideoToChannelMsg))
+                {
+                    _channel = m.Channel;
+                }
+            });
+        }
     }
 }
