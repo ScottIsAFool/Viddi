@@ -44,7 +44,8 @@
                          PlaceholderText="Username"
                          Header="&#xE13D;"
                          IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
-                         Style="{StaticResource FullLengthTextBoxStyle}">
+                         Style="{StaticResource FullLengthTextBoxStyle}"
+                         InputScope="EmailSmtpAddress">
                     <interactivity:Interaction.Behaviors>
                         <behaviours:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
