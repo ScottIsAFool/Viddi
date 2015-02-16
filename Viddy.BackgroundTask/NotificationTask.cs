@@ -41,8 +41,15 @@ namespace Viddy.BackgroundTask
 
             if (AuthenticationService.Current != null)
             {
-                AuthenticationService.Current.StartService();
-                _vidMeClient = AuthenticationService.Current.GetAuthenticatedVidMeClient();
+                if (!AuthenticationService.Current.ServiceStarted)
+                {
+                    AuthenticationService.Current.StartService();
+                }
+
+                if (_vidMeClient.AuthenticationInfo == null)
+                {
+                    _vidMeClient = AuthenticationService.Current.GetAuthenticatedVidMeClient();
+                }
             }
         }
 

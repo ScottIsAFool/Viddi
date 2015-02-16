@@ -37,7 +37,10 @@ namespace Viddy.Core.Services
 
             var deviceId = Utils.UniqueDeviceIdentifier;
             _vidMeClient.SetDeviceNameAndPlatform(deviceId, "WindowsPhone");
+            ServiceStarted = true;
         }
+
+        public bool ServiceStarted { get; set; }
 
         public void SetAuthenticationInfo(AuthResponse authInfo, bool save = true)
         {
