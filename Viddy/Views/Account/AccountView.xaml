@@ -34,21 +34,21 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="record"
                               Command="{Binding NavigateToRecordCommand}"
-                              Icon="Video"/>
+                              Icon="Video" />
                 <AppBarButton IsCompact="True"
                               Label="settings"
                               Command="{Binding NavigateToSettingsCommand}"
-                              Icon="Setting"/>
+                              Icon="Setting" />
                 <AppBarButton IsCompact="True"
                               Label="refresh"
                               Command="{Binding RefreshCommand}"
                               IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
-                              Icon="Refresh"/>
+                              Icon="Refresh" />
                 <AppBarButton IsCompact="True"
                               Label="edit profile"
                               Icon="Edit"
                               Command="{Binding NavigateToEditProfileCommand}"
-                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"/>
+                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="manage account"
@@ -78,7 +78,7 @@
                 <localControls:PageHeaderControl HeaderText="{Binding Name}"
                                                  AvatarChanging="{Binding Avatar.ChangingAvatar}"
                                                  Grid.ColumnSpan="2"
-                                                 Padding="0"/>
+                                                 Padding="0" />
 
                 <localControls:CustomButton Grid.Column="1"
                                             TapCommand="{Binding LogInLogOutCommand}"
@@ -150,9 +150,11 @@
 
         <Grid Grid.Row="1">
             <localControls:LoadingListView ItemsSource="{Binding Items}"
-                                                IsInitialising="{Binding ProgressIsVisible}"
-                                                IsEmpty="{Binding IsEmpty}"
-                                                ItemTemplate="{StaticResource VideoTemplate}">
+                                           IsInitialising="{Binding ProgressIsVisible}"
+                                           IsEmpty="{Binding IsEmpty}"
+                                           ItemTemplate="{StaticResource VideoTemplate}"
+                                           LoadFailed="{Binding HasErrors}"
+                                           LoadFailedContent="{StaticResource LoadFailedTemplate}">
                 <localControls:LoadingListView.EmptyContent>
                     <DataTemplate>
                         <Grid Margin="19,12,19,0">
@@ -167,8 +169,8 @@
                                     <TextBlock Text="It doesn't look like you've uploaded any videos, you may need to sign in in order to see them"
                                                Style="{StaticResource BodyTextBlockStyle}"
                                                TextWrapping="WrapWholeWords"
-                                               TextAlignment="Center" 
-                                               Margin="0,0,0,12"/>
+                                               TextAlignment="Center"
+                                               Margin="0,0,0,12" />
                                 </Grid>
 
                                 <Grid x:Name="SignedInGrid"
@@ -180,12 +182,12 @@
                                                TextAlignment="Center" />
                                 </Grid>
                             </Grid>
-                            
+
                             <Grid Grid.Row="1">
                                 <TextBlock Text="You can record new videos by tapping the video button below"
                                            TextWrapping="WrapWholeWords"
                                            TextAlignment="Center"
-                                           Style="{StaticResource BodyTextBlockStyle}"/>
+                                           Style="{StaticResource BodyTextBlockStyle}" />
 
                                 <Path Width="28"
                                       Height="60"
@@ -211,7 +213,7 @@
                 </localControls:LoadingListView.EmptyContent>
                 <localControls:LoadingListView.FooterTemplate>
                     <DataTemplate>
-                        <localControls:LoadMoreControl/>
+                        <localControls:LoadMoreControl />
                     </DataTemplate>
                 </localControls:LoadingListView.FooterTemplate>
                 <ListView.HeaderTemplate>
@@ -219,7 +221,7 @@
                         <TextBlock Text="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource HeaderConverter}}"
                                    Style="{StaticResource GroupHeaderTextBlockStyle}"
                                    Margin="19,0,19,6"
-                                   Visibility="{Binding IsEmpty, Converter={StaticResource InverseVisibilityConverter}}"/>
+                                   Visibility="{Binding IsEmpty, Converter={StaticResource InverseVisibilityConverter}}" />
                     </DataTemplate>
                 </ListView.HeaderTemplate>
             </localControls:LoadingListView>

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Cimbalino.Toolkit.Extensions;
 using Cimbalino.Toolkit.Services;
 using Viddy.Core.Extensions;
-using Viddy.Extensions;
 using Viddy.ViewModel.Item;
 using VidMePortable;
 
@@ -28,6 +27,8 @@ namespace Viddy.ViewModel
             {
                 return;
             }
+
+            HasErrors = false;
 
             try
             {
@@ -55,7 +56,7 @@ namespace Viddy.ViewModel
             }
             catch (Exception ex)
             {
-                
+                HasErrors = true;
             }
 
             IsLoadingMore = false;

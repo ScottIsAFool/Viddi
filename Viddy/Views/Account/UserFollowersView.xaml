@@ -31,7 +31,9 @@
         <controls:LoadingListView ItemsSource="{Binding Items}"
                                   IsEmpty="{Binding IsEmpty}"
                                   IsInitialising="{Binding ProgressIsVisible}"
-                                  Margin="19,19,19,0">
+                                  Margin="19,19,19,0"
+                                  LoadFailed="{Binding HasErrors}"
+                                  LoadFailedContent="{StaticResource LoadFailedTemplate}">
             <controls:LoadingListView.FooterTemplate>
                 <DataTemplate>
                     <controls:LoadMoreControl/>

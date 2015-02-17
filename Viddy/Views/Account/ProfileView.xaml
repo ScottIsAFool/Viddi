@@ -29,13 +29,13 @@
                               x:Name="PinButton"
                               Click="PinButton_OnClick">
                     <AppBarButton.Icon>
-                        <SymbolIcon Symbol="{Binding User.IsPinned, Converter={StaticResource PinUnpinSymbolConverter}}"/>
+                        <SymbolIcon Symbol="{Binding User.IsPinned, Converter={StaticResource PinUnpinSymbolConverter}}" />
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton Label="refresh"
                               Command="{Binding User.RefreshCommand}"
-                              Icon="Refresh" 
-                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"/>
+                              Icon="Refresh"
+                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </views:BasePage.BottomAppBar>
@@ -43,18 +43,20 @@
     <Grid>
         <Grid Margin="-1200,-1200,0,0">
             <controls:TileControl x:Name="MediumTile"
-                                  ImageUrl="{Binding User.AvatarUrl}"/>
+                                  ImageUrl="{Binding User.AvatarUrl}" />
             <controls:TileControl x:Name="WideTile"
                                   ImageUrl="{Binding User.CoverUrl}"
-                                  Width="691"/>
+                                  Width="691" />
         </Grid>
         <controls:ProfileHeaderControl DataContext="{Binding EmptyUser}"
-                                       Visibility="{Binding ProgressIsVisible, Converter={StaticResource VisibilityConverter}}"/>
+                                       Visibility="{Binding ProgressIsVisible, Converter={StaticResource VisibilityConverter}}" />
         <controls:LoadingListView ItemsSource="{Binding User.Items}"
                                   IsEmpty="{Binding User.IsEmpty}"
                                   ItemTemplateSelector="{StaticResource VideoTemplateSelector}"
                                   IsInitialising="{Binding User.ProgressIsVisible}"
-                                  Header="{Binding}">
+                                  Header="{Binding}"
+                                  LoadFailed="{Binding User.HasErrors}"
+                                  LoadFailedContent="{StaticResource LoadFailedTemplate}">
             <controls:LoadingListView.HeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
@@ -64,12 +66,16 @@
                                                    FollowingText="{Binding User.FollowingText}"
                                                    IsChecked="{Binding User.IsFollowedByMe, Mode=TwoWay}"
                                                    Margin="19,-5,19,12" />
-                        <TextBlock Text="This user hasn't submitted any content yet."
-                                   Style="{StaticResource BodyTextBlockStyle}"
-                                   Margin="19"
-                                   TextWrapping="WrapWholeWords"
-                                   TextAlignment="Center"
-                                   Visibility="{Binding User.IsEmpty, Converter={StaticResource VisibilityConverter}}" />
+                        <Grid Visibility="{Binding User.HasErrors, Converter={StaticResource InverseVisibilityConverter}}">
+                            <TextBlock Text="This user hasn't submitted any content yet."
+                                       Style="{StaticResource BodyTextBlockStyle}"
+                                       Margin="19"
+                                       TextWrapping="WrapWholeWords"
+                                       TextAlignment="Center"
+                                       Visibility="{Binding User.IsEmpty, Converter={StaticResource VisibilityConverter}}" />
+                        </Grid>
+                        <ContentControl ContentTemplate="{StaticResource LoadFailedTemplate}"
+                                        Visibility="{Binding User.HasErrors, Converter={StaticResource VisibilityConverter}}"/>
                     </StackPanel>
                 </DataTemplate>
             </controls:LoadingListView.HeaderTemplate>
@@ -80,7 +86,7 @@
             </controls:LoadingListView.FooterTemplate>
             <controls:LoadingListView.EmptyContent>
                 <DataTemplate>
-                    <Grid/>
+                    <Grid />
                 </DataTemplate>
             </controls:LoadingListView.EmptyContent>
         </controls:LoadingListView>

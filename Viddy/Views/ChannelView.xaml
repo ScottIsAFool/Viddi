@@ -13,7 +13,7 @@
                         DataContext="{Binding Channel, Source={StaticResource Locator}}">
 
     <interactivity:Interaction.Behaviors>
-        <behaviours:StatusBarBehavior IsVisible="False"/>
+        <behaviours:StatusBarBehavior IsVisible="False" />
         <core:EventTriggerBehavior EventName="Loaded">
             <core:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
         </core:EventTriggerBehavior>
@@ -30,7 +30,7 @@
                               x:Name="PinButton"
                               Click="PinButton_OnClick">
                     <AppBarButton.Icon>
-                        <SymbolIcon Symbol="{Binding Channel.IsPinned, Converter={StaticResource PinUnpinSymbolConverter}}"/>
+                        <SymbolIcon Symbol="{Binding Channel.IsPinned, Converter={StaticResource PinUnpinSymbolConverter}}" />
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton Label="refresh"
@@ -38,7 +38,7 @@
                               Icon="Refresh" />
                 <AppBarButton Label="add video"
                               Icon="Video"
-                              Command="{Binding AddVideoCommand}"/>
+                              Command="{Binding AddVideoCommand}" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </local:BasePage.BottomAppBar>
@@ -67,23 +67,27 @@
                                                    IsChecked="{Binding Channel.IsFollowedByMe, Mode=TwoWay}"
                                                    Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"
                                                    Margin="19,-5,19,12" />
-                        <TextBlock Text="This channel hasn't got any content yet."
-                                   Style="{StaticResource BodyTextBlockStyle}"
-                                   Margin="19"
-                                   TextWrapping="WrapWholeWords"
-                                   TextAlignment="Center"
-                                   Visibility="{Binding Channel.IsEmpty, Converter={StaticResource VisibilityConverter}}" />
+                        <Grid Visibility="{Binding Channel.HasErrors, Converter={StaticResource InverseVisibilityConverter}}">
+                            <TextBlock Text="This channel hasn't got any content yet."
+                                       Style="{StaticResource BodyTextBlockStyle}"
+                                       Margin="19"
+                                       TextWrapping="WrapWholeWords"
+                                       TextAlignment="Center"
+                                       Visibility="{Binding Channel.IsEmpty, Converter={StaticResource VisibilityConverter}}" />
+                        </Grid>
+                        <ContentControl ContentTemplate="{StaticResource LoadFailedTemplate}"
+                                        Visibility="{Binding Channel.HasErrors, Converter={StaticResource VisibilityConverter}}" />
                     </StackPanel>
                 </DataTemplate>
             </controls:LoadingListView.HeaderTemplate>
             <controls:LoadingListView.FooterTemplate>
                 <DataTemplate>
-                    <controls:LoadMoreControl DataContext="{Binding Channel}"/>
+                    <controls:LoadMoreControl DataContext="{Binding Channel}" />
                 </DataTemplate>
             </controls:LoadingListView.FooterTemplate>
             <controls:LoadingListView.EmptyContent>
                 <DataTemplate>
-                    <Grid/>
+                    <Grid />
                 </DataTemplate>
             </controls:LoadingListView.EmptyContent>
         </controls:LoadingListView>

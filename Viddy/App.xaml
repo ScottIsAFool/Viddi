@@ -24,7 +24,7 @@
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Themes/ControlStyles.xaml"/>
+                <ResourceDictionary Source="/Themes/ControlStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <vm:ViewModelLocator xmlns:vm="using:Viddy.ViewModel"
                                  x:Key="Locator" />
@@ -32,23 +32,23 @@
             <FontFamily x:Key="SegoeUISymbolsFont">ms-appx:///Fonts/seguisym.ttf#Segoe UI Symbol</FontFamily>
 
             <localConverters:ThumbnailConverter x:Key="ThumbnailConverter" />
-            <localConverters:NullBooleanConverter x:Key="NullBooleanConverter"/>
-            <localConverters:NullBooleanConverter x:Key="InverseNullBooleanConverter" 
-                                                  Invert="True"/>
+            <localConverters:NullBooleanConverter x:Key="NullBooleanConverter" />
+            <localConverters:NullBooleanConverter x:Key="InverseNullBooleanConverter"
+                                                  Invert="True" />
             <localConverters:BooleanToSymbolConverter x:Key="PinUnpinSymbolConverter"
                                                       TrueValue="UnPin"
-                                                      FalseValue="Pin"/>
+                                                      FalseValue="Pin" />
 
             <converters:BooleanToVisibilityConverter x:Key="VisibilityConverter" />
             <converters:BooleanToVisibilityConverter x:Key="InverseVisibilityConverter"
                                                      InvertValue="True" />
             <converters:NegativeBooleanConverter x:Key="NegativeBooleanConverter" />
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
-            <converters:NullToVisibilityConverter x:Key="InverseNullToVisibilityConverter" 
-                                                  InvertValue="True"/>
+            <converters:NullToVisibilityConverter x:Key="InverseNullToVisibilityConverter"
+                                                  InvertValue="True" />
             <converters:BooleanToStringConverter x:Key="PinUnpinConverter"
                                                  TrueValue="unpin"
-                                                 FalseValue="pin"/>
+                                                 FalseValue="pin" />
             <converters:BooleanToStringConverter x:Key="PinUnpinLongConverter"
                                                  TrueValue="unpin from start"
                                                  FalseValue="pin to start" />
@@ -56,19 +56,7 @@
             <themeManagerRt:ThemeManager x:Key="ThemeManager" />
             <Color x:Key="OverlayColor">#4C000000</Color>
             <SolidColorBrush x:Key="OverlayBrush"
-                             Color="{StaticResource OverlayColor}"/>
-            <!--<LinearGradientBrush SpreadMethod="Reflect"
-                                 ColorInterpolationMode="SRgbLinearInterpolation"
-                                 StartPoint="0,0"
-                                 EndPoint="0,1"
-                                 x:Key="OverlayBrush">
-                <GradientStop Color="{StaticResource OverlayColor}"
-                              Offset="0.126" />
-                <GradientStop Color="Transparent"
-                              Offset=".5" />
-                <GradientStop Color="{StaticResource OverlayColor}"
-                              Offset="0.874" />
-            </LinearGradientBrush>-->
+                             Color="{StaticResource OverlayColor}" />
 
             <DataTemplate x:Key="VideoTemplate">
                 <controls:VideoControl />
@@ -86,6 +74,32 @@
 
             <DataTemplate x:Key="CommentTemplate">
                 <controls:CommentControl />
+            </DataTemplate>
+
+            <DataTemplate x:Key="LoadFailedTemplate">
+                <StackPanel Orientation="Vertical"
+                            Margin="19,12">
+                    <Path Data="M20,12A8,8 0 0,0 12,4A8,8 0 0,0 4,12A8,8 0 0,0 12,20A8,8 0 0,0 20,12M22,12A10,10 0 0,1 12,22A10,10 0 0,1 2,12A10,10 0 0,1 12,2A10,10 0 0,1 22,12M15.5,8C16.3,8 17,8.7 17,9.5C17,10.3 16.3,11 15.5,11C14.7,11 14,10.3 14,9.5C14,8.7 14.7,8 15.5,8M10,9.5C10,10.3 9.3,11 8.5,11C7.7,11 7,10.3 7,9.5C7,8.7 7.7,8 8.5,8C9.3,8 10,8.7 10,9.5M12,14C13.75,14 15.29,14.72 16.19,15.81L14.77,17.23C14.32,16.5 13.25,16 12,16C10.75,16 9.68,16.5 9.23,17.23L7.81,15.81C8.71,14.72 10.25,14 12,14Z"
+                          Fill="{ThemeResource ApplicationForegroundThemeBrush}"
+                          Height="130"
+                          Width="130"
+                          Stretch="Uniform"
+                          Margin="0,0,0,12"
+                          HorizontalAlignment="Center" />
+                    <TextBlock Text="D'oh, there was a problem loading your content. Might be worth giving it another go."
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               HorizontalAlignment="Center"
+                               TextAlignment="Center" />
+                    <controls:CustomHyperlinkButton TapCommand="{Binding RefreshCommand}"
+                                                    HorizontalAlignment="Center"
+                                                    HorizontalContentAlignment="Center">
+                        <TextBlock FontSize="{StaticResource TextStyleLargeFontSize}">
+                            <Underline>
+                                <Run Text="Try again" />
+                            </Underline>
+                        </TextBlock>
+                    </controls:CustomHyperlinkButton>
+                </StackPanel>
             </DataTemplate>
 
             <controls:ItemTypeDataTemplateSelector x:Key="VideoTemplateSelector"
