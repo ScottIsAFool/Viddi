@@ -52,14 +52,14 @@
                                        Content="no"
                                        Style="{StaticResource ReviewButtonStyle}"
                                        TapCommand="{Binding NoReviewCommand}"
-									   Background="{ThemeResource ReviewNoBackgroundBrush}"/>
+									   Background="{ThemeResource HeaderBrush}"/>
 
                 <controls:CustomButton Grid.Row="1"
                                        Grid.Column="1"
                                        Style="{StaticResource ReviewButtonStyle}"
                                        Content="yes"
                                        TapCommand="{Binding YesReviewCommand}"
-                                       Background="{ThemeResource HeaderBrush}"/>
+                                       Background="{ThemeResource ReviewNoBackgroundBrush}"/>
             </Grid>
 
             <Grid x:Name="FeedbackGrid"
@@ -88,13 +88,13 @@
                                        Style="{StaticResource ReviewButtonStyle}"
                                        Content="no"
                                        TapCommand="{Binding NoFeedbackCommand}" 
-									   Background="{ThemeResource ReviewNoBackgroundBrush}"/>
+									   Background="{ThemeResource HeaderBrush}"/>
 
                 <controls:CustomButton Grid.Row="1"
                                        Grid.Column="1"
                                        Style="{StaticResource ReviewButtonStyle}"
                                        Content="yes"
-									   Background="{ThemeResource HeaderBrush}"
+                                       Background="{ThemeResource ReviewNoBackgroundBrush}"
                                        TapCommand="{Binding YesFeedbackCommand}" />
             </Grid>
         </Grid>
