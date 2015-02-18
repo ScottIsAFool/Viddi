@@ -54,6 +54,8 @@ namespace Viddy.ViewModel.Account.Manage
                 return;
             }
 
+            HasErrors = false;
+
             try
             {
                 SetProgressBar("Getting apps...");
@@ -67,7 +69,8 @@ namespace Viddy.ViewModel.Account.Manage
             }
             catch (Exception ex)
             {
-                
+                Log.ErrorException("LoadData()", ex);
+                HasErrors = true;
             }
 
             SetProgressBar();

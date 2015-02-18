@@ -18,14 +18,14 @@
             <core:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
-    
+
     <views:BasePage.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="refresh"
                               Command="{Binding RefreshCommand}"
                               IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
-                              Icon="Refresh"/>
+                              Icon="Refresh" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </views:BasePage.BottomAppBar>
@@ -42,9 +42,11 @@
         <Grid x:Name="Content"
               Grid.Row="1"
               Margin="0,12,0,0">
-            <controls:LoadingListView ItemsSource="{Binding Apps}"
-                                           IsInitialising="{Binding ProgressIsVisible}"
-                                           IsEmpty="{Binding IsEmpty}">
+            <controls:LoadingListView ItemsSource="{Binding Items}"
+                                      IsInitialising="{Binding ProgressIsVisible}"
+                                      IsEmpty="{Binding IsEmpty}"
+                                      LoadFailed="{Binding HasErrors}"
+                                      LoadFailedContent="{StaticResource LoadFailedTemplate}">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Grid Margin="0,0,0,12"
@@ -59,8 +61,8 @@
                                 <StackPanel Orientation="Vertical">
                                     <Grid>
                                         <TextBlock Text="{Binding Application.Name}"
-                                                   Style="{StaticResource TitleTextBlockStyle}" 
-                                                   Visibility="{Binding ProgressIsVisible, Converter={StaticResource InverseVisibilityConverter}}"/>
+                                                   Style="{StaticResource TitleTextBlockStyle}"
+                                                   Visibility="{Binding ProgressIsVisible, Converter={StaticResource InverseVisibilityConverter}}" />
                                         <StackPanel Orientation="Horizontal"
                                                     HorizontalAlignment="Stretch"
                                                     Visibility="{Binding ProgressIsVisible, Converter={StaticResource VisibilityConverter}}">
@@ -69,9 +71,9 @@
                                                        Style="{StaticResource TitleTextBlockStyle}" />
                                             <ProgressBar IsIndeterminate="{Binding ProgressIsVisible}"
                                                          HorizontalAlignment="Stretch"
-                                                         Width="100" 
+                                                         Width="100"
                                                          VerticalAlignment="Bottom"
-                                                         Margin="3,0,0,4"/>
+                                                         Margin="3,0,0,4" />
                                         </StackPanel>
                                     </Grid>
                                     <TextBlock Text="{Binding Application.Organization}"

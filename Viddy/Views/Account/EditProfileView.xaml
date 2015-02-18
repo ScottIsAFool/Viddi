@@ -113,9 +113,9 @@
             </Grid>
 
 
-            <Grid       VerticalAlignment="Bottom"
-                        Margin="19,0"
-                        HorizontalAlignment="Left">
+            <Grid VerticalAlignment="Bottom"
+                  Margin="19,0"
+                  HorizontalAlignment="Left">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto" />
                     <ColumnDefinition Width="*" />

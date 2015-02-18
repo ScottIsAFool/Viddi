@@ -13,13 +13,13 @@
     <interactivity:Interaction.Behaviors>
         <behaviours:StatusBarBehavior IsVisible="False" />
     </interactivity:Interaction.Behaviors>
-    
+
     <local:BasePage.BottomAppBar>
         <CommandBar Visibility="{Binding ShowHomeButton, Converter={StaticResource VisibilityConverter}}">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="home"
                               Icon="Home"
-                              Command="{Binding NavigateHomeCommand}"/>
+                              Command="{Binding NavigateHomeCommand}" />
             </CommandBar.PrimaryCommands>
         </CommandBar>
     </local:BasePage.BottomAppBar>
@@ -36,13 +36,13 @@
                   HorizontalAlignment="Stretch">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
                     </Grid.ColumnDefinitions>
-                    
+
                     <controls:PageHeaderControl HeaderText=""
                                                 ProfilePictureEnabled="False"
-                                                Padding="0"/>
+                                                Padding="0" />
 
                     <TextBox PlaceholderText="enter something to search for"
                              Text="{Binding SearchText, Mode=TwoWay}"
@@ -57,7 +57,7 @@
                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
                              Grid.Column="1">
                         <interactivity:Interaction.Behaviors>
-                            <behaviours:UpdateTextBindingOnPropertyChanged EnterHitCommand="{Binding SearchCommand}"/>
+                            <behaviours:UpdateTextBindingOnPropertyChanged EnterHitCommand="{Binding SearchCommand}" />
                         </interactivity:Interaction.Behaviors>
                     </TextBox>
                 </Grid>
@@ -66,9 +66,11 @@
 
         <Grid Grid.Row="1">
             <controls:LoadingListView ItemsSource="{Binding Items}"
-                                           IsInitialising="{Binding ProgressIsVisible}"
-                                           IsEmpty="{Binding IsEmpty}"
-                                           ItemTemplateSelector="{StaticResource VideoTemplateSelector}">
+                                      IsInitialising="{Binding ProgressIsVisible}"
+                                      IsEmpty="{Binding IsEmpty}"
+                                      ItemTemplateSelector="{StaticResource VideoTemplateSelector}"
+                                      LoadFailed="{Binding HasErrors}"
+                                      LoadFailedContent="{StaticResource LoadFailedTemplate}">
                 <controls:LoadingListView.FooterTemplate>
                     <DataTemplate>
                         <controls:LoadMoreControl />
@@ -77,8 +79,8 @@
                 <controls:LoadingListView.HeaderTemplate>
                     <DataTemplate>
                         <CheckBox IsChecked="{Binding IncludeNsfw, Mode=TwoWay}"
-                                  Content="Include NSFW videos" 
-                                  Margin="12,0"/>
+                                  Content="Include NSFW videos"
+                                  Margin="12,0" />
                     </DataTemplate>
                 </controls:LoadingListView.HeaderTemplate>
             </controls:LoadingListView>

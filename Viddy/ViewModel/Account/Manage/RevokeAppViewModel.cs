@@ -51,7 +51,7 @@ namespace Viddy.ViewModel.Account.Manage
                             }
                             else
                             {
-                                _manageAppsAccessViewModel.Apps.Remove(appVm);
+                                _manageAppsAccessViewModel.Items.Remove(appVm);
                             }
                         }
                     }

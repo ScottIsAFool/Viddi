@@ -101,14 +101,20 @@
         </Grid>
 
         <Grid x:Name="VideoEditGrid"
-              Visibility="{Binding EditVideo.CanEdit, Converter={StaticResource VisibilityConverter}}"
-              >
+              Visibility="{Binding EditVideo.CanEdit, Converter={StaticResource VisibilityConverter}}">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="2.5*" />
+            </Grid.RowDefinitions>
             <controls:BlurredImageControl HorizontalAlignment="Stretch"
                                           VerticalAlignment="Stretch"
-                                          Image="{Binding Image}"/>
+                                          Image="{Binding Image}"
+                                          Grid.Row="0"
+                                          Grid.RowSpan="2"/>
             
             <StackPanel Orientation="Vertical"
                         VerticalAlignment="Top"
+                        Grid.Row="0"
                         Visibility="{Binding IsUploading, Converter={StaticResource VisibilityConverter}}">
                 <ProgressBar IsIndeterminate="{Binding IsUploading}"
                              Background="Transparent"/>
@@ -119,7 +125,8 @@
             </StackPanel>
             
             <StackPanel Orientation="Vertical"
-                        VerticalAlignment="Center">
+                        VerticalAlignment="Top"
+                        Grid.Row="1">
                 <TextBox Style="{StaticResource FullLengthTextBoxStyleNoFocusChange}"
                          PlaceholderText="This video is called..."
                          Text="{Binding EditVideo.Title, Mode=TwoWay}">
@@ -157,6 +164,8 @@
                                        HorizontalContentAlignment="Center"
                                        TapCommand="{Binding EditVideo.SaveChangesCommand}"
                                        IsEnabled="{Binding EditVideo.CanSave}"/>
+                <controls:ErrorBox Visibility="{Binding EditVideo.ErrorMessage, Converter={StaticResource NullToVisibilityConverter}}"
+                                   ErrorMessage="{Binding EditVideo.ErrorMessage}"/>
             </StackPanel>
         </Grid>
     </Grid>

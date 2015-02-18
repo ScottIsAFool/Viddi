@@ -3,19 +3,16 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
-using GalaSoft.MvvmLight.Command;
 using Viddy.Common;
 using Viddy.Core.Extensions;
 using Viddy.Core.Services;
-using Viddy.Extensions;
-using Viddy.Services;
 using Viddy.Views;
 using VidMePortable;
 using VidMePortable.Model;
 
 namespace Viddy.ViewModel.Account.Manage
 {
-    public class ManageAppsAccessViewModel : ViewModelBase
+    public class ManageAppsAccessViewModel : LoadingItemsViewModel<RevokeAppViewModel>
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
@@ -31,7 +28,7 @@ namespace Viddy.ViewModel.Account.Manage
 
             if (IsInDesignMode)
             {
-                Apps = new ObservableCollection<RevokeAppViewModel>
+                Items = new ObservableCollection<RevokeAppViewModel>
                 {
                     new RevokeAppViewModel(new Application
                     {
@@ -44,45 +41,22 @@ namespace Viddy.ViewModel.Account.Manage
             }
         }
 
-        public ObservableCollection<RevokeAppViewModel> Apps { get; set; }
-        public bool IsEmpty { get; set; }
-
-        public RelayCommand PageLoadedCommand
-        {
-            get
-            {
-                return new RelayCommand(async () =>
-                {
-                    await LoadData(false);
-                });
-            }
-        }
-
-        public RelayCommand RefreshCommand
-        {
-            get
-            {
-                return new RelayCommand(async () =>
-                {
-                    await LoadData(true);
-                });
-            }
-        }
-
         internal void ResetApp()
         {
             _appsLoaded = false;
-            Apps = null;
+            Items = null;
             AuthenticationService.Current.SignOut();
             _navigationService.Navigate<VideoRecordView>(new NavigationParameters { ClearBackstack = true });
         }
 
-        private async Task LoadData(bool isRefresh)
+        protected override async Task LoadData(bool isRefresh, bool add = false, int offset = 0)
         {
             if (_appsLoaded && !isRefresh)
             {
                 return;
             }
+
+            HasErrors = false;
 
             SetProgressBar("Getting apps...");
 
@@ -90,16 +64,17 @@ namespace Viddy.ViewModel.Account.Manage
             {
                 var response = await _vidMeClient.GetAuthorisedAppsAsync();
 
-                Apps = new ObservableCollection<RevokeAppViewModel>(response.Select(x => new RevokeAppViewModel(x, _vidMeClient, this, _messageBoxService)));
-                IsEmpty = Apps.IsNullOrEmpty();
+                Items = new ObservableCollection<RevokeAppViewModel>(response.Select(x => new RevokeAppViewModel(x, _vidMeClient, this, _messageBoxService)));
 
                 _appsLoaded = true;
             }
             catch (Exception ex)
             {
-                
+                Log.ErrorException("LoadData()", ex);
+                HasErrors = true;
             }
 
+            IsEmpty = Items.IsNullOrEmpty();
             SetProgressBar();
         }
     }

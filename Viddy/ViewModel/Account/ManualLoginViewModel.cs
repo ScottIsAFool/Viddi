@@ -64,7 +64,7 @@ namespace Viddy.ViewModel.Account
                     catch (VidMeException vex)
                     {
                         Log.ErrorException("SignInCommand", vex);
-                        ErrorMessage = vex.Error.Code == "invalid_password" ? "Username and/or password incorrect" : "There was an error signing in";
+                        ErrorMessage = vex.Error != null && vex.Error.Code == "invalid_password" ? "Username and/or password incorrect" : "There was an error signing in";
                     }
                     catch (Exception ex)
                     {

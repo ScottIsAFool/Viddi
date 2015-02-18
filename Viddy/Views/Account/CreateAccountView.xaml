@@ -31,23 +31,6 @@
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-
-        <Grid Background="{ThemeResource HeaderBrush}"
-              Height="80">
-            <Grid Margin="19,0">
-                <StackPanel Orientation="Horizontal">
-                    <controls:ProfilePictureControl IsHitTestVisible="False" />
-
-                    <Grid>
-                        <TextBlock VerticalAlignment="Center"
-                                   Style="{StaticResource BodyTextBlockStyle}"
-                                   Text="create account"
-                                   TextWrapping="Wrap"
-                                   Margin="12,0,0,0" />
-                    </Grid>
-                </StackPanel>
-            </Grid>
-        </Grid>
         
         <controls:PageHeaderControl HeaderText="create account"
                                     ProfilePictureEnabled="False"/>
@@ -81,6 +64,9 @@
                         <behaviours:EnterKeyHandler Command="{Binding CreateAccountCommand}"/>
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
+
+                <controls:ErrorBox Visibility="{Binding ErrorMessage, Converter={StaticResource NullToVisibilityConverter}}"
+                                   ErrorMessage="{Binding ErrorMessage}" />
             </StackPanel>
         </Grid>
     </Grid>

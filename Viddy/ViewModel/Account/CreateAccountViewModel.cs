@@ -1,4 +1,5 @@
-﻿using Cimbalino.Toolkit.Services;
+﻿using System;
+using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Common;
 using Viddy.Core.Services;
@@ -24,6 +25,8 @@ namespace Viddy.ViewModel.Account
         public string Password { get; set; }
         public string EmailAddress { get; set; }
 
+        public string ErrorMessage { get; set; }
+
         public bool CanCreateAccount
         {
             get
@@ -40,11 +43,6 @@ namespace Viddy.ViewModel.Account
             {
                 return new RelayCommand(async () =>
                 {
-                    if (!CanCreateAccount)
-                    {
-                        return;
-                    }
-
                     try
                     {
                         SetProgressBar("Creating user...");
@@ -57,16 +55,19 @@ namespace Viddy.ViewModel.Account
 
                         Username = Password = EmailAddress = string.Empty;
                     }
-                    catch (VidMeException ex)
+                    catch (VidMeException vex)
                     {
-                        if (ex.Error.Code == "used_username")
-                        {
-                            // TODO: Display an error 
-                        }
+                        Log.ErrorException("CreateAccountCommand(vex)", vex);
+                        ErrorMessage = vex.Error.Code == "used_username" ? "This username is already in use" : "An error ocurred signing you up.";
+                    }
+                    catch (Exception ex)
+                    {
+                        Log.ErrorException("CreateAccountCommand(ex)", ex);
+                        ErrorMessage = "An error ocurred signing you up.";
                     }
 
                     SetProgressBar();
-                });
+                }, () => CanCreateAccount);
             }
         }
 

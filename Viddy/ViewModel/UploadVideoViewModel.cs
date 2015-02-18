@@ -8,13 +8,10 @@ using Viddy.Common;
 using Viddy.Core;
 using Viddy.Core.Extensions;
 using Viddy.Core.Services;
-using Viddy.Extensions;
 using Viddy.Messaging;
-using Viddy.Services;
 using Viddy.ViewModel.Item;
 using Viddy.Views;
 using VidMePortable;
-using VidMePortable.Model;
 using VidMePortable.Model.Requests;
 
 namespace Viddy.ViewModel
@@ -132,7 +129,8 @@ namespace Viddy.ViewModel
                     }
                     catch (Exception ex)
                     {
-                        
+                        Log.ErrorException("UploadVideoCommand()", ex);
+                        EditVideo.ErrorMessage = "There was an error trying to upload your video";
                     }
 
                     SetProgressBar();

@@ -23,6 +23,11 @@ namespace Viddy.ViewModel
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
             _messageBoxService = messageBoxService;
+
+            if (IsInDesignMode)
+            {
+                CanEdit = true;
+            }
         }
 
         public void SetVideo(Video video)
@@ -52,6 +57,7 @@ namespace Viddy.ViewModel
         }
 
         public bool IsChanged { get; set; }
+        public string ErrorMessage { get; set; }
 
         public bool CanSave
         {
@@ -93,7 +99,7 @@ namespace Viddy.ViewModel
                     }
                     catch (Exception ex)
                     {
-
+                        ErrorMessage = "There was an error updating your video";
                     }
                 }, () => CanSave);
             }
