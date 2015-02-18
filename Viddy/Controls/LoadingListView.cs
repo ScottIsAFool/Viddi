@@ -1,6 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using WinRTXamlToolkit.Controls.Extensions;
 
 namespace Viddy.Controls
 {
@@ -126,7 +127,7 @@ namespace Viddy.Controls
         {
             if (_scrollViewer != null)
             {
-                _scrollViewer.ScrollToVerticalOffset(0);
+                _scrollViewer.ScrollToVerticalOffsetWithAnimation(0);
             }
         }
 

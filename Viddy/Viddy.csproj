@@ -516,6 +516,9 @@
       <HintPath>..\packages\VidMePortable.0.0.0.35-beta\lib\portable-net45+win+wpa81+wp80\VidMePortable.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="WinRTXamlToolkit">
+      <HintPath>..\packages\WinRTXamlToolkit.WindowsPhone.1.8.1.0\lib\wpa\WinRTXamlToolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <SDKReference Include="BehaviorsXamlSDKManaged, version=12.0">
