@@ -38,6 +38,8 @@ namespace Viddy.ViewModel.Account
                 return;
             }
 
+            HasErrors = false;
+
             try
             {
                 if (!add)
@@ -65,7 +67,8 @@ namespace Viddy.ViewModel.Account
             }
             catch (Exception ex)
             {
-                
+                Log.ErrorException("LoadData()", ex);
+                HasErrors = true;
             }
 
             IsEmpty = Items.IsNullOrEmpty();

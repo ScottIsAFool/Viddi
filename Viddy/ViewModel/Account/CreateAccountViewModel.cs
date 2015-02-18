@@ -3,10 +3,10 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Common;
 using Viddy.Core.Services;
-using Viddy.Services;
 using Viddy.Views.Account;
 using VidMePortable;
 using VidMePortable.Model;
+using VidMePortable.Model.Responses;
 
 namespace Viddy.ViewModel.Account
 {
@@ -45,20 +45,21 @@ namespace Viddy.ViewModel.Account
                 {
                     try
                     {
+                        ErrorMessage = null;
                         SetProgressBar("Creating user...");
 
                         var response = await _vidMeClient.CreateUserAsync(Username, Password, EmailAddress);
 
                         AuthenticationService.Current.SetAuthenticationInfo(response);
 
-                        _navigationService.Navigate<AccountView>(new NavigationParameters {ClearBackstack = true});
+                        _navigationService.Navigate<AccountView>(new NavigationParameters { ClearBackstack = true });
 
                         Username = Password = EmailAddress = string.Empty;
                     }
                     catch (VidMeException vex)
                     {
                         Log.ErrorException("CreateAccountCommand(vex)", vex);
-                        ErrorMessage = vex.Error.Code == "used_username" ? "This username is already in use" : "An error ocurred signing you up.";
+                        ErrorMessage = vex.Error != null && vex.Error.Code == "used_username" ? "This username is already in use" : "An error ocurred signing you up.";
                     }
                     catch (Exception ex)
                     {

@@ -39,7 +39,9 @@
               Margin="0,12,0,0">
             <controls:LoadingListView ItemsSource="{Binding Items}"
                                       IsEmpty="{Binding IsEmpty}"
-                                      IsInitialising="{Binding ProgressIsVisible}">
+                                      IsInitialising="{Binding ProgressIsVisible}"
+                                      LoadFailed="{Binding HasErrors}"
+                                      LoadFailedContent="{StaticResource LoadFailedTemplate}">
                 <controls:LoadingListView.EmptyContent>
                     <DataTemplate>
                         <TextBlock Text="You don't have any notifications."

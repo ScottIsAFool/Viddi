@@ -27,6 +27,8 @@ namespace Viddy.ViewModel.Account.Manage
         public string Organisation { get; set; }
         public string RedirectUrl { get; set; }
 
+        public string ErrorMessage { get; set; }
+
         public bool CanAddApp
         {
             get
@@ -45,6 +47,8 @@ namespace Viddy.ViewModel.Account.Manage
                 {
                     try
                     {
+                        ErrorMessage = null;
+
                         SetProgressBar("Adding app...");
                         var app = new AppRequest
                         {
@@ -71,7 +75,8 @@ namespace Viddy.ViewModel.Account.Manage
                     }
                     catch (Exception ex)
                     {
-                        
+                        Log.ErrorException("SaveAppCommand", ex);
+                        ErrorMessage = "An error occurred when adding your app";
                     }
 
                     SetProgressBar();

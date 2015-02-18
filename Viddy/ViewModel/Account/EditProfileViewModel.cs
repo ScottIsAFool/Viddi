@@ -1,10 +1,6 @@
-﻿using System;
-using Cimbalino.Toolkit.Services;
-using Coding4Fun.Toolkit.Controls;
-using GalaSoft.MvvmLight.Command;
+﻿using GalaSoft.MvvmLight.Command;
 using Viddy.Core.Services;
 using Viddy.Services;
-using Viddy.ViewModel.Item;
 using VidMePortable;
 using VidMePortable.Model;
 
@@ -12,14 +8,12 @@ namespace Viddy.ViewModel.Account
 {
     public class EditProfileViewModel : ViewModelBase
     {
-        private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
         private readonly IToastService _toastService;
 
-        public EditProfileViewModel(INavigationService navigationService, IVidMeClient vidMeClient, AvatarViewModel avatarViewModel, IToastService toastService)
+        public EditProfileViewModel(IVidMeClient vidMeClient, AvatarViewModel avatarViewModel, IToastService toastService)
         {
             Avatar = avatarViewModel;
-            _navigationService = navigationService;
             _vidMeClient = vidMeClient;
             _toastService = toastService;
         }
@@ -33,6 +27,7 @@ namespace Viddy.ViewModel.Account
         public string NewPassword { get; set; }
         public string CurrentPassword { get; set; }
         public bool IsChanged { get; set; }
+        public string ErrorMessage { get; set; }
 
         public bool CanUpdate
         {
@@ -54,6 +49,7 @@ namespace Viddy.ViewModel.Account
                 {
                     try
                     {
+                        ErrorMessage = null;
                         SetProgressBar("Updating profile...");
 
                         string newPassword = null, currentPassword = null;
@@ -79,7 +75,11 @@ namespace Viddy.ViewModel.Account
                     {
                         if (ex.Error != null && !string.IsNullOrEmpty(ex.Error.Error))
                         {
-                            _toastService.Show(ex.Error.Error);
+                            ErrorMessage = ex.Error.Error;
+                        }
+                        else
+                        {
+                            ErrorMessage = "An error occurred updating your profile";
                         }
                     }
 

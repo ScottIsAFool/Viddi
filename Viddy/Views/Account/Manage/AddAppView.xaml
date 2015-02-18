@@ -78,7 +78,9 @@
                         <behaviours:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
-                
+
+                <controls:ErrorBox Visibility="{Binding ErrorMessage, Converter={StaticResource NullToVisibilityConverter}}"
+                                   ErrorMessage="{Binding ErrorMessage}" />
             </StackPanel>
         </Grid>
     </Grid>
