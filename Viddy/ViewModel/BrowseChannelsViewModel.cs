@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Extensions;
-using Cimbalino.Toolkit.Services;
 using Viddy.Core.Extensions;
 using Viddy.ViewModel.Item;
 using VidMePortable;
@@ -12,12 +11,10 @@ namespace Viddy.ViewModel
 {
     public class BrowseChannelsViewModel : LoadingItemsViewModel<ChannelItemViewModel>
     {
-        private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
 
-        public BrowseChannelsViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
+        public BrowseChannelsViewModel(IVidMeClient vidMeClient)
         {
-            _navigationService = navigationService;
             _vidMeClient = vidMeClient;
         }
 

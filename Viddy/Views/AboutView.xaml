@@ -17,5 +17,10 @@
         
         <controls:PageHeaderControl HeaderText="about"
                                     ProfilePictureVisibility="Collapsed"/>
+        
+        <Grid Grid.Row="1"
+              Margin="19,19,19,0">
+            
+        </Grid>
     </Grid>
 </local:BasePage>
