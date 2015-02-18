@@ -2,28 +2,33 @@
 using System.Collections.Generic;
 using System.Linq;
 using Windows.UI.Xaml;
+using Cimbalino.Toolkit.Services;
+using GalaSoft.MvvmLight.Command;
 using JetBrains.Annotations;
 using ThemeManagerRt;
 using Viddy.Core.Extensions;
 using Viddy.Model;
 using Viddy.Services;
+using Viddy.Views;
 
 namespace Viddy.ViewModel
 {
     public class SettingsViewModel : ViewModelBase
     {
+        private readonly INavigationService _navigationService;
         private readonly ISettingsService _settingsService;
         private readonly ITaskService _taskService;
 
         private bool _ignoreChanges;
 
-        public SettingsViewModel(ISettingsService settingsService, ITaskService taskService)
+        public SettingsViewModel(INavigationService navigationService, ISettingsService settingsService, ITaskService taskService)
         {
+            _navigationService = navigationService;
             _settingsService = settingsService;
             _taskService = taskService;
 
             _ignoreChanges = true;
-            UpdateFrequencies = Enum.GetValues(typeof (UpdateFrequency)).ToList<UpdateFrequency>();
+            UpdateFrequencies = Enum.GetValues(typeof(UpdateFrequency)).ToList<UpdateFrequency>();
             NotificationFrequency = UpdateFrequencies.First(x => x == _settingsService.NotificationFrequency.GetFrequency());
             _ignoreChanges = false;
         }
@@ -34,11 +39,16 @@ namespace Viddy.ViewModel
         public UpdateFrequency NotificationFrequency { get; set; }
         public List<UpdateFrequency> UpdateFrequencies { get; set; }
 
+        public RelayCommand NavigateToPrivacyCommand
+        {
+            get { return new RelayCommand(() => _navigationService.Navigate<PrivacyView>()); }
+        }
+
         [UsedImplicitly]
         private void OnCheckForNotificationsInBackgroundChanged()
         {
             if (_ignoreChanges) return;
-            
+
             if (CheckForNotificationsInBackground)
             {
                 _taskService.CreateService();
@@ -54,8 +64,8 @@ namespace Viddy.ViewModel
         [UsedImplicitly]
         private void OnNotificationFrequencyChanged()
         {
-            if (_ignoreChanges) return; 
-            
+            if (_ignoreChanges) return;
+
             _taskService.RemoveService();
             _taskService.CreateService(NotificationFrequency.GetMinutes());
 

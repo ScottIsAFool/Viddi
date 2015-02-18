@@ -165,8 +165,7 @@
                         </Grid>
                     </StackPanel>
                     <StackPanel Orientation="Vertical"
-                                Margin="0,12"
-                                Visibility="Collapsed">
+                                Margin="0,12">
                         <TextBlock Text="LOCATION"
                                    Style="{StaticResource BodyTextBlockStyle}"
                                    FontWeight="Bold"
@@ -177,6 +176,15 @@
                                    Margin="0,0,0,12" />
                         <ToggleSwitch Header="Location service"
                                       IsOn="{Binding IsLocationOn, Mode=TwoWay}" />
+                        <controls:CustomHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
+                                                        TapCommand="{Binding NavigateToPrivacyCommand}">
+                            <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                       FontWeight="SemiBold">
+                                <Underline>
+                                    <Run Text="Privacy" />
+                                </Underline>
+                            </TextBlock>
+                        </controls:CustomHyperlinkButton>
                     </StackPanel>
                     <StackPanel Orientation="Vertical"
                                 Margin="0,12">

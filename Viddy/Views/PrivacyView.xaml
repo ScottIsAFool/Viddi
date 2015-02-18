@@ -1,0 +1,42 @@
+﻿<local:BasePage x:Class="Viddy.Views.PrivacyView"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:local="using:Viddy.Views"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:controls="using:Viddy.Controls"
+                mc:Ignorable="d"
+                Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                DataContext="{Binding Privacy, Source={StaticResource Locator}}">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <controls:PageHeaderControl ProfilePictureVisibility="Collapsed"
+                                    HeaderText="privacy"/>
+        
+        <StackPanel Orientation="Vertical"
+                    Grid.Row="1"
+                    Margin="19,12,19,0">
+            <TextBlock Text="Viddy doesn't store any personal information about you or your location. If you use the location, that is used purely to add to the video and send to VidMe."
+                       Style="{StaticResource BodyTextBlockStyle}"
+                       Margin="0,0,0,24"/>
+            <TextBlock Text="VidMe's own privacy can be viewed online:"
+                       Style="{StaticResource BodyTextBlockStyle}"
+                       Margin="0,0,0,12"/>
+            
+            <controls:CustomHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
+                                            TapCommand="{Binding PrivacyCommand}">
+                <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                           FontWeight="SemiBold">
+                    <Underline>
+                        <Run Text="VidMe Privacy Policy"/>
+                    </Underline>
+                </TextBlock>
+            </controls:CustomHyperlinkButton>
+        </StackPanel>
+    </Grid>
+</local:BasePage>

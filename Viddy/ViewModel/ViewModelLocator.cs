@@ -38,6 +38,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.RegisterIf<ISettingsService, SettingsService>();
             SimpleIoc.Default.RegisterIf<INotificationService, NotificationService>();
             SimpleIoc.Default.RegisterIf<ITaskService, TaskService>();
+            SimpleIoc.Default.RegisterIf<ILauncherService, LauncherService>();
 
             SimpleIoc.Default.Register<FoursqureViewModel>();
             SimpleIoc.Default.Register<AvatarViewModel>();
@@ -62,6 +63,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.Register<UserFollowersViewModel>(true);
             SimpleIoc.Default.Register<NotificationsViewModel>(true);
             SimpleIoc.Default.Register<AboutViewModel>();
+            SimpleIoc.Default.Register<PrivacyViewModel>();
         }
 
         public MainViewModel Main
@@ -162,6 +164,11 @@ namespace Viddy.ViewModel
         public AboutViewModel About
         {
             get { return ServiceLocator.Current.GetInstance<AboutViewModel>(); }
+        }
+
+        public PrivacyViewModel Privacy
+        {
+            get { return ServiceLocator.Current.GetInstance<PrivacyViewModel>(); }
         }
 
         public NotificationsViewModel Notifications
