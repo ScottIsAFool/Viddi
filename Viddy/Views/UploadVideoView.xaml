@@ -145,7 +145,8 @@
                               Foreground="{ThemeResource PlaceholderTextBrush}"
                               BorderBrush="{ThemeResource PlaceholderTextBrush}"
                               HorizontalAlignment="Stretch"
-                              IsChecked="{Binding EditVideo.IsNsfw, Mode=TwoWay}" />
+                              IsChecked="{Binding EditVideo.IsNsfw, Mode=TwoWay}" 
+                              IsEnabled="{Binding EditVideo.CanSetNsfw}"/>
                 </Border>
                 <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
                                        Content="Save"

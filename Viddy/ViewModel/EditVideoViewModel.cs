@@ -28,6 +28,9 @@ namespace Viddy.ViewModel
         public void SetVideo(Video video)
         {
             _video = video;
+            Title = _video.Title;
+            Description = _video.Description;
+            IsNsfw = _video.Nsfw;
             CanEdit = true;
         }
 
@@ -42,6 +45,11 @@ namespace Viddy.ViewModel
         public bool IsNsfw { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+
+        public bool CanSetNsfw
+        {
+            get { return !_video.Nsfw; }
+        }
 
         public bool IsChanged { get; set; }
 
@@ -72,7 +80,7 @@ namespace Viddy.ViewModel
 
                         if (IsNsfw && !_video.Nsfw)
                         {
-                            request.Title += "NSFW";
+                            request.IsNsfw = true;
                         }
 
                         var response = await _vidMeClient.EditVideoAsync(_video.VideoId, request);
@@ -80,6 +88,7 @@ namespace Viddy.ViewModel
                         if (response != null)
                         {
                             IsChanged = false;
+                            RaisePropertyChanged(() => CanSetNsfw);
                         }
                     }
                     catch (Exception ex)
