@@ -125,6 +125,7 @@
     </Compile>
     <Compile Include="Controls\CustomButton.cs" />
     <Compile Include="Controls\CustomHyperlinkButton.cs" />
+    <Compile Include="Controls\ErrorBox.cs" />
     <Compile Include="Controls\FollowingControl.cs" />
     <Compile Include="Controls\LoadingListView.cs" />
     <Compile Include="Controls\LoadMoreControl.xaml.cs">

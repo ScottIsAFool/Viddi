@@ -3,7 +3,6 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Common;
 using Viddy.Core.Services;
-using Viddy.Services;
 using Viddy.Views.Account;
 using VidMePortable;
 using VidMePortable.Model;
@@ -24,6 +23,8 @@ namespace Viddy.ViewModel.Account
         public string Username { get; set; }
         public string Password { get; set; }
 
+        public string ErrorMessage { get; set; }
+
         public bool CanSignIn
         {
             get
@@ -40,10 +41,7 @@ namespace Viddy.ViewModel.Account
             {
                 return new RelayCommand(async () =>
                 {
-                    if (!CanSignIn)
-                    {
-                        return;
-                    }
+                    ErrorMessage = null;
 
                     try
                     {
@@ -65,19 +63,17 @@ namespace Viddy.ViewModel.Account
                     }
                     catch (VidMeException vex)
                     {
-                        if (vex.Error.Code == "invalid_password")
-                        {
-                            // TODO: Display error message
-                        }
+                        Log.ErrorException("SignInCommand", vex);
+                        ErrorMessage = vex.Error.Code == "invalid_password" ? "Username and/or password incorrect" : "There was an error signing in";
                     }
                     catch (Exception ex)
                     {
-
+                        Log.ErrorException("SignInCommand", ex);
+                        ErrorMessage = "There was an error signing in";
                     }
 
-
                     SetProgressBar();
-                });
+                }, () => CanSignIn);
             }
         }
 

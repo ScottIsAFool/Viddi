@@ -575,5 +575,39 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <Style TargetType="controls:ErrorBox">
+        <Setter Property="Background"
+                Value="Red"/>
+        <Setter Property="Foreground"
+                Value="White"/>
+        <Setter Property="HorizontalContentAlignment"
+                Value="Stretch"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:ErrorBox">
+                    <Border Background="{TemplateBinding Background}"
+                            Padding="28,12">
+                        <StackPanel Orientation="Horizontal">
+                            <Viewbox StretchDirection="DownOnly"
+                                     Stretch="Uniform"
+                                     Height="25">
+                                <Path Width="43.9488"
+                                      Height="40.9682"
+                                      Stretch="Fill"
+                                      Fill="{TemplateBinding Foreground}"
+                                      Data="F1 M 58.5832,55.4172L 17.4169,55.4171C 15.5619,53.5621 15.5619,50.5546 17.4168,48.6996L 35.201,15.8402C 37.056,13.9852 40.0635,13.9852 41.9185,15.8402L 58.5832,48.6997C 60.4382,50.5546 60.4382,53.5622 58.5832,55.4172 Z M 34.0417,25.7292L 36.0208,41.9584L 39.9791,41.9583L 41.9583,25.7292L 34.0417,25.7292 Z M 38,44.3333C 36.2511,44.3333 34.8333,45.7511 34.8333,47.5C 34.8333,49.2489 36.2511,50.6667 38,50.6667C 39.7489,50.6667 41.1666,49.2489 41.1666,47.5C 41.1666,45.7511 39.7489,44.3333 38,44.3333 Z " 
+                                      Margin="0,0,29,0"/>
+                            </Viewbox>
+                            <TextBlock Text="There was an error signing in"
+                                       Style="{StaticResource BodyTextBlockStyle}"
+                                       Foreground="{TemplateBinding Foreground}"
+                                       VerticalAlignment="Center"/>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 </ResourceDictionary>
