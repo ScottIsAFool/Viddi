@@ -1,4 +1,7 @@
-﻿using Cimbalino.Toolkit.Services;
+﻿using System;
+using Windows.ApplicationModel.Store;
+using Windows.System;
+using Cimbalino.Toolkit.Services;
 using Viddy.Core;
 using Viddy.ViewModel;
 using Viddy.ViewModel.Item;
@@ -22,6 +25,11 @@ namespace Viddy.Services
 
             GetRunCount();
             GetAlreadyResponded();
+        }
+
+        public void LaunchReview()
+        {
+            Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + CurrentApp.AppId));
         }
 
         public ReviewViewModel ReviewViewModel { get { return _reviewViewModel; } }

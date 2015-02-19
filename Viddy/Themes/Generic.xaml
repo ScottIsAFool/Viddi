@@ -609,5 +609,55 @@
             </Setter.Value>
         </Setter>
     </Style>
+    
+    <Style TargetType="controls:AboutPerson">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="controls:AboutPerson">
+                    <Grid Margin="0,6">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="50" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <Ellipse Height="45"
+                                 Width="45"
+                                 HorizontalAlignment="Left"
+                                 VerticalAlignment="Center"
+                                 Tag="{TemplateBinding Avatar}"
+                                 x:Name="ImageEllipse">
+                            <Ellipse.Fill>
+                                <ImageBrush ImageSource="{Binding Tag, ElementName=ImageEllipse}"
+                                            Stretch="UniformToFill" />
+                            </Ellipse.Fill>
+                        </Ellipse>
+
+                        <Viewbox Width="Auto"
+                                 Stretch="Uniform"
+                                 StretchDirection="DownOnly"
+                                 Grid.Column="1"
+                                 HorizontalAlignment="Left">
+                            <TextBlock Text="{TemplateBinding PersonName}"
+                                       Style="{StaticResource BaseTextBlockStyle}"
+                                       Margin="12,0" />
+                        </Viewbox>
+
+                        <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                               Grid.Column="2"
+                                               HorizontalContentAlignment="Right"
+                                               Margin="0,-10,0,-10"
+                                               TapCommand="{TemplateBinding Command}">
+                            <Viewbox Width="Auto"
+                                     Stretch="Uniform"
+                                     StretchDirection="DownOnly">
+                                <TextBlock Text="{TemplateBinding Twitter}" />
+                            </Viewbox>
+                        </controls:CustomButton>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
 
 </ResourceDictionary>

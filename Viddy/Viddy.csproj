@@ -88,6 +88,7 @@
     <None Include="app.config" />
     <Content Include="Assets\Icons\appbar.film.list.png" />
     <Content Include="Assets\Icons\appbar.share.png" />
+    <Content Include="Assets\Pictures\scott.jpg" />
     <Content Include="Assets\TileIcons\Logo.scale-100.png" />
     <Content Include="Assets\TileIcons\Logo.scale-140.png" />
     <Content Include="Assets\PureLogo.png" />
@@ -116,6 +117,7 @@
     <Compile Include="Common\NavigationParameters.cs" />
     <Compile Include="Common\ObservableDictionary.cs" />
     <Compile Include="Common\SuspensionManager.cs" />
+    <Compile Include="Controls\AboutPerson.cs" />
     <Compile Include="Controls\BlurredImageControl.cs" />
     <Compile Include="Controls\ChannelControl.xaml.cs">
       <DependentUpon>ChannelControl.xaml</DependentUpon>

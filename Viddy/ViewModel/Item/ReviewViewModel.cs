@@ -1,7 +1,4 @@
-﻿using System;
-using Windows.ApplicationModel.Store;
-using Windows.System;
-using Cimbalino.Toolkit.Services;
+﻿using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Core;
@@ -24,7 +21,7 @@ namespace Viddy.ViewModel.Item
                 {
                     ReviewService.Current.Responded();
                     CloseControl();
-                    Launcher.LaunchUriAsync(new Uri("ms-windows-store:reviewapp?appid=" + CurrentApp.AppId));
+                    ReviewService.Current.LaunchReview();
                 });
             }
         }
