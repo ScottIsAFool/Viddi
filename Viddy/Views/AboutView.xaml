@@ -61,20 +61,17 @@
                     <controls:CustomHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
                                                     Margin="0,6,0,6"
                                                     TapCommand="{Binding TellAFriendCommand}"
-                                                    Content="Tell a friend">
-                        <!--<TextBlock Text="Tell a friend"
-                                   Style="{StaticResource BodyTextBlockStyle}"
-                                   FontWeight="SemiBold"/>-->
-                    </controls:CustomHyperlinkButton>
+                                                    Content="Tell a friend"/>
+                    
                     <controls:CustomHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
                                                     Margin="0,6,0,6"
                                                     TapCommand="{Binding LeaveReviewCommand}"
-                                                    Content="Leave a review">
-                        <!--<TextBlock Text="Leave a review"
-                                   Style="{StaticResource BodyTextBlockStyle}"
-                                   FontWeight="SemiBold" />-->
-                    </controls:CustomHyperlinkButton>
-                    
+                                                    Content="Leave a review"/>
+                    <controls:CustomHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
+                                                    Margin="0,6,0,6"
+                                                    TapCommand="{Binding EmailCommand}"
+                                                    Content="Email feedback" />
+
                     <TextBlock Text="BUILT BY"
                                Style="{StaticResource BodyTextBlockStyle}"
                                Foreground="{ThemeResource SubtleBrush}"
