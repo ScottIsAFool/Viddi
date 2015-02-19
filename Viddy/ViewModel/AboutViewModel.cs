@@ -5,18 +5,21 @@ using Windows.ApplicationModel.Store;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Services;
+using Viddy.Views;
 
 namespace Viddy.ViewModel
 {
     public class AboutViewModel : ViewModelBase
     {
+        private readonly INavigationService _navigationService;
         private readonly ILauncherService _launcherService;
         private readonly IEmailComposeService _emailCompose;
         private readonly ReviewService _reviewService;
         private readonly PackageVersion _version;
 
-        public AboutViewModel(ILauncherService launcherService, IEmailComposeService emailCompose, ReviewService reviewService)
+        public AboutViewModel(INavigationService navigationService, ILauncherService launcherService, IEmailComposeService emailCompose, ReviewService reviewService)
         {
+            _navigationService = navigationService;
             _launcherService = launcherService;
             _emailCompose = emailCompose;
             _reviewService = reviewService;
@@ -78,6 +81,11 @@ namespace Viddy.ViewModel
             {
                 return new RelayCommand(DataTransferManager.ShowShareUI);
             }
+        }
+
+        public RelayCommand NavigateToToolsCommand
+        {
+            get { return new RelayCommand(() => _navigationService.Navigate<ToolsUsedView>()); }
         }
 
         private void ManagerOnDataRequested(DataTransferManager sender, DataRequestedEventArgs args)

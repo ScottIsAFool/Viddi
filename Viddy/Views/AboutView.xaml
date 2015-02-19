@@ -60,17 +60,19 @@
                 <StackPanel Orientation="Vertical">
                     <controls:CustomHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
                                                     Margin="0,6,0,6"
-                                                    TapCommand="{Binding TellAFriendCommand}">
-                        <TextBlock Text="Tell a friend"
+                                                    TapCommand="{Binding TellAFriendCommand}"
+                                                    Content="Tell a friend">
+                        <!--<TextBlock Text="Tell a friend"
                                    Style="{StaticResource BodyTextBlockStyle}"
-                                   FontWeight="SemiBold"/>
+                                   FontWeight="SemiBold"/>-->
                     </controls:CustomHyperlinkButton>
                     <controls:CustomHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
                                                     Margin="0,6,0,6"
-                                                    TapCommand="{Binding LeaveReviewCommand}">
-                        <TextBlock Text="Leave a review"
+                                                    TapCommand="{Binding LeaveReviewCommand}"
+                                                    Content="Leave a review">
+                        <!--<TextBlock Text="Leave a review"
                                    Style="{StaticResource BodyTextBlockStyle}"
-                                   FontWeight="SemiBold" />
+                                   FontWeight="SemiBold" />-->
                     </controls:CustomHyperlinkButton>
                     
                     <TextBlock Text="BUILT BY"
@@ -89,9 +91,17 @@
                                Margin="0,12,0,6" />
 
                     <controls:AboutPerson PersonName="Deani Hansen"
-                                          Twitter="@DeaniHansen"
+                                          Twitter="@deanihansen"
                                           Command="{Binding DeaniTwitterCommand}"
                                           Avatar="/Assets/Pictures/deani.jpg" />
+
+                    <controls:CustomHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
+                                                    Margin="0,12,0,6"
+                                                    TapCommand="{Binding NavigateToToolsCommand}">
+                        <TextBlock Text="Tools used"
+                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   FontWeight="SemiBold" />
+                    </controls:CustomHyperlinkButton>
                 </StackPanel>
             </Grid>
         </Grid>
