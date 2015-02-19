@@ -65,6 +65,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.Register<NotificationsViewModel>(true);
             SimpleIoc.Default.Register<AboutViewModel>();
             SimpleIoc.Default.Register<PrivacyViewModel>();
+            SimpleIoc.Default.Register<ToolsUsedViewModel>();
         }
 
         public MainViewModel Main
@@ -170,6 +171,11 @@ namespace Viddy.ViewModel
         public PrivacyViewModel Privacy
         {
             get { return ServiceLocator.Current.GetInstance<PrivacyViewModel>(); }
+        }
+
+        public ToolsUsedViewModel Tools
+        {
+            get { return ServiceLocator.Current.GetInstance<ToolsUsedViewModel>(); }
         }
 
         public NotificationsViewModel Notifications

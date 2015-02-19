@@ -1,14 +1,33 @@
-﻿<Page
-    x:Class="Viddy.Views.ToolsUsedView"
-    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:local="using:Viddy.Views"
-    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-    mc:Ignorable="d"
-    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+﻿<local:BasePage x:Class="Viddy.Views.ToolsUsedView"
+                xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                xmlns:local="using:Viddy.Views"
+                xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                xmlns:controls="using:Viddy.Controls"
+                mc:Ignorable="d"
+                Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
+                DataContext="{Binding Tools, Source={StaticResource Locator}}">
 
-    <Grid>
-
+    <Grid Margin="19,19,19,0">
+        <controls:LoadingListView ItemsSource="{Binding Tools}"
+                                  ShowGoToTopButton="False">
+            <controls:LoadingListView.ItemTemplate>
+                <DataTemplate>
+                    <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                           Margin="0,0,0,12"
+                                           TapCommand="{Binding Tools.OpenToolCommand, Source={StaticResource Locator}}"
+                                           CommandParameter="{Binding}">
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Text="{Binding Name}"
+                                       Style="{StaticResource BodyTextBlockStyle}"/>
+                            <TextBlock Text="{Binding Url}"
+                                       Style="{StaticResource BodyTextBlockStyle}"
+                                       Foreground="{ThemeResource SubtleBrush}"/>
+                        </StackPanel>
+                    </controls:CustomButton>
+                </DataTemplate>
+            </controls:LoadingListView.ItemTemplate>
+        </controls:LoadingListView>
     </Grid>
-</Page>
+</local:BasePage>

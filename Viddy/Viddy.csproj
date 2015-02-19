@@ -170,6 +170,7 @@
     <Compile Include="Messaging\UserMessage.cs" />
     <Compile Include="Messaging\VideoMessage.cs" />
     <Compile Include="Model\AppSettings.cs" />
+    <Compile Include="Model\Tool.cs" />
     <Compile Include="Model\UpdateFrequency.cs" />
     <Compile Include="Services\CameraInfoService.cs" />
     <Compile Include="Services\ICameraInfoService.cs" />
@@ -216,6 +217,7 @@
     <Compile Include="ViewModel\PrivacyViewModel.cs" />
     <Compile Include="ViewModel\SearchViewModel.cs" />
     <Compile Include="ViewModel\SettingsViewModel.cs" />
+    <Compile Include="ViewModel\ToolsUsedViewModel.cs" />
     <Compile Include="ViewModel\UploadVideoViewModel.cs" />
     <Compile Include="ViewModel\Item\UserViewModel.cs" />
     <Compile Include="ViewModel\Item\VideoItemViewModel.cs" />
