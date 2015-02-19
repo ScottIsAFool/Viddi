@@ -1,4 +1,5 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using WinRTXamlToolkit.Controls.Extensions;
@@ -138,6 +139,8 @@ namespace Viddy.Controls
             if (_scrollViewer != null)
             {
                 _scrollViewer.ViewChanged += ScrollViewerOnViewChanged;
+                _scrollViewer.ViewChanging += ScrollViewerOnViewChanging;
+                _scrollViewer.IsScrollInertiaEnabled = true;
             }
 
             _goToTopButton = GetTemplateChild("GoToTopButtonPresenter") as ContentPresenter;
@@ -147,11 +150,26 @@ namespace Viddy.Controls
             }
         }
 
+        private void ScrollViewerOnViewChanging(object sender, ScrollViewerViewChangingEventArgs e)
+        {
+            if (e.IsInertial)
+            {
+                if (!IsAtTop)
+                {
+                    if (ShowGoToTopButton)
+                    {
+                        // Show go to top button
+                        VisualStateManager.GoToState(this, "ShowGoToTopButton", true);
+                    }
+                }
+            }
+        }
+
         private void GoToTopButtonOnTapped(object sender, TappedRoutedEventArgs tappedRoutedEventArgs)
         {
             GoToTop();
         }
-
+        
         private void ScrollViewerOnViewChanged(object sender, ScrollViewerViewChangedEventArgs scrollViewerViewChangedEventArgs)
         {
             if (_scrollViewer == null)
@@ -165,14 +183,6 @@ namespace Viddy.Controls
             {
                 // Hide go to top button
                 VisualStateManager.GoToState(this, "HideGoToTopButton", true);
-            }
-            else
-            {
-                if (ShowGoToTopButton)
-                {
-                    // Show go to top button
-                    VisualStateManager.GoToState(this, "ShowGoToTopButton", true);
-                }
             }
         }
     }
