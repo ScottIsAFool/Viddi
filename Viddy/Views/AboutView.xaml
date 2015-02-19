@@ -76,7 +76,7 @@
                     <TextBlock Text="BUILT BY"
                                Style="{StaticResource BodyTextBlockStyle}"
                                Foreground="{ThemeResource SubtleBrush}"
-                               Margin="0,24,0,12"/>
+                               Margin="0,12,0,6"/>
 
                     <controls:AboutPerson PersonName="Scott Lovegrove"
                                           Twitter="@scottisafool"
@@ -86,12 +86,12 @@
                     <TextBlock Text="DESIGN INPUT BY"
                                Style="{StaticResource BodyTextBlockStyle}"
                                Foreground="{ThemeResource SubtleBrush}"
-                               Margin="0,24,0,12" />
+                               Margin="0,12,0,6" />
 
                     <controls:AboutPerson PersonName="Deani Hansen"
                                           Twitter="@DeaniHansen"
-                                          Command="{Binding ScottTwitterCommand}"
-                                          Avatar="/Assets/Pictures/scott.jpg" />
+                                          Command="{Binding DeaniTwitterCommand}"
+                                          Avatar="/Assets/Pictures/deani.jpg" />
                 </StackPanel>
             </Grid>
         </Grid>

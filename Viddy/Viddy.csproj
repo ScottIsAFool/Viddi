@@ -88,6 +88,7 @@
     <None Include="app.config" />
     <Content Include="Assets\Icons\appbar.film.list.png" />
     <Content Include="Assets\Icons\appbar.share.png" />
+    <Content Include="Assets\Pictures\deani.jpg" />
     <Content Include="Assets\Pictures\scott.jpg" />
     <Content Include="Assets\TileIcons\Logo.scale-100.png" />
     <Content Include="Assets\TileIcons\Logo.scale-140.png" />
@@ -271,6 +272,9 @@
     <Compile Include="Views\SearchView.xaml.cs">
       <DependentUpon>SearchView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\ToolsUsedView.xaml.cs">
+      <DependentUpon>ToolsUsedView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\VideoPlayerView.xaml.cs">
       <DependentUpon>VideoPlayerView.xaml</DependentUpon>
     </Compile>
@@ -432,6 +436,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\SearchView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ToolsUsedView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

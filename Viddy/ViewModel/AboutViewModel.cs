@@ -56,6 +56,14 @@ namespace Viddy.ViewModel
             }
         }
 
+        public RelayCommand DeaniTwitterCommand
+        {
+            get
+            {
+                return new RelayCommand(() => _launcherService.LaunchUriAsync(new Uri("http://twitter.com/deanihansen", UriKind.Absolute)));
+            }
+        }
+
         public RelayCommand EmailCommand
         {
             get
