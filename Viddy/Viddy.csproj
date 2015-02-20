@@ -173,6 +173,7 @@
     <Compile Include="Model\Tool.cs" />
     <Compile Include="Model\UpdateFrequency.cs" />
     <Compile Include="Services\CameraInfoService.cs" />
+    <Compile Include="Services\DisplayRequestService.cs" />
     <Compile Include="Services\ICameraInfoService.cs" />
     <Compile Include="Services\ITileService.cs" />
     <Compile Include="Services\IToastService.cs" />

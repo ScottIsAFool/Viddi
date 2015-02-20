@@ -12,14 +12,13 @@ namespace Viddy.Services
     public class DisplayRequestService : IDisplayRequestService
     {
         private DisplayRequest _displayRequest;
-        private bool _isActive;
 
         public DisplayRequestService()
         {
             _displayRequest = new DisplayRequest();
         }
 
-        public bool IsActive { get { return _isActive; } }
+        public bool IsActive { get; private set; }
 
         public void Request()
         {
@@ -29,7 +28,7 @@ namespace Viddy.Services
             }
 
             _displayRequest.RequestActive();
-            _isActive = true;
+            IsActive = true;
         }
 
         public void Release()
@@ -41,7 +40,7 @@ namespace Viddy.Services
 
             _displayRequest.RequestRelease();
             _displayRequest = null;
-            _isActive = false;
+            IsActive = false;
         }
     }
 }

@@ -44,7 +44,7 @@ namespace Viddy.Services
         private const string WideTileLocation = "ms-appdata:///Local/" + WideTileFile;
         private const string WideTileFile = "{0}{1}Wide.png";
         private const string SourceTileFile = "{0}{1}.png";
-        private const string Arguments = "http://ferretlabs.com/viddy?tileType={0}&id={1}";
+        private const string Arguments = "viddy://{0}?id={1}";
 
         private readonly IStorageService _storageService;
         private readonly IApplicationSettingsService _appSettings;

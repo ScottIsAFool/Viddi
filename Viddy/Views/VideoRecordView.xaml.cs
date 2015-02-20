@@ -8,7 +8,6 @@ using Windows.Graphics.Display;
 using Windows.Media.Capture;
 using Windows.Media.MediaProperties;
 using Windows.Storage;
-using Windows.System.Display;
 using Windows.UI.Core;
 using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
@@ -17,6 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
+using Viddy.Services;
 using Viddy.ViewModel;
 
 namespace Viddy.Views
@@ -26,7 +26,7 @@ namespace Viddy.Views
     /// </summary>
     public sealed partial class VideoRecordView
     {
-        private DisplayRequest _displayRequest;
+        private IDisplayRequestService _displayRequest;
         private bool _isRecording;
         private readonly DisplayInformation _display;
         private readonly DispatcherTimer _recordingTimer;
@@ -59,7 +59,6 @@ namespace Viddy.Views
         public VideoRecordView()
         {
             InitializeComponent();
-            _displayRequest = new DisplayRequest();
 
             _display = DisplayInformation.GetForCurrentView();
             _display.OrientationChanged += DisplayOnOrientationChanged;
@@ -71,6 +70,14 @@ namespace Viddy.Views
             _recordingTimer.Tick += RecordingTimerOnTick;
 
             _cameraInfoService = SimpleIoc.Default.GetInstance<ICameraInfoService>();
+            _displayRequest = SimpleIoc.Default.GetInstance<IDisplayRequestService>();
+
+            Window.Current.Activated += CurrentOnActivated;
+        }
+
+        private void CurrentOnActivated(object sender, WindowActivatedEventArgs e)
+        {
+            var i = 1;
         }
 
         private void RecordingTimerOnTick(object sender, object o)
@@ -134,7 +141,6 @@ namespace Viddy.Views
             {
                 _fromPageNavigation = false;
                 StopVideo();
-                //Window.Current.VisibilityChanged -= CurrentOnVisibilityChanged;
             }
         }
 
@@ -174,7 +180,7 @@ namespace Viddy.Views
             await mediaCapture.VideoDeviceController.SetMediaStreamPropertiesAsync(MediaStreamType.VideoPreview, highestPreviewRes);
             await mediaCapture.VideoDeviceController.SetMediaStreamPropertiesAsync(MediaStreamType.VideoRecord, highestRecordingRes);
 
-            CaptureElement.Source = _cameraInfoService.MediaCapture;
+            CaptureElement.Source = mediaCapture;
             SetRotation(_display.CurrentOrientation);
         }
 
@@ -237,12 +243,8 @@ namespace Viddy.Views
                 RecordedLengthText.Visibility = Visibility.Visible;
 
                 _isRecording = true;
-                if (_displayRequest == null)
-                {
-                    _displayRequest = new DisplayRequest();
-                }
-
-                _displayRequest.RequestActive();
+                
+                _displayRequest.Request();
 
                 _fileName = string.Format("Viddy-{0}.mp4", DateTime.Now.ToString("yyyy-M-dd-HH-mm-ss"));
                 var folder = ApplicationData.Current.LocalCacheFolder;
@@ -263,7 +265,7 @@ namespace Viddy.Views
             {
                 _recordingTimer.Stop();
                 _isRecording = false;
-                _displayRequest.RequestRelease();
+                _displayRequest.Release();
                 _displayRequest = null;
                 _recordedDuration = TimeSpan.MinValue;
 
@@ -311,7 +313,7 @@ namespace Viddy.Views
         {
             if (_displayRequest != null && _isRecording)
             {
-                _displayRequest.RequestRelease();
+                _displayRequest.Release();
                 _displayRequest = null;
             }
 

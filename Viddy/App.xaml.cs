@@ -18,7 +18,6 @@ using GalaSoft.MvvmLight.Messaging;
 using Viddy.Common;
 using Viddy.Core;
 using Viddy.Core.Extensions;
-using Viddy.Extensions;
 using Viddy.Messaging;
 using Viddy.Services;
 using Viddy.ViewModel;
@@ -306,6 +305,7 @@ namespace Viddy
 
                     Messenger.Default.Send(new ProtocolMessage(ProtocolMessage.ProtocolType.Search, query["query"], includeNsfw));
                     break;
+                case "videorecord":
                 case "record":
                     pageToGoTo = typeof (VideoRecordView);
                     break;
@@ -385,12 +385,15 @@ namespace Viddy
         /// </summary>
         /// <param name="sender">The source of the suspend request.</param>
         /// <param name="e">Details about the suspend request.</param>
-        private void OnSuspending(object sender, SuspendingEventArgs e)
+        private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
             var deferral = e.SuspendingOperation.GetDeferral();
 
             Window.Current.VisibilityChanged -= VideoRecordView.CurrentOnVisibilityChanged;
             Window.Current.VisibilityChanged -= CurrentOnVisibilityChanged;
+
+            SimpleIoc.Default.GetInstance<IDisplayRequestService>().Release();
+            await SimpleIoc.Default.GetInstance<ICameraInfoService>().DisposeMediaCapture();
 
             // TODO: Save application state and stop any background activity
             deferral.Complete();

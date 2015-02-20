@@ -53,7 +53,7 @@ namespace Viddy.ViewModel
 
         public bool CanSetNsfw
         {
-            get { return !_video.Nsfw; }
+            get { return _video != null && !_video.Nsfw; }
         }
 
         public bool IsChanged { get; set; }
