@@ -15,6 +15,7 @@ using Windows.UI.Xaml.Navigation;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
+using ScottIsAFool.WindowsPhone.Logging;
 using Viddy.Common;
 using Viddy.Core;
 using Viddy.Core.Extensions;
@@ -34,6 +35,7 @@ namespace Viddy
     public sealed partial class App
     {
         private TransitionCollection _transitions;
+        private readonly ILog Log;
 
         public static ViewModelLocator Locator
         {
@@ -49,6 +51,8 @@ namespace Viddy
             InitializeComponent();
             Suspending += OnSuspending;
             UnhandledException += OnUnhandledException;
+            Log = new WinLogger(GetType());
+            WinLogger.LogConfiguration = new LogConfiguration {LoggingIsEnabled = true, LogType = LogType.WriteToFile};
         }
 
         private void OnUnhandledException(object sender, UnhandledExceptionEventArgs e)
@@ -57,6 +61,8 @@ namespace Viddy
             {
                 Debugger.Break();
             }
+
+            Log.ErrorException("Unhandled", e.Exception);
 
             e.Handled = true;
         }
@@ -392,7 +398,12 @@ namespace Viddy
             Window.Current.VisibilityChanged -= VideoRecordView.CurrentOnVisibilityChanged;
             Window.Current.VisibilityChanged -= CurrentOnVisibilityChanged;
 
-            SimpleIoc.Default.GetInstance<IDisplayRequestService>().Release();
+            var display = SimpleIoc.Default.GetInstance<IDisplayRequestService>();
+            if (display.IsActive)
+            {
+                display.Release();
+            }
+
             await SimpleIoc.Default.GetInstance<ICameraInfoService>().DisposeMediaCapture();
 
             // TODO: Save application state and stop any background activity

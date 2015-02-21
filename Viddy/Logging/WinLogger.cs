@@ -110,7 +110,7 @@ namespace ScottIsAFool.WindowsPhone.Logging
 
     public class WinLogger : ILog
     {
-        private static readonly IStorageServiceHandler CacheStorage;
+        private static IStorageServiceHandler CacheStorage;
         private readonly string _typeName;
 
         #region Public static properties
@@ -129,8 +129,9 @@ namespace ScottIsAFool.WindowsPhone.Logging
         {
         }
 
-        static WinLogger()
+        public WinLogger(string typeName)
         {
+            _typeName = typeName;
             if (LogConfiguration == null)
             {
                 LogConfiguration = new LogConfiguration();
@@ -138,16 +139,7 @@ namespace ScottIsAFool.WindowsPhone.Logging
 
             if (CacheStorage == null)
             {
-                CacheStorage = new StorageService().LocalCache;
-            }
-        }
-
-        public WinLogger(string typeName)
-        {
-            _typeName = typeName;
-            if (LogConfiguration == null)
-            {
-                LogConfiguration = new LogConfiguration();
+                CacheStorage = new StorageService().Local;
             }
         }
         #endregion
@@ -214,6 +206,7 @@ namespace ScottIsAFool.WindowsPhone.Logging
             }
             catch (Exception)
             {
+                var i = 1;
             }
         }
 
