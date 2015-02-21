@@ -160,8 +160,7 @@ namespace Viddy.BackgroundTask
                 }
 
                 var toastNotification = ToastContentFactory.CreateToastText02();
-                toastNotification.Launch = HandleNotificationType(notification);
-                toastNotification.TextHeading.Text = "Viddy";
+                toastNotification.Launch = HandleNotificationType(notification, toastNotification);
                 toastNotification.TextBodyWrap.Text = notification.Text;
                 
                 var toast = toastNotification.CreateNotification();
@@ -172,7 +171,7 @@ namespace Viddy.BackgroundTask
             }
         }
 
-        private static string HandleNotificationType(Notification notification)
+        private static string HandleNotificationType(Notification notification, IToastText02 toastNotification)
         {
             if (notification == null)
             {
@@ -185,23 +184,29 @@ namespace Viddy.BackgroundTask
             switch (type)
             {
                 case NotificationType.ChannelSubscribed:
+                    toastNotification.TextHeading.Text = "Channel subscription";
+
                     var channel = notification.Channel;
                     if (channel != null)
                     {
                         return string.Format(urlTemplate, "channel", channel.ChannelId);
                     }
                     break;
-                case NotificationType.CommentReply:
-                    break;
                 case NotificationType.UserSubscribed:
+                    toastNotification.TextHeading.Text = "User subscription";
                     var user = notification.User;
                     if (user != null)
                     {
                         return string.Format(urlTemplate, "user", user.UserId);
                     }
                     break;
+                case NotificationType.CommentReply:
                 case NotificationType.VideoComment:
                 case NotificationType.VideoUpVoted:
+                    if (type == NotificationType.CommentReply) toastNotification.TextHeading.Text = "Comment Reply";
+                    else if (type == NotificationType.VideoComment) toastNotification.TextHeading.Text = "Video comment";
+                    else if (type == NotificationType.VideoUpVoted) toastNotification.TextHeading.Text = "Video Up Vote";
+
                     var video = notification.Video;
                     if (video != null)
                     {
