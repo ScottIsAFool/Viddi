@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="936e0564-d6bf-489c-8f9a-1fb1b912b139" Publisher="CN=Scott" Version="1.0.0.0" />
-  <mp:PhoneIdentity PhoneProductId="936e0564-d6bf-489c-8f9a-1fb1b912b139" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
+  <Identity Name="43233ScottLovegrove.ViddyBeta" Publisher="CN=43EE5435-230A-4364-8907-04B5F073D610" Version="1.1.0.0" />
+  <mp:PhoneIdentity PhoneProductId="a70534d1-4390-4561-8683-7919944680cf" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
-    <DisplayName>Viddy</DisplayName>
-    <PublisherDisplayName>Scott</PublisherDisplayName>
+    <DisplayName>Viddy Beta</DisplayName>
+    <PublisherDisplayName>ScottLovegrove</PublisherDisplayName>
     <Logo>Assets\TileIcons\StoreLogo.png</Logo>
   </Properties>
   <Prerequisites>
@@ -16,7 +16,7 @@
   </Resources>
   <Applications>
     <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Viddy.App">
-      <m3:VisualElements DisplayName="Viddy" Square150x150Logo="Assets\TileIcons\Logo.png" Square44x44Logo="Assets\TileIcons\SmallLogo.png" Description="Viddy" ForegroundText="light" BackgroundColor="transparent" ToastCapable="true">
+      <m3:VisualElements DisplayName="Viddy Beta" Square150x150Logo="Assets\TileIcons\Logo.png" Square44x44Logo="Assets\TileIcons\SmallLogo.png" Description="Viddy" ForegroundText="light" BackgroundColor="transparent" ToastCapable="true">
         <m3:DefaultTile Wide310x150Logo="Assets\TileIcons\WideLogo.png" Square71x71Logo="Assets\TileIcons\Square71x71Logo.png">
           <m3:ShowNameOnTiles>
             <m3:ShowOn Tile="square150x150Logo" />
