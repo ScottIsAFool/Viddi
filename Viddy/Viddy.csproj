@@ -313,6 +313,7 @@
     <Content Include="Assets\TileIcons\StoreLogo.scale-240.png" />
     <Content Include="Assets\TileIcons\WideLogo.scale-240.png" />
     <Content Include="FodyWeavers.xml" />
+    <None Include="Package.StoreAssociation.xml" />
     <Content Include="ReadMe.Coding4Fun.Toolkit.txt" />
     <Content Include="StoreManifest.xml" />
   </ItemGroup>
