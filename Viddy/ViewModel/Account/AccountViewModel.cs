@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Security.Authentication.Web;
+using Windows.UI.Xaml;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
@@ -41,7 +43,7 @@ namespace Viddy.ViewModel.Account
                 Reset();
             }
         }
-
+        
         private async void UserStateChanged(object sender, EventArgs eventArgs)
         {
             Reset();

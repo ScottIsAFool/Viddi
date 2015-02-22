@@ -2,6 +2,7 @@
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
+using Viddy.Core;
 using Viddy.Messaging;
 using Viddy.Views;
 using Viddy.Views.Account;

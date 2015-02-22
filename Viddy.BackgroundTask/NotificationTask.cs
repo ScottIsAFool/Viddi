@@ -35,7 +35,7 @@ namespace Viddy.BackgroundTask
         {
             if (AuthenticationService.Current == null)
             {
-                _vidMeClient = new VidMeClient(Utils.DeviceId, "WindowsPhone");
+                _vidMeClient = new VidMeClient(Utils.UniqueDeviceIdentifier, "WindowsPhone");
                 new AuthenticationService(_settingsService, _vidMeClient);
             }
 

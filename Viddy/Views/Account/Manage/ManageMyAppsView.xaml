@@ -58,14 +58,6 @@
                                        TextWrapping="WrapWholeWords"
                                        TextAlignment="Center"
                                        Style="{StaticResource BodyTextBlockStyle}" />
-
-                            <Path Width="28"
-                                  Height="60"
-                                  Stretch="Fill"
-                                  Fill="{ThemeResource ApplicationForegroundThemeBrush}"
-                                  VerticalAlignment="Bottom"
-                                  Margin="70,0,0,10"
-                                  Data="F1 M 42,19.0002L 34,19.0002L 34,43.7502L 24,33.7502L 24,44.2502L 38,58.2502L 52,44.2502L 52,33.7502L 42,43.7502L 42,19.0002 Z " />
                         </Grid>
                     </DataTemplate>
                 </controls:LoadingListView.EmptyContent>

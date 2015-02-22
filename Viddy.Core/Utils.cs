@@ -5,7 +5,7 @@ using Windows.Security.Cryptography.Core;
 using Windows.Security.ExchangeActiveSyncProvisioning;
 using Windows.System.Profile;
 
-namespace Viddy
+namespace Viddy.Core
 {
     public static class Utils
     {
@@ -21,6 +21,7 @@ namespace Viddy
         {
             get
             {
+                return Guid.NewGuid().ToString();
                 var myToken = HardwareIdentification.GetPackageSpecificToken(null);
                 var hardwareId = myToken.Id;
 

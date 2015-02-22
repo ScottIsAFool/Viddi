@@ -9,6 +9,7 @@
                 xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                 xmlns:core="using:Microsoft.Xaml.Interactions.Core"
                 xmlns:behaviours="using:Viddy.Behaviours"
+                xmlns:converters1="using:Viddy.Converters"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding Account, Source={StaticResource Locator}}">
@@ -184,29 +185,12 @@
                             </Grid>
 
                             <Grid Grid.Row="1">
-                                <TextBlock Text="You can record new videos by tapping the video button below"
+                                <TextBlock Text="You can record new videos by tapping the record button below"
                                            TextWrapping="WrapWholeWords"
                                            TextAlignment="Center"
                                            Style="{StaticResource BodyTextBlockStyle}" />
 
-                                <Path Width="28"
-                                      Height="60"
-                                      Stretch="Fill"
-                                      Fill="{ThemeResource ApplicationForegroundThemeBrush}"
-                                      VerticalAlignment="Bottom"
-                                      HorizontalAlignment="Left"
-                                      Margin="95,0,0,10"
-                                      Data="F1 M 42,19.0002L 34,19.0002L 34,43.7502L 24,33.7502L 24,44.2502L 38,58.2502L 52,44.2502L 52,33.7502L 42,43.7502L 42,19.0002 Z "
-                                      Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource InverseVisibilityConverter}}" />
-                                <Path Width="28"
-                                      Height="60"
-                                      Stretch="Fill"
-                                      Fill="{ThemeResource ApplicationForegroundThemeBrush}"
-                                      VerticalAlignment="Bottom"
-                                      HorizontalAlignment="Left"
-                                      Margin="60,0,0,10"
-                                      Data="F1 M 42,19.0002L 34,19.0002L 34,43.7502L 24,33.7502L 24,44.2502L 38,58.2502L 52,44.2502L 52,33.7502L 42,43.7502L 42,19.0002 Z "
-                                      Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}" />
+                                
                             </Grid>
                         </Grid>
                     </DataTemplate>

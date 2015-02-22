@@ -222,6 +222,7 @@ namespace Viddy.ViewModel.Item
                     catch (Exception ex)
                     {
                         Log.ErrorException("DeleteCommend("+ AuthenticationService.Current.IsLoggedIn + ")", ex);
+                        _toastService.Show("Error deleting comment");
                     }
                 }, () => IsOwner);
             }
@@ -269,6 +270,7 @@ namespace Viddy.ViewModel.Item
                     catch (Exception ex)
                     {
                         Log.ErrorException("AddComment", ex);
+                        _toastService.Show("Error adding comment");
                     }
 
                     AddingComment = false;
