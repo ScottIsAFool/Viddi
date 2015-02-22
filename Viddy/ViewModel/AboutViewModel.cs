@@ -134,15 +134,20 @@ namespace Viddy.ViewModel
 
             request.Data.Properties.Title = "Logfile from Viddy " + Version;
 
-            var folder = ApplicationData.Current.LocalFolder;
-            var file = await folder.GetFileAsync(WinLogger.LogFileName);
-
-            if (file != null)
+            try
             {
-                request.Data.SetStorageItems(new List<IStorageFile> { file });
-            }
+                var folder = ApplicationData.Current.LocalFolder;
+                var file = await folder.GetFileAsync(WinLogger.LogFileName);
 
-            deferral.Complete();
+                if (file != null)
+                {
+                    request.Data.SetStorageItems(new List<IStorageFile> {file});
+                }
+            }
+            finally
+            {
+                deferral.Complete();
+            }
         }
 
         private static void TellAFriend(DataRequest request)
