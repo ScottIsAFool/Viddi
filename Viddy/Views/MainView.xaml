@@ -41,8 +41,7 @@
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="account"
-                              Command="{Binding NavigateToAccountCommand}"
-                              Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"></AppBarButton>
+                              Command="{Binding NavigateToAccountCommand}"/>
                 <AppBarButton Label="settings"
                               Command="{Binding NavigateToSettingsCommand}" />
                 <AppBarButton Label="about"

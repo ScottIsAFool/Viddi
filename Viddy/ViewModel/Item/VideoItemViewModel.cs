@@ -11,7 +11,6 @@ using GalaSoft.MvvmLight.Messaging;
 using Viddy.Core;
 using Viddy.Core.Extensions;
 using Viddy.Core.Services;
-using Viddy.Extensions;
 using Viddy.Messaging;
 using Viddy.Model;
 using Viddy.Services;
@@ -28,6 +27,7 @@ namespace Viddy.ViewModel.Item
         private readonly IApplicationSettingsService _settingsService;
         private readonly INavigationService _navigationService;
         private readonly ITileService _tileService;
+        private readonly IToastService _toastService;
 
         private readonly DataTransferManager _manager;
         
@@ -37,6 +37,7 @@ namespace Viddy.ViewModel.Item
             _settingsService = SimpleIoc.Default.GetInstance<IApplicationSettingsService>();
             _navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
             _tileService = SimpleIoc.Default.GetInstance<ITileService>();
+            _toastService = SimpleIoc.Default.GetInstance<IToastService>();
             _manager = DataTransferManager.GetForCurrentView();
             _videoLoadingViewModel = videoLoadingViewModel;
             Video = video;
@@ -220,7 +221,7 @@ namespace Viddy.ViewModel.Item
                     }
                     catch (Exception ex)
                     {
-
+                        Log.ErrorException("DeleteCommend("+ AuthenticationService.Current.IsLoggedIn + ")", ex);
                     }
                 }, () => IsOwner);
             }
@@ -267,7 +268,7 @@ namespace Viddy.ViewModel.Item
                     }
                     catch (Exception ex)
                     {
-
+                        Log.ErrorException("AddComment", ex);
                     }
 
                     AddingComment = false;
@@ -446,7 +447,8 @@ namespace Viddy.ViewModel.Item
             }
             catch (Exception ex)
             {
-
+                HasErrors = true;
+                Log.ErrorException("LoadData(Comments)", ex);
             }
 
             IsLoadingMore = false;
