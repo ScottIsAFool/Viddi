@@ -115,6 +115,7 @@ namespace ScottIsAFool.WindowsPhone.Logging
 
         #region Public static properties
         public static string LogFileName { get { return "TraceLog.txt"; } }
+        public static string LofFileLocation { get { return string.Format("ms-appx:///Local/{0}", LogFileName); }}
         public static LogConfiguration LogConfiguration { get; set; }
         public static string AppVersion { get; set; }
         #endregion

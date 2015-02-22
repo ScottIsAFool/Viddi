@@ -27,6 +27,7 @@
                               Icon="Video" />
                 <AppBarButton Label="refresh"
                               Command="{Binding RefreshCommand}"
+                              
                               Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator},Converter={StaticResource VisibilityConverter}}"
                               Icon="Refresh" />
                 <AppBarButton Label="search"

@@ -5,9 +5,26 @@
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 xmlns:controls="using:Viddy.Controls"
+                xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+                xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding About, Source={StaticResource Locator}}">
+    <interactivity:Interaction.Behaviors>
+        <core:EventTriggerBehavior EventName="Loaded">
+            <core:InvokeCommandAction Command="{Binding ViewLoadedCommand}" />
+        </core:EventTriggerBehavior>
+    </interactivity:Interaction.Behaviors>
+    
+    <local:BasePage.BottomAppBar>
+        <CommandBar ClosedDisplayMode="Minimal"
+                    Visibility="{Binding CanSendLogs, Converter={StaticResource VisibilityConverter}}">
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="email logs"
+                              Command="{Binding EmailLogsCommand}"/>
+            </CommandBar.SecondaryCommands>
+        </CommandBar>
+    </local:BasePage.BottomAppBar>
 
     <Grid>
         <Grid.RowDefinitions>
