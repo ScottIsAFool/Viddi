@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Windows.ApplicationModel.DataTransfer;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
@@ -18,7 +19,6 @@ namespace Viddy.ViewModel
         private DataTransferManager _manager;
 
         private Video _video;
-        private bool _isUploading;
 
         public EditVideoViewModel(INavigationService navigationService, IVidMeClient vidMeClient, IMessageBoxService messageBoxService)
         {
@@ -45,7 +45,7 @@ namespace Viddy.ViewModel
 
         public void SetIsUploading(bool isUploading)
         {
-            _isUploading = isUploading;
+            IsUploading = isUploading;
         }
 
         public bool CanEdit { get; set; }
@@ -61,9 +61,26 @@ namespace Viddy.ViewModel
         public bool IsChanged { get; set; }
         public string ErrorMessage { get; set; }
 
+        public bool IsUploading { get; private set; }
+
         public bool CanSave
         {
             get { return !ProgressIsVisible && IsChanged; }
+        }
+
+        public void TryGoingBack()
+        {
+            if (!IsUploading)
+            {
+                if (_navigationService.CanGoBack)
+                {
+                    _navigationService.GoBack();
+                }
+
+                return;
+            }
+
+            _messageBoxService.ShowAsync("You are still uploading a video, leaving now will disrupt this. You wouldn't want to disrupt it.", "Careful now!", new List<string> { "Ok" });
         }
 
         public RelayCommand SaveChangesCommand
@@ -128,9 +145,9 @@ namespace Viddy.ViewModel
                         // TODO: display error
                         return;
                     }
-                    if (_isUploading)
+                    if (IsUploading)
                     {
-                        // TODO: show "do not exit message"
+                        _messageBoxService.ShowAsync("You are still uploading a video, sharing now will disrupt this. You wouldn't want to disrupt it.", "Careful now!", new List<string> { "Ok" });
                         return;
                     }
 

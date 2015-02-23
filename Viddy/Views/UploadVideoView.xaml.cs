@@ -1,5 +1,7 @@
 ﻿using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
+using Cimbalino.Toolkit.Services;
+using Viddy.ViewModel;
 
 namespace Viddy.Views
 {
@@ -21,6 +23,18 @@ namespace Viddy.Views
         private void MediaPlayer_OnMediaFailed(object sender, ExceptionRoutedEventArgs e)
         {
             var s = "";
+        }
+
+        protected override void OnBackKeyPressed(object sender, NavigationServiceBackKeyPressedEventArgs e)
+        {
+            var vm = DataContext as UploadVideoViewModel;
+            if (vm != null)
+            {
+                vm.EditVideo.TryGoingBack();
+                e.Behavior = NavigationServiceBackKeyPressedBehavior.DoNothing;
+            }
+
+            base.OnBackKeyPressed(sender, e);
         }
     }
 }
