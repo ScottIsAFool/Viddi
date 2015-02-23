@@ -149,7 +149,7 @@ namespace Viddy.BackgroundTask
             }
 
             var type = notification.NotificationType;
-            var urlTemplate = "viddy://{0}?id={1}&notificationId=" + notification.NotificationId;
+            var notificationParameter = "&notificationId=" + notification.NotificationId;
 
             switch (type)
             {
@@ -159,7 +159,7 @@ namespace Viddy.BackgroundTask
                     var channel = notification.Channel;
                     if (channel != null)
                     {
-                        return string.Format(urlTemplate, "channel", channel.ChannelId);
+                        return channel.ToViddyLink() + notificationParameter;
                     }
                     break;
                 case NotificationType.UserSubscribed:
@@ -167,7 +167,7 @@ namespace Viddy.BackgroundTask
                     var user = notification.User;
                     if (user != null)
                     {
-                        return string.Format(urlTemplate, "user", user.UserId);
+                        return user.ToViddyLink() + notificationParameter;
                     }
                     break;
                 case NotificationType.CommentReply:
@@ -180,7 +180,7 @@ namespace Viddy.BackgroundTask
                     var video = notification.Video;
                     if (video != null)
                     {
-                        return string.Format(urlTemplate, "video", video.VideoId);
+                        return video.ToViddyLink() + notificationParameter;
                     }
                     break;
             }

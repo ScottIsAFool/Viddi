@@ -480,7 +480,7 @@ namespace Viddy.ViewModel.Item
             request.Data.Properties.Title = "Check out this video";
             var description = IsAnonymous ? string.Format("Check out this video") : string.Format("Check out this video by {0}", Video.User.Username);
             request.Data.Properties.Description = description;
-            request.Data.SetApplicationLink(new Uri("viddy://video?id=" + Video.VideoId)); 
+            request.Data.SetApplicationLink(new Uri(Video.ToViddyLink())); 
             
             switch (_shareType)
             {
@@ -497,7 +497,7 @@ namespace Viddy.ViewModel.Item
         private string PrepareMessage(string description)
         {
             description += "\n\n" + Video.FullUrl + "\n\n";
-            var viddyLink = string.Format("On a Windows Phone? View the video in Viddy by clicking here: viddy://video?id={0}", Video.VideoId);
+            var viddyLink = string.Format("On a Windows Phone? View the video in Viddy by clicking here: {0}", Video.ToViddyLink());
 
             description += viddyLink;
 

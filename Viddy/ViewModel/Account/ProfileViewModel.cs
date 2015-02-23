@@ -5,6 +5,7 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Core.Extensions;
+using Viddy.Core.Model;
 using Viddy.Extensions;
 using Viddy.Messaging;
 using Viddy.Services;
@@ -106,7 +107,7 @@ namespace Viddy.ViewModel.Account
 
         public override string GetPinFileName(bool isWideTile = false)
         {
-            return _tileService.GetTileFileName(TileService.TileType.User, User.User.UserId, isWideTile);
+            return _tileService.GetTileFileName(TileType.User, User.User.UserId, isWideTile);
         }
 
         public override async Task PinUnpin()

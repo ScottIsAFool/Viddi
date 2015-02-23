@@ -19,6 +19,7 @@ using ScottIsAFool.WindowsPhone.Logging;
 using Viddy.Common;
 using Viddy.Core;
 using Viddy.Core.Extensions;
+using Viddy.Core.Model;
 using Viddy.Messaging;
 using Viddy.Services;
 using Viddy.ViewModel;
@@ -194,25 +195,25 @@ namespace Viddy
             }
 
             var source = query["tileType"];
-            var tileType = (TileService.TileType)Enum.Parse(typeof(TileService.TileType), source);
+            var tileType = (TileType)Enum.Parse(typeof(TileType), source);
             var id = query["id"];
 
             var item = Locator.TileService.GetPinnedItemDetails(tileType, id);
 
             switch (tileType)
             {
-                case TileService.TileType.VideoRecord:
+                case TileType.VideoRecord:
                     type = typeof(VideoRecordView);
                     break;
-                case TileService.TileType.Channel:
+                case TileType.Channel:
                     Messenger.Default.Send(new ChannelMessage(new ChannelItemViewModel((Channel)item)));
                     type = typeof(ChannelView);
                     break;
-                case TileService.TileType.User:
+                case TileType.User:
                     Messenger.Default.Send(new UserMessage(new UserViewModel((User)item)));
                     type = typeof(ProfileView);
                     break;
-                case TileService.TileType.Video:
+                case TileType.Video:
                     Messenger.Default.Send(new VideoMessage(new VideoItemViewModel((Video)item, null)));
                     type = typeof(VideoPlayerView);
                     break;
@@ -283,7 +284,7 @@ namespace Viddy
 
         private static void HandleUriLaunch(Uri uri)
         {
-            // viddy://search?query={0}
+            // viddy://search?query={0}&nsfw=true/false
             // viddy://record
             // viddy://
             // viddy://user?id={0}

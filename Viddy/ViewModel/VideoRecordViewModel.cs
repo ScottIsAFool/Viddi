@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Core;
+using Viddy.Core.Model;
 using Viddy.Messaging;
 using Viddy.Services;
 using Viddy.ViewModel.Account;
@@ -121,7 +122,7 @@ namespace Viddy.ViewModel
 
         public override string GetPinFileName(bool isWideTile = false)
         {
-            var filename = _tileService.GetTileFileName(TileService.TileType.VideoRecord);
+            var filename = _tileService.GetTileFileName(TileType.VideoRecord);
             return filename;
         }
 

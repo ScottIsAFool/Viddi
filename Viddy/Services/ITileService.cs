@@ -2,16 +2,13 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.UI;
-using Windows.UI.Notifications;
 using Windows.UI.StartScreen;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
 using Cimbalino.Toolkit.Extensions;
 using Cimbalino.Toolkit.Services;
-using NotificationsExtensions.BadgeContent;
-using NotificationsExtensions.TileContent;
 using Viddy.Core.Extensions;
-using Viddy.Extensions;
+using Viddy.Core.Model;
 using VidMePortable.Model;
 
 namespace Viddy.Services
@@ -31,11 +28,10 @@ namespace Viddy.Services
         Task<bool> PinUser(User user);
         Task<bool> UnpinUser(string userId);
         Task SaveVisualElementToFile(UIElement element, string filename, int height, int width);
-        string GetTileImageUrl(TileService.TileType tileType, string id = "");
-        string GetTileFileName(TileService.TileType tileType, string id = "", bool isWideTile = false);
-        string GetTileId(TileService.TileType tileType, string id = "");
-        object GetPinnedItemDetails(TileService.TileType tileType, string id);
-        void UpdateTileCount(int count);
+        string GetTileImageUrl(TileType tileType, string id = "");
+        string GetTileFileName(TileType tileType, string id = "", bool isWideTile = false);
+        string GetTileId(TileType tileType, string id = "");
+        object GetPinnedItemDetails(TileType tileType, string id);
     }
 
     public class TileService : ITileService
@@ -44,7 +40,6 @@ namespace Viddy.Services
         private const string WideTileLocation = "ms-appdata:///Local/" + WideTileFile;
         private const string WideTileFile = "{0}{1}Wide.png";
         private const string SourceTileFile = "{0}{1}.png";
-        private const string Arguments = "viddy://{0}?id={1}";
 
         private readonly IStorageService _storageService;
         private readonly IApplicationSettingsService _appSettings;
@@ -169,12 +164,6 @@ namespace Viddy.Services
             }
         }
 
-        public void UpdateTileCount(int count)
-        {
-            var badgeContent = new BadgeNumericNotificationContent((uint) count);
-            BadgeUpdateManager.CreateBadgeUpdaterForApplication().Update(badgeContent.CreateNotification());
-        }
-
         #endregion
 
         private static bool IsPinned(string tileId)
@@ -191,7 +180,7 @@ namespace Viddy.Services
         {
             var uri = GetTileImageUrl(tileType, itemId);
             var wideUri = GetWideTileImageUrl(tileType, itemId);
-            var arguments = string.Format(Arguments, tileType, itemId);
+            var arguments = tileType.ToViddyLink(itemId);
             var tileId = GetTileId(tileType, itemId);
 
             if (tileType != TileType.VideoRecord)
@@ -216,7 +205,7 @@ namespace Viddy.Services
 
                 return await secondaryTile.RequestCreateAsync();
             }
-            catch (Exception ex)
+            catch
             {
             }
 
@@ -249,12 +238,6 @@ namespace Viddy.Services
             return !_appSettings.Local.Contains(key) ? default(T) : _appSettings.Local.GetS<T>(key);
         }
 
-        public enum TileType
-        {
-            VideoRecord,
-            Channel,
-            User,
-            Video
-        }
+        
     }
 }

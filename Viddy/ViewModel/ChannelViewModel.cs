@@ -6,6 +6,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Core;
 using Viddy.Core.Extensions;
+using Viddy.Core.Model;
 using Viddy.Extensions;
 using Viddy.Messaging;
 using Viddy.Services;
@@ -42,7 +43,7 @@ namespace Viddy.ViewModel
 
         public override string GetPinFileName(bool isWideTile = false)
         {
-            return _tileService.GetTileFileName(TileService.TileType.Channel, Channel.Channel.ChannelId, isWideTile);
+            return _tileService.GetTileFileName(TileType.Channel, Channel.Channel.ChannelId, isWideTile);
         }
 
         public override async Task PinUnpin()
