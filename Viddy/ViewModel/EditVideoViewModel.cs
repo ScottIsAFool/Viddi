@@ -2,6 +2,8 @@
 using Windows.ApplicationModel.DataTransfer;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
+using Viddy.Common;
+using Viddy.Views.Account;
 using VidMePortable;
 using VidMePortable.Model;
 using VidMePortable.Model.Requests;
@@ -90,15 +92,25 @@ namespace Viddy.ViewModel
                         }
 
                         var response = await _vidMeClient.EditVideoAsync(_video.VideoId, request);
-                        
+
                         if (response != null)
                         {
                             IsChanged = false;
                             RaisePropertyChanged(() => CanSetNsfw);
+
+                            if (_navigationService.CanGoBack)
+                            {
+                                _navigationService.GoBack();
+                            }
+                            else
+                            {
+                                _navigationService.Navigate<AccountView>(new NavigationParameters { RemoveCurrentPageFromBackstack = true });
+                            }
                         }
                     }
                     catch (Exception ex)
                     {
+                        Log.ErrorException("SaveChanges", ex);
                         ErrorMessage = "There was an error updating your video";
                     }
                 }, () => CanSave);
@@ -122,7 +134,7 @@ namespace Viddy.ViewModel
                         return;
                     }
 
-                    _manager = DataTransferManager.GetForCurrentView(); 
+                    _manager = DataTransferManager.GetForCurrentView();
                     _manager.DataRequested += ManagerOnDataRequested;
                     DataTransferManager.ShowShareUI();
                 });
@@ -134,7 +146,7 @@ namespace Viddy.ViewModel
             _manager.DataRequested -= ManagerOnDataRequested;
             var request = args.Request;
             request.Data.Properties.Title = !string.IsNullOrEmpty(_video.Title) ? _video.Title : "Check out my video";
-            var message = "Check out my video"; 
+            var message = "Check out my video";
             request.Data.Properties.Description = message;
             request.Data.SetUri(new Uri(_video.FullUrl));
         }

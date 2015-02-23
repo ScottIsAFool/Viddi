@@ -127,6 +127,8 @@
             <StackPanel Orientation="Vertical"
                         VerticalAlignment="Top"
                         Grid.Row="1">
+                <ProgressBar Background="Transparent"
+                             IsIndeterminate="{Binding EditVideo.ProgressIsVisible}"/>
                 <TextBox Style="{StaticResource FullLengthTextBoxStyleNoFocusChange}"
                          PlaceholderText="This video is called..."
                          Text="{Binding EditVideo.Title, Mode=TwoWay}">
