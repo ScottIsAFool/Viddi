@@ -461,10 +461,11 @@ namespace Viddy.ViewModel.Item
         {
             _manager.DataRequested -= ManagerOnDataRequested;
             var request = args.Request;
-            request.Data.Properties.Title = string.IsNullOrEmpty(Title) ? Title : "Check out this video";
+            request.Data.Properties.Title = "Check out this video";
             var message = IsAnonymous ? string.Format("Check out this video") : string.Format("Check out this video by {0}", Video.User.Username);
             request.Data.Properties.Description = message;
-            request.Data.SetUri(new Uri(Video.FullUrl));
+            request.Data.SetApplicationLink(new Uri("viddy://video?id=" + Video.VideoId));
+            request.Data.SetWebLink(new Uri(Video.FullUrl));
         }
 
         private bool VideoIsAnonymousButOwned()
