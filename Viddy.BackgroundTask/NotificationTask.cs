@@ -61,15 +61,7 @@ namespace Viddy.BackgroundTask
             return returnTask;
         }
 
-        public IAsyncOperation<int> CheckForNotifications(int limit, int offset, bool showToasts)
-        {
-            SetAuthentication();
-            var task = CheckForNotificationsInternal(limit, offset);
-            var returnTask = task.AsAsyncOperation();
-            return returnTask;
-        }
-
-        private async Task<int> CheckForNotificationsInternal(int limit = 1, int offset = 0, bool showToasts = false)
+        private async Task<int> CheckForNotificationsInternal(bool showToasts = false)
         {
             var unreadCount = 0;
             if (!AuthenticationService.Current.IsLoggedIn)
@@ -80,44 +72,22 @@ namespace Viddy.BackgroundTask
 
             try
             {
-                var response = await _vidMeClient.GetNotificationsAsync(limit, offset);
-                if (response != null && !response.Notifications.IsNullOrEmpty())
+                var response = await _vidMeClient.GetUnreadNotificationCountAsync();
+                unreadCount = response;
+
+                if (showToasts && unreadCount > 0)
                 {
-                    if (limit == 1)
-                    {
-                        _notifications = null;
-                        var notification = response.Notifications[0];
-                        if (!notification.Read)
-                        {
-                            unreadCount = await CheckForNotificationsInternal(20, showToasts: showToasts);
-                        }
-                        else
-                        {
-                            UpdateTileCount(0, false);
-                            return unreadCount;
-                        }
-                    }
-                    else
+                    var notifications = await _vidMeClient.GetNotificationsAsync(unreadCount);
+                    if (notifications != null && !notifications.Notifications.IsNullOrEmpty())
                     {
                         if (_notifications == null)
                         {
-                            _notifications = new List<Notification>();
-                        }
-
-                        _notifications.AddRange(response.Notifications);
-                        var hasReadItems = _notifications.Any(x => x.Read);
-                        if (hasReadItems)
-                        {
-                            unreadCount = _notifications.Count(x => !x.Read);
-                            UpdateTileCount(unreadCount, showToasts);
-                            return unreadCount;
-                        }
-                        else
-                        {
-                            unreadCount = await CheckForNotifications(20, _notifications.Count, showToasts);
+                            _notifications = notifications.Notifications;
                         }
                     }
                 }
+
+                UpdateTileCount(unreadCount, unreadCount > 0 && showToasts);
             }
             catch (Exception ex)
             {
@@ -162,7 +132,7 @@ namespace Viddy.BackgroundTask
                 var toastNotification = ToastContentFactory.CreateToastText02();
                 toastNotification.Launch = HandleNotificationType(notification, toastNotification);
                 toastNotification.TextBodyWrap.Text = notification.Text;
-                
+
                 var toast = toastNotification.CreateNotification();
                 toast.Tag = notification.NotificationId;
                 toastManager.Show(toast);
