@@ -90,17 +90,6 @@ namespace Viddy.ViewModel
             }
         }
 
-        public RelayCommand PinToStartCommand
-        {
-            get
-            {
-                return new RelayCommand(() =>
-                {
-                    
-                });
-            }
-        }
-
         public override bool IsPinned
         {
             get { return _tileService.IsVideoRecordPinned; }
