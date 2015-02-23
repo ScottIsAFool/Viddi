@@ -75,8 +75,9 @@ namespace Viddy.Services
                 if (_timer != null && !_timer.IsEnabled)
                 {
                     _timer.Start();
-                    CheckForNotifications();
                 }
+
+                CheckForNotifications();
             }
             else
             {
@@ -85,6 +86,7 @@ namespace Viddy.Services
                     _timer.Stop();
                 }
 
+                NotificationCount = 0;
                 _notificationTask.UpdateTileCount(0, false);
             }
         }

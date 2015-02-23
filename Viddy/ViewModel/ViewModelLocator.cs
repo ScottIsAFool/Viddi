@@ -36,7 +36,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.RegisterIf<IToastService, ToastService>();
             SimpleIoc.Default.RegisterIf<ITileService, TileService>();
             SimpleIoc.Default.RegisterIf<ISettingsService, SettingsService>();
-            SimpleIoc.Default.RegisterIf<INotificationService, NotificationService>();
+            SimpleIoc.Default.RegisterIf<INotificationService, NotificationService>(true);
             SimpleIoc.Default.RegisterIf<ITaskService, TaskService>();
             SimpleIoc.Default.RegisterIf<ILauncherService, LauncherService>();
             SimpleIoc.Default.RegisterIf<IEmailComposeService, EmailComposeService>();
