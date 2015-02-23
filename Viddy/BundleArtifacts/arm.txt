@@ -1,0 +1,4 @@
+MainPackage=G:\Documents\Visual Studio 2013\Projects\Viddy\Viddy\bin\ARM\Release\Viddy_0.0.1.0_Bundle\Viddy_0.0.1.0_ARM.appx
+SymbolPackage=G:\Documents\Visual Studio 2013\Projects\Viddy\Viddy\AppPackages\Viddy_0.0.1.0_Test\Viddy_0.0.1.0_ARM.appxsym
+ResourcePack=G:\Documents\Visual Studio 2013\Projects\Viddy\Viddy\bin\ARM\Release\Viddy_0.0.1.0_Bundle\Viddy_0.0.1.0_scale-100.appx
+ResourcePack=G:\Documents\Visual Studio 2013\Projects\Viddy\Viddy\bin\ARM\Release\Viddy_0.0.1.0_Bundle\Viddy_0.0.1.0_scale-140.appx
