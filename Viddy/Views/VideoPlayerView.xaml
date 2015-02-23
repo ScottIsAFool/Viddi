@@ -180,7 +180,8 @@
                 </controls:LoadingListView>
 
                 <Grid Grid.Row="3"
-                      Margin="19,0,19,12">
+                      Margin="19,0,19,12"
+                      Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
