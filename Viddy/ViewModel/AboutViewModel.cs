@@ -132,7 +132,8 @@ namespace Viddy.ViewModel
         {
             var deferral = request.GetDeferral();
 
-            request.Data.Properties.Title = "Logfile from Viddy " + Version;
+            request.Data.Properties.Title = "Logfile from Viddy " + Version + "." + _version.Revision;
+            request.Data.Properties.Description = "Please email to scottisafool@live.co.uk";
 
             try
             {

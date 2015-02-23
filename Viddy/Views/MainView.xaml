@@ -8,6 +8,7 @@
                 xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                 xmlns:behaviours="using:Viddy.Behaviours"
                 xmlns:core="using:Microsoft.Xaml.Interactions.Core"
+                xmlns:converters="using:Cimbalino.Toolkit.Converters"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding Main, Source={StaticResource Locator}}">
@@ -18,6 +19,12 @@
             <core:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
+    
+    <local:BasePage.Resources>
+        <converters:BooleanToStringConverter x:Key="AccountConverter"
+                                             TrueValue="account"
+                                             FalseValue="anonymous account"/>
+    </local:BasePage.Resources>
 
     <local:BasePage.BottomAppBar>
         <CommandBar>
@@ -27,7 +34,6 @@
                               Icon="Video" />
                 <AppBarButton Label="refresh"
                               Command="{Binding RefreshCommand}"
-                              
                               Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator},Converter={StaticResource VisibilityConverter}}"
                               Icon="Refresh" />
                 <AppBarButton Label="search"
@@ -41,7 +47,7 @@
                 </AppBarButton>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="account"
+                <AppBarButton Label="{Binding Auth.IsLoggedIn, Source={StaticResource Locator},Converter={StaticResource AccountConverter}}"
                               Command="{Binding NavigateToAccountCommand}"/>
                 <AppBarButton Label="settings"
                               Command="{Binding NavigateToSettingsCommand}" />
