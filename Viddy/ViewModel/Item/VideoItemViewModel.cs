@@ -30,7 +30,8 @@ namespace Viddy.ViewModel.Item
         private readonly IToastService _toastService;
 
         private readonly DataTransferManager _manager;
-        
+        private ShareType _shareType;
+
         public VideoItemViewModel(Video video, VideoLoadingViewModel videoLoadingViewModel)
         {
             _vidMeClient = SimpleIoc.Default.GetInstance<IVidMeClient>();
@@ -181,7 +182,7 @@ namespace Viddy.ViewModel.Item
 
             Items.Remove(comment);
             Video.CommentCount--;
-            RaisePropertyChanged(()=> CommentCount);
+            RaisePropertyChanged(() => CommentCount);
         }
 
         public RelayCommand DeleteCommand
@@ -221,7 +222,7 @@ namespace Viddy.ViewModel.Item
                     }
                     catch (Exception ex)
                     {
-                        Log.ErrorException("DeleteCommend("+ AuthenticationService.Current.IsLoggedIn + ")", ex);
+                        Log.ErrorException("DeleteCommend(" + AuthenticationService.Current.IsLoggedIn + ")", ex);
                         _toastService.Show("Error deleting comment");
                     }
                 }, () => IsOwner);
@@ -284,6 +285,20 @@ namespace Viddy.ViewModel.Item
             {
                 return new RelayCommand(() =>
                 {
+                    _shareType = ShareType.Info;
+                    _manager.DataRequested += ManagerOnDataRequested;
+                    DataTransferManager.ShowShareUI();
+                });
+            }
+        }
+
+        public RelayCommand ShareLinkCommand
+        {
+            get
+            {
+                return new RelayCommand(() =>
+                {
+                    _shareType = ShareType.JustLink;
                     _manager.DataRequested += ManagerOnDataRequested;
                     DataTransferManager.ShowShareUI();
                 });
@@ -342,20 +357,21 @@ namespace Viddy.ViewModel.Item
         private async Task ChangeVote(Vote vote)
         {
             GettingVideoInfo = true;
-            ViewerVote response = null;
+            ViewerVote response;
             try
             {
                 response = await _vidMeClient.VoteForVideoAsync(Video.VideoId, vote);
             }
             catch (Exception ex)
             {
+                Log.ErrorException("ChangeVote()", ex);
                 GettingVideoInfo = false;
                 return;
             }
 
             if (response != null)
             {
-                await RefreshVideoDetails();                
+                await RefreshVideoDetails();
             }
         }
 
@@ -405,7 +421,7 @@ namespace Viddy.ViewModel.Item
             }
             catch (Exception ex)
             {
-                
+                Log.ErrorException("RefreshVideoDetails()", ex);
             }
 
             GettingVideoInfo = false;
@@ -462,16 +478,42 @@ namespace Viddy.ViewModel.Item
             _manager.DataRequested -= ManagerOnDataRequested;
             var request = args.Request;
             request.Data.Properties.Title = "Check out this video";
-            var message = IsAnonymous ? string.Format("Check out this video") : string.Format("Check out this video by {0}", Video.User.Username);
-            request.Data.Properties.Description = message;
-            request.Data.SetApplicationLink(new Uri("viddy://video?id=" + Video.VideoId));
-            request.Data.SetWebLink(new Uri(Video.FullUrl));
+            var description = IsAnonymous ? string.Format("Check out this video") : string.Format("Check out this video by {0}", Video.User.Username);
+            request.Data.Properties.Description = description;
+            request.Data.SetApplicationLink(new Uri("viddy://video?id=" + Video.VideoId)); 
+            
+            switch (_shareType)
+            {
+                case ShareType.Info:
+                    var message = PrepareMessage(description);
+                    request.Data.SetText(message);
+                    break;
+                case ShareType.JustLink:
+                    request.Data.SetWebLink(new Uri(Video.FullUrl));
+                    break;
+            }
+        }
+
+        private string PrepareMessage(string description)
+        {
+            description += "\n\n" + Video.FullUrl + "\n\n";
+            var viddyLink = string.Format("On a Windows Phone? View the video in Viddy by clicking here: viddy://video?id={0}", Video.VideoId);
+
+            description += viddyLink;
+
+            return description;
         }
 
         private bool VideoIsAnonymousButOwned()
         {
             // This means it's an anonymous video
             return string.IsNullOrEmpty(Video.UserId) && _settingsService.Roaming.Contains(Utils.GetAnonVideoKeyName(Video.VideoId));
+        }
+
+        private enum ShareType
+        {
+            JustLink,
+            Info
         }
     }
 }

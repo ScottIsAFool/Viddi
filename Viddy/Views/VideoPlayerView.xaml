@@ -56,6 +56,10 @@
                               Visibility="{Binding Video.IsOwner, Converter={StaticResource VisibilityConverter}}"
                               Command="{Binding Video.EditVideoCommand}"/>
             </CommandBar.PrimaryCommands>
+            <CommandBar.SecondaryCommands>
+                <AppBarButton Label="share for email"
+                              Command="{Binding Video.ShareCommand}"/>
+            </CommandBar.SecondaryCommands>
         </CommandBar>
     </local:BasePage.BottomAppBar>
 
