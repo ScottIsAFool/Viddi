@@ -49,6 +49,11 @@ namespace Viddy.ViewModel.Account
                     {
                         SetProgressBar("Signing in...");
                         var response = await _vidMeClient.AuthenticateAsync(Username, Password);
+                        var user = await _vidMeClient.GetUserAsync(response.User.UserId);
+                        if (user != null && user.User != null)
+                        {
+                            response.User = user.User;
+                        }
 
                         AuthenticationService.Current.SetAuthenticationInfo(response);
 
