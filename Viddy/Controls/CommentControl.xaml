@@ -50,10 +50,10 @@
                                FontWeight="Bold" />
                 </localControls:CustomButton>
 
-                <TextBlock Text="{Binding Comment.Body, FallbackValue='This is the comment text and should appear as such'}"
+                <TextBlock Text="{Binding Comment.Body}"
                            Style="{StaticResource BodyTextBlockStyle}" />
 
-                <TextBlock Text="{Binding Date, FallbackValue='an hour ago'}"
+                <TextBlock Text="{Binding Date}"
                            Style="{StaticResource BodyTextBlockStyle}"
                            FontSize="{StaticResource TextStyleSmallFontSize}"
                            Foreground="{ThemeResource SubtleBrush}" />

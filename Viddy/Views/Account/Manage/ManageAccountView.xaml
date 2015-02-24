@@ -16,7 +16,8 @@
         </Grid.RowDefinitions>
         
         <controls:PageHeaderControl HeaderText="manage account"
-                                    ProfilePictureEnabled="False" />
+                                    ProfilePictureEnabled="False" 
+                                    x:Uid="HeaderManageAccount"/>
         
         <Grid Grid.Row="1"
               Margin="0,12,0,0">
@@ -24,10 +25,12 @@
                         VerticalAlignment="Top"
                         Margin="19,0">
                 <controls:CustomHyperlinkButton Content="Manage apps' access"
+                                                x:Uid="LabelManageAppsAccess"
                                                 Style="{StaticResource EmptyButtonStyle}" 
                                                 TapCommand="{Binding NavigateToAppsAccessCommand}"
                                                 Margin="0,0,0,12"/>
                 <controls:CustomHyperlinkButton Content="Manage my apps"
+                                                x:Uid="LabelManageMyApps"
                                                 Style="{StaticResource EmptyButtonStyle}"
                                                 TapCommand="{Binding NavigateToMyAppsCommand}" />
             </StackPanel>

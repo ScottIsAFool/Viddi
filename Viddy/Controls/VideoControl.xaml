@@ -19,7 +19,8 @@
                     <MenuFlyout>
                         <MenuFlyoutItem Margin="12,0,0,0"
                                         Command="{Binding DeleteCommand}"
-                                        Text="delete" />
+                                        Text="delete"
+                                        x:Uid="MenuDelete"/>
                     </MenuFlyout>
                 </FlyoutBase.AttachedFlyout>
                 <Image Source="{Binding Video.ThumbnailUrl}"
@@ -57,7 +58,8 @@
                     <Border Background="{ThemeResource NsfwBackgroundBrush}"
                             Padding="5,3">
                         <TextBlock Text="NSFW"
-                                   Foreground="White" />
+                                   Foreground="White"
+                                   x:Uid="LabelNSFW"/>
                     </Border>
                 </local:RotateContentControl>
 
@@ -69,7 +71,7 @@
                            HorizontalAlignment="Left"
                            Margin="19,0,0,12"
                            Padding="0,3"
-                           Text="{Binding Plays, FallbackValue=0 plays}" />
+                           Text="{Binding Plays}" />
 
                 <StackPanel Orientation="Horizontal"
                             VerticalAlignment="Bottom"

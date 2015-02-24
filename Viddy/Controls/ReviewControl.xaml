@@ -41,15 +41,18 @@
                             Grid.ColumnSpan="2"
                             Margin="19">
                     <TextBlock Text="Fancy a review?"
+                               x:Uid="ReviewHeader"
                                Style="{StaticResource BodyTextBlockStyle}"
                                FontWeight="Bold" />
                     <TextBlock Text="Thanks for using Viddy, we hope you're enjoying it. Would you fancy giving the app a quick review?"
+                               x:Uid="ReviewByline"
                                Style="{StaticResource BodyTextBlockStyle}" />
                 </StackPanel>
 
                 <controls:CustomButton Grid.Row="1"
                                        Grid.Column="0"
                                        Content="no"
+                                       x:Uid="No"
                                        Style="{StaticResource ReviewButtonStyle}"
                                        TapCommand="{Binding NoReviewCommand}"
 									   Background="{ThemeResource HeaderBrush}"/>
@@ -58,6 +61,7 @@
                                        Grid.Column="1"
                                        Style="{StaticResource ReviewButtonStyle}"
                                        Content="yes"
+                                       x:Uid="Yes"
                                        TapCommand="{Binding YesReviewCommand}"
                                        Background="{ThemeResource ReviewNoBackgroundBrush}"/>
             </Grid>
@@ -77,9 +81,11 @@
                             Grid.ColumnSpan="2"
                             Margin="19">
                     <TextBlock Text="What about feedback?"
+                               x:Uid="FeedbackHeader"
                                Style="{StaticResource BodyTextBlockStyle}"
                                FontWeight="Bold" />
                     <TextBlock Text="Not to worry, would you prefer to provide any feedback about the app instead?"
+                               x:Uid="FeedbackByline"
                                Style="{StaticResource BodyTextBlockStyle}" />
                 </StackPanel>
 
@@ -87,6 +93,7 @@
                                        Grid.Column="0"
                                        Style="{StaticResource ReviewButtonStyle}"
                                        Content="no"
+                                       x:Uid="No"
                                        TapCommand="{Binding NoFeedbackCommand}" 
 									   Background="{ThemeResource HeaderBrush}"/>
 
@@ -94,6 +101,7 @@
                                        Grid.Column="1"
                                        Style="{StaticResource ReviewButtonStyle}"
                                        Content="yes"
+                                       x:Uid="Yes"
                                        Background="{ThemeResource ReviewNoBackgroundBrush}"
                                        TapCommand="{Binding YesFeedbackCommand}" />
             </Grid>

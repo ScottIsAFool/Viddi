@@ -23,10 +23,12 @@
         <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="refresh"
+                              x:Uid="AppBarRefresh"
                               Command="{Binding RefreshCommand}"
                               IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
                               Icon="Refresh" />
                 <AppBarButton Label="add"
+                              x:Uid="AppBarAdd"
                               Command="{Binding AddAppCommand}"
                               Icon="Add" />
             </CommandBar.PrimaryCommands>
@@ -40,7 +42,8 @@
         </Grid.RowDefinitions>
 
         <controls:PageHeaderControl HeaderText="manage my apps"
-                                    ProfilePictureEnabled="False" />
+                                    ProfilePictureEnabled="False"
+                                    x:Uid="HeaderManageMyApps"/>
 
         <Grid Grid.Row="1"
               Margin="0,12,0,0">
@@ -55,6 +58,7 @@
                         <Grid VerticalAlignment="Stretch"
                               Margin="19,0">
                             <TextBlock Text="It appears you don't have any apps created. If you're a developer wanting to create an app that uses the VidMe API, you can add one using the + below."
+                                       x:Uid="EmptyApps"
                                        TextWrapping="WrapWholeWords"
                                        TextAlignment="Center"
                                        Style="{StaticResource BodyTextBlockStyle}" />
@@ -79,7 +83,8 @@
                                                FontSize="{StaticResource TextStyleSmallFontSize}"
                                                Foreground="{ThemeResource SubtleBrush}"
                                                Visibility="{Binding Application.ClientId, Converter={StaticResource NullToVisibilityConverter}}">
-                                        <Run Text="Client ID:" />
+                                        <Run Text="Client ID:" 
+                                             x:Uid="LabelClientId"/>
                                         <Run Text="{Binding Application.ClientId}" />
                                     </TextBlock>
                                     <TextBlock TextTrimming="CharacterEllipsis"
@@ -87,7 +92,8 @@
                                                FontSize="{StaticResource TextStyleSmallFontSize}"
                                                Foreground="{ThemeResource SubtleBrush}"
                                                Visibility="{Binding Application.ClientSecret, Converter={StaticResource NullToVisibilityConverter}}">
-                                        <Run Text="Client Secret:" />
+                                        <Run Text="Client Secret:"
+                                             x:Uid="LabelClientSecret"/>
                                         <Run Text="{Binding Application.ClientSecret}" />
                                     </TextBlock>
                                 </StackPanel>
@@ -108,7 +114,8 @@
                                             <MenuFlyoutItem Margin="12,0,0,0"
                                                             Command="{Binding ShareAppCommand}"
                                                             CommandParameter="{Binding}"
-                                                            Text="share" />
+                                                            Text="share" 
+                                                            x:Uid="MenuShare"/>
                                             <!--<MenuFlyoutItem Margin="12,0,0,0"
                                                             Command="{Binding ShareAppCommand}"
                                                             CommandParameter="{Binding}"

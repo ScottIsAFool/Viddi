@@ -22,20 +22,21 @@
                        Stretch="UniformToFill" />
                 <Rectangle Height="200"
                            Fill="{StaticResource OverlayBrush}" />
-                <TextBlock Text="{Binding Name, FallbackValue=Awww}"
+                <TextBlock Text="{Binding Name}"
                            Style="{StaticResource BodyTextBlockStyle}"
                            Margin="19,12"
                            VerticalAlignment="Top"
-                           Foreground="White"/>
-                
+                           Foreground="White" />
+
                 <controls:RotateContentControl Direction="Down"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Right"
-                                            Visibility="{Binding Channel.Nsfw, Converter={StaticResource VisibilityConverter}}">
+                                               VerticalAlignment="Center"
+                                               HorizontalAlignment="Right"
+                                               Visibility="{Binding Channel.Nsfw, Converter={StaticResource VisibilityConverter}}">
                     <Border Background="{ThemeResource NsfwBackgroundBrush}"
                             Padding="5,3">
                         <TextBlock Text="NSFW"
-                                   Foreground="White" />
+                                   Foreground="White"
+                                   x:Uid="LabelNSFW" />
                     </Border>
                 </controls:RotateContentControl>
             </Grid>

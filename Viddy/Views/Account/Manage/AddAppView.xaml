@@ -20,6 +20,7 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="save"
                               Icon="Save"
+                              x:Uid="AppBarSave"
                               Command="{Binding SaveAppCommand}"
                               IsEnabled="{Binding CanAddApp}"/>
             </CommandBar.PrimaryCommands>
@@ -33,7 +34,8 @@
         </Grid.RowDefinitions>
 
         <controls:PageHeaderControl ProfilePictureEnabled="False"
-                                    HeaderText="add app"/>
+                                    HeaderText="add app"
+                                    x:Uid="HeaderAddApp"/>
         
         <Grid Grid.Row="1"
               Margin="0,12,0,0">
@@ -41,7 +43,8 @@
                 <TextBox PlaceholderText="Name"
                          Text="{Binding Name, Mode=TwoWay}"
                          Style="{StaticResource FullLengthTextBoxStyle}"
-                         Header="&#xE088;">
+                         Header="&#xE088;"
+                         x:Uid="Name">
                     <interactivity:Interaction.Behaviors>
                         <behaviours:UpdateTextBindingOnPropertyChanged/>
                     </interactivity:Interaction.Behaviors>
@@ -49,12 +52,14 @@
                 <TextBox PlaceholderText="Redirect Url"
                          Text="{Binding RedirectUrl, Mode=TwoWay}"
                          Style="{StaticResource FullLengthTextBoxStyle}"
-                         Header="&#xE12B;">
+                         Header="&#xE12B;"
+                         x:Uid="RedirectUrl">
                     <interactivity:Interaction.Behaviors>
                         <behaviours:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
                 <TextBox PlaceholderText="Description (optional)"
+                         x:Uid="Description"
                          Text="{Binding Description, Mode=TwoWay}"
                          Style="{StaticResource FullLengthTextBoxStyle}"
                          Header="&#xE1C2;">
@@ -65,7 +70,8 @@
                 <TextBox PlaceholderText="Website (optional)"
                          Text="{Binding Website, Mode=TwoWay}"
                          Style="{StaticResource FullLengthTextBoxStyle}"
-                         Header="&#xE12B;">
+                         Header="&#xE12B;"
+                         x:Uid="Website">
                     <interactivity:Interaction.Behaviors>
                         <behaviours:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
@@ -73,7 +79,8 @@
                 <TextBox PlaceholderText="Company (optional)"
                          Text="{Binding Organisation, Mode=TwoWay}"
                          Style="{StaticResource FullLengthTextBoxStyle}"
-                         Header="&#xE10F;">
+                         Header="&#xE10F;"
+                         x:Uid="Company">
                     <interactivity:Interaction.Behaviors>
                         <behaviours:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>

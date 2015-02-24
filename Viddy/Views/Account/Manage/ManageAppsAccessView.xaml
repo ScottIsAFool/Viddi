@@ -23,6 +23,7 @@
         <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="refresh"
+                              x:Uid="AppBarRefresh"
                               Command="{Binding RefreshCommand}"
                               IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
                               Icon="Refresh" />
@@ -36,8 +37,9 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <controls:PageHeaderControl HeaderText="manage app's access"
-                                    ProfilePictureEnabled="False" />
+        <controls:PageHeaderControl HeaderText="manage apps' access"
+                                    ProfilePictureEnabled="False" 
+                                    x:Uid="HeaderManageAppsAccess"/>
 
         <Grid x:Name="Content"
               Grid.Row="1"
@@ -67,6 +69,7 @@
                                                     HorizontalAlignment="Stretch"
                                                     Visibility="{Binding ProgressIsVisible, Converter={StaticResource VisibilityConverter}}">
                                             <TextBlock Text="Revoking"
+                                                       x:Uid="LabelRevoking"
                                                        VerticalAlignment="Center"
                                                        Style="{StaticResource TitleTextBlockStyle}" />
                                             <ProgressBar IsIndeterminate="{Binding ProgressIsVisible}"
