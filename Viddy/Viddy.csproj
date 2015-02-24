@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Viddy</RootNamespace>
     <AssemblyName>Viddy</AssemblyName>
-    <DefaultLanguage>en-US</DefaultLanguage>
+    <DefaultLanguage>en-GB</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
     <FileAlignment>512</FileAlignment>
@@ -157,6 +157,7 @@
       <DependentUpon>VideoControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\ItemTypeDataTemplateSelector.cs" />
+    <Compile Include="Converters\BooleanToLocalisedStringConverter.cs" />
     <Compile Include="Converters\BooleanToSymbolConverter.cs" />
     <Compile Include="Converters\CommentEnabledConverter.cs" />
     <Compile Include="Converters\FrequencyConverter.cs" />
@@ -554,6 +555,10 @@
     <ProjectReference Include="..\Viddy.Core\Viddy.Core.csproj">
       <Project>{d0dc6c8b-6813-40bd-80f1-2b70503bf43a}</Project>
       <Name>Viddy.Core</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Viddy.Localisation\Viddy.Localisation.csproj">
+      <Project>{c7add5a9-3ea2-457a-a3c1-57f78b0f5f03}</Project>
+      <Name>Viddy.Localisation</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">

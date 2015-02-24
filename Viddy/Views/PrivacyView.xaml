@@ -16,15 +16,18 @@
         </Grid.RowDefinitions>
         
         <controls:PageHeaderControl ProfilePictureVisibility="Collapsed"
-                                    HeaderText="privacy"/>
+                                    HeaderText="privacy"
+                                    x:Uid="HeaderPrivacy"/>
         
         <StackPanel Orientation="Vertical"
                     Grid.Row="1"
                     Margin="19,12,19,0">
             <TextBlock Text="Viddy doesn't store any personal information about you or your location. If you use the location, that is used purely to add to the video and send to VidMe."
+                       x:Uid="BodyPrivacyPara1"
                        Style="{StaticResource BodyTextBlockStyle}"
                        Margin="0,0,0,24"/>
             <TextBlock Text="VidMe's own privacy can be viewed online:"
+                       x:Uid="BodyPrivacyPara2"
                        Style="{StaticResource BodyTextBlockStyle}"
                        Margin="0,0,0,12"/>
             
@@ -33,7 +36,8 @@
                 <TextBlock Style="{StaticResource BodyTextBlockStyle}"
                            FontWeight="SemiBold">
                     <Underline>
-                        <Run Text="VidMe Privacy Policy"/>
+                        <Run Text="VidMe Privacy Policy"
+                             x:Uid="LabelVidMePrivacy"/>
                     </Underline>
                 </TextBlock>
             </controls:CustomHyperlinkButton>

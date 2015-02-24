@@ -20,6 +20,7 @@
         <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="refresh"
+                              x:Uid="AppBarRefresh"
                               Command="{Binding RefreshCommand}"
                               Icon="Refresh"/>
             </CommandBar.PrimaryCommands>
@@ -33,7 +34,8 @@
         </Grid.RowDefinitions>
 
         <controls:PageHeaderControl ProfilePictureEnabled="False"
-                                    HeaderText="browse channels" />
+                                    HeaderText="browse channels"
+                                    x:Uid="HeaderBrowseChannels"/>
         
         <Grid Grid.Row="1">
             <controls:LoadingListView ItemsSource="{Binding Items}"

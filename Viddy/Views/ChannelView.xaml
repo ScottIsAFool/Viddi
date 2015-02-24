@@ -11,7 +11,6 @@
                         mc:Ignorable="d"
                         Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                         DataContext="{Binding Channel, Source={StaticResource Locator}}">
-
     <interactivity:Interaction.Behaviors>
         <behaviours:StatusBarBehavior IsVisible="False" />
         <core:EventTriggerBehavior EventName="Loaded">
@@ -23,6 +22,7 @@
         <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="home"
+                              x:Uid="AppBarHome"
                               Icon="Home"
                               Visibility="{Binding ShowHomeButton, Converter={StaticResource VisibilityConverter}}"
                               Command="{Binding NavigateHomeCommand}" />
@@ -34,9 +34,11 @@
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton Label="refresh"
+                              x:Uid="AppBarRefresh"
                               Command="{Binding Channel.RefreshCommand}"
                               Icon="Refresh" />
                 <AppBarButton Label="add video"
+                              x:Uid="AppBarRecord"
                               Icon="Video"
                               Command="{Binding AddVideoCommand}" />
             </CommandBar.PrimaryCommands>
@@ -69,6 +71,7 @@
                                                    Margin="19,-5,19,12" />
                         <Grid Visibility="{Binding Channel.HasErrors, Converter={StaticResource InverseVisibilityConverter}}">
                             <TextBlock Text="This channel hasn't got any content yet."
+                                       x:Uid="LabelNoChannelContent"
                                        Style="{StaticResource BodyTextBlockStyle}"
                                        Margin="19"
                                        TextWrapping="WrapWholeWords"

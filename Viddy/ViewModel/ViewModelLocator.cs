@@ -41,6 +41,7 @@ namespace Viddy.ViewModel
             SimpleIoc.Default.RegisterIf<ILauncherService, LauncherService>();
             SimpleIoc.Default.RegisterIf<IEmailComposeService, EmailComposeService>();
             SimpleIoc.Default.RegisterIf<IDisplayRequestService, DisplayRequestService>();
+            SimpleIoc.Default.RegisterIf<ILocalisationLoader, LocalisationLoader>();
 
             SimpleIoc.Default.Register<FoursqureViewModel>();
             SimpleIoc.Default.Register<AvatarViewModel>();

@@ -50,6 +50,8 @@
     <Compile Include="Extensions\VidMeExtensions.cs" />
     <Compile Include="Services\AuthenticationService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\ILocalisationLoader.cs" />
+    <Compile Include="Services\LocalisationLoader.cs" />
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -80,6 +82,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="FodyWeavers.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Viddy.Localisation\Viddy.Localisation.csproj">
+      <Project>{c7add5a9-3ea2-457a-a3c1-57f78b0f5f03}</Project>
+      <Name>Viddy.Localisation</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />
   <Import Project="..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets" Condition="Exists('..\packages\Microsoft.Bcl.Build.1.0.21\build\Microsoft.Bcl.Build.targets')" />

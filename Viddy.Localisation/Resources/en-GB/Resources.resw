@@ -1,0 +1,241 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="AppBarAbout.Label" xml:space="preserve">
+    <value>about</value>
+  </data>
+  <data name="AppBarAccount" xml:space="preserve">
+    <value>account</value>
+  </data>
+  <data name="AppBarAnonymousAccount" xml:space="preserve">
+    <value>anonymous account</value>
+  </data>
+  <data name="AppBarChannels.Label" xml:space="preserve">
+    <value>channels</value>
+  </data>
+  <data name="AppBarEmailLogs.Label" xml:space="preserve">
+    <value>email logs</value>
+  </data>
+  <data name="AppBarHome.Label" xml:space="preserve">
+    <value>home</value>
+  </data>
+  <data name="AppBarPin" xml:space="preserve">
+    <value>pin</value>
+  </data>
+  <data name="AppBarPinLong" xml:space="preserve">
+    <value>pin to start</value>
+  </data>
+  <data name="AppBarRecord.Label" xml:space="preserve">
+    <value>record</value>
+  </data>
+  <data name="AppBarRefresh.Label" xml:space="preserve">
+    <value>refresh</value>
+  </data>
+  <data name="AppBarSearch.Label" xml:space="preserve">
+    <value>search</value>
+  </data>
+  <data name="AppBarSettings.Label" xml:space="preserve">
+    <value>settings</value>
+  </data>
+  <data name="AppBarUnpin" xml:space="preserve">
+    <value>unpin</value>
+  </data>
+  <data name="AppBarUnpinLong" xml:space="preserve">
+    <value>unpin from start</value>
+  </data>
+  <data name="AppName" xml:space="preserve">
+    <value>Viddy</value>
+  </data>
+  <data name="BodyPrivacyPara1.Text" xml:space="preserve">
+    <value>Viddy doesn't store any personal information about you or your location. If you use the location, that is used purely to add to the video and send to VidMe.</value>
+  </data>
+  <data name="BodyPrivacyPara2.Text" xml:space="preserve">
+    <value>VidMe's own privacy can be viewed online:</value>
+  </data>
+  <data name="HeaderAbout.HeaderText" xml:space="preserve">
+    <value>about</value>
+  </data>
+  <data name="HeaderBrowseChannels.HeaderText" xml:space="preserve">
+    <value>browse channels</value>
+  </data>
+  <data name="HeaderPrivacy.HeaderText" xml:space="preserve">
+    <value>privacy</value>
+  </data>
+  <data name="LabelBuiltBy.Text" xml:space="preserve">
+    <value>BUILT BY</value>
+  </data>
+  <data name="LabelCreatingAccount.Text" xml:space="preserve">
+    <value>creating an account.</value>
+  </data>
+  <data name="LabelDesignInputBy.Text" xml:space="preserve">
+    <value>DESIGN INPUT BY</value>
+  </data>
+  <data name="LabelEmailFeedback.Content" xml:space="preserve">
+    <value>Email feedback</value>
+  </data>
+  <data name="LabelLeaveAReview.Content" xml:space="preserve">
+    <value>Leave a review</value>
+  </data>
+  <data name="LabelMainAnonEmptyPara1.Text" xml:space="preserve">
+    <value>If you want to see content here, consider</value>
+    <comment>{0} = signing in, {1} = creating an account</comment>
+  </data>
+  <data name="LabelMainAnonEmptyPara2.Text" xml:space="preserve">
+    <value>Having an account means you can follow users or channels and catch up with them in your feed.</value>
+  </data>
+  <data name="LabelMainAnonEmptyPara3.Text" xml:space="preserve">
+    <value>If you simply wish to upload a video anonymously, then just tap the video button below.</value>
+  </data>
+  <data name="LabelMainAnonEmptyPara4.Text" xml:space="preserve">
+    <value>Or you can search for videos, or browse the list of available channels.</value>
+  </data>
+  <data name="LabelMainEmptyPara1.Text" xml:space="preserve">
+    <value>It doesn't look like you have anything to show in your feed.</value>
+  </data>
+  <data name="LabelMainEmptyPara2.Text" xml:space="preserve">
+    <value>Try searching for videos, or browse the list of available channels.</value>
+  </data>
+  <data name="LabelNoChannelContent.Text" xml:space="preserve">
+    <value>This channel hasn't got any content yet.</value>
+  </data>
+  <data name="LabelNSFW.Text" xml:space="preserve">
+    <value>NSFW</value>
+  </data>
+  <data name="LabelProblemLoadingContent.Text" xml:space="preserve">
+    <value>D'oh, there was a problem loading your content. Might be worth giving it another go.</value>
+  </data>
+  <data name="LabelSigningIn.Text" xml:space="preserve">
+    <value>signing in</value>
+  </data>
+  <data name="LabelTellAFriend.Content" xml:space="preserve">
+    <value>Tell a friend</value>
+  </data>
+  <data name="LabelToolsUsed.Text" xml:space="preserve">
+    <value>Tools used</value>
+  </data>
+  <data name="LabelTryAgain.Text" xml:space="preserve">
+    <value>Try again</value>
+  </data>
+  <data name="LabelVidMePrivacy.Text" xml:space="preserve">
+    <value>VidMe Privacy Policy</value>
+  </data>
+  <data name="LabelMainAnonEmptyPara1Or.Text" xml:space="preserve">
+    <value>or</value>
+  </data>
+</root>

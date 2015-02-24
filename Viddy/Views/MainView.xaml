@@ -8,7 +8,7 @@
                 xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                 xmlns:behaviours="using:Viddy.Behaviours"
                 xmlns:core="using:Microsoft.Xaml.Interactions.Core"
-                xmlns:converters="using:Cimbalino.Toolkit.Converters"
+                xmlns:converters="using:Viddy.Converters"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding Main, Source={StaticResource Locator}}">
@@ -19,27 +19,31 @@
             <core:InvokeCommandAction Command="{Binding PageLoadedCommand}" />
         </core:EventTriggerBehavior>
     </interactivity:Interaction.Behaviors>
-    
+
     <local:BasePage.Resources>
-        <converters:BooleanToStringConverter x:Key="AccountConverter"
-                                             TrueValue="account"
-                                             FalseValue="anonymous account"/>
+        <converters:BooleanToLocalisedStringConverter x:Key="AccountConverter"
+                                                      TrueValue="AppBarAccount"
+                                                      FalseValue="AppBarAnonymousAccount" />
     </local:BasePage.Resources>
 
     <local:BasePage.BottomAppBar>
         <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="record"
+                              x:Uid="AppBarRecord"
                               Command="{Binding NavigateToVideoRecordCommand}"
                               Icon="Video" />
                 <AppBarButton Label="refresh"
+                              x:Uid="AppBarRefresh"
                               Command="{Binding RefreshCommand}"
                               Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator},Converter={StaticResource VisibilityConverter}}"
                               Icon="Refresh" />
                 <AppBarButton Label="search"
+                              x:Uid="AppBarSearch"
                               Command="{Binding NavigateToSearchCommand}"
                               Icon="Find" />
                 <AppBarButton Label="channels"
+                              x:Uid="AppBarChannels"
                               Command="{Binding NavigateToBrowseChannelsCommand}">
                     <AppBarButton.Icon>
                         <BitmapIcon UriSource="/Assets/Icons/appbar.film.list.png" />
@@ -47,11 +51,13 @@
                 </AppBarButton>
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
-                <AppBarButton Label="{Binding Auth.IsLoggedIn, Source={StaticResource Locator},Converter={StaticResource AccountConverter}}"
-                              Command="{Binding NavigateToAccountCommand}"/>
+                <AppBarButton Label="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource AccountConverter}}"
+                              Command="{Binding NavigateToAccountCommand}" />
                 <AppBarButton Label="settings"
+                              x:Uid="AppBarSettings"
                               Command="{Binding NavigateToSettingsCommand}" />
                 <AppBarButton Label="about"
+                              x:Uid="AppBarAbout"
                               Command="{Binding NavigateToAboutCommand}" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
@@ -96,11 +102,13 @@
                                            Style="{StaticResource BodyTextBlockStyle}"
                                            TextAlignment="Center"
                                            Grid.Row="1">
-                                    <Run Text="It doesn't look like you have anything to show in your feed." />
+                                    <Run Text="It doesn't look like you have anything to show in your feed."
+                                         x:Uid="LabelMainEmptyPara1" />
                                           
                                     <LineBreak />
                                     <LineBreak />
-                                    <Run Text="Try searching for videos, or browse the list of available channels." />
+                                    <Run Text="Try searching for videos, or browse the list of available channels."
+                                         x:Uid="LabelMainEmptyPara2" />
                                 </TextBlock>
                             </Grid>
 
@@ -120,27 +128,34 @@
                                            Style="{StaticResource BodyTextBlockStyle}"
                                            TextAlignment="Center"
                                            Grid.Row="1">
-                                    <Run Text="If you want to see content here, consider" />
+                                    <Run Text="If you want to see content here, consider"
+                                         x:Uid="LabelMainAnonEmptyPara1"/>
                                     <Hyperlink Click="SignInHyperlink_OnClick"
                                                x:Name="SignInHyperlink"
                                                Foreground="{ThemeResource PhoneAccentBrush}">
-                                        <Run Text="signing in" />
+                                        <Run Text="signing in" 
+                                             x:Uid="LabelSigningIn"/>
                                     </Hyperlink>
-                                    <Run Text="or" />
+                                    <Run Text="or"
+                                         x:Uid="LabelMainAnonEmptyPara1Or"/>
                                     <Hyperlink x:Name="CreateAccountHyperlink"
                                                Click="CreateAccountHyperlink_OnClick"
                                                Foreground="{ThemeResource PhoneAccentBrush}">
-                                        <Run Text="creating an account." />
+                                        <Run Text="creating an account." 
+                                             x:Uid="LabelCreatingAccount"/>
                                     </Hyperlink>
                                     <LineBreak />
                                     <LineBreak />
-                                    <Run Text="Having an account means you can follow users or channels and catch up with them in your feed." />
+                                    <Run Text="Having an account means you can follow users or channels and catch up with them in your feed."
+                                         x:Uid="LabelMainAnonEmptyPara2" />
                                     <LineBreak />
                                     <LineBreak />
-                                    <Run Text="If you simply wish to upload a video anonymously, then just tap the video button below." />
+                                    <Run Text="If you simply wish to upload a video anonymously, then just tap the video button below."
+                                         x:Uid="LabelMainAnonEmptyPara3" />
                                     <LineBreak />
                                     <LineBreak />
-                                    <Run Text="Or you can search for videos, or browse the list of available channels." />
+                                    <Run Text="Or you can search for videos, or browse the list of available channels."
+                                         x:Uid="LabelMainAnonEmptyPara4" />
                                 </TextBlock>
                             </Grid>
                         </Grid>

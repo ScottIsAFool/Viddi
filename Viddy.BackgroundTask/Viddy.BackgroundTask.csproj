@@ -116,6 +116,10 @@
       <Project>{d0dc6c8b-6813-40bd-80f1-2b70503bf43a}</Project>
       <Name>Viddy.Core</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Viddy.Localisation\Viddy.Localisation.csproj">
+      <Project>{c7add5a9-3ea2-457a-a3c1-57f78b0f5f03}</Project>
+      <Name>Viddy.Localisation</Name>
+    </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>

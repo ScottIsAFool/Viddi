@@ -46,12 +46,14 @@
             <converters:NullToVisibilityConverter x:Key="NullToVisibilityConverter" />
             <converters:NullToVisibilityConverter x:Key="InverseNullToVisibilityConverter"
                                                   InvertValue="True" />
-            <converters:BooleanToStringConverter x:Key="PinUnpinConverter"
-                                                 TrueValue="unpin"
-                                                 FalseValue="pin" />
-            <converters:BooleanToStringConverter x:Key="PinUnpinLongConverter"
-                                                 TrueValue="unpin from start"
-                                                 FalseValue="pin to start" />
+            <localConverters:BooleanToLocalisedStringConverter x:Key="PinUnpinConverter"
+                                                               TrueValue="AppBarUnpin"
+                                                               FalseValue="AppBarPin" />
+            <localConverters:BooleanToLocalisedStringConverter x:Key="PinUnpinLongConverter"
+                                                               TrueValue="AppBarUnpinLong"
+                                                               FalseValue="AppBarPinLong" />
+            <converters:StringToLowercaseConverter x:Key="LowercaseConverter" />
+            <converters:StringToUppercaseConverter x:Key="UppercaseConverter" />
 
             <themeManagerRt:ThemeManager x:Key="ThemeManager" />
             <Color x:Key="OverlayColor">#4C000000</Color>
@@ -86,7 +88,7 @@
                           Stretch="Uniform"
                           Margin="0,0,0,12"
                           HorizontalAlignment="Center" />
-                    <TextBlock Text="D'oh, there was a problem loading your content. Might be worth giving it another go."
+                    <TextBlock Text="{Binding LabelProblemLoadingContent, Source={StaticResource LocalisedResources}, FallbackValue='Doh, there was a problem loading your content. Might be worth giving it another go.'}"
                                Style="{StaticResource BodyTextBlockStyle}"
                                HorizontalAlignment="Center"
                                TextAlignment="Center" />
@@ -95,7 +97,7 @@
                                                     HorizontalContentAlignment="Center">
                         <TextBlock FontSize="{StaticResource TextStyleLargeFontSize}">
                             <Underline>
-                                <Run Text="Try again" />
+                                <Run Text="{Binding LabelTryAgain, Source={StaticResource LocalisedResources}, FallbackValue='Try again'}" />
                             </Underline>
                         </TextBlock>
                     </controls:CustomHyperlinkButton>

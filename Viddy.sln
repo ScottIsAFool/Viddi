@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viddy", "Viddy\Viddy.csproj", "{EC0F5D0C-D402-4DDF-90F1-CD515049296C}"
 EndProject
@@ -17,6 +17,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2DAD19
 		.nuget\NuGet.exe = .nuget\NuGet.exe
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viddy.Localisation", "Viddy.Localisation\Viddy.Localisation.csproj", "{C7ADD5A9-3EA2-457A-A3C1-57F78B0F5F03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -107,6 +109,18 @@ Global
 		{D0DC6C8B-6813-40BD-80F1-2B70503BF43A}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
 		{D0DC6C8B-6813-40BD-80F1-2B70503BF43A}.Release|Mixed Platforms.Build.0 = Release|Any CPU
 		{D0DC6C8B-6813-40BD-80F1-2B70503BF43A}.Release|x86.ActiveCfg = Release|Any CPU
+		{C7ADD5A9-3EA2-457A-A3C1-57F78B0F5F03}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C7ADD5A9-3EA2-457A-A3C1-57F78B0F5F03}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C7ADD5A9-3EA2-457A-A3C1-57F78B0F5F03}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{C7ADD5A9-3EA2-457A-A3C1-57F78B0F5F03}.Debug|Mixed Platforms.ActiveCfg = Debug|Any CPU
+		{C7ADD5A9-3EA2-457A-A3C1-57F78B0F5F03}.Debug|Mixed Platforms.Build.0 = Debug|Any CPU
+		{C7ADD5A9-3EA2-457A-A3C1-57F78B0F5F03}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{C7ADD5A9-3EA2-457A-A3C1-57F78B0F5F03}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C7ADD5A9-3EA2-457A-A3C1-57F78B0F5F03}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C7ADD5A9-3EA2-457A-A3C1-57F78B0F5F03}.Release|ARM.ActiveCfg = Release|Any CPU
+		{C7ADD5A9-3EA2-457A-A3C1-57F78B0F5F03}.Release|Mixed Platforms.ActiveCfg = Release|Any CPU
+		{C7ADD5A9-3EA2-457A-A3C1-57F78B0F5F03}.Release|Mixed Platforms.Build.0 = Release|Any CPU
+		{C7ADD5A9-3EA2-457A-A3C1-57F78B0F5F03}.Release|x86.ActiveCfg = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
