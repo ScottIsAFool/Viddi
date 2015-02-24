@@ -516,7 +516,7 @@
     <value>Changes saved</value>
   </data>
   <data name="MinutesAgo" xml:space="preserve">
-    <value>(0}m ago</value>
+    <value>{0}m ago</value>
   </data>
   <data name="Name.PlaceholderText" xml:space="preserve">
     <value>Name</value>
