@@ -7,6 +7,7 @@ using Windows.Storage;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using ScottIsAFool.WindowsPhone.Logging;
+using Viddy.Core.Services;
 using Viddy.Services;
 using Viddy.Views;
 
@@ -17,16 +18,18 @@ namespace Viddy.ViewModel
         private readonly INavigationService _navigationService;
         private readonly ILauncherService _launcherService;
         private readonly IEmailComposeService _emailCompose;
+        private readonly ILocalisationLoader _localisationLoader;
         private readonly ReviewService _reviewService;
         private readonly PackageVersion _version;
 
         private ShareType _shareType;
 
-        public AboutViewModel(INavigationService navigationService, ILauncherService launcherService, IEmailComposeService emailCompose, ReviewService reviewService)
+        public AboutViewModel(INavigationService navigationService, ILauncherService launcherService, IEmailComposeService emailCompose, ILocalisationLoader localisationLoader, ReviewService reviewService)
         {
             _navigationService = navigationService;
             _launcherService = launcherService;
             _emailCompose = emailCompose;
+            _localisationLoader = localisationLoader;
             _reviewService = reviewService;
             _version = Package.Current.Id.Version;
         }
@@ -151,11 +154,11 @@ namespace Viddy.ViewModel
             }
         }
 
-        private static void TellAFriend(DataRequest request)
+        private void TellAFriend(DataRequest request)
         {
-            request.Data.Properties.Title = "Check out Viddy";
+            request.Data.Properties.Title = _localisationLoader.GetString("TellAFriendTitle");
 
-            var messageTemplate = "Viddy is an app that lets you browse and upload videos to VidMe\n\n{0}";
+            var messageTemplate = _localisationLoader.GetString("TellAFriendBody");
             var message = string.Format(messageTemplate, CurrentApp.LinkUri);
 
             request.Data.Properties.Description = message;

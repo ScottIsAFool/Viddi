@@ -265,6 +265,10 @@
   <data name="AppBarSignIn" xml:space="preserve">
     <value>sign in</value>
   </data>
+  <data name="AppDetails" xml:space="preserve">
+    <value>{0} Details</value>
+    <comment>{0} = name of the app</comment>
+  </data>
   <data name="Bio.PlaceholderText" xml:space="preserve">
     <value>Bio</value>
   </data>
@@ -273,6 +277,12 @@
   </data>
   <data name="CheckboxNsfwSearch.Content" xml:space="preserve">
     <value>Include NSFW videos</value>
+  </data>
+  <data name="ClientId" xml:space="preserve">
+    <value>Client ID</value>
+  </data>
+  <data name="ClientSecret" xml:space="preserve">
+    <value>Client Secret</value>
   </data>
   <data name="Company.PlaceholderText" xml:space="preserve">
     <value>Company (optional)</value>
@@ -303,6 +313,36 @@
   </data>
   <data name="EmptyUserContent.Text" xml:space="preserve">
     <value>This user hasn't submitted any content yet.</value>
+  </data>
+  <data name="ErrorAddAppGeneric" xml:space="preserve">
+    <value>There was an error when adding your app</value>
+  </data>
+  <data name="ErrorImageTooSmall" xml:space="preserve">
+    <value>Image too small</value>
+  </data>
+  <data name="ErrorSigninGeneric" xml:space="preserve">
+    <value>There was an error signing in</value>
+  </data>
+  <data name="ErrorSigninUsernamePassword" xml:space="preserve">
+    <value>Username and/or password is incorrect</value>
+  </data>
+  <data name="ErrorSignupGeneric" xml:space="preserve">
+    <value>An error ocurred signing you up.</value>
+  </data>
+  <data name="ErrorSignupUsernameExists" xml:space="preserve">
+    <value>This username is already in use</value>
+  </data>
+  <data name="ErrorStillUploadingBack" xml:space="preserve">
+    <value>You are still uploading a video, leaving now will disrupt this. You wouldn't want to disrupt it.</value>
+  </data>
+  <data name="ErrorStillUploadingShare" xml:space="preserve">
+    <value>You are still uploading a video, sharing now will disrupt this. You wouldn't want to disrupt it.</value>
+  </data>
+  <data name="ErrorTitle" xml:space="preserve">
+    <value>Careful now!</value>
+  </data>
+  <data name="ErrorUpdatingProfile" xml:space="preserve">
+    <value>An error ocurred updating your profile</value>
   </data>
   <data name="FeedbackByline.Text" xml:space="preserve">
     <value>Not to worry, would you prefer to provide any feedback about the app instead?</value>
@@ -427,11 +467,35 @@
   <data name="LoadMore.Content" xml:space="preserve">
     <value>load more</value>
   </data>
+  <data name="LocationAddLocation" xml:space="preserve">
+    <value>Add location?</value>
+  </data>
+  <data name="LocationFailedToFindYou" xml:space="preserve">
+    <value>Failed to find you</value>
+  </data>
+  <data name="LocationFindingYou" xml:space="preserve">
+    <value>Finding you...</value>
+  </data>
+  <data name="LocationNothingNearby" xml:space="preserve">
+    <value>Nothing nearby</value>
+  </data>
+  <data name="LocationTurnLocationOn" xml:space="preserve">
+    <value>Turn location on</value>
+  </data>
   <data name="MenuDelete.Text" xml:space="preserve">
     <value>delete</value>
   </data>
   <data name="MenuShare.Text" xml:space="preserve">
     <value>share</value>
+  </data>
+  <data name="MessageAreYouSureTitle" xml:space="preserve">
+    <value>Are you sure?</value>
+  </data>
+  <data name="MessageChangesSaved" xml:space="preserve">
+    <value>Changes saved</value>
+  </data>
+  <data name="Name" xml:space="preserve">
+    <value>Name</value>
   </data>
   <data name="Name.PlaceholderText" xml:space="preserve">
     <value>Name</value>
@@ -439,8 +503,14 @@
   <data name="NewPassword.PlaceholderText" xml:space="preserve">
     <value>New password</value>
   </data>
+  <data name="No" xml:space="preserve">
+    <value>no</value>
+  </data>
   <data name="No.Content" xml:space="preserve">
     <value>no</value>
+  </data>
+  <data name="Ok" xml:space="preserve">
+    <value>Ok</value>
   </data>
   <data name="OneDay" xml:space="preserve">
     <value>1 day</value>
@@ -463,8 +533,17 @@
   <data name="ReviewHeader.Text" xml:space="preserve">
     <value>Fancy a review?</value>
   </data>
+  <data name="RevokeViddyTokenBody" xml:space="preserve">
+    <value>This is the token for this app, are you sure you wish to revoke this token? If you do, you will have to sign in again.</value>
+  </data>
   <data name="SixHours" xml:space="preserve">
     <value>6 hours</value>
+  </data>
+  <data name="TellAFriendBody" xml:space="preserve">
+    <value>Viddy is an app that lets you browse and upload videos to VidMe\n\n{0}</value>
+  </data>
+  <data name="TellAFriendTitle" xml:space="preserve">
+    <value>Check out Viddy</value>
   </data>
   <data name="ThirtyMinutes" xml:space="preserve">
     <value>30 minutes</value>
@@ -489,6 +568,9 @@
   </data>
   <data name="Website.PlaceholderText" xml:space="preserve">
     <value>Website (optional)</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>yes</value>
   </data>
   <data name="Yes.Content" xml:space="preserve">
     <value>yes</value>

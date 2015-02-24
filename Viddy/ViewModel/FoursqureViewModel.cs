@@ -6,7 +6,7 @@ using Windows.Devices.Geolocation;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Core.Extensions;
-using Viddy.Extensions;
+using Viddy.Core.Services;
 using Viddy.Foursquare;
 using Viddy.Model;
 using Viddy.Views;
@@ -17,14 +17,16 @@ namespace Viddy.ViewModel
     {
         private readonly ISettingsService _settingsService;
         private readonly INavigationService _navigationService;
+        private readonly ILocalisationLoader _localisationLoader;
         private readonly FoursquareClient _foursquareClient;
 
         private Geopoint _curentLocation;
 
-        public FoursqureViewModel(ISettingsService settingsService, INavigationService navigationService)
+        public FoursqureViewModel(ISettingsService settingsService, INavigationService navigationService, ILocalisationLoader localisationLoader)
         {
             _settingsService = settingsService;
             _navigationService = navigationService;
+            _localisationLoader = localisationLoader;
             _foursquareClient = new FoursquareClient();
         }
 
@@ -32,16 +34,16 @@ namespace Viddy.ViewModel
         {
             if (!_settingsService.LocationIsOn)
             {
-                LocationText = "Turn location on";
+                LocationText = _localisationLoader.GetString("Turn location on");
                 return;
             }
 
-            LocationText = "Finding you...";
+            LocationText = _localisationLoader.GetString("LocationFindingYou");
 
             var position = await GetCurrentLocation();
             if (position == null)
             {
-                LocationText = "Failed to find you";
+                LocationText = _localisationLoader.GetString("LocationFailedToFindYou");
                 return;
             }
 
@@ -50,13 +52,13 @@ namespace Viddy.ViewModel
             var venues = await _foursquareClient.GetVenuesAsync(_curentLocation.Position.Longitude, _curentLocation.Position.Latitude);
             if (venues.IsNullOrEmpty())
             {
-                LocationText = "Nothing nearby";
+                LocationText = _localisationLoader.GetString("LocationNothingNearby");
                 return;
             }
 
             Locations = venues;
             SelectedVenue = Locations.FirstOrDefault();
-            LocationText = SelectedVenue != null ? SelectedVenue.Name : "Add location?";
+            LocationText = SelectedVenue != null ? SelectedVenue.Name : _localisationLoader.GetString("LocationAddLocation");
             ShowVenues = true;
         }
 
@@ -151,7 +153,7 @@ namespace Viddy.ViewModel
                 return new RelayCommand(() =>
                 {
                     SelectedVenue = null;
-                    LocationText = "Add location?";
+                    LocationText = _localisationLoader.GetString("LocationAddLocation");
                     ShowVenues = false;
                 }, () => _settingsService.LocationIsOn);
             }

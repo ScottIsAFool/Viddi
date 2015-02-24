@@ -10,12 +10,14 @@ namespace Viddy.ViewModel.Account
     {
         private readonly IVidMeClient _vidMeClient;
         private readonly IToastService _toastService;
+        private readonly ILocalisationLoader _localisationLoader;
 
-        public EditProfileViewModel(IVidMeClient vidMeClient, AvatarViewModel avatarViewModel, IToastService toastService)
+        public EditProfileViewModel(IVidMeClient vidMeClient, AvatarViewModel avatarViewModel, IToastService toastService, ILocalisationLoader localisationLoader)
         {
             Avatar = avatarViewModel;
             _vidMeClient = vidMeClient;
             _toastService = toastService;
+            _localisationLoader = localisationLoader;
         }
 
         public AvatarViewModel Avatar { get; set; }
@@ -69,7 +71,7 @@ namespace Viddy.ViewModel.Account
 
                         NewPassword = CurrentPassword = string.Empty;
 
-                        _toastService.Show("Changes saved");
+                        _toastService.Show(_localisationLoader.GetString("MessageChangesSaved"));
                     }
                     catch (VidMeException ex)
                     {
@@ -79,7 +81,7 @@ namespace Viddy.ViewModel.Account
                         }
                         else
                         {
-                            ErrorMessage = "An error occurred updating your profile";
+                            ErrorMessage = _localisationLoader.GetString("ErrorUpdatingProfile");
                         }
                     }
 

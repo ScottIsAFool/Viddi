@@ -14,11 +14,13 @@ namespace Viddy.ViewModel.Account
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
+        private readonly ILocalisationLoader _localisationLoader;
 
-        public CreateAccountViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
+        public CreateAccountViewModel(INavigationService navigationService, IVidMeClient vidMeClient, ILocalisationLoader localisationLoader)
         {
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
+            _localisationLoader = localisationLoader;
         }
 
         public string Username { get; set; }
@@ -59,12 +61,12 @@ namespace Viddy.ViewModel.Account
                     catch (VidMeException vex)
                     {
                         Log.ErrorException("CreateAccountCommand(vex)", vex);
-                        ErrorMessage = vex.Error != null && vex.Error.Code == "used_username" ? "This username is already in use" : "An error ocurred signing you up.";
+                        ErrorMessage = vex.Error != null && vex.Error.Code == "used_username" ? _localisationLoader.GetString("ErrorSignupUsernameExists") : _localisationLoader.GetString("ErrorSignupGeneric");
                     }
                     catch (Exception ex)
                     {
                         Log.ErrorException("CreateAccountCommand(ex)", ex);
-                        ErrorMessage = "An error ocurred signing you up.";
+                        ErrorMessage = _localisationLoader.GetString("ErrorSignupGeneric");
                     }
 
                     SetProgressBar();

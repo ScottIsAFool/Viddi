@@ -13,11 +13,13 @@ namespace Viddy.ViewModel.Account
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
+        private readonly ILocalisationLoader _localisationLoader;
 
-        public ManualLoginViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
+        public ManualLoginViewModel(INavigationService navigationService, IVidMeClient vidMeClient, ILocalisationLoader localisationLoader)
         {
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
+            _localisationLoader = localisationLoader;
         }
 
         public string Username { get; set; }
@@ -64,12 +66,12 @@ namespace Viddy.ViewModel.Account
                     catch (VidMeException vex)
                     {
                         Log.ErrorException("SignInCommand", vex);
-                        ErrorMessage = vex.Error != null && vex.Error.Code == "invalid_password" ? "Username and/or password incorrect" : "There was an error signing in";
+                        ErrorMessage = vex.Error != null && vex.Error.Code == "invalid_password" ? _localisationLoader.GetString("ErrorSigninUsernamePassword") : _localisationLoader.GetString("ErrorSigninGeneric");
                     }
                     catch (Exception ex)
                     {
                         Log.ErrorException("SignInCommand", ex);
-                        ErrorMessage = "There was an error signing in";
+                        ErrorMessage = _localisationLoader.GetString("ErrorSigninGeneric");
                     }
 
                     SetProgressBar();

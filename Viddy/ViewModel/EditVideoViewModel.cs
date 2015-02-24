@@ -4,6 +4,7 @@ using Windows.ApplicationModel.DataTransfer;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Common;
+using Viddy.Core.Services;
 using Viddy.Views.Account;
 using VidMePortable;
 using VidMePortable.Model;
@@ -16,15 +17,17 @@ namespace Viddy.ViewModel
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
         private readonly IMessageBoxService _messageBoxService;
+        private readonly ILocalisationLoader _localisationLoader;
         private DataTransferManager _manager;
 
         private Video _video;
 
-        public EditVideoViewModel(INavigationService navigationService, IVidMeClient vidMeClient, IMessageBoxService messageBoxService)
+        public EditVideoViewModel(INavigationService navigationService, IVidMeClient vidMeClient, IMessageBoxService messageBoxService, ILocalisationLoader localisationLoader)
         {
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
             _messageBoxService = messageBoxService;
+            _localisationLoader = localisationLoader;
 
             if (IsInDesignMode)
             {
@@ -80,7 +83,7 @@ namespace Viddy.ViewModel
                 return;
             }
 
-            _messageBoxService.ShowAsync("You are still uploading a video, leaving now will disrupt this. You wouldn't want to disrupt it.", "Careful now!", new List<string> { "Ok" });
+            _messageBoxService.ShowAsync(_localisationLoader.GetString("ErrorStillUploadingBack"), _localisationLoader.GetString("ErrorTitle"), new List<string> { _localisationLoader.GetString("Ok") });
         }
 
         public RelayCommand SaveChangesCommand
@@ -147,7 +150,7 @@ namespace Viddy.ViewModel
                     }
                     if (IsUploading)
                     {
-                        _messageBoxService.ShowAsync("You are still uploading a video, sharing now will disrupt this. You wouldn't want to disrupt it.", "Careful now!", new List<string> { "Ok" });
+                        _messageBoxService.ShowAsync(_localisationLoader.GetString("ErrorStillUploadingShare"), _localisationLoader.GetString("ErrorTitle"), new List<string> { _localisationLoader.GetString("Ok") });
                         return;
                     }
 

@@ -5,7 +5,6 @@ using System.Threading.Tasks;
 using Cimbalino.Toolkit.Extensions;
 using Cimbalino.Toolkit.Services;
 using Viddy.Core.Extensions;
-using Viddy.Extensions;
 using Viddy.Services;
 using Viddy.ViewModel.Item;
 using VidMePortable;

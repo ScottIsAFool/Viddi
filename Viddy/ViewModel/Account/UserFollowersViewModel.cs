@@ -4,7 +4,6 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Core;
 using Viddy.Core.Extensions;
-using Viddy.Extensions;
 using Viddy.Messaging;
 using Viddy.ViewModel.Item;
 using Viddy.Views.Account;

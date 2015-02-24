@@ -36,7 +36,7 @@ namespace Viddy.ViewModel.Account.Manage
                         Organization = "Ferret Labs",
                         Website = "http://ferretlabs.com",
                         Description = "VidMe app for Windows Phone 8.1"
-                    }, _vidMeClient, this, _messageBoxService)
+                    }, _vidMeClient, this, _messageBoxService, new LocalisationLoader())
                 };
             }
         }

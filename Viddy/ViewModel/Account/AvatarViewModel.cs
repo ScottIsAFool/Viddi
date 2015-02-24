@@ -18,13 +18,15 @@ namespace Viddy.ViewModel.Account
         private const string DefaultAvatar = "/Assets/Defaults/UserLoginDefault.png";
         private readonly IVidMeClient _vidMeClient;
         private readonly IToastService _toastService;
+        private readonly ILocalisationLoader _localisationLoader;
 
         private PictureType _pictureType;
 
-        public AvatarViewModel(IVidMeClient vidMeClient, IToastService toastService)
+        public AvatarViewModel(IVidMeClient vidMeClient, IToastService toastService, ILocalisationLoader localisationLoader)
         {
             _vidMeClient = vidMeClient;
             _toastService = toastService;
+            _localisationLoader = localisationLoader;
         }
 
         public void ChangeAvatar()
@@ -124,7 +126,7 @@ namespace Viddy.ViewModel.Account
                         {
                             if (properties.Width < 800 || properties.Height < 600)
                             {
-                                _toastService.Show("Image too small");
+                                _toastService.Show(_localisationLoader.GetString("ErrorImageTooSmall"));
                                 return;
                             }
                         }

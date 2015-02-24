@@ -1,21 +1,17 @@
 ﻿using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
-using Viddy.Views.Account;
 using Viddy.Views.Account.Manage;
-using VidMePortable;
 
 namespace Viddy.ViewModel.Account.Manage
 {
     public class ManageAccountViewModel
     {
         private readonly INavigationService _navigationService;
-        private readonly IVidMeClient _vidMeClient;
 
-        public ManageAccountViewModel(INavigationService navigationService, IVidMeClient vidMeClient, AvatarViewModel avatar)
+        public ManageAccountViewModel(INavigationService navigationService, AvatarViewModel avatar)
         {
             Avatar = avatar;
             _navigationService = navigationService;
-            _vidMeClient = vidMeClient;
         }
 
         public AvatarViewModel Avatar { get; set; }

@@ -3,7 +3,6 @@ using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Core.Services;
-using Viddy.Services;
 using Viddy.Views;
 using Viddy.Views.Account;
 using VidMePortable;
