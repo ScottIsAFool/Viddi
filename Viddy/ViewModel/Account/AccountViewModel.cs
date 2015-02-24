@@ -25,12 +25,14 @@ namespace Viddy.ViewModel.Account
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
+        private readonly ILocalisationLoader _localisationLoader;
 
-        public AccountViewModel(INavigationService navigationService, IVidMeClient vidMeClient, AvatarViewModel avatar)
+        public AccountViewModel(INavigationService navigationService, IVidMeClient vidMeClient, AvatarViewModel avatar, ILocalisationLoader localisationLoader)
         {
             Avatar = avatar;
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
+            _localisationLoader = localisationLoader;
 
             if (IsInDesignMode)
             {
@@ -52,7 +54,7 @@ namespace Viddy.ViewModel.Account
 
         protected override void Reset()
         {
-            Name = AuthenticationService.Current.IsLoggedIn ? AuthenticationService.Current.LoggedInUser.Username : "anonymous account";
+            Name = AuthenticationService.Current.IsLoggedIn ? AuthenticationService.Current.LoggedInUser.Username : _localisationLoader.GetString("AnonymousAccount");
             base.Reset();
         }
 
