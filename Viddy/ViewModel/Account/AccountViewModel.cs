@@ -162,6 +162,12 @@ namespace Viddy.ViewModel.Account
                 var auth = await _vidMeClient.ExchangeCodeForTokenAsync(code, Constants.ClientId, Constants.ClientSecret);
                 if (auth != null)
                 {
+                    var user = await _vidMeClient.GetUserAsync(auth.User.UserId);
+                    if (user != null && user.User != null)
+                    {
+                        auth.User = user.User;
+                    }
+
                     AuthenticationService.Current.SetAuthenticationInfo(auth);
                 }
 
