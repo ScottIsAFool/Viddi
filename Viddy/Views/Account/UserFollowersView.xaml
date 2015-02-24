@@ -21,6 +21,7 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="refresh"
                               Icon="Refresh"
+                              x:Uid="AppBarRefresh"
                               IsEnabled="{Binding Item.Followers.ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
                               Command="{Binding Item.Followers.RefreshCommand}"/>
             </CommandBar.PrimaryCommands>

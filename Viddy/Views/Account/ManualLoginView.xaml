@@ -19,6 +19,7 @@
         <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="sign in"
+                              x:Uid="AppBarSignIn"
                               IsEnabled="{Binding CanSignIn}"
                               Command="{Binding SignInCommand}"
                               Icon="Accept" />
@@ -33,7 +34,8 @@
         </Grid.RowDefinitions>
 
         <controls:PageHeaderControl ProfilePictureEnabled="False"
-                                    HeaderText="sign in" />
+                                    HeaderText="sign in" 
+                                    x:Uid="HeaderSignIn"/>
 
         <Grid Grid.Row="1"
               Margin="0,12,0,0">
@@ -44,6 +46,7 @@
                 <TextBox Text="{Binding Username, Mode=TwoWay, FallbackValue=Here is some text}"
                          PlaceholderText="Username"
                          Header="&#xE13D;"
+                         x:Uid="Username"
                          IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
                          Style="{StaticResource FullLengthTextBoxStyle}"
                          InputScope="EmailSmtpAddress">
@@ -55,6 +58,7 @@
                 <PasswordBox Password="{Binding Password, Mode=TwoWay}"
                              IsPasswordRevealButtonEnabled="True"
                              PlaceholderText="Password"
+                             x:Uid="Password"
                              Header="&#xE1F6;"
                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
                              Style="{StaticResource FullLengthPasswordBoxStyle}">
@@ -70,7 +74,8 @@
                                                 Margin="19,12">
                     <TextBlock FontSize="{StaticResource TextStyleMediumFontSize}">
                         <Underline>
-                            <Run Text="Create account" />
+                            <Run Text="Create account" 
+                                 x:Uid="LabelCreateAccount"/>
                         </Underline>
                     </TextBlock>
                 </controls:CustomHyperlinkButton>

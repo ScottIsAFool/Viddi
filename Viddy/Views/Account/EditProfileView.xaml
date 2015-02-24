@@ -24,6 +24,7 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="save"
                               Icon="Save"
+                              x:Uid="AppBarSave"
                               IsEnabled="{Binding CanUpdate}"
                               Command="{Binding UpdateProfileCommand}" />
             </CommandBar.PrimaryCommands>
@@ -207,6 +208,7 @@
                 <TextBox Text="{Binding Bio, Mode=TwoWay}"
                          Style="{StaticResource FullLengthTextBoxStyle}"
                          PlaceholderText="Bio"
+                         x:Uid="Bio"
                          AcceptsReturn="True"
                          IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}">
                     <interactivity:Interaction.Behaviors>
@@ -216,6 +218,7 @@
                 <TextBox Text="{Binding Email, Mode=TwoWay}"
                          Style="{StaticResource FullLengthTextBoxStyle}"
                          PlaceholderText="Email"
+                         x:Uid="Email"
                          IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}">
                     <interactivity:Interaction.Behaviors>
                         <behaviours:UpdateTextBindingOnPropertyChanged />
@@ -223,13 +226,16 @@
                 </TextBox>
 
                 <TextBlock Text="Change password:"
+                           x:Uid="LabelChangePassword"
                            Style="{StaticResource BodyTextBlockStyle}"
                            Margin="19,24,19,12" />
                 <PasswordBox Password="{Binding CurrentPassword, Mode=TwoWay}"
                              Style="{StaticResource FullLengthPasswordBoxStyle}"
+                             x:Uid="CurrentPassword"
                              PlaceholderText="Current password"
                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}" />
                 <PasswordBox Password="{Binding NewPassword, Mode=TwoWay}"
+                             x:Uid="NewPassword"
                              Style="{StaticResource FullLengthPasswordBoxStyle}"
                              PlaceholderText="New password"
                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}" />

@@ -23,6 +23,7 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="home"
                               Icon="Home"
+                              x:Uid="AppBarHome"
                               Visibility="{Binding ShowHomeButton, Converter={StaticResource VisibilityConverter}}"
                               Command="{Binding NavigateHomeCommand}" />
                 <AppBarButton Label="{Binding User.IsPinned, Converter={StaticResource PinUnpinConverter}}"
@@ -33,6 +34,7 @@
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton Label="refresh"
+                              x:Uid="AppBarRefresh"
                               Command="{Binding User.RefreshCommand}"
                               Icon="Refresh"
                               IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}" />
@@ -68,6 +70,7 @@
                                                    Margin="19,-5,19,12" />
                         <Grid Visibility="{Binding User.HasErrors, Converter={StaticResource InverseVisibilityConverter}}">
                             <TextBlock Text="This user hasn't submitted any content yet."
+                                       x:Uid="EmptyUserContent"
                                        Style="{StaticResource BodyTextBlockStyle}"
                                        Margin="19"
                                        TextWrapping="WrapWholeWords"

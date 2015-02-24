@@ -117,7 +117,8 @@
         </Grid.RowDefinitions>
 
         <controls:PageHeaderControl ProfilePictureEnabled="False"
-                                    HeaderText="settings" />
+                                    HeaderText="settings"
+                                    x:Uid="HeaderSettings"/>
 
         <Grid Grid.Row="1"
               Margin="19,12,19,0">
@@ -125,10 +126,12 @@
                 <StackPanel Orientation="Vertical">
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="THEME"
+                                   x:Uid="GroupTheme"
                                    Style="{StaticResource BodyTextBlockStyle}"
                                    FontWeight="Bold"
                                    Margin="0,0,0,12" />
                         <TextBlock Text="You have the choice of two themes in which to view Viddy, which would you like?"
+                                   x:Uid="LabelWhichTheme"
                                    Style="{StaticResource BodyTextBlockStyle}"
                                    FontSize="{StaticResource TextStyleMediumFontSize}"
                                    Margin="0,0,0,12" />
@@ -144,6 +147,7 @@
                                 <Border Background="White"
                                         HorizontalAlignment="Stretch">
                                     <TextBlock Text="Light"
+                                               x:Uid="LabelLight"
                                                Foreground="Black"
                                                VerticalAlignment="Center"
                                                Margin="12,0" />
@@ -157,6 +161,7 @@
                                 <Border Background="#060E1B"
                                         HorizontalAlignment="Stretch">
                                     <TextBlock Text="Dark"
+                                               x:Uid="LabelDark"
                                                Foreground="White"
                                                VerticalAlignment="Center"
                                                Margin="12,0" />
@@ -167,21 +172,25 @@
                     <StackPanel Orientation="Vertical"
                                 Margin="0,12">
                         <TextBlock Text="LOCATION"
+                                   x:Uid="GroupLocation"
                                    Style="{StaticResource BodyTextBlockStyle}"
                                    FontWeight="Bold"
                                    Margin="0,0,0,12" />
                         <TextBlock Text="This app can allow you to attach your location to the videos you upload or find videos in your area, if you don't want this, you can easily turn it off."
+                                   x:Uid="LabelLocationDescription"
                                    Style="{StaticResource BodyTextBlockStyle}"
                                    FontSize="{StaticResource TextStyleMediumFontSize}"
                                    Margin="0,0,0,12" />
                         <ToggleSwitch Header="Location service"
+                                      x:Uid="HeaderLocationService"
                                       IsOn="{Binding IsLocationOn, Mode=TwoWay}" />
                         <controls:CustomHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
                                                         TapCommand="{Binding NavigateToPrivacyCommand}">
                             <TextBlock Style="{StaticResource BodyTextBlockStyle}"
                                        FontWeight="SemiBold">
                                 <Underline>
-                                    <Run Text="Privacy" />
+                                    <Run Text="Privacy" 
+                                         x:Uid="LabelPrivacy"/>
                                 </Underline>
                             </TextBlock>
                         </controls:CustomHyperlinkButton>
@@ -189,18 +198,22 @@
                     <StackPanel Orientation="Vertical"
                                 Margin="0,12">
                         <TextBlock Text="NOTIFICATIONS"
+                                   x:Uid="GroupNotifications"
                                    Style="{StaticResource BodyTextBlockStyle}"
                                    FontWeight="Bold"
                                    Margin="0,0,0,12" />
                         <TextBlock Text="Would you like this app to check for new notifications in the background? If so, you can set how often you'd like the app to check."
+                                   x:Uid="LabelNotificationsDescription"
                                    Style="{StaticResource BodyTextBlockStyle}"
                                    FontSize="{StaticResource TextStyleMediumFontSize}"
                                    Margin="0,0,0,12" />
                         <ToggleSwitch Header="Background check for notifications"
+                                      x:Uid="HeaderBackgroundTask"
                                       IsOn="{Binding CheckForNotificationsInBackground, Mode=TwoWay}" />
                         <ComboBox ItemsSource="{Binding UpdateFrequencies}"
                                   SelectedItem="{Binding NotificationFrequency, Mode=TwoWay}"
-                                  Header="Check for notifications every...">
+                                  Header="Check for notifications every..."
+                                  x:Uid="HeaderNotificationsFrequency">
                             <ComboBox.ItemTemplate>
                                 <DataTemplate>
                                     <TextBlock Text="{Binding Converter={StaticResource FrequencyConverter}}"/>

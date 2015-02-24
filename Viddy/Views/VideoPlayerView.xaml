@@ -22,9 +22,9 @@
     </interactivity:Interaction.Behaviors>
 
     <local:BasePage.Resources>
-        <converters:BooleanToStringConverter x:Key="LikeTextConverter"
-                                             TrueValue="unlike"
-                                             FalseValue="like" />
+        <localConverters:BooleanToLocalisedStringConverter x:Key="LikeTextConverter"
+                                                           TrueValue="unlike"
+                                                           FalseValue="like" />
         <converters:BooleanToStringConverter x:Key="LikeIconConverter"
                                              TrueValue="/Assets/Icons/appbar.thumbs.up.inverted.png"
                                              FalseValue="/Assets/Icons/appbar.thumbs.up.png" />
@@ -42,23 +42,27 @@
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton Label="share"
+                              x:Uid="AppBarShare"
                               Command="{Binding Video.ShareCommand}">
                     <AppBarButton.Icon>
-                        <BitmapIcon UriSource="/Assets/Icons/appbar.share.png"/>
+                        <BitmapIcon UriSource="/Assets/Icons/appbar.share.png" />
                     </AppBarButton.Icon>
                 </AppBarButton>
                 <AppBarButton Label="refresh"
                               Icon="Refresh"
+                              x:Uid="AppBarRefresh"
                               Command="{Binding Video.RefreshVideoInfoCommand}"
-                              IsEnabled="{Binding Video.GettingVideoInfo, Converter={StaticResource NegativeBooleanConverter}}"/>
+                              IsEnabled="{Binding Video.GettingVideoInfo, Converter={StaticResource NegativeBooleanConverter}}" />
                 <AppBarButton Label="edit"
                               Icon="Edit"
+                              x:Uid="AppBarEdit"
                               Visibility="{Binding Video.IsOwner, Converter={StaticResource VisibilityConverter}}"
-                              Command="{Binding Video.EditVideoCommand}"/>
+                              Command="{Binding Video.EditVideoCommand}" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="share for email"
-                              Command="{Binding Video.ShareCommand}"/>
+                              x:Uid="AppBarShareForEmail"
+                              Command="{Binding Video.ShareCommand}" />
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </local:BasePage.BottomAppBar>
@@ -169,9 +173,9 @@
                         <DataTemplate>
                             <Grid>
                                 <Grid.Resources>
-                                    <converters:BooleanToStringConverter x:Key="LeaveCommentConverter"
-                                                                         TrueValue="No comments have been left for this video, why not leave one?"
-                                                                         FalseValue="No comments have been left for this video, why not sign in and leave one?" />
+                                    <localConverters:BooleanToLocalisedStringConverter x:Key="LeaveCommentConverter"
+                                                                                       TrueValue="EmptyComments"
+                                                                                       FalseValue="EmptyCommentsAnon" />
                                 </Grid.Resources>
                                 <TextBlock Text="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource LeaveCommentConverter}}"
                                            TextWrapping="WrapWholeWords"
@@ -194,6 +198,7 @@
                     <TextBox InputScope="Chat"
                              AcceptsReturn="True"
                              PlaceholderText="keep it civil..."
+                             x:Uid="VideoComment"
                              Text="{Binding Video.CommentText, Mode=TwoWay}"
                              Style="{StaticResource FullLengthTextBoxStyle}">
                         <interactivity:Interaction.Behaviors>

@@ -235,7 +235,145 @@
   <data name="LabelVidMePrivacy.Text" xml:space="preserve">
     <value>VidMe Privacy Policy</value>
   </data>
+  <data name="AppBarEdit.Label" xml:space="preserve">
+    <value>edit</value>
+  </data>
+  <data name="AppBarEditProfile" xml:space="preserve">
+    <value>edit profile</value>
+  </data>
+  <data name="AppBarManageAccount" xml:space="preserve">
+    <value>manage account</value>
+  </data>
+  <data name="AppBarShare.Label" xml:space="preserve">
+    <value>share</value>
+  </data>
+  <data name="AppBarShareForEmail.Label" xml:space="preserve">
+    <value>share for email</value>
+  </data>
+  <data name="ButtonSave.Content" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="CheckboxNsfwSearch.Content" xml:space="preserve">
+    <value>Include NSFW videos</value>
+  </data>
+  <data name="EmailAddress.PlaceholderText" xml:space="preserve">
+    <value>Email address (optional)</value>
+  </data>
+  <data name="EmptyComments" xml:space="preserve">
+    <value>No comments have been left for this video, why not leave one?</value>
+  </data>
+  <data name="EmptyCommentsAnon" xml:space="preserve">
+    <value>No comments have been left for this video, why not sign in and leave one?</value>
+  </data>
+  <data name="GroupLocation.Text" xml:space="preserve">
+    <value>LOCATION</value>
+  </data>
+  <data name="GroupNotifications.Text" xml:space="preserve">
+    <value>NOTIFICATIONS</value>
+  </data>
+  <data name="GroupTheme.Text" xml:space="preserve">
+    <value>THEME</value>
+  </data>
+  <data name="HeaderBackgroundTask.Header" xml:space="preserve">
+    <value>Background check for notifications</value>
+  </data>
+  <data name="HeaderCreateAccount.HeaderText" xml:space="preserve">
+    <value>create account</value>
+  </data>
+  <data name="HeaderLocationService.Header" xml:space="preserve">
+    <value>Location service</value>
+  </data>
+  <data name="HeaderNotificationsFrequency.Header" xml:space="preserve">
+    <value>Check for notifications every...</value>
+  </data>
+  <data name="HeaderSettings.HeaderText" xml:space="preserve">
+    <value>settings</value>
+  </data>
+  <data name="LabelDark.Text" xml:space="preserve">
+    <value>Dark</value>
+  </data>
+  <data name="LabelEmptyAccount.Text" xml:space="preserve">
+    <value>It doesn't look like you've uploaded any videos.</value>
+  </data>
+  <data name="LabelEmptyAccountAnon.Text" xml:space="preserve">
+    <value>It doesn't look like you've uploaded any videos, you may need to sign in in order to see them</value>
+  </data>
+  <data name="LabelLight.Text" xml:space="preserve">
+    <value>Light</value>
+  </data>
+  <data name="LabelLike" xml:space="preserve">
+    <value>like</value>
+  </data>
+  <data name="LabelLocationDescription.Text" xml:space="preserve">
+    <value>This app can allow you to attach your location to the videos you upload or find videos in your area, if you don't want this, you can easily turn it off.</value>
+  </data>
   <data name="LabelMainAnonEmptyPara1Or.Text" xml:space="preserve">
     <value>or</value>
+  </data>
+  <data name="LabelMyAnonymousVideos" xml:space="preserve">
+    <value>my anonymous videos</value>
+  </data>
+  <data name="LabelMyVideos" xml:space="preserve">
+    <value>my videos</value>
+  </data>
+  <data name="LabelNotificationsDescription.Text" xml:space="preserve">
+    <value>Would you like this app to check for new notifications in the background? If so, you can set how often you'd like the app to check.</value>
+  </data>
+  <data name="LabelPrivacy.Text" xml:space="preserve">
+    <value>Privacy</value>
+  </data>
+  <data name="LabelRecordNewVideo.Text" xml:space="preserve">
+    <value>You can record new videos by tapping the record button below</value>
+  </data>
+  <data name="LabelSignIn" xml:space="preserve">
+    <value>sign in</value>
+  </data>
+  <data name="LabelSignOut" xml:space="preserve">
+    <value>sign out</value>
+  </data>
+  <data name="LabelUnlike" xml:space="preserve">
+    <value>unlike</value>
+  </data>
+  <data name="LabelVideoUploading.Text" xml:space="preserve">
+    <value>Your video is currently uploading, please don't leave this page</value>
+  </data>
+  <data name="LabelWhichTheme.Text" xml:space="preserve">
+    <value>You have the choice of two themes in which to view Viddy, which would you like?</value>
+  </data>
+  <data name="OneDay" xml:space="preserve">
+    <value>1 day</value>
+  </data>
+  <data name="OneHour" xml:space="preserve">
+    <value>1 hour</value>
+  </data>
+  <data name="Password.PlaceholderText" xml:space="preserve">
+    <value>Password</value>
+  </data>
+  <data name="PlaceholderSearch.PlaceholderText" xml:space="preserve">
+    <value>enter something to search for</value>
+  </data>
+  <data name="SixHours" xml:space="preserve">
+    <value>6 hours</value>
+  </data>
+  <data name="ThirtyMinutes" xml:space="preserve">
+    <value>30 minutes</value>
+  </data>
+  <data name="TwelveHours" xml:space="preserve">
+    <value>12 hours</value>
+  </data>
+  <data name="Username.PlaceholderText" xml:space="preserve">
+    <value>Username</value>
+  </data>
+  <data name="VideoComment.PlaceholderText" xml:space="preserve">
+    <value>keep it civil...</value>
+  </data>
+  <data name="VideoDescription.PlaceholderText" xml:space="preserve">
+    <value>Because it shows...</value>
+  </data>
+  <data name="VideoNsfw.Content" xml:space="preserve">
+    <value>And is totally NSFW!</value>
+  </data>
+  <data name="VideoTitle.PlaceholderText" xml:space="preserve">
+    <value>This video is called...</value>
   </data>
 </root>

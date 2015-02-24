@@ -22,6 +22,7 @@
     <local:BasePage.BottomAppBar>
         <CommandBar Visibility="{Binding EditVideo.CanEdit, Converter={StaticResource VisibilityConverter}}">
             <AppBarButton Label="share"
+                          x:Uid="AppBarShare"
                           Command="{Binding EditVideo.ShareCommand}">
                 <AppBarButton.Icon>
                     <BitmapIcon UriSource="/Assets/Icons/appbar.share.png"/>
@@ -119,6 +120,7 @@
                 <ProgressBar IsIndeterminate="{Binding IsUploading}"
                              Background="Transparent"/>
                 <TextBlock Text="Your video is currently uploading, please don't leave this page"
+                           x:Uid="LabelVideoUploading"
                            Style="{StaticResource BodyTextBlockStyle}"
                            FontSize="{StaticResource TextStyleMediumFontSize}"
                            Margin="19,0"/>
@@ -131,6 +133,7 @@
                              IsIndeterminate="{Binding EditVideo.ProgressIsVisible}"/>
                 <TextBox Style="{StaticResource FullLengthTextBoxStyleNoFocusChange}"
                          PlaceholderText="This video is called..."
+                         x:Uid="VideoTitle"
                          Text="{Binding EditVideo.Title, Mode=TwoWay}">
                     <interactivity:Interaction.Behaviors>
                         <behaviours:UpdateTextBindingOnPropertyChanged />
@@ -139,6 +142,7 @@
 
                 <TextBox Style="{StaticResource FullLengthTextBoxStyleNoFocusChange}"
                          PlaceholderText="Because it shows..."
+                         x:Uid="VideoDescription"
                          Text="{Binding EditVideo.Description, Mode=TwoWay}"
                          AcceptsReturn="True">
                     <interactivity:Interaction.Behaviors>
@@ -151,6 +155,7 @@
                         BorderThickness="1"
                         Opacity="0.8">
                     <CheckBox Content="And is totally NSFW!"
+                              x:Uid="VideoNsfw"
                               Foreground="{ThemeResource PlaceholderTextBrush}"
                               BorderBrush="{ThemeResource PlaceholderTextBrush}"
                               HorizontalAlignment="Stretch"
@@ -159,6 +164,7 @@
                 </Border>
                 <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
                                        Content="Save"
+                                       x:Uid="ButtonSave"
                                        Background="{ThemeResource TextBoxBackgroundBrush}"
                                        Opacity="0.8"
                                        Height="60"

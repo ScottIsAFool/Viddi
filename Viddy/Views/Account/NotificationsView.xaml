@@ -21,6 +21,7 @@
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="refresh"
                               Icon="Refresh"
+                              x:Uid="AppBarRefresh"
                               Command="{Binding RefreshCommand}"
                               IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"/>
             </CommandBar.PrimaryCommands>
@@ -33,7 +34,8 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         
-        <controls:PageHeaderControl HeaderText="notifications"/>
+        <controls:PageHeaderControl HeaderText="notifications"
+                                    x:Uid="HeaderNotifications"/>
         
         <Grid Grid.Row="1"
               Margin="0,12,0,0">
@@ -45,6 +47,7 @@
                 <controls:LoadingListView.EmptyContent>
                     <DataTemplate>
                         <TextBlock Text="You don't have any notifications."
+                                   x:Uid="EmptyNotifications"
                                    Style="{StaticResource BodyTextBlockStyle}"
                                    Margin="19,0"/>
                     </DataTemplate>

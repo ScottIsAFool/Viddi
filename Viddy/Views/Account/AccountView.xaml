@@ -5,7 +5,6 @@
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 xmlns:localControls="using:Viddy.Controls"
-                xmlns:converters="using:Cimbalino.Toolkit.Converters"
                 xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                 xmlns:core="using:Microsoft.Xaml.Interactions.Core"
                 xmlns:behaviours="using:Viddy.Behaviours"
@@ -22,37 +21,42 @@
     </interactivity:Interaction.Behaviors>
 
     <local:BasePage.Resources>
-        <converters:BooleanToStringConverter x:Key="LoginLogoutConverter"
-                                             TrueValue="sign out"
-                                             FalseValue="sign in" />
-        <converters:BooleanToStringConverter x:Key="HeaderConverter"
-                                             TrueValue="my videos"
-                                             FalseValue="my anonymous videos" />
+        <converters1:BooleanToLocalisedStringConverter x:Key="LoginLogoutConverter"
+                                                       TrueValue="LabelSignOut"
+                                                       FalseValue="LabelSignIn" />
+        <converters1:BooleanToLocalisedStringConverter x:Key="HeaderConverter"
+                                                       TrueValue="LabelMyVideos"
+                                                       FalseValue="LabelMyAnonymousVideos" />
     </local:BasePage.Resources>
 
     <local:BasePage.BottomAppBar>
         <CommandBar ClosedDisplayMode="Compact">
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="record"
+                              x:Uid="AppBarRecord"
                               Command="{Binding NavigateToRecordCommand}"
                               Icon="Video" />
                 <AppBarButton IsCompact="True"
+                              x:Uid="AppBarSettings"
                               Label="settings"
                               Command="{Binding NavigateToSettingsCommand}"
                               Icon="Setting" />
                 <AppBarButton IsCompact="True"
                               Label="refresh"
+                              x:Uid="AppBarRefresh"
                               Command="{Binding RefreshCommand}"
                               IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
                               Icon="Refresh" />
                 <AppBarButton IsCompact="True"
                               Label="edit profile"
+                              x:Uid="AppBarEditProfile"
                               Icon="Edit"
                               Command="{Binding NavigateToEditProfileCommand}"
                               Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}" />
             </CommandBar.PrimaryCommands>
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="manage account"
+                              x:Uid="AppBarManageAccount"
                               Command="{Binding NavigateToManageAccountCommand}"
                               Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}" />
                 <!--<AppBarButton Label="problems signing in?"
@@ -168,6 +172,7 @@
                                 <Grid x:Name="AnonymousGrid"
                                       Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource InverseVisibilityConverter}}">
                                     <TextBlock Text="It doesn't look like you've uploaded any videos, you may need to sign in in order to see them"
+                                               x:Uid="LabelEmptyAccountAnon"
                                                Style="{StaticResource BodyTextBlockStyle}"
                                                TextWrapping="WrapWholeWords"
                                                TextAlignment="Center"
@@ -178,6 +183,7 @@
                                       Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}">
 
                                     <TextBlock Text="It doesn't look like you've uploaded any videos."
+                                               x:Uid="LabelEmptyAccount"
                                                Style="{StaticResource BodyTextBlockStyle}"
                                                TextWrapping="WrapWholeWords"
                                                TextAlignment="Center" />
@@ -186,11 +192,12 @@
 
                             <Grid Grid.Row="1">
                                 <TextBlock Text="You can record new videos by tapping the record button below"
+                                           x:Uid="LabelRecordNewVideo"
                                            TextWrapping="WrapWholeWords"
                                            TextAlignment="Center"
                                            Style="{StaticResource BodyTextBlockStyle}" />
 
-                                
+
                             </Grid>
                         </Grid>
                     </DataTemplate>

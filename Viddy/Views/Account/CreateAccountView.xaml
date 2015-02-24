@@ -19,6 +19,7 @@
         <CommandBar>
             <CommandBar.PrimaryCommands>
                 <AppBarButton Label="create"
+                              x:Uid="AppBarCreate"
                               IsEnabled="{Binding CanCreateAccount}"
                               Command="{Binding CreateAccountCommand}"
                               Icon="Accept"/>
@@ -33,7 +34,8 @@
         </Grid.RowDefinitions>
         
         <controls:PageHeaderControl HeaderText="create account"
-                                    ProfilePictureEnabled="False"/>
+                                    ProfilePictureEnabled="False"
+                                    x:Uid="HeaderCreateAccount"/>
 
         <Grid Grid.Row="1"
               Margin="0,12,0,0">
@@ -42,6 +44,7 @@
                 <ProgressBar IsIndeterminate="{Binding ProgressIsVisible}"
                              Visibility="{Binding ProgressIsVisible, Converter={StaticResource VisibilityConverter}}" />
                 <TextBox Text="{Binding Username, Mode=TwoWay}"
+                         x:Uid="Username"
                          PlaceholderText="Username"
                          Header="&#xE13D;"
                          Style="{StaticResource FullLengthTextBoxStyle}">
@@ -53,11 +56,13 @@
                 <PasswordBox Password="{Binding Password, Mode=TwoWay}"
                              IsPasswordRevealButtonEnabled="True"
                              PlaceholderText="Password"
+                             x:Uid="Password"
                              Header="&#xE1F6;"
                              Style="{StaticResource FullLengthPasswordBoxStyle}"/>
 
                 <TextBox Text="{Binding EmailAddress, Mode=TwoWay}"
                          PlaceholderText="Email address (optional)"
+                         x:Uid="EmailAddress"
                          Style="{StaticResource FullLengthTextBoxStyle}"
                          Header="&#xE119;">
                     <interactivity:Interaction.Behaviors>
