@@ -235,6 +235,9 @@
   <data name="LabelVidMePrivacy.Text" xml:space="preserve">
     <value>VidMe Privacy Policy</value>
   </data>
+  <data name="Anonymous" xml:space="preserve">
+    <value>Anonymous</value>
+  </data>
   <data name="AppBarAdd" xml:space="preserve">
     <value>add</value>
   </data>
@@ -290,6 +293,9 @@
   <data name="CurrentPassword.PlaceholderText" xml:space="preserve">
     <value>Current password</value>
   </data>
+  <data name="DaysAgo" xml:space="preserve">
+    <value>{0}d ago</value>
+  </data>
   <data name="Description.PlaceholderText" xml:space="preserve">
     <value>Description (optional)</value>
   </data>
@@ -316,6 +322,12 @@
   </data>
   <data name="ErrorAddAppGeneric" xml:space="preserve">
     <value>There was an error when adding your app</value>
+  </data>
+  <data name="ErrorAddingComment" xml:space="preserve">
+    <value>Error adding comment</value>
+  </data>
+  <data name="ErrorDeletingComment" xml:space="preserve">
+    <value>Error deleting comment</value>
   </data>
   <data name="ErrorImageTooSmall" xml:space="preserve">
     <value>Image too small</value>
@@ -349,6 +361,12 @@
   </data>
   <data name="FeedbackHeader.Text" xml:space="preserve">
     <value>What about feedback?</value>
+  </data>
+  <data name="Follow" xml:space="preserve">
+    <value>follow</value>
+  </data>
+  <data name="Following" xml:space="preserve">
+    <value>following</value>
   </data>
   <data name="GroupLocation.Text" xml:space="preserve">
     <value>LOCATION</value>
@@ -391,6 +409,9 @@
   </data>
   <data name="HeaderSignIn.HeaderText" xml:space="preserve">
     <value>sign in</value>
+  </data>
+  <data name="HoursAgo" xml:space="preserve">
+    <value>{0}h ago</value>
   </data>
   <data name="LabelChangePassword.Text" xml:space="preserve">
     <value>Change password:</value>
@@ -494,19 +515,22 @@
   <data name="MessageChangesSaved" xml:space="preserve">
     <value>Changes saved</value>
   </data>
-  <data name="Name" xml:space="preserve">
-    <value>Name</value>
+  <data name="MinutesAgo" xml:space="preserve">
+    <value>(0}m ago</value>
   </data>
   <data name="Name.PlaceholderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NameText" xml:space="preserve">
     <value>Name</value>
   </data>
   <data name="NewPassword.PlaceholderText" xml:space="preserve">
     <value>New password</value>
   </data>
-  <data name="No" xml:space="preserve">
+  <data name="No.Content" xml:space="preserve">
     <value>no</value>
   </data>
-  <data name="No.Content" xml:space="preserve">
+  <data name="NoText" xml:space="preserve">
     <value>no</value>
   </data>
   <data name="Ok" xml:space="preserve">
@@ -514,6 +538,9 @@
   </data>
   <data name="OneDay" xml:space="preserve">
     <value>1 day</value>
+  </data>
+  <data name="OneFollower" xml:space="preserve">
+    <value>1 follower</value>
   </data>
   <data name="OneHour" xml:space="preserve">
     <value>1 hour</value>
@@ -536,6 +563,16 @@
   <data name="RevokeViddyTokenBody" xml:space="preserve">
     <value>This is the token for this app, are you sure you wish to revoke this token? If you do, you will have to sign in again.</value>
   </data>
+  <data name="SecondsAgo" xml:space="preserve">
+    <value>{0}s ago</value>
+  </data>
+  <data name="ShareVideoMessage" xml:space="preserve">
+    <value>Check out this video by {0}</value>
+    <comment>{0} = username</comment>
+  </data>
+  <data name="ShareVideoTitle" xml:space="preserve">
+    <value>Check out this video</value>
+  </data>
   <data name="SixHours" xml:space="preserve">
     <value>6 hours</value>
   </data>
@@ -548,11 +585,33 @@
   <data name="ThirtyMinutes" xml:space="preserve">
     <value>30 minutes</value>
   </data>
+  <data name="ThisIsYou" xml:space="preserve">
+    <value>this is you</value>
+  </data>
   <data name="TwelveHours" xml:space="preserve">
     <value>12 hours</value>
   </data>
+  <data name="UnknownUser" xml:space="preserve">
+    <value>Unknown user</value>
+  </data>
+  <data name="UserFollowers" xml:space="preserve">
+    <value>{0:N0} followers</value>
+    <comment>{0:N0} = number of followers</comment>
+  </data>
   <data name="Username.PlaceholderText" xml:space="preserve">
     <value>Username</value>
+  </data>
+  <data name="UserPlays" xml:space="preserve">
+    <value>{0:N0} plays</value>
+    <comment>{0:N0} = number of plays</comment>
+  </data>
+  <data name="UserVideoCount" xml:space="preserve">
+    <value>{0:N0} videos</value>
+    <comment>{0:N0} = number of followers</comment>
+  </data>
+  <data name="ViddyWindowsPhone" xml:space="preserve">
+    <value>On a Windows Phone? View the video in Viddy by clicking here: {0}</value>
+    <comment>{0} = video link</comment>
   </data>
   <data name="VideoComment.PlaceholderText" xml:space="preserve">
     <value>keep it civil...</value>
@@ -569,10 +628,16 @@
   <data name="Website.PlaceholderText" xml:space="preserve">
     <value>Website (optional)</value>
   </data>
-  <data name="Yes" xml:space="preserve">
-    <value>yes</value>
+  <data name="WeeksAgo" xml:space="preserve">
+    <value>{0}w ago</value>
   </data>
   <data name="Yes.Content" xml:space="preserve">
     <value>yes</value>
+  </data>
+  <data name="YesText" xml:space="preserve">
+    <value>yes</value>
+  </data>
+  <data name="ZeroFollowers" xml:space="preserve">
+    <value>0 followers</value>
   </data>
 </root>

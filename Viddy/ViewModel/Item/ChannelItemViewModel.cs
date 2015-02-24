@@ -23,6 +23,7 @@ namespace Viddy.ViewModel.Item
         private readonly IVidMeClient _vidMeClient;
         private readonly INavigationService _navigationService;
         private readonly ITileService _tileService;
+        private readonly ILocalisationLoader _localisationLoader;
 
         public ChannelItemViewModel(Channel channel)
         {
@@ -30,6 +31,7 @@ namespace Viddy.ViewModel.Item
             _vidMeClient = SimpleIoc.Default.GetInstance<IVidMeClient>();
             _navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
             _tileService = SimpleIoc.Default.GetInstance<ITileService>();
+            _localisationLoader = SimpleIoc.Default.GetInstance<ILocalisationLoader>();
         }
 
         public Channel Channel { get; set; }
@@ -42,16 +44,24 @@ namespace Viddy.ViewModel.Item
         #region IProfileViewModel implementations
         public string UserFollowers
         {
-            get { return Channel != null && Channel.FollowerCount > 0 ? string.Format("{0:N0} followers", Channel.FollowerCount) : null; }
-        }
-
-        public string UserPlays
-        {
             get
             {
-                return null;
+                if (Channel == null)
+                {
+                    return string.Empty;
+                }
+
+                if (Channel.FollowerCount == 0)
+                {
+                    return _localisationLoader.GetString("ZeroFollowers");
+                }
+
+
+                return Channel.FollowerCount > 1 ? string.Format(_localisationLoader.GetString("UserFollowers"), Channel.FollowerCount) : _localisationLoader.GetString("OneFollower");
             }
         }
+
+        public string UserPlays { get { return null; } }
         public string Description { get { return Channel != null ? Channel.Description : null; } }
         public string CoverUrl { get { return Channel != null ? Channel.CoverUrl : null; } }
         public string AvatarUrl { get { return Channel != null ? Channel.AvatarUrl : null; } }
@@ -63,7 +73,7 @@ namespace Viddy.ViewModel.Item
 
         public string UserVideoCount
         {
-            get { return Channel != null && Channel.VideoCount > 0 ? string.Format("{0:N0} videos", Channel.VideoCount) : null; }
+            get { return Channel != null && Channel.VideoCount > 0 ? string.Format(_localisationLoader.GetString("UserVideoCount"), Channel.VideoCount) : null; }
         }
 
         public bool DisplayBio
@@ -88,7 +98,7 @@ namespace Viddy.ViewModel.Item
         {
             get
             {
-                return IsFollowedByMe ? "following" : "follow";
+                return IsFollowedByMe ? _localisationLoader.GetString("Following") : _localisationLoader.GetString("Follow");
             }
         }
 

@@ -4,11 +4,13 @@ using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
 using Windows.Security.ExchangeActiveSyncProvisioning;
 using Windows.System.Profile;
+using Viddy.Core.Services;
 
 namespace Viddy.Core
 {
     public static class Utils
     {
+        private static ILocalisationLoader _loader;
         private static EasClientDeviceInformation _info;
         
         /// <summary>
@@ -21,7 +23,6 @@ namespace Viddy.Core
         {
             get
             {
-                return Guid.NewGuid().ToString();
                 var myToken = HardwareIdentification.GetPackageSpecificToken(null);
                 var hardwareId = myToken.Id;
 
@@ -77,6 +78,7 @@ namespace Viddy.Core
 
         public static string DaysAgo(DateTime value)
         {
+            if(_loader == null) _loader = new LocalisationLoader();
             const int SECOND = 1;
             const int MINUTE = 60 * SECOND;
             const int HOUR = 60 * MINUTE;
@@ -93,27 +95,27 @@ namespace Viddy.Core
 
             // Less than one minute
             if (seconds < 1 * MINUTE)
-                return ts.Seconds == 1 ? "1s ago" : string.Format("{0}s ago", ts.Seconds);
+                return string.Format(_loader.GetString("SecondsAgo"), ts.Seconds);
 
             if (seconds < 60 * MINUTE)
-                return ts.Minutes == 1 ? "1m ago" : string.Format("{0}m ago", ts.Minutes);
+                return string.Format(_loader.GetString("MinutesAgo"), ts.Minutes);
 
             if (seconds < 120 * MINUTE)
-                return "1h ago";
+                return string.Format(_loader.GetString("HoursAgo"), 1);
 
             if (seconds < 24 * HOUR)
-                return string.Format("{0}h ago", ts.Hours);
+                return string.Format(_loader.GetString("HoursAgo"), ts.Hours);
 
             if (seconds < 48 * HOUR)
-                return "1d ago";
+                return string.Format(_loader.GetString("DaysAgo"), 1);
 
             if (seconds < 7 * DAY)
-                return string.Format("{0}d ago", ts.Days);
+                return string.Format(_loader.GetString("DaysAgo"), ts.Days);
 
             if (seconds > 1 * WEEK)
             {
                 var weeks = Convert.ToInt32(Math.Floor((double)ts.Days / 7));
-                return weeks <= 1 ? "1w ago" : string.Format("{0}w ago", weeks);
+                return string.Format(_loader.GetString("WeeksAgo"), weeks);
             }
 
             return string.Empty;

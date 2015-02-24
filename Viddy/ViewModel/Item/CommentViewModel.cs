@@ -7,7 +7,6 @@ using Viddy.Core;
 using Viddy.Core.Services;
 using Viddy.Messaging;
 using Viddy.Model;
-using Viddy.Services;
 using Viddy.Views.Account;
 using VidMePortable;
 using VidMePortable.Model;
@@ -18,16 +17,16 @@ namespace Viddy.ViewModel.Item
     {
         private readonly VideoItemViewModel _videoItemViewModel;
         private readonly IVidMeClient _vidMeClient;
-        private readonly IMessageBoxService _messageBoxService;
         private readonly INavigationService _navigationService;
+        private readonly ILocalisationLoader _localisationLoader;
 
         public CommentViewModel(Comment comment, VideoItemViewModel videoItemViewModel)
         {
             _videoItemViewModel = videoItemViewModel;
             Comment = comment;
             _vidMeClient = SimpleIoc.Default.GetInstance<IVidMeClient>();
-            _messageBoxService = SimpleIoc.Default.GetInstance<IMessageBoxService>();
             _navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
+            _localisationLoader = SimpleIoc.Default.GetInstance<ILocalisationLoader>();
 
             if (IsInDesignMode)
             {
@@ -82,7 +81,7 @@ namespace Viddy.ViewModel.Item
 
         public string Username
         {
-            get { return Comment != null && Comment.User != null ? Comment.User.Username : "Unknown user"; }
+            get { return Comment != null && Comment.User != null ? Comment.User.Username : _localisationLoader.GetString("UnknownUser"); }
         }
 
         public RelayCommand DeleteCommand

@@ -17,14 +17,16 @@ namespace Viddy.ViewModel.Account.Manage
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
         private readonly IMessageBoxService _messageBoxService;
+        private readonly ILocalisationLoader _localisationLoader;
 
         private bool _appsLoaded;
 
-        public ManageAppsAccessViewModel(INavigationService navigationService, IVidMeClient vidMeClient, IMessageBoxService messageBoxService)
+        public ManageAppsAccessViewModel(INavigationService navigationService, IVidMeClient vidMeClient, IMessageBoxService messageBoxService, ILocalisationLoader localisationLoader)
         {
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
             _messageBoxService = messageBoxService;
+            _localisationLoader = localisationLoader;
 
             if (IsInDesignMode)
             {
@@ -64,7 +66,7 @@ namespace Viddy.ViewModel.Account.Manage
             {
                 var response = await _vidMeClient.GetAuthorisedAppsAsync();
 
-                Items = new ObservableCollection<RevokeAppViewModel>(response.Select(x => new RevokeAppViewModel(x, _vidMeClient, this, _messageBoxService)));
+                Items = new ObservableCollection<RevokeAppViewModel>(response.Select(x => new RevokeAppViewModel(x, _vidMeClient, this, _messageBoxService, _localisationLoader)));
 
                 _appsLoaded = true;
             }

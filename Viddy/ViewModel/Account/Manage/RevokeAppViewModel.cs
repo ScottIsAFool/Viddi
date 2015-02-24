@@ -40,7 +40,7 @@ namespace Viddy.ViewModel.Account.Manage
                             var result = await _messageBoxService.ShowAsync(
                                 _localisationLoader.GetString("RevokeViddyTokenBody"), 
                                 _localisationLoader.GetString("MessageAreYouSureTitle"),
-                                new List<string> { _localisationLoader.GetString("Yes"), _localisationLoader.GetString("No") });
+                                new List<string> { _localisationLoader.GetString("YesText"), _localisationLoader.GetString("NoText") });
                             if (result == 1)
                             {
                                 return;

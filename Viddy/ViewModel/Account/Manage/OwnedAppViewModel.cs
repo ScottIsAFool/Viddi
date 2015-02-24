@@ -25,7 +25,7 @@ namespace Viddy.ViewModel.Account.Manage
             _manager.DataRequested -= ManagerOnDataRequested;
             var request = args.Request;
             request.Data.Properties.Title = string.Format(_localisationLoader.GetString("AppDetails"), Application.Name);
-            var message = string.Format("{0}: {1}\n{2}: {3}", _localisationLoader.GetString("Name"), Application.Name, _localisationLoader.GetString("ClientId"), Application.ClientId);
+            var message = string.Format("{0}: {1}\n{2}: {3}", _localisationLoader.GetString("NameText"), Application.Name, _localisationLoader.GetString("ClientId"), Application.ClientId);
             if (!string.IsNullOrEmpty(Application.ClientSecret))
             {
                 message += string.Format("\n{0}: {1}", _localisationLoader.GetString("ClientSecret"), Application.ClientSecret);

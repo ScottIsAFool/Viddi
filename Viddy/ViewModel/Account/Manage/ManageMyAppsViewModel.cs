@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Core;
 using Viddy.Core.Extensions;
+using Viddy.Core.Services;
 using Viddy.Views.Account.Manage;
 using VidMePortable;
 using VidMePortable.Model;
@@ -17,11 +18,13 @@ namespace Viddy.ViewModel.Account.Manage
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
+        private readonly ILocalisationLoader _localisationLoader;
 
-        public ManageMyAppsViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
+        public ManageMyAppsViewModel(INavigationService navigationService, IVidMeClient vidMeClient, ILocalisationLoader localisationLoader)
         {
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
+            _localisationLoader = localisationLoader;
 
             if (IsInDesignMode)
             {
@@ -31,7 +34,7 @@ namespace Viddy.ViewModel.Account.Manage
                     {
                         ClientId = "kjsdlfkjlsdkfjlskdjf09wefj0w9e",
                         Name = "Viddy for Windows Phone"
-                    })
+                    }, _localisationLoader)
                 };
 
                 IsEmpty = true;
@@ -61,7 +64,7 @@ namespace Viddy.ViewModel.Account.Manage
 
                 var response = await _vidMeClient.GetOwnedAppsAsync();
 
-                Items = new ObservableCollection<OwnedAppViewModel>(response.Select(x => new OwnedAppViewModel(x)));
+                Items = new ObservableCollection<OwnedAppViewModel>(response.Select(x => new OwnedAppViewModel(x, _localisationLoader)));
                 IsEmpty = Items.IsNullOrEmpty();
 
                 ItemsLoaded = true;

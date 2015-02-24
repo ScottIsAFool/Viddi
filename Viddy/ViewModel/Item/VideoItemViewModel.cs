@@ -28,6 +28,7 @@ namespace Viddy.ViewModel.Item
         private readonly INavigationService _navigationService;
         private readonly ITileService _tileService;
         private readonly IToastService _toastService;
+        private readonly ILocalisationLoader _localisationLoader;
 
         private readonly DataTransferManager _manager;
         private ShareType _shareType;
@@ -39,6 +40,7 @@ namespace Viddy.ViewModel.Item
             _navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
             _tileService = SimpleIoc.Default.GetInstance<ITileService>();
             _toastService = SimpleIoc.Default.GetInstance<IToastService>();
+            _localisationLoader = SimpleIoc.Default.GetInstance<ILocalisationLoader>();
             _manager = DataTransferManager.GetForCurrentView();
             _videoLoadingViewModel = videoLoadingViewModel;
             Video = video;
@@ -113,7 +115,7 @@ namespace Viddy.ViewModel.Item
                     return string.Empty;
                 }
 
-                return IsAnonymous ? "Anonymous" : Video.User.Username;
+                return IsAnonymous ? _localisationLoader.GetString("Anonymous") : Video.User.Username;
             }
         }
 
@@ -124,7 +126,11 @@ namespace Viddy.ViewModel.Item
 
         public string Plays
         {
-            get { return Video != null ? string.Format("{0} plays", Video.ViewCount) : "0 plays"; }
+            get
+            {
+                var number = Video != null ? Video.ViewCount : 0;
+                return string.Format(_localisationLoader.GetString("UserPlays"), number);
+            }
         }
 
         public string Date
@@ -223,7 +229,7 @@ namespace Viddy.ViewModel.Item
                     catch (Exception ex)
                     {
                         Log.ErrorException("DeleteCommend(" + AuthenticationService.Current.IsLoggedIn + ")", ex);
-                        _toastService.Show("Error deleting comment");
+                        _toastService.Show(_localisationLoader.GetString("ErrorDeletingComment"));
                     }
                 }, () => IsOwner);
             }
@@ -271,7 +277,7 @@ namespace Viddy.ViewModel.Item
                     catch (Exception ex)
                     {
                         Log.ErrorException("AddComment", ex);
-                        _toastService.Show("Error adding comment");
+                        _toastService.Show(_localisationLoader.GetString("ErrorAddingComment"));
                     }
 
                     AddingComment = false;
@@ -477,8 +483,8 @@ namespace Viddy.ViewModel.Item
         {
             _manager.DataRequested -= ManagerOnDataRequested;
             var request = args.Request;
-            request.Data.Properties.Title = "Check out this video";
-            var description = IsAnonymous ? string.Format("Check out this video") : string.Format("Check out this video by {0}", Video.User.Username);
+            request.Data.Properties.Title = _localisationLoader.GetString("ShareVideoTitle");
+            var description = IsAnonymous ? _localisationLoader.GetString("ShareVideoTitle") : string.Format(_localisationLoader.GetString("ShareVideoMessage"), Video.User.Username);
             request.Data.Properties.Description = description;
             request.Data.SetApplicationLink(new Uri(Video.ToViddyLink())); 
             
@@ -497,7 +503,7 @@ namespace Viddy.ViewModel.Item
         private string PrepareMessage(string description)
         {
             description += "\n\n" + Video.FullUrl + "\n\n";
-            var viddyLink = string.Format("On a Windows Phone? View the video in Viddy by clicking here: {0}", Video.ToViddyLink());
+            var viddyLink = string.Format(_localisationLoader.GetString("ViddyWindowsPhone"), Video.ToViddyLink());
 
             description += viddyLink;
 
