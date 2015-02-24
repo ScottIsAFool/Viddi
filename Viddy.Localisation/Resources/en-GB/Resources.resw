@@ -235,6 +235,15 @@
   <data name="LabelVidMePrivacy.Text" xml:space="preserve">
     <value>VidMe Privacy Policy</value>
   </data>
+  <data name="AppBarAdd" xml:space="preserve">
+    <value>add</value>
+  </data>
+  <data name="AppBarCreate.Label" xml:space="preserve">
+    <value>create</value>
+  </data>
+  <data name="AppBarDelete.Label" xml:space="preserve">
+    <value>delete</value>
+  </data>
   <data name="AppBarEdit.Label" xml:space="preserve">
     <value>edit</value>
   </data>
@@ -244,11 +253,20 @@
   <data name="AppBarManageAccount" xml:space="preserve">
     <value>manage account</value>
   </data>
+  <data name="AppBarSave.Label" xml:space="preserve">
+    <value>save</value>
+  </data>
   <data name="AppBarShare.Label" xml:space="preserve">
     <value>share</value>
   </data>
   <data name="AppBarShareForEmail.Label" xml:space="preserve">
     <value>share for email</value>
+  </data>
+  <data name="AppBarSignIn" xml:space="preserve">
+    <value>sign in</value>
+  </data>
+  <data name="Bio.PlaceholderText" xml:space="preserve">
+    <value>Bio</value>
   </data>
   <data name="ButtonSave.Content" xml:space="preserve">
     <value>Save</value>
@@ -256,14 +274,41 @@
   <data name="CheckboxNsfwSearch.Content" xml:space="preserve">
     <value>Include NSFW videos</value>
   </data>
+  <data name="Company.PlaceholderText" xml:space="preserve">
+    <value>Company (optional)</value>
+  </data>
+  <data name="CurrentPassword.PlaceholderText" xml:space="preserve">
+    <value>Current password</value>
+  </data>
+  <data name="Description.PlaceholderText" xml:space="preserve">
+    <value>Description (optional)</value>
+  </data>
+  <data name="Email.PlaceholderText" xml:space="preserve">
+    <value>Email</value>
+  </data>
   <data name="EmailAddress.PlaceholderText" xml:space="preserve">
     <value>Email address (optional)</value>
+  </data>
+  <data name="EmptyApps.Text" xml:space="preserve">
+    <value>It appears you don't have any apps created. If you're a developer wanting to create an app that uses the VidMe API, you can add one using the + below.</value>
   </data>
   <data name="EmptyComments" xml:space="preserve">
     <value>No comments have been left for this video, why not leave one?</value>
   </data>
   <data name="EmptyCommentsAnon" xml:space="preserve">
     <value>No comments have been left for this video, why not sign in and leave one?</value>
+  </data>
+  <data name="EmptyNotifications.Text" xml:space="preserve">
+    <value>You don't have any notifications</value>
+  </data>
+  <data name="EmptyUserContent.Text" xml:space="preserve">
+    <value>This user hasn't submitted any content yet.</value>
+  </data>
+  <data name="FeedbackByline.Text" xml:space="preserve">
+    <value>Not to worry, would you prefer to provide any feedback about the app instead?</value>
+  </data>
+  <data name="FeedbackHeader.Text" xml:space="preserve">
+    <value>What about feedback?</value>
   </data>
   <data name="GroupLocation.Text" xml:space="preserve">
     <value>LOCATION</value>
@@ -274,6 +319,9 @@
   <data name="GroupTheme.Text" xml:space="preserve">
     <value>THEME</value>
   </data>
+  <data name="HeaderAddApp.HeaderText" xml:space="preserve">
+    <value>add app</value>
+  </data>
   <data name="HeaderBackgroundTask.Header" xml:space="preserve">
     <value>Background check for notifications</value>
   </data>
@@ -283,11 +331,38 @@
   <data name="HeaderLocationService.Header" xml:space="preserve">
     <value>Location service</value>
   </data>
+  <data name="HeaderManageAccount.HeaderText" xml:space="preserve">
+    <value>manage account</value>
+  </data>
+  <data name="HeaderManageAppsAccess.HeaderText" xml:space="preserve">
+    <value>manage apps' access</value>
+  </data>
+  <data name="HeaderManageMyApps.Text" xml:space="preserve">
+    <value>manage my apps</value>
+  </data>
+  <data name="HeaderNotifications.HeaderText" xml:space="preserve">
+    <value>notifications</value>
+  </data>
   <data name="HeaderNotificationsFrequency.Header" xml:space="preserve">
     <value>Check for notifications every...</value>
   </data>
   <data name="HeaderSettings.HeaderText" xml:space="preserve">
     <value>settings</value>
+  </data>
+  <data name="HeaderSignIn.HeaderText" xml:space="preserve">
+    <value>sign in</value>
+  </data>
+  <data name="LabelChangePassword.Text" xml:space="preserve">
+    <value>Change password:</value>
+  </data>
+  <data name="LabelClientId.Text" xml:space="preserve">
+    <value>Client ID:</value>
+  </data>
+  <data name="LabelClientSecret.Text" xml:space="preserve">
+    <value>Client Secret:</value>
+  </data>
+  <data name="LabelCreateAccount.Text" xml:space="preserve">
+    <value>Create account</value>
   </data>
   <data name="LabelDark.Text" xml:space="preserve">
     <value>Dark</value>
@@ -310,6 +385,12 @@
   <data name="LabelMainAnonEmptyPara1Or.Text" xml:space="preserve">
     <value>or</value>
   </data>
+  <data name="LabelManageAppsAccess.Content" xml:space="preserve">
+    <value>Manage apps' access</value>
+  </data>
+  <data name="LabelManageMyApps.Content" xml:space="preserve">
+    <value>Manage my apps</value>
+  </data>
   <data name="LabelMyAnonymousVideos" xml:space="preserve">
     <value>my anonymous videos</value>
   </data>
@@ -324,6 +405,9 @@
   </data>
   <data name="LabelRecordNewVideo.Text" xml:space="preserve">
     <value>You can record new videos by tapping the record button below</value>
+  </data>
+  <data name="LabelRevoking.Text" xml:space="preserve">
+    <value>Revoking</value>
   </data>
   <data name="LabelSignIn" xml:space="preserve">
     <value>sign in</value>
@@ -340,6 +424,24 @@
   <data name="LabelWhichTheme.Text" xml:space="preserve">
     <value>You have the choice of two themes in which to view Viddy, which would you like?</value>
   </data>
+  <data name="LoadMore.Content" xml:space="preserve">
+    <value>load more</value>
+  </data>
+  <data name="MenuDelete.Text" xml:space="preserve">
+    <value>delete</value>
+  </data>
+  <data name="MenuShare.Text" xml:space="preserve">
+    <value>share</value>
+  </data>
+  <data name="Name.PlaceholderText" xml:space="preserve">
+    <value>Name</value>
+  </data>
+  <data name="NewPassword.PlaceholderText" xml:space="preserve">
+    <value>New password</value>
+  </data>
+  <data name="No.Content" xml:space="preserve">
+    <value>no</value>
+  </data>
   <data name="OneDay" xml:space="preserve">
     <value>1 day</value>
   </data>
@@ -351,6 +453,15 @@
   </data>
   <data name="PlaceholderSearch.PlaceholderText" xml:space="preserve">
     <value>enter something to search for</value>
+  </data>
+  <data name="RedirectUrl.PlaceholderText" xml:space="preserve">
+    <value>Redirect Url</value>
+  </data>
+  <data name="ReviewByline.Text" xml:space="preserve">
+    <value>Thanks for using Viddy, we hope you're enjoying it. Would you fancy giving the app a quick review?</value>
+  </data>
+  <data name="ReviewHeader.Text" xml:space="preserve">
+    <value>Fancy a review?</value>
   </data>
   <data name="SixHours" xml:space="preserve">
     <value>6 hours</value>
@@ -375,5 +486,11 @@
   </data>
   <data name="VideoTitle.PlaceholderText" xml:space="preserve">
     <value>This video is called...</value>
+  </data>
+  <data name="Website.PlaceholderText" xml:space="preserve">
+    <value>Website (optional)</value>
+  </data>
+  <data name="Yes.Content" xml:space="preserve">
+    <value>yes</value>
   </data>
 </root>
