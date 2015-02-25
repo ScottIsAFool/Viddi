@@ -88,16 +88,19 @@
                           Stretch="Uniform"
                           Margin="0,0,0,12"
                           HorizontalAlignment="Center" />
-                    <TextBlock Text="{Binding LabelProblemLoadingContent, Source={StaticResource LocalisedResources}, FallbackValue='Doh, there was a problem loading your content. Might be worth giving it another go.'}"
+                    <TextBlock Text="D'oh, there was a problem loading your content. Might be worth giving it another go."
+                               x:Uid="ProblemLoadingContent"
                                Style="{StaticResource BodyTextBlockStyle}"
                                HorizontalAlignment="Center"
-                               TextAlignment="Center" />
+                               TextAlignment="Center"
+                               FontFamily="Global User Interface" />
                     <controls:CustomHyperlinkButton TapCommand="{Binding RefreshCommand}"
                                                     HorizontalAlignment="Center"
                                                     HorizontalContentAlignment="Center">
                         <TextBlock FontSize="{StaticResource TextStyleLargeFontSize}">
                             <Underline>
-                                <Run Text="{Binding LabelTryAgain, Source={StaticResource LocalisedResources}, FallbackValue='Try again'}" />
+                                <Run Text="Try again"
+                                     x:Uid="LabelTryAgain"/>
                             </Underline>
                         </TextBlock>
                     </controls:CustomHyperlinkButton>
