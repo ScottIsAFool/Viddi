@@ -89,7 +89,6 @@ namespace Viddy.Views
 
             _recordedDuration = _recordedDuration.Add(TimeSpan.FromSeconds(1));
             var timeString = string.Format("{0:00}:{1:00}", _recordedDuration.Minutes, _recordedDuration.Seconds);
-            Debug.WriteLine(timeString);
             RecordedLengthText.Text = timeString;
         }
 
@@ -232,76 +231,6 @@ namespace Viddy.Views
             var i = 1;
         }
 
-        private string _fileName;
-
-        private async void RecordButton_OnTapped(object sender, TappedRoutedEventArgs e)
-        {
-            var mediaCapture = _cameraInfoService.MediaCapture;
-            if (!_isRecording)
-            {
-                RecordedLengthText.Text = "00:00";
-                RecordedLengthText.Visibility = Visibility.Visible;
-
-                _isRecording = true;
-                
-                _displayRequest.Request();
-
-                _fileName = string.Format("Viddy-{0}.mp4", DateTime.Now.ToString("yyyy-M-dd-HH-mm-ss"));
-                var folder = ApplicationData.Current.LocalCacheFolder;
-                var file = await folder.CreateFileAsync(_fileName, CreationCollisionOption.ReplaceExisting);
-
-                var profile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);
-
-                var mfVideoRotationGuid = new Guid("C380465D-2271-428C-9B83-ECEA3B4A85C1"); // MF_MT_VIDEO_ROTATION in Mfapi.h
-                var rotation = _cameraInfoService.MediaCapture.GetPreviewRotation();
-                int mfVideoRotation = ConvertVideoRotationToMFRotation(rotation);
-
-                profile.Video.Properties.Add(mfVideoRotationGuid, PropertyValue.CreateInt32(mfVideoRotation));
-
-                mediaCapture.StartRecordToStorageFileAsync(profile, file);
-                _recordingTimer.Start();
-            }
-            else
-            {
-                _recordingTimer.Stop();
-                _isRecording = false;
-                _displayRequest.Release();
-                _displayRequest = null;
-                _recordedDuration = TimeSpan.MinValue;
-
-                await mediaCapture.StopRecordAsync();
-
-                if (string.IsNullOrEmpty(_fileName))
-                {
-                    return;
-                }
-
-                var folder = ApplicationData.Current.LocalCacheFolder;
-                try
-                {
-                    var file = await folder.GetFileAsync(_fileName);
-                    if (file != null)
-                    {
-                        var cameraRoll = KnownFolders.CameraRoll;
-                        await file.MoveAsync(cameraRoll);
-
-                        var movedFile = await cameraRoll.GetFileAsync(_fileName);
-
-                        var vm = DataContext as VideoRecordViewModel;
-                        if (vm != null)
-                        {
-                            vm.FinishedRecording(movedFile);
-                            RecordedLengthText.Visibility = Visibility.Collapsed;
-                        }
-                    }
-                }
-                catch (FileNotFoundException)
-                {
-
-                }
-            }
-        }
-
         protected override void OnNavigatingFrom(NavigatingCancelEventArgs e)
         {
             base.OnNavigatingFrom(e);
@@ -386,6 +315,75 @@ namespace Viddy.Views
         private async void PinButton_OnClick(object sender, RoutedEventArgs e)
         {
             await SaveTileImage(RecordTile);
+        }
+
+        private string _fileName;
+        private async void RecordButtonChanged(object sender, RoutedEventArgs e)
+        {
+            var mediaCapture = _cameraInfoService.MediaCapture;
+            if (!_isRecording)
+            {
+                RecordedLengthText.Text = "00:00";
+                RecordedLengthText.Visibility = Visibility.Visible;
+
+                _isRecording = true;
+
+                _displayRequest.Request();
+
+                _fileName = string.Format("Viddy-{0}.mp4", DateTime.Now.ToString("yyyy-M-dd-HH-mm-ss"));
+                var folder = ApplicationData.Current.LocalCacheFolder;
+                var file = await folder.CreateFileAsync(_fileName, CreationCollisionOption.ReplaceExisting);
+
+                var profile = MediaEncodingProfile.CreateMp4(VideoEncodingQuality.Auto);
+
+                var mfVideoRotationGuid = new Guid("C380465D-2271-428C-9B83-ECEA3B4A85C1"); // MF_MT_VIDEO_ROTATION in Mfapi.h
+                var rotation = _cameraInfoService.MediaCapture.GetPreviewRotation();
+                int mfVideoRotation = ConvertVideoRotationToMFRotation(rotation);
+
+                profile.Video.Properties.Add(mfVideoRotationGuid, PropertyValue.CreateInt32(mfVideoRotation));
+
+                mediaCapture.StartRecordToStorageFileAsync(profile, file);
+                _recordingTimer.Start();
+            }
+            else
+            {
+                _recordingTimer.Stop();
+                _isRecording = false;
+                _displayRequest.Release();
+                _displayRequest = null;
+                _recordedDuration = TimeSpan.MinValue;
+
+                await mediaCapture.StopRecordAsync();
+
+                if (string.IsNullOrEmpty(_fileName))
+                {
+                    return;
+                }
+
+                var folder = ApplicationData.Current.LocalCacheFolder;
+                try
+                {
+                    var file = await folder.GetFileAsync(_fileName);
+                    if (file != null)
+                    {
+                        var cameraRoll = KnownFolders.CameraRoll;
+                        await file.MoveAsync(cameraRoll);
+
+                        var movedFile = await cameraRoll.GetFileAsync(_fileName);
+
+                        var vm = DataContext as VideoRecordViewModel;
+                        if (vm != null)
+                        {
+                            vm.FinishedRecording(movedFile);
+                            RecordedLengthText.Visibility = Visibility.Collapsed;
+                        }
+                    }
+                }
+                catch (FileNotFoundException)
+                {
+
+                }
+            }
         }
     }
 }
