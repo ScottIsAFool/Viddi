@@ -640,4 +640,19 @@
   <data name="ZeroFollowers" xml:space="preserve">
     <value>0 followers</value>
   </data>
+  <data name="NotificationChannelSubscription" xml:space="preserve">
+    <value>Channel subscription</value>
+  </data>
+  <data name="NotificationCommentReply" xml:space="preserve">
+    <value>Comment reply</value>
+  </data>
+  <data name="NotificationUserSubscription" xml:space="preserve">
+    <value>User subscription</value>
+  </data>
+  <data name="NotificationVideoComment" xml:space="preserve">
+    <value>Video comment</value>
+  </data>
+  <data name="NotificationVideoUpVote" xml:space="preserve">
+    <value>Video up vote</value>
+  </data>
 </root>
