@@ -304,14 +304,6 @@
                     </Grid>
                 </Border>
 
-                <TextBlock Text="00:01"
-                           Grid.Row="2"
-                           Grid.Column="0"
-                           Grid.ColumnSpan="2"
-                           FontSize="{StaticResource TextStyleExtraExtraLargeFontSize}"
-                           x:Name="RecordedLengthText"
-                           Visibility="Collapsed" />
-
                 <Border Grid.Column="0"
                         Grid.Row="2"
                         Grid.RowSpan="100"
@@ -351,9 +343,15 @@
                         </ListView.ItemTemplate>
                     </ListView>
                 </Border>
-
-
             </Grid>
+
+            <TextBlock Text="00:01"
+                       Grid.Row="1"
+                       VerticalAlignment="Bottom"
+                       FontSize="50"
+                       x:Name="RecordedLengthText"
+                       Visibility="Collapsed" 
+                       Margin="19,0,19,-12"/>
 
             <controls:CustomButton Grid.Row="2"
                                    Style="{StaticResource EmptyButtonStyle}"
