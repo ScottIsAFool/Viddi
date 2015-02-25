@@ -4,7 +4,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Common;
 using Viddy.Core;
-using Viddy.Core.Services;
+using Viddy.Localisation;
 using Viddy.Views.Account.Manage;
 using VidMePortable;
 using VidMePortable.Model.Requests;
@@ -15,13 +15,11 @@ namespace Viddy.ViewModel.Account.Manage
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
-        private readonly ILocalisationLoader _localisationLoader;
 
-        public AddAppViewModel(INavigationService navigationService, IVidMeClient vidMeClient, ILocalisationLoader localisationLoader)
+        public AddAppViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
         {
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
-            _localisationLoader = localisationLoader;
         }
 
         public string Name { get; set; }
@@ -79,7 +77,7 @@ namespace Viddy.ViewModel.Account.Manage
                     catch (Exception ex)
                     {
                         Log.ErrorException("SaveAppCommand", ex);
-                        ErrorMessage = _localisationLoader.GetString("ErrorAddAppGeneric");
+                        ErrorMessage = Resources.ErrorAddAppGeneric;
                     }
 
                     SetProgressBar();

@@ -655,4 +655,10 @@
   <data name="NotificationVideoUpVote" xml:space="preserve">
     <value>Video up vote</value>
   </data>
+  <data name="AnonymousAccount" xml:space="preserve">
+    <value>Anonymous account</value>
+  </data>
+  <data name="LabelCheckOutMyVideo" xml:space="preserve">
+    <value>Check out my video</value>
+  </data>
 </root>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="43233ScottLovegrove.ViddyBeta" Publisher="CN=43EE5435-230A-4364-8907-04B5F073D610" Version="1.1.0.4" />
+  <Identity Name="43233ScottLovegrove.ViddyBeta" Publisher="CN=43EE5435-230A-4364-8907-04B5F073D610" Version="1.1.0.7" />
   <mp:PhoneIdentity PhoneProductId="a70534d1-4390-4561-8683-7919944680cf" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Viddy Beta</DisplayName>

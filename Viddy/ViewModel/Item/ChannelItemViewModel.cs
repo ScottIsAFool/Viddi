@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Messaging;
 using JetBrains.Annotations;
 using Viddy.Core;
 using Viddy.Core.Services;
+using Viddy.Localisation;
 using Viddy.Messaging;
 using Viddy.Services;
 using Viddy.ViewModel.Account;
@@ -23,7 +24,6 @@ namespace Viddy.ViewModel.Item
         private readonly IVidMeClient _vidMeClient;
         private readonly INavigationService _navigationService;
         private readonly ITileService _tileService;
-        private readonly ILocalisationLoader _localisationLoader;
 
         public ChannelItemViewModel(Channel channel)
         {
@@ -31,7 +31,6 @@ namespace Viddy.ViewModel.Item
             _vidMeClient = SimpleIoc.Default.GetInstance<IVidMeClient>();
             _navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
             _tileService = SimpleIoc.Default.GetInstance<ITileService>();
-            _localisationLoader = SimpleIoc.Default.GetInstance<ILocalisationLoader>();
         }
 
         public Channel Channel { get; set; }
@@ -53,11 +52,11 @@ namespace Viddy.ViewModel.Item
 
                 if (Channel.FollowerCount == 0)
                 {
-                    return _localisationLoader.GetString("ZeroFollowers");
+                    return Resources.ZeroFollowers;
                 }
 
 
-                return Channel.FollowerCount > 1 ? string.Format(_localisationLoader.GetString("UserFollowers"), Channel.FollowerCount) : _localisationLoader.GetString("OneFollower");
+                return Channel.FollowerCount > 1 ? string.Format(Resources.UserFollowers, Channel.FollowerCount) : Resources.OneFollower;
             }
         }
 
@@ -73,7 +72,7 @@ namespace Viddy.ViewModel.Item
 
         public string UserVideoCount
         {
-            get { return Channel != null && Channel.VideoCount > 0 ? string.Format(_localisationLoader.GetString("UserVideoCount"), Channel.VideoCount) : null; }
+            get { return Channel != null && Channel.VideoCount > 0 ? string.Format(Resources.UserVideoCount, Channel.VideoCount) : null; }
         }
 
         public bool DisplayBio
@@ -98,7 +97,7 @@ namespace Viddy.ViewModel.Item
         {
             get
             {
-                return IsFollowedByMe ? _localisationLoader.GetString("Following") : _localisationLoader.GetString("Follow");
+                return IsFollowedByMe ? Resources.Following : Resources.Follow;
             }
         }
 

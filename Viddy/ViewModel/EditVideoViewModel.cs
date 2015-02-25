@@ -4,7 +4,7 @@ using Windows.ApplicationModel.DataTransfer;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Common;
-using Viddy.Core.Services;
+using Viddy.Localisation;
 using Viddy.Views.Account;
 using VidMePortable;
 using VidMePortable.Model;
@@ -17,17 +17,15 @@ namespace Viddy.ViewModel
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
         private readonly IMessageBoxService _messageBoxService;
-        private readonly ILocalisationLoader _localisationLoader;
         private DataTransferManager _manager;
 
         private Video _video;
 
-        public EditVideoViewModel(INavigationService navigationService, IVidMeClient vidMeClient, IMessageBoxService messageBoxService, ILocalisationLoader localisationLoader)
+        public EditVideoViewModel(INavigationService navigationService, IVidMeClient vidMeClient, IMessageBoxService messageBoxService)
         {
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
             _messageBoxService = messageBoxService;
-            _localisationLoader = localisationLoader;
 
             if (IsInDesignMode)
             {
@@ -83,7 +81,7 @@ namespace Viddy.ViewModel
                 return;
             }
 
-            _messageBoxService.ShowAsync(_localisationLoader.GetString("ErrorStillUploadingBack"), _localisationLoader.GetString("ErrorTitle"), new List<string> { _localisationLoader.GetString("Ok") });
+            _messageBoxService.ShowAsync(Resources.ErrorStillUploadingBack, Resources.ErrorTitle, new List<string> { Resources.Ok });
         }
 
         public RelayCommand SaveChangesCommand
@@ -150,7 +148,7 @@ namespace Viddy.ViewModel
                     }
                     if (IsUploading)
                     {
-                        _messageBoxService.ShowAsync(_localisationLoader.GetString("ErrorStillUploadingShare"), _localisationLoader.GetString("ErrorTitle"), new List<string> { _localisationLoader.GetString("Ok") });
+                        _messageBoxService.ShowAsync(Resources.ErrorStillUploadingShare, Resources.ErrorTitle, new List<string> { Resources.Ok });
                         return;
                     }
 
@@ -165,8 +163,8 @@ namespace Viddy.ViewModel
         {
             _manager.DataRequested -= ManagerOnDataRequested;
             var request = args.Request;
-            request.Data.Properties.Title = !string.IsNullOrEmpty(_video.Title) ? _video.Title : "Check out my video";
-            var message = "Check out my video";
+            request.Data.Properties.Title = !string.IsNullOrEmpty(_video.Title) ? _video.Title : Resources.LabelCheckOutMyVideo;
+            var message = Resources.LabelCheckOutMyVideo;
             request.Data.Properties.Description = message;
             request.Data.SetUri(new Uri(_video.FullUrl));
         }

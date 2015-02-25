@@ -1,15 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Windows.Foundation;
 using Windows.Foundation.Collections;
 using Windows.Security.Authentication.Web;
-using Windows.UI.Xaml;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Core;
 using Viddy.Core.Services;
+using Viddy.Localisation;
 using Viddy.Messaging;
 using Viddy.ViewModel.Item;
 using Viddy.Views;
@@ -25,14 +24,12 @@ namespace Viddy.ViewModel.Account
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
-        private readonly ILocalisationLoader _localisationLoader;
 
-        public AccountViewModel(INavigationService navigationService, IVidMeClient vidMeClient, AvatarViewModel avatar, ILocalisationLoader localisationLoader)
+        public AccountViewModel(INavigationService navigationService, IVidMeClient vidMeClient, AvatarViewModel avatar)
         {
             Avatar = avatar;
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
-            _localisationLoader = localisationLoader;
 
             if (IsInDesignMode)
             {
@@ -54,7 +51,7 @@ namespace Viddy.ViewModel.Account
 
         protected override void Reset()
         {
-            Name = AuthenticationService.Current.IsLoggedIn ? AuthenticationService.Current.LoggedInUser.Username : _localisationLoader.GetString("AnonymousAccount");
+            Name = AuthenticationService.Current.IsLoggedIn ? AuthenticationService.Current.LoggedInUser.Username : Resources.AnonymousAccount.ToLower();
             base.Reset();
         }
 

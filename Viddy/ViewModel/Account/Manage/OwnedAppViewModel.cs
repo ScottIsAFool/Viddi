@@ -1,20 +1,18 @@
 ﻿using Windows.ApplicationModel.DataTransfer;
 using GalaSoft.MvvmLight.Command;
-using Viddy.Core.Services;
+using Viddy.Localisation;
 using VidMePortable.Model;
 
 namespace Viddy.ViewModel.Account.Manage
 {
     public class OwnedAppViewModel : ViewModelBase
     {
-        private readonly ILocalisationLoader _localisationLoader;
         public Application Application { get; set; }
 
         private readonly DataTransferManager _manager;
 
-        public OwnedAppViewModel(Application application, ILocalisationLoader localisationLoader)
+        public OwnedAppViewModel(Application application)
         {
-            _localisationLoader = localisationLoader;
             Application = application;
 
             _manager = DataTransferManager.GetForCurrentView();
@@ -24,11 +22,11 @@ namespace Viddy.ViewModel.Account.Manage
         {
             _manager.DataRequested -= ManagerOnDataRequested;
             var request = args.Request;
-            request.Data.Properties.Title = string.Format(_localisationLoader.GetString("AppDetails"), Application.Name);
-            var message = string.Format("{0}: {1}\n{2}: {3}", _localisationLoader.GetString("NameText"), Application.Name, _localisationLoader.GetString("ClientId"), Application.ClientId);
+            request.Data.Properties.Title = string.Format(Resources.AppDetails, Application.Name);
+            var message = string.Format("{0}: {1}\n{2}: {3}", Resources.NameText, Application.Name, Resources.ClientId, Application.ClientId);
             if (!string.IsNullOrEmpty(Application.ClientSecret))
             {
-                message += string.Format("\n{0}: {1}", _localisationLoader.GetString("ClientSecret"), Application.ClientSecret);
+                message += string.Format("\n{0}: {1}", Resources.ClientSecret, Application.ClientSecret);
             }
             request.Data.Properties.Description = message;
             request.Data.SetText(message);

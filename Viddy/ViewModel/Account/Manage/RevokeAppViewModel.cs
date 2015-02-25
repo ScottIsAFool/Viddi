@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Core;
-using Viddy.Core.Services;
+using Viddy.Localisation;
 using VidMePortable;
 using VidMePortable.Model;
 
@@ -14,15 +14,13 @@ namespace Viddy.ViewModel.Account.Manage
         private readonly IVidMeClient _vidMeClient;
         private readonly ManageAppsAccessViewModel _manageAppsAccessViewModel;
         private readonly IMessageBoxService _messageBoxService;
-        private readonly ILocalisationLoader _localisationLoader;
         public Application Application { get; set; }
 
-        public RevokeAppViewModel(Application application, IVidMeClient vidMeClient, ManageAppsAccessViewModel manageAppsAccessViewModel, IMessageBoxService messageBoxService, ILocalisationLoader localisationLoader)
+        public RevokeAppViewModel(Application application, IVidMeClient vidMeClient, ManageAppsAccessViewModel manageAppsAccessViewModel, IMessageBoxService messageBoxService)
         {
             _vidMeClient = vidMeClient;
             _manageAppsAccessViewModel = manageAppsAccessViewModel;
             _messageBoxService = messageBoxService;
-            _localisationLoader = localisationLoader;
             Application = application;
         }
 
@@ -38,9 +36,9 @@ namespace Viddy.ViewModel.Account.Manage
                         if (app.ClientId == Constants.ClientId)
                         {
                             var result = await _messageBoxService.ShowAsync(
-                                _localisationLoader.GetString("RevokeViddyTokenBody"), 
-                                _localisationLoader.GetString("MessageAreYouSureTitle"),
-                                new List<string> { _localisationLoader.GetString("YesText"), _localisationLoader.GetString("NoText") });
+                                Resources.RevokeViddyTokenBody, 
+                                Resources.MessageAreYouSureTitle,
+                                new List<string> { Resources.YesText, Resources.NoText });
                             if (result == 1)
                             {
                                 return;

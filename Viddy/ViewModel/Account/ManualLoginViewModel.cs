@@ -3,6 +3,7 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Common;
 using Viddy.Core.Services;
+using Viddy.Localisation;
 using Viddy.Views.Account;
 using VidMePortable;
 using VidMePortable.Model;
@@ -13,13 +14,11 @@ namespace Viddy.ViewModel.Account
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
-        private readonly ILocalisationLoader _localisationLoader;
 
-        public ManualLoginViewModel(INavigationService navigationService, IVidMeClient vidMeClient, ILocalisationLoader localisationLoader)
+        public ManualLoginViewModel(INavigationService navigationService, IVidMeClient vidMeClient)
         {
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
-            _localisationLoader = localisationLoader;
         }
 
         public string Username { get; set; }
@@ -71,12 +70,12 @@ namespace Viddy.ViewModel.Account
                     catch (VidMeException vex)
                     {
                         Log.ErrorException("SignInCommand", vex);
-                        ErrorMessage = vex.Error != null && vex.Error.Code == "invalid_password" ? _localisationLoader.GetString("ErrorSigninUsernamePassword") : _localisationLoader.GetString("ErrorSigninGeneric");
+                        ErrorMessage = vex.Error != null && vex.Error.Code == "invalid_password" ? Resources.ErrorSigninUsernamePassword : Resources.ErrorSigninGeneric;
                     }
                     catch (Exception ex)
                     {
                         Log.ErrorException("SignInCommand", ex);
-                        ErrorMessage = _localisationLoader.GetString("ErrorSigninGeneric");
+                        ErrorMessage = Resources.ErrorSigninGeneric;
                     }
 
                     SetProgressBar();

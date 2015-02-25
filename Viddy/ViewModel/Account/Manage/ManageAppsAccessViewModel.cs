@@ -38,7 +38,7 @@ namespace Viddy.ViewModel.Account.Manage
                         Organization = "Ferret Labs",
                         Website = "http://ferretlabs.com",
                         Description = "VidMe app for Windows Phone 8.1"
-                    }, _vidMeClient, this, _messageBoxService, new LocalisationLoader())
+                    }, _vidMeClient, this, _messageBoxService)
                 };
             }
         }
@@ -66,7 +66,7 @@ namespace Viddy.ViewModel.Account.Manage
             {
                 var response = await _vidMeClient.GetAuthorisedAppsAsync();
 
-                Items = new ObservableCollection<RevokeAppViewModel>(response.Select(x => new RevokeAppViewModel(x, _vidMeClient, this, _messageBoxService, _localisationLoader)));
+                Items = new ObservableCollection<RevokeAppViewModel>(response.Select(x => new RevokeAppViewModel(x, _vidMeClient, this, _messageBoxService)));
 
                 _appsLoaded = true;
             }

@@ -7,7 +7,7 @@ using Windows.Storage;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using ScottIsAFool.WindowsPhone.Logging;
-using Viddy.Core.Services;
+using Viddy.Localisation;
 using Viddy.Services;
 using Viddy.Views;
 
@@ -18,18 +18,16 @@ namespace Viddy.ViewModel
         private readonly INavigationService _navigationService;
         private readonly ILauncherService _launcherService;
         private readonly IEmailComposeService _emailCompose;
-        private readonly ILocalisationLoader _localisationLoader;
         private readonly ReviewService _reviewService;
         private readonly PackageVersion _version;
 
         private ShareType _shareType;
 
-        public AboutViewModel(INavigationService navigationService, ILauncherService launcherService, IEmailComposeService emailCompose, ILocalisationLoader localisationLoader, ReviewService reviewService)
+        public AboutViewModel(INavigationService navigationService, ILauncherService launcherService, IEmailComposeService emailCompose, ReviewService reviewService)
         {
             _navigationService = navigationService;
             _launcherService = launcherService;
             _emailCompose = emailCompose;
-            _localisationLoader = localisationLoader;
             _reviewService = reviewService;
             _version = Package.Current.Id.Version;
         }
@@ -156,9 +154,9 @@ namespace Viddy.ViewModel
 
         private void TellAFriend(DataRequest request)
         {
-            request.Data.Properties.Title = _localisationLoader.GetString("TellAFriendTitle");
+            request.Data.Properties.Title = Resources.TellAFriendTitle;
 
-            var messageTemplate = _localisationLoader.GetString("TellAFriendBody");
+            var messageTemplate = Resources.TellAFriendBody;
             var message = string.Format(messageTemplate, CurrentApp.LinkUri);
 
             request.Data.Properties.Description = message;

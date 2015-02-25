@@ -6,8 +6,8 @@ using Windows.Devices.Geolocation;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using Viddy.Core.Extensions;
-using Viddy.Core.Services;
 using Viddy.Foursquare;
+using Viddy.Localisation;
 using Viddy.Model;
 using Viddy.Views;
 
@@ -17,16 +17,14 @@ namespace Viddy.ViewModel
     {
         private readonly ISettingsService _settingsService;
         private readonly INavigationService _navigationService;
-        private readonly ILocalisationLoader _localisationLoader;
         private readonly FoursquareClient _foursquareClient;
 
         private Geopoint _curentLocation;
 
-        public FoursqureViewModel(ISettingsService settingsService, INavigationService navigationService, ILocalisationLoader localisationLoader)
+        public FoursqureViewModel(ISettingsService settingsService, INavigationService navigationService)
         {
             _settingsService = settingsService;
             _navigationService = navigationService;
-            _localisationLoader = localisationLoader;
             _foursquareClient = new FoursquareClient();
         }
 
@@ -34,16 +32,16 @@ namespace Viddy.ViewModel
         {
             if (!_settingsService.LocationIsOn)
             {
-                LocationText = _localisationLoader.GetString("LocationTurnLocationOn");
+                LocationText = Resources.LocationTurnLocationOn;
                 return;
             }
 
-            LocationText = _localisationLoader.GetString("LocationFindingYou");
+            LocationText = Resources.LocationFindingYou;
 
             var position = await GetCurrentLocation();
             if (position == null)
             {
-                LocationText = _localisationLoader.GetString("LocationFailedToFindYou");
+                LocationText = Resources.LocationFailedToFindYou;
                 return;
             }
 
@@ -52,13 +50,13 @@ namespace Viddy.ViewModel
             var venues = await _foursquareClient.GetVenuesAsync(_curentLocation.Position.Longitude, _curentLocation.Position.Latitude);
             if (venues.IsNullOrEmpty())
             {
-                LocationText = _localisationLoader.GetString("LocationNothingNearby");
+                LocationText = Resources.LocationNothingNearby;
                 return;
             }
 
             Locations = venues;
             SelectedVenue = Locations.FirstOrDefault();
-            LocationText = SelectedVenue != null ? SelectedVenue.Name : _localisationLoader.GetString("LocationAddLocation");
+            LocationText = SelectedVenue != null ? SelectedVenue.Name : Resources.LocationAddLocation;
             ShowVenues = true;
         }
 
@@ -153,7 +151,7 @@ namespace Viddy.ViewModel
                 return new RelayCommand(() =>
                 {
                     SelectedVenue = null;
-                    LocationText = _localisationLoader.GetString("LocationAddLocation");
+                    LocationText = Resources.LocationAddLocation;
                     ShowVenues = false;
                 }, () => _settingsService.LocationIsOn);
             }

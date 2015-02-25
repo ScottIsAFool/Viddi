@@ -5,6 +5,7 @@ using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Core;
 using Viddy.Core.Services;
+using Viddy.Localisation;
 using Viddy.Messaging;
 using Viddy.Model;
 using Viddy.Views.Account;
@@ -18,7 +19,6 @@ namespace Viddy.ViewModel.Item
         private readonly VideoItemViewModel _videoItemViewModel;
         private readonly IVidMeClient _vidMeClient;
         private readonly INavigationService _navigationService;
-        private readonly ILocalisationLoader _localisationLoader;
 
         public CommentViewModel(Comment comment, VideoItemViewModel videoItemViewModel)
         {
@@ -26,7 +26,6 @@ namespace Viddy.ViewModel.Item
             Comment = comment;
             _vidMeClient = SimpleIoc.Default.GetInstance<IVidMeClient>();
             _navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
-            _localisationLoader = SimpleIoc.Default.GetInstance<ILocalisationLoader>();
 
             if (IsInDesignMode)
             {
@@ -81,7 +80,7 @@ namespace Viddy.ViewModel.Item
 
         public string Username
         {
-            get { return Comment != null && Comment.User != null ? Comment.User.Username : _localisationLoader.GetString("UnknownUser"); }
+            get { return Comment != null && Comment.User != null ? Comment.User.Username : Resources.UnknownUser; }
         }
 
         public RelayCommand DeleteCommand

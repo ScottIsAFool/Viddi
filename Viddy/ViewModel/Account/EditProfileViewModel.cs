@@ -1,5 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Command;
 using Viddy.Core.Services;
+using Viddy.Localisation;
 using Viddy.Services;
 using VidMePortable;
 using VidMePortable.Model;
@@ -10,14 +11,12 @@ namespace Viddy.ViewModel.Account
     {
         private readonly IVidMeClient _vidMeClient;
         private readonly IToastService _toastService;
-        private readonly ILocalisationLoader _localisationLoader;
 
-        public EditProfileViewModel(IVidMeClient vidMeClient, AvatarViewModel avatarViewModel, IToastService toastService, ILocalisationLoader localisationLoader)
+        public EditProfileViewModel(IVidMeClient vidMeClient, AvatarViewModel avatarViewModel, IToastService toastService)
         {
             Avatar = avatarViewModel;
             _vidMeClient = vidMeClient;
             _toastService = toastService;
-            _localisationLoader = localisationLoader;
         }
 
         public AvatarViewModel Avatar { get; set; }
@@ -71,7 +70,7 @@ namespace Viddy.ViewModel.Account
 
                         NewPassword = CurrentPassword = string.Empty;
 
-                        _toastService.Show(_localisationLoader.GetString("MessageChangesSaved"));
+                        _toastService.Show(Resources.MessageChangesSaved);
                     }
                     catch (VidMeException ex)
                     {
@@ -81,7 +80,7 @@ namespace Viddy.ViewModel.Account
                         }
                         else
                         {
-                            ErrorMessage = _localisationLoader.GetString("ErrorUpdatingProfile");
+                            ErrorMessage = Resources.ErrorUpdatingProfile;
                         }
                     }
 

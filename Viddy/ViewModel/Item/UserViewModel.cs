@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Messaging;
 using JetBrains.Annotations;
 using Viddy.Core;
 using Viddy.Core.Services;
+using Viddy.Localisation;
 using Viddy.Messaging;
 using Viddy.Services;
 using Viddy.ViewModel.Account;
@@ -22,7 +23,6 @@ namespace Viddy.ViewModel.Item
         private readonly IVidMeClient _vidMeClient;
         private readonly ITileService _tileService;
         private readonly INavigationService _navigationService;
-        private readonly ILocalisationLoader _localisationLoader;
 
         public User User { get; set; }
 
@@ -32,7 +32,6 @@ namespace Viddy.ViewModel.Item
             _vidMeClient = SimpleIoc.Default.GetInstance<IVidMeClient>();
             _tileService = SimpleIoc.Default.GetInstance<ITileService>();
             _navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
-            _localisationLoader = SimpleIoc.Default.GetInstance<ILocalisationLoader>();
         }
 
         private FollowersViewModel _followers;
@@ -64,11 +63,11 @@ namespace Viddy.ViewModel.Item
 
                 if (User.FollowerCount == 0)
                 {
-                    return _localisationLoader.GetString("ZeroFollowers");
+                    return Resources.ZeroFollowers;
                 }
 
 
-                return User.FollowerCount > 1 ? string.Format(_localisationLoader.GetString("UserFollowers"), User.FollowerCount) : _localisationLoader.GetString("OneFollower");
+                return User.FollowerCount > 1 ? string.Format(Resources.UserFollowers, User.FollowerCount) : Resources.OneFollower;
             }
         }
 
@@ -81,7 +80,7 @@ namespace Viddy.ViewModel.Item
                        && !string.IsNullOrEmpty(User.VideoViews)
                        && double.TryParse(User.VideoViews, out views)
                        && views > 0
-                    ? string.Format(_localisationLoader.GetString("UserPlays"), views)
+                    ? string.Format(Resources.UserPlays, views)
                     : null;
             }
         }
@@ -92,7 +91,7 @@ namespace Viddy.ViewModel.Item
         public string Name { get { return User != null ? User.Username : null; } }
         public string UserVideoCount
         {
-            get { return User != null && User.VideoCount > 0 ? string.Format(_localisationLoader.GetString("UserVideoCount"), User.VideoCount) : null; }
+            get { return User != null && User.VideoCount > 0 ? string.Format(Resources.UserVideoCount, User.VideoCount) : null; }
         }
 
         public bool DisplayBio
@@ -120,10 +119,10 @@ namespace Viddy.ViewModel.Item
                 if (User != null
                     && User.UserId == AuthenticationService.Current.LoggedInUserId)
                 {
-                    return _localisationLoader.GetString("ThisIsYou");
+                    return Resources.ThisIsYou;
                 }
 
-                return IsFollowedByMe ? _localisationLoader.GetString("Following") : _localisationLoader.GetString("Follow");
+                return IsFollowedByMe ? Resources.Following : Resources.Follow;
             }
         }
 

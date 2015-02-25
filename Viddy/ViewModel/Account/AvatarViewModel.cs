@@ -7,6 +7,7 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Core;
 using Viddy.Core.Services;
+using Viddy.Localisation;
 using Viddy.Services;
 using VidMePortable;
 using VidMePortable.Model;
@@ -15,18 +16,15 @@ namespace Viddy.ViewModel.Account
 {
     public class AvatarViewModel : ViewModelBase
     {
-        private const string DefaultAvatar = "/Assets/Defaults/UserLoginDefault.png";
         private readonly IVidMeClient _vidMeClient;
         private readonly IToastService _toastService;
-        private readonly ILocalisationLoader _localisationLoader;
 
         private PictureType _pictureType;
 
-        public AvatarViewModel(IVidMeClient vidMeClient, IToastService toastService, ILocalisationLoader localisationLoader)
+        public AvatarViewModel(IVidMeClient vidMeClient, IToastService toastService)
         {
             _vidMeClient = vidMeClient;
             _toastService = toastService;
-            _localisationLoader = localisationLoader;
         }
 
         public void ChangeAvatar()
@@ -126,7 +124,7 @@ namespace Viddy.ViewModel.Account
                         {
                             if (properties.Width < 800 || properties.Height < 600)
                             {
-                                _toastService.Show(_localisationLoader.GetString("ErrorImageTooSmall"));
+                                _toastService.Show(Resources.ErrorImageTooSmall);
                                 return;
                             }
                         }

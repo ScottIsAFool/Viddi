@@ -11,6 +11,7 @@ using NotificationsExtensions.ToastContent;
 using Viddy.Core;
 using Viddy.Core.Extensions;
 using Viddy.Core.Services;
+using Viddy.Localisation;
 using VidMePortable;
 using VidMePortable.Model;
 
@@ -20,7 +21,6 @@ namespace Viddy.BackgroundTask
     {
         private IVidMeClient _vidMeClient;
         private readonly IApplicationSettingsService _settingsService = new ApplicationSettingsService();
-        private readonly ILocalisationLoader _localisationLoader = new LocalisationLoader();
 
         private List<Notification> _notifications;
         public async void Run(IBackgroundTaskInstance taskInstance)
@@ -155,7 +155,7 @@ namespace Viddy.BackgroundTask
             switch (type)
             {
                 case NotificationType.ChannelSubscribed:
-                    toastNotification.TextHeading.Text = _localisationLoader.GetString("NotificationChannelSubscription");
+                    toastNotification.TextHeading.Text = Resources.NotificationChannelSubscription;
 
                     var channel = notification.Channel;
                     if (channel != null)
@@ -164,7 +164,7 @@ namespace Viddy.BackgroundTask
                     }
                     break;
                 case NotificationType.UserSubscribed:
-                    toastNotification.TextHeading.Text = _localisationLoader.GetString("NotificationUserSubscription");
+                    toastNotification.TextHeading.Text = Resources.NotificationUserSubscription;
                     var user = notification.User;
                     if (user != null)
                     {
@@ -174,9 +174,9 @@ namespace Viddy.BackgroundTask
                 case NotificationType.CommentReply:
                 case NotificationType.VideoComment:
                 case NotificationType.VideoUpVoted:
-                    if (type == NotificationType.CommentReply) toastNotification.TextHeading.Text = _localisationLoader.GetString("NotificationCommentReply");
-                    else if (type == NotificationType.VideoComment) toastNotification.TextHeading.Text = _localisationLoader.GetString("NotificationVideoComment");
-                    else if (type == NotificationType.VideoUpVoted) toastNotification.TextHeading.Text = _localisationLoader.GetString("NotificationVideoUpVote");
+                    if (type == NotificationType.CommentReply) toastNotification.TextHeading.Text = Resources.NotificationCommentReply;
+                    else if (type == NotificationType.VideoComment) toastNotification.TextHeading.Text = Resources.NotificationVideoComment;
+                    else if (type == NotificationType.VideoUpVoted) toastNotification.TextHeading.Text = Resources.NotificationVideoUpVote;
 
                     var video = notification.Video;
                     if (video != null)
