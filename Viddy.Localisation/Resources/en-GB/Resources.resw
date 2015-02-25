@@ -664,4 +664,7 @@
   <data name="ProblemLoadingContent.Text" xml:space="preserve">
     <value>D'oh, there was a problem loading your content. Might be worth giving it another go.</value>
   </data>
+  <data name="ErrorOneFileAtATime" xml:space="preserve">
+    <value>Viddy can only accept one file at a time</value>
+  </data>
 </root>

@@ -359,8 +359,7 @@ namespace Viddy
                 var files = await shareOperation.Data.GetStorageItemsAsync();
                 if (files.Count > 1)
                 {
-                    // TODO: Display error message
-                    shareOperation.ReportError("Viddy can only accept one file at a time");
+                    shareOperation.ReportError(Localisation.Resources.ErrorOneFileAtATime);
                     return;
                 }
 
