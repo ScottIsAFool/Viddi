@@ -34,7 +34,7 @@ namespace Viddy.ViewModel
         {
             if (!_settingsService.LocationIsOn)
             {
-                LocationText = _localisationLoader.GetString("Turn location on");
+                LocationText = _localisationLoader.GetString("LocationTurnLocationOn");
                 return;
             }
 
