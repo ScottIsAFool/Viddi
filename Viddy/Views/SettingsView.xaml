@@ -108,6 +108,12 @@
                 </Setter.Value>
             </Setter>
         </Style>
+        <Style TargetType="TextBlock"
+               BasedOn="{StaticResource BodyTextBlockStyle}"
+               x:Key="HeaderStyle">
+            <Setter Property="FontSize"
+                    Value="{StaticResource TextStyleExtraLargeFontSize}"/>
+        </Style>
     </views:BasePage.Resources>
 
     <Grid>
@@ -127,7 +133,7 @@
                     <StackPanel Orientation="Vertical">
                         <TextBlock Text="THEME"
                                    x:Uid="GroupTheme"
-                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   Style="{StaticResource HeaderStyle}"
                                    FontWeight="Bold"
                                    Margin="0,0,0,12" />
                         <TextBlock Text="You have the choice of two themes in which to view Viddy, which would you like?"
@@ -173,9 +179,9 @@
                                 Margin="0,12">
                         <TextBlock Text="LOCATION"
                                    x:Uid="GroupLocation"
-                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   Style="{StaticResource HeaderStyle}"
                                    FontWeight="Bold"
-                                   Margin="0,0,0,12" />
+                                   Margin="0,12" />
                         <TextBlock Text="This app can allow you to attach your location to the videos you upload or find videos in your area, if you don't want this, you can easily turn it off."
                                    x:Uid="LabelLocationDescription"
                                    Style="{StaticResource BodyTextBlockStyle}"
@@ -199,9 +205,9 @@
                                 Margin="0,12">
                         <TextBlock Text="NOTIFICATIONS"
                                    x:Uid="GroupNotifications"
-                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   Style="{StaticResource HeaderStyle}"
                                    FontWeight="Bold"
-                                   Margin="0,0,0,12" />
+                                   Margin="0,12" />
                         <TextBlock Text="Would you like this app to check for new notifications in the background? If so, you can set how often you'd like the app to check."
                                    x:Uid="LabelNotificationsDescription"
                                    Style="{StaticResource BodyTextBlockStyle}"
