@@ -14,12 +14,16 @@ namespace Viddy.Views
         public SearchView()
         {
             InitializeComponent();
-            Loaded += OnLoaded;
         }
 
-        private void OnLoaded(object sender, RoutedEventArgs routedEventArgs)
+        protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-            SearchBox.Focus(FocusState.Programmatic);
+            if (e.NavigationMode != NavigationMode.Back)
+            {
+                SearchBox.Focus(FocusState.Programmatic);                
+            }
+
+            base.OnNavigatedTo(e);
         }
 
         protected override void OnNavigatedFrom(NavigationEventArgs e)
