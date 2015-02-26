@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
 using Viddy.Common;
-using Viddy.Core.Extensions;
 using Viddy.Core.Services;
 using Viddy.Views;
 using VidMePortable;
@@ -17,16 +16,14 @@ namespace Viddy.ViewModel.Account.Manage
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
         private readonly IMessageBoxService _messageBoxService;
-        private readonly ILocalisationLoader _localisationLoader;
 
         private bool _appsLoaded;
 
-        public ManageAppsAccessViewModel(INavigationService navigationService, IVidMeClient vidMeClient, IMessageBoxService messageBoxService, ILocalisationLoader localisationLoader)
+        public ManageAppsAccessViewModel(INavigationService navigationService, IVidMeClient vidMeClient, IMessageBoxService messageBoxService)
         {
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
             _messageBoxService = messageBoxService;
-            _localisationLoader = localisationLoader;
 
             if (IsInDesignMode)
             {
