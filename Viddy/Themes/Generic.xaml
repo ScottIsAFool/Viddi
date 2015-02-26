@@ -182,7 +182,8 @@
             <Setter.Value>
                 <DataTemplate>
                     <TextBlock Text="Nothing to see here"
-                               Style="{StaticResource BodyTextBlockStyle}" />
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Margin="19" />
                 </DataTemplate>
             </Setter.Value>
         </Setter>
@@ -226,7 +227,8 @@
             <Setter.Value>
                 <DataTemplate>
                     <TextBlock Text="Error loading content."
-                               Style="{StaticResource BodyTextBlockStyle}" />
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Margin="19" />
                 </DataTemplate>
             </Setter.Value>
         </Setter>
@@ -275,47 +277,54 @@
                                           IsDeferredScrollingEnabled="{TemplateBinding ScrollViewer.IsDeferredScrollingEnabled}"
                                           BringIntoViewOnFocusChange="{TemplateBinding ScrollViewer.BringIntoViewOnFocusChange}"
                                           AutomationProperties.AccessibilityView="Raw">
-                                <Grid x:Name="LoadFailedGrid"
-                                      Tag="{TemplateBinding LoadFailed}">
-                                    <Grid Visibility="{Binding Tag, ElementName=LoadFailedGrid, Converter={StaticResource InverseVisibilityConverter}}">
-                                        <Grid Tag="{TemplateBinding IsInitialising}"
-                                              x:Name="ContainerGrid">
-                                            <Grid x:Name="InitialisedContent"
-                                                  Tag="{TemplateBinding IsEmpty}"
-                                                  Visibility="{Binding Tag, ElementName=ContainerGrid, Converter={StaticResource InverseVisibilityConverter}}">
-                                                <ItemsPresenter Header="{TemplateBinding Header}"
-                                                                HeaderTemplate="{TemplateBinding HeaderTemplate}"
-                                                                HeaderTransitions="{TemplateBinding HeaderTransitions}"
-                                                                Footer="{TemplateBinding Footer}"
-                                                                FooterTemplate="{TemplateBinding FooterTemplate}"
-                                                                FooterTransitions="{TemplateBinding FooterTransitions}"
-                                                                Padding="{TemplateBinding Padding}" />
-                                                <ContentControl ContentTemplate="{TemplateBinding EmptyContent}"
-                                                                HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                                VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                                HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                                                VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                                                Style="{TemplateBinding EmptyContentStyle}"
-                                                                Visibility="{Binding Tag, ElementName=InitialisedContent, Converter={StaticResource VisibilityConverter}}" />
-                                            </Grid>
-                                        </Grid>
-                                        <Grid x:Name="InitialisingContent"
-                                              Visibility="{Binding Tag, ElementName=ContainerGrid, Converter={StaticResource VisibilityConverter}}">
-                                            <ContentControl ContentTemplate="{TemplateBinding InitialisingContent}"
-                                                            HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                                            VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
-                                                            HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                                            VerticalAlignment="{TemplateBinding VerticalAlignment}"
-                                                            Style="{TemplateBinding InitialisingContentStyle}"
-                                                            DataContext="{TemplateBinding IsInitialising}" />
-                                        </Grid>
-                                    </Grid>
-                                    <Grid Visibility="{Binding Tag, ElementName=LoadFailedGrid, Converter={StaticResource VisibilityConverter}}">
+                                <Grid x:Name="LoadFailedGrid">
+                                    <Grid x:Name="InitialisedContent">
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="Auto" />
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
+                                        <ContentControl Content="{TemplateBinding Header}"
+                                                        ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                                        ContentTransitions="{TemplateBinding HeaderTransitions}"
+                                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                        x:Name="HeaderContent"/>
+
+                                        <ItemsPresenter Padding="{TemplateBinding Padding}"
+                                                        Grid.Row="1"
+                                                        x:Name="ItemsPresenter"/>
+                                        <ContentControl ContentTemplate="{TemplateBinding EmptyContent}"
+                                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                                        Style="{TemplateBinding EmptyContentStyle}"
+                                                        Visibility="{Binding Tag, ElementName=InitialisedContent, Converter={StaticResource VisibilityConverter}}"
+                                                        Grid.Row="1"
+                                                        x:Name="EmptyContentControl" />
                                         <ContentControl ContentTemplate="{TemplateBinding LoadFailedContent}"
                                                         HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
                                                         VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
                                                         HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
-                                                        VerticalAlignment="{TemplateBinding VerticalAlignment}" />
+                                                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                                        Grid.Row="1"
+                                                        x:Name="LoadFailedContentControl" />
+                                        <ContentControl ContentTemplate="{TemplateBinding InitialisingContent}"
+                                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                        VerticalContentAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                        HorizontalAlignment="{TemplateBinding HorizontalAlignment}"
+                                                        VerticalAlignment="{TemplateBinding VerticalAlignment}"
+                                                        Style="{TemplateBinding InitialisingContentStyle}"
+                                                        DataContext="{TemplateBinding IsInitialising}"
+                                                        Grid.Row="1"
+                                                        x:Name="InitialisingContentControl" />
+
+                                        <ContentControl Content="{TemplateBinding Footer}"
+                                                        ContentTemplate="{TemplateBinding FooterTemplate}"
+                                                        ContentTransitions="{TemplateBinding FooterTransitions}"
+                                                        HorizontalContentAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                        Grid.Row="2" 
+                                                        x:Name="FooterContent"/>
                                     </Grid>
                                 </Grid>
                             </ScrollViewer>
