@@ -6,7 +6,6 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
 using Viddy.Core;
-using Viddy.Core.Extensions;
 using Viddy.Views.Account.Manage;
 using VidMePortable;
 using VidMePortable.Model;
@@ -33,8 +32,6 @@ namespace Viddy.ViewModel.Account.Manage
                         Name = "Viddy for Windows Phone"
                     })
                 };
-
-                IsEmpty = true;
             }
         }
 
@@ -62,7 +59,6 @@ namespace Viddy.ViewModel.Account.Manage
                 var response = await _vidMeClient.GetOwnedAppsAsync();
 
                 Items = new ObservableCollection<OwnedAppViewModel>(response.Select(x => new OwnedAppViewModel(x)));
-                IsEmpty = Items.IsNullOrEmpty();
 
                 ItemsLoaded = true;
             }

@@ -40,7 +40,7 @@
         <Grid Grid.Row="1"
               Margin="0,12,0,0">
             <controls:LoadingListView ItemsSource="{Binding Items}"
-                                      IsEmpty="{Binding IsEmpty}"
+                                      
                                       IsInitialising="{Binding ProgressIsVisible}"
                                       LoadFailed="{Binding HasErrors}"
                                       LoadFailedContent="{StaticResource LoadFailedTemplate}">

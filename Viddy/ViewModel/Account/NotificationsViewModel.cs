@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Extensions;
-using Cimbalino.Toolkit.Services;
 using Viddy.Core.Extensions;
 using Viddy.Services;
 using Viddy.ViewModel.Item;
@@ -13,13 +12,11 @@ namespace Viddy.ViewModel.Account
 {
     public class NotificationsViewModel : LoadingItemsViewModel<NotificationItemViewModel>
     {
-        private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
         private readonly INotificationService _notificationService;
 
-        public NotificationsViewModel(INavigationService navigationService, IVidMeClient vidMeClient, INotificationService notificationService)
+        public NotificationsViewModel(IVidMeClient vidMeClient, INotificationService notificationService)
         {
-            _navigationService = navigationService;
             _vidMeClient = vidMeClient;
             _notificationService = notificationService;
         }
@@ -59,7 +56,7 @@ namespace Viddy.ViewModel.Account
                     var allNotifications = response.Notifications.Select(x => new NotificationItemViewModel(x)).ToList();
 
                     Items.AddRange(allNotifications);
-                    //CanLoadMore = Items != null && Items.Count < response.page
+                    CanLoadMore = Items != null && Items.Count < response.Page.Total;
 
                     ItemsLoaded = true;
                 }
@@ -70,7 +67,6 @@ namespace Viddy.ViewModel.Account
                 HasErrors = true;
             }
 
-            IsEmpty = Items.IsNullOrEmpty();
             SetProgressBar();
         }
     }

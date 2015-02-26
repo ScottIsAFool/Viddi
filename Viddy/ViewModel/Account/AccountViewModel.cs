@@ -33,10 +33,6 @@ namespace Viddy.ViewModel.Account
 
             if (IsInDesignMode)
             {
-                IsEmpty = true;
-            }
-            else
-            {
                 AuthenticationService.Current.UserSignedIn += UserStateChanged;
                 AuthenticationService.Current.UserSignedOut += UserStateChanged;
                 Reset();

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using Viddy.Core.Extensions;
 using Viddy.Model;
-using Viddy.ViewModel;
 
 namespace Viddy.Extensions
 {

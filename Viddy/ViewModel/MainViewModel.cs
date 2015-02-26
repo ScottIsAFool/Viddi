@@ -20,11 +20,7 @@ namespace Viddy.ViewModel
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
 
-            if (IsInDesignMode)
-            {
-                IsEmpty = true;
-            }
-            else
+            if (!IsInDesignMode)
             {
                 AuthenticationService.Current.UserSignedOut += UserStateChanged;
                 AuthenticationService.Current.UserSignedIn += UserStateChanged;
@@ -41,10 +37,6 @@ namespace Viddy.ViewModel
             if (AuthenticationService.Current.IsLoggedIn)
             {
                 await base.PageLoaded();
-            }
-            else
-            {
-                IsEmpty = true;
             }
         }
 

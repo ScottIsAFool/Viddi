@@ -167,7 +167,6 @@
                                           ItemsSource="{Binding Video.Items}"
                                           ItemTemplate="{StaticResource CommentTemplate}"
                                           Margin="0,12,0,0"
-                                          IsEmpty="{Binding Video.IsEmpty}"
                                           IsInitialising="{Binding Video.ProgressIsVisible}">
                     <controls:LoadingListView.EmptyContent>
                         <DataTemplate>

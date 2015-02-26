@@ -156,7 +156,7 @@
         <Grid Grid.Row="1">
             <localControls:LoadingListView ItemsSource="{Binding Items}"
                                            IsInitialising="{Binding ProgressIsVisible}"
-                                           IsEmpty="{Binding IsEmpty}"
+                                           x:Name="VideoList"
                                            ItemTemplate="{StaticResource VideoTemplate}"
                                            LoadFailed="{Binding HasErrors}"
                                            LoadFailedContent="{StaticResource LoadFailedTemplate}">
@@ -212,7 +212,7 @@
                         <TextBlock Text="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource HeaderConverter}}"
                                    Style="{StaticResource GroupHeaderTextBlockStyle}"
                                    Margin="19,0,19,6"
-                                   Visibility="{Binding IsEmpty, Converter={StaticResource InverseVisibilityConverter}}" />
+                                   Visibility="{Binding IsEmpty, ElementName=VideoList, Converter={StaticResource InverseVisibilityConverter}}" />
                     </DataTemplate>
                 </ListView.HeaderTemplate>
             </localControls:LoadingListView>

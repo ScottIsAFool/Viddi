@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Extensions;
-using Viddy.Core.Extensions;
 using Viddy.ViewModel.Item;
 using VidMePortable;
 
@@ -46,7 +45,6 @@ namespace Viddy.ViewModel
 
                     Items.AddRange(response.Select(x => new ChannelItemViewModel(x)));
 
-                    IsEmpty = Items.IsNullOrEmpty();
                     CanLoadMore = false;
                     ItemsLoaded = true;
                 }

@@ -76,7 +76,6 @@ namespace Viddy.ViewModel.Account.Manage
                 HasErrors = true;
             }
 
-            IsEmpty = Items.IsNullOrEmpty();
             SetProgressBar();
         }
     }

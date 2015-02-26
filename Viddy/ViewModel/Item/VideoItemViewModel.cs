@@ -464,7 +464,6 @@ namespace Viddy.ViewModel.Item
 
                 Items.AddRange(response.Comments.Select(x => new CommentViewModel(x, this)));
 
-                IsEmpty = Items.IsNullOrEmpty();
                 CanLoadMore = response.Page.Total > Items.Count;
                 ItemsLoaded = true;
             }

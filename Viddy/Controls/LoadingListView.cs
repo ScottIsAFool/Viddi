@@ -1,6 +1,8 @@
-﻿using Windows.UI.Xaml;
+﻿using System;
+using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using Viddy.Core.Extensions;
 using WinRTXamlToolkit.Controls.Extensions;
 
 namespace Viddy.Controls
@@ -127,11 +129,11 @@ namespace Viddy.Controls
             DefaultStyleKey = typeof(LoadingListView);
         }
 
-        public void GoToTop()
+        public async void GoToTop()
         {
             if (_scrollViewer != null)
             {
-                _scrollViewer.ScrollToVerticalOffsetWithAnimation(0);
+                await _scrollViewer.ScrollToVerticalOffsetWithAnimation(0);
             }
         }
 
@@ -160,6 +162,12 @@ namespace Viddy.Controls
             ShowParts();
         }
 
+        protected override void OnItemsChanged(object e)
+        {
+            base.OnItemsChanged(e);
+            IsEmpty = Items.IsNullOrEmpty();
+        }
+
         private static void StateChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
         {
             var listview = sender as LoadingListView;
@@ -171,9 +179,11 @@ namespace Viddy.Controls
 
         private void ShowParts()
         {
+            IsEmpty = Items.IsNullOrEmpty();
+
             if (_itemsPresenter != null)
             {
-                if ((LoadFailed || IsEmpty || IsInitialising))
+                if (LoadFailed || IsEmpty || IsInitialising)
                 {
                     _itemsPresenter.Visibility = Visibility.Collapsed;
                 }
@@ -191,7 +201,7 @@ namespace Viddy.Controls
                     _loadFailedContent.Visibility = Visibility.Visible;
                     return;
                 }
-                
+
                 _loadFailedContent.Visibility = Visibility.Collapsed;
             }
 

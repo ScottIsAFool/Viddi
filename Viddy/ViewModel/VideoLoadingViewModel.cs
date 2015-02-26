@@ -74,7 +74,6 @@ namespace Viddy.ViewModel
                 HasErrors = true;
             }
 
-            IsEmpty = Items.IsNullOrEmpty();
             IsLoadingMore = false;
             SetProgressBar();
         }

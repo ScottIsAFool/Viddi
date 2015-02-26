@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Extensions;
 using Viddy.Core.Extensions;
-using Viddy.Extensions;
 using Viddy.ViewModel.Item;
 using VidMePortable;
 using VidMePortable.Model.Responses;
@@ -62,7 +61,6 @@ namespace Viddy.ViewModel.Account
             }
 
             IsLoadingMore = false;
-            IsEmpty = Items.IsNullOrEmpty();
             SetProgressBar();
         }
 

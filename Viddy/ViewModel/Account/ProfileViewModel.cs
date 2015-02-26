@@ -45,7 +45,7 @@ namespace Viddy.ViewModel.Account
                     VideoViews = "71556",
                     VideosScores = 220,
                     Bio = "Some bio information"
-                }) {IsEmpty = true};
+                });
             }
         }
 

@@ -53,7 +53,6 @@
         <controls:ProfileHeaderControl DataContext="{Binding EmptyUser}"
                                        Visibility="{Binding ProgressIsVisible, Converter={StaticResource VisibilityConverter}}" />
         <controls:LoadingListView ItemsSource="{Binding User.Items}"
-                                  IsEmpty="{Binding User.IsEmpty}"
                                   ItemTemplateSelector="{StaticResource VideoTemplateSelector}"
                                   IsInitialising="{Binding User.ProgressIsVisible}"
                                   Header="{Binding}"
@@ -68,17 +67,6 @@
                                                    FollowingText="{Binding User.FollowingText}"
                                                    IsChecked="{Binding User.IsFollowedByMe, Mode=TwoWay}"
                                                    Margin="19,-5,19,12" />
-                        <Grid Visibility="{Binding User.HasErrors, Converter={StaticResource InverseVisibilityConverter}}">
-                            <TextBlock Text="This user hasn't submitted any content yet."
-                                       x:Uid="EmptyUserContent"
-                                       Style="{StaticResource BodyTextBlockStyle}"
-                                       Margin="19"
-                                       TextWrapping="WrapWholeWords"
-                                       TextAlignment="Center"
-                                       Visibility="{Binding User.IsEmpty, Converter={StaticResource VisibilityConverter}}" />
-                        </Grid>
-                        <ContentControl ContentTemplate="{StaticResource LoadFailedTemplate}"
-                                        Visibility="{Binding User.HasErrors, Converter={StaticResource VisibilityConverter}}"/>
                     </StackPanel>
                 </DataTemplate>
             </controls:LoadingListView.HeaderTemplate>
@@ -89,7 +77,12 @@
             </controls:LoadingListView.FooterTemplate>
             <controls:LoadingListView.EmptyContent>
                 <DataTemplate>
-                    <Grid />
+                    <TextBlock Text="This user hasn't submitted any content yet."
+                               x:Uid="EmptyUserContent"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Margin="19"
+                               TextWrapping="WrapWholeWords"
+                               TextAlignment="Center" />
                 </DataTemplate>
             </controls:LoadingListView.EmptyContent>
         </controls:LoadingListView>

@@ -69,7 +69,7 @@
         <Grid Grid.Row="1">
             <controls:LoadingListView ItemsSource="{Binding Items}"
                                       IsInitialising="{Binding ProgressIsVisible}"
-                                      IsEmpty="{Binding IsEmpty}"
+                                      
                                       ItemTemplateSelector="{StaticResource VideoTemplateSelector}"
                                       LoadFailed="{Binding HasErrors}"
                                       LoadFailedContent="{StaticResource LoadFailedTemplate}">

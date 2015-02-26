@@ -49,7 +49,7 @@
               Margin="0,12,0,0">
             <controls:LoadingListView ItemsSource="{Binding Items}"
                                       IsInitialising="{Binding ProgressIsVisible}"
-                                      IsEmpty="{Binding IsEmpty}"
+                                      
                                       VerticalContentAlignment="Stretch"
                                       LoadFailed="{Binding HasErrors}"
                                       LoadFailedContent="{StaticResource LoadFailedTemplate}">

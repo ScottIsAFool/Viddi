@@ -57,9 +57,10 @@
                                        Visibility="{Binding Channel.ProgressIsVisible, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}" />
         <controls:LoadingListView ItemsSource="{Binding Channel.Items}"
                                   ItemTemplateSelector="{StaticResource VideoTemplateSelector}"
-                                  IsEmpty="{Binding Channel.IsEmpty}"
                                   IsInitialising="{Binding Channel.ProgressIsVisible}"
-                                  Header="{Binding}">
+                                  Header="{Binding}"
+                                  LoadFailed="{Binding Channel.HasErrors}"
+                                  LoadFailedContent="{StaticResource LoadFailedTemplate}">
             <controls:LoadingListView.HeaderTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Vertical">
@@ -69,17 +70,6 @@
                                                    IsChecked="{Binding Channel.IsFollowedByMe, Mode=TwoWay}"
                                                    Visibility="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}, Converter={StaticResource VisibilityConverter}}"
                                                    Margin="19,-5,19,12" />
-                        <Grid Visibility="{Binding Channel.HasErrors, Converter={StaticResource InverseVisibilityConverter}}">
-                            <TextBlock Text="This channel hasn't got any content yet."
-                                       x:Uid="LabelNoChannelContent"
-                                       Style="{StaticResource BodyTextBlockStyle}"
-                                       Margin="19"
-                                       TextWrapping="WrapWholeWords"
-                                       TextAlignment="Center"
-                                       Visibility="{Binding Channel.IsEmpty, Converter={StaticResource VisibilityConverter}}" />
-                        </Grid>
-                        <ContentControl ContentTemplate="{StaticResource LoadFailedTemplate}"
-                                        Visibility="{Binding Channel.HasErrors, Converter={StaticResource VisibilityConverter}}" />
                     </StackPanel>
                 </DataTemplate>
             </controls:LoadingListView.HeaderTemplate>
@@ -90,7 +80,12 @@
             </controls:LoadingListView.FooterTemplate>
             <controls:LoadingListView.EmptyContent>
                 <DataTemplate>
-                    <Grid />
+                    <TextBlock Text="This channel hasn't got any content yet."
+                               x:Uid="LabelNoChannelContent"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               Margin="19"
+                               TextWrapping="WrapWholeWords"
+                               TextAlignment="Center" />
                 </DataTemplate>
             </controls:LoadingListView.EmptyContent>
         </controls:LoadingListView>
