@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using Windows.UI.Xaml;
 using GalaSoft.MvvmLight.Messaging;
 using ScottIsAFool.WindowsPhone.Logging;
 using Viddy.Messaging;

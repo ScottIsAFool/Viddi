@@ -31,7 +31,7 @@ namespace Viddy.ViewModel.Account
             _navigationService = navigationService;
             _vidMeClient = vidMeClient;
 
-            if (IsInDesignMode)
+            if (!IsInDesignMode)
             {
                 AuthenticationService.Current.UserSignedIn += UserStateChanged;
                 AuthenticationService.Current.UserSignedOut += UserStateChanged;
