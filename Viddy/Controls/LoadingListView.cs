@@ -1,5 +1,4 @@
-﻿using System;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Viddy.Core.Extensions;
@@ -17,7 +16,7 @@ namespace Viddy.Controls
         private ItemsPresenter _itemsPresenter;
 
         public static readonly DependencyProperty IsEmptyProperty = DependencyProperty.Register(
-            "IsEmpty", typeof(bool), typeof(LoadingListView), new PropertyMetadata(default(bool), StateChanged));
+            "IsEmpty", typeof(bool), typeof(LoadingListView), new PropertyMetadata(default(bool)));
 
         public bool IsEmpty
         {
@@ -102,7 +101,7 @@ namespace Viddy.Controls
 
         public object GoToTopButton
         {
-            get { return (object)GetValue(GoToTopButtonProperty); }
+            get { return GetValue(GoToTopButtonProperty); }
             set { SetValue(GoToTopButtonProperty, value); }
         }
 
@@ -166,6 +165,7 @@ namespace Viddy.Controls
         {
             base.OnItemsChanged(e);
             IsEmpty = Items.IsNullOrEmpty();
+            ShowParts();
         }
 
         private static void StateChanged(DependencyObject sender, DependencyPropertyChangedEventArgs e)
