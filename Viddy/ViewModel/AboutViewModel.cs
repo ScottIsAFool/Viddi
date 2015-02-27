@@ -140,10 +140,9 @@ namespace Viddy.ViewModel
 
                 if (file != null)
                 {
-                    email.Attachments.Add(new EmailAttachment("LogFile", file));
+                    email.Attachments.Add(new EmailAttachment("LogFile.txt", file));
+                    await EmailManager.ShowComposeNewEmailAsync(email);
                 }
-
-                await EmailManager.ShowComposeNewEmailAsync(email);
             }
             catch
             {
