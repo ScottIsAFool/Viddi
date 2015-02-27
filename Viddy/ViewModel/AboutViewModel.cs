@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.DataTransfer;
+using Windows.ApplicationModel.Email;
 using Windows.ApplicationModel.Store;
 using Windows.Storage;
 using Cimbalino.Toolkit.Services;
@@ -58,10 +60,9 @@ namespace Viddy.ViewModel
         {
             get
             {
-                return new RelayCommand(() =>
+                return new RelayCommand(async () =>
                 {
-                    _shareType = ShareType.EmailLogs;
-                    DataTransferManager.ShowShareUI();
+                    await EmailLogs();
                 });
             }
         }
@@ -123,32 +124,29 @@ namespace Viddy.ViewModel
                 case ShareType.TellAFriend:
                     TellAFriend(request);
                     break;
-                case ShareType.EmailLogs:
-                    EmailLogs(request);
-                    break;
             }
         }
 
-        private async void EmailLogs(DataRequest request)
+        private async Task EmailLogs()
         {
-            var deferral = request.GetDeferral();
-
-            request.Data.Properties.Title = "Logfile from Viddy " + Version + "." + _version.Revision;
-            request.Data.Properties.Description = "Please email to scottisafool@live.co.uk";
-
             try
             {
+                var email = new EmailMessage();
+                email.To.Add(new EmailRecipient("scottisafool@live.co.uk", "Scott Lovegrove"));
+                email.Subject = "Logfile from Viddy (" + Version + "." + _version.Revision + ")";
+
                 var folder = ApplicationData.Current.LocalFolder;
                 var file = await folder.GetFileAsync(WinLogger.LogFileName);
 
                 if (file != null)
                 {
-                    request.Data.SetStorageItems(new List<IStorageFile> {file});
+                    email.Attachments.Add(new EmailAttachment("LogFile", file));
                 }
+
+                await EmailManager.ShowComposeNewEmailAsync(email);
             }
-            finally
+            catch
             {
-                deferral.Complete();
             }
         }
 
@@ -161,6 +159,7 @@ namespace Viddy.ViewModel
 
             request.Data.Properties.Description = message;
             request.Data.SetText(message);
+
         }
 
         private enum ShareType
