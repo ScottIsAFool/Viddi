@@ -30,7 +30,7 @@ namespace Viddy.ViewModel.Item
         private readonly ITileService _tileService;
         private readonly IToastService _toastService;
 
-        private readonly DataTransferManager _manager;
+        private DataTransferManager _manager;
         private ShareType _shareType;
 
         public VideoItemViewModel(Video video, VideoLoadingViewModel videoLoadingViewModel)
@@ -40,7 +40,6 @@ namespace Viddy.ViewModel.Item
             _navigationService = SimpleIoc.Default.GetInstance<INavigationService>();
             _tileService = SimpleIoc.Default.GetInstance<ITileService>();
             _toastService = SimpleIoc.Default.GetInstance<IToastService>();
-            _manager = DataTransferManager.GetForCurrentView();
             _videoLoadingViewModel = videoLoadingViewModel;
             Video = video;
 
@@ -291,8 +290,7 @@ namespace Viddy.ViewModel.Item
                 return new RelayCommand(() =>
                 {
                     _shareType = ShareType.Info;
-                    _manager.DataRequested += ManagerOnDataRequested;
-                    DataTransferManager.ShowShareUI();
+                    ShowShareUI();
                 });
             }
         }
@@ -304,10 +302,16 @@ namespace Viddy.ViewModel.Item
                 return new RelayCommand(() =>
                 {
                     _shareType = ShareType.JustLink;
-                    _manager.DataRequested += ManagerOnDataRequested;
-                    DataTransferManager.ShowShareUI();
+                    ShowShareUI();
                 });
             }
+        }
+
+        private void ShowShareUI()
+        {
+            _manager = DataTransferManager.GetForCurrentView();
+            _manager.DataRequested += ManagerOnDataRequested;
+            DataTransferManager.ShowShareUI();
         }
 
         public RelayCommand RefreshVideoInfoCommand

@@ -9,13 +9,11 @@ namespace Viddy.ViewModel.Account.Manage
     {
         public Application Application { get; set; }
 
-        private readonly DataTransferManager _manager;
+        private DataTransferManager _manager;
 
         public OwnedAppViewModel(Application application)
         {
             Application = application;
-
-            _manager = DataTransferManager.GetForCurrentView();
         }
 
         private void ManagerOnDataRequested(DataTransferManager sender, DataRequestedEventArgs args)
@@ -38,6 +36,7 @@ namespace Viddy.ViewModel.Account.Manage
             {
                 return new RelayCommand(() =>
                 {
+                    _manager = DataTransferManager.GetForCurrentView();
                     _manager.DataRequested += ManagerOnDataRequested;
                     DataTransferManager.ShowShareUI();
                 });
