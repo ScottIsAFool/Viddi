@@ -350,7 +350,6 @@ namespace Viddy.Views
                 _recordingTimer.Stop();
                 _isRecording = false;
                 _displayRequest.Release();
-                _displayRequest = null;
                 _recordedDuration = TimeSpan.MinValue;
 
                 await mediaCapture.StopRecordAsync();

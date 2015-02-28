@@ -149,7 +149,17 @@
                         <behaviours:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
-
+                <Border Background="{ThemeResource TextBoxBackgroundBrush}"
+                        BorderBrush="{ThemeResource TextBoxBorderBrush}"
+                        BorderThickness="1"
+                        Opacity="0.8">
+                    <CheckBox Content="Is definitely private"
+                              x:Uid="IsPrivate"
+                              Foreground="{ThemeResource PlaceholderTextBrush}"
+                              BorderBrush="{ThemeResource PlaceholderTextBrush}"
+                              HorizontalAlignment="Stretch"
+                              IsChecked="{Binding EditVideo.IsPrivate, Mode=TwoWay}" />
+                </Border>
                 <Border Background="{ThemeResource TextBoxBackgroundBrush}"
                         BorderBrush="{ThemeResource TextBoxBorderBrush}"
                         BorderThickness="1"

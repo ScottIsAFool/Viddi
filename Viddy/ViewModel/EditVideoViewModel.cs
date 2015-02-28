@@ -39,7 +39,9 @@ namespace Viddy.ViewModel
             Title = _video.Title;
             Description = _video.Description;
             IsNsfw = _video.Nsfw;
+            IsPrivate = _video.Private;
             CanEdit = true;
+            IsChanged = false;
         }
 
         public string ThumbnailImage { get; set; }
@@ -53,6 +55,7 @@ namespace Viddy.ViewModel
         public bool IsNsfw { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
+        public bool IsPrivate { get; set; }
 
         public bool CanSetNsfw
         {
@@ -108,6 +111,8 @@ namespace Viddy.ViewModel
                         {
                             request.IsNsfw = true;
                         }
+
+                        request.IsPrivate = IsPrivate;
 
                         var response = await _vidMeClient.EditVideoAsync(_video.VideoId, request);
 
