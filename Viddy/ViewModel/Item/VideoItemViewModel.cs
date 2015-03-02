@@ -127,7 +127,7 @@ namespace Viddy.ViewModel.Item
             get
             {
                 var number = Video != null ? Video.ViewCount : 0;
-                return string.Format(Resources.UserPlays, number);
+                return number == 1 ? Resources.OneUserPlay : string.Format(Resources.UserPlays, number);
             }
         }
 
@@ -177,6 +177,20 @@ namespace Viddy.ViewModel.Item
 
         public bool IsUpVote { get; set; }
         public bool IsDownVote { get; set; }
+
+        public string Score
+        {
+            get
+            {
+                if (Video == null)
+                {
+                    return string.Empty;
+                }
+
+                var score = Video.Score;
+                return score == 1 ? Resources.OnePoint : string.Format(Resources.Points, score);
+            }
+        }
 
         public void RemoveComment(CommentViewModel comment)
         {
@@ -376,6 +390,8 @@ namespace Viddy.ViewModel.Item
                     if (response.Video != null)
                     {
                         Video.LikesCount = response.Video.LikesCount;
+                        Video.Score = response.Video.Score;
+                        RaisePropertyChanged(() => Score);
                     }
                 }
             }

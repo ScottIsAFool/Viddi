@@ -163,7 +163,6 @@
     <Compile Include="Converters\FrequencyConverter.cs" />
     <Compile Include="Converters\NullBooleanConverter.cs" />
     <Compile Include="Converters\ThumbnailConverter.cs" />
-    <Compile Include="Converters\VoteConverter.cs" />
     <Compile Include="Extensions\ContainerExtensions.cs" />
     <Compile Include="Extensions\ListTypeExtensions.cs" />
     <Compile Include="Foursquare\FoursquareClient.cs" />

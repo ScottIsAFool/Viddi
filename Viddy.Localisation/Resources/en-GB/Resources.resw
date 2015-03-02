@@ -670,4 +670,13 @@
   <data name="IsPrivate.Content" xml:space="preserve">
     <value>Is definitely private</value>
   </data>
+  <data name="OnePoint" xml:space="preserve">
+    <value>1 point</value>
+  </data>
+  <data name="OneUserPlay" xml:space="preserve">
+    <value>1 play</value>
+  </data>
+  <data name="Points" xml:space="preserve">
+    <value>{0} points</value>
+  </data>
 </root>
