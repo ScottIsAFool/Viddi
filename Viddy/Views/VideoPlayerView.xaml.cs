@@ -18,7 +18,7 @@ namespace Viddy.Views
 
         private void MediaPlayer_OnMediaFailed(object sender, ExceptionRoutedEventArgs e)
         {
-
+            Logger.Error("MediaPlayer Media Failed: " + e.ErrorMessage);
         }
 
         private void MediaPlayer_OnIsFullScreenChanged(object sender, RoutedPropertyChangedEventArgs<bool> e)
