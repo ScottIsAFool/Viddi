@@ -92,82 +92,93 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <Grid Grid.Row="0">
-                    <StackPanel Orientation="Vertical">
-                        <StackPanel Orientation="Horizontal"
-                                    Margin="19,6,19,6">
-                            <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
-                                                   TapCommand="{Binding NavigateToUserCommand}"
-                                                   IsHitTestVisible="{Binding Video.IsAnonymous, Converter={StaticResource NegativeBooleanConverter}}">
-                                <TextBlock Text="{Binding Video.SubmittedBy}"
-                                           Style="{StaticResource BodyTextBlockStyle}"
-                                           FontWeight="Bold" />
-                            </controls:CustomButton>
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal"
-                                    Margin="19,0,19,12">
-                            <SymbolIcon Symbol="Like"
-                                        Foreground="{ThemeResource SubtleBrush}"
-                                        Height="20" />
-                            <TextBlock Text="{Binding Video.Video.LikesCount}"
-                                       Style="{StaticResource BodyTextBlockStyle}"
-                                       Foreground="{ThemeResource SubtleBrush}"
-                                       Margin="6,0,6,0" />
-                            <TextBlock Style="{StaticResource BodyTextBlockStyle}"
-                                       VerticalAlignment="Bottom"
-                                       HorizontalAlignment="Left"
-                                       Text="{Binding Video.Plays}"
-                                       Foreground="{ThemeResource SubtleBrush}"
-                                       Margin="6,0" />
-                            <TextBlock Text="{Binding Video.Date}"
-                                       Style="{StaticResource BodyTextBlockStyle}"
-                                       Foreground="{ThemeResource SubtleBrush}"
-                                       Margin="6,0" />
-
-                            <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
-                                                   TapCommand="{Binding NavigateToChannelCommand}"
-                                                   Visibility="{Binding Video.Channel, Converter={StaticResource NullToVisibilityConverter}}">
-                                <TextBlock Text="{Binding Video.Channel.Name}"
-                                           Style="{StaticResource BodyTextBlockStyle}"
-                                           FontWeight="Bold"
-                                           Margin="6,0" />
-                            </controls:CustomButton>
-                        </StackPanel>
-                    </StackPanel>
-                </Grid>
-
-                <Grid MaxHeight="200"
-                      Grid.Row="1"
-                      VerticalAlignment="Top">
-                    <Image Source="{Binding Video.Video.ThumbnailUrl}"
-                           Stretch="UniformToFill"
-                           VerticalAlignment="Center" />
-                    <playerFramework:MediaPlayer IsVolumeVisible="False"
-                                                 IsDurationVisible="False"
-                                                 IsTimeElapsedVisible="False"
-                                                 IsTimeRemainingVisible="False"
-                                                 IsTimelineVisible="False"
-                                                 IsPlayPauseVisible="True"
-                                                 MediaFailed="MediaPlayer_OnMediaFailed"
-                                                 IsFullScreenVisible="True"
-                                                 Source="{Binding Video.Video.CompleteUrl}"
-                                                 IsFullScreenChanged="MediaPlayer_OnIsFullScreenChanged"
-                                                 x:Name="MediaPlayer">
-                        <interactivity:Interaction.Behaviors>
-                            <!--<behaviours:VideoStreamBehaviour File="{Binding File}"
-                                                             IsAutoPlay="True"
-                                                             IsStart="{Binding Play}"
-                                                             IsPause="{Binding Pause}"
-                                                             IsPlaying="{Binding IsPlaying, Mode=TwoWay}" />-->
-                        </interactivity:Interaction.Behaviors>
-                    </playerFramework:MediaPlayer>
-                </Grid>
-
                 <controls:LoadingListView Grid.Row="2"
                                           ItemsSource="{Binding Video.Items}"
                                           ItemTemplate="{StaticResource CommentTemplate}"
                                           Margin="0,12,0,0"
+                                          x:Name="VideoPlayerListView"
                                           IsInitialising="{Binding Video.ProgressIsVisible}">
+                    <controls:LoadingListView.HeaderTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto"/>
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Orientation="Vertical"
+                                            Grid.Row="0">
+                                    <StackPanel Orientation="Horizontal"
+                                                Margin="19,6,19,6">
+                                        <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                                               TapCommand="{Binding NavigateToUserCommand}"
+                                                               IsHitTestVisible="{Binding Video.IsAnonymous, Converter={StaticResource NegativeBooleanConverter}}">
+                                            <TextBlock Text="{Binding Video.SubmittedBy}"
+                                                       Style="{StaticResource BodyTextBlockStyle}"
+                                                       FontWeight="Bold" />
+                                        </controls:CustomButton>
+                                    </StackPanel>
+                                    <StackPanel Orientation="Horizontal"
+                                                Margin="19,0,19,12">
+                                        <SymbolIcon Symbol="Like"
+                                                    Foreground="{ThemeResource SubtleBrush}"
+                                                    Height="20" />
+                                        <TextBlock Text="{Binding Video.Video.LikesCount}"
+                                                   Style="{StaticResource BodyTextBlockStyle}"
+                                                   Foreground="{ThemeResource SubtleBrush}"
+                                                   Margin="6,0,6,0" />
+                                        <TextBlock Style="{StaticResource BodyTextBlockStyle}"
+                                                   VerticalAlignment="Bottom"
+                                                   HorizontalAlignment="Left"
+                                                   Text="{Binding Video.Plays}"
+                                                   Foreground="{ThemeResource SubtleBrush}"
+                                                   Margin="6,0" />
+                                        <TextBlock Text="{Binding Video.Date}"
+                                                   Style="{StaticResource BodyTextBlockStyle}"
+                                                   Foreground="{ThemeResource SubtleBrush}"
+                                                   Margin="6,0" />
+
+                                        <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                                               TapCommand="{Binding NavigateToChannelCommand}"
+                                                               Visibility="{Binding Video.Channel, Converter={StaticResource NullToVisibilityConverter}}">
+                                            <TextBlock Text="{Binding Video.Channel.Name}"
+                                                       Style="{StaticResource BodyTextBlockStyle}"
+                                                       FontWeight="Bold"
+                                                       Margin="6,0" />
+                                        </controls:CustomButton>
+                                    </StackPanel>
+                                </StackPanel>
+
+                                <Grid MaxHeight="200"
+                                      Grid.Row="1"
+                                      VerticalAlignment="Top">
+                                    <Image Source="{Binding Video.Video.ThumbnailUrl}"
+                                           Stretch="UniformToFill"
+                                           VerticalAlignment="Center" />
+                                    <playerFramework:MediaPlayer IsVolumeVisible="False"
+                                                                 IsDurationVisible="False"
+                                                                 IsTimeElapsedVisible="False"
+                                                                 IsTimeRemainingVisible="False"
+                                                                 IsTimelineVisible="False"
+                                                                 IsPlayPauseVisible="True"
+                                                                 MediaFailed="MediaPlayer_OnMediaFailed"
+                                                                 IsFullScreenVisible="True"
+                                                                 Source="{Binding Video.Video.CompleteUrl}"
+                                                                 IsFullScreenChanged="MediaPlayer_OnIsFullScreenChanged"
+                                                                 x:Name="MediaPlayer"
+                                                                 Loaded="MediaPlayer_OnLoaded">
+                                        <interactivity:Interaction.Behaviors>
+                                            <!--<behaviours:VideoStreamBehaviour File="{Binding File}"
+                                                             IsAutoPlay="True"
+                                                             IsStart="{Binding Play}"
+                                                             IsPause="{Binding Pause}"
+                                                             IsPlaying="{Binding IsPlaying, Mode=TwoWay}" />-->
+                                        </interactivity:Interaction.Behaviors>
+                                    </playerFramework:MediaPlayer>
+                                </Grid>
+                            </Grid>
+                        </DataTemplate>
+                    </controls:LoadingListView.HeaderTemplate>
                     <controls:LoadingListView.EmptyContent>
                         <DataTemplate>
                             <Grid>

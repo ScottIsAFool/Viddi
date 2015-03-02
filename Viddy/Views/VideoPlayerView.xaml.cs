@@ -1,6 +1,6 @@
-﻿using Windows.Phone.UI.Input;
-using Windows.UI.Xaml;
+﻿using Windows.UI.Xaml;
 using Cimbalino.Toolkit.Services;
+using Microsoft.PlayerFramework;
 
 namespace Viddy.Views
 {
@@ -9,27 +9,36 @@ namespace Viddy.Views
     /// </summary>
     public sealed partial class VideoPlayerView
     {
+        private MediaPlayer _mediaPlayer;
+
         public VideoPlayerView()
         {
             InitializeComponent();
         }
 
-        private void MediaPlayer_OnMediaFailed(object sender, Windows.UI.Xaml.ExceptionRoutedEventArgs e)
+        private void MediaPlayer_OnMediaFailed(object sender, ExceptionRoutedEventArgs e)
         {
 
         }
 
         private void MediaPlayer_OnIsFullScreenChanged(object sender, RoutedPropertyChangedEventArgs<bool> e)
         {
-            MediaPlayer.IsFullWindow = MediaPlayer.IsFullScreen;
+            var mediaPlayer = sender as MediaPlayer;
+            if (mediaPlayer != null)
+            {
+                mediaPlayer.IsFullWindow = mediaPlayer.IsFullScreen;
+            }
         }
 
         protected override void OnBackKeyPressed(object sender, NavigationServiceBackKeyPressedEventArgs e)
         {
-            e.Behavior = MediaPlayer.IsFullWindow ? NavigationServiceBackKeyPressedBehavior.DoNothing : NavigationServiceBackKeyPressedBehavior.GoBack;
+            if (_mediaPlayer != null)
+            {
+                e.Behavior = _mediaPlayer.IsFullWindow ? NavigationServiceBackKeyPressedBehavior.DoNothing : NavigationServiceBackKeyPressedBehavior.GoBack;
 
-            MediaPlayer.IsFullScreen = false;
-            MediaPlayer.IsFullWindow = false;
+                _mediaPlayer.IsFullScreen = false;
+                _mediaPlayer.IsFullWindow = false;
+            }
 
             base.OnBackKeyPressed(sender, e);
         }
@@ -37,6 +46,15 @@ namespace Viddy.Views
         private async void PinButton_OnClick(object sender, RoutedEventArgs e)
         {
             await SaveTileImage(MediumTile);
+        }
+
+        private void MediaPlayer_OnLoaded(object sender, RoutedEventArgs e)
+        {
+            var mediaPlayer = sender as MediaPlayer;
+            if (mediaPlayer != null)
+            {
+                _mediaPlayer = mediaPlayer;
+            }
         }
     }
 }
