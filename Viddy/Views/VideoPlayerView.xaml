@@ -311,7 +311,8 @@
 
                                     <TextBlock Text="{Binding Video.Score}"
                                                Style="{StaticResource BodyTextBlockStyle}"
-                                               Foreground="{StaticResource SubtleBrush}"/>
+                                               Foreground="{StaticResource SubtleBrush}"
+                                               VerticalAlignment="Center"/>
                                 </StackPanel>
                             </Grid>
                         </DataTemplate>
