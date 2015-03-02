@@ -175,7 +175,8 @@ namespace Viddy.ViewModel.Item
             get { return Video != null ? Video.CommentCount : 0; }
         }
 
-        public int UsersVote { get; set; }
+        public bool IsUpVote { get; set; }
+        public bool IsDownVote { get; set; }
 
         public void RemoveComment(CommentViewModel comment)
         {
@@ -331,7 +332,7 @@ namespace Viddy.ViewModel.Item
             {
                 return new RelayCommand(async () =>
                 {
-                    var vote = UsersVote == 0 ? Vote.Up : Vote.Neutral;
+                    var vote = !IsUpVote ? Vote.Up : Vote.Neutral;
 
                     await ChangeVote(vote);
                 });
@@ -344,7 +345,7 @@ namespace Viddy.ViewModel.Item
             {
                 return new RelayCommand(async () =>
                 {
-                    var vote = UsersVote == 0 ? Vote.Down : Vote.Neutral;
+                    var vote = !IsDownVote ? Vote.Down : Vote.Neutral;
 
                     await ChangeVote(vote);
                 });
@@ -366,22 +367,32 @@ namespace Viddy.ViewModel.Item
         private async Task ChangeVote(Vote vote)
         {
             GettingVideoInfo = true;
-            ViewerVote response;
             try
             {
-                response = await _vidMeClient.VoteForVideoAsync(Video.VideoId, vote);
+                var response = await _vidMeClient.VoteForVideoAsync(Video.VideoId, vote);
+                if (response != null)
+                {
+                    SetViewerVote(response.ViewerVote);
+                    if (response.Video != null)
+                    {
+                        Video.LikesCount = response.Video.LikesCount;
+                    }
+                }
             }
             catch (Exception ex)
             {
                 Log.ErrorException("ChangeVote()", ex);
-                GettingVideoInfo = false;
                 return;
             }
 
-            if (response != null)
-            {
-                await RefreshVideoDetails();
-            }
+            GettingVideoInfo = false;
+        }
+
+        private void SetViewerVote(ViewerVote viewerVote)
+        {
+            var value = viewerVote != null && viewerVote.Value.HasValue ? viewerVote.Value.Value : 0;
+            IsUpVote = value > 0;
+            IsDownVote = value < 0;
         }
 
         public string CommentText { get; set; }
@@ -425,7 +436,7 @@ namespace Viddy.ViewModel.Item
                 if (response != null)
                 {
                     Video = response.Video;
-                    UsersVote = response.ViewerVote != null && response.ViewerVote.Value.HasValue ? response.ViewerVote.Value.Value : 0;
+                    SetViewerVote(response.ViewerVote);
                 }
             }
             catch (Exception ex)
@@ -488,8 +499,8 @@ namespace Viddy.ViewModel.Item
             request.Data.Properties.Title = Resources.ShareVideoTitle;
             var description = IsAnonymous ? Resources.ShareVideoTitle : string.Format(Resources.ShareVideoMessage, Video.User.Username);
             request.Data.Properties.Description = description;
-            request.Data.SetApplicationLink(new Uri(Video.ToViddyLink())); 
-            
+            request.Data.SetApplicationLink(new Uri(Video.ToViddyLink()));
+
             switch (_shareType)
             {
                 case ShareType.Info:
