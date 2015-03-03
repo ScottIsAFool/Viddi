@@ -6,7 +6,6 @@
                 xmlns:views="using:Viddy.Views"
                 xmlns:controls="using:Viddy.Controls"
                 xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
-                xmlns:behaviours="using:Viddy.Behaviours"
                 xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -46,7 +45,7 @@
                          Header="&#xE088;"
                          x:Uid="Name">
                     <interactivity:Interaction.Behaviors>
-                        <behaviours:UpdateTextBindingOnPropertyChanged/>
+                        <behaviors:UpdateTextBindingOnPropertyChanged/>
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
                 <TextBox PlaceholderText="Redirect Url"
@@ -55,7 +54,7 @@
                          Header="&#xE12B;"
                          x:Uid="RedirectUrl">
                     <interactivity:Interaction.Behaviors>
-                        <behaviours:UpdateTextBindingOnPropertyChanged />
+                        <behaviors:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
                 <TextBox PlaceholderText="Description (optional)"
@@ -64,7 +63,7 @@
                          Style="{StaticResource FullLengthTextBoxStyle}"
                          Header="&#xE1C2;">
                     <interactivity:Interaction.Behaviors>
-                        <behaviours:UpdateTextBindingOnPropertyChanged />
+                        <behaviors:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
                 <TextBox PlaceholderText="Website (optional)"
@@ -73,7 +72,7 @@
                          Header="&#xE12B;"
                          x:Uid="Website">
                     <interactivity:Interaction.Behaviors>
-                        <behaviours:UpdateTextBindingOnPropertyChanged />
+                        <behaviors:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
                 <TextBox PlaceholderText="Company (optional)"
@@ -82,7 +81,7 @@
                          Header="&#xE10F;"
                          x:Uid="Company">
                     <interactivity:Interaction.Behaviors>
-                        <behaviours:UpdateTextBindingOnPropertyChanged />
+                        <behaviors:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
 

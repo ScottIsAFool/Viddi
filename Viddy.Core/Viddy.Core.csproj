@@ -55,9 +55,9 @@
     <Compile Include="Utils.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Cimbalino.Toolkit.Core, Version=1.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="Cimbalino.Toolkit.Core, Version=1.2.4.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Cimbalino.Toolkit.Core.1.2.3\lib\wpa81\Cimbalino.Toolkit.Core.dll</HintPath>
+      <HintPath>..\packages\Cimbalino.Toolkit.Core.1.2.4\lib\wpa81\Cimbalino.Toolkit.Core.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json">
       <HintPath>..\packages\Newtonsoft.Json.6.0.8\lib\portable-net40+sl5+wp80+win8+wpa81\Newtonsoft.Json.dll</HintPath>

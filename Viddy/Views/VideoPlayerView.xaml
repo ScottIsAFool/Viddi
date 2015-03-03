@@ -8,7 +8,6 @@
                         xmlns:core="using:Microsoft.Xaml.Interactions.Core"
                         xmlns:controls="using:Viddy.Controls"
                         xmlns:playerFramework="using:Microsoft.PlayerFramework"
-                        xmlns:behaviours="using:Viddy.Behaviours"
                         xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
                         xmlns:localConverters="using:Viddy.Converters"
                         xmlns:converters="using:Cimbalino.Toolkit.Converters"
@@ -245,7 +244,7 @@
                              Text="{Binding Video.CommentText, Mode=TwoWay}"
                              Style="{StaticResource FullLengthTextBoxStyle}">
                         <interactivity:Interaction.Behaviors>
-                            <behaviours:UpdateTextBindingOnPropertyChanged />
+                            <behaviors:UpdateTextBindingOnPropertyChanged />
                             <behaviors:MultiBindingBehavior PropertyName="IsEnabled"
                                                             Converter="{StaticResource CommentEnabledConverter}">
                                 <behaviors:MultiBindingItem Value="{Binding Auth.IsLoggedIn, Source={StaticResource Locator}}" />

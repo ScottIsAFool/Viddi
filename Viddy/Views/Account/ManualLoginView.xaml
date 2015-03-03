@@ -6,7 +6,6 @@
                 xmlns:views="using:Viddy.Views"
                 xmlns:controls="using:Viddy.Controls"
                 xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
-                xmlns:behaviours="using:Viddy.Behaviours"
                 xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
@@ -51,7 +50,7 @@
                          Style="{StaticResource FullLengthTextBoxStyle}"
                          InputScope="EmailSmtpAddress">
                     <interactivity:Interaction.Behaviors>
-                        <behaviours:UpdateTextBindingOnPropertyChanged />
+                        <behaviors:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
 
@@ -63,7 +62,7 @@
                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
                              Style="{StaticResource FullLengthPasswordBoxStyle}">
                     <interactivity:Interaction.Behaviors>
-                        <behaviours:EnterKeyHandler Command="{Binding SignInCommand}" />
+                        <behaviors:EnterKeyBehavior Command="{Binding SignInCommand}" />
                     </interactivity:Interaction.Behaviors>
                 </PasswordBox>
 

@@ -6,7 +6,6 @@
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 xmlns:controls="using:Viddy.Controls"
                 xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
-                xmlns:behaviours="using:Viddy.Behaviours"
                 xmlns:core="using:Microsoft.Xaml.Interactions.Core"
                 xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
                 mc:Ignorable="d"
@@ -197,7 +196,7 @@
                              BorderThickness="0"
                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}">
                         <interactivity:Interaction.Behaviors>
-                            <behaviours:UpdateTextBindingOnPropertyChanged />
+                            <behaviors:UpdateTextBindingOnPropertyChanged />
                         </interactivity:Interaction.Behaviors>
                     </TextBox>
                 </Grid>
@@ -212,7 +211,7 @@
                          AcceptsReturn="True"
                          IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}">
                     <interactivity:Interaction.Behaviors>
-                        <behaviours:UpdateTextBindingOnPropertyChanged />
+                        <behaviors:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
                 <TextBox Text="{Binding Email, Mode=TwoWay}"
@@ -221,7 +220,7 @@
                          x:Uid="Email"
                          IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}">
                     <interactivity:Interaction.Behaviors>
-                        <behaviours:UpdateTextBindingOnPropertyChanged />
+                        <behaviors:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
 

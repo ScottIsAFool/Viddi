@@ -138,7 +138,7 @@
                          x:Uid="VideoTitle"
                          Text="{Binding EditVideo.Title, Mode=TwoWay}">
                     <interactivity:Interaction.Behaviors>
-                        <behaviours:UpdateTextBindingOnPropertyChanged />
+                        <behaviors:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
 
@@ -148,7 +148,7 @@
                          Text="{Binding EditVideo.Description, Mode=TwoWay}"
                          AcceptsReturn="True">
                     <interactivity:Interaction.Behaviors>
-                        <behaviours:UpdateTextBindingOnPropertyChanged />
+                        <behaviors:UpdateTextBindingOnPropertyChanged />
                     </interactivity:Interaction.Behaviors>
                 </TextBox>
                 <Border Background="{ThemeResource TextBoxBackgroundBrush}"

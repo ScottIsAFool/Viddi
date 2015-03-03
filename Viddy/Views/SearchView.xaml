@@ -7,6 +7,7 @@
                 xmlns:controls="using:Viddy.Controls"
                 xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                 xmlns:behaviours="using:Viddy.Behaviours"
+                xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding Search, Source={StaticResource Locator}}">
@@ -59,7 +60,8 @@
                              IsEnabled="{Binding ProgressIsVisible, Converter={StaticResource NegativeBooleanConverter}}"
                              Grid.Column="1">
                         <interactivity:Interaction.Behaviors>
-                            <behaviours:UpdateTextBindingOnPropertyChanged EnterHitCommand="{Binding SearchCommand}" />
+                            <behaviors:UpdateTextBindingOnPropertyChanged  />
+                            <behaviors:EnterKeyBehavior Command="{Binding SearchCommand}"/>
                         </interactivity:Interaction.Behaviors>
                     </TextBox>
                 </Grid>

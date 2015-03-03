@@ -114,9 +114,7 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Behaviours\EnterKeyBehaviour.cs" />
     <Compile Include="Behaviours\OpenFlyoutBehaviour.cs" />
-    <Compile Include="Behaviours\UpdateTextBindingOnPropertyChanged.cs" />
     <Compile Include="Behaviours\StatusBarBehavior.cs" />
     <Compile Include="Behaviours\VideoStreamBehaviour.cs" />
     <Compile Include="Common\NavigationParameters.cs" />
@@ -474,11 +472,12 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Reference Include="Cimbalino.Toolkit">
-      <HintPath>..\packages\Cimbalino.Toolkit.1.2.3\lib\wpa81\Cimbalino.Toolkit.dll</HintPath>
+    <Reference Include="Cimbalino.Toolkit, Version=1.2.4.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Cimbalino.Toolkit.1.2.4\lib\wpa81\Cimbalino.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Cimbalino.Toolkit.Core">
-      <HintPath>..\packages\Cimbalino.Toolkit.Core.1.2.3\lib\wpa81\Cimbalino.Toolkit.Core.dll</HintPath>
+      <HintPath>..\packages\Cimbalino.Toolkit.Core.1.2.4\lib\wpa81\Cimbalino.Toolkit.Core.dll</HintPath>
     </Reference>
     <Reference Include="Coding4Fun.Toolkit">
       <HintPath>..\packages\Coding4Fun.Toolkit.Controls.2.1.0\lib\wpa81\Coding4Fun.Toolkit.dll</HintPath>
