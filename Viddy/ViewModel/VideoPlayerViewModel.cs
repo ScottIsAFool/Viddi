@@ -16,7 +16,7 @@ using VidMePortable.Model;
 
 namespace Viddy.ViewModel
 {
-    public class VideoPlayerViewModel : ViewModelBase, IBackSupportedViewModel
+    public class VideoPlayerViewModel : ViewModelBase, IBackSupportedViewModel, ICanHasHomeButton
     {
         private readonly INavigationService _navigationService;
         private readonly IVidMeClient _vidMeClient;
@@ -181,6 +181,16 @@ namespace Viddy.ViewModel
             }
 
             _previousItems.Push(Video);
+        }
+
+        public bool ShowHomeButton { get; set; }
+
+        public RelayCommand NavigateHomeCommand
+        {
+            get
+            {
+                return new RelayCommand(() => _navigationService.Navigate<MainView>());
+            }
         }
     }
 }
