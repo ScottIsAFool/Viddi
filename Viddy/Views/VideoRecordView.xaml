@@ -390,12 +390,7 @@
                       Checked="RecordButtonChanged"
                       Style="{StaticResource RecordCheckBox}"
                       Unchecked="RecordButtonChanged" />
-
-            <controls:ProfilePictureControl TappedCommand="{Binding NavigateToAccountCommand}"
-                                            Grid.Row="2"
-                                            VerticalAlignment="Center"
-                                            HorizontalAlignment="Right"
-                                            Margin="19" />
+            
         </Grid>
         <tiles:RecordTile Margin="-1000,-1000,0,0"
                           x:Name="RecordTile"
