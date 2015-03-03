@@ -35,7 +35,16 @@ namespace Viddy.Model
         public void StartService()
         {
             LoadSettings();
-            ThemeManager.DefaultTheme = Theme;
+            //ThemeManager.Th = Theme;
+            var themeManager = Application.Current.Resources["ThemeManager"] as ThemeManager;
+            if (Theme == ElementTheme.Light)
+            {
+                ThemeManager.ToLightTheme();
+            }
+            else
+            {
+                ThemeManager.ToLightTheme();
+            }
             _serviceStarted = true;
         }
 

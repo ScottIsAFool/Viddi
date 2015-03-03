@@ -71,6 +71,25 @@
                                Foreground="{ThemeResource SubtleBrush}"
                                Margin="0,6" />
                 </StackPanel>
+                
+                <StackPanel Orientation="Vertical"
+                            Grid.Row="0"
+                            Grid.Column="1"
+                            VerticalAlignment="Bottom">
+                    <TextBlock Text="Powered by"
+                               x:Uid="PoweredBy"
+                               Style="{StaticResource BodyTextBlockStyle}"
+                               FontSize="{StaticResource TextStyleMediumFontSize}"/>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Assets/VidmeLogo.png"
+                               Height="35"/>
+                        <TextBlock Text="vidme"
+                                   VerticalAlignment="Center"
+                                   Style="{StaticResource BodyTextBlockStyle}"
+                                   FontWeight="SemiBold"
+                                   Margin="3,0"/>
+                    </StackPanel>
+                </StackPanel>
 
                 <Grid Grid.Row="1"
                       Grid.Column="0"

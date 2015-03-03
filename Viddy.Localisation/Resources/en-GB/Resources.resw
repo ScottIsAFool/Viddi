@@ -679,4 +679,8 @@
   <data name="Points" xml:space="preserve">
     <value>{0} points</value>
   </data>
+  <data name="PoweredBy.Text" xml:space="preserve">
+    <value>Powered by</value>
+    <comment>Context: Powered by &lt;Vidme logo&gt;</comment>
+  </data>
 </root>

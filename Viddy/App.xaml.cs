@@ -165,8 +165,8 @@ namespace Viddy
 
             Window.Current.VisibilityChanged += CurrentOnVisibilityChanged;
 
-            Locator.SettingsService.StartService();
             Locator.Auth.StartService();
+            Locator.SettingsService.StartService();
             Locator.NotificationService.StartService();
             Locator.Review.IncreaseCount();
             Locator.TaskService.CreateService();

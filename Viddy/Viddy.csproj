@@ -106,6 +106,7 @@
     <Content Include="Assets\TileIcons\StoreLogo.scale-140.png" />
     <Content Include="Assets\TileIcons\WideLogo.scale-100.png" />
     <Content Include="Assets\TileIcons\WideLogo.scale-140.png" />
+    <Content Include="Assets\VidmeLogo.png" />
     <Content Include="Fonts\seguisym.ttf" />
     <None Include="packages.config" />
   </ItemGroup>
@@ -527,9 +528,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\wpa81\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="ThemeManagerRt, Version=1.0.1.4, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ThemeManagerRt, Version=1.0.1.5, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ThemeManagerRt.1.0.1.4\lib\portable-win81+WindowsPhoneApp81\ThemeManagerRt.dll</HintPath>
+      <HintPath>..\packages\ThemeManagerRt.1.0.1.5\lib\portable-win81+WindowsPhoneApp81\ThemeManagerRt.dll</HintPath>
     </Reference>
     <Reference Include="VidMePortable, Version=0.0.0.41, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
