@@ -191,7 +191,8 @@
                                                            FontFamily="{StaticResource SegoeUISymbolsFont}"
                                                            FontSize="35"
                                                            TapCommand="{Binding Video.UpVoteCommand}"
-                                                           Foreground="{Binding Video.IsUpVote, Converter={StaticResource IsOnColourConverter}}"/>
+                                                           Foreground="{Binding Video.IsUpVote, Converter={StaticResource IsOnColourConverter}}"
+                                                           IsEnabled="{Binding Video.GettingVideoInfo, Converter={StaticResource NegativeBooleanConverter}}"/>
 
                                     <controls:CustomButton HorizontalAlignment="Center"
                                                            Content="&#xE1FC;"
@@ -200,7 +201,8 @@
                                                            FontFamily="{StaticResource SegoeUISymbolsFont}"
                                                            FontSize="35"
                                                            TapCommand="{Binding Video.DownVoteCommand}"
-                                                           Foreground="{Binding Video.IsDownVote, Converter={StaticResource IsOnColourConverter}}"/>
+                                                           Foreground="{Binding Video.IsDownVote, Converter={StaticResource IsOnColourConverter}}"
+                                                           IsEnabled="{Binding Video.GettingVideoInfo, Converter={StaticResource NegativeBooleanConverter}}"/>
 
                                     <TextBlock Text="{Binding Video.Score}"
                                                Style="{StaticResource BodyTextBlockStyle}"
