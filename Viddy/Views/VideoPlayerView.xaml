@@ -31,6 +31,11 @@
     <local:BasePage.BottomAppBar>
         <CommandBar ClosedDisplayMode="Minimal">
             <CommandBar.PrimaryCommands>
+                <AppBarButton x:Uid="AppBarHome"
+                              Label="home"
+                              Icon="Home"
+                              Command="{Binding NavigateHomeCommand}"
+                              Visibility="{Binding ShowHomeButton, Converter={StaticResource VisibilityConverter}}"/>
                 <AppBarButton Label="{Binding IsPinned, Converter={StaticResource PinUnpinConverter}}"
                               x:Name="PinButton"
                               Click="PinButton_OnClick">

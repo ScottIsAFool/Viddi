@@ -42,6 +42,7 @@ namespace Viddy.ViewModel
             IsPrivate = _video.Private;
             CanEdit = true;
             IsChanged = false;
+            RaisePropertyChanged(() => CanSetNsfw);
         }
 
         public string ThumbnailImage { get; set; }
