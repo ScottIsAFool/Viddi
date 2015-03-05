@@ -30,6 +30,7 @@ namespace Viddy.ViewModel
             _ignoreChanges = true;
             UpdateFrequencies = Enum.GetValues(typeof(UpdateFrequency)).ToList<UpdateFrequency>();
             NotificationFrequency = UpdateFrequencies.First(x => x == _settingsService.NotificationFrequency.GetFrequency());
+            IsLightTheme = _settingsService.Theme == ElementTheme.Light;
             _ignoreChanges = false;
         }
 
@@ -75,6 +76,8 @@ namespace Viddy.ViewModel
         [UsedImplicitly]
         private void OnIsLightThemeChanged()
         {
+            if (_ignoreChanges) return;
+
             if (IsLightTheme)
             {
                 ThemeManager.ToLightTheme();
