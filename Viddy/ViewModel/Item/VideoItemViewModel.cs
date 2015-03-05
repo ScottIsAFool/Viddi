@@ -378,6 +378,14 @@ namespace Viddy.ViewModel.Item
             }
         }
 
+        public RelayCommand OpenInBrowserCommand
+        {
+            get
+            {
+                return new RelayCommand(() => new LauncherService().LaunchUriAsync(Video.FullUrl));
+            }
+        }
+
         private async Task ChangeVote(Vote vote)
         {
             GettingVideoInfo = true;

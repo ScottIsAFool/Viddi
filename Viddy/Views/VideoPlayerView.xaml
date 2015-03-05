@@ -106,7 +106,7 @@
                     </ControlTemplate>
                 </Setter.Value>
             </Setter>
-        </Style>
+        </Style>        
     </local:BasePage.Resources>
 
     <local:BasePage.BottomAppBar>
@@ -146,6 +146,9 @@
                 <AppBarButton Label="share for email"
                               x:Uid="AppBarShareForEmail"
                               Command="{Binding Video.ShareCommand}" />
+                <AppBarButton Label="open in browser"
+                              x:Uid="AppBarOpenInBrowser"
+                              Command="{Binding Video.OpenInBrowserCommand}"/>
             </CommandBar.SecondaryCommands>
         </CommandBar>
     </local:BasePage.BottomAppBar>
@@ -251,7 +254,10 @@
                                                                  Source="{Binding Video.Video.CompleteUrl}"
                                                                  IsFullScreenChanged="MediaPlayer_OnIsFullScreenChanged"
                                                                  x:Name="MediaPlayer"
-                                                                 Loaded="MediaPlayer_OnLoaded">
+                                                                 Loaded="MediaPlayer_OnLoaded"
+                                                                 IsSeekEnabled="True"
+                                                                 IsScrubbingEnabled="True"
+                                                                 IsThumbnailVisible="True">
                                         <interactivity:Interaction.Behaviors>
                                             <!--<behaviours:VideoStreamBehaviour File="{Binding File}"
                                                              IsAutoPlay="True"

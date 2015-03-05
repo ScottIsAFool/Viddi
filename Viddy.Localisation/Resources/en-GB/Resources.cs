@@ -17,7 +17,7 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 03/03/2015 15:01:59
+// 	Generated: 03/05/2015 22:28:21
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
 namespace Viddy.Localisation

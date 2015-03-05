@@ -683,4 +683,7 @@
     <value>Powered by</value>
     <comment>Context: Powered by &lt;Vidme logo&gt;</comment>
   </data>
+  <data name="AppBarOpenInBrowser.Label" xml:space="preserve">
+    <value>open in browser</value>
+  </data>
 </root>
