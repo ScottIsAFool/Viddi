@@ -43,7 +43,7 @@ namespace Viddy.Model
             }
             else
             {
-                ThemeManager.ToLightTheme();
+                ThemeManager.ToDarkTheme();
             }
             _serviceStarted = true;
         }
