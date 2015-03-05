@@ -22,9 +22,91 @@
 
     <local:BasePage.Resources>
         <localConverters:CommentEnabledConverter x:Key="CommentEnabledConverter" />
-        <converters:BooleanToBrushConverter x:Key="IsOnColourConverter"
-                                            TrueValue="{ThemeResource CrossBrush}"
-                                            FalseValue="{ThemeResource ApplicationForegroundThemeBrush}"/>
+        <Style x:Key="DoubleContentStyle"
+               TargetType="controls:CustomButton">
+            <Setter Property="Background"
+                    Value="Transparent" />
+            <Setter Property="BorderThickness"
+                    Value="0" />
+            <Setter Property="Padding"
+                    Value="0" />
+            <Setter Property="HorizontalContentAlignment"
+                    Value="Stretch" />
+            <Setter Property="HorizontalAlignment"
+                    Value="Stretch" />
+            <Setter Property="MinWidth"
+                    Value="0" />
+            <Setter Property="MinHeight"
+                    Value="0" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="controls:CustomButton">
+                        <Border Background="{TemplateBinding Background}"
+                                Padding="{TemplateBinding Padding}"
+                                Tag="{TemplateBinding Tag}"
+                                x:Name="MainBorder">
+                            <VisualStateManager.VisualStateGroups>
+                                <VisualStateGroup x:Name="CommonStates">
+                                    <VisualStateGroup.Transitions>
+                                        <VisualTransition From="Pressed"
+                                                          To="PointerOver">
+                                            <Storyboard>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="Container" />
+                                                <PointerUpThemeAnimation Storyboard.TargetName="SecondContainer" />
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition From="PointerOver"
+                                                          To="Normal">
+                                            <Storyboard>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="Container" />
+                                                <PointerUpThemeAnimation Storyboard.TargetName="SecondContainer" />
+                                            </Storyboard>
+                                        </VisualTransition>
+                                        <VisualTransition From="Pressed"
+                                                          To="Normal">
+                                            <Storyboard>
+                                                <PointerUpThemeAnimation Storyboard.TargetName="Container" />
+                                                <PointerUpThemeAnimation Storyboard.TargetName="SecondContainer" />
+                                            </Storyboard>
+                                        </VisualTransition>
+                                    </VisualStateGroup.Transitions>
+                                    <VisualState x:Name="Normal" />
+                                    <VisualState x:Name="PointerOver" />
+                                    <VisualState x:Name="Pressed">
+                                        <Storyboard>
+                                            <PointerDownThemeAnimation Storyboard.TargetName="Container" />
+                                            <PointerDownThemeAnimation Storyboard.TargetName="SecondContainer" />
+                                        </Storyboard>
+                                    </VisualState>
+                                    <VisualState x:Name="Disabled">
+                                        <Storyboard>
+                                            <PointerUpThemeAnimation Storyboard.TargetName="Container" />
+                                            <PointerUpThemeAnimation Storyboard.TargetName="SecondContainer" />
+                                        </Storyboard>
+                                    </VisualState>
+                                </VisualStateGroup>
+                            </VisualStateManager.VisualStateGroups>
+                            <Grid>
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Foreground="{ThemeResource ApplicationForegroundThemeBrush}"
+                                                  Content="{TemplateBinding Content}"
+                                                  x:Name="Container"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  Visibility="{Binding Tag, ElementName=MainBorder, Converter={StaticResource InverseVisibilityConverter}}"/>
+                                <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                                  Content="{TemplateBinding Content}"
+                                                  x:Name="SecondContainer"
+                                                  ContentTemplate="{TemplateBinding ContentTemplate}"
+                                                  Foreground="{ThemeResource CrossBrush}" 
+                                                  Visibility="{Binding Tag, ElementName=MainBorder, Converter={StaticResource VisibilityConverter}}"/>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </local:BasePage.Resources>
 
     <local:BasePage.BottomAppBar>
@@ -34,7 +116,7 @@
                               Label="home"
                               Icon="Home"
                               Command="{Binding NavigateHomeCommand}"
-                              Visibility="{Binding ShowHomeButton, Converter={StaticResource VisibilityConverter}}"/>
+                              Visibility="{Binding ShowHomeButton, Converter={StaticResource VisibilityConverter}}" />
                 <AppBarButton Label="{Binding IsPinned, Converter={StaticResource PinUnpinConverter}}"
                               x:Name="PinButton"
                               Click="PinButton_OnClick">
@@ -186,22 +268,22 @@
                                     <controls:CustomButton HorizontalAlignment="Center"
                                                            Margin="6,0,6,3"
                                                            Content="&#xE1FE;"
-                                                           Style="{StaticResource EmptyButtonStyle}"
+                                                           Style="{StaticResource DoubleContentStyle}"
                                                            FontFamily="{StaticResource SegoeUISymbolsFont}"
                                                            FontSize="35"
                                                            TapCommand="{Binding Video.UpVoteCommand}"
-                                                           Foreground="{Binding Video.IsUpVote, Converter={StaticResource IsOnColourConverter}}"
-                                                           IsEnabled="{Binding Video.GettingVideoInfo, Converter={StaticResource NegativeBooleanConverter}}"/>
+                                                           Tag="{Binding Video.IsUpVote}"
+                                                           IsEnabled="{Binding Video.GettingVideoInfo, Converter={StaticResource NegativeBooleanConverter}}" />
 
                                     <controls:CustomButton HorizontalAlignment="Center"
                                                            Content="&#xE1FC;"
                                                            Margin="6,0,6,3"
-                                                           Style="{StaticResource EmptyButtonStyle}"
+                                                           Style="{StaticResource DoubleContentStyle}"
                                                            FontFamily="{StaticResource SegoeUISymbolsFont}"
                                                            FontSize="35"
                                                            TapCommand="{Binding Video.DownVoteCommand}"
-                                                           Foreground="{Binding Video.IsDownVote, Converter={StaticResource IsOnColourConverter}}"
-                                                           IsEnabled="{Binding Video.GettingVideoInfo, Converter={StaticResource NegativeBooleanConverter}}"/>
+                                                           Tag="{Binding Video.IsDownVote}"
+                                                           IsEnabled="{Binding Video.GettingVideoInfo, Converter={StaticResource NegativeBooleanConverter}}" />
 
                                     <TextBlock Text="{Binding Video.Score}"
                                                Style="{StaticResource BodyTextBlockStyle}"
