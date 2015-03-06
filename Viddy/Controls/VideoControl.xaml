@@ -10,7 +10,7 @@
              d:DataContext="{Binding VideoPlayer.Video, Source={StaticResource Locator}}">
 
     <Grid Margin="0,0,0,2">
-        <local:CustomButton Style="{StaticResource EmptyButtonStyle}"
+        <local:TapButton Style="{StaticResource EmptyButtonStyle}"
                             TapCommand="{Binding OpenVideoCommand}">
             <Grid Height="200"
                   Holding="ContainerGrid_OnHolding"
@@ -93,6 +93,6 @@
                                Margin="6,0" />
                 </StackPanel>
             </Grid>
-        </local:CustomButton>
+        </local:TapButton>
     </Grid>
 </UserControl>

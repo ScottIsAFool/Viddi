@@ -85,7 +85,7 @@
                                                  Grid.ColumnSpan="2"
                                                  Padding="0" />
 
-                <localControls:CustomButton Grid.Column="1"
+                <localControls:TapButton Grid.Column="1"
                                             TapCommand="{Binding LogInLogOutCommand}"
                                             Style="{StaticResource EmptyButtonStyle}"
                                             Margin="0,15,0,6"
@@ -149,7 +149,7 @@
                                    HorizontalAlignment="Center"
                                    Foreground="{ThemeResource SubtleBrush}" />
                     </StackPanel>
-                </localControls:CustomButton>
+                </localControls:TapButton>
             </Grid>
         </Grid>
 

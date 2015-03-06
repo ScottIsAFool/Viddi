@@ -18,7 +18,7 @@
     </UserControl.Resources>
 
     <Grid VerticalAlignment="Top">
-        <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+        <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                VerticalContentAlignment="Stretch"
                                TapCommand="{Binding NavigationActionCommand}">
             <Grid VerticalAlignment="Top">
@@ -42,6 +42,6 @@
                                Foreground="{Binding Notification.Read, Converter={StaticResource UnreadBrushConverter}}"/>
                 </StackPanel>
             </Grid>
-        </controls:CustomButton>
+        </controls:TapButton>
     </Grid>
 </UserControl>

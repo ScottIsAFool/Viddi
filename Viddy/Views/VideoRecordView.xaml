@@ -183,7 +183,7 @@
 
                 </Grid.ColumnDefinitions>
 
-                <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                        Grid.Row="1"
                                        HorizontalAlignment="Left"
                                        x:Name="FlashButton"
@@ -223,9 +223,9 @@
                             </Grid>
                         </Border>
                     </Viewbox>
-                </controls:CustomButton>
+                </controls:TapButton>
 
-                <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                        x:Name="FrontFacingButton"
                                        Grid.Row="1"
                                        Grid.Column="2"
@@ -268,7 +268,7 @@
                             </Grid>
                         </Border>
                     </Viewbox>
-                </controls:CustomButton>
+                </controls:TapButton>
 
                 <Border BorderBrush="{ThemeResource ButtonBackgroundBrush}"
                         BorderThickness="2"
@@ -284,23 +284,23 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                        <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                                TapCommand="{Binding VenueTextTappedCommand}">
                             <TextBlock Text="{Binding LocationText}"
                                        TextAlignment="Center"
                                        TextWrapping="NoWrap"
                                        TextTrimming="CharacterEllipsis"
                                        Style="{StaticResource BodyTextBlockStyle}" />
-                        </controls:CustomButton>
+                        </controls:TapButton>
 
-                        <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                        <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                                Grid.Column="1"
                                                Width="25"
                                                Visibility="{Binding HasVenue, Converter={StaticResource VisibilityConverter}}"
                                                TapCommand="{Binding ClearLocationCommand}">
                             <SymbolIcon Symbol="Clear"
                                         Foreground="{ThemeResource ApplicationForegroundThemeBrush}" />
-                        </controls:CustomButton>
+                        </controls:TapButton>
                     </Grid>
                 </Border>
 
@@ -331,14 +331,14 @@
                         </ListView.HeaderTemplate>
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                                <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                                        Margin="0,0,0,6"
                                                        TapCommand="{Binding VideoRecord.Foursquare.VenueTappedCommand, Source={StaticResource Locator}}"
                                                        CommandParameter="{Binding}">
                                     <TextBlock Text="{Binding Name}"
                                                Style="{StaticResource BodyTextBlockStyle}"
                                                Padding="2" />
-                                </controls:CustomButton>
+                                </controls:TapButton>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
@@ -353,7 +353,7 @@
                        Visibility="Collapsed" 
                        Margin="19,0,19,-12"/>
 
-            <controls:CustomButton Grid.Row="2"
+            <controls:TapButton Grid.Row="2"
                                    Style="{StaticResource EmptyButtonStyle}"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Center"
@@ -381,7 +381,7 @@
                     </Border>
                 </Viewbox>
 
-            </controls:CustomButton>
+            </controls:TapButton>
 
             <CheckBox Grid.Row="2"
                       HorizontalAlignment="Center"

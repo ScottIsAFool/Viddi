@@ -57,7 +57,7 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                        <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                                TapCommand="{Binding Avatar.ChangeCoverCommand}"
                                                IsEnabled="{Binding Avatar.ChangingCover, Converter={StaticResource NegativeBooleanConverter}}"
                                                VerticalAlignment="Center"
@@ -83,9 +83,9 @@
                                                 Visibility="{Binding Auth.AuthenticationInfo.User.CoverUrl, Source={StaticResource Locator}, Converter={StaticResource NullToVisibilityConverter}}" />
                                 </Grid>
                             </Border>
-                        </controls:CustomButton>
+                        </controls:TapButton>
 
-                        <controls:CustomButton Grid.Column="2"
+                        <controls:TapButton Grid.Column="2"
                                                Style="{StaticResource EmptyButtonStyle}"
                                                HorizontalContentAlignment="Left"
                                                HorizontalAlignment="Left"
@@ -108,7 +108,7 @@
                                                 Width="26" />
                                 </Viewbox>
                             </Border>
-                        </controls:CustomButton>
+                        </controls:TapButton>
                     </Grid>
 
                 </Grid>
@@ -134,7 +134,7 @@
                                                             BorderBrush="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                                                             DisplayDefaultAvatar="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}, Converter={StaticResource InverseNullBooleanConverter}}"
                                                             IsChanging="{Binding Avatar.ChangingAvatar}" />
-                            <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                            <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                                    TapCommand="{Binding Avatar.ChangeAvatarCommand}"
                                                    IsEnabled="{Binding Avatar.ChangingAvatar, Converter={StaticResource NegativeBooleanConverter}}"
                                                    HorizontalAlignment="Center"
@@ -158,9 +158,9 @@
                                                     Visibility="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}, Converter={StaticResource NullToVisibilityConverter}}" />
                                     </Grid>
                                 </Border>
-                            </controls:CustomButton>
+                            </controls:TapButton>
 
-                            <controls:CustomButton Grid.Column="1"
+                            <controls:TapButton Grid.Column="1"
                                                    Style="{StaticResource EmptyButtonStyle}"
                                                    HorizontalContentAlignment="Left"
                                                    HorizontalAlignment="Left"
@@ -183,7 +183,7 @@
                                                     Width="26" />
                                     </Viewbox>
                                 </Border>
-                            </controls:CustomButton>
+                            </controls:TapButton>
                         </Grid>
                     </Grid>
                     <TextBox Text="{Binding Name, Mode=TwoWay}"

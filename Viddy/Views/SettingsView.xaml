@@ -190,7 +190,7 @@
                         <ToggleSwitch Header="Location service"
                                       x:Uid="HeaderLocationService"
                                       IsOn="{Binding IsLocationOn, Mode=TwoWay}" />
-                        <controls:CustomHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
+                        <controls:TapHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
                                                         TapCommand="{Binding NavigateToPrivacyCommand}">
                             <TextBlock Style="{StaticResource BodyTextBlockStyle}"
                                        FontWeight="SemiBold">
@@ -199,7 +199,7 @@
                                          x:Uid="LabelPrivacy"/>
                                 </Underline>
                             </TextBlock>
-                        </controls:CustomHyperlinkButton>
+                        </controls:TapHyperlinkButton>
                     </StackPanel>
                     <StackPanel Orientation="Vertical"
                                 Margin="0,12">

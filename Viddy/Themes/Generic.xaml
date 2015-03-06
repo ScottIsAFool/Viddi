@@ -22,7 +22,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ProfilePictureControl">
-                    <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                    <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                            IsHitTestVisible="{TemplateBinding IsHitTestVisible}"
                                            TapCommand="{TemplateBinding TappedCommand}">
                         <Grid>
@@ -102,7 +102,7 @@
                                 </Viewbox>
                             </Grid>
                         </Grid>
-                    </controls:CustomButton>
+                    </controls:TapButton>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -652,7 +652,7 @@
                                        Margin="12,0" />
                         </Viewbox>
 
-                        <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                        <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                                Grid.Column="2"
                                                HorizontalContentAlignment="Right"
                                                Margin="0,-10,0,-10"
@@ -662,7 +662,7 @@
                                      StretchDirection="DownOnly">
                                 <TextBlock Text="{TemplateBinding Twitter}" />
                             </Viewbox>
-                        </controls:CustomButton>
+                        </controls:TapButton>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

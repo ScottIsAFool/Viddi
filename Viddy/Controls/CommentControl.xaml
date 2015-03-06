@@ -26,7 +26,7 @@
                 </MenuFlyout>
             </FlyoutBase.AttachedFlyout>
 
-            <localControls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+            <localControls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                         TapCommand="{Binding NavigateTouserCommand}"
                                         Grid.Column="0"
                                         VerticalAlignment="Top">
@@ -34,21 +34,21 @@
                                                      Width="60"
                                                      DataContext="{Binding Comment}"
                                                      AvatarUrl="{Binding User.AvatarUrl}" />
-            </localControls:CustomButton>
+            </localControls:TapButton>
 
 
             <StackPanel Orientation="Vertical"
                         Margin="12,0,0,0"
                         Grid.Column="1"
                         VerticalAlignment="Top">
-                <localControls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                <localControls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                             TapCommand="{Binding NavigateTouserCommand}"
                                             VerticalAlignment="Top">
                     <TextBlock Text="{Binding Username, FallbackValue=scottisafool}"
                                Style="{StaticResource BodyTextBlockStyle}"
                                TextTrimming="CharacterEllipsis"
                                FontWeight="Bold" />
-                </localControls:CustomButton>
+                </localControls:TapButton>
 
                 <TextBlock Text="{Binding Comment.Body}"
                            Style="{StaticResource BodyTextBlockStyle}" />

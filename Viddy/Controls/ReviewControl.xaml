@@ -49,7 +49,7 @@
                                Style="{StaticResource BodyTextBlockStyle}" />
                 </StackPanel>
 
-                <controls:CustomButton Grid.Row="1"
+                <controls:TapButton Grid.Row="1"
                                        Grid.Column="0"
                                        Content="no"
                                        x:Uid="No"
@@ -57,7 +57,7 @@
                                        TapCommand="{Binding NoReviewCommand}"
 									   Background="{ThemeResource HeaderBrush}"/>
 
-                <controls:CustomButton Grid.Row="1"
+                <controls:TapButton Grid.Row="1"
                                        Grid.Column="1"
                                        Style="{StaticResource ReviewButtonStyle}"
                                        Content="yes"
@@ -89,7 +89,7 @@
                                Style="{StaticResource BodyTextBlockStyle}" />
                 </StackPanel>
 
-                <controls:CustomButton Grid.Row="1"
+                <controls:TapButton Grid.Row="1"
                                        Grid.Column="0"
                                        Style="{StaticResource ReviewButtonStyle}"
                                        Content="no"
@@ -97,7 +97,7 @@
                                        TapCommand="{Binding NoFeedbackCommand}" 
 									   Background="{ThemeResource HeaderBrush}"/>
 
-                <controls:CustomButton Grid.Row="1"
+                <controls:TapButton Grid.Row="1"
                                        Grid.Column="1"
                                        Style="{StaticResource ReviewButtonStyle}"
                                        Content="yes"

@@ -93,7 +93,7 @@
                                HorizontalAlignment="Center"
                                TextAlignment="Center"
                                FontFamily="Global User Interface" />
-                    <controls:CustomHyperlinkButton TapCommand="{Binding RefreshCommand}"
+                    <controls:TapHyperlinkButton TapCommand="{Binding RefreshCommand}"
                                                     HorizontalAlignment="Center"
                                                     HorizontalContentAlignment="Center">
                         <TextBlock FontSize="{StaticResource TextStyleLargeFontSize}">
@@ -102,7 +102,7 @@
                                      x:Uid="LabelTryAgain"/>
                             </Underline>
                         </TextBlock>
-                    </controls:CustomHyperlinkButton>
+                    </controls:TapHyperlinkButton>
                 </StackPanel>
             </DataTemplate>
 

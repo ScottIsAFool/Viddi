@@ -5,10 +5,10 @@ using Windows.UI.Xaml.Input;
 
 namespace Viddy.Controls
 {
-    public class CustomHyperlinkButton : HyperlinkButton
+    public class TapHyperlinkButton : HyperlinkButton
     {
         public static readonly DependencyProperty TapCommandProperty = DependencyProperty.Register(
-            "TapCommand", typeof (ICommand), typeof (CustomHyperlinkButton), new PropertyMetadata(default(ICommand)));
+            "TapCommand", typeof (ICommand), typeof (TapHyperlinkButton), new PropertyMetadata(default(ICommand)));
 
         public ICommand TapCommand
         {
@@ -16,7 +16,7 @@ namespace Viddy.Controls
             set { SetValue(TapCommandProperty, value); }
         }
 
-        public CustomHyperlinkButton()
+        public TapHyperlinkButton()
         {
             Tapped += OnTap;
         }

@@ -42,7 +42,7 @@
             </controls:LoadingListView.FooterTemplate>
             <controls:LoadingListView.ItemTemplate>
                 <DataTemplate>
-                    <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                    <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                            TapCommand="{Binding NavigateToProfileCommand}"
                                            Margin="0,0,0,12">
                         <Grid>
@@ -59,7 +59,7 @@
                                        VerticalAlignment="Center"
                                        Margin="12,0"/>
                         </Grid>
-                    </controls:CustomButton>
+                    </controls:TapButton>
                 </DataTemplate>
             </controls:LoadingListView.ItemTemplate>
         </controls:LoadingListView>

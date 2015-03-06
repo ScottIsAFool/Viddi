@@ -5,10 +5,10 @@ using Windows.UI.Xaml.Input;
 
 namespace Viddy.Controls
 {
-    public class CustomButton : Button
+    public class TapButton : Button
     {
         public static readonly DependencyProperty TapCommandProperty = DependencyProperty.Register(
-            "TapCommand", typeof (ICommand), typeof (CustomButton), new PropertyMetadata(default(ICommand)));
+            "TapCommand", typeof (ICommand), typeof (TapButton), new PropertyMetadata(default(ICommand)));
 
         public ICommand TapCommand
         {
@@ -16,7 +16,7 @@ namespace Viddy.Controls
             set { SetValue(TapCommandProperty, value); }
         }
 
-        public CustomButton()
+        public TapButton()
         {
             Tapped += OnTap;
         }

@@ -31,7 +31,7 @@
                        Style="{StaticResource BodyTextBlockStyle}"
                        Margin="0,0,0,12"/>
             
-            <controls:CustomHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
+            <controls:TapHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
                                             TapCommand="{Binding PrivacyCommand}">
                 <TextBlock Style="{StaticResource BodyTextBlockStyle}"
                            FontWeight="SemiBold">
@@ -40,7 +40,7 @@
                              x:Uid="LabelVidMePrivacy"/>
                     </Underline>
                 </TextBlock>
-            </controls:CustomHyperlinkButton>
+            </controls:TapHyperlinkButton>
         </StackPanel>
     </Grid>
 </local:BasePage>

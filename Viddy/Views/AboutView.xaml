@@ -96,18 +96,18 @@
                       Grid.ColumnSpan="2"
                       Margin="0,12">
                     <StackPanel Orientation="Vertical">
-                        <controls:CustomHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
+                        <controls:TapHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
                                                         Margin="0,6,0,6"
                                                         TapCommand="{Binding TellAFriendCommand}"
                                                         x:Uid="LabelTellAFriend"
                                                         Content="Tell a friend" />
 
-                        <controls:CustomHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
+                        <controls:TapHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
                                                         Margin="0,6,0,6"
                                                         TapCommand="{Binding LeaveReviewCommand}"
                                                         x:Uid="LabelLeaveAReview"
                                                         Content="Leave a review" />
-                        <controls:CustomHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
+                        <controls:TapHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
                                                         Margin="0,6,0,6"
                                                         TapCommand="{Binding EmailCommand}"
                                                         x:Uid="LabelEmailFeedback"
@@ -135,14 +135,14 @@
                                               Command="{Binding DeaniTwitterCommand}"
                                               Avatar="/Assets/Pictures/deani.jpg" />
 
-                        <controls:CustomHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
+                        <controls:TapHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
                                                         Margin="0,12,0,6"
                                                         TapCommand="{Binding NavigateToToolsCommand}">
                             <TextBlock Text="Tools used"
                                        x:Uid="LabelToolsUsed"
                                        Style="{StaticResource BodyTextBlockStyle}"
                                        FontWeight="SemiBold" />
-                        </controls:CustomHyperlinkButton>
+                        </controls:TapHyperlinkButton>
                     </StackPanel>
                 </Grid>
             </Grid>

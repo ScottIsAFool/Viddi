@@ -24,12 +24,12 @@
             <StackPanel Orientation="Vertical"
                         VerticalAlignment="Top"
                         Margin="19,0">
-                <controls:CustomHyperlinkButton Content="Manage apps' access"
+                <controls:TapHyperlinkButton Content="Manage apps' access"
                                                 x:Uid="LabelManageAppsAccess"
                                                 Style="{StaticResource EmptyButtonStyle}" 
                                                 TapCommand="{Binding NavigateToAppsAccessCommand}"
                                                 Margin="0,0,0,12"/>
-                <controls:CustomHyperlinkButton Content="Manage my apps"
+                <controls:TapHyperlinkButton Content="Manage my apps"
                                                 x:Uid="LabelManageMyApps"
                                                 Style="{StaticResource EmptyButtonStyle}"
                                                 TapCommand="{Binding NavigateToMyAppsCommand}" />

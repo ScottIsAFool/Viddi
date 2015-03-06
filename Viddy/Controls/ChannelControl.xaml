@@ -11,7 +11,7 @@
              d:DataContext="{d:DesignInstance d:Type=item:ChannelItemViewModel}">
 
     <Grid>
-        <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+        <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                VerticalContentAlignment="Stretch"
                                VerticalAlignment="Stretch"
                                TapCommand="{Binding NavigateToChannel}"
@@ -40,6 +40,6 @@
                     </Border>
                 </controls:RotateContentControl>
             </Grid>
-        </controls:CustomButton>
+        </controls:TapButton>
     </Grid>
 </UserControl>

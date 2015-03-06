@@ -10,7 +10,7 @@
 
     <Grid Height="47"
           Visibility="{Binding CanLoadMore, Converter={StaticResource VisibilityConverter}}">
-        <local:CustomHyperlinkButton Command="{Binding LoadMoreCommand}"
+        <local:TapHyperlinkButton Command="{Binding LoadMoreCommand}"
                                      Content="load more"
                                      x:Uid="LoadMore"
                                      HorizontalContentAlignment="Center"

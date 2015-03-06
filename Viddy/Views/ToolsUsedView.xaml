@@ -14,7 +14,7 @@
                                   ShowGoToTopButton="False">
             <controls:LoadingListView.ItemTemplate>
                 <DataTemplate>
-                    <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                    <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                            Margin="0,0,0,12"
                                            TapCommand="{Binding Tools.OpenToolCommand, Source={StaticResource Locator}}"
                                            CommandParameter="{Binding}">
@@ -25,7 +25,7 @@
                                        Style="{StaticResource BodyTextBlockStyle}"
                                        Foreground="{ThemeResource SubtleBrush}"/>
                         </StackPanel>
-                    </controls:CustomButton>
+                    </controls:TapButton>
                 </DataTemplate>
             </controls:LoadingListView.ItemTemplate>
         </controls:LoadingListView>

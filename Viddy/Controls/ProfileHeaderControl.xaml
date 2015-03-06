@@ -72,28 +72,28 @@
 
                 <StackPanel Orientation="Horizontal"
                             Visibility="{Binding DisplayByLine, Converter={StaticResource VisibilityConverter}}">
-                    <local:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                    <local:TapButton Style="{StaticResource EmptyButtonStyle}"
                                         Visibility="{Binding UserFollowers, Converter={StaticResource NullToVisibilityConverter}}"
                                         TapCommand="{Binding NavigateToFollowersCommand}">
                         <TextBlock Text="{Binding UserFollowers}"
                                    Style="{StaticResource ByLineStyle}"
                                    Margin="0,0,12,0" />
-                    </local:CustomButton>
+                    </local:TapButton>
 
-                    <local:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                    <local:TapButton Style="{StaticResource EmptyButtonStyle}"
                                         Visibility="{Binding UserVideoCount, Converter={StaticResource NullToVisibilityConverter}}"
                                         IsHitTestVisible="False">
                         <TextBlock Text="{Binding UserVideoCount}"
                                    Style="{StaticResource ByLineStyle}"
                                    Margin="0,0,12,0" />
-                    </local:CustomButton>
-                    <local:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                    </local:TapButton>
+                    <local:TapButton Style="{StaticResource EmptyButtonStyle}"
                                         IsHitTestVisible="False"
                                         Visibility="{Binding UserFollowers, Converter={StaticResource NullToVisibilityConverter}}">
                         <TextBlock Text="{Binding UserPlays}"
                                    Style="{StaticResource ByLineStyle}"
                                    Margin="0,0,12,0" />
-                    </local:CustomButton>
+                    </local:TapButton>
                 </StackPanel>
             </StackPanel>
         </Grid>

@@ -54,7 +54,7 @@
             <Grid VerticalAlignment="Bottom"
                   Background="#C4000000">
                 <Grid Margin="19">
-                    <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                    <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                            HorizontalAlignment="Left"
                                            TapCommand="{Binding CancelCommand}"
                                            Width="{StaticResource ButtonSize}"
@@ -64,9 +64,9 @@
                               Stretch="Fill"
                               Fill="White"
                               Data="F1 M 26.9166,22.1667L 37.9999,33.25L 49.0832,22.1668L 53.8332,26.9168L 42.7499,38L 53.8332,49.0834L 49.0833,53.8334L 37.9999,42.75L 26.9166,53.8334L 22.1666,49.0833L 33.25,38L 22.1667,26.9167L 26.9166,22.1667 Z " />
-                    </controls:CustomButton>
+                    </controls:TapButton>
 
-                    <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                    <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                            HorizontalAlignment="Center"
                                            Width="{StaticResource ButtonSize}"
                                            Height="{StaticResource ButtonSize}"
@@ -86,9 +86,9 @@
                                   Data="F1 M 26.9167,23.75L 33.25,23.75L 33.25,52.25L 26.9167,52.25L 26.9167,23.75 Z M 42.75,23.75L 49.0833,23.75L 49.0833,52.25L 42.75,52.25L 42.75,23.75 Z " />
                         </Grid>
 
-                    </controls:CustomButton>
+                    </controls:TapButton>
 
-                    <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                    <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                            HorizontalAlignment="Right"
                                            Width="{StaticResource ButtonSize}"
                                            Height="{StaticResource ButtonSize}"
@@ -98,7 +98,7 @@
                               Stretch="Fill"
                               Fill="White"
                               Data="F1 M 25.3333,23.75L 50.6667,23.75L 50.6667,19L 25.3333,19L 25.3333,23.75 Z M 34.8333,60.1667L 41.1667,60.1667L 41.1667,39.5833L 49.0833,49.0833L 49.0833,39.5833L 38,26.9167L 26.9167,39.5833L 26.9167,49.0833L 34.8333,39.5833L 34.8333,60.1667 Z " />
-                    </controls:CustomButton>
+                    </controls:TapButton>
                 </Grid>
             </Grid>
         </Grid>
@@ -174,7 +174,7 @@
                               IsChecked="{Binding EditVideo.IsNsfw, Mode=TwoWay}" 
                               IsEnabled="{Binding EditVideo.CanSetNsfw}"/>
                 </Border>
-                <controls:CustomButton Style="{StaticResource EmptyButtonStyle}"
+                <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                        Content="Save"
                                        x:Uid="ButtonSave"
                                        Background="{ThemeResource TextBoxBackgroundBrush}"
