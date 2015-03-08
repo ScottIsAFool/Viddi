@@ -1,11 +1,11 @@
-﻿<UserControl x:Class="Viddy.Controls.ReviewControl"
+﻿<UserControl x:Class="Viddi.Controls.ReviewControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-             xmlns:viewModel="using:Viddy.ViewModel"
-             xmlns:controls="using:Viddy.Controls"
-             xmlns:item="using:Viddy.ViewModel.Item"
+             xmlns:viewModel="using:Viddi.ViewModel"
+             xmlns:controls="using:Viddi.Controls"
+             xmlns:item="using:Viddi.ViewModel.Item"
              mc:Ignorable="d"
              Height="200"
              d:DesignWidth="480"
@@ -44,7 +44,7 @@
                                x:Uid="ReviewHeader"
                                Style="{StaticResource BodyTextBlockStyle}"
                                FontWeight="Bold" />
-                    <TextBlock Text="Thanks for using Viddy, we hope you're enjoying it. Would you fancy giving the app a quick review?"
+                    <TextBlock Text="Thanks for using Viddi, we hope you're enjoying it. Would you fancy giving the app a quick review?"
                                x:Uid="ReviewByline"
                                Style="{StaticResource BodyTextBlockStyle}" />
                 </StackPanel>

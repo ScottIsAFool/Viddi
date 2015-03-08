@@ -1,4 +1,4 @@
-﻿namespace Viddy.Controls.Tiles
+﻿namespace Viddi.Controls.Tiles
 {
     public sealed partial class RecordTile
     {

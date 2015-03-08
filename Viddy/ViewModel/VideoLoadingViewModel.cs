@@ -5,15 +5,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Extensions;
 using GalaSoft.MvvmLight.Messaging;
-using Viddy.Core;
-using Viddy.Core.Extensions;
-using Viddy.Extensions;
-using Viddy.Model;
-using Viddy.Services;
-using Viddy.ViewModel.Item;
+using Viddi.Core;
+using Viddi.Core.Extensions;
+using Viddi.Extensions;
+using Viddi.Model;
+using Viddi.Services;
+using Viddi.ViewModel.Item;
 using VidMePortable.Model.Responses;
 
-namespace Viddy.ViewModel
+namespace Viddi.ViewModel
 {
     public class VideoLoadingViewModel : LoadingItemsViewModel<IListType>
     {

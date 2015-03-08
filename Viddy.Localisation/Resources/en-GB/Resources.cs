@@ -17,10 +17,10 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 03/08/2015 10:52:40
+// 	Generated: 03/08/2015 13:08:09
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
-namespace Viddy.Localisation
+namespace Viddi.Localisation
 {
     using Windows.ApplicationModel.Resources;
     
@@ -119,7 +119,7 @@ namespace Viddy.Localisation
         }
         
         /// <summary>
-        /// Localized resource similar to "Viddy"
+        /// Localized resource similar to "Viddi"
         /// </summary>
         public static string AppName
         {
@@ -638,11 +638,11 @@ namespace Viddy.Localisation
         /// <summary>
         /// Localized resource similar to "This is the token for this app, are you sure you wish to revoke this token? If you do, you will have to sign in again."
         /// </summary>
-        public static string RevokeViddyTokenBody
+        public static string RevokeViddiTokenBody
         {
             get
             {
-                return resourceLoader.GetString("RevokeViddyTokenBody");
+                return resourceLoader.GetString("RevokeViddiTokenBody");
             }
         }
         
@@ -691,7 +691,7 @@ namespace Viddy.Localisation
         }
         
         /// <summary>
-        /// Localized resource similar to "Viddy is an app that lets you browse and upload videos to VidMe\n\n{0}"
+        /// Localized resource similar to "Viddi is an app that lets you browse and upload videos to VidMe\n\n{0}"
         /// </summary>
         public static string TellAFriendBody
         {
@@ -702,7 +702,7 @@ namespace Viddy.Localisation
         }
         
         /// <summary>
-        /// Localized resource similar to "Check out Viddy"
+        /// Localized resource similar to "Check out Viddi"
         /// </summary>
         public static string TellAFriendTitle
         {
@@ -790,13 +790,13 @@ namespace Viddy.Localisation
         }
         
         /// <summary>
-        /// Localized resource similar to "On a Windows Phone? View the video in Viddy by clicking here: {0}"
+        /// Localized resource similar to "On a Windows Phone? View the video in Viddi by clicking here: {0}"
         /// </summary>
-        public static string ViddyWindowsPhone
+        public static string ViddiWindowsPhone
         {
             get
             {
-                return resourceLoader.GetString("ViddyWindowsPhone");
+                return resourceLoader.GetString("ViddiWindowsPhone");
             }
         }
         
@@ -911,7 +911,7 @@ namespace Viddy.Localisation
         }
         
         /// <summary>
-        /// Localized resource similar to "Viddy can only accept one file at a time"
+        /// Localized resource similar to "Viddi can only accept one file at a time"
         /// </summary>
         public static string ErrorOneFileAtATime
         {

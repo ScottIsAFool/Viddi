@@ -4,9 +4,9 @@ using Windows.Security.Cryptography;
 using Windows.Security.Cryptography.Core;
 using Windows.Security.ExchangeActiveSyncProvisioning;
 using Windows.System.Profile;
-using Viddy.Core.Services;
+using Viddi.Core.Services;
 
-namespace Viddy.Core
+namespace Viddi.Core
 {
     public static class Utils
     {

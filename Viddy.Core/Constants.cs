@@ -1,17 +1,17 @@
-﻿namespace Viddy.Core
+﻿namespace Viddi.Core
 {
     public static class Constants
     {
         public const string ClientId = "c2073268824b46cead9262f183d2433f";
         public const string ClientSecret = "9d965c6a61840e8b557245ba79c6f4a2ceb4c5c3b267aaffd967cc6be7584198";
-        public const string CallBackUrl = "http://ferretlabs.com/viddy";
+        public const string CallBackUrl = "http://ferretlabs.com/Viddi";
 
         public const string FourSquareClientId = "XVBPN1RI30UYZJ21WG1OQ0PXXOCOQDYJB00ER0Z35BQOZPEL";
         public const string FourSquareClientSecret = "J1IUOTC0M0DCNVBRU4JNPI12DKD5UDYWXNREYLTN3YZTIYXT";
         public const string FourSquareSearchUrl = "https://api.foursquare.com/v2/venues/search?client_id={0}&client_secret={1}&v=20150212&ll={2},{3}&limit=10";
         public const string FourSquareGeneralAreaUrl = FourSquareSearchUrl + "&intent=checkin&radius=1000&categoryId=4f2a25ac4b909258e854f55f";
-        public const string ViddyNotificationAgent = "Viddy.NotificationBackgroundTask";
-        public const string ViddyNotificationAgentStartPoint = "Viddy.BackgroundTask.NotificationTask";
+        public const string ViddiNotificationAgent = "Viddi.NotificationBackgroundTask";
+        public const string ViddiNotificationAgentStartPoint = "Viddi.BackgroundTask.NotificationTask";
 
         public static class StorageSettings
         {

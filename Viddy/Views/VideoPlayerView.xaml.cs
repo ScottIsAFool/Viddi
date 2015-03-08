@@ -2,7 +2,7 @@
 using Cimbalino.Toolkit.Services;
 using Microsoft.PlayerFramework;
 
-namespace Viddy.Views
+namespace Viddi.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

@@ -3,7 +3,7 @@ using Windows.Storage.FileProperties;
 using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace Viddy.Converters
+namespace Viddi.Converters
 {
     public class ThumbnailConverter : IValueConverter
     {

@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
-using Viddy.Model;
+using Viddi.Model;
 
-namespace Viddy.ViewModel
+namespace Viddi.ViewModel
 {
     public class ToolsUsedViewModel : ViewModelBase
     {

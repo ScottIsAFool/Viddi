@@ -1,6 +1,6 @@
 ﻿using Windows.ApplicationModel.Resources;
 
-namespace Viddy.Core.Services
+namespace Viddi.Core.Services
 {
     public class LocalisationLoader : ILocalisationLoader
     {
@@ -8,7 +8,7 @@ namespace Viddy.Core.Services
 
         private static ResourceLoader Loader
         {
-            get { return _loader ?? (_loader = ResourceLoader.GetForCurrentView("Viddy.Localisation/Resources")); }
+            get { return _loader ?? (_loader = ResourceLoader.GetForCurrentView("Viddi.Localisation/Resources")); }
         }
 
         public string GetString(string key)

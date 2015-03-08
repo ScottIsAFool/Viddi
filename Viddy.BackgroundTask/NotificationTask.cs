@@ -8,14 +8,14 @@ using Windows.UI.Notifications;
 using Cimbalino.Toolkit.Services;
 using NotificationsExtensions.BadgeContent;
 using NotificationsExtensions.ToastContent;
-using Viddy.Core;
-using Viddy.Core.Extensions;
-using Viddy.Core.Services;
-using Viddy.Localisation;
+using Viddi.Core;
+using Viddi.Core.Extensions;
+using Viddi.Core.Services;
+using Viddi.Localisation;
 using VidMePortable;
 using VidMePortable.Model;
 
-namespace Viddy.BackgroundTask
+namespace Viddi.BackgroundTask
 {
     public sealed class NotificationTask : IBackgroundTask
     {
@@ -146,7 +146,7 @@ namespace Viddy.BackgroundTask
         {
             if (notification == null)
             {
-                return "viddy://";
+                return "Viddi://";
             }
 
             var type = notification.NotificationType;
@@ -160,7 +160,7 @@ namespace Viddy.BackgroundTask
                     var channel = notification.Channel;
                     if (channel != null)
                     {
-                        return channel.ToViddyLink() + notificationParameter;
+                        return channel.ToViddiLink() + notificationParameter;
                     }
                     break;
                 case NotificationType.UserSubscribed:
@@ -168,7 +168,7 @@ namespace Viddy.BackgroundTask
                     var user = notification.User;
                     if (user != null)
                     {
-                        return user.ToViddyLink() + notificationParameter;
+                        return user.ToViddiLink() + notificationParameter;
                     }
                     break;
                 case NotificationType.CommentReply:
@@ -181,12 +181,12 @@ namespace Viddy.BackgroundTask
                     var video = notification.Video;
                     if (video != null)
                     {
-                        return video.ToViddyLink() + notificationParameter;
+                        return video.ToViddiLink() + notificationParameter;
                     }
                     break;
             }
 
-            return "viddy://";
+            return "Viddi://";
         }
 
         private void LoadPreviousToasts()

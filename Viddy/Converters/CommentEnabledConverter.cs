@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Linq;
 using Cimbalino.Toolkit.Converters;
 
-namespace Viddy.Converters
+namespace Viddi.Converters
 {
     public class CommentEnabledConverter : MultiValueConverterBase
     {

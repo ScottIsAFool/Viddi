@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Windows.Foundation.Collections;
 
-namespace Viddy.Common
+namespace Viddi.Common
 {
     /// <summary>
     /// Implementation of IObservableMap that supports reentrancy for use as a default view

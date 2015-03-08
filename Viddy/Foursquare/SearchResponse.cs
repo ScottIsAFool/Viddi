@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using Newtonsoft.Json;
 
-namespace Viddy.Foursquare
+namespace Viddi.Foursquare
 {
     [DebuggerDisplay("Name: {Name}, Id = {Id}")]
     public class Venue

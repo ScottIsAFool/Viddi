@@ -6,17 +6,17 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
-using Viddy.Core;
-using Viddy.Core.Model;
-using Viddy.Messaging;
-using Viddy.Services;
-using Viddy.ViewModel.Account;
-using Viddy.ViewModel.Item;
-using Viddy.Views;
-using Viddy.Views.Account;
+using Viddi.Core;
+using Viddi.Core.Model;
+using Viddi.Messaging;
+using Viddi.Services;
+using Viddi.ViewModel.Account;
+using Viddi.ViewModel.Item;
+using Viddi.Views;
+using Viddi.Views.Account;
 using VidMePortable.Model;
 
-namespace Viddy.ViewModel
+namespace Viddi.ViewModel
 {
     /// <summary>
     /// This class contains properties that the main View can data bind to.

@@ -1,10 +1,10 @@
 ﻿using System;
 using Windows.UI.Xaml.Data;
 using GalaSoft.MvvmLight.Ioc;
-using Viddy.Core.Services;
-using Viddy.Model;
+using Viddi.Core.Services;
+using Viddi.Model;
 
-namespace Viddy.Converters
+namespace Viddi.Converters
 {
     public class FrequencyConverter : IValueConverter
     {

@@ -1,9 +1,9 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Viddy.Model;
-using Viddy.ViewModel;
+using Viddi.Model;
+using Viddi.ViewModel;
 
-namespace Viddy.Controls
+namespace Viddi.Controls
 {
     public class ItemTypeDataTemplateSelector : DataTemplateSelector
     {

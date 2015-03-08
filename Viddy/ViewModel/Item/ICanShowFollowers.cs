@@ -1,6 +1,6 @@
-using Viddy.ViewModel.Account;
+using Viddi.ViewModel.Account;
 
-namespace Viddy.ViewModel.Item
+namespace Viddi.ViewModel.Item
 {
     public interface ICanShowFollowers
     {

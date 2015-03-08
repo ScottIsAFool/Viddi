@@ -4,18 +4,18 @@ using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Viddy.Core;
-using Viddy.Core.Extensions;
-using Viddy.Core.Model;
-using Viddy.Extensions;
-using Viddy.Messaging;
-using Viddy.Services;
-using Viddy.ViewModel.Item;
-using Viddy.Views;
+using Viddi.Core;
+using Viddi.Core.Extensions;
+using Viddi.Core.Model;
+using Viddi.Extensions;
+using Viddi.Messaging;
+using Viddi.Services;
+using Viddi.ViewModel.Item;
+using Viddi.Views;
 using VidMePortable;
 using VidMePortable.Model;
 
-namespace Viddy.ViewModel
+namespace Viddi.ViewModel
 {
     public class ChannelViewModel : ViewModelBase, IBackSupportedViewModel, ICanHasHomeButton
     {

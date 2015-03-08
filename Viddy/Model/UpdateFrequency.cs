@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using Viddy.Core.Extensions;
+using Viddi.Core.Extensions;
 
-namespace Viddy.Model
+namespace Viddi.Model
 {
     public enum UpdateFrequency
     {

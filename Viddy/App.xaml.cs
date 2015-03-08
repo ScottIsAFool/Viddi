@@ -16,19 +16,19 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using ScottIsAFool.WindowsPhone.Logging;
-using Viddy.Common;
-using Viddy.Core;
-using Viddy.Core.Extensions;
-using Viddy.Core.Model;
-using Viddy.Messaging;
-using Viddy.Services;
-using Viddy.ViewModel;
-using Viddy.ViewModel.Item;
-using Viddy.Views;
-using Viddy.Views.Account;
+using Viddi.Common;
+using Viddi.Core;
+using Viddi.Core.Extensions;
+using Viddi.Core.Model;
+using Viddi.Messaging;
+using Viddi.Services;
+using Viddi.ViewModel;
+using Viddi.ViewModel.Item;
+using Viddi.Views;
+using Viddi.Views.Account;
 using VidMePortable.Model;
 
-namespace Viddy
+namespace Viddi
 {
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
@@ -36,7 +36,7 @@ namespace Viddy
     public sealed partial class App
     {
         private TransitionCollection _transitions;
-        private readonly ILog Log;
+        private readonly ILog _log;
 
         public static ViewModelLocator Locator
         {
@@ -52,7 +52,7 @@ namespace Viddy
             InitializeComponent();
             Suspending += OnSuspending;
             UnhandledException += OnUnhandledException;
-            Log = new WinLogger(GetType());
+            _log = new WinLogger(GetType());
             WinLogger.LogConfiguration = new LogConfiguration {LoggingIsEnabled = true, LogType = LogType.WriteToFile};
         }
 
@@ -63,7 +63,7 @@ namespace Viddy
                 Debugger.Break();
             }
 
-            Log.ErrorException("Unhandled", e.Exception);
+            _log.ErrorException("Unhandled", e.Exception);
 
             e.Handled = true;
         }
@@ -88,7 +88,7 @@ namespace Viddy
 
             AppStarted();
 
-            if (!string.IsNullOrEmpty(e.Arguments) && Uri.IsWellFormedUriString(e.Arguments, UriKind.Absolute) && e.Arguments.StartsWith("viddy://"))
+            if (!string.IsNullOrEmpty(e.Arguments) && Uri.IsWellFormedUriString(e.Arguments, UriKind.Absolute) && e.Arguments.StartsWith("viddi://"))
             {
                 var uri = new Uri(e.Arguments);
                 if (!string.IsNullOrEmpty(uri.Host))
@@ -139,7 +139,7 @@ namespace Viddy
                 }
 
                 rootFrame.ContentTransitions = null;
-                rootFrame.Navigated += RootFrame_FirstNavigated;
+                rootFrame.Navigated += RootFrameFirstNavigated;
 
                 // When the navigation stack isn't restored navigate to the first page,
                 // configuring the new page by passing required information as a navigation
@@ -284,12 +284,12 @@ namespace Viddy
 
         private static void HandleUriLaunch(Uri uri)
         {
-            // viddy://search?query={0}&nsfw=true/false
-            // viddy://record
-            // viddy://
-            // viddy://user?id={0}
-            // viddy://channel?id={0}
-            // viddy://video?id={0}
+            // viddi://search?query={0}&nsfw=true/false
+            // viddi://record
+            // viddi://
+            // viddi://user?id={0}
+            // viddi://channel?id={0}
+            // viddi://video?id={0}
 
             Type pageToGoTo;
             var query = uri.QueryString();
@@ -377,11 +377,14 @@ namespace Viddy
         /// </summary>
         /// <param name="sender">The object where the handler is attached.</param>
         /// <param name="e">Details about the navigation event.</param>
-        private void RootFrame_FirstNavigated(object sender, NavigationEventArgs e)
+        private void RootFrameFirstNavigated(object sender, NavigationEventArgs e)
         {
             var rootFrame = sender as Frame;
-            rootFrame.ContentTransitions = _transitions ?? new TransitionCollection { new NavigationThemeTransition() };
-            rootFrame.Navigated -= RootFrame_FirstNavigated;
+            if (rootFrame != null)
+            {
+                rootFrame.ContentTransitions = _transitions ?? new TransitionCollection {new NavigationThemeTransition()};
+                rootFrame.Navigated -= RootFrameFirstNavigated;
+            }
         }
 
         /// <summary>

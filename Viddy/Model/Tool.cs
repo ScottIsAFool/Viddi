@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace Viddy.Model
+namespace Viddi.Model
 {
     public class Tool
     {

@@ -1,7 +1,7 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
-using Viddy.ViewModel.Item;
+using Viddi.ViewModel.Item;
 
-namespace Viddy.Messaging
+namespace Viddi.Messaging
 {
     public class ChannelMessage : NotificationMessage
     {

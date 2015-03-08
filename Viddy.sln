@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30501.0
+VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viddy", "Viddy\Viddy.csproj", "{EC0F5D0C-D402-4DDF-90F1-CD515049296C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viddi", "Viddy\Viddi.csproj", "{EC0F5D0C-D402-4DDF-90F1-CD515049296C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViddyLauncher", "ViddyLauncher\ViddyLauncher.csproj", "{3B99D7F3-A634-4052-B7E6-0C4692C56248}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViddiLauncher", "ViddyLauncher\ViddiLauncher.csproj", "{3B99D7F3-A634-4052-B7E6-0C4692C56248}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viddy.BackgroundTask", "Viddy.BackgroundTask\Viddy.BackgroundTask.csproj", "{5F3FCB6F-4203-4555-BD9C-A28B95F9F91E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viddi.BackgroundTask", "Viddy.BackgroundTask\Viddi.BackgroundTask.csproj", "{5F3FCB6F-4203-4555-BD9C-A28B95F9F91E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viddy.Core", "Viddy.Core\Viddy.Core.csproj", "{D0DC6C8B-6813-40BD-80F1-2B70503BF43A}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viddi.Core", "Viddy.Core\Viddi.Core.csproj", "{D0DC6C8B-6813-40BD-80F1-2B70503BF43A}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2DAD1903-4893-429C-85F3-2165893971BE}"
 	ProjectSection(SolutionItems) = preProject
@@ -18,7 +18,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".nuget", ".nuget", "{2DAD19
 		.nuget\NuGet.targets = .nuget\NuGet.targets
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viddy.Localisation", "Viddy.Localisation\Viddy.Localisation.csproj", "{C7ADD5A9-3EA2-457A-A3C1-57F78B0F5F03}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Viddi.Localisation", "Viddy.Localisation\Viddi.Localisation.csproj", "{C7ADD5A9-3EA2-457A-A3C1-57F78B0F5F03}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

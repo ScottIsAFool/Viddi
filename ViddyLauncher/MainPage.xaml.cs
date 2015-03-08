@@ -15,7 +15,7 @@ using Windows.UI.Xaml.Navigation;
 
 // The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
-namespace ViddyLauncher
+namespace ViddiLauncher
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -45,40 +45,40 @@ namespace ViddyLauncher
             // this event is handled for you.
         }
 
-        private void LaunchViddyButton_OnTapped(object sender, TappedRoutedEventArgs e)
+        private void LaunchViddiButton_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            LaunchViddy(string.Empty);
+            LaunchViddi(string.Empty);
         }
 
-        private void SearchViddyButton_OnTapped(object sender, TappedRoutedEventArgs e)
+        private void SearchViddiButton_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            LaunchViddy("search?query=kendrick");
+            LaunchViddi("search?query=kendrick");
         }
 
         private void ShowUserButton_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            LaunchViddy("user?id=441167");
+            LaunchViddi("user?id=441167");
         }
 
         private void ShowChannelButton_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            LaunchViddy("channel?id=5");
+            LaunchViddi("channel?id=5");
         }
 
         private void VideoRecordButton_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            LaunchViddy("record");
+            LaunchViddi("record");
         }
 
-        private void LaunchViddy(string uri)
+        private void LaunchViddi(string uri)
         {
-            var fullUri = "viddy://" + uri;
+            var fullUri = "Viddi://" + uri;
             Windows.System.Launcher.LaunchUriAsync(new Uri(fullUri, UriKind.Absolute));
         }
 
-        private void SearchViddyNsfwButton_OnTapped(object sender, TappedRoutedEventArgs e)
+        private void SearchViddiNsfwButton_OnTapped(object sender, TappedRoutedEventArgs e)
         {
-            LaunchViddy("search?query=kendrick&nsfw=true");
+            LaunchViddi("search?query=kendrick&nsfw=true");
         }
     }
 }

@@ -2,7 +2,7 @@ using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Command;
 
-namespace Viddy.ViewModel
+namespace Viddi.ViewModel
 {
     public abstract class LoadingItemsViewModel<TItemType> : ViewModelBase
     {

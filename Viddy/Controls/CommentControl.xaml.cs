@@ -1,10 +1,10 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Controls.Primitives;
 using Windows.UI.Xaml.Input;
-using Viddy.ViewModel;
-using Viddy.ViewModel.Item;
+using Viddi.ViewModel;
+using Viddi.ViewModel.Item;
 
-namespace Viddy.Controls
+namespace Viddi.Controls
 {
     public sealed partial class CommentControl
     {

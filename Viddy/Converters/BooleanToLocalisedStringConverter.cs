@@ -3,9 +3,9 @@ using Windows.ApplicationModel.Resources;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Data;
 using GalaSoft.MvvmLight.Ioc;
-using Viddy.Core.Services;
+using Viddi.Core.Services;
 
-namespace Viddy.Converters
+namespace Viddi.Converters
 {
     public class BooleanToLocalisedStringConverter : DependencyObject, IValueConverter
     {

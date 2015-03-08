@@ -1,9 +1,9 @@
 ﻿using Windows.UI.Xaml.Documents;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
-using Viddy.Views.Account;
+using Viddi.Views.Account;
 
-namespace Viddy.Views
+namespace Viddi.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

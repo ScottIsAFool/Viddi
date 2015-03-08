@@ -3,7 +3,7 @@ using Windows.UI.ViewManagement;
 using Windows.UI.Xaml;
 using Microsoft.Xaml.Interactivity;
 
-namespace Viddy.Behaviours
+namespace Viddi.Behaviours
 {
     public class StatusBarBehavior : DependencyObject, IBehavior
     {

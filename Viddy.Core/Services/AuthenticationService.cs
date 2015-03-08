@@ -1,12 +1,12 @@
 ﻿using System;
 using Cimbalino.Toolkit.Services;
 using PropertyChanged;
-using Viddy.Core.Extensions;
+using Viddi.Core.Extensions;
 using VidMePortable;
 using VidMePortable.Model;
 using VidMePortable.Model.Responses;
 
-namespace Viddy.Core.Services
+namespace Viddi.Core.Services
 {
     [ImplementPropertyChanged]
     public class AuthenticationService

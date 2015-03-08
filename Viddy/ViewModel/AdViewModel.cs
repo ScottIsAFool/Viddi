@@ -1,6 +1,6 @@
-﻿using Viddy.Model;
+﻿using Viddi.Model;
 
-namespace Viddy.ViewModel
+namespace Viddi.ViewModel
 {
     public class AdViewModel : ViewModelBase, IListType
     {

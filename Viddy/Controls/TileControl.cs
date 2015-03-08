@@ -3,7 +3,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media.Imaging;
 
-namespace Viddy.Controls
+namespace Viddi.Controls
 {
     public class TileControl : Control
     {

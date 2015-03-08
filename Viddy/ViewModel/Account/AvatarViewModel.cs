@@ -5,14 +5,14 @@ using Windows.Storage;
 using Windows.Storage.Pickers;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Viddy.Core;
-using Viddy.Core.Services;
-using Viddy.Localisation;
-using Viddy.Services;
+using Viddi.Core;
+using Viddi.Core.Services;
+using Viddi.Localisation;
+using Viddi.Services;
 using VidMePortable;
 using VidMePortable.Model;
 
-namespace Viddy.ViewModel.Account
+namespace Viddi.ViewModel.Account
 {
     public class AvatarViewModel : ViewModelBase
     {

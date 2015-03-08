@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using Windows.ApplicationModel.DataTransfer;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
-using Viddy.Common;
-using Viddy.Localisation;
-using Viddy.Views.Account;
+using Viddi.Common;
+using Viddi.Localisation;
+using Viddi.Views.Account;
 using VidMePortable;
 using VidMePortable.Model;
 using VidMePortable.Model.Requests;
 
-namespace Viddy.ViewModel
+namespace Viddi.ViewModel
 {
     public class EditVideoViewModel : ViewModelBase
     {

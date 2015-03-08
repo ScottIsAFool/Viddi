@@ -9,11 +9,11 @@ using Windows.Storage;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using ScottIsAFool.WindowsPhone.Logging;
-using Viddy.Localisation;
-using Viddy.Services;
-using Viddy.Views;
+using Viddi.Localisation;
+using Viddi.Services;
+using Viddi.Views;
 
-namespace Viddy.ViewModel
+namespace Viddi.ViewModel
 {
     public class AboutViewModel : ViewModelBase
     {
@@ -95,7 +95,7 @@ namespace Viddy.ViewModel
         {
             get
             {
-                return new RelayCommand(() => _emailCompose.ShowAsync("scottisafool@live.co.uk", "Feedback from Viddy", string.Empty));
+                return new RelayCommand(() => _emailCompose.ShowAsync("scottisafool@live.co.uk", "Feedback from Viddi", string.Empty));
             }
         }
 
@@ -133,7 +133,7 @@ namespace Viddy.ViewModel
             {
                 var email = new EmailMessage();
                 email.To.Add(new EmailRecipient("scottisafool@live.co.uk", "Scott Lovegrove"));
-                email.Subject = "Logfile from Viddy (" + Version + "." + _version.Revision + ")";
+                email.Subject = "Logfile from Viddi (" + Version + "." + _version.Revision + ")";
 
                 var folder = ApplicationData.Current.LocalFolder;
                 var file = await folder.GetFileAsync(WinLogger.LogFileName);

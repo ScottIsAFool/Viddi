@@ -8,7 +8,7 @@
   <mp:PhoneIdentity PhoneProductId="55bc5448-bcff-4fcc-8cba-e85342d70bce" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
-    <DisplayName>ViddyLauncher</DisplayName>
+    <DisplayName>ViddiLauncher</DisplayName>
     <PublisherDisplayName>Scott</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
@@ -25,12 +25,12 @@
   <Applications>
     <Application Id="App"
         Executable="$targetnametoken$.exe"
-        EntryPoint="ViddyLauncher.App">
+        EntryPoint="ViddiLauncher.App">
         <m3:VisualElements
-            DisplayName="ViddyLauncher"
+            DisplayName="ViddiLauncher"
             Square150x150Logo="Assets\Logo.png"
             Square44x44Logo="Assets\SmallLogo.png"
-            Description="ViddyLauncher"
+            Description="ViddiLauncher"
             ForegroundText="light"
             BackgroundColor="transparent">
             <m3:DefaultTile Wide310x150Logo="Assets\WideLogo.png" Square71x71Logo="Assets\Square71x71Logo.png"/>

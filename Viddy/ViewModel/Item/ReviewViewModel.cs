@@ -1,11 +1,11 @@
 ﻿using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Viddy.Core;
-using Viddy.Model;
-using Viddy.Services;
+using Viddi.Core;
+using Viddi.Model;
+using Viddi.Services;
 
-namespace Viddy.ViewModel.Item
+namespace Viddi.ViewModel.Item
 {
     public class ReviewViewModel : ViewModelBase, IListType
     {
@@ -45,7 +45,7 @@ namespace Viddy.ViewModel.Item
                 return new RelayCommand(() =>
                 {
                     CloseControl();
-                    new EmailComposeService().ShowAsync("scottisafool@live.co.uk", "Feedback for Viddy", "Here are some thoughts:\n\n");
+                    new EmailComposeService().ShowAsync("scottisafool@live.co.uk", "Feedback for Viddi", "Here are some thoughts:\n\n");
                 });
             }
         }

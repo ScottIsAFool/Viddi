@@ -1,7 +1,7 @@
 ﻿using System.Linq;
 using Windows.UI.Xaml.Navigation;
 
-namespace Viddy.Views.Account
+namespace Viddi.Views.Account
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

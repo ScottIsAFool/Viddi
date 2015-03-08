@@ -1,9 +1,9 @@
 ﻿using Windows.ApplicationModel.DataTransfer;
 using GalaSoft.MvvmLight.Command;
-using Viddy.Localisation;
+using Viddi.Localisation;
 using VidMePortable.Model;
 
-namespace Viddy.ViewModel.Account.Manage
+namespace Viddi.ViewModel.Account.Manage
 {
     public class OwnedAppViewModel : ViewModelBase
     {

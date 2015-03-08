@@ -8,18 +8,18 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
-using Viddy.Core;
-using Viddy.Core.Extensions;
-using Viddy.Core.Services;
-using Viddy.Localisation;
-using Viddy.Messaging;
-using Viddy.Model;
-using Viddy.Services;
-using Viddy.Views;
+using Viddi.Core;
+using Viddi.Core.Extensions;
+using Viddi.Core.Services;
+using Viddi.Localisation;
+using Viddi.Messaging;
+using Viddi.Model;
+using Viddi.Services;
+using Viddi.Views;
 using VidMePortable;
 using VidMePortable.Model;
 
-namespace Viddy.ViewModel.Item
+namespace Viddi.ViewModel.Item
 {
     public class VideoItemViewModel : LoadingItemsViewModel<CommentViewModel>, IListType
     {
@@ -523,7 +523,7 @@ namespace Viddy.ViewModel.Item
             request.Data.Properties.Title = Resources.ShareVideoTitle;
             var description = IsAnonymous ? Resources.ShareVideoTitle : string.Format(Resources.ShareVideoMessage, Video.User.Username);
             request.Data.Properties.Description = description;
-            request.Data.SetApplicationLink(new Uri(Video.ToViddyLink()));
+            request.Data.SetApplicationLink(new Uri(Video.ToViddiLink()));
 
             switch (_shareType)
             {
@@ -540,9 +540,9 @@ namespace Viddy.ViewModel.Item
         private string PrepareMessage(string description)
         {
             description += "\n\n" + Video.FullUrl + "\n\n";
-            var viddyLink = string.Format(Resources.ViddyWindowsPhone, Video.ToViddyLink());
+            var ViddiLink = string.Format(Resources.ViddiWindowsPhone, Video.ToViddiLink());
 
-            description += viddyLink;
+            description += ViddiLink;
 
             return description;
         }

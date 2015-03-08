@@ -8,7 +8,7 @@ using Microsoft.Graphics.Canvas;
 using Microsoft.Graphics.Canvas.Effects;
 using Microsoft.Graphics.Canvas.Numerics;
 
-namespace Viddy.Controls
+namespace Viddi.Controls
 {
     public sealed class BlurredImageControl : Control
     {

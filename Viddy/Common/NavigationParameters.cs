@@ -1,4 +1,4 @@
-﻿namespace Viddy.Common
+﻿namespace Viddi.Common
 {
     public class NavigationParameters
     {

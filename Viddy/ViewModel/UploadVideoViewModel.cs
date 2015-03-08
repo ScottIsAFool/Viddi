@@ -4,17 +4,17 @@ using Windows.Storage;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Viddy.Common;
-using Viddy.Core;
-using Viddy.Core.Extensions;
-using Viddy.Core.Services;
-using Viddy.Messaging;
-using Viddy.ViewModel.Item;
-using Viddy.Views;
+using Viddi.Common;
+using Viddi.Core;
+using Viddi.Core.Extensions;
+using Viddi.Core.Services;
+using Viddi.Messaging;
+using Viddi.ViewModel.Item;
+using Viddi.Views;
 using VidMePortable;
 using VidMePortable.Model.Requests;
 
-namespace Viddy.ViewModel
+namespace Viddi.ViewModel
 {
     public class UploadVideoViewModel : ViewModelBase
     {

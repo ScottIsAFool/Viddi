@@ -1,4 +1,4 @@
-﻿namespace Viddy.Controls
+﻿namespace Viddi.Controls
 {
     public sealed partial class LoadMoreControl
     {

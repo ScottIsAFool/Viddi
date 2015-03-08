@@ -1,6 +1,6 @@
 ﻿using Windows.System.Display;
 
-namespace Viddy.Services
+namespace Viddi.Services
 {
     public interface IDisplayRequestService
     {

@@ -5,11 +5,11 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using ScottIsAFool.WindowsPhone.Logging;
 using ThemeManagerRt;
-using Viddy.Common;
-using Viddy.ViewModel;
-using Viddy.ViewModel.Account;
+using Viddi.Common;
+using Viddi.ViewModel;
+using Viddi.ViewModel.Account;
 
-namespace Viddy.Views
+namespace Viddi.Views
 {
     public class BasePage : ThemeEnabledPage
     {

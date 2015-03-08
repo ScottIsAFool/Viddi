@@ -1,4 +1,4 @@
-﻿namespace Viddy.Core.Model
+﻿namespace Viddi.Core.Model
 {
     public enum TileType
     {

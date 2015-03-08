@@ -3,13 +3,13 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
-using Viddy.Common;
-using Viddy.Core.Services;
-using Viddy.Views;
+using Viddi.Common;
+using Viddi.Core.Services;
+using Viddi.Views;
 using VidMePortable;
 using VidMePortable.Model;
 
-namespace Viddy.ViewModel.Account.Manage
+namespace Viddi.ViewModel.Account.Manage
 {
     public class ManageAppsAccessViewModel : LoadingItemsViewModel<RevokeAppViewModel>
     {
@@ -31,7 +31,7 @@ namespace Viddy.ViewModel.Account.Manage
                 {
                     new RevokeAppViewModel(new Application
                     {
-                        Name = "Viddy for Windows Phone",
+                        Name = "Viddi for Windows Phone",
                         Organization = "Ferret Labs",
                         Website = "http://ferretlabs.com",
                         Description = "VidMe app for Windows Phone 8.1"

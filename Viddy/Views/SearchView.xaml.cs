@@ -1,9 +1,9 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Navigation;
 using GalaSoft.MvvmLight.Messaging;
-using Viddy.Core;
+using Viddi.Core;
 
-namespace Viddy.Views
+namespace Viddi.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.

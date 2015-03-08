@@ -2,13 +2,13 @@
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Viddy.Core;
-using Viddy.Messaging;
-using Viddy.Views;
+using Viddi.Core;
+using Viddi.Messaging;
+using Viddi.Views;
 using VidMePortable;
 using VidMePortable.Model.Responses;
 
-namespace Viddy.ViewModel
+namespace Viddi.ViewModel
 {
     public class SearchViewModel : VideoLoadingViewModel, ICanHasHomeButton
     {

@@ -9,8 +9,8 @@
     <ProjectGuid>{5F3FCB6F-4203-4555-BD9C-A28B95F9F91E}</ProjectGuid>
     <OutputType>winmdobj</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Viddy.BackgroundTask</RootNamespace>
-    <AssemblyName>Viddy.BackgroundTask</AssemblyName>
+    <RootNamespace>Viddi.BackgroundTask</RootNamespace>
+    <AssemblyName>Viddi.BackgroundTask</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
@@ -113,13 +113,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Viddy.Core\Viddy.Core.csproj">
+    <ProjectReference Include="..\Viddy.Core\Viddi.Core.csproj">
       <Project>{d0dc6c8b-6813-40bd-80f1-2b70503bf43a}</Project>
-      <Name>Viddy.Core</Name>
+      <Name>Viddi.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Viddy.Localisation\Viddy.Localisation.csproj">
+    <ProjectReference Include="..\Viddy.Localisation\Viddi.Localisation.csproj">
       <Project>{c7add5a9-3ea2-457a-a3c1-57f78b0f5f03}</Project>
-      <Name>Viddy.Localisation</Name>
+      <Name>Viddi.Localisation</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">

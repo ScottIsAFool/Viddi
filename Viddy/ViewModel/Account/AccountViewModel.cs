@@ -6,19 +6,19 @@ using Windows.Security.Authentication.Web;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Viddy.Core;
-using Viddy.Core.Services;
-using Viddy.Localisation;
-using Viddy.Messaging;
-using Viddy.ViewModel.Item;
-using Viddy.Views;
-using Viddy.Views.Account;
-using Viddy.Views.Account.Manage;
+using Viddi.Core;
+using Viddi.Core.Services;
+using Viddi.Localisation;
+using Viddi.Messaging;
+using Viddi.ViewModel.Item;
+using Viddi.Views;
+using Viddi.Views.Account;
+using Viddi.Views.Account.Manage;
 using VidMePortable;
 using VidMePortable.Model;
 using VidMePortable.Model.Responses;
 
-namespace Viddy.ViewModel.Account
+namespace Viddi.ViewModel.Account
 {
     public class AccountViewModel : VideoLoadingViewModel
     {

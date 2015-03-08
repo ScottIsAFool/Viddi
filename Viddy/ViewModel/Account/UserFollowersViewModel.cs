@@ -2,13 +2,13 @@
 using System.Collections.Generic;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Messaging;
-using Viddy.Core;
-using Viddy.Core.Extensions;
-using Viddy.Messaging;
-using Viddy.ViewModel.Item;
-using Viddy.Views.Account;
+using Viddi.Core;
+using Viddi.Core.Extensions;
+using Viddi.Messaging;
+using Viddi.ViewModel.Item;
+using Viddi.Views.Account;
 
-namespace Viddy.ViewModel.Account
+namespace Viddi.ViewModel.Account
 {
     public class UserFollowersViewModel : ViewModelBase, IBackSupportedViewModel
     {

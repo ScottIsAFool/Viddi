@@ -1,14 +1,14 @@
 ﻿using System;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
-using Viddy.Common;
-using Viddy.Core.Services;
-using Viddy.Localisation;
-using Viddy.Views.Account;
+using Viddi.Common;
+using Viddi.Core.Services;
+using Viddi.Localisation;
+using Viddi.Views.Account;
 using VidMePortable;
 using VidMePortable.Model;
 
-namespace Viddy.ViewModel.Account
+namespace Viddi.ViewModel.Account
 {
     public class ManualLoginViewModel : ViewModelBase
     {

@@ -2,7 +2,7 @@
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 
-namespace Viddy.ViewModel
+namespace Viddi.ViewModel
 {
     public class PrivacyViewModel : ViewModelBase
     {

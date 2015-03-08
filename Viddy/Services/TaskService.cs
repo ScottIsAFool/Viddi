@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
-using Viddy.Core;
+using Viddi.Core;
 
-namespace Viddy.Services
+namespace Viddi.Services
 {
     public interface ITaskService
     {
@@ -18,13 +18,13 @@ namespace Viddy.Services
         {
             var backgroundStatus = await BackgroundExecutionManager.RequestAccessAsync();
 
-            var task = BackgroundTaskRegistration.AllTasks.FirstOrDefault(x => x.Value.Name == Constants.ViddyNotificationAgent);
+            var task = BackgroundTaskRegistration.AllTasks.FirstOrDefault(x => x.Value.Name == Constants.ViddiNotificationAgent);
             if (task.Value == null)
             {
                 var taskBuilder = new BackgroundTaskBuilder
                 {
-                    Name = Constants.ViddyNotificationAgent,
-                    TaskEntryPoint = Constants.ViddyNotificationAgentStartPoint
+                    Name = Constants.ViddiNotificationAgent,
+                    TaskEntryPoint = Constants.ViddiNotificationAgentStartPoint
                 };
 
                 var trigger = new TimeTrigger((uint)frequencyInMinutes, false);
@@ -35,7 +35,7 @@ namespace Viddy.Services
 
         public void RemoveService()
         {
-            var task = BackgroundTaskRegistration.AllTasks.FirstOrDefault(x => x.Value.Name == Constants.ViddyNotificationAgent);
+            var task = BackgroundTaskRegistration.AllTasks.FirstOrDefault(x => x.Value.Name == Constants.ViddiNotificationAgent);
             if (task.Value == null) return;
             
             var reg = task.Value;

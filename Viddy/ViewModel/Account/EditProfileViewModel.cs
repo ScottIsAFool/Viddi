@@ -1,11 +1,11 @@
 ﻿using GalaSoft.MvvmLight.Command;
-using Viddy.Core.Services;
-using Viddy.Localisation;
-using Viddy.Services;
+using Viddi.Core.Services;
+using Viddi.Localisation;
+using Viddi.Services;
 using VidMePortable;
 using VidMePortable.Model;
 
-namespace Viddy.ViewModel.Account
+namespace Viddi.ViewModel.Account
 {
     public class EditProfileViewModel : ViewModelBase
     {

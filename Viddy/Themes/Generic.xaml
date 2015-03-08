@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="using:Viddy.Controls">
+                    xmlns:controls="using:Viddi.Controls">
 
     <Style TargetType="controls:ProfilePictureControl">
         <Setter Property="Height"
@@ -508,7 +508,7 @@
     
     <Style TargetType="controls:PageHeaderControl">
         <Setter Property="HeaderText"
-                Value="Viddy"/>
+                Value="Viddi"/>
         <Setter Property="ProfilePictureEnabled"
                 Value="True"/>
         <Setter Property="Padding"

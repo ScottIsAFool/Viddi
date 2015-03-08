@@ -16,10 +16,10 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
-using Viddy.Services;
-using Viddy.ViewModel;
+using Viddi.Services;
+using Viddi.ViewModel;
 
-namespace Viddy.Views
+namespace Viddi.Views
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
@@ -330,7 +330,7 @@ namespace Viddy.Views
 
                 _displayRequest.Request();
 
-                _fileName = string.Format("Viddy-{0}.mp4", DateTime.Now.ToString("yyyy-M-dd-HH-mm-ss"));
+                _fileName = string.Format("Viddi-{0}.mp4", DateTime.Now.ToString("yyyy-M-dd-HH-mm-ss"));
                 var folder = ApplicationData.Current.LocalCacheFolder;
                 var file = await folder.CreateFileAsync(_fileName, CreationCollisionOption.ReplaceExisting);
 

@@ -1,10 +1,10 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
-using Viddy.Core.Extensions;
+using Viddi.Core.Extensions;
 using WinRTXamlToolkit.Controls.Extensions;
 
-namespace Viddy.Controls
+namespace Viddi.Controls
 {
     public class LoadingListView : ListView
     {

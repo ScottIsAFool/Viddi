@@ -1,4 +1,4 @@
-﻿namespace Viddy.Core.Services
+﻿namespace Viddi.Core.Services
 {
     public interface ILocalisationLoader
     {

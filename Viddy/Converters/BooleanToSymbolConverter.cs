@@ -1,7 +1,7 @@
 ﻿using Windows.UI.Xaml.Controls;
 using Cimbalino.Toolkit.Converters;
 
-namespace Viddy.Converters
+namespace Viddi.Converters
 {
     public class BooleanToSymbolConverter : BooleanToValueConverterBase<Symbol>
     {

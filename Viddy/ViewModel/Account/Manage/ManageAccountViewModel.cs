@@ -1,8 +1,8 @@
 ﻿using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
-using Viddy.Views.Account.Manage;
+using Viddi.Views.Account.Manage;
 
-namespace Viddy.ViewModel.Account.Manage
+namespace Viddi.ViewModel.Account.Manage
 {
     public class ManageAccountViewModel
     {

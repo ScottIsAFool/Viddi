@@ -2,13 +2,13 @@
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
-using Viddy.Core.Services;
-using Viddy.Views;
-using Viddy.Views.Account;
+using Viddi.Core.Services;
+using Viddi.Views;
+using Viddi.Views.Account;
 using VidMePortable;
 using VidMePortable.Model.Responses;
 
-namespace Viddy.ViewModel
+namespace Viddi.ViewModel
 {
     public class MainViewModel : VideoLoadingViewModel
     {

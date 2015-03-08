@@ -8,12 +8,12 @@ using Windows.UI.Xaml.Media.Imaging;
 using Cimbalino.Toolkit.Extensions;
 using Cimbalino.Toolkit.Services;
 using ScottIsAFool.WindowsPhone.Logging;
-using Viddy.Core.Extensions;
-using Viddy.Core.Model;
-using Viddy.Localisation;
+using Viddi.Core.Extensions;
+using Viddi.Core.Model;
+using Viddi.Localisation;
 using VidMePortable.Model;
 
-namespace Viddy.Services
+namespace Viddi.Services
 {
     public interface ITileService
     {
@@ -185,7 +185,7 @@ namespace Viddy.Services
         {
             var uri = GetTileImageUrl(tileType, itemId);
             var wideUri = GetWideTileImageUrl(tileType, itemId);
-            var arguments = tileType.ToViddyLink(itemId);
+            var arguments = tileType.ToViddiLink(itemId);
             var tileId = GetTileId(tileType, itemId);
 
             if (tileType != TileType.VideoRecord)

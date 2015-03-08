@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Viddy.Services
+namespace Viddi.Services
 {
     public interface IToastService
     {

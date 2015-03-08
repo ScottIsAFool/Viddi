@@ -3,12 +3,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Extensions;
-using Viddy.Core.Extensions;
-using Viddy.ViewModel.Item;
+using Viddi.Core.Extensions;
+using Viddi.ViewModel.Item;
 using VidMePortable;
 using VidMePortable.Model.Responses;
 
-namespace Viddy.ViewModel.Account
+namespace Viddi.ViewModel.Account
 {
     public class FollowersViewModel : LoadingItemsViewModel<UserViewModel>
     {

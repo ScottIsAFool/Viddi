@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Messaging;
 using ScottIsAFool.WindowsPhone.Logging;
-using Viddy.Messaging;
+using Viddi.Messaging;
 
-namespace Viddy.ViewModel
+namespace Viddi.ViewModel
 {
     public abstract class ViewModelBase : GalaSoft.MvvmLight.ViewModelBase
     {

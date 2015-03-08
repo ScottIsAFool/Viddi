@@ -8,8 +8,8 @@
     <ProjectGuid>{D0DC6C8B-6813-40BD-80F1-2B70503BF43A}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Viddy.Core</RootNamespace>
-    <AssemblyName>Viddy.Core</AssemblyName>
+    <RootNamespace>Viddi.Core</RootNamespace>
+    <AssemblyName>Viddi.Core</AssemblyName>
     <DefaultLanguage>en-US</DefaultLanguage>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{76F1466A-8B6D-4E39-A767-685A06062A39};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
@@ -84,9 +84,9 @@
     <Content Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Viddy.Localisation\Viddy.Localisation.csproj">
+    <ProjectReference Include="..\Viddy.Localisation\Viddi.Localisation.csproj">
       <Project>{c7add5a9-3ea2-457a-a3c1-57f78b0f5f03}</Project>
-      <Name>Viddy.Localisation</Name>
+      <Name>Viddi.Localisation</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\WindowsXaml\v$(VisualStudioVersion)\Microsoft.Windows.UI.Xaml.CSharp.targets" />

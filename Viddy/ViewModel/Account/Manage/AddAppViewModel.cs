@@ -2,14 +2,14 @@
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Viddy.Common;
-using Viddy.Core;
-using Viddy.Localisation;
-using Viddy.Views.Account.Manage;
+using Viddi.Common;
+using Viddi.Core;
+using Viddi.Localisation;
+using Viddi.Views.Account.Manage;
 using VidMePortable;
 using VidMePortable.Model.Requests;
 
-namespace Viddy.ViewModel.Account.Manage
+namespace Viddi.ViewModel.Account.Manage
 {
     public class AddAppViewModel : ViewModelBase
     {

@@ -8,8 +8,8 @@
     <ProjectGuid>{EC0F5D0C-D402-4DDF-90F1-CD515049296C}</ProjectGuid>
     <OutputType>AppContainerExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Viddy</RootNamespace>
-    <AssemblyName>Viddy</AssemblyName>
+    <RootNamespace>Viddi</RootNamespace>
+    <AssemblyName>Viddi</AssemblyName>
     <DefaultLanguage>en-GB</DefaultLanguage>
     <TargetPlatformVersion>8.1</TargetPlatformVersion>
     <MinimumVisualStudioVersion>12</MinimumVisualStudioVersion>
@@ -548,17 +548,17 @@
     </SDKReference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Viddy.BackgroundTask\Viddy.BackgroundTask.csproj">
+    <ProjectReference Include="..\Viddy.BackgroundTask\Viddi.BackgroundTask.csproj">
       <Project>{5f3fcb6f-4203-4555-bd9c-a28b95f9f91e}</Project>
-      <Name>Viddy.BackgroundTask</Name>
+      <Name>Viddi.BackgroundTask</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Viddy.Core\Viddy.Core.csproj">
+    <ProjectReference Include="..\Viddy.Core\Viddi.Core.csproj">
       <Project>{d0dc6c8b-6813-40bd-80f1-2b70503bf43a}</Project>
-      <Name>Viddy.Core</Name>
+      <Name>Viddi.Core</Name>
     </ProjectReference>
-    <ProjectReference Include="..\Viddy.Localisation\Viddy.Localisation.csproj">
+    <ProjectReference Include="..\Viddy.Localisation\Viddi.Localisation.csproj">
       <Project>{c7add5a9-3ea2-457a-a3c1-57f78b0f5f03}</Project>
-      <Name>Viddy.Localisation</Name>
+      <Name>Viddi.Localisation</Name>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">

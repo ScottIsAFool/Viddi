@@ -1,6 +1,6 @@
 using System.Threading.Tasks;
 
-namespace Viddy.ViewModel.Item
+namespace Viddi.ViewModel.Item
 {
     public interface IFollowViewModel
     {

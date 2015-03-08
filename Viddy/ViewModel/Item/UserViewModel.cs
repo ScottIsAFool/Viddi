@@ -5,18 +5,18 @@ using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
 using JetBrains.Annotations;
-using Viddy.Core;
-using Viddy.Core.Services;
-using Viddy.Localisation;
-using Viddy.Messaging;
-using Viddy.Services;
-using Viddy.ViewModel.Account;
-using Viddy.Views.Account;
+using Viddi.Core;
+using Viddi.Core.Services;
+using Viddi.Localisation;
+using Viddi.Messaging;
+using Viddi.Services;
+using Viddi.ViewModel.Account;
+using Viddi.Views.Account;
 using VidMePortable;
 using VidMePortable.Model;
 using VidMePortable.Model.Responses;
 
-namespace Viddy.ViewModel.Item
+namespace Viddi.ViewModel.Item
 {
     public class UserViewModel : VideoLoadingViewModel, IProfileViewModel, IFollowViewModel, ICanShowFollowers
     {

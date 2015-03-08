@@ -3,12 +3,12 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Extensions;
-using Viddy.Core.Extensions;
-using Viddy.Services;
-using Viddy.ViewModel.Item;
+using Viddi.Core.Extensions;
+using Viddi.Services;
+using Viddi.ViewModel.Item;
 using VidMePortable;
 
-namespace Viddy.ViewModel.Account
+namespace Viddi.ViewModel.Account
 {
     public class NotificationsViewModel : LoadingItemsViewModel<NotificationItemViewModel>
     {

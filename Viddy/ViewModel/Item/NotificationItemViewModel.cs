@@ -2,13 +2,13 @@
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
-using Viddy.Core;
-using Viddy.Messaging;
-using Viddy.Views;
-using Viddy.Views.Account;
+using Viddi.Core;
+using Viddi.Messaging;
+using Viddi.Views;
+using Viddi.Views.Account;
 using VidMePortable.Model;
 
-namespace Viddy.ViewModel.Item
+namespace Viddi.ViewModel.Item
 {
     public class NotificationItemViewModel : ViewModelBase
     {

@@ -3,10 +3,10 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Extensions;
-using Viddy.ViewModel.Item;
+using Viddi.ViewModel.Item;
 using VidMePortable;
 
-namespace Viddy.ViewModel
+namespace Viddi.ViewModel
 {
     public class BrowseChannelsViewModel : LoadingItemsViewModel<ChannelItemViewModel>
     {

@@ -4,12 +4,12 @@ using Windows.UI.Xaml;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using PropertyChanged;
-using Viddy.BackgroundTask;
-using Viddy.Core.Services;
-using Viddy.Views.Account;
+using Viddi.BackgroundTask;
+using Viddi.Core.Services;
+using Viddi.Views.Account;
 using VidMePortable;
 
-namespace Viddy.Services
+namespace Viddi.Services
 {
     public interface INotificationService
     {

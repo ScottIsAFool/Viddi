@@ -1,7 +1,7 @@
 using System;
 using Windows.UI.Xaml.Data;
 
-namespace Viddy.Converters
+namespace Viddi.Converters
 {
     public class NullBooleanConverter : IValueConverter
     {

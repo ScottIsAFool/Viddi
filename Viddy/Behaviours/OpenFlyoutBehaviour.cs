@@ -2,7 +2,7 @@
 using Windows.UI.Xaml.Controls.Primitives;
 using Cimbalino.Toolkit.Behaviors;
 
-namespace Viddy.Behaviours
+namespace Viddi.Behaviours
 {
     public class OpenFlyoutBehaviour : Behavior<FrameworkElement>
     {

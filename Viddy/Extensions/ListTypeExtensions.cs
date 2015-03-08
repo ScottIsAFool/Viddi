@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using Viddy.Core.Extensions;
-using Viddy.Model;
+using Viddi.Core.Extensions;
+using Viddi.Model;
 
-namespace Viddy.Extensions
+namespace Viddi.Extensions
 {
     public static class ListTypeExtensions
     {

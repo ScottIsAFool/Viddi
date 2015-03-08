@@ -5,7 +5,7 @@ using Windows.UI.Xaml.Media;
 using Cimbalino.Toolkit.Behaviors;
 using Microsoft.PlayerFramework;
 
-namespace Viddy.Behaviours
+namespace Viddi.Behaviours
 {
     public class VideoStreamBehaviour : Behavior<MediaPlayer>
     {

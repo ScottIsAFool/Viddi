@@ -3,7 +3,7 @@ using Windows.UI;
 using Windows.UI.Xaml.Media;
 using Coding4Fun.Toolkit.Controls;
 
-namespace Viddy.Services
+namespace Viddi.Services
 {
     public class ToastService : IToastService
     {

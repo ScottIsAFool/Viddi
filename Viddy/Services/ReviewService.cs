@@ -2,11 +2,11 @@
 using Windows.ApplicationModel.Store;
 using Windows.System;
 using Cimbalino.Toolkit.Services;
-using Viddy.Core;
-using Viddy.ViewModel;
-using Viddy.ViewModel.Item;
+using Viddi.Core;
+using Viddi.ViewModel;
+using Viddi.ViewModel.Item;
 
-namespace Viddy.Services
+namespace Viddi.Services
 {
     public class ReviewService
     {

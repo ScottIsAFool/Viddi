@@ -1,7 +1,7 @@
 ﻿using System;
 using GalaSoft.MvvmLight.Ioc;
 
-namespace Viddy.Extensions
+namespace Viddi.Extensions
 {
     public static class ContainerExtensions
     {

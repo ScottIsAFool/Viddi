@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/2010/manifest" xmlns:m2="http://schemas.microsoft.com/appx/2013/manifest" xmlns:m3="http://schemas.microsoft.com/appx/2014/manifest" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest">
-  <Identity Name="43233ScottLovegrove.ViddyBeta" Publisher="CN=43EE5435-230A-4364-8907-04B5F073D610" Version="1.1.0.35" />
+  <Identity Name="43233ScottLovegrove.ViddiBeta" Publisher="CN=43EE5435-230A-4364-8907-04B5F073D610" Version="1.1.0.35" />
   <mp:PhoneIdentity PhoneProductId="a70534d1-4390-4561-8683-7919944680cf" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Viddi Beta for Vidme</DisplayName>
@@ -15,8 +15,8 @@
     <Resource Language="x-generate" />
   </Resources>
   <Applications>
-    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Viddy.App">
-      <m3:VisualElements DisplayName="Viddi Beta for Vidme" Square150x150Logo="Assets\TileIcons\Logo.png" Square44x44Logo="Assets\TileIcons\SmallLogo.png" Description="Viddy" ForegroundText="light" BackgroundColor="transparent" ToastCapable="true">
+    <Application Id="App" Executable="$targetnametoken$.exe" EntryPoint="Viddi.App">
+      <m3:VisualElements DisplayName="Viddi Beta for Vidme" Square150x150Logo="Assets\TileIcons\Logo.png" Square44x44Logo="Assets\TileIcons\SmallLogo.png" Description="Viddi" ForegroundText="light" BackgroundColor="transparent" ToastCapable="true">
         <m3:DefaultTile Wide310x150Logo="Assets\TileIcons\WideLogo.png" Square71x71Logo="Assets\TileIcons\Square71x71Logo.png">
           <m3:ShowNameOnTiles>
             <m3:ShowOn Tile="square150x150Logo" />
@@ -36,12 +36,12 @@
           </ShareTarget>
         </Extension>
         <Extension Category="windows.protocol">
-          <Protocol Name="viddy">
+          <Protocol Name="viddi">
             <Logo>Assets\TileIcons\Logo.png</Logo>
-            <DisplayName>Launch Viddy, a VidMe Windows Phone client</DisplayName>
+            <DisplayName>Launch Viddi, a VidMe Windows Phone client</DisplayName>
           </Protocol>
         </Extension>
-        <Extension Category="windows.backgroundTasks" EntryPoint="Viddy.BackgroundTask.NotificationTask">
+        <Extension Category="windows.backgroundTasks" EntryPoint="Viddi.BackgroundTask.NotificationTask">
           <BackgroundTasks>
             <Task Type="timer" />
           </BackgroundTasks>

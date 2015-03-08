@@ -1,6 +1,6 @@
 using GalaSoft.MvvmLight.Command;
 
-namespace Viddy.ViewModel
+namespace Viddi.ViewModel
 {
     public interface ICanHasHomeButton
     {

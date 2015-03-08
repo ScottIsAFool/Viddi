@@ -1,6 +1,6 @@
 using System;
 
-namespace Viddy.ViewModel
+namespace Viddi.ViewModel
 {
     public interface IBackSupportedViewModel
     {

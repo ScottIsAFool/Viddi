@@ -1,15 +1,15 @@
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
-using Viddy.Core.Services;
-using Viddy.Extensions;
-using Viddy.Model;
-using Viddy.Services;
-using Viddy.ViewModel.Account;
-using Viddy.ViewModel.Account.Manage;
+using Viddi.Core.Services;
+using Viddi.Extensions;
+using Viddi.Model;
+using Viddi.Services;
+using Viddi.ViewModel.Account;
+using Viddi.ViewModel.Account.Manage;
 using VidMePortable;
 
-namespace Viddy.ViewModel
+namespace Viddi.ViewModel
 {
     /// <summary>
     /// This class contains static references to all the view models in the

@@ -5,13 +5,13 @@ using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
-using Viddy.Core.Extensions;
-using Viddy.Foursquare;
-using Viddy.Localisation;
-using Viddy.Model;
-using Viddy.Views;
+using Viddi.Core.Extensions;
+using Viddi.Foursquare;
+using Viddi.Localisation;
+using Viddi.Model;
+using Viddi.Views;
 
-namespace Viddy.ViewModel
+namespace Viddi.ViewModel
 {
     public class FoursqureViewModel : ViewModelBase
     {

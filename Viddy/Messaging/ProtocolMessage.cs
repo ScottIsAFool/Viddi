@@ -1,6 +1,6 @@
 ﻿using GalaSoft.MvvmLight.Messaging;
 
-namespace Viddy.Messaging
+namespace Viddi.Messaging
 {
     public class ProtocolMessage : MessageBase
     {

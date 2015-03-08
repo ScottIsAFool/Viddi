@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
-using Viddy.Core;
-using Viddy.Localisation;
+using Viddi.Core;
+using Viddi.Localisation;
 using VidMePortable;
 using VidMePortable.Model;
 
-namespace Viddy.ViewModel.Account.Manage
+namespace Viddi.ViewModel.Account.Manage
 {
     public class RevokeAppViewModel : ViewModelBase
     {
@@ -36,7 +36,7 @@ namespace Viddy.ViewModel.Account.Manage
                         if (app.ClientId == Constants.ClientId)
                         {
                             var result = await _messageBoxService.ShowAsync(
-                                Resources.RevokeViddyTokenBody, 
+                                Resources.RevokeViddiTokenBody, 
                                 Resources.MessageAreYouSureTitle,
                                 new List<string> { Resources.YesText, Resources.NoText });
                             if (result == 1)

@@ -3,7 +3,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Media;
 
-namespace Viddy.Controls
+namespace Viddi.Controls
 {
     [Windows.UI.Xaml.Markup.ContentProperty(Name = "Content")]
     public sealed class RotateContentControl : Control

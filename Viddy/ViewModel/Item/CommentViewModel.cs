@@ -3,16 +3,16 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
-using Viddy.Core;
-using Viddy.Core.Services;
-using Viddy.Localisation;
-using Viddy.Messaging;
-using Viddy.Model;
-using Viddy.Views.Account;
+using Viddi.Core;
+using Viddi.Core.Services;
+using Viddi.Localisation;
+using Viddi.Messaging;
+using Viddi.Model;
+using Viddi.Views.Account;
 using VidMePortable;
 using VidMePortable.Model;
 
-namespace Viddy.ViewModel.Item
+namespace Viddi.ViewModel.Item
 {
     public class CommentViewModel : ViewModelBase, IListType
     {

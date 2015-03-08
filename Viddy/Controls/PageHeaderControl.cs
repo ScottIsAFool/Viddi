@@ -5,9 +5,9 @@ using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
-using Viddy.Views.Account;
+using Viddi.Views.Account;
 
-namespace Viddy.Controls
+namespace Viddi.Controls
 {
     public class PageHeaderControl : Control
     {

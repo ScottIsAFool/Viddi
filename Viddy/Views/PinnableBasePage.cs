@@ -1,10 +1,10 @@
 ﻿using System.Threading.Tasks;
 using Windows.UI.Xaml;
 using GalaSoft.MvvmLight.Ioc;
-using Viddy.Services;
-using Viddy.ViewModel;
+using Viddi.Services;
+using Viddi.ViewModel;
 
-namespace Viddy.Views
+namespace Viddi.Views
 {
     public class PinnableBasePage : BasePage
     {
