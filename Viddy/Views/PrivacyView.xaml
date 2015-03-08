@@ -5,6 +5,7 @@
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 xmlns:controls="using:Viddi.Controls"
+                xmlns:controls1="using:ScottIsAFool.Windows.Controls"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding Privacy, Source={StaticResource Locator}}">
@@ -31,7 +32,7 @@
                        Style="{StaticResource BodyTextBlockStyle}"
                        Margin="0,0,0,12"/>
             
-            <controls:TapHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
+            <controls1:TapHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
                                             TapCommand="{Binding PrivacyCommand}">
                 <TextBlock Style="{StaticResource BodyTextBlockStyle}"
                            FontWeight="SemiBold">
@@ -40,7 +41,7 @@
                              x:Uid="LabelVidMePrivacy"/>
                     </Underline>
                 </TextBlock>
-            </controls:TapHyperlinkButton>
+            </controls1:TapHyperlinkButton>
         </StackPanel>
     </Grid>
 </local:BasePage>

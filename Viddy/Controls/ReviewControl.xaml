@@ -6,6 +6,7 @@
              xmlns:viewModel="using:Viddi.ViewModel"
              xmlns:controls="using:Viddi.Controls"
              xmlns:item="using:Viddi.ViewModel.Item"
+             xmlns:controls1="using:ScottIsAFool.Windows.Controls"
              mc:Ignorable="d"
              Height="200"
              d:DesignWidth="480"
@@ -49,7 +50,7 @@
                                Style="{StaticResource BodyTextBlockStyle}" />
                 </StackPanel>
 
-                <controls:TapButton Grid.Row="1"
+                <controls1:TapButton Grid.Row="1"
                                        Grid.Column="0"
                                        Content="no"
                                        x:Uid="No"
@@ -57,7 +58,7 @@
                                        TapCommand="{Binding NoReviewCommand}"
 									   Background="{ThemeResource HeaderBrush}"/>
 
-                <controls:TapButton Grid.Row="1"
+                <controls1:TapButton Grid.Row="1"
                                        Grid.Column="1"
                                        Style="{StaticResource ReviewButtonStyle}"
                                        Content="yes"
@@ -89,7 +90,7 @@
                                Style="{StaticResource BodyTextBlockStyle}" />
                 </StackPanel>
 
-                <controls:TapButton Grid.Row="1"
+                <controls1:TapButton Grid.Row="1"
                                        Grid.Column="0"
                                        Style="{StaticResource ReviewButtonStyle}"
                                        Content="no"
@@ -97,7 +98,7 @@
                                        TapCommand="{Binding NoFeedbackCommand}" 
 									   Background="{ThemeResource HeaderBrush}"/>
 
-                <controls:TapButton Grid.Row="1"
+                <controls1:TapButton Grid.Row="1"
                                        Grid.Column="1"
                                        Style="{StaticResource ReviewButtonStyle}"
                                        Content="yes"

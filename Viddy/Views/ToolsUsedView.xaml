@@ -5,6 +5,7 @@
                 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                 xmlns:controls="using:Viddi.Controls"
+                xmlns:controls1="using:ScottIsAFool.Windows.Controls"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding Tools, Source={StaticResource Locator}}">
@@ -14,7 +15,7 @@
                                   ShowGoToTopButton="False">
             <controls:LoadingListView.ItemTemplate>
                 <DataTemplate>
-                    <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
+                    <controls1:TapButton Style="{StaticResource EmptyButtonStyle}"
                                            Margin="0,0,0,12"
                                            TapCommand="{Binding Tools.OpenToolCommand, Source={StaticResource Locator}}"
                                            CommandParameter="{Binding}">
@@ -25,7 +26,7 @@
                                        Style="{StaticResource BodyTextBlockStyle}"
                                        Foreground="{ThemeResource SubtleBrush}"/>
                         </StackPanel>
-                    </controls:TapButton>
+                    </controls1:TapButton>
                 </DataTemplate>
             </controls:LoadingListView.ItemTemplate>
         </controls:LoadingListView>

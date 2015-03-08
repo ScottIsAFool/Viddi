@@ -1,6 +1,7 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:controls="using:Viddi.Controls">
+                    xmlns:controls="using:Viddi.Controls"
+                    xmlns:controls1="using:ScottIsAFool.Windows.Controls">
 
     <Style TargetType="controls:ProfilePictureControl">
         <Setter Property="Height"
@@ -22,7 +23,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="controls:ProfilePictureControl">
-                    <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
+                    <controls1:TapButton Style="{StaticResource EmptyButtonStyle}"
                                            IsHitTestVisible="{TemplateBinding IsHitTestVisible}"
                                            TapCommand="{TemplateBinding TappedCommand}">
                         <Grid>
@@ -102,7 +103,7 @@
                                 </Viewbox>
                             </Grid>
                         </Grid>
-                    </controls:TapButton>
+                    </controls1:TapButton>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -652,7 +653,7 @@
                                        Margin="12,0" />
                         </Viewbox>
 
-                        <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
+                        <controls1:TapButton Style="{StaticResource EmptyButtonStyle}"
                                                Grid.Column="2"
                                                HorizontalContentAlignment="Right"
                                                Margin="0,-10,0,-10"
@@ -662,7 +663,7 @@
                                      StretchDirection="DownOnly">
                                 <TextBlock Text="{TemplateBinding Twitter}" />
                             </Viewbox>
-                        </controls:TapButton>
+                        </controls1:TapButton>
                     </Grid>
                 </ControlTemplate>
             </Setter.Value>

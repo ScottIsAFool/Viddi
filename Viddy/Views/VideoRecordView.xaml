@@ -9,6 +9,7 @@
                         xmlns:core="using:Microsoft.Xaml.Interactions.Core"
                         xmlns:behaviours="using:Viddi.Behaviours"
                         xmlns:tiles="using:Viddi.Controls.Tiles"
+                        xmlns:controls1="using:ScottIsAFool.Windows.Controls"
                         mc:Ignorable="d"
                         Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                         DataContext="{Binding VideoRecord, Source={StaticResource Locator}}">
@@ -183,7 +184,7 @@
 
                 </Grid.ColumnDefinitions>
 
-                <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
+                <controls1:TapButton Style="{StaticResource EmptyButtonStyle}"
                                        Grid.Row="1"
                                        HorizontalAlignment="Left"
                                        x:Name="FlashButton"
@@ -223,9 +224,9 @@
                             </Grid>
                         </Border>
                     </Viewbox>
-                </controls:TapButton>
+                </controls1:TapButton>
 
-                <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
+                <controls1:TapButton Style="{StaticResource EmptyButtonStyle}"
                                        x:Name="FrontFacingButton"
                                        Grid.Row="1"
                                        Grid.Column="2"
@@ -268,7 +269,7 @@
                             </Grid>
                         </Border>
                     </Viewbox>
-                </controls:TapButton>
+                </controls1:TapButton>
 
                 <Border BorderBrush="{ThemeResource ButtonBackgroundBrush}"
                         BorderThickness="2"
@@ -284,23 +285,23 @@
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
-                        <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
+                        <controls1:TapButton Style="{StaticResource EmptyButtonStyle}"
                                                TapCommand="{Binding VenueTextTappedCommand}">
                             <TextBlock Text="{Binding LocationText}"
                                        TextAlignment="Center"
                                        TextWrapping="NoWrap"
                                        TextTrimming="CharacterEllipsis"
                                        Style="{StaticResource BodyTextBlockStyle}" />
-                        </controls:TapButton>
+                        </controls1:TapButton>
 
-                        <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
+                        <controls1:TapButton Style="{StaticResource EmptyButtonStyle}"
                                                Grid.Column="1"
                                                Width="25"
                                                Visibility="{Binding HasVenue, Converter={StaticResource VisibilityConverter}}"
                                                TapCommand="{Binding ClearLocationCommand}">
                             <SymbolIcon Symbol="Clear"
                                         Foreground="{ThemeResource ApplicationForegroundThemeBrush}" />
-                        </controls:TapButton>
+                        </controls1:TapButton>
                     </Grid>
                 </Border>
 
@@ -331,14 +332,14 @@
                         </ListView.HeaderTemplate>
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
+                                <controls1:TapButton Style="{StaticResource EmptyButtonStyle}"
                                                        Margin="0,0,0,6"
                                                        TapCommand="{Binding VideoRecord.Foursquare.VenueTappedCommand, Source={StaticResource Locator}}"
                                                        CommandParameter="{Binding}">
                                     <TextBlock Text="{Binding Name}"
                                                Style="{StaticResource BodyTextBlockStyle}"
                                                Padding="2" />
-                                </controls:TapButton>
+                                </controls1:TapButton>
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
@@ -353,7 +354,7 @@
                        Visibility="Collapsed" 
                        Margin="19,0,19,-12"/>
 
-            <controls:TapButton Grid.Row="2"
+            <controls1:TapButton Grid.Row="2"
                                    Style="{StaticResource EmptyButtonStyle}"
                                    HorizontalAlignment="Left"
                                    VerticalAlignment="Center"
@@ -381,7 +382,7 @@
                     </Border>
                 </Viewbox>
 
-            </controls:TapButton>
+            </controls1:TapButton>
 
             <CheckBox Grid.Row="2"
                       HorizontalAlignment="Center"

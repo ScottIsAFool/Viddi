@@ -8,6 +8,7 @@
                 xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                 xmlns:core="using:Microsoft.Xaml.Interactions.Core"
                 xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
+                xmlns:controls1="using:ScottIsAFool.Windows.Controls"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding EditProfile, Source={StaticResource Locator}}">
@@ -57,7 +58,7 @@
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
 
-                        <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
+                        <controls1:TapButton Style="{StaticResource EmptyButtonStyle}"
                                                TapCommand="{Binding Avatar.ChangeCoverCommand}"
                                                IsEnabled="{Binding Avatar.ChangingCover, Converter={StaticResource NegativeBooleanConverter}}"
                                                VerticalAlignment="Center"
@@ -83,9 +84,9 @@
                                                 Visibility="{Binding Auth.AuthenticationInfo.User.CoverUrl, Source={StaticResource Locator}, Converter={StaticResource NullToVisibilityConverter}}" />
                                 </Grid>
                             </Border>
-                        </controls:TapButton>
+                        </controls1:TapButton>
 
-                        <controls:TapButton Grid.Column="2"
+                        <controls1:TapButton Grid.Column="2"
                                                Style="{StaticResource EmptyButtonStyle}"
                                                HorizontalContentAlignment="Left"
                                                HorizontalAlignment="Left"
@@ -108,7 +109,7 @@
                                                 Width="26" />
                                 </Viewbox>
                             </Border>
-                        </controls:TapButton>
+                        </controls1:TapButton>
                     </Grid>
 
                 </Grid>
@@ -134,7 +135,7 @@
                                                             BorderBrush="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                                                             DisplayDefaultAvatar="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}, Converter={StaticResource InverseNullBooleanConverter}}"
                                                             IsChanging="{Binding Avatar.ChangingAvatar}" />
-                            <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
+                            <controls1:TapButton Style="{StaticResource EmptyButtonStyle}"
                                                    TapCommand="{Binding Avatar.ChangeAvatarCommand}"
                                                    IsEnabled="{Binding Avatar.ChangingAvatar, Converter={StaticResource NegativeBooleanConverter}}"
                                                    HorizontalAlignment="Center"
@@ -158,9 +159,9 @@
                                                     Visibility="{Binding Auth.AuthenticationInfo.User.AvatarUrl, Source={StaticResource Locator}, Converter={StaticResource NullToVisibilityConverter}}" />
                                     </Grid>
                                 </Border>
-                            </controls:TapButton>
+                            </controls1:TapButton>
 
-                            <controls:TapButton Grid.Column="1"
+                            <controls1:TapButton Grid.Column="1"
                                                    Style="{StaticResource EmptyButtonStyle}"
                                                    HorizontalContentAlignment="Left"
                                                    HorizontalAlignment="Left"
@@ -183,7 +184,7 @@
                                                     Width="26" />
                                     </Viewbox>
                                 </Border>
-                            </controls:TapButton>
+                            </controls1:TapButton>
                         </Grid>
                     </Grid>
                     <TextBox Text="{Binding Name, Mode=TwoWay}"

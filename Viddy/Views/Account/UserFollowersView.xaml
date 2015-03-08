@@ -7,6 +7,7 @@
                 xmlns:controls="using:Viddi.Controls"
                 xmlns:core="using:Microsoft.Xaml.Interactions.Core"
                 xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+                xmlns:controls1="using:ScottIsAFool.Windows.Controls"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding UserFollowers, Source={StaticResource Locator}}">
@@ -42,7 +43,7 @@
             </controls:LoadingListView.FooterTemplate>
             <controls:LoadingListView.ItemTemplate>
                 <DataTemplate>
-                    <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
+                    <controls1:TapButton Style="{StaticResource EmptyButtonStyle}"
                                            TapCommand="{Binding NavigateToProfileCommand}"
                                            Margin="0,0,0,12">
                         <Grid>
@@ -59,7 +60,7 @@
                                        VerticalAlignment="Center"
                                        Margin="12,0"/>
                         </Grid>
-                    </controls:TapButton>
+                    </controls1:TapButton>
                 </DataTemplate>
             </controls:LoadingListView.ItemTemplate>
         </controls:LoadingListView>

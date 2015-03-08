@@ -9,6 +9,7 @@
                 xmlns:core="using:Microsoft.Xaml.Interactions.Core"
                 xmlns:behaviours="using:Viddi.Behaviours"
                 xmlns:converters1="using:Viddi.Converters"
+                xmlns:controls="using:ScottIsAFool.Windows.Controls"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding Account, Source={StaticResource Locator}}">
@@ -85,7 +86,7 @@
                                                  Grid.ColumnSpan="2"
                                                  Padding="0" />
 
-                <localControls:TapButton Grid.Column="1"
+                <controls:TapButton Grid.Column="1"
                                             TapCommand="{Binding LogInLogOutCommand}"
                                             Style="{StaticResource EmptyButtonStyle}"
                                             Margin="0,15,0,6"
@@ -149,7 +150,7 @@
                                    HorizontalAlignment="Center"
                                    Foreground="{ThemeResource SubtleBrush}" />
                     </StackPanel>
-                </localControls:TapButton>
+                </controls:TapButton>
             </Grid>
         </Grid>
 

@@ -11,6 +11,7 @@
                         xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
                         xmlns:localConverters="using:Viddi.Converters"
                         xmlns:converters="using:Cimbalino.Toolkit.Converters"
+                        xmlns:controls1="using:ScottIsAFool.Windows.Controls"
                         mc:Ignorable="d"
                         Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                         DataContext="{Binding VideoPlayer, Source={StaticResource Locator}}">
@@ -23,7 +24,7 @@
     <local:BasePage.Resources>
         <localConverters:CommentEnabledConverter x:Key="CommentEnabledConverter" />
         <Style x:Key="DoubleContentStyle"
-               TargetType="controls:TapButton">
+               TargetType="controls1:TapButton">
             <Setter Property="Background"
                     Value="Transparent" />
             <Setter Property="BorderThickness"
@@ -40,7 +41,7 @@
                     Value="0" />
             <Setter Property="Template">
                 <Setter.Value>
-                    <ControlTemplate TargetType="controls:TapButton">
+                    <ControlTemplate TargetType="controls1:TapButton">
                         <Border Background="{TemplateBinding Background}"
                                 Padding="{TemplateBinding Padding}"
                                 Tag="{TemplateBinding Tag}"
@@ -196,13 +197,13 @@
                                             Grid.Row="0">
                                     <StackPanel Orientation="Horizontal"
                                                 Margin="19,6,19,6">
-                                        <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
+                                        <controls1:TapButton Style="{StaticResource EmptyButtonStyle}"
                                                                TapCommand="{Binding NavigateToUserCommand}"
                                                                IsHitTestVisible="{Binding Video.IsAnonymous, Converter={StaticResource NegativeBooleanConverter}}">
                                             <TextBlock Text="{Binding Video.SubmittedBy}"
                                                        Style="{StaticResource BodyTextBlockStyle}"
                                                        FontWeight="Bold" />
-                                        </controls:TapButton>
+                                        </controls1:TapButton>
                                     </StackPanel>
                                     <StackPanel Orientation="Horizontal"
                                                 Margin="19,0,19,12">
@@ -226,14 +227,14 @@
                                                    Foreground="{ThemeResource SubtleBrush}"
                                                    Margin="6,0" />
 
-                                        <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
+                                        <controls1:TapButton Style="{StaticResource EmptyButtonStyle}"
                                                                TapCommand="{Binding NavigateToChannelCommand}"
                                                                Visibility="{Binding Video.Channel, Converter={StaticResource NullToVisibilityConverter}}">
                                             <TextBlock Text="{Binding Video.Channel.Name}"
                                                        Style="{StaticResource BodyTextBlockStyle}"
                                                        FontWeight="Bold"
                                                        Margin="6,0" />
-                                        </controls:TapButton>
+                                        </controls1:TapButton>
                                     </StackPanel>
                                 </StackPanel>
 
@@ -271,7 +272,7 @@
                                 <StackPanel Grid.Row="2"
                                             Orientation="Horizontal"
                                             Margin="19,0">
-                                    <controls:TapButton HorizontalAlignment="Center"
+                                    <controls1:TapButton HorizontalAlignment="Center"
                                                            Margin="6,0,6,3"
                                                            Content="&#xE1FE;"
                                                            Style="{StaticResource DoubleContentStyle}"
@@ -281,7 +282,7 @@
                                                            Tag="{Binding Video.IsUpVote}"
                                                            IsEnabled="{Binding Video.GettingVideoInfo, Converter={StaticResource NegativeBooleanConverter}}" />
 
-                                    <controls:TapButton HorizontalAlignment="Center"
+                                    <controls1:TapButton HorizontalAlignment="Center"
                                                            Content="&#xE1FC;"
                                                            Margin="6,0,6,3"
                                                            Style="{StaticResource DoubleContentStyle}"
@@ -341,7 +342,7 @@
                         </interactivity:Interaction.Behaviors>
                     </TextBox>
 
-                    <controls:TapButton Grid.Column="1"
+                    <controls1:TapButton Grid.Column="1"
                                            Style="{StaticResource EmptyButtonStyle}"
                                            Margin="6,0,0,0"
                                            IsTabStop="False"
@@ -367,7 +368,7 @@
                             </Viewbox>
                         </Grid>
 
-                    </controls:TapButton>
+                    </controls1:TapButton>
                 </Grid>
             </Grid>
         </Grid>

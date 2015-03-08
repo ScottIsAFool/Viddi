@@ -6,6 +6,7 @@
              xmlns:item="using:Viddi.ViewModel.Item"
              xmlns:controls="using:Viddi.Controls"
              xmlns:converters="using:Cimbalino.Toolkit.Converters"
+             xmlns:controls1="using:ScottIsAFool.Windows.Controls"
              mc:Ignorable="d"
              d:DesignHeight="100"
              d:DesignWidth="400"
@@ -18,7 +19,7 @@
     </UserControl.Resources>
 
     <Grid VerticalAlignment="Top">
-        <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
+        <controls1:TapButton Style="{StaticResource EmptyButtonStyle}"
                                VerticalContentAlignment="Stretch"
                                TapCommand="{Binding NavigationActionCommand}">
             <Grid VerticalAlignment="Top">
@@ -42,6 +43,6 @@
                                Foreground="{Binding Notification.Read, Converter={StaticResource UnreadBrushConverter}}"/>
                 </StackPanel>
             </Grid>
-        </controls:TapButton>
+        </controls1:TapButton>
     </Grid>
 </UserControl>

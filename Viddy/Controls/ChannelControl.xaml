@@ -5,13 +5,14 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:item="using:Viddi.ViewModel.Item"
              xmlns:controls="using:Viddi.Controls"
+             xmlns:controls1="using:ScottIsAFool.Windows.Controls"
              mc:Ignorable="d"
              Height="200"
              d:DesignWidth="400"
              d:DataContext="{d:DesignInstance d:Type=item:ChannelItemViewModel}">
 
     <Grid>
-        <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
+        <controls1:TapButton Style="{StaticResource EmptyButtonStyle}"
                                VerticalContentAlignment="Stretch"
                                VerticalAlignment="Stretch"
                                TapCommand="{Binding NavigateToChannel}"
@@ -40,6 +41,6 @@
                     </Border>
                 </controls:RotateContentControl>
             </Grid>
-        </controls:TapButton>
+        </controls1:TapButton>
     </Grid>
 </UserControl>

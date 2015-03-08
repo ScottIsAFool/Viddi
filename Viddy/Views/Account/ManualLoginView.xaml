@@ -7,6 +7,7 @@
                 xmlns:controls="using:Viddi.Controls"
                 xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
                 xmlns:behaviors="using:Cimbalino.Toolkit.Behaviors"
+                xmlns:controls1="using:ScottIsAFool.Windows.Controls"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding ManualLogin, Source={StaticResource Locator}}">
@@ -69,7 +70,7 @@
                 <controls:ErrorBox Visibility="{Binding ErrorMessage, Converter={StaticResource NullToVisibilityConverter}}"
                                    ErrorMessage="{Binding ErrorMessage}"/>
 
-                <controls:TapHyperlinkButton TapCommand="{Binding NavigateToCreateAccountCommand}"
+                <controls1:TapHyperlinkButton TapCommand="{Binding NavigateToCreateAccountCommand}"
                                                 Margin="19,12">
                     <TextBlock FontSize="{StaticResource TextStyleMediumFontSize}">
                         <Underline>
@@ -77,7 +78,7 @@
                                  x:Uid="LabelCreateAccount"/>
                         </Underline>
                     </TextBlock>
-                </controls:TapHyperlinkButton>
+                </controls1:TapHyperlinkButton>
             </StackPanel>
         </Grid>
     </Grid>

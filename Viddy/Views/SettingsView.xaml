@@ -6,6 +6,7 @@
                 xmlns:views="using:Viddi.Views"
                 xmlns:controls="using:Viddi.Controls"
                 xmlns:converters="using:Viddi.Converters"
+                xmlns:controls1="using:ScottIsAFool.Windows.Controls"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding Settings, Source={StaticResource Locator}}">
@@ -190,7 +191,7 @@
                         <ToggleSwitch Header="Location service"
                                       x:Uid="HeaderLocationService"
                                       IsOn="{Binding IsLocationOn, Mode=TwoWay}" />
-                        <controls:TapHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
+                        <controls1:TapHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
                                                         TapCommand="{Binding NavigateToPrivacyCommand}">
                             <TextBlock Style="{StaticResource BodyTextBlockStyle}"
                                        FontWeight="SemiBold">
@@ -199,7 +200,7 @@
                                          x:Uid="LabelPrivacy"/>
                                 </Underline>
                             </TextBlock>
-                        </controls:TapHyperlinkButton>
+                        </controls1:TapHyperlinkButton>
                     </StackPanel>
                     <StackPanel Orientation="Vertical"
                                 Margin="0,12">

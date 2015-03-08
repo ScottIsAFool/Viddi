@@ -4,13 +4,14 @@
              xmlns:local="using:Viddi.Controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="using:ScottIsAFool.Windows.Controls"
              mc:Ignorable="d"
              d:DesignHeight="202"
              d:DesignWidth="400"
              d:DataContext="{Binding VideoPlayer.Video, Source={StaticResource Locator}}">
 
     <Grid Margin="0,0,0,2">
-        <local:TapButton Style="{StaticResource EmptyButtonStyle}"
+        <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                             TapCommand="{Binding OpenVideoCommand}">
             <Grid Height="200"
                   Holding="ContainerGrid_OnHolding"
@@ -93,6 +94,6 @@
                                Margin="6,0" />
                 </StackPanel>
             </Grid>
-        </local:TapButton>
+        </controls:TapButton>
     </Grid>
 </UserControl>

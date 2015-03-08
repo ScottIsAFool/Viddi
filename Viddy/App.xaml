@@ -6,6 +6,7 @@
              xmlns:controls="using:Viddi.Controls"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls1="using:ScottIsAFool.Windows.Controls"
              mc:Ignorable="d"
              x:Class="Viddi.App">
     <Application.Resources>
@@ -93,7 +94,7 @@
                                HorizontalAlignment="Center"
                                TextAlignment="Center"
                                FontFamily="Global User Interface" />
-                    <controls:TapHyperlinkButton TapCommand="{Binding RefreshCommand}"
+                    <controls1:TapHyperlinkButton TapCommand="{Binding RefreshCommand}"
                                                     HorizontalAlignment="Center"
                                                     HorizontalContentAlignment="Center">
                         <TextBlock FontSize="{StaticResource TextStyleLargeFontSize}">
@@ -102,7 +103,7 @@
                                      x:Uid="LabelTryAgain"/>
                             </Underline>
                         </TextBlock>
-                    </controls:TapHyperlinkButton>
+                    </controls1:TapHyperlinkButton>
                 </StackPanel>
             </DataTemplate>
 

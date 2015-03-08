@@ -7,6 +7,7 @@
                 xmlns:controls="using:Viddi.Controls"
                 xmlns:core="using:Microsoft.Xaml.Interactions.Core"
                 xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+                xmlns:controls1="using:ScottIsAFool.Windows.Controls"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding About, Source={StaticResource Locator}}">
@@ -96,18 +97,18 @@
                       Grid.ColumnSpan="2"
                       Margin="0,12">
                     <StackPanel Orientation="Vertical">
-                        <controls:TapHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
+                        <controls1:TapHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
                                                         Margin="0,6,0,6"
                                                         TapCommand="{Binding TellAFriendCommand}"
                                                         x:Uid="LabelTellAFriend"
                                                         Content="Tell a friend" />
 
-                        <controls:TapHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
+                        <controls1:TapHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
                                                         Margin="0,6,0,6"
                                                         TapCommand="{Binding LeaveReviewCommand}"
                                                         x:Uid="LabelLeaveAReview"
                                                         Content="Leave a review" />
-                        <controls:TapHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
+                        <controls1:TapHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
                                                         Margin="0,6,0,6"
                                                         TapCommand="{Binding EmailCommand}"
                                                         x:Uid="LabelEmailFeedback"
@@ -135,14 +136,14 @@
                                               Command="{Binding DeaniTwitterCommand}"
                                               Avatar="/Assets/Pictures/deani.jpg" />
 
-                        <controls:TapHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
+                        <controls1:TapHyperlinkButton Style="{StaticResource EmptyButtonStyle}"
                                                         Margin="0,12,0,6"
                                                         TapCommand="{Binding NavigateToToolsCommand}">
                             <TextBlock Text="Tools used"
                                        x:Uid="LabelToolsUsed"
                                        Style="{StaticResource BodyTextBlockStyle}"
                                        FontWeight="SemiBold" />
-                        </controls:TapHyperlinkButton>
+                        </controls1:TapHyperlinkButton>
                     </StackPanel>
                 </Grid>
             </Grid>

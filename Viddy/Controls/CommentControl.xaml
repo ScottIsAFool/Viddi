@@ -4,6 +4,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:localControls="using:Viddi.Controls"
+             xmlns:controls="using:ScottIsAFool.Windows.Controls"
              mc:Ignorable="d"
              d:DesignHeight="160"
              d:DesignWidth="400"
@@ -26,7 +27,7 @@
                 </MenuFlyout>
             </FlyoutBase.AttachedFlyout>
 
-            <localControls:TapButton Style="{StaticResource EmptyButtonStyle}"
+            <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                         TapCommand="{Binding NavigateTouserCommand}"
                                         Grid.Column="0"
                                         VerticalAlignment="Top">
@@ -34,21 +35,21 @@
                                                      Width="60"
                                                      DataContext="{Binding Comment}"
                                                      AvatarUrl="{Binding User.AvatarUrl}" />
-            </localControls:TapButton>
+            </controls:TapButton>
 
 
             <StackPanel Orientation="Vertical"
                         Margin="12,0,0,0"
                         Grid.Column="1"
                         VerticalAlignment="Top">
-                <localControls:TapButton Style="{StaticResource EmptyButtonStyle}"
+                <controls:TapButton Style="{StaticResource EmptyButtonStyle}"
                                             TapCommand="{Binding NavigateTouserCommand}"
                                             VerticalAlignment="Top">
                     <TextBlock Text="{Binding Username, FallbackValue=scottisafool}"
                                Style="{StaticResource BodyTextBlockStyle}"
                                TextTrimming="CharacterEllipsis"
                                FontWeight="Bold" />
-                </localControls:TapButton>
+                </controls:TapButton>
 
                 <TextBlock Text="{Binding Comment.Body}"
                            Style="{StaticResource BodyTextBlockStyle}" />
