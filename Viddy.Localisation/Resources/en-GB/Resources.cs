@@ -17,7 +17,7 @@
 // 	This code contains a helper class exposing property representations
 // 	of the string resources defined in the specified .ResW file
 // 
-// 	Generated: 03/05/2015 22:28:21
+// 	Generated: 03/08/2015 10:52:40
 // </auto-generatedInfo>
 // --------------------------------------------------------------------------------------------------
 namespace Viddy.Localisation
@@ -951,6 +951,28 @@ namespace Viddy.Localisation
             get
             {
                 return resourceLoader.GetString("Points");
+            }
+        }
+        
+        /// <summary>
+        /// Localized resource similar to "Record video"
+        /// </summary>
+        public static string RecordVideo
+        {
+            get
+            {
+                return resourceLoader.GetString("RecordVideo");
+            }
+        }
+        
+        /// <summary>
+        /// Localized resource similar to "Untitled"
+        /// </summary>
+        public static string Untitled
+        {
+            get
+            {
+                return resourceLoader.GetString("Untitled");
             }
         }
     }

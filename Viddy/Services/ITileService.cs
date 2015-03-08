@@ -9,6 +9,7 @@ using Cimbalino.Toolkit.Extensions;
 using Cimbalino.Toolkit.Services;
 using Viddy.Core.Extensions;
 using Viddy.Core.Model;
+using Viddi.Localisation;
 using VidMePortable.Model;
 
 namespace Viddy.Services
@@ -79,7 +80,7 @@ namespace Viddy.Services
 
         public Task<bool> PinVideoRecord()
         {
-            return PinTile(string.Empty, TileType.VideoRecord, "Record video", null, false);
+            return PinTile(string.Empty, TileType.VideoRecord, Resources.RecordVideo, null, false);
         }
 
         public Task<bool> UnpinVideoRecord()
@@ -89,7 +90,8 @@ namespace Viddy.Services
 
         public Task<bool> PinVideo(Video video)
         {
-            return PinTile(video.VideoId, TileType.Video, video.Title, video, false);
+            var displayName = string.IsNullOrEmpty(video.Title) || string.IsNullOrWhiteSpace(video.Title) ? Resources.Untitled : video.Title;
+            return PinTile(video.VideoId, TileType.Video, displayName, video, false);
         }
 
         public Task<bool> UnpinVideo(string videoId)
