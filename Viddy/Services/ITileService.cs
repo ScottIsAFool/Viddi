@@ -7,9 +7,10 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
 using Cimbalino.Toolkit.Extensions;
 using Cimbalino.Toolkit.Services;
+using ScottIsAFool.WindowsPhone.Logging;
 using Viddy.Core.Extensions;
 using Viddy.Core.Model;
-using Viddi.Localisation;
+using Viddy.Localisation;
 using VidMePortable.Model;
 
 namespace Viddy.Services
@@ -44,11 +45,13 @@ namespace Viddy.Services
 
         private readonly IStorageService _storageService;
         private readonly IApplicationSettingsService _appSettings;
+        private readonly ILog _log;
 
         public TileService(IStorageService storageService, IApplicationSettingsService appSettings)
         {
             _storageService = storageService;
             _appSettings = appSettings;
+            _log = new WinLogger(GetType());
         }
 
         public static bool IsFromSecondaryTile(string args)
@@ -207,8 +210,9 @@ namespace Viddy.Services
 
                 return await secondaryTile.RequestCreateAsync();
             }
-            catch
+            catch (Exception ex)
             {
+                _log.ErrorException("Error creating tile", ex);
             }
 
             return false;
@@ -240,6 +244,6 @@ namespace Viddy.Services
             return !_appSettings.Local.Contains(key) ? default(T) : _appSettings.Local.GetS<T>(key);
         }
 
-        
+
     }
 }
