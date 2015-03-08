@@ -11,9 +11,8 @@
                 DataContext="{Binding Tools, Source={StaticResource Locator}}">
 
     <Grid Margin="19,19,19,0">
-        <controls:LoadingListView ItemsSource="{Binding Tools}"
-                                  ShowGoToTopButton="False">
-            <controls:LoadingListView.ItemTemplate>
+        <ListView ItemsSource="{Binding Tools}">
+            <ListView.ItemTemplate>
                 <DataTemplate>
                     <controls1:TapButton Style="{StaticResource EmptyButtonStyle}"
                                            Margin="0,0,0,12"
@@ -28,7 +27,7 @@
                         </StackPanel>
                     </controls1:TapButton>
                 </DataTemplate>
-            </controls:LoadingListView.ItemTemplate>
-        </controls:LoadingListView>
+            </ListView.ItemTemplate>
+        </ListView>
     </Grid>
 </local:BasePage>
