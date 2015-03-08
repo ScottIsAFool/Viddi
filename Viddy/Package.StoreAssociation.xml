@@ -184,10 +184,10 @@
     <Language Code="vi-vn" InMinimumRequirementSet="true" />
   </SupportedLocales>
   <ProductReservedInfo>
-    <MainPackageIdentityName>43233ScottLovegrove.ViddiBeta</MainPackageIdentityName>
+    <MainPackageIdentityName>43233ScottLovegrove.ViddyBeta</MainPackageIdentityName>
     <ReservedNames>
-      <ReservedName>Viddi Beta</ReservedName>
-      <ReservedName>Viddi Beta for Vidme</ReservedName>
+      <ReservedName>Viddy Beta</ReservedName>
+      <ReservedName>Viddy Beta for Vidme</ReservedName>
       <ReservedName>Viddi Beta</ReservedName>
       <ReservedName>Viddi Beta for Vidme</ReservedName>
     </ReservedNames>
@@ -199,24 +199,24 @@
     <MainPackageIdentityName>43233ScottLovegrove.SquirrelforWindows</MainPackageIdentityName>
     <MainPackageIdentityName>43233ScottLovegrove.UniContact</MainPackageIdentityName>
     <MainPackageIdentityName>43233ScottLovegrove.VBeta</MainPackageIdentityName>
-    <MainPackageIdentityName>43233ScottLovegrove.Viddi</MainPackageIdentityName>
+    <MainPackageIdentityName>43233ScottLovegrove.Viddy</MainPackageIdentityName>
   </AccountPackageIdentityNames>
   <PackageInfoList LandingUrl="https://dev.windowsphone.com/AppSubmission/AssociationLanding?windowsProductId=126a9d5e-0d30-4d37-b2d3-bc14a434f9d5">
     <BundleInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
+        <PackageArchitecture></PackageArchitecture>
+        <PackageMaxArchitectureVersion>1.1.0.35</PackageMaxArchitectureVersion>
+      </PackageInfo>
+      <PackageInfo>
+        <OsMinVersion>6.3.0.0</OsMinVersion>
+        <PackageArchitecture></PackageArchitecture>
+        <PackageMaxArchitectureVersion>1.1.0.35</PackageMaxArchitectureVersion>
+      </PackageInfo>
+      <PackageInfo>
+        <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>arm</PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.33</PackageMaxArchitectureVersion>
-      </PackageInfo>
-      <PackageInfo>
-        <OsMinVersion>6.3.0.0</OsMinVersion>
-        <PackageArchitecture></PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.33</PackageMaxArchitectureVersion>
-      </PackageInfo>
-      <PackageInfo>
-        <OsMinVersion>6.3.0.0</OsMinVersion>
-        <PackageArchitecture></PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.33</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>1.1.0.35</PackageMaxArchitectureVersion>
       </PackageInfo>
     </BundleInfo>
   </PackageInfoList>
