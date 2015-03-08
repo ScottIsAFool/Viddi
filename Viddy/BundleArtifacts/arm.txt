@@ -1,4 +1,4 @@
-MainPackage=G:\Documents\Visual Studio 2013\Projects\Viddy\Viddy\bin\ARM\Release\Viddy_1.1.0.20_Bundle\Viddy_1.1.0.20_ARM.appx
-SymbolPackage=G:\Documents\Visual Studio 2013\Projects\Viddy\Viddy\AppPackages\Viddy_1.1.0.20_Test\Viddy_1.1.0.20_ARM.appxsym
-ResourcePack=G:\Documents\Visual Studio 2013\Projects\Viddy\Viddy\bin\ARM\Release\Viddy_1.1.0.20_Bundle\Viddy_1.1.0.20_scale-100.appx
-ResourcePack=G:\Documents\Visual Studio 2013\Projects\Viddy\Viddy\bin\ARM\Release\Viddy_1.1.0.20_Bundle\Viddy_1.1.0.20_scale-140.appx
+MainPackage=g:\Documents\Visual Studio 2013\Projects\Viddi\Viddy\bin\ARM\Release\Viddy_1.1.0.33_Bundle\Viddy_1.1.0.33_ARM.appx
+SymbolPackage=g:\Documents\Visual Studio 2013\Projects\Viddi\Viddy\AppPackages\Viddy_1.1.0.33_Test\Viddy_1.1.0.33_ARM.appxsym
+ResourcePack=g:\Documents\Visual Studio 2013\Projects\Viddi\Viddy\bin\ARM\Release\Viddy_1.1.0.33_Bundle\Viddy_1.1.0.33_scale-100.appx
+ResourcePack=g:\Documents\Visual Studio 2013\Projects\Viddi\Viddy\bin\ARM\Release\Viddy_1.1.0.33_Bundle\Viddy_1.1.0.33_scale-140.appx
