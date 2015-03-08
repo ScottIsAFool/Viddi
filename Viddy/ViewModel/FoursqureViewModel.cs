@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Windows.Devices.Geolocation;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
+using ScottIsAFool.Windows.Core.Extensions;
 using Viddi.Core.Extensions;
 using Viddi.Foursquare;
 using Viddi.Localisation;

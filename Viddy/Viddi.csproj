@@ -117,9 +117,6 @@
     <Compile Include="Behaviours\OpenFlyoutBehaviour.cs" />
     <Compile Include="Behaviours\StatusBarBehavior.cs" />
     <Compile Include="Behaviours\VideoStreamBehaviour.cs" />
-    <Compile Include="Common\NavigationParameters.cs" />
-    <Compile Include="Common\ObservableDictionary.cs" />
-    <Compile Include="Common\SuspensionManager.cs" />
     <Compile Include="Controls\AboutPerson.cs" />
     <Compile Include="Controls\BlurredImageControl.cs" />
     <Compile Include="Controls\ChannelControl.xaml.cs">
@@ -153,7 +150,6 @@
     <Compile Include="Controls\VideoControl.xaml.cs">
       <DependentUpon>VideoControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\ItemTypeDataTemplateSelector.cs" />
     <Compile Include="Converters\BooleanToLocalisedStringConverter.cs" />
     <Compile Include="Converters\BooleanToSymbolConverter.cs" />
     <Compile Include="Converters\CommentEnabledConverter.cs" />
@@ -161,10 +157,8 @@
     <Compile Include="Converters\NullBooleanConverter.cs" />
     <Compile Include="Converters\ThumbnailConverter.cs" />
     <Compile Include="Extensions\ContainerExtensions.cs" />
-    <Compile Include="Extensions\ListTypeExtensions.cs" />
     <Compile Include="Foursquare\FoursquareClient.cs" />
     <Compile Include="Foursquare\SearchResponse.cs" />
-    <Compile Include="Logging\WinLogger.cs" />
     <Compile Include="Messaging\ChannelMessage.cs" />
     <Compile Include="Messaging\PinMessage.cs" />
     <Compile Include="Messaging\ProtocolMessage.cs" />
@@ -173,9 +167,6 @@
     <Compile Include="Model\AppSettings.cs" />
     <Compile Include="Model\Tool.cs" />
     <Compile Include="Model\UpdateFrequency.cs" />
-    <Compile Include="Services\CameraInfoService.cs" />
-    <Compile Include="Services\DisplayRequestService.cs" />
-    <Compile Include="Services\ICameraInfoService.cs" />
     <Compile Include="Services\ITileService.cs" />
     <Compile Include="Services\IToastService.cs" />
     <Compile Include="Services\NotificationService.cs" />
@@ -194,7 +185,6 @@
     <Compile Include="ViewModel\Account\Manage\ManageMyAppsViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\OwnedAppViewModel.cs" />
     <Compile Include="ViewModel\Account\ManualLoginViewModel.cs" />
-    <Compile Include="ViewModel\ICanHasHomeButton.cs" />
     <Compile Include="ViewModel\Item\ICanShowFollowers.cs" />
     <Compile Include="ViewModel\Item\NotificationItemViewModel.cs" />
     <Compile Include="ViewModel\Account\NotificationsViewModel.cs" />
@@ -209,8 +199,6 @@
     <Compile Include="ViewModel\Account\Manage\ManageAccountViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\ManageAppsAccessViewModel.cs" />
     <Compile Include="ViewModel\Account\Manage\RevokeAppViewModel.cs" />
-    <Compile Include="Model\IListType.cs" />
-    <Compile Include="Model\ListType.cs" />
     <Compile Include="ViewModel\Item\IFollowViewModel.cs" />
     <Compile Include="ViewModel\Item\IProfileViewModel.cs" />
     <Compile Include="ViewModel\LoadingItemsViewModel{T}.cs" />
@@ -531,9 +519,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\wpa81\System.Net.Http.Primitives.dll</HintPath>
     </Reference>
-    <Reference Include="ThemeManagerRt, Version=1.0.1.5, Culture=neutral, processorArchitecture=MSIL">
+    <Reference Include="ThemeManagerRt, Version=1.0.1.6, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\ThemeManagerRt.1.0.1.5\lib\portable-win81+WindowsPhoneApp81\ThemeManagerRt.dll</HintPath>
+      <HintPath>..\packages\ThemeManagerRt.1.0.1.6\lib\portable-win81+WindowsPhoneApp81\ThemeManagerRt.dll</HintPath>
     </Reference>
     <Reference Include="VidMePortable, Version=0.0.0.41, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -562,6 +550,7 @@
       <Name>Viddi.Localisation</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '12.0' ">
     <VisualStudioVersion>12.0</VisualStudioVersion>
   </PropertyGroup>

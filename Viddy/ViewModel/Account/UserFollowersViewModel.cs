@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Messaging;
+using ScottIsAFool.Windows.Core.Extensions;
 using Viddi.Core;
 using Viddi.Core.Extensions;
 using Viddi.Messaging;

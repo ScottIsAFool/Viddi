@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 using GalaSoft.MvvmLight.Messaging;
-using ScottIsAFool.WindowsPhone.Logging;
+using ScottIsAFool.Windows.Core.Logging;
 using Viddi.Messaging;
 
 namespace Viddi.ViewModel
@@ -49,7 +49,10 @@ namespace Viddi.ViewModel
 
         public virtual void UpdateProperties() { }
 
-        public virtual async Task PinUnpin() { }
+        public virtual Task PinUnpin()
+        {
+            return Task.FromResult(0);
+        }
 
         public virtual string GetPinFileName(bool isWideTile = false)
         {

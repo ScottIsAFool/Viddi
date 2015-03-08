@@ -2,7 +2,7 @@
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
-using Viddi.Common;
+using ScottIsAFool.Windows.Helpers;
 using Viddi.Core;
 using Viddi.Localisation;
 using Viddi.Views.Account.Manage;

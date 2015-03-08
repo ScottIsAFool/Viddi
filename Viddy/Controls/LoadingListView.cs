@@ -1,6 +1,7 @@
 ﻿using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Input;
+using ScottIsAFool.Windows.Core.Extensions;
 using Viddi.Core.Extensions;
 using WinRTXamlToolkit.Controls.Extensions;
 

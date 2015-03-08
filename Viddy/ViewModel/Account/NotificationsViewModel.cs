@@ -3,6 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Extensions;
+using ScottIsAFool.Windows.Core.Extensions;
 using Viddi.Core.Extensions;
 using Viddi.Services;
 using Viddi.ViewModel.Item;

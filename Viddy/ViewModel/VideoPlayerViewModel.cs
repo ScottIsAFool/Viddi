@@ -1,9 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using ScottIsAFool.Windows.Core.Extensions;
+using ScottIsAFool.Windows.Core.ViewModel;
 using Viddi.Core.Extensions;
 using Viddi.Core.Model;
 using Viddi.Messaging;
@@ -185,7 +188,7 @@ namespace Viddi.ViewModel
 
         public bool ShowHomeButton { get; set; }
 
-        public RelayCommand NavigateHomeCommand
+        public ICommand NavigateHomeCommand
         {
             get
             {

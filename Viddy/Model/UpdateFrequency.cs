@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Reflection;
-using Viddi.Core.Extensions;
+using ScottIsAFool.Windows.Core.Extensions;
 
 namespace Viddi.Model
 {

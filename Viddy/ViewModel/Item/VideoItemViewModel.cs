@@ -8,12 +8,13 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
+using ScottIsAFool.Windows.Core.Extensions;
+using ScottIsAFool.Windows.Core.ViewModel;
 using Viddi.Core;
 using Viddi.Core.Extensions;
 using Viddi.Core.Services;
 using Viddi.Localisation;
 using Viddi.Messaging;
-using Viddi.Model;
 using Viddi.Services;
 using Viddi.Views;
 using VidMePortable;
@@ -540,9 +541,9 @@ namespace Viddi.ViewModel.Item
         private string PrepareMessage(string description)
         {
             description += "\n\n" + Video.FullUrl + "\n\n";
-            var ViddiLink = string.Format(Resources.ViddiWindowsPhone, Video.ToViddiLink());
+            var viddiLink = string.Format(Resources.ViddiWindowsPhone, Video.ToViddiLink());
 
-            description += ViddiLink;
+            description += viddiLink;
 
             return description;
         }

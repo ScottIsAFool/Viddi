@@ -7,7 +7,7 @@ using Windows.UI.Xaml;
 using Windows.UI.Xaml.Media.Imaging;
 using Cimbalino.Toolkit.Extensions;
 using Cimbalino.Toolkit.Services;
-using ScottIsAFool.WindowsPhone.Logging;
+using ScottIsAFool.Windows.Core.Logging;
 using Viddi.Core.Extensions;
 using Viddi.Core.Model;
 using Viddi.Localisation;

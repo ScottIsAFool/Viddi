@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Threading.Tasks;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.DataTransfer;
@@ -8,7 +7,7 @@ using Windows.ApplicationModel.Store;
 using Windows.Storage;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
-using ScottIsAFool.WindowsPhone.Logging;
+using ScottIsAFool.Windows.Core.Logging;
 using Viddi.Localisation;
 using Viddi.Services;
 using Viddi.Views;

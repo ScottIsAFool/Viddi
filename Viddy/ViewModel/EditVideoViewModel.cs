@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using Windows.ApplicationModel.DataTransfer;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
-using Viddi.Common;
+using ScottIsAFool.Windows.Helpers;
 using Viddi.Localisation;
 using Viddi.Views.Account;
 using VidMePortable;

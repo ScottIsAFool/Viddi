@@ -1,11 +1,14 @@
 using System;
 using System.Threading.Tasks;
+using System.Windows.Input;
 using Windows.Storage;
 using Windows.Storage.Pickers;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
+using ScottIsAFool.Windows.Core.Services;
+using ScottIsAFool.Windows.Core.ViewModel;
 using Viddi.Core;
 using Viddi.Core.Model;
 using Viddi.Messaging;
@@ -14,7 +17,6 @@ using Viddi.ViewModel.Account;
 using Viddi.ViewModel.Item;
 using Viddi.Views;
 using Viddi.Views.Account;
-using VidMePortable.Model;
 
 namespace Viddi.ViewModel
 {
@@ -35,7 +37,6 @@ namespace Viddi.ViewModel
         private readonly INavigationService _navigationService;
         private readonly ICameraInfoService _cameraInfo;
         private readonly ITileService _tileService;
-        private readonly IMessageBoxService _messageBoxService;
 
         /// <summary>
         /// Initializes a new instance of the MainViewModel class.
@@ -45,15 +46,13 @@ namespace Viddi.ViewModel
             ICameraInfoService cameraInfo, 
             AvatarViewModel avatar, 
             ITileService tileService, 
-            FoursqureViewModel foursquare,
-            IMessageBoxService messageBoxService)
+            FoursqureViewModel foursquare)
         {
             Avatar = avatar;
             _navigationService = navigationService;
             _cameraInfo = cameraInfo;
             _tileService = tileService;
             Foursquare = foursquare;
-            _messageBoxService = messageBoxService;
             if (IsInDesignMode)
             {
                 // Code runs in Blend --> create design time data.
@@ -154,7 +153,7 @@ namespace Viddi.ViewModel
         #region ICanHasHomeButton implementation
         public bool ShowHomeButton { get; set; }
 
-        public RelayCommand NavigateHomeCommand
+        public ICommand NavigateHomeCommand
         {
             get
             {

@@ -6,7 +6,7 @@ using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using JetBrains.Annotations;
 using ThemeManagerRt;
-using Viddi.Core.Extensions;
+using ScottIsAFool.Windows.Core.Extensions;
 using Viddi.Model;
 using Viddi.Services;
 using Viddi.Views;

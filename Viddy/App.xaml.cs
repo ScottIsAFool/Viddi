@@ -15,10 +15,11 @@ using Windows.UI.Xaml.Navigation;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using GalaSoft.MvvmLight.Messaging;
-using ScottIsAFool.WindowsPhone.Logging;
-using Viddi.Common;
+using ScottIsAFool.Windows.Core.Extensions;
+using ScottIsAFool.Windows.Core.Logging;
+using ScottIsAFool.Windows.Core.Services;
+using ScottIsAFool.Windows.Helpers;
 using Viddi.Core;
-using Viddi.Core.Extensions;
 using Viddi.Core.Model;
 using Viddi.Messaging;
 using Viddi.Services;
@@ -188,7 +189,7 @@ namespace Viddi
                 return type;
             }
 
-            var query = new Uri(arguments).QueryString();
+            var query = new Uri(arguments).QueryDictionary();
             if (!query.ContainsKey("tileType"))
             {
                 return type;
@@ -244,7 +245,7 @@ namespace Viddi
                             if (url.Contains(Constants.CallBackUrl))
                             {
                                 var uri = new Uri(url);
-                                var queryString = uri.QueryString();
+                                var queryString = uri.QueryDictionary();
                                 var code = queryString["code"];
                                 Messenger.Default.Send(new NotificationMessage(code, Constants.Messages.AuthCodeMsg));
                             }
@@ -292,7 +293,7 @@ namespace Viddi
             // viddi://video?id={0}
 
             Type pageToGoTo;
-            var query = uri.QueryString();
+            var query = uri.QueryDictionary();
 
             if (query.ContainsKey("notificationId"))
             {

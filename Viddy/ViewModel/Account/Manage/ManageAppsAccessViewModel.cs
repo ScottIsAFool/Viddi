@@ -3,7 +3,7 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Threading.Tasks;
 using Cimbalino.Toolkit.Services;
-using Viddi.Common;
+using ScottIsAFool.Windows.Helpers;
 using Viddi.Core.Services;
 using Viddi.Views;
 using VidMePortable;

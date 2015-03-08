@@ -7,6 +7,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:controls1="using:ScottIsAFool.Windows.Controls"
+             xmlns:data="using:ScottIsAFool.Windows.Data"
              mc:Ignorable="d"
              x:Class="Viddi.App">
     <Application.Resources>
@@ -95,22 +96,22 @@
                                TextAlignment="Center"
                                FontFamily="Global User Interface" />
                     <controls1:TapHyperlinkButton TapCommand="{Binding RefreshCommand}"
-                                                    HorizontalAlignment="Center"
-                                                    HorizontalContentAlignment="Center">
+                                                  HorizontalAlignment="Center"
+                                                  HorizontalContentAlignment="Center">
                         <TextBlock FontSize="{StaticResource TextStyleLargeFontSize}">
                             <Underline>
                                 <Run Text="Try again"
-                                     x:Uid="LabelTryAgain"/>
+                                     x:Uid="LabelTryAgain" />
                             </Underline>
                         </TextBlock>
                     </controls1:TapHyperlinkButton>
                 </StackPanel>
             </DataTemplate>
 
-            <controls:ItemTypeDataTemplateSelector x:Key="VideoTemplateSelector"
-                                                   NormalTemplate="{StaticResource VideoTemplate}"
-                                                   ReviewTemplate="{StaticResource ReviewTemplate}"
-                                                   AdTemplate="{StaticResource AdTemplate}" />
+            <data:ItemTypeDataTemplateSelector x:Key="VideoTemplateSelector"
+                                               NormalTemplate="{StaticResource VideoTemplate}"
+                                               ReviewTemplate="{StaticResource ReviewTemplate}"
+                                               AdTemplate="{StaticResource AdTemplate}" />
         </ResourceDictionary>
 
     </Application.Resources>

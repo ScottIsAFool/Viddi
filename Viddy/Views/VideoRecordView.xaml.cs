@@ -16,6 +16,7 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Navigation;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
+using ScottIsAFool.Windows.Core.Services;
 using Viddi.Services;
 using Viddi.ViewModel;
 
@@ -149,7 +150,7 @@ namespace Viddi.Views
             {
                 if (!_cameraInfoService.IsInitialised)
                 {
-                    var cameraType = IsFrontFacing ? CameraInfoService.CameraType.FrontFacing : CameraInfoService.CameraType.Primary;
+                    var cameraType = IsFrontFacing ? CameraType.FrontFacing : CameraType.Primary;
                     await _cameraInfoService.StartService(cameraType);
                 }
             }

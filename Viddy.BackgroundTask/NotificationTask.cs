@@ -8,6 +8,7 @@ using Windows.UI.Notifications;
 using Cimbalino.Toolkit.Services;
 using NotificationsExtensions.BadgeContent;
 using NotificationsExtensions.ToastContent;
+using ScottIsAFool.Windows.Core.Extensions;
 using Viddi.Core;
 using Viddi.Core.Extensions;
 using Viddi.Core.Services;

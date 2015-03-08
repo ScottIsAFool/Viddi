@@ -1,6 +1,8 @@
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Ioc;
 using Microsoft.Practices.ServiceLocation;
+using ScottIsAFool.Windows.Core.Services;
+using ScottIsAFool.Windows.Services;
 using Viddi.Core.Services;
 using Viddi.Extensions;
 using Viddi.Model;

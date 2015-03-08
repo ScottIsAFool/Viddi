@@ -1,7 +1,7 @@
 ﻿using System;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
-using Viddi.Common;
+using ScottIsAFool.Windows.Helpers;
 using Viddi.Core.Services;
 using Viddi.Localisation;
 using Viddi.Views.Account;

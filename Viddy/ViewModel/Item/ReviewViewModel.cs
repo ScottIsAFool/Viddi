@@ -1,8 +1,8 @@
 ﻿using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using ScottIsAFool.Windows.Core.ViewModel;
 using Viddi.Core;
-using Viddi.Model;
 using Viddi.Services;
 
 namespace Viddi.ViewModel.Item

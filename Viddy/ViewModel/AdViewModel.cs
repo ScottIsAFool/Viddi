@@ -1,4 +1,4 @@
-﻿using Viddi.Model;
+﻿using ScottIsAFool.Windows.Core.ViewModel;
 
 namespace Viddi.ViewModel
 {

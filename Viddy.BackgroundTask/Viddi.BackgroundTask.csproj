@@ -101,6 +101,9 @@
     <Reference Include="NotificationsExtensions">
       <HintPath>..\packages\NotificationsExtensions.UniversalApps.1.0.3\lib\wpa81\NotificationsExtensions.winmd</HintPath>
     </Reference>
+    <Reference Include="ScottIsAFool.Windows.Core">
+      <HintPath>..\packages\ScottIsAFool.Windows.Core.0.0.1.5-pre\lib\wpa81\ScottIsAFool.Windows.Core.dll</HintPath>
+    </Reference>
     <Reference Include="System.Net.Http.Extensions">
       <HintPath>..\packages\Microsoft.Net.Http.2.2.28\lib\wpa81\System.Net.Http.Extensions.dll</HintPath>
     </Reference>

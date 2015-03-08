@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
+using System.Windows.Input;
 using Cimbalino.Toolkit.Services;
 using GalaSoft.MvvmLight.Command;
 using GalaSoft.MvvmLight.Messaging;
+using ScottIsAFool.Windows.Core.ViewModel;
 using Viddi.Core;
 using Viddi.Messaging;
 using Viddi.Views;
@@ -85,7 +87,7 @@ namespace Viddi.ViewModel
         #region ICanHasHomeButton implementation
         public bool ShowHomeButton { get; set; }
 
-        public RelayCommand NavigateHomeCommand
+        public ICommand NavigateHomeCommand
         {
             get
             {
