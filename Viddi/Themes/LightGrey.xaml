@@ -24,6 +24,7 @@
     <Color x:Key="PlaceholderTextColor">#FF7C7878</Color>
     <Color x:Key="ReviewBackgroundColor">#FFCBCBCB</Color>
     <Color x:Key="ReviewNoBackgroundColor">#FFB1B1B1</Color>
+    <Color x:Key="PlayerButtonColor">White</Color>
 
     <SolidColorBrush x:Key="CommentButtonBrush"
                      Color="{StaticResource CommentButtonColor}"/>
@@ -95,4 +96,7 @@
 
     <SolidColorBrush x:Key="ReviewNoBackgroundBrush"
                      Color="{StaticResource ReviewNoBackgroundColor}" />
+    
+    <SolidColorBrush x:Key="PlayerButtonBrush"
+                     Color="{StaticResource PlayerButtonColor}"/>
 </ResourceDictionary>

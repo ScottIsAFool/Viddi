@@ -1,0 +1,418 @@
+﻿<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:Microsoft.PlayerFramework">
+
+    <Style TargetType="local:ControlPanel">
+        <Setter Property="TransportBarButtonStyle">
+            <Setter.Value>
+                <Style TargetType="AppBarButton">
+                    <Setter Property="VerticalAlignment"
+                            Value="Center" />
+                    <Setter Property="HorizontalAlignment"
+                            Value="Center" />
+                    <Setter Property="Padding"
+                            Value="0" />
+                    <Setter Property="IsCompact"
+                            Value="True" />
+                    <Setter Property="Template">
+                        <Setter.Value>
+                            <ControlTemplate TargetType="AppBarButton">
+                                <Grid x:Name="RootGrid"
+                                      Background="Transparent">
+                                    <VisualStateManager.VisualStateGroups>
+                                        <VisualStateGroup x:Name="ApplicationViewStates">
+                                            <VisualState x:Name="FullSize" />
+                                            <VisualState x:Name="Compact" />
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="CommonStates">
+                                            <VisualState x:Name="Normal" />
+                                            <VisualState x:Name="PointerOver">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill"
+                                                                                   Storyboard.TargetName="BackgroundEllipse">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{ThemeResource AppBarItemPointerOverBackgroundThemeBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground"
+                                                                                   Storyboard.TargetName="Content">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{ThemeResource AppBarItemPointerOverForegroundThemeBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Pressed">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke"
+                                                                                   Storyboard.TargetName="OutlineEllipse">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{ThemeResource AppBarItemForegroundThemeBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Fill"
+                                                                                   Storyboard.TargetName="BackgroundEllipse">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{ThemeResource AppBarItemForegroundThemeBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground"
+                                                                                   Storyboard.TargetName="Content">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{ThemeResource AppBarItemPressedForegroundThemeBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Disabled">
+                                                <Storyboard>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Stroke"
+                                                                                   Storyboard.TargetName="OutlineEllipse">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{ThemeResource AppBarItemDisabledForegroundThemeBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                    <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Foreground"
+                                                                                   Storyboard.TargetName="Content">
+                                                        <DiscreteObjectKeyFrame KeyTime="0"
+                                                                                Value="{ThemeResource AppBarItemDisabledForegroundThemeBrush}" />
+                                                    </ObjectAnimationUsingKeyFrames>
+                                                </Storyboard>
+                                            </VisualState>
+                                        </VisualStateGroup>
+                                        <VisualStateGroup x:Name="FocusStates">
+                                            <VisualState x:Name="Focused">
+                                                <Storyboard>
+                                                    <DoubleAnimation Duration="0"
+                                                                     To="1"
+                                                                     Storyboard.TargetProperty="Opacity"
+                                                                     Storyboard.TargetName="FocusVisualWhite" />
+                                                    <DoubleAnimation Duration="0"
+                                                                     To="1"
+                                                                     Storyboard.TargetProperty="Opacity"
+                                                                     Storyboard.TargetName="FocusVisualBlack" />
+                                                </Storyboard>
+                                            </VisualState>
+                                            <VisualState x:Name="Unfocused" />
+                                            <VisualState x:Name="PointerFocused" />
+                                        </VisualStateGroup>
+                                    </VisualStateManager.VisualStateGroups>
+                                    <Viewbox Margin="{TemplateBinding Padding}">
+                                        <Grid Height="40"
+                                              Width="40">
+                                            <Ellipse x:Name="BackgroundEllipse"
+                                                     Fill="{ThemeResource OverlayBrush}"
+                                                     UseLayoutRounding="False" />
+                                            <Ellipse x:Name="OutlineEllipse"
+                                                     Stroke="White"
+                                                     StrokeThickness="2"
+                                                     UseLayoutRounding="False" />
+                                            <ContentPresenter x:Name="Content"
+                                                              AutomationProperties.AccessibilityView="Raw"
+                                                              Content="{TemplateBinding Icon}"
+                                                              Foreground="White"
+                                                              HorizontalAlignment="Center"
+                                                              VerticalAlignment="Center" />
+                                        </Grid>
+                                    </Viewbox>
+                                    <Rectangle x:Name="FocusVisualWhite"
+                                               IsHitTestVisible="False"
+                                               Opacity="0"
+                                               StrokeDashOffset="1.5"
+                                               StrokeEndLineCap="Square"
+                                               Stroke="{ThemeResource FocusVisualWhiteStrokeThemeBrush}"
+                                               StrokeDashArray="1,1" />
+                                    <Rectangle x:Name="FocusVisualBlack"
+                                               IsHitTestVisible="False"
+                                               Opacity="0"
+                                               StrokeDashOffset="0.5"
+                                               StrokeEndLineCap="Square"
+                                               Stroke="{ThemeResource FocusVisualBlackStrokeThemeBrush}"
+                                               StrokeDashArray="1,1" />
+                                </Grid>
+                            </ControlTemplate>
+                        </Setter.Value>
+                    </Setter>
+                </Style>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+    <Style TargetType="local:MediaPlayer">
+        <Setter Property="ControlPanelTemplate">
+            <Setter.Value>
+                <ControlTemplate TargetType="local:ControlPanel">
+                    <Grid VerticalAlignment="Bottom">
+                        <VisualStateManager.VisualStateGroups>
+                            <VisualStateGroup x:Name="MediaStates">
+                                <VisualState x:Name="Opening" />
+                                <VisualState x:Name="Paused" />
+                                <VisualState x:Name="Playing" />
+                                <VisualState x:Name="Closed" />
+                                <VisualState x:Name="Buffering" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="LayoutStates">
+                                <VisualState x:Name="Compact" />
+                                <VisualState x:Name="Normal" />
+                            </VisualStateGroup>
+                            <VisualStateGroup x:Name="Orientation">
+                                <VisualState x:Name="Landscape" />
+                                <VisualState x:Name="Portrait" />
+                            </VisualStateGroup>
+                        </VisualStateManager.VisualStateGroups>
+
+                        <Border x:Name="Border"
+                                DataContext="{TemplateBinding ViewModel}"
+                                Background="{TemplateBinding Background}">
+                            <Border.Resources>
+                                <local:BoolToVisibilityConverter x:Key="VisibleIfConverter" />
+                            </Border.Resources>
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="0"
+                                            HorizontalAlignment="Right"
+                                            Margin="0,10,10,10">
+                                    <AppBarButton x:Name="ReplayButton"
+                                                  Style="{TemplateBinding TransportBarButtonStyle}"
+                                                  Visibility="{Binding IsReplayButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                  Margin="10,0,10,0">
+                                        <local:MediaControls.Behavior>
+                                            <local:ReplayButtonBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </local:MediaControls.Behavior>
+                                    </AppBarButton>
+                                    <AppBarButton x:Name="StopButton"
+                                                  Style="{TemplateBinding TransportBarButtonStyle}"
+                                                  Visibility="{Binding IsStopButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                  Margin="10,0,10,0">
+                                        <local:MediaControls.Behavior>
+                                            <local:StopButtonBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </local:MediaControls.Behavior>
+                                    </AppBarButton>
+                                    <AppBarButton x:Name="SlowMotionButton"
+                                                  Style="{TemplateBinding TransportBarButtonStyle}"
+                                                  Visibility="{Binding IsSlowMotionButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                  Margin="10,0,10,0">
+                                        <local:MediaControls.Behavior>
+                                            <local:SlowMotionButtonBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </local:MediaControls.Behavior>
+                                    </AppBarButton>
+                                    <AppBarButton x:Name="CaptionSelectionButton"
+                                                  Style="{TemplateBinding TransportBarButtonStyle}"
+                                                  Visibility="{Binding IsCaptionSelectionButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                  Margin="10,0,10,0">
+                                        <local:MediaControls.Behavior>
+                                            <local:CaptionSelectionButtonBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </local:MediaControls.Behavior>
+                                    </AppBarButton>
+                                    <AppBarButton x:Name="AudioSelectionButton"
+                                                  Style="{TemplateBinding TransportBarButtonStyle}"
+                                                  Visibility="{Binding IsAudioSelectionButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                  Margin="10,0,10,0">
+                                        <local:MediaControls.Behavior>
+                                            <local:AudioSelectionButtonBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </local:MediaControls.Behavior>
+                                    </AppBarButton>
+                                    <AppBarButton x:Name="ZoomButton"
+                                                  Style="{TemplateBinding TransportBarButtonStyle}"
+                                                  Visibility="{Binding IsZoomButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                  Margin="5,5,5,5">
+                                        <local:MediaControls.Behavior>
+                                            <local:ZoomButtonBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </local:MediaControls.Behavior>
+                                    </AppBarButton>
+                                    <AppBarButton x:Name="GoLiveButton"
+                                                  Style="{TemplateBinding TransportBarButtonStyle}"
+                                                  Visibility="{Binding IsGoLiveButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                  Margin="10,0,10,0">
+                                        <local:MediaControls.Behavior>
+                                            <local:GoLiveButtonBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </local:MediaControls.Behavior>
+                                    </AppBarButton>
+                                    <AppBarButton x:Name="InfoButton"
+                                                  Style="{TemplateBinding TransportBarButtonStyle}"
+                                                  Visibility="{Binding IsInfoButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                  Margin="10,0,10,0">
+                                        <local:MediaControls.Behavior>
+                                            <local:InfoButtonBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </local:MediaControls.Behavior>
+                                    </AppBarButton>
+                                    <AppBarButton x:Name="FullScreenButton"
+                                                  Style="{TemplateBinding TransportBarButtonStyle}"
+                                                  Visibility="{Binding IsFullScreenButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                  Margin="10,0,10,0">
+                                        <local:MediaControls.Behavior>
+                                            <local:FullScreenButtonBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </local:MediaControls.Behavior>
+                                    </AppBarButton>
+                                    <AppBarButton x:Name="MuteButton"
+                                                  Style="{TemplateBinding TransportBarButtonStyle}"
+                                                  Visibility="{Binding IsMuteButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                  Margin="10,0,10,0">
+                                        <local:MediaControls.Behavior>
+                                            <local:MuteButtonBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </local:MediaControls.Behavior>
+                                    </AppBarButton>
+                                    <AppBarButton x:Name="MoreButton"
+                                                  Style="{TemplateBinding TransportBarButtonStyle}"
+                                                  Visibility="{Binding IsMoreButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                  Margin="10,0,10,0">
+                                        <local:MediaControls.Behavior>
+                                            <local:MoreButtonBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </local:MediaControls.Behavior>
+                                    </AppBarButton>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="1"
+                                            HorizontalAlignment="Center">
+
+                                    <StackPanel Orientation="Horizontal"
+                                                x:Name="NonEssentialsNearLeft">
+                                        <AppBarButton x:Name="SkipPreviousButton"
+                                                      Style="{TemplateBinding TransportBarButtonStyle}"
+                                                      Width="70"
+                                                      Height="70"
+                                                      Visibility="{Binding IsSkipPreviousButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                      Margin="10,0,10,0">
+                                            <local:MediaControls.Behavior>
+                                                <local:SkipPreviousButtonBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                            </local:MediaControls.Behavior>
+                                        </AppBarButton>
+                                        <AppBarButton x:Name="RewindButton"
+                                                      Style="{TemplateBinding TransportBarButtonStyle}"
+                                                      Width="70"
+                                                      Height="70"
+                                                      Visibility="{Binding IsRewindButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                      Margin="10,0,10,0">
+                                            <local:MediaControls.Behavior>
+                                                <local:RewindButtonBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                            </local:MediaControls.Behavior>
+                                        </AppBarButton>
+                                        <AppBarButton x:Name="SkipBackButton"
+                                                      Style="{TemplateBinding TransportBarButtonStyle}"
+                                                      Width="70"
+                                                      Height="70"
+                                                      Visibility="{Binding IsSkipBackButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                      Margin="10,0,10,0">
+                                            <local:MediaControls.Behavior>
+                                                <local:SkipBackButtonBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                            </local:MediaControls.Behavior>
+                                        </AppBarButton>
+                                    </StackPanel>
+
+                                    <AppBarButton x:Name="PlayPauseButton"
+                                                  Style="{TemplateBinding TransportBarButtonStyle}"
+                                                  Width="70"
+                                                  Height="70"
+                                                  Visibility="{Binding IsPlayPauseButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                  Margin="50,0,50,0">
+                                        <local:MediaControls.Behavior>
+                                            <local:PlayPauseButtonBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </local:MediaControls.Behavior>
+                                    </AppBarButton>
+
+                                    <StackPanel Orientation="Horizontal"
+                                                x:Name="NonEssentialsNearRight">
+                                        <AppBarButton x:Name="SkipAheadButton"
+                                                      Style="{TemplateBinding TransportBarButtonStyle}"
+                                                      Width="70"
+                                                      Height="70"
+                                                      Visibility="{Binding IsSkipAheadButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                      Margin="10,0,10,0">
+                                            <local:MediaControls.Behavior>
+                                                <local:SkipAheadButtonBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                            </local:MediaControls.Behavior>
+                                        </AppBarButton>
+                                        <AppBarButton x:Name="FastForwardButton"
+                                                      Style="{TemplateBinding TransportBarButtonStyle}"
+                                                      Width="70"
+                                                      Height="70"
+                                                      Visibility="{Binding IsFastForwardButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                      Margin="10,0,10,0">
+                                            <local:MediaControls.Behavior>
+                                                <local:FastForwardButtonBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                            </local:MediaControls.Behavior>
+                                        </AppBarButton>
+                                        <AppBarButton x:Name="SkipNextButton"
+                                                      Style="{TemplateBinding TransportBarButtonStyle}"
+                                                      Width="70"
+                                                      Height="70"
+                                                      Visibility="{Binding IsSkipNextButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                      Margin="10,0,10,0">
+                                            <local:MediaControls.Behavior>
+                                                <local:SkipNextButtonBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                            </local:MediaControls.Behavior>
+                                        </AppBarButton>
+                                    </StackPanel>
+
+                                </StackPanel>
+
+                                <local:Timeline x:Name="Timeline"
+                                                Grid.Row="2"
+                                                ViewModel="{TemplateBinding ViewModel}"
+                                                Visibility="{Binding IsTimelineVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}"
+                                                Height="25"
+                                                Padding="0,10,0,10"
+                                                Margin="10,20,10,0" />
+
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="3"
+                                            HorizontalAlignment="Left"
+                                            Margin="10,5,10,5">
+                                    <TextBlock x:Name="TimeElapsed"
+                                               VerticalAlignment="Center"
+                                               FontSize="20"
+                                               Visibility="{Binding IsTimeElapsedButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}">
+                                        <local:MediaControls.Behavior>
+                                            <local:TimeElapsedBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </local:MediaControls.Behavior>
+                                    </TextBlock>
+                                    <TextBlock Text=" / "
+                                               VerticalAlignment="Center"
+                                               FontSize="20" />
+                                    <TextBlock x:Name="TimeRemaining"
+                                               VerticalAlignment="Center"
+                                               FontSize="20"
+                                               Visibility="{Binding IsTimeRemainingButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}">
+                                        <local:MediaControls.Behavior>
+                                            <local:TimeRemainingBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </local:MediaControls.Behavior>
+                                    </TextBlock>
+                                    <TextBlock x:Name="TotalDuration"
+                                               VerticalAlignment="Center"
+                                               FontSize="20"
+                                               Visibility="{Binding IsDurationButtonVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}">
+                                        <local:MediaControls.Behavior>
+                                            <local:TotalDurationBehavior ViewModel="{Binding ViewModel, RelativeSource={RelativeSource TemplatedParent}}" />
+                                        </local:MediaControls.Behavior>
+                                    </TextBlock>
+                                </StackPanel>
+
+                                <StackPanel Orientation="Horizontal"
+                                            Grid.Row="3"
+                                            HorizontalAlignment="Right"
+                                            Margin="10,0,10,10">
+                                    <local:SignalStrength x:Name="SignalStrength"
+                                                          Value="{Binding SignalStrength}"
+                                                          Margin="10,0,0,0"
+                                                          VerticalAlignment="Center"
+                                                          Visibility="{Binding IsSignalStrengthVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}" />
+                                    <local:ResolutionIndicator x:Name="ResolutionIndicator"
+                                                               MediaQuality="{Binding MediaQuality}"
+                                                               VerticalAlignment="Center"
+                                                               Margin="10,0,10,0"
+                                                               Visibility="{Binding IsResolutionIndicatorVisible, RelativeSource={RelativeSource TemplatedParent}, Converter={StaticResource VisibleIfConverter}}" />
+                                </StackPanel>
+
+                            </Grid>
+                        </Border>
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    
+
+</ResourceDictionary>

@@ -26,6 +26,7 @@
             </ResourceDictionary.ThemeDictionaries>
             <ResourceDictionary.MergedDictionaries>
                 <ResourceDictionary Source="/Themes/ControlStyles.xaml" />
+                <ResourceDictionary Source="/Themes/MediaControlStyles.xaml" />
             </ResourceDictionary.MergedDictionaries>
             <themeManagerRt:ThemeManager x:Key="ThemeManager" />
             <vm:ViewModelLocator xmlns:vm="using:Viddi.ViewModel"
