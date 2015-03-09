@@ -184,7 +184,7 @@
                 <DataTemplate>
                     <TextBlock Text="Nothing to see here"
                                Style="{StaticResource BodyTextBlockStyle}"
-                               Margin="19" />
+                               Margin="22,12,19,0" />
                 </DataTemplate>
             </Setter.Value>
         </Setter>

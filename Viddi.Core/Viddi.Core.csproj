@@ -85,7 +85,7 @@
     <Content Include="FodyWeavers.xml" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Viddy.Localisation\Viddi.Localisation.csproj">
+    <ProjectReference Include="..\Viddi.Localisation\Viddi.Localisation.csproj">
       <Project>{c7add5a9-3ea2-457a-a3c1-57f78b0f5f03}</Project>
       <Name>Viddi.Localisation</Name>
     </ProjectReference>
