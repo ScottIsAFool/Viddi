@@ -299,14 +299,16 @@ namespace Viddi.ViewModel.Item
             }
         }
 
-        public RelayCommand ShareCommand
+        public RelayCommand ShareByEmailCommand
         {
             get
             {
                 return new RelayCommand(() =>
                 {
-                    _shareType = ShareType.Info;
-                    ShowShareUI();
+                    var description = IsAnonymous ? Resources.ShareVideoTitle : string.Format(Resources.ShareVideoMessage, Video.User.Username);
+                    var message = PrepareMessage(description);
+
+                    new EmailComposeService().ShowAsync(Resources.ShareVideoTitle, message);
                 });
             }
         }

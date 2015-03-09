@@ -127,7 +127,7 @@
                 </AppBarButton>
                 <AppBarButton Label="share"
                               x:Uid="AppBarShare"
-                              Command="{Binding Video.ShareCommand}">
+                              Command="{Binding Video.ShareLinkCommand}">
                     <AppBarButton.Icon>
                         <BitmapIcon UriSource="/Assets/Icons/appbar.share.png" />
                     </AppBarButton.Icon>
@@ -146,7 +146,7 @@
             <CommandBar.SecondaryCommands>
                 <AppBarButton Label="share for email"
                               x:Uid="AppBarShareForEmail"
-                              Command="{Binding Video.ShareCommand}" />
+                              Command="{Binding Video.ShareByEmailCommand}" />
                 <AppBarButton Label="open in browser"
                               x:Uid="AppBarOpenInBrowser"
                               Command="{Binding Video.OpenInBrowserCommand}"/>
