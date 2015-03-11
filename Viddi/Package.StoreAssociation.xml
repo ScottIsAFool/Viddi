@@ -205,18 +205,18 @@
     <BundleInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
-        <PackageArchitecture></PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.46</PackageMaxArchitectureVersion>
-      </PackageInfo>
-      <PackageInfo>
-        <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture>arm</PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.46</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>1.1.0.47</PackageMaxArchitectureVersion>
       </PackageInfo>
       <PackageInfo>
         <OsMinVersion>6.3.0.0</OsMinVersion>
         <PackageArchitecture></PackageArchitecture>
-        <PackageMaxArchitectureVersion>1.1.0.46</PackageMaxArchitectureVersion>
+        <PackageMaxArchitectureVersion>1.1.0.47</PackageMaxArchitectureVersion>
+      </PackageInfo>
+      <PackageInfo>
+        <OsMinVersion>6.3.0.0</OsMinVersion>
+        <PackageArchitecture></PackageArchitecture>
+        <PackageMaxArchitectureVersion>1.1.0.47</PackageMaxArchitectureVersion>
       </PackageInfo>
     </BundleInfo>
   </PackageInfoList>
