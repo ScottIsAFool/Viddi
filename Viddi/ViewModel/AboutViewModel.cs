@@ -40,7 +40,26 @@ namespace Viddi.ViewModel
 
         public bool CanSendLogs
         {
-            get { return true; }
+            get
+            {
+#if BETA
+                return true;
+#else
+                return false;
+#endif
+            }
+        }
+
+        public string AppName
+        {
+            get
+            {
+#if BETA
+                return "Viddi Beta";
+#else
+                return "Viddi";
+#endif
+            }
         }
 
         public RelayCommand ViewLoadedCommand

@@ -64,7 +64,7 @@
 
                 <StackPanel Grid.Row="0"
                             Grid.Column="1">
-                    <TextBlock Text="Viddi"
+                    <TextBlock Text="{Binding AppName}"
                                Style="{StaticResource BodyTextBlockStyle}"
                                FontSize="{StaticResource TextStyleExtraExtraLargeFontSize}" />
                     <TextBlock Text="{Binding Version}"
