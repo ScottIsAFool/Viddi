@@ -45,6 +45,18 @@ namespace Viddi.ViewModel
             get { return new RelayCommand(() => _navigationService.Navigate<PrivacyView>()); }
         }
 
+        public RelayCommand<string> ChangeThemeCommand
+        {
+            get
+            {
+                return new RelayCommand<string>(value =>
+                {
+                    var isLightTheme = bool.Parse(value);
+                    IsLightTheme = isLightTheme;
+                });
+            }
+        }
+
         [UsedImplicitly]
         private void OnCheckForNotificationsInBackgroundChanged()
         {

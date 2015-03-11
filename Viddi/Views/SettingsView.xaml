@@ -7,6 +7,8 @@
                 xmlns:controls="using:Viddi.Controls"
                 xmlns:converters="using:Viddi.Converters"
                 xmlns:controls1="using:ScottIsAFool.Windows.Controls"
+                xmlns:interactivity="using:Microsoft.Xaml.Interactivity"
+                xmlns:core="using:Microsoft.Xaml.Interactions.Core"
                 mc:Ignorable="d"
                 Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
                 DataContext="{Binding Settings, Source={StaticResource Locator}}">
@@ -147,10 +149,16 @@
                                 <ColumnDefinition Width="*" />
                                 <ColumnDefinition Width="*" />
                             </Grid.ColumnDefinitions>
-                            <RadioButton IsChecked="{Binding IsLightTheme, Mode=TwoWay}"
+                            <RadioButton IsChecked="{Binding IsLightTheme}"
                                          Style="{StaticResource RadioSelectionTemplate}"
                                          HorizontalAlignment="Stretch"
                                          Height="50">
+                                <interactivity:Interaction.Behaviors>
+                                    <core:EventTriggerBehavior EventName="Tapped">
+                                        <core:InvokeCommandAction Command="{Binding ChangeThemeCommand}"
+                                                                  CommandParameter="true"/>
+                                    </core:EventTriggerBehavior>
+                                </interactivity:Interaction.Behaviors>
                                 <Border Background="White"
                                         HorizontalAlignment="Stretch">
                                     <TextBlock Text="Light"
@@ -164,7 +172,14 @@
                                          Grid.Column="1"
                                          Height="50"
                                          Style="{StaticResource RadioSelectionTemplate}"
+                                         x:Name="LighThemeButton"
                                          HorizontalAlignment="Stretch">
+                                <interactivity:Interaction.Behaviors>
+                                    <core:EventTriggerBehavior EventName="Tapped">
+                                        <core:InvokeCommandAction Command="{Binding ChangeThemeCommand}"
+                                                                  CommandParameter="false" />
+                                    </core:EventTriggerBehavior>
+                                </interactivity:Interaction.Behaviors>
                                 <Border Background="#060E1B"
                                         HorizontalAlignment="Stretch">
                                     <TextBlock Text="Dark"
